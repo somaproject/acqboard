@@ -1,0 +1,10 @@
+This is our attempt to simulate the entire filtering subsystem. 
+
+We combine the Input/Offset block, the sample buffer, the RMAC control, the Filter Array, the RMAC, and read the resulting Y output values. We try and use the same signal names as are used in the actual acqboard. 
+
+
+We begin by writing in filter array coefficients from the file filter.dat
+
+Then we begin the insample filtering. Whee. 
+
+We store the output in a file, again. 

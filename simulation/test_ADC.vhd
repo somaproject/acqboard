@@ -19,6 +19,8 @@ entity test_ADC is
            SDOUT : out std_logic;
 		 CHA_VALUE: in integer;
 		 CHB_VALUE: in integer;
+		 CHA_OUT : out integer;
+		 CHB_OUT : out integer; 
 		 FILEMODE: in std_logic; 
 		 BUSY: out std_logic; 
 		 INPUTDONE: out std_logic);
@@ -38,18 +40,23 @@ architecture Behavioral of test_ADC is
   signal channelA_bits, channelB_bits : std_logic_vector(15 downto 0); 
   signal bitpos : integer := 0;  
   signal outputbits : std_logic_vector(31 downto 0);
-
+  signal filedone : std_logic := '0'; 
 begin
    -- reset closes the file, opens the file, etc. 
    outputbits <= channelA_bits & channelB_bits;
+	INPUTDONE <= filedone; 
    process(CONVST, SCLK, RESET, FILEMODE, CHA_VALUE, CHB_VALUE) is
-  	file inputfile : text open read_mode is filename; 
+  	file inputfile : text; 
   	variable L: line;
 
     	variable channelA, channelB: integer; 
    begin 
   		if falling_edge(RESET) then
 		     SDOUT <= '0';	
+			  filedone <= '0';
+			  file_open(inputfile, filename, read_mode); 
+
+			  
 		elsif CONVST'EVENT and CONVST = '0' then
 		     SDOUT <= '0';
 			BUSY <= '1' after 10 ns, '0' after 1.75 us; 
@@ -64,21 +71,27 @@ begin
 			   if FILEMODE = '1' then 
 				   channelA_bits <= conv_std_logic_vector(channelA, 16);
 				   channelB_bits <= conv_std_logic_vector(channelB, 16);
-		   	   else
+					CHA_OUT <= channelA;
+					CHB_OUT <= channelB; 
+	   	   else
 				   channelA_bits <= conv_std_logic_vector(CHA_VALUE, 16);
 				   channelB_bits <= conv_std_logic_vector(CHB_VALUE, 16);
 			   end if; 				   	   	
 
 			else
-			   INPUTDONE <= '1';
+			   filedone <= '1';
+				file_close(inputfile);
 			end if; 
 		else
 	      if rising_edge(SCLK) then
-			if CS = '0' then 
-				SDOUT <= outputbits(bitpos) after 25 ns;
-				bitpos <= bitpos -1;
-			end if;  
-
+			if filedone = '0' and RESET = '0' then		
+				if CS = '0'  then 
+					SDOUT <= outputbits(bitpos) after 25 ns;
+					bitpos <= bitpos -1;
+				end if;  
+			else
+				SDOUT <= '0';
+			end if; 
 		 end if; 
 	    end if; 
    end process; 

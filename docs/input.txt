@@ -1,0 +1,41 @@
+Signal definitions for input.vhd:
+
+CLK      : 64 MHz input clock
+INSAMPLE :  Take new sample, 32 kHz CE
+RESET	 : standard reset
+
+
+output signals to ADCs:
+CONVST	 : start conversion
+ADCCS    : ADC chip select
+SCLK     : serial clock out
+SDIN     : serial data input, unipolar (0x0000 to 0xFFFF), ADC A and then B, per the AD7655
+
+
+
+Output to rest of system:
+DOUT     : data word out
+COUT     : channel number out
+WEOUT    : write enable for next stage
+
+Offset control:
+OSC      : channel number for offset
+OSEN     : offsets enabled
+OSWE     : write this offset value
+OSD	 : offset value to write
+
+
+Data is acquired via serial interface over galvanic isolators from the 5 dual ADCs. 
+
+SRL16Es are used to store, reverse the bit direction of the samples for bit-arithmatic
+
+We use bit-wide math to cut down on storage requirements. 
+
+Writing offsets:
+
+You can only write one offset every 20 ticks, and you must keep the offset value OSD constant during those ticks. 
+
+An input FSM stores the data in the appropriate register sets. 
+
+Keep in mind that INR needs to be cleared after every computation. 
+

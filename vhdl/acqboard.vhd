@@ -34,6 +34,7 @@ architecture Behavioral of acqboard is
 
 -- signals
 
+
 -- clock-related signals
    signal clk, clk8, insample, outsample, outbyte, spiclk : 
    	 std_logic := '0';

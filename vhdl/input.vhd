@@ -11,7 +11,7 @@ use UNISIM.VComponents.all;
 entity input is
     Port ( CLK : in std_logic;				   
            INSAMPLE : in std_logic;
-		 RESET : in std_logic; 
+		 	  RESET : in std_logic; 
            CONVST : out std_logic;
            ADCCS : out std_logic;
            SCLK : out std_logic;
@@ -19,11 +19,11 @@ entity input is
            DOUT : out std_logic_vector(15 downto 0);
            COUT : out std_logic_vector(3 downto 0);
            WEOUT : out std_logic;
-		 OSC : in std_logic_vector(3 downto 0);
-		 OSEN : in std_logic;
-		 OSWE : in std_logic; 
-		 OSD : in std_logic_vector(15 downto 0)
-		 );
+		 	  OSC : in std_logic_vector(3 downto 0);
+		     OSEN : in std_logic;
+		     OSWE : in std_logic; 
+		      OSD : in std_logic_vector(15 downto 0)
+		  		);
 
 end input;
 
@@ -407,7 +407,7 @@ begin
 				adden <= '0'; 
 				ons <= nextchan2;
 			when nextchan2 => 
-				inr <= '0';
+				inr <= '1';
 				WEOUT <= '1';
 				adden <= '0'; 
 				if chan = "1001" then

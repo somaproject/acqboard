@@ -19,31 +19,19 @@ SIMULATORTIME 0
 DEVGENERATEDSIMULATIONMODEL VHDL
 GENERATEDSIMULATIONMODELTIME 0
 STIMULUS overflow_testbench.vhd
-STIMULUS test_SendCMD_test.tbw
 STIMULUS overflow_test.tbw
-STIMULUS input_testbench.vhd
 STIMULUS pgaload_test.tbw
 STIMULUS acqboard_testbench.vhd
 STIMULUS rounding_testbench.vhd
 STIMULUS clocks_test.tbw
-STIMULUS test_deserialize_testbench.vhd
 STIMULUS rounding_test.tbw
-STIMULUS test_EEPROM_test.tbw
 STIMULUS rmac_testbench.vhd
 STIMULUS RMAC_test.tbw
-STIMULUS EEPROMio_testbench.vhd
-STIMULUS decoder_testbench.vhd
-STIMULUS test_ADC_testbench.vhd
-STIMULUS test_serialize_testbench.vhd
-STIMULUS test_serialize_test.tbw
-STIMULUS FiberRX_testbench.vhd
 STIMULUS fibertx_testbench.vhd
 SOURCE samplebuffer.vhd
 SOURCE EEPROMio.vhd
 SOURCE Loader.vhd
-SOURCE test_ADC.vhd
 SOURCE input.vhd
-SOURCE test_serialize.vhd
 SOURCE decode8b10b.xco
 SOURCE encode8b10b.xco
 SOURCE RMACcontrol.vhd
@@ -54,15 +42,12 @@ SOURCE accumulator.vhd
 SOURCE decoder.vhd
 SOURCE PGAload.vhd
 SOURCE overflow.vhd
-SOURCE test_SendCMD.vhd
 SOURCE acqboard.vhd
 SOURCE clocks.vhd
 SOURCE FiberTX.vhd
 SOURCE FiberRX.vhd
 SOURCE rounding.vhd
 SOURCE distRAM.vhd
-SOURCE test_EEPROM.vhd
-SOURCE test_deserialize.vhd
 SOURCE RMAC.vhd
 DEPASSOC input input.ucf
 DEPASSOC multiplier multiplier.ucf
@@ -72,12 +57,11 @@ DEPASSOC rmac RMAC.ucf
 [Normal]
 p_ModelSimSimRunTime_tb=xstvhd, spartan2e, VHDL Test Bench.t_MSimulateBehavioralVhdlModel, 1059341326, 20 ms
 p_xstPackIORegister=xstvhd, spartan2e, Schematic.t_synthesize, 1061064066, Yes
-xilxMapAllowLogicOpt=xstvhd, spartan2e, VHDL.t_placeAndRouteDes, 1069448677, True
-xilxPAReffortLevel=xstvhd, spartan2e, VHDL.t_placeAndRouteDes, 1055895324, Medium
+xilxMapAllowLogicOpt=xstvhd, spartan2e, Implementation.t_placeAndRouteDes, 1069448677, True
+xilxPAReffortLevel=xstvhd, spartan2e, Implementation.t_placeAndRouteDes, 1055895324, Medium
 _SynthMultStyle=xstvhd, spartan2e, Schematic.t_synthesize, 1058138004, Pipe_LUT
 _SynthOptEffort=xstvhd, spartan2e, Schematic.t_synthesize, 1056383182, High
 [STATUS-ALL]
-acqboard.ngcFile=WARNINGS,1074043939
-acqboard.ngdFile=WARNINGS,1074043967
+acqboard.ncdFile=WARNINGS,0
 [STRATEGY-LIST]
 Normal=True

@@ -1,0 +1,24 @@
+input_testbench.vhd
+
+Code to test the input section, offsets, etc. Uses test_ADC.vhd to input values.
+
+
+Parameters to check:
+
+Each input test vector has two channels , A  and B, each with an independent permutation of 0x0 to 0xFFFF, all to be interpreted as unsigned shorts. 
+
+Then, check the same for the following offset values:
+
+0
++- 256
++- 4096
++- 2^15-1
+
+All tests are run in blocks of 0x0000 to 0xFFFF, at 64 MHz, with the INSAMPLE occuring every 250 ticks. 
+
+2004.04.04 : Passes all tests for:
+no offset
+offset enabled, many different offset cases
+offset disabled. 
+
+Found bug where we were only setting INR once per sample, not once per channel

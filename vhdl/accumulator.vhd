@@ -28,11 +28,13 @@ begin
 	clock: process (CLK, clr) is
 	begin
 		if rising_edge(CLK) then
-		   pl <= P; 
 		   if clr = '0' then
+		   
+		   	pl <= P; 	
 		   	accint <= sum;
 		   else 
 		   	accint <= (others => '0');
+			pl <= (others => '0'); 
 		   end if;  
 
 		end if; 

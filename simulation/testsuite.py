@@ -15,6 +15,6 @@ if len(sys.argv) > 1 :
         
 else:
     suite.addTest(vhdltest.VhdlSimTestCase("input"))
-
+    suite.addTest(vhdltest.VhdlSimTestCase("mac"))
 runner = unittest.TextTestRunner()
 runner.run(suite)

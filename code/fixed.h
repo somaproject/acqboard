@@ -130,7 +130,7 @@ inline Fixed overf(Fixed x, int bits) {
 
 inline long getint(Fixed x, int bits) {
   // returns an int where the LSBs are a.bits of the int
-   mpz_class t(x >> (POINTPOS - bits));
+   mpz_class t(rshift(x, POINTPOS - bits));
    return t.get_si(); 
 }
 

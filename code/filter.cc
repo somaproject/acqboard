@@ -40,12 +40,15 @@ signal rmac(const signal & x, const signal& h, int precision)
   
   signal y(x.size() + h.size()); 
 
-  for(int n = h.size(); n < y.size(); ++n){
+  for(unsigned int n = h.size(); n < y.size(); ++n){
     Fixed yn(0), yp(0); 
-    for (int k = 0; k < h.size(); ++k) {
+    for (unsigned int k = 0; k < h.size(); ++k) {
       Fixed yp = mult(h[k],  xz[n-k]); 
       
-      yn = trunc(yp, precision) + yn; 
+      yn = trunc(yp, precision) + yn;
+      
+     if (yn != trunc(yn, precision)) 
+	cout << "precision error in rmac;" << yn << " != " << trunc(yn, precision) << endl;
     }
     y[n - h.size()] = yn; 
   }

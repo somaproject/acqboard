@@ -22,13 +22,15 @@ int main(void)
       ifstream adcs(fname.str().c_str()); 
       cout << "Opening " << fname << endl; 
       int a, b;
-      x[i*2].reserve(1000000); 
-      x[i*2+1].reserve(1000000); 
+      x[i*2].reserve(4000000); 
+      x[i*2+1].reserve(4000000); 
       
-      while (! adcs.eof()) {
+      // we're actually just reading in a few
+      int q = 11000; 
+      while (q-- > 0 & !adcs.eof()) {
 	adcs >> a >> b; 
-	x[i*2+1].push_back(movepoint(a-32768, 15));
-	x[i*2].push_back(movepoint(b-32768, 15));
+	x[i*2+1].push_back(trunc(movepoint(a-32768, 15), 15));
+	x[i*2].push_back(trunc(movepoint(b-32768, 15), 15));
       }
     }
 
@@ -41,16 +43,18 @@ int main(void)
   int hn;  
   while (! hfstream.eof()) {
     hfstream >> hn;
-    h.push_back(movepoint(hn, 21)); 
+    h.push_back(trunc(movepoint(hn, 21), 21)); 
   }  
 
+
   // now the actual filtering; whee!!!
-  vector<signal > yraw(10);
-  for (int i = 0; i < 10; i++) {
-    yraw[i] = rmac(x[i], h, 24); 
+  vector<signal > yraw(x.size());
+  for (int i = 0; i < x.size(); i++) {
+    cout << "Filtering channel " << i << endl; 
+    yraw[i] = rmac(x[i], h, 25); 
   }
-  
-  
+  //yraw[4] = rmac(x[4], h, 25); 
+ 
   // convergent rounding to 1.15, followed by overflow 
   vector<signal >::iterator chan;
   signal::iterator samp; 
@@ -58,20 +62,22 @@ int main(void)
     {
       for(samp = chan->begin(); samp != chan->end(); samp++)
 	{
-	  *samp =  convrnd(*samp, 16);
+	  *samp = convrnd(trunc(*samp, 25), 15);
 	  *samp = overf(*samp, 1); 
 	}
     }
   
   // write output
+  cout << "Writing output" << endl; 
   boost::format ofname("%s.simoutput.dat");
   ofname % simname;
   ofstream output(ofname.str().c_str()); 
   for (int n = 0; n < yraw[0].size(); n++)
     {
       for (int j = 0; j < 10; j++) {
-	output << getint(yraw[j][n], 15) << ' '; 
+	output << rshift(yraw[j][n], POINTPOS-15) << ' '; 
       }
       output << endl; 
     }
+  //cout << hprint(yraw[4][1000], 10, 19) << endl;
 }

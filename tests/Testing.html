@@ -1351,14 +1351,34 @@ We're going to buy some of the analog devices AD780 voltage references
 and try and hack them onto the board and see if that makes any
 difference. (ordered from digikey) <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">23 March
+2005</span><br style="font-weight: bold; text-decoration: underline;">
 <br>
+I'm curious as to whether this is an artifact of using an inverting
+configuration with the voltage reference. To test, we're going to have
+A3 measure the Vref buffered for ADC3 . <br>
 <br>
+This produced output virtually identical to the above.<br>
 <br>
+In a very last-ditch effort, we are going to try and replace our
+voltage references with an AD780 ; we have the dip component, so now
+it's time for some strange-soldering. We've placed the AD780 where the
+VRef reference should be. We get: <br>
 <br>
+<img alt="" src="results/20050323/dual-chan.AD780-as-ref.png"
+ style="width: 600px; height: 450px;"><br>
+For Vos With and Without AD8513, which is really awesome. <br>
 <br>
+Now, we'll try with both reference and Vos as AD780s:<br>
 <br>
+<img alt="" src="results/20050323/dual-chan.AD780-as-both.png"
+ style="width: 600px; height: 450px;"><br>
 <br>
+That's with 1m points for each; still not perfect, but better than
+expected. <br>
 <br>
+Based on this, we're going to push out a new acqboard using these as
+the voltage references. <br>
 <br>
 <br>
 <br>

@@ -34,10 +34,11 @@ class AcqBoardCmd:
         else:
             self.cmdid += 1
             
-    def switchmode(self, mode, rawchan='A4'):
+    def switchmode(self, mode, rawchan='A4' ):
         self.updatecmd()        
         str = ""
 
+            
 
         cmdbyte = (self.cmdid << 4) | 0x7
         str = pack("BBBBBB", cmdbyte, mode, self.channames[rawchan], \

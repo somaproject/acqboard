@@ -28,9 +28,9 @@ DEPASSOC aes3 aes3out.ucf
 [Normal]
 p_parGenSimModel=xstvhd, spartan3, VHDL.t_placeAndRouteDes, 1108152618, True
 [STATUS-ALL]
-aes3.bitFile=WARNINGS,1108388975
-aes3.ngcFile=WARNINGS,1108388951
-aes3.ngdFile=WARNINGS,1108388964
-bitencode.ngcFile=WARNINGS,1108154258
+aes3.bitFile=WARNINGS,1108474630
+aes3.ncdFile=WARNINGS,1108474614
+aes3.ngcFile=WARNINGS,1108474594
+aes3.ngdFile=WARNINGS,1108474610
 [STRATEGY-LIST]
 Normal=True

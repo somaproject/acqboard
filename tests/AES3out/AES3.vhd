@@ -177,7 +177,7 @@ begin
    freqsyn: dcm generic map (
    		DFS_FREQUENCY_MODE => "LOW",
 		CLKFX_DIVIDE => 5,
-		CLKFX_MULTIPLY=> 6,
+		CLKFX_MULTIPLY=> 1,
 		STARTUP_WAIT => False,
 		CLK_FEEDBACK => "NONE"	  
    	) port map (

@@ -6,23 +6,33 @@ DEVFAM spartan2e
 DEVFAMTIME 0
 DEVICE xc2s50e
 DEVICETIME 0
-DEVPKG pq208
-DEVPKGTIME 1061049026
+DEVPKG tq144
+DEVPKGTIME 1055894492
 DEVSPEED -6
 DEVSPEEDTIME 0
 FLOW XST VHDL
 FLOWTIME 1061049059
+STIMULUS RMAC_test.tbw Normal
+STIMULUS overflow_test.tbw Normal
+STIMULUS rounding_test.tbw Normal
 MODULE samplebuffer.vhd
 MODSTYLE samplebuffer Normal
+MODULE overflow.vhd
+MODSTYLE overflow Normal
 MODULE multiplier.vhd
 MODSTYLE multiplier Normal
+MODULE accumulator.vhd
+MODSTYLE accumulator Normal
+MODULE rounding.vhd
+MODSTYLE rounding Normal
 MODULE input.vhd
 MODSTYLE input Normal
-DEPASSOC multiplier multiplier.ucf SYSTEM
+MODULE RMAC.vhd
+MODSTYLE rmac Normal
+DEPASSOC rmac RMAC.ucf SYSTEM
+DEPASSOC multiplier multiplier.ucf Normal
 [Normal]
-p_xstPackIORegister=xstvhd, spartan2e, VHDL.t_synthesize, 1061064066, Yes
-xilxPAReffortLevel=xstvhd, spartan2e, VHDL.t_placeAndRouteDes, 1061078311, Normal
-[STATUS-ALL]
-samplebuffer.ngcFile=WARNINGS,1061078624
+p_xstPackIORegister=xstvhd, spartan2e, Schematic.t_synthesize, 1061064066, Yes
+xilxPAReffortLevel=xstvhd, spartan2e, VHDL.t_placeAndRouteDes, 1055895324, High
 [STRATEGY-LIST]
 Normal=True

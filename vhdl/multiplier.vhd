@@ -8,32 +8,40 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity multiplier is
+entity multiplier is	   
+    Generic ( n: positive := 24); 
     Port ( CLK2X : in std_logic;
-           X : in std_logic_vector(15 downto 0);
-           H : in std_logic_vector(21 downto 0);
-           Y : out std_logic_vector(26 downto 0));
+           A : in std_logic_vector(15 downto 0);
+           B : in std_logic_vector(21 downto 0);
+           P : out std_logic_vector(n-1 downto 0));
 end multiplier;
 
 architecture Behavioral of multiplier is
-    signal xl, x1 : std_logic_vector(15 downto 0) := (others => '0');
-    signal hl, h1: std_logic_vector(21 downto 0) := (others => '0');
-    signal ly, y1, y2 : std_logic_vector(27 downto 0) := (others => '0'); 
+-- MULTIPLIER.VHD -- configurable-width fixed-precision multiplier. 
+-- This has a latency of five ticks, because the synthesis tools
+-- will push those extra registers at the inputs and outputs
+-- into the multiplier itself, giving us a pipelined implementation
+-- for basically no effort. 
+
+    signal al, a1 : std_logic_vector(15 downto 0) := (others => '0');
+    signal bl, b1: std_logic_vector(21 downto 0) := (others => '0');
+    signal lp, p1, p2 : std_logic_vector(37 downto 0) := (others => '0'); 
 
 begin
 	process(CLK2X) is
 	begin
 		if rising_edge(CLK2X) then
-			x1 <= X;
-			xl <= x1;
-			h1 <= H;
-			hl <= h1; 
-			y1 <= ly;
-			y <= y1(26 downto 0);
+			a1 <= A;
+			al <= a1;
+			b1 <= B;
+			bl <= B1;
+			p1 <= lp;
+			p2 <= p1;  
+			P <= p2(36 downto (36-n+1)); 
 		end if;
 	end process; 
 
-    ly <= xl * hl;  
+    lp <= al * bl;  
 
 
 end Behavioral;

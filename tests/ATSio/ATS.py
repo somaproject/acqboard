@@ -21,11 +21,10 @@ class ATS2(object):
     def __init__(self):
         self.gpib  = Gpib('ats2'); 
         self.gpib.clear()
-
+        
 
     def setAmpVppA(self, val):
         self.gpib.write(":AGEN:AMPL A,%fVPP" % val)
-
 
     def getAmpVppA(self):
         self.gpib.write(":AGEN:AMPL? A,VPP")
@@ -93,7 +92,7 @@ class ATS2(object):
 
     def setMode(self, val):
         if val == Modes.SINE :
-            self.gpib.write(":AGEN:WFM DASINE,STEREO")
+            self.gpib.write(":AGEN:WFM DASINE,STER")
 
     def getMode(self):
         self.gpib.write(":AGEN:WFM?")
@@ -168,21 +167,11 @@ class ATS2(object):
             
 def main() :
     a = ATS2()
-    a.ampVppA = 3.0
-    print a.ampVppA
-
-    a.output = "bal"
-    print a.output
-    a.output = "unbal"
-    print a.output
-
-    a.freq1 = 3000
-    print a.freq1
-
-    a.mode = Modes.SINE
-    print a.mode
-
-    a.onA = True
-    
+    a.gpib.write(":AGEN:DASINE:FRQ1 31000.4Hz")
+    a.gpib.write(":AGEN:DASINE:FRQ2 31000.4Hz")
+    a.gpib.write("ERRS?")
+    print a.gpib.read(2024) 
+    a.gpib.write(":AGEN:SET?")
+        
 if __name__ == "__main__":
     main()

@@ -27,7 +27,7 @@ entity acqboard is
            FIBEROUT : out std_logic;
 		 CLK8_OUT : out std_logic;
 		 LED0 : out std_logic;
-			  LED1 : out std_logic);
+		 LED1 : out std_logic);
 end acqboard;
 
 architecture Behavioral of acqboard is
@@ -44,7 +44,7 @@ architecture Behavioral of acqboard is
 
 -- pga and input select signals
    signal gain : std_logic_vector(2 downto 0) := (others => '0');
-   signal filter : std_logic_vector(1 downto 0) := (others => '0'); 
+   signal filter : std_logic := '0'; 
    signal pgachan : std_logic_vector(3 downto 0) := (others => '0');
    signal gset, iset, fset, pgarst : std_logic := '0';
    signal isel : std_logic_vector(1 downto 0) := (others => '0');
@@ -111,15 +111,7 @@ architecture Behavioral of acqboard is
         port (O : out std_logic); 
    end component; 
  
-		component serdebug is
-	    Port ( CLK : in std_logic;
-	    		 RESET : in std_logic; 
-	           DIN : in std_logic_vector(15 downto 0);
-	           DINEN : in std_logic;
-	           SOUTCS : out std_logic;
-	           SOUTCLK : out std_logic;
-	           SOUTDATA : out std_logic);
-	end component;
+
 	component clocks is
 	    Port ( CLKIN : in std_logic;
 	           CLK : out std_logic;
@@ -209,7 +201,7 @@ architecture Behavioral of acqboard is
 	           RCLK : out std_logic;
 	           SOUT : out std_logic;
 	           CHAN : in std_logic_vector(3 downto 0);
-			 FILTER : in std_logic_vector(1 downto 0); 
+			 FILTER : in std_logic; 
 	           GAIN : in std_logic_vector(2 downto 0);
 	           GSET : in std_logic;
 	           ISET : in std_logic;
@@ -288,7 +280,7 @@ architecture Behavioral of acqboard is
 	           PGACHAN : out std_logic_vector(3 downto 0);
 	           PGAGAIN : out std_logic_vector(2 downto 0);
 	           PGAISEL : out std_logic_vector(1 downto 0);
-	           PGAFIL : out std_logic_vector(1 downto 0);
+	           PGAFIL : out std_logic;
 	           GSET : out std_logic;
 	           ISET : out std_logic;
 	           FSET : out std_logic;
@@ -400,9 +392,9 @@ begin
 	pgaload_inst : PGAload port map (
 			CLK => clk,
 			RESET => reset,
-			SCLK => open ,
-			RCLK => open,
-			SOUT => open,
+			SCLK => PGASRCK,
+			RCLK => PGARCK,
+			SOUT => PGASERA,
 			CHAN => pgachan,
 			GAIN => gain,
 			FILTER => filter,
@@ -508,15 +500,6 @@ begin
 			YEN => yenraw); 
 	
 	
- 	debugging: serdebug port map (
-			CLK => clk,
-			RESET => reset, 
-			dinen => debugsample,	
-			din => yraw,
-			soutcs => PGARCK,
-			SOUTCLK => PGASRCK,
-			SOUTDATA => PGASERA); 
-			 
  -- muxes
 	y <= yraw when rawsel = '1' else ymac;
 	yen <= yenraw when rawsel = '1' else yenmac;  

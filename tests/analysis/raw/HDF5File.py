@@ -15,7 +15,7 @@ class SineRecord(IsDescription):
     data          = Int16Col(shape=(65536,))
 
 
-class RawH5File:
+class H5File:
     def __init__(self, filename, title, acqVersion=4.3):
         self.filename = filename
         self.title = title

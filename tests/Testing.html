@@ -1174,12 +1174,40 @@ Sine run will:<br>
 </ul>
 <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">6 February
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+With progress being made on benchmarking and measurement, two things
+still puzzle:<br>
+<ul>
+  <li>Our inability to coherently sample without getting massive skirt
+around the fundamental<br>
+  </li>
+  <li>the difficulty in removing the fundamental with our 2-pole notch
+filter.&nbsp;</li>
+</ul>
+It is very difficult to measure jitter using our scope and other
+equipment due to the nature of our CONVST signal. That said, it looks
+like we have ~1ns of jitter as an artifact of the isoloop converters,
+which would give us an SNR max of 84 dB per AD App note AN-501.<br>
 <br>
+To help get the data into the digital domain, I am going to try and use
+the HFBR output and interface it with the ATS-2 via TOSlink. The AP
+TechNote-26 will be very helpful.<br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">19
+Feburary 2005</span><br
+ style="font-weight: bold; text-decoration: underline;">
 <br>
+Jitter. I think the problem is jitter on CONVST. This would explain the
+difficulties in coherent sampliong. Our analysis of THD+N from using
+the two-pole notch filter in python agrees with the SNR measurements
+taken via our makeshift TOSlink interface. My original implementation
+was lame but I was able to hack on the behavioral one from the SPDIF
+opencores project and get it to work. The ATS-2 gives a roughly-flat
+-70 dB THD+N across the board, too. <br>
 <br>
-<br>
-<br>
-<br>
+Secondary measurements suggest jitter on the order of 500 ps for
+CONVST. Similar jitter effects are seen, however, on the output of the
+clock oscillator near the FPGA. <br>
 </body>
 </html>

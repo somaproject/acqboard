@@ -74,7 +74,9 @@ _SynthMultStyle=xstvhd, spartan3, Schematic.t_synthesize, 1082297163, Auto
 _SynthOpt=xstvhd, spartan3, Schematic.t_synthesize, 1082297163, Area
 _SynthOptEffort=xstvhd, spartan3, Schematic.t_synthesize, 1056383182, High
 [STATUS-ALL]
-pgaload.ngcFileGroup=OK,1107439984
+acqboard.bitFile=WARNINGS,1107541415
+acqboard.ngcFile=WARNINGS,1107541319
+acqboard.ngdFile=WARNINGS,1107541340
 serdebug.bitFile=WARNINGS,1106586638
 [STRATEGY-LIST]
 Normal=True

@@ -18,7 +18,11 @@ DEVSIMULATOR Modelsim
 SIMULATORTIME 0
 DEVGENERATEDSIMULATIONMODEL VHDL
 GENERATEDSIMULATIONMODELTIME 0
-SOURCE ..\bench\vhdl\spdif_source.vhd
+SOURCE spdif_source.vhd
 DEPASSOC spdif_source test.ucf
+[STATUS-ALL]
+spdif_source.bitFile=WARNINGS,1108768330
+spdif_source.ngcFile=WARNINGS,1108768311
+spdif_source.ngdFile=WARNINGS,1108768322
 [STRATEGY-LIST]
 Normal=True

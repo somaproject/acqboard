@@ -34,8 +34,9 @@ architecture Behavioral of FiberTX is
    		std_logic_vector(7 downto 0):= (others => '0');
 		
    signal din, dinl : std_logic_vector(7 downto 0):= (others => '0');
-   
-   signal ldout, dout, shiftreg : 
+   signal yl: std_logic_vector(15 downto 0) := (others => '0');
+
+   signal dout, shiftreg : 
    		std_logic_vector(9 downto 0):= (others => '0');
    
    signal kin, sout : std_logic := '0';
@@ -51,6 +52,7 @@ architecture Behavioral of FiberTX is
    signal cs, ns : states := kcomma;
    
    --8b/10b encoder
+
 	component encode8b10b IS
 		port (
 		din: IN std_logic_VECTOR(7 downto 0);
@@ -58,14 +60,17 @@ architecture Behavioral of FiberTX is
 		clk: IN std_logic;
 		dout: OUT std_logic_VECTOR(9 downto 0);
 		ce: IN std_logic);
-	END component;      	
+	END component;
+		
 begin
+
+
    encode: encode8b10b port map (
    		din => dinl,
-		dout => ldout,
+		dout => dout,
 		clk => CLK,
 		kin => kin,
-		ce => '1'); 
+		ce => outbyte); 
 
    sout <= shiftreg(0); 
 
@@ -111,8 +116,11 @@ begin
 		   if OUTBYTE = '1' then
 		   	  dinl <= din;
 		   end if; 
-						 
-		   dout <= ldout;
+
+		   if OUTBYTE = '1' then
+		   	  yl <= y;
+		   end if; 
+					
 
 		   -- loadable shift register
 
@@ -138,14 +146,14 @@ begin
    end process clock; 
 
    -- din mux;
-   din <= "11111100" when insel = "000" else
+   din <= "10111100" when insel = "000" else
    		("0000" & cmdstsl) when insel = "001" else
-		y(15 downto 8) when insel = "010" else
-		y(7 downto 0) when insel = "011" else
+		yl(15 downto 8) when insel = "010" else
+		yl(7 downto 0) when insel = "011" else
 		cmdl when insel = "100" else
 		chksuml(7 downto 0) when insel = "101" else
 		"00000000" when insel = "110" else
-		"11111100"; 
+		"10111100"; 
 
 
    fsm: process(CS) is

@@ -61,7 +61,7 @@ component wrapped_encode8b10b
 end component;
 
 -- Configuration specification 
-	for all : wrapped_encode8b10b use entity XilinxCoreLib.encode_8b10b_v3_0(behavioral)
+	for all : wrapped_encode8b10b use entity XilinxCoreLib.encode_8b10b_v4_0(behavioral)
 		generic map(
 			c_has_nd_b => 0,
 			c_force_code_disp => 1,

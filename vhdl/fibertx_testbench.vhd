@@ -43,7 +43,7 @@ ARCHITECTURE behavior OF testbench IS
 	SIGNAL y :  std_logic_vector(15 downto 0) := "0000000000000000";
 	SIGNAL cmdsts :  std_logic_vector(3 downto 0) := "0000";
 	SIGNAL cmdid :  std_logic_vector(6 downto 0) := "0000000";
-	SIGNAL cmderr : std_logic := '0'
+	SIGNAL cmderr : std_logic := '0';
 	SIGNAL outbyte :  std_logic;
 	SIGNAL chksum :  std_logic_vector(15 downto 0) := (others => '0');
 	signal counter : integer := 0;

@@ -21,9 +21,11 @@ entity acqboard is
            ESCK : out std_logic;
 		 ECS : out std_logic;
 		 ESO : in std_logic; 
+		 EEPROMLEN : in std_logic;  
            FIBERIN : in std_logic;
            FIBEROUT : out std_logic;
-           RESET : in std_logic);
+           RESET : in std_logic;
+		 CLK8_OUT : out std_logic);
 end acqboard;
 
 architecture Behavioral of acqboard is
@@ -73,6 +75,7 @@ architecture Behavioral of acqboard is
    signal h : std_logic_vector(21 downto 0) := (others => '0');
    signal startmac, macdone : std_logic := '0';
    signal macchan : std_logic_vector(3 downto 0) := (others => '0');
+   signal sampouten : std_logic := '0';
 
 -- command-related signals
    signal cmddata : std_logic_vector(31 downto 0) := (others => '0');
@@ -127,6 +130,7 @@ architecture Behavioral of acqboard is
 	           AIN : in std_logic_vector(6 downto 0);
 	           DOUT : out std_logic_vector(15 downto 0);
 	           AOUT : in std_logic_vector(6 downto 0);
+			 SAMPOUTEN : in std_logic; 
 	           CHANOUT : in std_logic_vector(3 downto 0));
 	end component;
 
@@ -134,11 +138,13 @@ architecture Behavioral of acqboard is
 	    Port ( CLK : in std_logic;
 	           INSAMPLE : in std_logic;
 	           OUTSAMPLE : in std_logic;
+			 OUTBYTE : in std_logic; 
 	           RESET : in std_logic;
 	           STARTMAC : out std_logic;
 	           MACDONE : in std_logic;
 	           SAMPLE : out std_logic_vector(6 downto 0);
 	           SAMPBASE : out std_logic_vector(6 downto 0);
+			 SAMPOUTEN : out std_logic; 
 	           RMACCHAN : out std_logic_vector(3 downto 0));
 	end component;
 
@@ -216,6 +222,7 @@ architecture Behavioral of acqboard is
 			 RESET : in std_logic; 
 	           SWE : out std_logic;
 	           FWE : out std_logic;
+			 EEPROMEN : in std_logic;
 	           ADDR : out std_logic_vector(8 downto 0);
 	           EEEN : out std_logic;
 	           EEDONE : in std_logic);
@@ -305,6 +312,7 @@ begin
 			AIN => ain,
 			DOUT => x,
 			AOUT => xa,
+			SAMPOUTEN => sampouten, 
 			CHANOUT => macchan);
 			
 	 
@@ -312,11 +320,13 @@ begin
 			CLK => clk,
 			INSAMPLE => insample,
 			OUTSAMPLE => outsample,
+			OUTBYTE => outbyte, 
 			RESET => reset, 
 			STARTMAC => startmac,
 			MACDONE => macdone,
 			SAMPLE => sample,
 			SAMPBASE => xabase,
+			SAMPOUTEN => sampouten, 
 			RMACCHAN => macchan);
 
 	filterarray_inst : FilterArray port map (
@@ -389,6 +399,7 @@ begin
 			SWE => lswe,
 			FWE => lfwe,
 			ADDR => laddr,
+			EEPROMEN => EEPROMLEN,
 			EEEN => len,
 			EEDONE => edone);
 			
@@ -441,10 +452,11 @@ begin
 
  	bin <= dout when bufsel = '0' else edout;
 	bwe <= weout when bufsel = '0' else lswe;
-	ain <= laddr(6 downto 0) when bufsel = '0' else sample;
+	ain <= laddr(6 downto 0) when bufsel = '1' else sample;
 
-	ea <= ("00" & laddr) when eesel = '0' else ('0' & ewaddr);
-	een <= len when eesel = '0' else ceen; 
+	ea <= ("00" & laddr) when eesel = '1' else ('0' & ewaddr);
+	een <= len when eesel = '1' else ceen; 
 
+	CLK8_OUT <= clk8; 
 
 end Behavioral;

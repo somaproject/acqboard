@@ -1,4 +1,4 @@
-# Xilinx CORE Generator 5.2.03i
+# Xilinx CORE Generator 5.2.03i; Cores Update # 2
 # Username = Eric Jonas
 # COREGenPath = C:\Xilinx\coregen
 # ProjectPath = C:\desktop\acqboard\vhdl
@@ -29,7 +29,7 @@ SET OutputOption = DesignFlow
 SET DesignFlow = Vhdl
 SET FlowVendor = Foundation_iSE
 SET FormalVerification = None
-SELECT Encode_8b/10b Spartan2 Xilinx,_Inc. 3.0
+SELECT Encode_8b/10b Spartan2 Xilinx,_Inc. 4.0
 CSET b_new_data = false
 CSET force_code = false
 CSET disparity_output = false

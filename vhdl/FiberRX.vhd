@@ -12,7 +12,7 @@ entity FiberRX is
     Port ( CLK : in std_logic;
            FIBERIN : in std_logic;
 		 RESET : in std_logic; 
-           DATA : out std_logic_vector(31 downto 0);
+           DATA : out std_logic_vector(31 downto 0) := (others => '0');
            CMD : out std_logic_vector(3 downto 0);
            NEWCMD : out std_logic;
 		 PENDING : in std_logic; 
@@ -66,6 +66,11 @@ begin
    begin
    	if RESET = '1' then
 		cs <= none;
+		DATA <= (others => '0');
+		CMDID <= (others => '0');
+		CMD <= (others => '0');
+		CHKSUM <= (others => '0');
+
 	else
 		if rising_edge(clk) then
 		   cs <= ns; 

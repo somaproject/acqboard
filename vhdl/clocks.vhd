@@ -15,7 +15,7 @@ entity clocks is
 		 RESET : in std_logic;  
            INSAMPLE : out std_logic;
            OUTSAMPLE : out std_logic;
-           OUTBYTE : out std_logic;
+           OUTBYTE : out std_logic := '0';
            SPICLK : out std_logic);
 end clocks;
 
@@ -32,7 +32,6 @@ architecture Behavioral of clocks is
    signal div10a_o, div10a_l, div10a : std_logic := '0';
    signal div5a_o, div5a_l, div5a : std_logic := '0';
    signal div5b_o, div5b_l, div5b : std_logic := '0';
-   signal div8b_o, div8b_l, div8b : std_logic := '0';
    signal div5c_o, div5c_l, div5c : std_logic := '0';
    signal div5d_o, div5d_l, div5d : std_logic := '0';
    signal div10b_o, div10b_l, div10b : std_logic := '0';
@@ -134,17 +133,6 @@ begin
 			A3 => '0',
 			Q => div5b_o);
 
-    div8b_srl: SRL16E
-    	      generic map (INIT => X"0001")
-		 port map (
-		 	D => div8b_o,
-			CE => div10a,
-			CLK => clk_g,
-			A0 => '1',
-			A1 => '1',
-			A2 => '1',
-			A3 => '0',
-			Q => div8b_o);
  
     div5c_srl: SRL16E
     	      generic map (INIT => X"0008")
@@ -188,41 +176,45 @@ begin
 	div5a <= '1' when div5a_l = '0' and div5a_o = '1' else '0';
 	div5b <= '1' when div5b_l = '0' and div5b_o = '1' else '0';
 	div5d <= '1' when div5d_l = '0' and div5d_o = '1' else '0';
- 	div8b <= '1' when div8b_l = '0' and div8b_o = '1' else '0';
 
 
 
- 	process(clk_g) is
+ 	process(clk_g, RESET) is
 	begin
-		if rising_edge(clk_g) then
-		   div10a_l <= div10a_o; 
-		   div10b_l <= div10b_o; 
-		   div5a_l <= div5a_o; 
-		   div5b_l <= div5b_o;  
-		   div5d_l <= div5d_o; 
-		   div8b_l <= div8b_o;
-		   div10al <= div10a;
- 		   div10all <= div10al;
-		   if div5b = '1' and locked = '1' then
-		   	outenable <= '1';
-		   end if; 
+		if RESET = '1' then 
+		   	INSAMPLE <= '0';
+		   	OUTBYTE <= '0';
+             	OUTSAMPLE <= '0';
+         	   	CLK8 <='0'; 
+		else 			
+			if rising_edge(clk_g) then
+			   div10a_l <= div10a_o; 
+			   div10b_l <= div10b_o; 
+			   div5a_l <= div5a_o; 
+			   div5b_l <= div5b_o;  
+			   div5d_l <= div5d_o; 
+			   div10al <= div10a;
+	 		   div10all <= div10al;
+			   if div5b = '1' and locked = '1' then
+			   	outenable <= '1';
+			   end if; 
 		   
-		   	linsample <= div10b;
-		   	loutbyte <= div10all;
-             	loutsample <= div5b; 
-         	   	lclk8 <= div8c;  
+			   	linsample <= div10b;
+			   	loutbyte <= div10all;
+	             	loutsample <= div5b; 
+	         	   	lclk8 <= div8c;  
 		    
-		   if outenable = '1' then 
-		   	INSAMPLE <= linsample;
-		   	OUTBYTE <= loutbyte;
-             	OUTSAMPLE <= loutsample; 
-         	   	CLK8 <= lclk8;  
-		   end if;
-		end if;
+			   if outenable = '1' then 
+			   	INSAMPLE <= linsample;
+			   	OUTBYTE <= loutbyte;
+	             	OUTSAMPLE <= loutsample; 
+	         	   	CLK8 <= lclk8;  
+			   end if;
+			end if;
+		end if; 
 	end process; 
 
-      SPICLK <= div8b;  
     
-
+    SPICLK <= loutbyte; 
 
 end Behavioral;

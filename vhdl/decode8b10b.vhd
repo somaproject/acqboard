@@ -65,7 +65,7 @@ component wrapped_decode8b10b
 end component;
 
 -- Configuration specification 
-	for all : wrapped_decode8b10b use entity XilinxCoreLib.decode_8b10b_v4_0(behavioral)
+	for all : wrapped_decode8b10b use entity XilinxCoreLib.decode_8b10b_v5_0(behavioral)
 		generic map(
 			c_has_nd_b => 0,
 			c_has_run_disp => 0,

@@ -110,7 +110,7 @@ begin
 		  pgareset <= '0';
 		  eaddrsel <= 0;
 		  edatasel <= '0'; 
-		  erw <= '0';
+		  erw <= '1';
 		  een <= '0';
 		  gset <= '0';
 		  iset <= '0';
@@ -159,7 +159,7 @@ begin
 		  pgareset <= '0';
 		  eaddrsel <= 0;
 		  edatasel <= '0'; 
-		  erw <= '0';
+		  erw <= '1';
 		  een <= '1';
 		  gset <= '1';
 		  iset <= '0';
@@ -175,7 +175,7 @@ begin
 		  pgareset <= '0';
 		  eaddrsel <= 0;
 		  edatasel <= '0'; 
-		  erw <= '0';
+		  erw <= '1';
 		  een <= '1';
 		  gset <= '0';
 		  iset <= '0';
@@ -195,7 +195,7 @@ begin
 		  pgareset <= '0';
 		  eaddrsel <= 0;
 		  edatasel <= '0'; 
-		  erw <= '0';
+		  erw <= '1';
 		  een <= '0';
 		  gset <= '0';
 		  iset <= '0';
@@ -211,7 +211,7 @@ begin
 		  pgareset <= '0';
 		  eaddrsel <= 0;
 		  edatasel <= '0'; 
-		  erw <= '0';
+		  erw <= '1';
 		  een <= '0';
 		  gset <= '0';
 		  iset <= '0';
@@ -227,7 +227,7 @@ begin
 		  pgareset <= '0';
 		  eaddrsel <= 0;
 		  edatasel <= '0'; 
-		  erw <= '0';
+		  erw <= '1';
 		  een <= '0';
 		  gset <= '0';
 		  iset <= '1';
@@ -243,7 +243,7 @@ begin
 		  pgareset <= '0';
 		  eaddrsel <= 0;
 		  edatasel <= '0'; 
-		  erw <= '0';
+		  erw <= '1';
 		  een <= '0';
 		  gset <= '0';
 		  iset <= '0';
@@ -259,7 +259,7 @@ begin
 		  pgareset <= '0';
 		  eaddrsel <= 0;
 		  edatasel <= '0'; 
-		  erw <= '1';
+		  erw <= '0';
 		  een <= '1';
 		  gset <= '0';
 		  iset <= '0';
@@ -275,7 +275,7 @@ begin
 		  pgareset <= '0';
 		  eaddrsel <= 0;
 		  edatasel <= '0'; 
-		  erw <= '1';
+		  erw <= '0';
 		  een <= '1';
 		  gset <= '0';
 		  iset <= '0';
@@ -295,7 +295,7 @@ begin
 		  pgareset <= '0';
 		  eaddrsel <= 1;
 		  edatasel <= '0'; 
-		  erw <= '1';
+		  erw <= '0';
 		  een <= '1';
 		  gset <= '0';
 		  iset <= '0';
@@ -311,7 +311,7 @@ begin
 		  pgareset <= '0';
 		  eaddrsel <= 1;
 		  edatasel <= '0'; 
-		  erw <= '1';
+		  erw <= '0';
 		  een <= '1';
 		  gset <= '0';
 		  iset <= '0';
@@ -331,7 +331,7 @@ begin
 		  pgareset <= '0';
 		  eaddrsel <= 2;
 		  edatasel <= '0'; 
-		  erw <= '1';
+		  erw <= '0';
 		  een <= '1';
 		  gset <= '0';
 		  iset <= '0';
@@ -347,7 +347,7 @@ begin
 		  pgareset <= '0';
 		  eaddrsel <= 2;
 		  edatasel <= '0'; 
-		  erw <= '1';
+		  erw <= '0';
 		  een <= '1';
 		  gset <= '0';
 		  iset <= '0';
@@ -367,7 +367,7 @@ begin
 		  pgareset <= '0';
 		  eaddrsel <= 3;
 		  edatasel <= '1'; 
-		  erw <= '1';
+		  erw <= '0';
 		  een <= '1';
 		  gset <= '0';
 		  iset <= '0';
@@ -383,7 +383,7 @@ begin
 		  pgareset <= '0';
 		  eaddrsel <= 3;
 		  edatasel <= '1'; 
-		  erw <= '1';
+		  erw <= '0';
 		  een <= '1';
 		  gset <= '0';
 		  iset <= '0';
@@ -403,7 +403,7 @@ begin
 		  pgareset <= '0';
 		  eaddrsel <= 0;
 		  edatasel <= '0'; 
-		  erw <= '0';
+		  erw <= '1';
 		  een <= '0';
 		  gset <= '0';
 		  iset <= '0';
@@ -423,7 +423,7 @@ begin
 		  pgareset <= '0';
 		  eaddrsel <= 0;
 		  edatasel <= '0'; 
-		  erw <= '0';
+		  erw <= '1';
 		  een <= '0';
 		  gset <= '0';
 		  iset <= '0';
@@ -439,7 +439,7 @@ begin
 		  pgareset <= '0';
 		  eaddrsel <= 0;
 		  edatasel <= '0'; 
-		  erw <= '0';
+		  erw <= '1';
 		  een <= '0';
 		  gset <= '0';
 		  iset <= '0';
@@ -455,7 +455,7 @@ begin
 		  pgareset <= '1';
 		  eaddrsel <= 0;
 		  edatasel <= '0'; 
-		  erw <= '0';
+		  erw <= '1';
 		  een <= '0';
 		  gset <= '0';
 		  iset <= '0';
@@ -471,7 +471,7 @@ begin
 		  pgareset <= '0';
 		  eaddrsel <= 0;
 		  edatasel <= '0'; 
-		  erw <= '0';
+		  erw <= '1';
 		  een <= '0';
 		  gset <= '0';
 		  iset <= '0';
@@ -491,7 +491,7 @@ begin
 		  pgareset <= '0';
 		  eaddrsel <= 0;
 		  edatasel <= '0'; 
-		  erw <= '0';
+		  erw <= '1';
 		  een <= '0';
 		  gset <= '0';
 		  iset <= '0';
@@ -507,7 +507,7 @@ begin
 		  pgareset <= '0';
 		  eaddrsel <= 0;
 		  edatasel <= '0'; 
-		  erw <= '0';
+		  erw <= '1';
 		  een <= '0';
 		  gset <= '0';
 		  iset <= '0';

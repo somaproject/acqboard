@@ -24,10 +24,10 @@ architecture Behavioral of test_deserialize is
    signal inbuff, inbuffl: std_logic_vector(249 downto 0) := (others => '0');
    signal outbuff : std_logic_vector(25*8-1 downto 0) := (others => '0');
 
-   signal intclk: std_logic := '0'; -- obscenely fast internal clock. 
    signal din : std_logic_vector(9 downto 0) := (others => '0');
    signal dout : std_logic_vector(7 downto 0) := (others => '0'); 
    signal code_err, kout, disp_err, translate : std_logic; 
+   signal intclk : std_logic := '0';
     
 	component decode8b10b IS
 		port (
@@ -100,7 +100,8 @@ begin
 		 write(L, TO_Bitvector(outbuff(15 downto 8)));
 		 for i in 0 to 9 loop
 			write(L, ' ');
-			write(L, to_integer(signed(outbuff((i+2)*16-1 downto (i+1)*16)))); 
+			write(L, to_integer(signed(outbuff((i+2)*16-9 downto (i+1)*16) & 
+				   outbuff((i+2)*16-1 downto (i+1)*16+8)))); 
 		 end loop; 
 
 		 write(L, ' ');

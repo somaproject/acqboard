@@ -17,6 +17,7 @@ entity samplebuffer is
            AIN : in std_logic_vector(6 downto 0);
            DOUT : out std_logic_vector(15 downto 0);
            AOUT : in std_logic_vector(6 downto 0);
+		 SAMPOUTEN: in std_logic; 
            CHANOUT : in std_logic_vector(3 downto 0));
 end samplebuffer;
 
@@ -75,7 +76,7 @@ begin
    		DIA => DIN,
 		DIB => "0000000000000000",
 		ENA => '1',
-		ENB => '1',
+		ENB => SAMPOUTEN,
 		WEA => WE1,
 		WEB => '0',
 		RSTA => RESET,
@@ -91,7 +92,7 @@ begin
    		DIA => DIN,
 		DIB => "0000000000000000",
 		ENA => '1',
-		ENB => '1',
+		ENB => SAMPOUTEN,
 		WEA => WE2,
 		WEB => '0',
 		RSTA => RESET,
@@ -107,7 +108,7 @@ begin
    		DIA => DIN,
 		DIB => "0000000000000000",
 		ENA => '1',
-		ENB => '1',
+		ENB => SAMPOUTEN,
 		WEA => WE3,
 		WEB => '0',
 		RSTA => RESET,
@@ -123,7 +124,7 @@ begin
    		DIA => DIN,
 		DIB => "0000000000000000",
 		ENA => '1',
-		ENB => '1',
+		ENB => SAMPOUTEN,
 		WEA => WE4,
 		WEB => '0',
 		RSTA => RESET,
@@ -139,7 +140,7 @@ begin
    		DIA => DIN,
 		DIB => "0000000000000000",
 		ENA => '1',
-		ENB => '1',
+		ENB => SAMPOUTEN,
 		WEA => WE5,
 		WEB => '0',
 		RSTA => RESET,

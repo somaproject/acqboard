@@ -15,6 +15,7 @@ entity Loader is
 		 RESET : in std_logic; 
            SWE : out std_logic;
            FWE : out std_logic;
+		 EEPROMEN : in std_logic; 
            ADDR : out std_logic_vector(8 downto 0);
            EEEN : out std_logic;
            EEDONE : in std_logic);
@@ -26,6 +27,8 @@ architecture Behavioral of Loader is
 -- the address lines are combined with WEs to map filter and sample
 -- buffer into the same address space, and data is stored in the 
 -- eeprom so things can be easily read in. 
+--
+-- note that if EEPROMEN = 0, this function just returns done
    signal address : std_logic_vector(8 downto 0) := (others => '0');
    signal we : std_logic := '0';
 
@@ -65,9 +68,11 @@ begin
 			EEEN <= '0';
 			WE <= '0';
 			DONE <= '0';
-			if LOAD = '1' then
+			if LOAD = '1' and EEPROMEN = '1' then
 				ns <= enable;
-			else
+			elsif LOAD = '1' and EEPROMEN = '0' then
+				ns <= ldone;
+			else 
 				ns <= none;
 			end if;
 		when enable => 
@@ -82,7 +87,7 @@ begin
 			if EEDONE = '1' then
 				ns <= write;
 			else
-				ns <= none;
+				ns <= ewait;
 			end if;		
 		when write => 
 			EEEN <= '0';

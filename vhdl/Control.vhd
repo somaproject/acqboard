@@ -18,7 +18,7 @@ entity Control is
            CMDDONE : out std_logic;
            PGACHAN : out std_logic_vector(3 downto 0);
            PGAGAIN : out std_logic_vector(2 downto 0);
-           PGAISEL : out std_logic_vector(3 downto 0);
+           PGAISEL : out std_logic_vector(1 downto 0);
            PGAFIL : out std_logic_vector(1 downto 0);
            GSET : out std_logic;
            ISET : out std_logic;
@@ -59,7 +59,7 @@ begin
    -- input command data decoding
    PGACHAN <= DATA(3 downto 0);
    PGAGAIN <= DATA(10 downto 8);
-   PGAISEL <= DATA(9 downto 8) & DATA(1 downto 0);
+   PGAISEL <= DATA(9 downto 8) ;
    PGAFIL <= DATA(9 downto 8);
 
    -- eeprom-related muxes

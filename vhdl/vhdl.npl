@@ -4,8 +4,8 @@ PROJECT vhdl
 DESIGN vhdl Normal
 DEVFAM spartan2e
 DEVFAMTIME 0
-DEVICE xc2s100e
-DEVICETIME 1057602409
+DEVICE xc2s50e
+DEVICETIME 1058186809
 DEVPKG tq144
 DEVPKGTIME 1055894492
 DEVSPEED -6
@@ -34,8 +34,6 @@ MODULE EEPROMio.vhd
 MODSTYLE eepromio Normal
 MODULE Loader.vhd
 MODSTYLE loader Normal
-MODULE muxtest.vhd
-MODSTYLE muxtest Normal
 MODULE test_ADC.vhd
 MODSTYLE test_adc Normal
 MODULE input.vhd
@@ -46,6 +44,8 @@ MODULE decode8b10b.xco
 MODSTYLE decode8b10b Normal
 MODULE encode8b10b.xco
 MODSTYLE encode8b10b Normal
+MODULE shiftMAC.vhd
+MODSTYLE shiftmac Normal
 MODULE RMACcontrol.vhd
 MODSTYLE rmaccontrol Normal
 MODULE FilterArray.vhd
@@ -72,16 +72,23 @@ MODULE FiberRX.vhd
 MODSTYLE fiberrx Normal
 MODULE rounding.vhd
 MODSTYLE rounding Normal
+MODULE distRAM.vhd
+MODSTYLE distram Normal
 MODULE RMAC.vhd
 MODSTYLE rmac Normal
 DEPASSOC acqboard acqboard.ucf Normal
+DEPASSOC control control.ucf Normal
 DEPASSOC rmac RMAC.ucf Normal
-DEPASSOC input input.ucf SYSTEM
+DEPASSOC input input.ucf Normal
 DEPASSOC multiplier multiplier.ucf Normal
+DEPASSOC eepromio EEPROMio.ucf Normal
+DEPASSOC pgaload pgaload.ucf Normal
 [Normal]
 p_ModelSimSimRunTime_tb=xstvhd, spartan2e, Module VHDL Test Bench.t_MSimulateBehavioralVhdlModel, 1056480462, 100us
 p_xstPackIORegister=xstvhd, spartan2e, Schematic.t_synthesize, 1061064066, Yes
-xilxPAReffortLevel=xstvhd, spartan2e, Implementation.t_par, 1055895324, High
+xilxPAReffortLevel=xstvhd, spartan2e, Implementation.t_placeAndRouteDes, 1055895324, High
+_SynthMultStyle=xstvhd, spartan2e, Schematic.t_synthesize, 1058138004, Pipe_LUT
+_SynthOpt=xstvhd, spartan2e, Schematic.t_synthesize, 1058205222, Area
 _SynthOptEffort=xstvhd, spartan2e, Schematic.t_synthesize, 1056383182, High
 [STRATEGY-LIST]
 Normal=True

@@ -47,7 +47,7 @@ architecture Behavioral of input is
    signal cina, cinb, couta, coutb : std_logic := '0';
    signal osa, osb: std_logic := '0';
    signal pda, pdb : std_logic_vector(15 downto 0) := (others => '0');
-   signal outsel : std_logic_vector(1 downto 0) := (others => '0');
+   signal outsel, outsell : std_logic_vector(1 downto 0) := (others => '0');
    signal sclkcnt : std_logic_vector(4 downto 0) := (others => '0');
    signal od : std_logic_vector(9 downto 0) := (others => '0');
    
@@ -273,6 +273,7 @@ begin
 			  end if;
               end if; 
 
+		   
 
 		    -- output bit counter
 			       if ocs = incbitaddr or ocs = oneinc then

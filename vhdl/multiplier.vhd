@@ -9,7 +9,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 --use UNISIM.VComponents.all;
 
 entity multiplier is	   
-    Generic ( n: positive := 36); 
+    Generic ( n: positive := 24); 
     Port ( CLK : in std_logic;
            A : in std_logic_vector(15 downto 0);
            B : in std_logic_vector(21 downto 0);
@@ -23,21 +23,19 @@ architecture Behavioral of multiplier is
 -- into the multiplier itself, giving us a pipelined implementation
 -- for basically no effort. 
 
-    signal al, a1 : std_logic_vector(15 downto 0) := (others => '0');
-    signal bl, b1: std_logic_vector(21 downto 0) := (others => '0');
-    signal lp, p1, p2 : std_logic_vector(37 downto 0) := (others => '0'); 
+    signal al : std_logic_vector(15 downto 0) := (others => '0');
+    signal bl: std_logic_vector(21 downto 0) := (others => '0');
+    signal lp, p1 : std_logic_vector(37 downto 0) := (others => '0'); 
 
 begin
 	process(CLK) is
 	begin
 		if rising_edge(CLK) then
-			a1 <= A;
-			al <= a1;
-			b1 <= B;
-			bl <= B1;
-			p1 <= lp;
-			p2 <= p1;  
-			P <= p2(36 downto (36-n+1)); 
+			al <= A;
+			bl <= B;
+			--p1 <= lp;
+			p1 <= lp;  
+			P <= p1(36 downto (36-n+1)); 
 		end if;
 	end process; 
 

@@ -24,7 +24,7 @@ end RMAC;
 architecture Behavioral of RMAC is
 -- RMAC.VHD -- main repeated multiply-accumulator system. 
    -- resolution of intermediate MAC
-   constant n : positive := 36; 
+   constant n : positive := 24; 
    
    signal xl: std_logic_vector(15 downto 0) := (others => '0');
    signal hl: std_logic_vector(21 downto 0) := (others => '0');
@@ -74,8 +74,8 @@ begin
   multiplier_inst: multiplier
   	generic map (n => n)
   	port map( CLK => CLK,
-			A => xl,
-			B => hl,
+			A => x,
+			B => h,
 			P => p);
 	
   accumulator_inst: accumulator
@@ -89,8 +89,8 @@ begin
 	port map( ACCL => accl,
 			yrnd => yrnd);
   overflow_inst : overflow 
-  	port map( YOVERF => yovrf,
-			YRNDL => yrndl);
+  	port map( YOVERF => Y,
+			YRNDL => yrnd);
 
   -- general connections
   XA <= lxa;
@@ -111,7 +111,7 @@ begin
 
 		    -- latch intermediate values
 		    yrndl <= yrnd;
-		    Y <= yovrf;
+		    --Y <= yovrf;
 		    if cs = accen then
 		    	  accl <= acc;
 		    end if; 

@@ -39,7 +39,7 @@ architecture Behavioral of acqboard is
    signal filter : std_logic_vector(1 downto 0) := (others => '0'); 
    signal pgachan : std_logic_vector(3 downto 0) := (others => '0');
    signal gset, iset, fset, pgareset : std_logic := '0';
-   signal isel : std_logic_vector(3 downto 0) := (others => '0');
+   signal isel : std_logic_vector(1 downto 0) := (others => '0');
 
 -- loader and EEPROM-related signals
    signal edin, edout : std_logic_vector(15 downto 0);
@@ -175,7 +175,7 @@ architecture Behavioral of acqboard is
 	           ISET : in std_logic;
 			 FSET : in std_logic;
 			 PGARESET : in std_logic;  
-	           ISEL : in std_logic_vector(3 downto 0));
+	           ISEL : in std_logic_vector(1 downto 0));
 	end component;
 
 
@@ -241,7 +241,7 @@ architecture Behavioral of acqboard is
 	           CMDDONE : out std_logic;
 	           PGACHAN : out std_logic_vector(3 downto 0);
 	           PGAGAIN : out std_logic_vector(2 downto 0);
-	           PGAISEL : out std_logic_vector(3 downto 0);
+	           PGAISEL : out std_logic_vector(1 downto 0);
 	           PGAFIL : out std_logic_vector(1 downto 0);
 	           GSET : out std_logic;
 	           ISET : out std_logic;

@@ -21,238 +21,222 @@ entity PGAload is
            ISET : in std_logic;
 		 FSET : in std_logic;
 		 PGARESET : in std_logic;  
-           ISEL : in std_logic_vector(3 downto 0));
+           ISEL : in std_logic_vector(1 downto 0));
 end PGAload;
 
 architecture Behavioral of PGAload is
 -- PGALOAD.VHD -- This maintains gain settings for the PGAs and input
 -- selection for the two continuous-data channels. Every change causes
--- it to serialize out to the shift registers. It also has the gain-setting
--- to PGA look-up table. 
+-- it to serialize out to the shift registers.  The use of LUTs as 
+-- 16x1bit RAMs with async reads makes the design really compact. 
 
-   signal isetl, gwe, fwe, pgaresetl : std_logic := '0';
-   signal gainl : std_logic_vector(4 downto 0) := (others => '0');
-   signal chanl, isell : std_logic_vector(3 downto 0) := (others => '0');
+   signal zero, lsout, lsclk, latch, chansel : std_logic := '0';
+   signal bitout : std_logic := '0';
+   signal i, f : std_logic_vector(1 downto 0) := (others => '0');
+   signal g : std_logic_vector(2 downto 0) := (others => '0');
+   signal lbit : std_logic_vector(6 downto 0) := (others => '0');
+   signal osel : std_logic_vector(6 downto 0) := (others => '0');
+   signal addr : std_logic_vector(3 downto 0) := (others => '0');
+   signal fwe, iwe, gwe : std_logic := '0';
 
-   signal cin, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c
-			: std_logic_vector(4 downto 0) := (others => '0');
-   signal inputsel, input : std_logic_vector(1 downto 0) := (others => '0');
-   signal msbout, shiften, latch, lsclk : std_logic := '0';
-   signal shiftreg, shiftregin : 
-   		std_logic_vector(7 downto 0) := (others => '0');
-
-   type states is (none, rst_chan_cnt, rst_shft_cnt, clkl1, clkh1, 
-   	    clkh2, clkl2, shift, next_chan, latchh1, latchh2); 
-
-   signal cs, ns  : states := none;
-   signal chancnt, shiftcnt : integer range 10 downto 0 := 0;
- 
-
-
-
+   type states is (none, write_wait, outl, clkl1, clkh1, clkh2, clkl2,
+   			    incsel, latchl, latchh1, latchh2) ;
+			    
+   signal cs, ns : states := none;
+       
+	component distRAM is
+	    Port ( CLK : in std_logic;
+	           WE : in std_logic;
+	           A : in std_logic_vector(3 downto 0);
+	           DI : in std_logic;
+	           DO : out std_logic);
+	end component;
 
 begin
 
-   clock: process(CLK, cs, ns, ISEL, ISET, GAIN, GSET, CHAN, FSET, input,
-      		  shiftreg, msbout, lsclk, latch, RESET) is
+   -- wire up distributed RAM:
+   gain_RAM_0: distRAM port map (
+   		CLK => CLK,
+		WE => gwe,
+		A => addr,
+		DI => g(0),
+		DO => LBIT(0));
+
+   gain_RAM_1: distRAM port map (
+   		CLK => CLK,
+		WE => gwe,
+		A => addr,
+		DI => g(1),
+		DO => LBIT(1));
+
+   gain_RAM_2: distRAM port map (
+   		CLK => CLK,
+		WE => gwe,
+		A => addr,
+		DI => g(2),
+		DO => LBIT(2));
+
+   filter_RAM_0: distRAM port map (
+   		CLK => CLK,
+		WE => fwe,
+		A => addr,
+		DI => f(0),
+		DO => LBIT(3));
+
+   filter_RAM_1: distRAM port map (
+   		CLK => CLK,
+		WE => fwe,
+		A => addr,
+		DI => f(1),
+		DO => LBIT(4));
+
+   input_RAM_0: distRAM port map (
+   		CLK => CLK,
+		WE => iwe,
+		A => addr,
+		DI => i(0),
+		DO => LBIT(5));
+
+   input_RAM_1: distRAM port map (
+   		CLK => CLK,
+		WE => iwe,	 
+		A => addr,
+		DI => i(1),
+		DO => LBIT(6));
+
+
+
+
+   clock: process(CLK, RESET) is 
    begin
-   	if RESET = '1' then
-		cs <= none; 
+   	if RESET = '1' then 
+	   cs <= none; 
 	else
-		if rising_edge(CLK) then
-			cs <= ns; 
+	   if rising_edge(CLK) then
+		cs <= ns;
 
-			-- input latches
-			if ISET = '1' then
-			 	isell <= ISEL;
-			end if; 
-			isetl <= ISET;
-			cin <= (filter & gain) ; 
-			gwe <= GSET;
-			fwe <= FSET;
-			pgaresetl <= PGARESET;
-			chanl <= CHAN;
-
-			
-			-- gain registers for each channel
-			if pgaresetl = '1' then
-				c1 <= (others => '0');
-				c2 <= (others => '0');
-				c3 <= (others => '0'); 
-				c4 <= (others => '0'); 
-				c5 <= (others => '0'); 
-				c6 <= (others => '0'); 
-				c7 <= (others => '0'); 
-				c8 <= (others => '0'); 
-				c9 <= (others => '0'); 
-				c10 <= (others => '0');  
-			else
-				if gwe = '1' then 
-				  case chanl is
-					when "0000" => c1(2 downto 0) <= cin(2 downto 0); 
-					when "0001" => c2(2 downto 0) <= cin(2 downto 0); 
-					when "0010" => c3(2 downto 0) <= cin(2 downto 0); 
-					when "0011" => c4(2 downto 0) <= cin(2 downto 0); 
-					when "0100" => c5(2 downto 0) <= cin(2 downto 0); 
-					when "0101" => c6(2 downto 0) <= cin(2 downto 0); 
-					when "0110" => c7(2 downto 0) <= cin(2 downto 0); 
-					when "0111" => c8(2 downto 0) <= cin(2 downto 0); 
-					when "1000" => c9(2 downto 0) <= cin(2 downto 0); 
-					when "1001" => c10(2 downto 0) <= cin(2 downto 0); 
-					when others => Null;
-					end case; 
-				end if; 
-				-- filter registers for each channel 
-				if fwe = '1' then 
-				  case chanl is
-					when "0000" => c1(4 downto 3) <= cin(4 downto 3); 
-					when "0001" => c2(4 downto 3) <= cin(4 downto 3); 
-					when "0010" => c3(4 downto 3) <= cin(4 downto 3); 
-					when "0011" => c4(4 downto 3) <= cin(4 downto 3); 
-					when "0100" => c5(4 downto 3) <= cin(4 downto 3); 
-					when "0101" => c6(4 downto 3) <= cin(4 downto 3); 
-					when "0110" => c7(4 downto 3) <= cin(4 downto 3); 
-					when "0111" => c8(4 downto 3) <= cin(4 downto 3); 
-					when "1000" => c9(4 downto 3) <= cin(4 downto 3); 
-					when "1001" => c10(4 downto 3) <= cin(4 downto 3); 
-					when others => Null;
-					end case; 
-				end if; 
-			end if; 
-
- 
-			
-			if cs = rst_shft_cnt then
-				shiftreg <= shiftregin;
-			else
-				if shiften = '1' then
-					shiftreg <= shiftreg(6 downto 0) & '0';
-				end if;
-			end if; 
-
-			-- fsm-related counters
-			if cs = rst_chan_cnt then
-				chancnt <= 0;
-			elsif cs = next_chan then
-				chancnt <= chancnt + 1;
-			end if; 
-			if cs = rst_shft_cnt then
-				shiftcnt <= 0;
-			elsif cs = shift then
-				shiftcnt <= shiftcnt + 1;
-			end if; 
-
-			-- output latches
-			SOUT <= msbout;
-			SCLK <= lsclk;
-			RCLK <= latch; 
-
+		-- zero for pga reset
+		if PGARESET = '1' then
+		   zero <= '1';
+		elsif cs = latchh2 then
+		   zero <= '0';
 		end if;
+
+		--outsel counter
+		if  cs = none then
+		   osel <= (others => '0');
+		elsif cs = incsel then
+		   osel <= osel + 1;
+		end if;
+
+		--output latching
+		SOUT <= lsout;
+		SCLK <= lsclk;
+		RCLK <= latch; 
+
+	   end if; 
 	end if; 
+
    end process clock; 
 
-   msbout <= shiftreg(7); 
-   shiftregin <= (input(1) & '0' & c & input(0));
-   -- PGA channel selection
-   c <= c1 when chancnt = 0 else
-   		    c2 when chancnt = 1 else
-   		    c3 when chancnt = 2 else
-   		    c4 when chancnt = 3 else
-   		    c5 when chancnt = 4 else
-   		    c6 when chancnt = 5 else
-   		    c7 when chancnt = 6 else
-   		    c8 when chancnt = 7 else
-   		    c9 when chancnt = 8 else
-   		    c10;
-
-   -- input selection for PGA		    
-   input <= isell(1 downto 0) when inputsel = "00" else
-   		  isell(3 downto 2) when inputsel = "01" else
-		  "00" when inputsel = "10" else
-		  "00" when inputsel = "11" ; 
-   inputsel <= "00" when chancnt = 5 else
-   			"01" when chancnt = 6 else
-			"10"; 
-   
 
 
-   fsm : process (cs, ns, gwe, fwe, isetl, shiftcnt, chancnt, pgaresetl) is
+   -- FSM for output
+   fsm: process(cs, gset, iset, pgareset, osel) is
    begin
-   	case cs is 
-		when none => 
+   	case cs is
+		when none =>
 			lsclk <= '0';
 			latch <= '0';
-			shiften <= '0';
-  			if gwe = '1' or isetl = '1' or fwe = '1'
-				or pgaresetl = '1'  then
-				ns <= rst_chan_cnt;
-			else	
-				ns <= none;
-			end if;
-		when rst_chan_cnt =>
+			chansel <= '0'; 
+			if gset = '1' or iset = '1' or fset = '1' or pgareset = '1' then
+			   ns <= write_wait;
+			else
+			   ns <= none;
+ 			end if;
+		when write_wait => 
 			lsclk <= '0';
 			latch <= '0';
-			shiften <= '0';
-			ns <= rst_shft_cnt;
-		when rst_shft_cnt =>
+			chansel <= '0';
+			ns <= outl;
+		when outl => 
 			lsclk <= '0';
 			latch <= '0';
-			shiften <= '0';
+			chansel <= '1';
 			ns <= clkl1;
-		when clkl1 =>
+		when clkl1 => 
 			lsclk <= '0';
 			latch <= '0';
-			shiften <= '0';
+			chansel <= '1';
 			ns <= clkh1;
-		when clkh1 =>
+		when clkh1 => 
 			lsclk <= '1';
 			latch <= '0';
-			shiften <= '0';
+			chansel <= '1';
 			ns <= clkh2;
-		when clkh2 =>
+		when clkh2 => 
 			lsclk <= '1';
 			latch <= '0';
-			shiften <= '0';
+			chansel <= '1';
 			ns <= clkl2;
-		when clkl2 =>
+		when clkl2 => 
 			lsclk <= '0';
 			latch <= '0';
-			shiften <= '0';
-			ns <= shift;
-		when shift => 
+			chansel <= '1';
+			ns <= incsel;
+		when incsel => 
 			lsclk <= '0';
 			latch <= '0';
-			shiften <= '1';
-  			if shiftcnt = 7 then
-				ns <= next_chan;
-			else	
+			chansel <= '1';
+			if osel = "1001111" then
+				ns <= latchl;
+			else 
 				ns <= clkl1;
-			end if;	
-		when next_chan => 
+			end if;
+		when latchl => 
 			lsclk <= '0';
 			latch <= '0';
-			shiften <= '0';
-  			if chancnt = 9	then 
-				ns <= latchh1;
-			else	
-				ns <= rst_shft_cnt;
-			end if;	
-		when latchh1 =>
+			chansel <= '1';
+			ns <= latchh1;
+		when latchh1 => 
 			lsclk <= '0';
 			latch <= '1';
-			shiften <= '0';
+			chansel <= '1';
 			ns <= latchh2;
-		when latchh2 =>
+		when latchh2 => 
 			lsclk <= '0';
 			latch <= '1';
-			shiften <= '0';
+			chansel <= '1';
 			ns <= none;
-		when others =>
+		when others => 
 			lsclk <= '0';
 			latch <= '0';
-			shiften <= '0';
-			ns <= none;							
-	   end case; 
-   end process fsm; 
+			chansel <= '0';
+			ns <= none;
+	end case;
+   end process; 
 
-end Behavioral;
+   --- combinational stuff
+   g <= "000" when zero = '1' else GAIN;
+   i <= "00" when zero = '1' else ISEL;
+   f <= "00" when zero = '1' else FILTER;
+
+   gwe <= GSET or zero;
+   fwe <= FSET or zero;
+   iwe <= ISET or zero;
+
+   lsout <= bitout when zero ='0' else '0';
+   bitout <= lbit(0) when osel(2 downto 0) = "000" else
+   		   lbit(1) when osel(2 downto 0) = "001" else
+		   lbit(2) when osel(2 downto 0) = "010" else
+		   lbit(3) when osel(2 downto 0) = "011" else
+		   lbit(4) when osel(2 downto 0) = "100" else
+		   lbit(5) when osel(2 downto 0) = "101" else
+		   lbit(6) when osel(2 downto 0) = "110" else
+		   '0';
+  
+  addr <= osel(6 downto 3) when chansel = '1' else CHAN;
+
+  
+
+end Behavioral; 

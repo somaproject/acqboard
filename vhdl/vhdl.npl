@@ -1,0 +1,19 @@
+JDF F
+// Created by Project Navigator ver 1.0
+PROJECT vhdl
+DESIGN vhdl Normal
+DEVFAM spartan2e
+DEVFAMTIME 0
+DEVICE xc2s50e
+DEVICETIME 0
+DEVPKG tq144
+DEVPKGTIME 1041752361
+DEVSPEED -6
+DEVSPEEDTIME 1041752361
+FLOW XST VHDL
+FLOWTIME 0
+STIMULUS clocks_test.tbw Normal
+MODULE clocks.vhd
+MODSTYLE clocks Normal
+[STRATEGY-LIST]
+Normal=True

@@ -43,9 +43,6 @@ xilxSynthKeepHierarchy=xstvhd, spartan2e, Schematic.t_synthesize, 1042091876, Tr
 _SynthConstraintsFile=xstvhd, spartan2e, Schematic.t_synthesize, 1042616754, filter_test.xcf
 _SynthOptEffort=xstvhd, spartan2e, Schematic.t_synthesize, 1042151381, High
 [STATUS-ALL]
-clocks.ngcFile=WARNINGS,1042661095
-filter_test.ncdFile=WARNINGS,1042661095
-filter_test.ngcFile=WARNINGS,1042661095
-filter_test.ngdFile=WARNINGS,1042661095
+clocks.ngcFile=WARNINGS,1043015553
 [STRATEGY-LIST]
 Normal=True

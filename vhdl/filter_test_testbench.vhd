@@ -77,7 +77,7 @@ BEGIN
 
 	simulator_in: process (CONVST, oeb) is
 			--subtype dataword is integer range -8192 to 8191;
-			file input_file : text open read_mode is "\\shannon\HostFS\acquisition\development\acqboard\dsp\simulation\test.rtl.dat";
+			file input_file : text open read_mode is "\\shannon\HostFS\acquisition\development\acqboard\dsp\simulation\impulse.behavioral.dat";
 			variable tempdata: dataword;
 			variable iline: line; 
 			
@@ -122,27 +122,25 @@ BEGIN
 
 	  	end process simulator_in;
 
-		simulator_out :process (outbyteout) is
-			 file output_file : text open write_mode is "\\shannon\HostFS\acquisition\development\acqboard\dsp\simulation\output.dat";
+		simulator_out :process (outbyteout, outbytecount, macrnd) is
+			 file output_file : text open write_mode is "\\shannon\HostFS\acquisition\development\acqboard\dsp\simulation\impulse.behavioral.out";
 			 variable oline : line; 
 		begin
 			 if rising_edge(outbyteout) then
 			 	-- crude hack to sample the output at the right times
-			 	if  outbytecount = 2 or
-						outbytecount = 4 or
-						outbytecount = 6 or
-						outbytecount = 8 or
-						outbytecount = 10 or
-						outbytecount = 12 or
-						outbytecount = 14 or
-						outbytecount = 16 or
-						outbytecount = 18 or
-						outbytecount = 0 then
+			 	if  outbytecount = 3 or
+						outbytecount = 5 or
+						outbytecount = 7 or
+						outbytecount = 9 or
+						outbytecount = 11 or
+						outbytecount = 13 or
+						outbytecount = 15 or
+						outbytecount = 17 or
+						outbytecount = 19 or
+						outbytecount = 1 then
 						macrndl <= macrnd;
 						write(oline, conv_integer(macrnd));
 						write(oline, ' '); 
-
-
 				end if; 
 			  	if outbytecount = 22 then
 					writeline(output_file, oline); 

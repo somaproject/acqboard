@@ -19,7 +19,8 @@ entity PGAload is
 		 FILTER : in std_logic_vector(1 downto 0); 
            GSET : in std_logic;
            ISET : in std_logic;
-		 FSET : in std_logic; 
+		 FSET : in std_logic;
+		 PGARESET : in std_logic;  
            ISEL : in std_logic_vector(3 downto 0));
 end PGAload;
 
@@ -29,7 +30,7 @@ architecture Behavioral of PGAload is
 -- it to serialize out to the shift registers. It also has the gain-setting
 -- to PGA look-up table. 
 
-   signal isetl, gwe, fwe : std_logic := '0';
+   signal isetl, gwe, fwe, pgaresetl : std_logic := '0';
    signal gainl : std_logic_vector(4 downto 0) := (others => '0');
    signal chanl, isell : std_logic_vector(3 downto 0) := (others => '0');
 
@@ -69,41 +70,55 @@ begin
 			cin <= (filter & gain) ; 
 			gwe <= GSET;
 			fwe <= FSET;
+			pgaresetl <= PGARESET;
 			chanl <= CHAN;
 
+			
 			-- gain registers for each channel
-			if gwe = '1' then 
-			  case chanl is
-				when "0000" => c1(2 downto 0) <= cin(2 downto 0); 
-				when "0001" => c2(2 downto 0) <= cin(2 downto 0); 
-				when "0010" => c3(2 downto 0) <= cin(2 downto 0); 
-				when "0011" => c4(2 downto 0) <= cin(2 downto 0); 
-				when "0100" => c5(2 downto 0) <= cin(2 downto 0); 
-				when "0101" => c6(2 downto 0) <= cin(2 downto 0); 
-				when "0110" => c7(2 downto 0) <= cin(2 downto 0); 
-				when "0111" => c8(2 downto 0) <= cin(2 downto 0); 
-				when "1000" => c9(2 downto 0) <= cin(2 downto 0); 
-				when "1001" => c10(2 downto 0) <= cin(2 downto 0); 
-				when others => Null;
-				end case; 
+			if pgaresetl = '1' then
+				c1 <= (others => '0');
+				c2 <= (others => '0');
+				c3 <= (others => '0'); 
+				c4 <= (others => '0'); 
+				c5 <= (others => '0'); 
+				c6 <= (others => '0'); 
+				c7 <= (others => '0'); 
+				c8 <= (others => '0'); 
+				c9 <= (others => '0'); 
+				c10 <= (others => '0');  
+			else
+				if gwe = '1' then 
+				  case chanl is
+					when "0000" => c1(2 downto 0) <= cin(2 downto 0); 
+					when "0001" => c2(2 downto 0) <= cin(2 downto 0); 
+					when "0010" => c3(2 downto 0) <= cin(2 downto 0); 
+					when "0011" => c4(2 downto 0) <= cin(2 downto 0); 
+					when "0100" => c5(2 downto 0) <= cin(2 downto 0); 
+					when "0101" => c6(2 downto 0) <= cin(2 downto 0); 
+					when "0110" => c7(2 downto 0) <= cin(2 downto 0); 
+					when "0111" => c8(2 downto 0) <= cin(2 downto 0); 
+					when "1000" => c9(2 downto 0) <= cin(2 downto 0); 
+					when "1001" => c10(2 downto 0) <= cin(2 downto 0); 
+					when others => Null;
+					end case; 
+				end if; 
+				-- filter registers for each channel 
+				if fwe = '1' then 
+				  case chanl is
+					when "0000" => c1(4 downto 3) <= cin(4 downto 3); 
+					when "0001" => c2(4 downto 3) <= cin(4 downto 3); 
+					when "0010" => c3(4 downto 3) <= cin(4 downto 3); 
+					when "0011" => c4(4 downto 3) <= cin(4 downto 3); 
+					when "0100" => c5(4 downto 3) <= cin(4 downto 3); 
+					when "0101" => c6(4 downto 3) <= cin(4 downto 3); 
+					when "0110" => c7(4 downto 3) <= cin(4 downto 3); 
+					when "0111" => c8(4 downto 3) <= cin(4 downto 3); 
+					when "1000" => c9(4 downto 3) <= cin(4 downto 3); 
+					when "1001" => c10(4 downto 3) <= cin(4 downto 3); 
+					when others => Null;
+					end case; 
+				end if; 
 			end if; 
-
-			if fwe = '1' then 
-			  case chanl is
-				when "0000" => c1(4 downto 3) <= cin(4 downto 3); 
-				when "0001" => c2(4 downto 3) <= cin(4 downto 3); 
-				when "0010" => c3(4 downto 3) <= cin(4 downto 3); 
-				when "0011" => c4(4 downto 3) <= cin(4 downto 3); 
-				when "0100" => c5(4 downto 3) <= cin(4 downto 3); 
-				when "0101" => c6(4 downto 3) <= cin(4 downto 3); 
-				when "0110" => c7(4 downto 3) <= cin(4 downto 3); 
-				when "0111" => c8(4 downto 3) <= cin(4 downto 3); 
-				when "1000" => c9(4 downto 3) <= cin(4 downto 3); 
-				when "1001" => c10(4 downto 3) <= cin(4 downto 3); 
-				when others => Null;
-				end case; 
-			end if; 
-
 
  
 			
@@ -161,14 +176,15 @@ begin
    
 
 
-   fsm : process (cs, ns, gwe, fwe, isetl, shiftcnt, chancnt) is
+   fsm : process (cs, ns, gwe, fwe, isetl, shiftcnt, chancnt, pgaresetl) is
    begin
    	case cs is 
 		when none => 
 			lsclk <= '0';
 			latch <= '0';
 			shiften <= '0';
-  			if gwe = '1' or isetl = '1' or fwe = '1' then
+  			if gwe = '1' or isetl = '1' or fwe = '1'
+				or pgaresetl = '1'  then
 				ns <= rst_chan_cnt;
 			else	
 				ns <= none;

@@ -30,6 +30,8 @@ MODULE samplebuffer.vhd
 MODSTYLE samplebuffer Normal
 MODULE EEPROMio.vhd
 MODSTYLE eepromio Normal
+MODULE Loader.vhd
+MODSTYLE loader Normal
 MODULE input.vhd
 MODSTYLE input Normal
 MODULE test_serialize.vhd
@@ -42,6 +44,8 @@ MODULE RMACcontrol.vhd
 MODSTYLE rmaccontrol Normal
 MODULE FilterArray.vhd
 MODSTYLE filterarray Normal
+MODULE Control.vhd
+MODSTYLE control Normal
 MODULE multiplier.vhd
 MODSTYLE multiplier Normal
 MODULE accumulator.vhd

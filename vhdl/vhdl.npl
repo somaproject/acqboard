@@ -4,8 +4,8 @@ PROJECT vhdl
 DESIGN vhdl Normal
 DEVFAM spartan2e
 DEVFAMTIME 0
-DEVICE xc2s100e
-DEVICETIME 1057173017
+DEVICE xc2s50e
+DEVICETIME 1057175311
 DEVPKG tq144
 DEVPKGTIME 1055894492
 DEVSPEED -6
@@ -17,9 +17,11 @@ STIMULUS RMAC_test.tbw Normal
 STIMULUS EEPROMio_testbench.vhd Normal
 STIMULUS decoder_testbench.vhd Normal
 STIMULUS overflow_testbench.vhd Normal
+STIMULUS test_ADC_testbench.vhd Normal
 STIMULUS overflow_test.tbw Normal
 STIMULUS test_serialize_testbench.vhd Normal
 STIMULUS pgaload_test.tbw Normal
+STIMULUS input_testbench.vhd Normal
 STIMULUS test_serialize_test.tbw Normal
 STIMULUS FiberRX_testbench.vhd Normal
 STIMULUS rounding_testbench.vhd Normal
@@ -32,6 +34,10 @@ MODULE EEPROMio.vhd
 MODSTYLE eepromio Normal
 MODULE Loader.vhd
 MODSTYLE loader Normal
+MODULE muxtest.vhd
+MODSTYLE muxtest Normal
+MODULE test_ADC.vhd
+MODSTYLE test_adc Normal
 MODULE input.vhd
 MODSTYLE input Normal
 MODULE test_serialize.vhd
@@ -50,6 +56,8 @@ MODULE multiplier.vhd
 MODSTYLE multiplier Normal
 MODULE accumulator.vhd
 MODSTYLE accumulator Normal
+MODULE bitserial.vhd
+MODSTYLE bitserial Normal
 MODULE decoder.vhd
 MODSTYLE decoder Normal
 MODULE PGAload.vhd
@@ -70,13 +78,13 @@ MODULE rounding.vhd
 MODSTYLE rounding Normal
 MODULE RMAC.vhd
 MODSTYLE rmac Normal
-DEPASSOC acqboard acqboard.ucf SYSTEM
+DEPASSOC acqboard acqboard.ucf Normal
 DEPASSOC rmac RMAC.ucf Normal
 DEPASSOC multiplier multiplier.ucf Normal
 [Normal]
-p_ModelSimSimRunTime_tb=xstvhd, spartan2e, Module VHDL Test Bench.t_MSimulatePostTranslateVhdlModel, 1056480462, 100us
+p_ModelSimSimRunTime_tb=xstvhd, spartan2e, Module VHDL Test Bench.t_MSimulateBehavioralVhdlModel, 1056480462, 100us
 p_xstPackIORegister=xstvhd, spartan2e, Schematic.t_synthesize, 1061064066, Yes
-xilxPAReffortLevel=xstvhd, spartan2e, Implementation.t_placeAndRouteDes, 1055895324, High
+xilxPAReffortLevel=xstvhd, spartan2e, Implementation.t_par, 1055895324, High
 _SynthOptEffort=xstvhd, spartan2e, Schematic.t_synthesize, 1056383182, High
 [STRATEGY-LIST]
 Normal=True

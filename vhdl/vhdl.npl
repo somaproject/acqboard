@@ -74,8 +74,9 @@ _SynthMultStyle=xstvhd, spartan3, Schematic.t_synthesize, 1082297163, Auto
 _SynthOpt=xstvhd, spartan3, Schematic.t_synthesize, 1082297163, Area
 _SynthOptEffort=xstvhd, spartan3, Schematic.t_synthesize, 1056383182, High
 [STATUS-ALL]
-fibertx.ngcFileGroup=OK,1106760409
-fibertx.stxFile=WARNINGS,1106760410
+acqboard.bitFile=WARNINGS,1106787798
+acqboard.ngcFile=WARNINGS,1106787742
+acqboard.ngdFile=WARNINGS,1106787761
 serdebug.bitFile=WARNINGS,1106586638
 [STRATEGY-LIST]
 Normal=True

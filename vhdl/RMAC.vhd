@@ -32,6 +32,8 @@ architecture Behavioral of RMAC is
    signal p: std_logic_vector((n-1) downto 0) := (others => '0');
    signal acc, accl : std_logic_vector((7+n-1) downto 0) := (others=> '0');
    signal yrnd: std_logic_vector(22 downto 0) := (others => '0');
+   signal yoverf : std_logic_vector(15 downto 0) := (others => '0'); 
+
 
    -- fsm signals
    type states is (none, addrrst, macwait, accen, latch_out, 
@@ -88,7 +90,7 @@ begin
 	port map( ACCL => accl,
 			yrnd => yrnd);
   overflow_inst : overflow 
-  	port map( YOVERF => Y,
+  	port map( YOVERF => yoverf,
 			YRNDL => yrnd);
 
   -- general connections
@@ -106,7 +108,7 @@ begin
 
 
 
-		    --Y <= yovrf;
+		    Y <= yoverf;
 		    if cs = accen then
 		    	  accl <= acc;
 		    end if; 

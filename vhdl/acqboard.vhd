@@ -73,9 +73,10 @@ architecture Behavioral of acqboard is
    signal ain : std_logic_vector(7 downto 0) := (others => '0'); 
 
 -- MAC & MAC control signals
-   signal x, ymac, y : std_logic_vector(15 downto 0) := (others => '0');
+   signal x, ymac, y: std_logic_vector(15 downto 0) := (others => '0');
    signal xa, xabase, ha, sample : 
    	     std_logic_vector(7 downto 0) := (others => '0');
+   signal yenmac, yen : std_logic := '0'; 
    signal h : std_logic_vector(21 downto 0) := (others => '0');
    signal startmac, macdone : std_logic := '0';
    signal macchan : std_logic_vector(3 downto 0) := (others => '0');
@@ -85,7 +86,7 @@ architecture Behavioral of acqboard is
 	signal yraw : std_logic_vector(15 downto 0) := (others => '0');
 	signal rawsel : std_logic := '0';
 	signal rawchan : std_logic_vector(3 downto 0) := (others => '0'); 
-
+	signal yenraw : std_logic := '0'; 
 
 -- command-related signals
    signal cmddata : std_logic_vector(31 downto 0) := (others => '0');
@@ -96,7 +97,7 @@ architecture Behavioral of acqboard is
    signal cmdsuccess, cmddone : std_logic := '0';
    signal cmdsts : std_logic_vector(3 downto 0) := (others => '0');
    
-
+   signal debugsample : std_logic := '0';
 
 
 -- component definitions
@@ -145,8 +146,7 @@ architecture Behavioral of acqboard is
 			 OSEN : in std_logic;
 			 OSRST : in std_logic; 
 			 OSWE : in std_logic; 
-			 OSD : in std_logic_vector(15 downto 0);  
-		 	DEBUGDATA : out std_logic_vector(15 downto 0)
+			 OSD : in std_logic_vector(15 downto 0)
 			 );
 
 	end component;
@@ -226,14 +226,14 @@ architecture Behavioral of acqboard is
 	           OUTSAMPLE : in std_logic;
 	           FIBEROUT : out std_logic;
 	           CMDDONE : in std_logic;
-			 Y : in std_logic_vector(15 downto 0); 
+			 Y : in std_logic_vector(15 downto 0);
+			 YEN : in std_logic;  
 	           CMDSTS : in std_logic_vector(3 downto 0);
 	           CMDID : in std_logic_vector(3 downto 0);
 			 CMDSUCCESS : in std_logic; 
 			 OUTBYTE : in std_logic; 
-	           CHKSUM : in std_logic_vector(7 downto 0);
-		 DEBUGWORD: out std_logic_vector(8 downto 0); 
-		 DEBUGEN : out std_logic);
+	           CHKSUM : in std_logic_vector(7 downto 0)
+			 );
 	end component;
 
 	component FiberRX is
@@ -312,14 +312,12 @@ architecture Behavioral of acqboard is
 
 	component raw is
 	    Port ( CLK : in std_logic;
-	           OUTSAMPLE : in std_logic;
-	           OUTBYTE : in std_logic;
-				  INSAMPLE : in std_logic;
 	           WEIN : in std_logic;
 	           CIN : in std_logic_vector(3 downto 0);
 	           DIN : in std_logic_vector(15 downto 0);
 	           CHAN : in std_logic_vector(3 downto 0);
-	           Y : out std_logic_vector(15 downto 0));
+	           Y : out std_logic_vector(15 downto 0);
+			 YEN : out std_logic);
 	end component;
 begin
    U1: TOC port map (O=>reset);
@@ -349,8 +347,7 @@ begin
 			OSEN => osen,
 			OSRST => pgarst, 
 			OSWE => oswe,
-			OSD => edout,
-			DEBUGDATA => debugdata); 
+			OSD => edout); 
 	
 	samplebuffer_inst : samplebuffer port map (
 			CLK => clk,
@@ -422,14 +419,13 @@ begin
 			OUTSAMPLE => outsample,
 			FIBEROUT => FIBEROUT,
 			CMDDONE => cmddone,
-			Y => y,
+			Y => yraw,
+			YEN => yenraw,
 			CMDSTS => cmdsts,
 			CMDID => cmdid,
 			CMDSUCCESS => cmdsuccess,
 			OUTBYTE => outbyte,
-			CHKSUM => chksum,
-			DEBUGWORD => open, 
-			DEBUGEN => debugen);
+			CHKSUM => chksum);
 
 
 	fiberrx_inst : FiberRX port map (
@@ -504,27 +500,26 @@ begin
 
 	raw_inst: raw port map (
 			CLK => clk,
-			OUTSAMPLE => outsample,
-			OUTBYTE => outbyte,
-			INSAMPLE => insample, 
 			WEIN => weout,
 			CIN => cout,
 			DIN => dout, 
 			CHAN => rawchan,
-			Y => yraw); 
+			Y => yraw,
+			YEN => yenraw); 
 	
 	
  	debugging: serdebug port map (
 			CLK => clk,
 			RESET => reset, 
-			dinen => INSAMPLE,	
-			din => debugdata,
+			dinen => debugsample,	
+			din => dout,
 			soutcs => PGARCK,
 			SOUTCLK => PGASRCK,
 			SOUTDATA => PGASERA); 
 			 
  -- muxes
-	y <= yraw when rawsel = '1' else ymac; 
+	y <= yraw when rawsel = '1' else ymac;
+	yen <= yenraw when rawsel = '1' else yenmac;  
  	bin <= dout when bufsel = '0' else edout; 
 	bwe <= weout when bufsel = '0' else lswe;	
 
@@ -532,7 +527,8 @@ begin
 
 	ea <= ('0' & laddr) when eesel = '1' else (ewaddr);
 	een <= len when eesel = '1' else ceen; 
-
+	debugsample <= '1' when cout = "0000" and weout = '1' else '0';
+	 
 	CLK8_OUT <= clk8; 
 
 	LED0 <= bufsel; 	

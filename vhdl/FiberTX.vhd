@@ -31,7 +31,7 @@ architecture Behavioral of FiberTX is
    -- input latches
    signal csl, csll : std_logic_vector(3 downto 0) := (others => '0');
    type samparray is array (0 to 9) of std_logic_vector(15 downto 0);
-   signal yl, yout : samparray; 
+   signal yl, yout : samparray := (others => X"0000"); 
    signal cl, cll, ckl, ckll : std_logic_vector(7 downto 0)
    	:= (others => '0');
    
@@ -137,7 +137,12 @@ begin
 				incnt <= 0; 
 			else
 				if YEN = '1' then
-					incnt <= incnt + 1;
+					if incnt = 9 then
+						incnt <= 0; 
+					else
+						incnt <= incnt + 1;
+					end if; 
+
 				end if;
 			end if; 
 

@@ -8,6 +8,8 @@ This code creates a "test" of the acqboard, in the form of setting a bunch of pa
 import sys
 import socket
 import struct
+from scipy import *
+from matplotlib.matlab import *
 
 sys.path.append("../acqboardcmd")
 import acqboard
@@ -173,14 +175,52 @@ class Test:
         
         
         # reenable function generator
-        #funcgen.setoutputenable("on")
+        funcgen.setoutputenable("on")
         
 
 
-    def run(self, nsamples):
-        """ Collect N samples """
+    def rawrun(self, nsamples):
+        """ Collect nsamples of data running in raw mode """
 
         self.configure()
+
+        s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        
+        
+        s.connect("/tmp/acqboard.out")
+
+
+                
+        nsamp = 0; 
+        
+        resultstr = ""
+        sample = s.recv(512)
+
+
+        while (nsamp < (2*nsamples*24.0/16.0 + 200)):
+            tmpstr =s.recv(1024)
+            nsamp += len(tmpstr)
+            resultstr += tmpstr
+
+        offset = 20
+        datastr = resultstr[offset:]
+
+        
+
+        # now, we format
+        data = zeros(nsamples, Int16)
+
+        pos = 0
+        for i in range(len(datastr)/2):
+
+            #print i, len(datastr), len(datastr)/2, pos
+            if i % 12 < 8 :
+                if pos < nsamples:
+                    data[pos] = unpack(">h", datastr[(2*i):(2*(i+1))])[0]
+                    pos += 1             
+                
+        s.close()
+        return data
 
 
 def main():
@@ -196,7 +236,8 @@ def main():
     
     t = Test(a,f)
 
-    t.configure()
+    plot(t.run(200000))
+    show()
     
     
 

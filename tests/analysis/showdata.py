@@ -2,24 +2,28 @@
 
 from scipy import *
 from matplotlib.matlab import *
-import periodogram
-import windows
+
 import readacq
 
 def plotmain():
-    raw = readacq.RawFile('../results/test.247.16.dat')
+    raw = readacq.RawFile('/home/jonas/test.dat')
 
     x = raw.read(2**16)/32768.0
 
+    plot(x[0:1000])
+    show()
     Fs = 256000
     phix = fft(x)
+
+    print "The length is", len(phix)
 
     normrealphix = abs(phix[0:(len(phix)/2)])**2 / max(abs(phix)**2)
 
     w = r_[0:2**15]/float(2**15) * (Fs/2)
-    
-    plot(w, 10*log10(normrealphix), 'r')
 
+    print len(normrealphix), len(w)
+    plot(w,10*log10 (normrealphix), 'r')
+    
     
     axis([ 0, 10000, -100, 1])
     xlabel('Frequency (Hz)')

@@ -59,18 +59,21 @@ DEPASSOC rmac RMAC.ucf
 [Normal]
 p_ModelSimSimRunTime_tb=xstvhd, spartan2e, VHDL Test Bench.t_MSimulateBehavioralVhdlModel, 1059341326, 20 ms
 p_xstPackIORegister=xstvhd, spartan3, Schematic.t_synthesize, 1061064066, Yes
-xilxBitgCfg_GenOpt_ASCIIFile=xstvhd, spartan3, VHDL.t_bitFile, 1081779539, True
-xilxBitgCfg_GenOpt_BinaryFile=xstvhd, spartan3, VHDL.t_bitFile, 1085932711, True
-xilxMapAllowLogicOpt=xstvhd, spartan3, Implementation.t_placeAndRouteDes, 1069448677, True
-xilxMapCoverMode=xstvhd, spartan3, Implementation.t_placeAndRouteDes, 1081776641, Speed
-xilxMapTimingDrivenPacking=xstvhd, spartan3, Implementation.t_placeAndRouteDes, 1081774588, True
-xilxPAReffortLevel=xstvhd, spartan3, Implementation.t_placeAndRouteDes, 1081443642, High
-xilxTriStateBuffTXMode=xstvhd, spartan3, Implementation.t_placeAndRouteDes, 1081443699, Off
+xilxBitgCfg_GenOpt_ASCIIFile=xstvhd, spartan3, Implementation.t_bitFile, 1081779539, True
+xilxBitgCfg_GenOpt_BinaryFile=xstvhd, spartan3, Implementation.t_bitFile, 1085932711, True
+xilxBitgCfg_GenOpt_IEEE1532File=xstvhd, spartan3, Implementation.t_bitFile, 1102443161, True
+xilxMapAllowLogicOpt=xstvhd, spartan3, Implementation.t_map, 1069448677, True
+xilxMapCoverMode=xstvhd, spartan3, Implementation.t_map, 1081776641, Speed
+xilxMapTimingDrivenPacking=xstvhd, spartan3, Implementation.t_map, 1081774588, True
+xilxPAReffortLevel=xstvhd, spartan3, Implementation.t_par, 1081443642, High
+xilxTriStateBuffTXMode=xstvhd, spartan3, Implementation.t_map, 1081443699, Off
 _SynthFsmEncode=xstvhd, spartan3, Schematic.t_synthesize, 1082297163, One-Hot
 _SynthMultStyle=xstvhd, spartan3, Schematic.t_synthesize, 1082297163, Auto
 _SynthOpt=xstvhd, spartan3, Schematic.t_synthesize, 1082297163, Area
 _SynthOptEffort=xstvhd, spartan3, Schematic.t_synthesize, 1056383182, High
 [STATUS-ALL]
-acqboard.twrFile=WARNINGS,1102439570
+acqboard.bitFile=WARNINGS,1102541026
+acqboard.ngcFile=WARNINGS,1102540959
+acqboard.ngdFile=WARNINGS,1102540979
 [STRATEGY-LIST]
 Normal=True

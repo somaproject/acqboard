@@ -920,6 +920,52 @@ linearity measures are obtained for different frequencies. <br>
 <br>
 For cost, 397.69 for initial design, <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">8 December
+2004</span><br style="font-weight: bold; text-decoration: underline;">
+Soldered up the initial board; I was dumb and forgot the data lines on
+the FPGA. Currently we have DC inputs. Wow, there's like a 5% sine wave
+on the input that looks really awful, in raw mode. The only potential
+saving grace is that these are iso-loop-related signal integrity
+problems, because when I press with my finger on the ISOloop for ADC1
+that carries SDIN I get random bit errors. <br>
+<br>
+There appears to be a propagation delay across the isoloops of 8 ns in
+each direction. <br>
+<br>
+Attempting giant cap at ref input, still no progress. <br>
+<br>
+When I look at the signals, we obviously see a lot of really bad
+ringing in the digital signals. I wonder if I should be doing some sort
+of termination (etc) to minimize negative effects of this? <br>
+<br>
+The thing is, during the conversion process that side of the board
+should be dead fucking quiet. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">9 December
+2004</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+The conclusion from last night, then, means that whatever problems that
+we're seeing are only on the ADC side. This means that we need to screw
+around a bit with ground plane issues. <br>
+<br>
+Things we know we want to fix:<br>
+<ul>
+  <li>pull ups/downs for the digital inputs to the isoloop<br>
+  </li>
+  <li>source&nbsp; impedance matching for the outputs to reduce visible
+ringing</li>
+  <li>extra caps (47 uF?) on the output of the OAs that handle the
+reference input</li>
+</ul>
+<br>
+Then, our two new strategies for power will be:<br>
+<ul>
+  <li>localized DVDD, i.e. one LPF for each component that wants/needs
+it</li>
+</ul>
+<br>
+<br>
+<br>
 <br>
 <br>
 </body>

@@ -33,7 +33,7 @@ class AcqBoardCmd:
         else:
             self.cmdid += 1
             
-    def switchmode(self, mode, rawchan='B2'):
+    def switchmode(self, mode, rawchan='A2'):
         self.updatecmd()        
         str = ""
 
@@ -42,6 +42,7 @@ class AcqBoardCmd:
         str = pack("BBBBBB", cmdbyte, mode, self.channames[rawchan], \
                    0x0, 0x0, 0x0);
 
+        print rawchan
         return str;
     
     def setgain(self, chan, gain):

@@ -27,7 +27,6 @@ ARCHITECTURE behavior OF testbench IS
 		y : IN std_logic_vector(15 downto 0);
 		cmdsts : IN std_logic_vector(3 downto 0);
 		cmdid : IN std_logic_vector(6 downto 0);
-		cmderr : in std_logic;
 		outbyte : IN std_logic;
 		chksum : IN std_logic_vector(15 downto 0);          
 		fiberout : OUT std_logic
@@ -62,7 +61,6 @@ BEGIN
 		y => y,
 		cmdsts => cmdsts,
 		cmdid => cmdid,
-		cmderr => cmderr,
 		outbyte => outbyte,
 		chksum => chksum
 	);

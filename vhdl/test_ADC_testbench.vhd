@@ -25,10 +25,10 @@ ARCHITECTURE behavior OF testbench IS
 		cs : IN std_logic;          
 		sdout : OUT std_logic;
 		busy : OUT std_logic;
-		inputdone : OUT std_logic
+		inputdone : OUT std_logic;
 		 CHA_VALUE: in integer;
 		 CHB_VALUE: in integer;
-		 FILEMODE: in std_logic; 
+		 FILEMODE: in std_logic 
 		);
 	END COMPONENT;
 
@@ -49,6 +49,9 @@ BEGIN
 		cs => cs,
 		sdout => sdout,
 		busy => busy,
+		cha_value => 0,
+		chb_value => 0,
+		filemode => '1',
 		inputdone => inputdone
 	);
 

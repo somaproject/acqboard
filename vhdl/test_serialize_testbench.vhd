@@ -18,11 +18,10 @@ END testbench;
 ARCHITECTURE behavior OF testbench IS 
 
 	COMPONENT test_serialize
-	PORT(
-		start : IN std_logic;          
-		dout : OUT std_logic;
-		done : OUT std_logic
-		);
+    Generic (filename : string := "input.dat"); 
+    Port ( START : in std_logic;
+           DOUT : out std_logic;
+		 DONE : out std_logic);
 	END COMPONENT;
 
 	SIGNAL start :  std_logic := '0';

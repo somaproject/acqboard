@@ -18,6 +18,7 @@ END testbench;
 ARCHITECTURE behavior OF testbench IS 
 
 	COMPONENT test_deserialize
+    generic ( filename : string := "deserialize.output.dat"); 
 	PORT(
 		clk8 : IN std_logic;
 		fiberout : IN std_logic       
@@ -38,7 +39,9 @@ ARCHITECTURE behavior OF testbench IS
 
 BEGIN
 
-	uut: test_deserialize PORT MAP(
+	uut: test_deserialize 
+		generic map (filename => "foo.dat")
+		PORT MAP(
 		clk8 => clk8,
 		fiberout => fiberout);
 

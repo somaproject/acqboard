@@ -75,7 +75,7 @@ begin
    sout <= shiftreg(0); 
 
 
-   clock: process(CLK, CMDSTS, CMDID, CHKSUM, din, RESET, ldout, OUTBYTE, CLK8, 
+   clock: process(CLK, CMDSTS, CMDID, CHKSUM, din, RESET, OUTBYTE, CLK8, 
    			   OUTSAMPLE, CMDDONE, y, cmdstsinl, cmdinl, cs, ns,
 			   chksuminl, insel, sout, CMDSUCCESS) is 
    begin

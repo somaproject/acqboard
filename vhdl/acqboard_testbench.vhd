@@ -143,22 +143,75 @@ BEGIN
 	);
 
 
-	test_ADCs: for i in 0 to 4 generate
-	begin
-		ADC: test_ADC generic map (
-			filename => "testvectors/acqboard.test_ADCs.updown.dat")
+	ADC0: test_ADC generic map (
+			filename => "testvectors/acqboard.test_ADCs.random.0.dat")
 			port map (
 			RESET => reset,
 			SCLK => adcclk,
 			CONVST => adcconvst,
 			CS => adccs,
-			SDOUT => adcin(i),
+			SDOUT => adcin(0),
 			CHA_VALUE => 0,
 			CHB_VALUE => 0,
 			FILEMODE => '1',
 			BUSY => adcbusy,
 			INPUTDONE => adcdone);
-	end generate; 
+
+	ADC1: test_ADC generic map (
+			filename => "testvectors/acqboard.test_ADCs.random.1.dat")
+			port map (
+			RESET => reset,
+			SCLK => adcclk,
+			CONVST => adcconvst,
+			CS => adccs,
+			SDOUT => adcin(1),
+			CHA_VALUE => 0,
+			CHB_VALUE => 0,
+			FILEMODE => '1',
+			BUSY => adcbusy,
+			INPUTDONE => adcdone);
+
+	ADC2: test_ADC generic map (
+			filename => "testvectors/acqboard.test_ADCs.random.2.dat")
+			port map (
+			RESET => reset,
+			SCLK => adcclk,
+			CONVST => adcconvst,
+			CS => adccs,
+			SDOUT => adcin(2),
+			CHA_VALUE => 0,
+			CHB_VALUE => 0,
+			FILEMODE => '1',
+			BUSY => adcbusy,
+			INPUTDONE => adcdone);
+
+	ADC3: test_ADC generic map (
+			filename => "testvectors/acqboard.test_ADCs.random.3.dat")
+			port map (
+			RESET => reset,
+			SCLK => adcclk,
+			CONVST => adcconvst,
+			CS => adccs,
+			SDOUT => adcin(3),
+			CHA_VALUE => 0,
+			CHB_VALUE => 0,
+			FILEMODE => '1',
+			BUSY => adcbusy,
+			INPUTDONE => adcdone);
+
+	ADC4: test_ADC generic map (
+			filename => "testvectors/acqboard.test_ADCs.random.4.dat")
+			port map (
+			RESET => reset,
+			SCLK => adcclk,
+			CONVST => adcconvst,
+			CS => adccs,
+			SDOUT => adcin(4),
+			CHA_VALUE => 0,
+			CHB_VALUE => 0,
+			FILEMODE => '1',
+			BUSY => adcbusy,
+			INPUTDONE => adcdone);
 
 
 	commands : test_sendCMD port map (
@@ -175,7 +228,7 @@ BEGIN
 
     deserializer: test_deserialize 
     			generic map (
-				filename => "testvectors/acqboard.output.updown.dat")
+				filename => "testvectors/acqboard.output.random.dat")
 			port map (
 				clk8 => clk8,
 				fiberout => fiberout); 

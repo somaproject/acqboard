@@ -6,8 +6,8 @@ use std.textio.all;
 
 --  Uncomment the following lines to use the declarations that are
 --  provided for instantiating Xilinx primitive components.
---library UNISIM;
---use UNISIM.VComponents.all;
+library UNISIM;
+use UNISIM.VComponents.all;
 
 entity test_EEPROM is
     Generic (  FILEIN : string := "eeprom_in.dat"; 

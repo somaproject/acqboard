@@ -28,13 +28,10 @@ architecture Behavioral of RMAC is
    -- resolution of intermediate MAC
    constant n : positive := 26; 
    
-   signal xl: std_logic_vector(15 downto 0) := (others => '0');
-   signal hl: std_logic_vector(21 downto 0) := (others => '0');
    signal lxa, lha: std_logic_vector(6 downto 0) := (others => '0');
    signal p: std_logic_vector((n-1) downto 0) := (others => '0');
    signal acc, accl : std_logic_vector((7+n-1) downto 0) := (others=> '0');
-   signal yrnd, yrndl : std_logic_vector(22 downto 0) := (others => '0');
-   signal yovrf: std_logic_vector(15 downto 0) := (others => '0');
+   signal yrnd: std_logic_vector(22 downto 0) := (others => '0');
 
    -- fsm signals
    type states is (none, addrrst, macwait, accen, latch_out, 
@@ -169,7 +166,8 @@ begin
 		when rmac_done =>
 		  MACDONE <= '1';
 		  ns <= none; 		  
-		when others => 			     
+		when others => 
+		  MACDONE <= '0'; 			     
 		  ns <= none;		  
 	end case; 	  		
   end process fsm; 

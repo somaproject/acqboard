@@ -61,7 +61,7 @@ begin
    end process clock; 
 
 
-   fsm: process(cs, LOAD, EEDONE, address) is
+   fsm: process(cs, LOAD, EEDONE, address, EEPROMEN) is
    begin
    	case cs is
 		when none => 

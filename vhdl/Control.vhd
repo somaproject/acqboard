@@ -98,7 +98,7 @@ begin
    end process clock;
 
 
-   fsm: process(cs, NEWCMD, CMD, EDONE, DATA) is
+   fsm: process(cs, NEWCMD, CMD, EDONE, DATA, mode, LDONE) is
    begin
 	case cs is 
 		when cmdwait => 
@@ -460,7 +460,7 @@ begin
 		  gset <= '0';
 		  iset <= '0';
 		  fset <= '0'; 
-		  oswe <= '0';
+		  oswe <= '1';
 		  ns <= load_wait;
 		when load_wait => 
 		  pending <= '1';  

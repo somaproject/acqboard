@@ -1,0 +1,5 @@
+#PACE: Start of Constraints extracted by PACE from the Design
+NET "clk" LOC = "p126"  ;
+NET "dout" LOC = "p114"  ;
+NET "kout" LOC = "p117"  ;
+NET "timerout" LOC = "p118"  ;

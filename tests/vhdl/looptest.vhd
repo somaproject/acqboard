@@ -8,15 +8,16 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 library UNISIM;
 use UNISIM.VComponents.all;
 
-entity testdataout is
+entity looptest is
     Port ( CLK : in std_logic;
 	 		  KOUT : out std_logic;
 			  --encodeddataout: out std_logic_vector(9 downto 0);
 			  timerout: out std_logic;
+			  RESET: in std_logic; 
            DOUT : out std_logic);
-end testdataout;
+end looptest;
 
-architecture Behavioral of testdataout is
+architecture Behavioral of looptest is
 -- this just outputs a series of data bytes over an 8b/10b interface at 8MHz. 
 -- the data stream itself counting from 0 to 239
 
@@ -36,6 +37,10 @@ signal shift_timer: std_logic := '0';
 
 signal data_timer: std_logic_vector(4 downto 0) := "00000";
 signal encodeddata, encodeddata1, encodeddata2, outreg : std_logic_vector(9 downto 0);  
+
+signal testvect: std_logic_vector(99 downto 0) := "0011111000100111010001110101001011010100110001101111000001110110001011100010101101001010111100010100";
+                                                   
+	
 begin
 
 	encode: encoder port map (
@@ -44,7 +49,7 @@ begin
 		clk => clk,
 		dout => encodeddata,
 		ce => '1');
-	dout <= outreg(0);
+
 	
 	KOUT <= KIN;
 	--encodeddataout <= encodeddata;
@@ -54,6 +59,9 @@ begin
 		 
 		variable shiftcount : std_logic_vector(1 downto 0) := "00";
 	begin
+		if RESET = '1' then
+			testvect <= "0011111000100111010001110101001011010100110001101111000001110110001011100010101101001010111100010100";
+		else
 		if rising_edge(CLK) then
 			if timecount = 39 then
 				timecount := 0;
@@ -81,15 +89,16 @@ begin
 						outreg(8 downto 0) <= outreg(9 downto 1);
 					end if;
 				end if;
-				
-		end if; 
 	
 		if shiftcount = "00" then
-			shift_timer <= '1';
-		else
-			shift_timer <= '0';
-		end if; 		
-		
+			testvect(99 downto 1) <= testvect(98 downto 0);
+			testvect(0) <= testvect(99); 
+		end if; 	
+
+			dout <= testvect(0);		
+		end if; 
+	
+		 end if; 
 
 	end process timing; 			
 	output: process(CLK, data_timer, datacnt) is 

@@ -88,7 +88,7 @@ grid;
 % Oppenheim!
 
 
-w = linspace(0, pi, 10000);
+w = linspace(0, pi, 32768);
 flin = w/pi*128000;
 slin = flin*j; 
 hanalogb = polyval(bb, slin);
@@ -102,12 +102,39 @@ figure;
 plot(flin/1000, 20*log10(abs(H)), 'g');
 hold;
 plot(flin/1000, 20*log10(abs(hanalog)), 'r'); 
+Y = abs(H).*abs(hanalog); 
 
-plot(flin/1000, 20*log10(abs(H).*abs(hanalog)), 'b'); 
-axis([0 32 -120 10]);
+plot(flin/1000, 20*log10(Y), 'b'); 
+axis([0 128 -120 10]);
  
 grid; 
 line([10, 10], [-120,10], 'Color', 'k', 'LineStyle', '--');
 line([16, 16], [-120,10], 'Color', 'k', 'LineStyle', '--');
 ylabel('Magnitude (dB)'); 
 xlabel('Frequency (kHz)'); 
+title('Aggregate Spectra of Y(e^{j\omega})')
+
+
+% now, we do the dance of downsampling
+M = 8; 
+%we plot two resulting spectra, the Yd_signal
+% and Yd_aliases
+wseg = length(Y)/M; 
+Yd_signal = Y(1:wseg); 
+Yd_noise = zeros(1, wseg); 
+
+for i = 1:(M-1)
+  Yd_noise = Yd_noise + fliplr(Y((wseg*i+1):(wseg*(i+1)))); 
+end
+
+figure; 
+plot(flin(1:wseg)/1000, 20*log10(Yd_signal)); 
+hold; 
+grid; 
+plot(flin(1:wseg)/1000, 20*log10(Yd_noise), 'r'); 
+
+
+ylabel('Magnitude (dB)'); 
+xlabel('Frequency (kHz)'); 
+title('Signal, noise spectra of Y_d(e^{j\omega})')
+

@@ -54,3 +54,24 @@ C2=3900 pf = C44
 
 
 
+-----------------------------------------------------------------------------
+more DSP
+-----------------------------------------------------------------------------
+
+note that the output ft following decimation is
+
+Y_d(e^{j\omega}) = \frac{1}{M}\sum_{i=0}^{M-1}X(e^{j(\frac{\omega}{M}-\frac{2*pi*i}{M})})
+
+I.e. added, replicated copies. Thus, we created the function downspectra, which adds the spectra of a filter h[n] downsampled by N, scaled by the appropriate amount, and returns the result, from 0 to pi. 
+
+As we can see from the output of downspectra.m, the aliased images suck a lot more than we had originally anticipated, because there are 7 of them adding up. Thus, it's not enough to make sure our signal outside of the bandwidth of interest is down by 96 db, but rather need an ADDITIONAL 15 dB down!
+
+But, we only care about the region in DC-10 kHz, correct? So... 
+
+First, we created some code to let us look at downsampled filters.
+
+Then, we realized that we could:
+B = remez(119, [0 10/128  22/128 1], [1 1 0 0 ], [0.5  1000]);
+I.e. create a filter with a not-as-tight passband. this results in us getting part of a high-frequency image in our output, but "who cares", as we're only interested in the band between 0-10 khz. This will mean, however, that all DSP boards will need to have an O(10) tap filter to further filter. Oh well. 
+
+Part of me still wishes there were a better way. I'm just not seeing it though. But, happily, we now have correct output plots of the signal versus alias/noise for the total system. 

@@ -95,6 +95,27 @@ class data:
         h5file.close()
 
 
+    def basicrawsquare(self, gains, channels):
+        """
+        Runs a basic raw sine and saves the data in filename, for the
+        channels in channels
+        
+        """
+        
+        h5file = tables.openFile(self.filename, mode = "w", title = "Test file")
+
+        for c in channels:
+
+                cgroup = h5file.createGroup("/", c, 'Channel %s' % c)
+                tgroup = h5file.createGroup("/%s" % c, "square", \
+                                            'squre inputs')
+
+                for g in gains:
+                    r = run.Runs()
+                    r.rawSquareSet(c, g,  h5file, '/%s/square' % c)
+    
+        h5file.close()
+
 
 
 

@@ -141,6 +141,48 @@ class Runs:
                 r.save(h5file, group, "rawSineSet_g%d_f%d_a%d" \
                        % (gain, freqi, amp*100))
                 
+
+    def rawSquareSet(self, chan, gain, h5file, group):
+        """ 64k samples of square wave, of multiple amplitudes.
+        maxAmp is a float describing the maximum amplitude.
+        The frequency is 20 Hz, so at our 256 ksps we should see
+        5 transitions, each roughly 12800 samples long. 
+        """
+
+        # use N=[53, 141, 257, 1237, 2537]
+        # M = 2**16
+        freq = 20 
+
+        maxAmp = 4.000 / gain
+
+        print "Beginning rawSquareSet for channel %s, gain=%d, in group %s" \
+              % (chan, gain, group)
+        
+        for amp in [1.0, 0.20, 0.01]:
+            
+            
+            
+            f = FuncState()
+            
+            f.setmode("square")
+            f.freq = 20.0
+            f.amp = maxAmp * amp
+                
+
+                
+            a = AcqState()
+            a.setmode("raw")
+            a.rawchan = chan
+            a.gains[chan] = gain
+            
+            
+            r = Run()
+            r.acqstate = a
+            r.fstate = f
+            r.run(64000)
+            r.save(h5file, group, "rawSquareSet_g%d_a%d" \
+                   % (gain, amp*100))
+                
     
 
     def noInputSet(self, chan, gain, h5file, group):

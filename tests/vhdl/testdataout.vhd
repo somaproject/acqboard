@@ -43,7 +43,7 @@ begin
 		kin => kin,
 		clk => clk,
 		dout => encodeddata,
-		ce => '1');
+		ce => timer);
 	dout <= outreg(0);
 	
 	KOUT <= KIN;
@@ -77,18 +77,18 @@ begin
 				if timer = '1' then
 					outreg <= encodeddata;
 				else
-					if shiftcount = "01" then
+					if shift_timer = '1'	 then
 						outreg(8 downto 0) <= outreg(9 downto 1);
-					end if;
-				end if;
-				
+					end if; 
+				end if; 
 		end if; 
-	
-		if shiftcount = "00" then
-			shift_timer <= '1';
-		else
-			shift_timer <= '0';
-		end if; 		
+			if shiftcount = "00" then
+				shift_timer <= '1';
+			else
+				shift_timer <= '0';
+			end if; 		
+							
+
 		
 
 	end process timing; 			
@@ -104,7 +104,7 @@ begin
 			end if;
 
 			if data_timer = "00000" then
-				data <= "11111100";
+				data <= "10111100";			-- wow, K28.5 instead of K28.7
 				kin <= '1';
 			else
 				data <= datacnt;

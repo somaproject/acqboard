@@ -82,7 +82,7 @@ begin
 		end if; 
 
 	end process clocks;
-	SAMPCNT <= sampcntind; 
+
 	memset: process (CLK4X,	outcnt, oe, chcnt, we, tsel) is
 	begin
 		if rising_edge(CLK4X) then

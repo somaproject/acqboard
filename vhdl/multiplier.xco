@@ -1,0 +1,59 @@
+# Xilinx CORE Generator 5.1.03i
+# Username = Eric Jonas
+# COREGenPath = C:\xilinx\coregen
+# ProjectPath = F:\acquisition\development\acqboard\vhdl
+# ExpandedProjectPath = F:\acquisition\development\acqboard\vhdl
+# OverwriteFiles = true
+# Core name: multiplier
+# Number of Primitives in design: 1406
+# Number of CLBs used in design: 108
+# Number of Slices used in design: 183
+# Number of LUT sites used in design: 288
+# Number of LUTs used in design: 288
+# Number of REG used in design: 362
+# Number of SRL16s used in design: 0
+# Number of Distributed RAM primitives used in design: 0
+# Number of Block Memories used in design: 0
+# Number of Dedicated Multipliers used in design: 0
+# Number of HU_SETs used: 1
+# Huset "multiplier/top_level/par_mul/m2/top" = (0, 0) to (9, 17) in CLBs
+# 
+SET BusFormat = BusFormatAngleBracket
+SET SimulationOutputProducts = Verilog VHDL
+SET XilinxFamily = Spartan2
+SET OutputOption = DesignFlow
+SET DesignFlow = Vhdl
+SET FlowVendor = Foundation_iSE
+SET FormalVerification = None
+SELECT Multiplier Spartan2 Xilinx,_Inc. 5.0
+CSET create_rpm = true
+CSET clock_enable = false
+CSET output_options = Registered
+CSET port_b_constant = false
+CSET port_a_input = Parallel
+CSET reloadable = false
+CSET port_b_width = 18
+CSET nd = false
+CSET multiplier_type = Parallel
+CSET port_a_width = 14
+CSET reload_options = Stop_During_Reload
+CSET ce_overrides = CE_Overrides_SCLR
+CSET memory_type = Distributed_Memory
+CSET multiplier_construction = Use_LUTs
+CSET port_a_data = Signed
+CSET rdy = false
+CSET register_input = true
+CSET port_b_data = Signed
+CSET component_name = multiplier
+CSET synchronous_clear = true
+CSET asynchronous_clear = false
+CSET load_done_output = false
+CSET rfd = false
+CSET clk_cycles_per_input = 1
+CSET style = Rectangular_Shape
+CSET port_b_constant_value = 1
+CSET pipelined = Maximum
+CSET output_hold_register = false
+CSET output_width = 32
+GENERATE
+

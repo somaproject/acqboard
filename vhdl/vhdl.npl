@@ -15,8 +15,12 @@ FLOWTIME 0
 STIMULUS hsel_test.tbw Normal
 STIMULUS input_test.tbw Normal
 STIMULUS clocks_test.tbw Normal
+MODULE rmac.vhd
+MODSTYLE rmac Normal
 MODULE clocks.vhd
 MODSTYLE clocks Normal
+MODULE multiplier.xco
+MODSTYLE multiplier Normal
 MODULE hsel.vhd
 MODSTYLE hsel Normal
 MODULE xsel.vhd
@@ -24,6 +28,6 @@ MODSTYLE xsel Normal
 MODULE input.vhd
 MODSTYLE input Normal
 [STATUS-ALL]
-xsel.ngcFile=WARNINGS,1041832720
+xsel.ngcFile=WARNINGS,1041837195
 [STRATEGY-LIST]
 Normal=True

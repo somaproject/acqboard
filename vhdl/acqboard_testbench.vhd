@@ -122,26 +122,6 @@ ARCHITECTURE behavior OF acqboard_testbench IS
 
 BEGIN
 
-	uut: acqboard PORT MAP(
-		clkin => clkin,
-		adcin => adcin,
-		adcclk => adcclk,
-		adccs => adccs,
-		adcconvst => adcconvst,
-		pgarck => pgarck,
-		pgasrck => pgasrck,
-		pgasera => pgasera,
-		esi => esi,
-		esck => esck,
-		ecs => ecs,
-		eso => eso,
-		eepromlen => eepromlen,
-		fiberin => fiberin,
-		fiberout => fiberout,
-		reset => reset,
-		clk8_out => clk8
-	);
-
 
 	ADC0: test_ADC generic map (
 			filename => "testvectors/acqboard.test_ADCs.random.0.dat")
@@ -245,6 +225,26 @@ BEGIN
 			 RESET => reset, 
 			 SAVE => save);
 
+ 
+	uut: acqboard PORT MAP(
+		clkin => clkin,
+		adcin => adcin,
+		adcclk => adcclk,
+		adccs => adccs,
+		adcconvst => adcconvst,
+		pgarck => pgarck,
+		pgasrck => pgasrck,
+		pgasera => pgasera,
+		esi => esi,
+		esck => esck,
+		ecs => ecs,
+		eso => eso,
+		eepromlen => eepromlen,
+		fiberin => fiberin,
+		fiberout => fiberout,
+		reset => reset,
+		clk8_out => clk8
+	);
 
 
     -- first, the input clock;

@@ -1,8 +1,8 @@
-# Xilinx CORE Generator 6.2.02i
+# Xilinx CORE Generator 6.2.03i
 # Username = Eric Jonas
 # COREGenPath = C:\Xilinx\coregen
-# ProjectPath = C:\desktop\acqboard\vhdl
-# ExpandedProjectPath = C:\desktop\acqboard\vhdl
+# ProjectPath = E:\desktop\acqboard\vhdl
+# ExpandedProjectPath = E:\desktop\acqboard\vhdl
 # OverwriteFiles = true
 # Core name: encode8b10b
 # 
@@ -33,9 +33,9 @@ CSET b_new_data = false
 CSET force_code = false
 CSET disparity_output = false
 CSET b_disparity_output = false
-CSET implementation = LUT_Based
-CSET force_disparity = false
 CSET b_clock_enable = false
+CSET force_disparity = false
+CSET implementation = LUT_Based
 CSET b_force_code_symbol = B_D_10_2_pos
 CSET clock_enable = true
 CSET force_code_symbol = D_10_2_pos
@@ -47,3 +47,4 @@ CSET component_name = encode8b10b
 CSET code_error_output = false
 CSET b_force_code = false
 GENERATE
+

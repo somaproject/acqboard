@@ -1,8 +1,8 @@
-# Xilinx CORE Generator 6.2.02i
+# Xilinx CORE Generator 6.2.03i
 # Username = Eric Jonas
 # COREGenPath = C:\Xilinx\coregen
-# ProjectPath = C:\desktop\acqboard\vhdl
-# ExpandedProjectPath = C:\desktop\acqboard\vhdl
+# ProjectPath = E:\desktop\acqboard\vhdl
+# ExpandedProjectPath = E:\desktop\acqboard\vhdl
 # OverwriteFiles = true
 # Core name: decode8b10b
 # 

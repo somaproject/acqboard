@@ -76,28 +76,28 @@ AnnotateSuffix=
 DoLibraryUpdate=1
 DoDatabaseUpdate=1
 [Document10]
-DocumentPath=acqboard.PcbDoc
+DocumentPath=PCBs.OUTJOB
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotateSuffix=
 DoLibraryUpdate=1
 DoDatabaseUpdate=1
 [Document11]
-DocumentPath=acqboard 3.0.PcbDoc
+DocumentPath=muxes.SCHDOC
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotateSuffix=
 DoLibraryUpdate=1
 DoDatabaseUpdate=1
 [Document12]
-DocumentPath=acqboard.PcbDoc
+DocumentPath=FPGA Power.SCHDOC
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotateSuffix=
 DoLibraryUpdate=1
 DoDatabaseUpdate=1
 [Document13]
-DocumentPath=PCBs.OUTJOB
+DocumentPath=acqboard.PcbDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotateSuffix=

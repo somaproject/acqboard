@@ -1109,10 +1109,11 @@ input type is the input type, i.e. <br>
       </li>
       <li>source VPP</li>
     </ul>
-    <li><br>
+    <li style="font-family: monospace;"><br>
     </li>
   </ul>
-  <li>sines : a set of sine waves, nominally a sweep</li>
+  <li><span style="font-family: monospace;">sines : a set of sine
+waves, nominally a s</span>weep</li>
   <ul>
     <li>Fields<br>
     </li>
@@ -1273,5 +1274,94 @@ The plot of the two is below. A2 is the one that doesn't suck:<br>
  style="width: 600px; height: 450px;"><br>
 <br>
 This is very, very odd. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">26
+February 2005</span><br
+ style="font-weight: bold; text-decoration: underline;">
+<br>
+I refuse to believe that the above input is normal. That's 200 samples
+p-p noise, or... roughly 12 mV pp of noise. Holy crap. <br>
+<br>
+In the most basic configuration, we have disabled all other inputs, and
+are feeding the VOS directly into the B input of ADC1 (i.e. A.2). We
+have a 10 uF tantalum at C60. <br>
+<br>
+<img alt="" src="results/20050226/A2.constant-input.png"
+ style="width: 600px; height: 450px;"><img alt=""
+ src="results/20050226/A2.constant-input.hist.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+Now, I placed a 10 uF tantalum on the output of Vos, between Vos and
+ground. <br>
+<img alt="" src="results/20050226/A2.constant-input.extra-cap.hist.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+<br>
+The addition of an additiona 0.1uF cap to Vos didn't help. <br>
+<br>
+Is it the resistance of the gain resistors? We have disconnected all
+other sinks of Vos, and added the above-noted capacitors. Now, looking
+at the output of A1, which is tied to Vos, we get the following
+histograms (with their means zeroed-out):<br>
+<br>
+<img alt=""
+ src="results/20050226/A1.vos-input.different-resistances.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+The one on the left is with 500-ohm resistors, the left with 16.0k.
+There's no -way- the johnson noise makes that big of a difference;
+something else must be going on. <br>
+<br>
+<br>
+22 March 2005<br>
+If you look at the voltage-dividing circuit generating Vos from U25 on
+power.schdoc, it actually -doesn't do anything-. Let the voltage at pin
+6 be Vref; that's still the same voltage in/at R28; similarly, the
+effect of R29 + C60 is to make the lower resisitive element of the
+voltage divider be frequency-dependent. What we really need is an
+additional RC circuit there. <br>
+<br>
+So we're going to hack a bit, and try and insert a real RC filter
+before the input to U26, the Vos buffer amp; similar skillz will be
+needed for the reference voltage. <br>
+<br>
+This is ADC2 measuring vos using our custom ADC VOS measurement where
+we first go through a 16k ohm 10uF LPF. Top is A3 where Vos directly
+connects to ADC; bottom is Vos through AD8513:<br>
+<br>
+<img alt="" src="results/20050322/Vos-custom1.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+Note that both are mean-normalized. Now, The thing I can't quite wrap
+my finger around is why adding the extra buffer in there actually
+-hurts- things; the only thing I can think of is that the reference
+noise on both Vos and REF for the ADC are 1. pretty severe (The LT1790
+datasheet says 32 uV pp &lt; 10 Hz; 48 uV RMS 10Hz to 1k). <br>
+<br>
+We're going to bump the Vos LPF resistor up to 250k, moving the -3dB of
+the single-pole LPF to 0.063 Hz. This had no measurable effect. <br>
+<br>
+Adding a LPF to the output of the VREF amp had no effect, either. Damn.
+<br>
+<br>
+Note that for the above graphs, the RMS noise of the top is 80 uV, and
+the bottom is 213 uV. <br>
+<br>
+We're going to buy some of the analog devices AD780 voltage references
+and try and hack them onto the board and see if that makes any
+difference. (ordered from digikey) <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 </body>
 </html>

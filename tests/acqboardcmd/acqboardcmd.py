@@ -7,6 +7,7 @@ This file, and the commands.ai doc should always be in sync.
 create a new acqboardcmd object:
    cmd = acqboardcmd();
 
+Status is 6 3 255
    then,
    result = cmd.setgain(chan, value)
 
@@ -33,7 +34,7 @@ class AcqBoardCmd:
         else:
             self.cmdid += 1
             
-    def switchmode(self, mode, rawchan='A2'):
+    def switchmode(self, mode, rawchan='A4'):
         self.updatecmd()        
         str = ""
 

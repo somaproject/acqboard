@@ -43,7 +43,7 @@ ScopeArea::ScopeArea(int width, int height)
   // scale
   offset_ = height/2;
   scale_ = (double)(height/2)/32768.0;
-  thold_ = 10000; 
+  thold_ = -32768; 
   
 // set up buffers
   
@@ -142,7 +142,7 @@ bool ScopeArea::newdata(Glib::IOCondition foo)
   
   
   for (int i = 0; i < 8; i++) { 
-    short sample  = buffer[(i+1)*2] + 256 * buffer[(i+1)*2+1]; 
+    short sample  = buffer[(i+1)*2 + 1] + 256 * buffer[(i+1)*2];
     add_data(sample); 
 
     if (pos_ < 0) { 

@@ -53,7 +53,7 @@ int main(int argc, char** argv)
   bzero(&cliaddr, sizeof(cliaddr));
   cliaddr.sun_family = AF_LOCAL;
   
-  strncpy(cliaddr.sun_path, "/tmp/sock", 9); 
+  strncpy(cliaddr.sun_path, "/tmp/acqboard.out", 18); 
   
   connect(area.datafd_, (sockaddr *) &cliaddr, sizeof(cliaddr));
   

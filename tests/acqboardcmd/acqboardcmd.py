@@ -83,7 +83,14 @@ class AcqBoardCmd:
         None
         
     def writesamplebuffer(self, addr, value):
-        None
+        print "writesamplebuffer address ", addr, " with value ", value 
+        self.updatecmd()        
+        str = ""
+
+        cmdbyte = (self.cmdid << 4) | 0x6
+        str = pack("BBBBBB", cmdbyte, addr, 0x00, value & 0xFF, (value >> 8) & 0xFF, 0x0);
+
+        return str;
         
 
 if __name__ == "__main__":

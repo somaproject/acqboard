@@ -7,6 +7,10 @@ import acqboardcmd
 
 
 import gtk
+import string
+import thread
+import threading
+from time import sleep
 
 class AcqSocketOut:
     # actually handles the socket communication
@@ -18,8 +22,8 @@ class AcqSocketOut:
        self.s.connect("/tmp/acqboard.in")
         
     def send(self, str):
-        print str
-        self.s.send(str + "123456789012345678901")
+        outstr = str + "123456789012345678"
+        self.s.send(outstr)
     def close(self):
         self.s.close()
 
@@ -71,7 +75,8 @@ class AcqState:
         self.modebox.pack_start(self.modelabel, gtk.FALSE, gtk.FALSE, 0)
         self.modebox.pack_start(self.modecurrent, gtk.FALSE, gtk.FALSE, 0)
 
-        self.mainbox.pack_start(self.modebox, gtk.FALSE, gtk.FALSE, 0);
+        
+        self.mainbox.pack_start(self.modebox, gtk.FALSE, gtk.FALSE, 0)
         
         
             
@@ -119,12 +124,17 @@ class AcqState:
 
 
     def startcmdid(self, cmdid,  cmd, args):
+        print "startcmdid storing command for ", cmdid
         self.cmddict[cmdid] = (cmd, args)
 
     def commitcmdid(self, cmdid):
-        x = self.cmddict[cmdid][0]
-        y = self.cmddict[cmdid][1]
-        apply(x,y)
+        print "commitcmdid called for cmdid=", cmdid
+        if self.cmddict.has_key(cmdid):
+            x = self.cmddict[cmdid][0]
+            y = self.cmddict[cmdid][1]
+            apply(x,y)
+        else:
+            print "commitcmdid could not find cmdid ", cmdid
         
         
     def update_gain(self, chan, value):
@@ -135,8 +145,9 @@ class AcqState:
         self.hpf[chan] = value
         self.hpflabel[chan].set_text(self.hlist[value])
 
-    def update_mode(self, foo, mode):
-        self.modecurrent = gtk.Label("%d" % mode)
+    def update_mode(self, mode, foo):
+        self.modecurrent.set_text("%d" % (mode))
+
 
         
     def update_cchan(self, chan, value):
@@ -189,6 +200,7 @@ class AcqBoardControl:
         chan = self.cselAopt.get_history()
         self.acqout.send(self.acqcmd.setinputch(0, chan))
         self.acqs.startcmdid(self.acqcmd.cmdid, self.acqs.update_cchan, (0, chan))
+        
     def button_cselBset(self, widget):
         chan = self.cselBopt.get_history()
         self.acqout.send(self.acqcmd.setinputch(1, chan))
@@ -197,8 +209,17 @@ class AcqBoardControl:
     def button_setmode(self, widget, mode):
         print "Setting mode to ", mode
         self.acqout.send(self.acqcmd.switchmode(mode))
-        self.acqs.startcmdid(self.acqcmd.cmdid, self.acqs.update_mode, (1, mode))
+        self.acqs.startcmdid(self.acqcmd.cmdid, self.acqs.update_mode, (mode, 2))
         
+    def load_buffer(self, widget):
+        print " and now we would load some stuff!"
+        fid = file("samples.dat")
+        samples = fid.readlines()
+        addr = 0 
+        for str in samples:
+            print string.atoi(str)
+            self.blocksend(self.acqcmd.writesamplebuffer(addr, string.atoi(str)))
+            addr += 1
 
      
     def delete_event(self, widget, event, data=None):
@@ -317,7 +338,15 @@ class AcqBoardControl:
         self.box1.pack_start(self.box2, gtk.FALSE, gtk.FALSE, 0)
         self.box2.show()
 
+        self.loadbuffer = gtk.Button("Load File Into Sample Buffer")
+        self.box2.pack_start(self.loadbuffer, gtk.FALSE, gtk.FALSE, 0)
+        self.loadbuffer.show();
+        self.loadbuffer.connect("clicked", self.load_buffer)
+
+
         self.cselbox = gtk.VBox(gtk.FALSE,0)
+
+        
         # continuous channel A box
         
         self.cselAbox = gtk.HBox(gtk.FALSE, 0)
@@ -408,7 +437,31 @@ class AcqBoardControl:
         self.box1.show()
         self.window.show()
 
-import thread
+
+        self.l = threading.Lock()
+    def blocksend(self, cmdstr):
+        """ A blocking send, which will use mutex-fu to wait until
+        we can return"""
+
+        # first, acquire lock
+       
+        self.l.acquire()
+
+        # then, send command
+        self.acqout.send(cmdstr)
+        self.acqs.startcmdid(self.acqcmd.cmdid, self.unblock, (1,2))
+        
+
+        # then try and acquire it again -- the self.acqs command execution will
+
+        self.l.acquire()
+        # release it, and then that lock will succeed, then we release it
+        self.l.release()
+               
+    def unblock(self, foo, bar):
+        self.l.release()
+
+
 
 def sockstat(acqboard, foo):
     acqstat = AcqSocketStat()

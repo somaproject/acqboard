@@ -56,8 +56,6 @@ MODULE multiplier.vhd
 MODSTYLE multiplier Normal
 MODULE accumulator.vhd
 MODSTYLE accumulator Normal
-MODULE bitserial.vhd
-MODSTYLE bitserial Normal
 MODULE decoder.vhd
 MODSTYLE decoder Normal
 MODULE PGAload.vhd

@@ -14,6 +14,7 @@ NET "ADCIN<3>"  LOC = "p104"  ;
 NET "ADCIN<4>"  LOC = "p114"  ;
 NET "CLKIN"  LOC = "p52"  ;
 NET "ECS"  LOC = "p7"  ;
+NET "EEPROMLEN" PULLUP ;
 NET "ESCK"  LOC = "p15"  ;
 NET "ESI"  LOC = "p14"  ;
 NET "ESO"  LOC = "p8"  ;

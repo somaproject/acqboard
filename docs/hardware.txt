@@ -91,3 +91,12 @@ The LTC1563-3 Resistors are 255k , part 9C08052A2553FKHFT from digikey
 input stage
 ---------------------------------------------------------------------------
 499 0hm .5% \0805 resistors, RR12P499DCT-ND from digikey
+
+
+----------------------------------------------------------------------------
+High pass Filter
+----------------------------------------------------------------------------
+Goals:
+We use the OPA227UA in-amp as a 2-pole HPF
+
+Rational for design: Assume that there's a 5 V difference between the output node and the input pin of the opamp. That means that there's a 5V drop across Ron+R1. But, then, the voltage across Ron varies as Ron/(Ron+R1). I.e. if R5 = 5k, ad max Ron = 50 ohms, then Ron will see 1/100th the voltage difference, and (as far as I can tell from the 

@@ -15,8 +15,8 @@ class AcqSocketOut:
         self.s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 
     def open(self):
-        self.s.connect("/tmp/acqboard.in")
-
+       self.s.connect("/tmp/acqboard.in")
+        
     def send(self, str):
         print str
         self.s.send(str + "123456789012345678901")
@@ -60,7 +60,21 @@ class AcqState:
 
 
 
+        self.mainbox = gtk.VBox(gtk.FALSE, 0);
+        
+        self.modelabel = gtk.Label("Mode:")
+        self.modelabel.show()
+        self.modebox = gtk.HBox(gtk.FALSE, 0);
+        self.modebox.show()
+        self.modecurrent = gtk.Label("0")
+        self.modecurrent.show()
+        self.modebox.pack_start(self.modelabel, gtk.FALSE, gtk.FALSE, 0)
+        self.modebox.pack_start(self.modecurrent, gtk.FALSE, gtk.FALSE, 0)
 
+        self.mainbox.pack_start(self.modebox, gtk.FALSE, gtk.FALSE, 0);
+        
+        
+            
         self.table = gtk.Table(rows=11, columns=4, homogeneous=gtk.FALSE)
         self.cheader = gtk.Label("Channel")
         self.table.attach(self.cheader, 0, 1, 0, 1, xpadding=6)
@@ -98,6 +112,9 @@ class AcqState:
            
         self.table.show()    
 
+        self.mainbox.pack_start(self.table, gtk.FALSE, gtk.FALSE, 0);
+        self.mainbox.show()
+        
         self.cmddict = {}
 
 
@@ -118,6 +135,10 @@ class AcqState:
         self.hpf[chan] = value
         self.hpflabel[chan].set_text(self.hlist[value])
 
+    def update_mode(self, foo, mode):
+        self.modecurrent = gtk.Label("%d" % mode)
+
+        
     def update_cchan(self, chan, value):
         if chan == 0 :
             for i in range(5):
@@ -173,14 +194,47 @@ class AcqBoardControl:
         self.acqout.send(self.acqcmd.setinputch(1, chan))
         self.acqs.startcmdid(self.acqcmd.cmdid, self.acqs.update_cchan, (1, chan))
                              
-                             
+    def button_setmode(self, widget, mode):
+        print "Setting mode to ", mode
+        self.acqout.send(self.acqcmd.switchmode(mode))
+        self.acqs.startcmdid(self.acqcmd.cmdid, self.acqs.update_mode, (1, mode))
         
+
      
     def delete_event(self, widget, event, data=None):
         gtk.main_quit()
         return gtk.FALSE
         
     def create_everychan(self):
+
+
+        # mode widgets
+        self.modetable = gtk.Table(rows=1, columns=4, homogeneous=gtk.FALSE)
+        self.modetable.show()
+        self.modebutton0 = gtk.Button("Mode 0")
+        self.modebutton0.show()
+        self.modetable.attach(self.modebutton0, 0, 1, 0, 1)
+        self.box0.pack_start(self.modetable, gtk.FALSE, gtk.FALSE, 0)
+        self.modebutton0.connect("clicked", self.button_setmode, 0)
+
+        self.modebutton1 = gtk.Button("Mode 1")
+        self.modebutton1.show()
+        self.modetable.attach(self.modebutton1, 1, 2, 0, 1)
+        self.modebutton1.connect("clicked", self.button_setmode, 1)
+               
+
+        self.modebutton2 = gtk.Button("Mode 2")
+        self.modebutton2.show()
+        self.modetable.attach(self.modebutton2, 2, 3, 0, 1)
+        self.modebutton2.connect("clicked", self.button_setmode, 2)
+
+        self.modebutton3 = gtk.Button("Mode 3")
+        self.modebutton3.show()
+        self.modetable.attach(self.modebutton3, 3, 4, 0, 1)
+        self.modebutton3.connect("clicked", self.button_setmode, 3)
+        
+
+
         #widgets that exist for each channel
         
         self.allchantable = gtk.Table(rows=3, columns=3, homogeneous=gtk.FALSE)
@@ -339,15 +393,17 @@ class AcqBoardControl:
 
         self.window.set_border_width(10)
 
-
+        self.box0 = gtk.VBox(gtk.FALSE, 0)
         self.box1 = gtk.HBox(gtk.FALSE, 0)
-        self.window.add(self.box1)
+        self.window.add(self.box0)
+        self.box0.pack_start(self.box1, gtk.FALSE, gtk.FALSE, 0)
+        self.box0.show()
 
     
 
         self.create_everychan()
         self.acqs = AcqState()
-        self.box1.pack_start(self.acqs.table, gtk.FALSE, gtk.FALSE, 0)
+        self.box1.pack_start(self.acqs.mainbox, gtk.FALSE, gtk.FALSE, 0)
     
         self.box1.show()
         self.window.show()
@@ -361,6 +417,7 @@ def sockstat(acqboard, foo):
     while 1:
         stat = unpack("BBB", acqstat.read())
         print "Status is %d %d %d" % stat
+        
         acqboard.acqs.commitcmdid(stat[1]/2)
         
 

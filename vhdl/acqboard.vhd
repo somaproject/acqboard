@@ -476,5 +476,4 @@ begin
 	CLK8_OUT <= clk8; 
 
 
-
 end Behavioral;

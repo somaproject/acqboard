@@ -66,11 +66,5 @@ xilxTriStateBuffTXMode=xstvhd, spartan2e, VHDL.t_placeAndRouteDes, 1081443699, O
 _SynthMultStyle=xstvhd, spartan2e, VHDL.t_synthesize, 1058138004, Pipe_LUT
 _SynthOpt=xstvhd, spartan2e, VHDL.t_synthesize, 1081776629, Speed
 _SynthOptEffort=xstvhd, spartan2e, VHDL.t_synthesize, 1056383182, High
-[STATUS-ALL]
-acqboard.bitFile=WARNINGS,1081889900
-acqboard.nc1File=WARNINGS,0
-acqboard.ngcFileGroup=OK,1081889486
-acqboard.stxFile=WARNINGS,1081889481
-acqboard.twrFile=WARNINGS,1081889884
 [STRATEGY-LIST]
 Normal=True

@@ -34,7 +34,7 @@ class AcqBoardCmd:
         self.updatecmd()        
         str = ""
 
-        cmdbyte = (self.cmdid << 4) | 0x0
+        cmdbyte = (self.cmdid << 4) | 0x7
         str = pack("BBBBBB", cmdbyte, mode, 0x0, 0x0, 0x0, 0x0);
 
         return str;

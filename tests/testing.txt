@@ -51,3 +51,7 @@ verified in SPICE
 
 15 April 2004
 isolators + shift registers appear to produce correct outputs for at least a subset of the outputs (i.e. didn't test all)
+
+17 April 2004
+Discovered that the wrong packaging was used for the EEPROM -- TSSOP and SOIC packages have different pinouts, and was using the TSSOP pinout withthe SOIC package. Obviously, this won't work. Solved by removing IC, soldering CS\ and SO pins together, so all values read should be zero. This will prevent testing EEPROM reading, writing, on this version of the acqboard, and will require us having loaden == 0. Which sucks. But it will still let us measure a great deal of analog performance. 
+

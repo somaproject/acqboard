@@ -24,7 +24,7 @@ ARCHITECTURE behavior OF testbench IS
 		RESET : IN std_logic;
 		SDIN : IN std_logic_vector(4 downto 0);
 		OSC : IN std_logic_vector(3 downto 0);
-		OSCALL : in std_logic; 
+		OSRST : in std_logic; 
 		OSEN : IN std_logic;
 		OSWE : IN std_logic;
 		OSD : IN std_logic_vector(15 downto 0);          
@@ -51,7 +51,7 @@ ARCHITECTURE behavior OF testbench IS
 	SIGNAL OSEN :  std_logic;
 	SIGNAL OSWE :  std_logic;
 	SIGNAL OSD :  std_logic_vector(15 downto 0);
-	signal OSCALL : std_logic; 
+	signal OSCALL : std_logic := '0'; 
 
 	component test_ADC is
 	    Generic (filename : string := "adcin.dat" ); 
@@ -91,7 +91,7 @@ BEGIN
 		COUT => COUT,
 		WEOUT => WEOUT,
 		OSC => OSC,
-		OSCALL => OSCALL, 
+		OSRST => OSCALL, 
 		OSEN => OSEN,
 		OSWE => OSWE,
 		OSD => OSD
@@ -318,7 +318,8 @@ BEGIN
 	  osd <= X"0000";
 	  oswe <= '1';
 	  wait until rising_edge(clk);
-	  oswe <= '0'; 
+	  oswe <= '0'; 	
+	  oscall <= '0'; -- make sure to turn it off to test for latching
 	  
  	  -- now, test after resetting offsets
 	   osen <= '1'; 

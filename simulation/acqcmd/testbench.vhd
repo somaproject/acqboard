@@ -322,11 +322,11 @@ BEGIN
 		sendcmd <= '0';  
 		wait until cmdpending = '0';
 		
-		wait until decmdid(4 downto 1) = "0101"; 
+		wait until decmdst = X"02"; 
 		wait until rising_edge(clkin);
-		if decmdst /= X"01" then 
-			error <= '1';
-		end if; 
+		wait until rising_edge(clkin);
+		wait until rising_edge(clkin);
+
 
 	   -- write offset value
 		cmdid <= "0110";
@@ -358,7 +358,7 @@ BEGIN
 		
 		wait until decmdid(4 downto 1) = "0111"; 
 		wait until rising_edge(clkin);
-		if decmdst /= X"01" then 
+		if decmdst /= X"00" then 
 			error <= '1';
 		end if; 
 		
@@ -375,7 +375,7 @@ BEGIN
 
 		wait until decmdid(4 downto 1) = "0011"; 
 
-		if gains(0) = 7 then 
+		if gains(4) = 3 then 
 			error <= '0';
 		else	
 			error <= '1'; 

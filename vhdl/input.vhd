@@ -20,7 +20,7 @@ entity input is
            COUT : out std_logic_vector(3 downto 0);
            WEOUT : out std_logic;
 		 	  OSC : in std_logic_vector(3 downto 0);
-			  OSCALL : in std_logic; 
+			  OSRST : in std_logic; 
 		     OSEN : in std_logic;
 		     OSWE : in std_logic; 
 		     OSD : in std_logic_vector(15 downto 0)
@@ -65,10 +65,10 @@ architecture Behavioral of input is
 
 
    -- offset-related signals
-   signal oswes, osin : std_logic := '0';
+   signal oswes, osin, osinmux, osrstl : std_logic := '0';
    signal oswen : std_logic_vector(9 downto 0) := (others => '0');
-   signal osinbitsel : std_logic_vector(3 downto 0) := (others => '0');
-   signal osdin : std_logic_vector(15 downto 0) := (others => '0');
+   signal osinbitsel, oscl : std_logic_vector(3 downto 0) := (others => '0');
+   signal osdl : std_logic_vector(15 downto 0) := (others => '0');
 
    -- offset state machine
    type osstates  is (none, oswinc);
@@ -430,13 +430,20 @@ begin
 	   	oscs <= none;
  	   else
 	   	if rising_edge(CLK) then
-		   oscs <= osns;
+			   oscs <= osns;
 
-		   if oscs = none then
-		   	osinbitsel <= (others => '1');
- 		   elsif oscs = oswinc then
-		   	osinbitsel <= osinbitsel - 1;
-		   end if;
+			   if oscs = none then
+			   	osinbitsel <= (others => '1');
+	 		   elsif oscs = oswinc then
+			   	osinbitsel <= osinbitsel - 1;
+			   end if;
+
+				if oswe = '1' then
+					osrstl <= OSRST;
+					osdl <= OSD;
+					oscl <= OSC; 
+				end if;  
+					
 
 		end if;
 	  end if;
@@ -460,35 +467,38 @@ begin
 		ce <= oswen(j) and oswes; 
 	  end generate; 	   	
 
-	oswen(0) <= '1' when OSC = "0000" or OSCALL = '1'  else '0';
-	oswen(1) <= '1' when OSC = "0001" or OSCALL = '1' else '0';
-	oswen(2) <= '1' when OSC = "0010" or OSCALL = '1' else '0';
-	oswen(3) <= '1' when OSC = "0011" or OSCALL = '1' else '0';
-	oswen(4) <= '1' when OSC = "0100" or OSCALL = '1' else '0';
-	oswen(5) <= '1' when OSC = "0101" or OSCALL = '1' else '0';
-	oswen(6) <= '1' when OSC = "0110" or OSCALL = '1' else '0';
-	oswen(7) <= '1' when OSC = "0111" or OSCALL = '1' else '0';
-	oswen(8) <= '1' when OSC = "1000" or OSCALL = '1' else '0';
-	oswen(9) <= '1' when OSC = "1001" or OSCALL = '1' else '0';
+	oswen(0) <= '1' when oscl = "0000" or osrstl = '1'  else '0';
+	oswen(1) <= '1' when oscl = "0001" or osrstl = '1' else '0';
+	oswen(2) <= '1' when oscl = "0010" or osrstl = '1' else '0';
+	oswen(3) <= '1' when oscl = "0011" or osrstl = '1' else '0';
+	oswen(4) <= '1' when oscl = "0100" or osrstl = '1' else '0';
+	oswen(5) <= '1' when oscl = "0101" or osrstl = '1' else '0';
+	oswen(6) <= '1' when oscl = "0110" or osrstl = '1' else '0';
+	oswen(7) <= '1' when oscl = "0111" or osrstl = '1' else '0';
+	oswen(8) <= '1' when oscl = "1000" or osrstl = '1' else '0';
+	oswen(9) <= '1' when oscl = "1001" or osrstl = '1' else '0';
 
 
 
-	osin <= osd(0) when osinbitsel = "0000" else
-		   osd(1) when osinbitsel = "0001" else
-		   osd(2) when osinbitsel = "0010" else
-		   osd(3) when osinbitsel = "0011" else
-		   osd(4) when osinbitsel = "0100" else
-		   osd(5) when osinbitsel = "0101" else
-		   osd(6) when osinbitsel = "0110" else
-		   osd(7) when osinbitsel = "0111" else
-		   osd(8) when osinbitsel = "1000" else
-		   osd(9) when osinbitsel = "1001" else
-		   osd(10) when osinbitsel = "1010" else
-		   osd(11) when osinbitsel = "1011" else
-		   osd(12) when osinbitsel = "1100" else
-		   osd(13) when osinbitsel = "1101" else
-		   osd(14) when osinbitsel = "1110" else
-		   osd(15);
+	osinmux <= osdl(0) when osinbitsel = "0000" else
+		   osdl(1) when osinbitsel = "0001" else
+		   osdl(2) when osinbitsel = "0010" else
+		   osdl(3) when osinbitsel = "0011" else
+		   osdl(4) when osinbitsel = "0100" else
+		   osdl(5) when osinbitsel = "0101" else
+		   osdl(6) when osinbitsel = "0110" else
+		   osdl(7) when osinbitsel = "0111" else
+		   osdl(8) when osinbitsel = "1000" else
+		   osdl(9) when osinbitsel = "1001" else
+		   osdl(10) when osinbitsel = "1010" else
+		   osdl(11) when osinbitsel = "1011" else
+		   osdl(12) when osinbitsel = "1100" else
+		   osdl(13) when osinbitsel = "1101" else
+		   osdl(14) when osinbitsel = "1110" else
+		   osdl(15);
+
+     osin <= osinmux when osrstl /= '1' else '0'; 
+
 
      osa <= od(0) when chan(3 downto 1) = "000" else
 		  od(2) when chan(3 downto 1) = "001" else

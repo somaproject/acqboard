@@ -43,7 +43,7 @@ architecture Behavioral of acqboard is
    signal gain : std_logic_vector(2 downto 0) := (others => '0');
    signal filter : std_logic_vector(1 downto 0) := (others => '0'); 
    signal pgachan : std_logic_vector(3 downto 0) := (others => '0');
-   signal gset, iset, fset, pgareset : std_logic := '0';
+   signal gset, iset, fset, pgarst : std_logic := '0';
    signal isel : std_logic_vector(1 downto 0) := (others => '0');
 
 -- loader and EEPROM-related signals
@@ -116,6 +116,7 @@ architecture Behavioral of acqboard is
 	           WEOUT : out std_logic;
 			 OSC : in std_logic_vector(3 downto 0);
 			 OSEN : in std_logic;
+			 OSRST : in std_logic; 
 			 OSWE : in std_logic; 
 			 OSD : in std_logic_vector(15 downto 0)
 			 );
@@ -301,6 +302,7 @@ begin
 			WEOUT => weout,
 			OSC => pgachan,
 			OSEN => osen,
+			OSRST => pgarst, 
 			OSWE => oswe,
 			OSD => edout); 
 	
@@ -363,7 +365,7 @@ begin
 			GSET => gset,
 			ISET => iset,
 			FSET => fset,
-			PGARESET => pgareset,
+			PGARESET => pgarst,
 			ISEL => isel);
 
 	fibertx_inst : FiberTX port map (
@@ -434,7 +436,7 @@ begin
 			GSET => gset,
 			ISET => iset,
 			FSET => fset,
-			PGARESET => pgareset,
+			PGARESET => pgarst,
 			EADDR => ewaddr,
 			EEN => ceen,
 			EDONE => edone,

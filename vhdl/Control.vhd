@@ -31,11 +31,11 @@ entity Control is
            EDATA : out std_logic_vector(15 downto 0);
            EESEL : out std_logic;
            BUFSEL : out std_logic;
-		 CMDSUCCESS : out std_logic; 
+		     CMDSUCCESS : out std_logic; 
            OSEN : out std_logic;
            OSWE : out std_logic;
            LOAD : out std_logic;
-		 PENDING : out std_logic;
+		     PENDING : out std_logic;
            LDONE : in std_logic);
 end Control;
 

@@ -1,0 +1,16 @@
+Repeated multiply-accumulator, does hardware convolution. 
+
+The pipelined multiplier is pure VHDL
+WE use 22-bit coefficients in fixed-point format to increase filter accuracy. 
+
+
+The 24-bit multiplier output is passed to the accumulator. 
+
+The accumulator output is 22+7 bits wide to prevent overflow-wraparound. 
+
+The RMAC unit expects a latency of two ticks from XA/HA to X/H (i.e. blockselect+ ram + register). 
+
+
+convergent rounding, see lab notebook, which results in "round towards nearest, halves to nearest even
+
+

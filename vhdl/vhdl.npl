@@ -45,12 +45,11 @@ MODULE hsel.vhd
 MODSTYLE hsel Normal
 DEPASSOC filter_test constraints.ucf Normal
 [Normal]
-p_ModelSimSimRunTime_tb=xstvhd, spartan2e, Module VHDL Test Bench.t_MSimulatePostPlace&RouteVhdlModel, 1042005909, 1000us
+p_ModelSimSimRunTime_tb=xstvhd, spartan2e, Module VHDL Test Bench.t_MSimulateBehavioralVhdlModel, 1044734369, 100ms
 xilxSynthKeepHierarchy=xstvhd, spartan2e, Schematic.t_synthesize, 1042091876, True
 _SynthConstraintsFile=xstvhd, spartan2e, Schematic.t_synthesize, 1042616754, filter_test.xcf
 _SynthOptEffort=xstvhd, spartan2e, Schematic.t_synthesize, 1042151381, High
 [STATUS-ALL]
-deserializer.ngcFile=WARNINGS,1044729951
-filter_test.ngcFile=WARNINGS,1044729951
+deserializer.ngcFile=WARNINGS,1044744730
 [STRATEGY-LIST]
 Normal=True

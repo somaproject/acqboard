@@ -77,7 +77,7 @@ BEGIN
 
 	simulator_in: process (CONVST, oeb) is
 			--subtype dataword is integer range -8192 to 8191;
-			file input_file : text open read_mode is "\\shannon\HostFS\acquisition\development\acqboard\dsp\simulation\impulse.behavioral.dat";
+			file input_file : text open read_mode is "\\shannon\HostFS\acquisition\development\acqboard\dsp\simulation\constant.behavioral.dat";
 			variable tempdata: dataword;
 			variable iline: line; 
 			
@@ -123,7 +123,7 @@ BEGIN
 	  	end process simulator_in;
 
 		simulator_out :process (outbyteout, outbytecount, macrnd) is
-			 file output_file : text open write_mode is "\\shannon\HostFS\acquisition\development\acqboard\dsp\simulation\impulse.behavioral.out";
+			 file output_file : text open write_mode is "\\shannon\HostFS\acquisition\development\acqboard\dsp\simulation\constant.behavioral.out";
 			 variable oline : line; 
 		begin
 			 if rising_edge(outbyteout) then

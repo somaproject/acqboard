@@ -70,8 +70,18 @@ begin
 
 		sum <= macout + (pl(35) & pl(35) & pl);
 
-		macrnd <= macout(34 downto 19);
 
+		-- this is the code for rounding, wheee!
+		if macout(37 downto 34) = "1111" or macout(37 downto 34) = "0000"	then
+			macrnd <= macout(34 downto 19);
+		else
+			if macout(37) = '1' then
+				macrnd <= "1000000000000000";
+			else
+				macrnd <= "0111111111111111";
+			end if;
+		end if; 
+			
 	end process rmac_core; 
 
 

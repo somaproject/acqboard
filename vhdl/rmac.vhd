@@ -26,10 +26,10 @@ entity RMAC is
 end RMAC;
 
 architecture Behavioral of RMAC is
-	signal mina : std_logic_vector(13 downto 0);
-	signal minb : std_logic_vector(17 downto 0); 
-	signal p, pl : std_logic_vector(31 downto 0); 
-	signal sum, macout: std_logic_vector(33 downto 0); 
+	signal mina : std_logic_vector(13 downto 0) := "00000000000000";
+	signal minb : std_logic_vector(17 downto 0) := "000000000000000000"; 
+	signal p, pl : std_logic_vector(31 downto 0) := "00000000000000000000000000000000"; 
+	signal sum, macout: std_logic_vector(33 downto 0) := "0000000000000000000000000000000000"; 
 
 	component multiplier IS
 		port (

@@ -25,11 +25,11 @@ architecture Behavioral of INPUT is
 
 	signal convstl : std_logic := '1'; 
 	signal outcnt : integer range 10 downto 0 := 0;
-	signal waitcnt : integer range 250 downto 0 := 0;  
+	signal waitcnt : integer range 1025 downto 0 := 0;  
 	signal chcnt : integer range 4 downto 0 := 0; 
 	signal sampcntind: std_logic_vector(6 downto 0) := "0000000";
 	signal tsel : std_logic := '0'; 
-	signal oe : std_logic := '0';
+	signal oe : std_logic := '1';
 	signal we : std_logic := '0';
 
 begin
@@ -90,7 +90,31 @@ begin
 	begin
 		if rising_edge(CLK2X) then
 			if outcnt < 10 then
-				OEB(outcnt) <= oe; 
+				case outcnt is
+					when 9 =>
+						OEB <= oe & "111111111";
+					when 8 =>
+						OEB <= "1" & oe & "11111111";
+					when 7 =>
+						OEB <= "11" & oe & "1111111";
+					when 6 =>
+						OEB <= "111" & oe & "111111";
+					when 5 =>
+						OEB <= "1111" & oe & "11111";
+					when 4 =>
+						OEB <= "11111" & oe & "1111";
+					when 3 =>
+						OEB <= "111111" & oe & "111";
+					when 2 =>
+						OEB <= "1111111" & oe & "11";
+					when 1 =>
+						OEB <= "11111111" & oe & "1";
+					when 0 =>
+						OEB <= "111111111" & oe;
+					when others =>
+						OEB <= "1111111111";
+				end case	;
+					 
 			end if; 
 		end if;
 
@@ -130,7 +154,7 @@ begin
 		case cs is
 			when NONE =>
 				convstl <= '1'; 
-				oe <= '0';
+				oe <= '1';
 				we <= '0';
 				if INSAMPCLK = '1' then
 					ns <= CONVST_1;
@@ -139,27 +163,27 @@ begin
 				end if;
 			when CONVST_1 =>
 				convstl <= '0'; 
-				oe <= '0';
+				oe <= '1';
 				we <= '0';
 				ns <= CONVST_2; 
  			when CONVST_2 =>
 				convstl <= '0'; 
-				oe <= '0';
+				oe <= '1';
 				we <= '0';
 				ns <= CONVST_3; 
 			when CONVST_3 =>
 				convstl <= '0'; 
-				oe <= '0';
+				oe <= '1';
 				we <= '0';
 				ns <= CONVST_4; 
 			when CONVST_4 =>
 				convstl <= '0'; 
-				oe <= '0';
+				oe <= '1';
 				we <= '0';
 				ns <= CONVWAIT; 
 			when CONVWAIT =>
 				convstl <= '1'; 
-				oe <= '0';
+				oe <= '1';
 				we <= '0';
 				if waitcnt = 180 then 
 					ns <= ZEROCNT;
@@ -168,27 +192,27 @@ begin
 				end if;
 			when ZEROCNT =>
 				convstl <= '1'; 
-				oe <= '0';
+				oe <= '1';
 				we <= '0';
 				ns <= OE_L1;
 			when OE_L1 =>
 				convstl <= '1'; 
-				oe <= '1';
+				oe <= '0';
 				we <= '0';
 				ns <= OE_L2;
 			when OE_L2 =>
 				convstl <= '1'; 
-				oe <= '1';
+				oe <= '0';
 				we <= '0';
 				ns <= STORE;
 			when STORE =>
 				convstl <= '1'; 
-				oe <= '1';
+				oe <= '0';
 				we <= '1';
 				ns <= REPEAT;
 			when REPEAT =>
 				convstl <= '1'; 
-				oe <= '0';
+				oe <= '1';
 				we <= '0';
 				if outcnt < 9 then
 					ns <= OE_L1;
@@ -197,7 +221,7 @@ begin
 				end if;
 			when others =>
 				convstl <= '1';
-				oe <= '0';
+				oe <= '1';
 				we <= '0';
 		end case; 
 	end process fsm;

@@ -21,7 +21,7 @@ entity XSEL is
            SAMPCNT : in std_logic_vector(6 downto 0);
            ADDRA7 : in std_logic;
 			  RESET : in std_logic; 
-           XD : out std_logic_vector(13 downto 0);
+           XD : out std_logic_vector(13 downto 0) := "00000000000000";
            DOTS : in std_logic_vector(4 downto 0);
            DATAIN : in std_logic_vector(13 downto 0);
            WEB : in std_logic_vector(4 downto 0);
@@ -237,7 +237,7 @@ begin
 			DOA2 when DOTS = "00100" else
 			DOA3 when DOTS = "01000" else
 			DOA4 when DOTS = "10000" else
-			"ZZZZZZZZZZZZZZ"; 
+			"00000000000000"; 
 			
 		 
 end Behavioral;

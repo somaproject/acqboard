@@ -12,7 +12,7 @@ use UNISIM.VComponents.all;
 
 
 entity filter_test is
-    Port ( CONVST : out std_logic;
+    Port ( CONVST : out std_logic ;
            CLKIN : in std_logic;
 			  RESETIN: in std_logic; 
            DATAIN : in std_logic_vector(13 downto 0);
@@ -47,7 +47,7 @@ architecture Behavioral of filter_test is
 	           SAMPCNT : out std_logic_vector(6 downto 0);
 	           ADDRB7 : out std_logic;
 				  RESET : in std_logic; 
-				  CONVST: out std_logic; 
+				  CONVST: out std_logic := '1'; 
 	           WEB : out std_logic_vector(4 downto 0);
 	           OEB : out std_logic_vector(9 downto 0));
 	end component;

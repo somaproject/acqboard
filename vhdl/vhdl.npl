@@ -35,5 +35,7 @@ MODULE input.vhd
 MODSTYLE input Normal
 MODULE rmacfsm.vhd
 MODSTYLE rmacfsm Normal
+[Normal]
+p_ModelSimSimRunTime_tb=xstvhd, spartan2e, Module VHDL Test Bench.t_MSimulateBehavioralVhdlModel, 1042005909, 1000us
 [STRATEGY-LIST]
 Normal=True

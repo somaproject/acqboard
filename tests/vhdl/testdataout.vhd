@@ -76,7 +76,7 @@ begin
 				if timer = '1' then
 					outreg <= encodeddata;
 				else
-					if shiftcount = "00" then
+					if shiftcount = "01" then
 					outreg(8 downto 0) <= outreg(9 downto 1);
 					end if;
 				end if;

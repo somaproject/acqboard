@@ -22,6 +22,7 @@ DEPASSOC testdataout constraints.ucf SYSTEM
 xilxBitgCfg_GenOpt_ASCIIFile=xstvhd, spartan2e, VHDL.t_bitFile, 1042845683, True
 xilxSynthKeepHierarchy=xstvhd, spartan2e, Schematic.t_synthesize, 1042841103, True
 [STATUS-ALL]
-testdataout.ngdFile=WARNINGS,1042845832
+testdataout.ngcFile=WARNINGS,1042924219
+testdataout.ngdFile=WARNINGS,1042924219
 [STRATEGY-LIST]
 Normal=True

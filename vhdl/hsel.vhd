@@ -21,7 +21,9 @@ entity HSEL is
 end HSEL;
 
 architecture Behavioral of HSEL is
-	signal index: std_logic_vector(7 downto 0) := "00000000"; 
+	signal index: std_logic_vector(7 downto 0) := "00000000"; 		  
+
+	signal DO_Dummy: std_logic_vector(13 downto 0); 
 	component RAMB4_S16
 		generic (
 	       INIT_00 : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000";
@@ -97,7 +99,7 @@ begin
 			CLK => CLK4X,
 			ADDR => 	index,
 			DO(1 downto 0) => HD(17 downto 16),
-			DO(15 downto 2)  => "UUUUUUUUUUUUUU");
+			DO(15 downto 2)  => DO_dummy);
 
 
 end Behavioral;

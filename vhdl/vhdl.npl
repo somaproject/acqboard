@@ -15,6 +15,7 @@ FLOWTIME 0
 STIMULUS hsel_test.tbw Normal
 STIMULUS input_test.tbw Normal
 STIMULUS rmacfsm_test.tbw Normal
+STIMULUS xsel_test.tbw Normal
 STIMULUS rmac_test.tbw Normal
 STIMULUS clocks_test.tbw Normal
 MODULE rmac.vhd
@@ -32,6 +33,7 @@ MODSTYLE input Normal
 MODULE rmacfsm.vhd
 MODSTYLE rmacfsm Normal
 [STATUS-ALL]
-xsel.ngcFile=WARNINGS,1041913540
+hsel.ngcFile=WARNINGS,1041917397
+xsel.ngcFile=WARNINGS,1041917397
 [STRATEGY-LIST]
 Normal=True

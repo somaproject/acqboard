@@ -137,22 +137,25 @@ bool ScopeArea::newdata(Glib::IOCondition foo)
     ohh, look, the interetsing part
   */
   
-  char buffer[25];
-  int result = read(datafd_, buffer, 25); 
+  char buffer[24];
+  int result = read(datafd_, buffer, 24); 
   
-  
-  for (int i = 0; i < 8; i++) { 
-    short sample  = buffer[(i+1)*2 + 1] + 256 * buffer[(i+1)*2];
+  //cout << endl;
+  for (int i = 0; i < 1;  i++) { 
+    short sample  = buffer[(i+1)*2 + 1] + 256 * buffer[(i+1)*2+0];
     add_data(sample); 
+    //cout << sample <<  ' ';
+
 
     if (pos_ < 0) { 
-      if ((sample > thold_) and (get_data(-1) <= thold_)) {
+      //if ((sample > thold_) and (get_data(-1) <= thold_)) {
 	pos_ = 0;
-      }
+	//}
     } else {
       pos_++; 
       if (pos_ == WINSIZE) {
 	// we've reached a full window
+	cout << "new window!";
 	for (int j = 0; j < WINSIZE; j++) { 
 	  winbuffer_[j] = convsample(get_data(-(WINSIZE-j)));
 	  

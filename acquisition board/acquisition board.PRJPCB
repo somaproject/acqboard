@@ -75,6 +75,13 @@ AnnotateStartValue=1
 AnnotateSuffix=
 DoLibraryUpdate=1
 DoDatabaseUpdate=1
+[Document10]
+DocumentPath=acqboard.PcbDoc
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotateSuffix=
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
 [SearchPath1]
 Path=..\..\..\Program Files\Altium\Library\Pcb\*.*
 IncludeSubFolders=1

@@ -74,3 +74,12 @@ A short between VSS and GND on the analog side caused this board to be a loss, b
 Can successfully download, boot, read filters, sample buffer from EEPROM, acqboard. Turns out there were problems with which exact bytes we were reading with the loader. Note EEPROM needs you to wait the FULL 5 MS before you try another operation following a write. 
 
 Mode 2 will only use channels 0, 4, and 8 for the sample buffer due to the way in which we write them. 
+
+
+17 June 2004
+So, the new connector size is correct, but the connectors we bought don't have the correct notch and so in general don't fit. But the bigger issue was that the solder mask expansion on the connector wasn't large enough, thus scraping ,and the hole's werent' big enough, hence drilling. The problem was the VCC and the GND connectors, which needed jumpers. 
+
+AS of now, things are booting. 
+
+18 June 2004
+Wow, mixed up OVDD and OGND pins on ADCs. I suck. 

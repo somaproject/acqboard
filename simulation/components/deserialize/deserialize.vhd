@@ -123,6 +123,7 @@ begin
 			 writeline(outputfile, L); 
 
 			 -- now, for the output
+			 kchar <= outbuff(7 downto 0); 
 			 cmdst <= outbuff(15 downto 8); 
 			 cmdid <= outbuff(183 downto 176); 
 			 data <= outbuff(175 downto 16); 

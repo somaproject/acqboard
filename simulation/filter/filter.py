@@ -7,65 +7,51 @@
 """
 
 import sys
-sys.path.append("../../code")
-import filt
-from fixed import *
+from scipy import *
+from matplotlib.matlab import * 
 
 def verify(simname):
+    simfid = file("%s.simoutput.dat" % simname)
+    simout = io.read_array(simfid, lines=((0, 1000),))
 
-    xu = []
-    # read in the ADCs:
-    for i in range(5):
-        xun1 = []
-        xun2 = []
-        fid = file("%s.adcin.%d.dat" % (simname, i))
+    fid = file("%s.output.dat" % simname)
+    out = io.read_array(fid, lines=((1, 600),))
 
-        for l in fid.readlines():
-            (s1, s2) = l.split()
-            xun1.append(int(s1))
-            xun2.append(int(s2))
+    print simout.shape
 
-        xu.append(xun1)
-        xu.append(xun2)
-
-    print "converting to fixed, bipolar"
-    # now convert to fixed, bipolar
-    x = []
+    yin = out[0:40, 0]
     for chan in range(10):
-        xn = []
-        print "hah" 
-        for i in range(len(xu[chan])):
-            xn.append(fixed(xu[chan][i]-2**15, 16))
+        maxos = 0
+        shift = 0
+        os = 0
+        for i in range(8):
+            ysim = simout[i:(320+i):8]
 
-        x.append(xn)
+            offset = []
+            # then we try 10 shifts back:
+            for j in range(5):
+                offset.append(sum(r_[zeros(j),
+                                     out[0:(40-j),chan]] * ysim[:, chan]))
 
-    print "reading in filter"
-    # read in the filter:
-    h = []
-    fid = file("%s.filter.dat" % simname)
-    for i in fid.readlines():
-        h.append(fixed(long(i), 22))
+            # forward
+            for j in range(1, 6 ):
+                offset.append( sum(out[j:(40+j), chan] *  ysim[:, chan]))
 
-        
-    # compute the ys
-    y = []
-    yraw = []
-    yrnd = []
-    for xi in x:
-        print "rmacing"
-        y_raw = filt.rmac(xi, h, 24)
-        yraw.append(y_raw)
-        print "convrnding"
-        y_rnd = filt.convrnd(y_raw, 16)
+            if max(offset) > maxos:
+                maxos = max(offset)
+                shift = i
+                os = argmax(offset)
 
-        yrnd.append(y_rnd)
+        print os, maxos, shift
 
-        y_overf = filt.overf(y_rnd, 1)
-
-        y.append(y_overf)
-
-    # at this point we should have the covolved, NOT DOWNSAMPLED ys
-
+    #print dsoffset, max(dsoffset[:, 2])
+    plot(simout[5:640:8, 0])
+    plot(out[0:80, 0])
+    plot((simout[5:640:8, 0]- out[0:80, 0])*1000)
+    show()
+    
+    #show()
+    
 
 def main():
     

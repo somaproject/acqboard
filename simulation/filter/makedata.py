@@ -9,10 +9,10 @@ def to_16bit(x):
     return x
 
 # First impulse to determine relative delay and 
-vlen = 256000; 
+vlen = 10000; 
 
 for r in range(5):
-    f = open("adcin.%d.dat" % r, 'w')
+    f = open("basic.adcin.%d.dat" % r, 'w')
     
     for i in range(150):
         f.write("32768 32768\n")

@@ -33,7 +33,7 @@ class AcqBoardCmd:
         else:
             self.cmdid += 1
             
-    def switchmode(self, mode, rawchan='A1'):
+    def switchmode(self, mode, rawchan='B2'):
         self.updatecmd()        
         str = ""
 

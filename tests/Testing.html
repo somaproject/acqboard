@@ -6,7 +6,8 @@
   <title>Soma Acquisition Board Testing</title>
 </head>
 <body>
-<span style="font-weight: bold; text-decoration: underline;">13 January
+<span style="font-weight: bold; text-decoration: underline;"><br>
+13 January
 2004</span><br style="font-weight: bold; text-decoration: underline;">
 <br style="font-weight: bold; text-decoration: underline;">
 Okay, this is the assembly and testing log of our (*pray*) final
@@ -593,6 +594,105 @@ code histograms for them. <br>
 <br>
 20 July 2004<br>
 Sent things to Analog, waiting for response. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">13 August
+2004</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+Many responses from analog engineer; in particular, we'll want to
+buffer the reference input to each ADC. To test and see if indeed the
+reference was the problem, I desoldered the resistors to REF pins on
+the ADCs, thus disconnecting all ADCs from the input reference; I then
+shorted across this resistor for ADC1&nbsp; and took data on A1. <br>
+<br>
+<img style="width: 600px; height: 450px;" alt=""
+ src="results/20040813/A1.noADCres.ADC1shorted.png"><br>
+This is really depressing. Chris suggested that I consider the problem
+is&nbsp; still the FPGA, and look at the converter output bits using a
+simple precision DC source. We really haven't tried this option, and
+it's worth a shot. I just need a precision OA and some resistors...<br>
+<br style="font-weight: bold; text-decoration: underline;">
+<span style="font-weight: bold; text-decoration: underline;">15 August
+2004</span><br>
+I built the precision DC source, although I may have subsequently burnt
+it out. No bother, though, because ADC4 appears to have difficulty
+reading even bits:<br>
+<br>
+<img style="width: 600px; height: 450px;" alt=""
+ src="results/20040815/ADC4.DCin.png"><br>
+What to do, what to do... <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">16 August
+2004</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+Okay, accepting the fact that we obviously have some digital signal
+integrity problems here, how can we rectify these? <br>
+<br>
+Well, my first zeroth-order guess as to the problem is that it's some
+sort of timing-related error in the FPGA. While I know that EVERY
+SINGLE FPGA-based error assumption I've ever made has turned out to be
+really really wrong, I'm going to still try to replace the input side. <br>
+<br>
+Having lobotomized the input stage, we no longer have the
+no-even-values error. <span style="font-weight: bold;">This means that
+the digital input&nbsp; portion of the FPGA was at least partly
+responsible</span>. So, we'll have to fix that. <br>
+<br>
+&nbsp;But, that said, for some values of the ADC input, we get a really
+nice output. For other values, generated from our DC source, we get:<br>
+<br>
+<img style="width: 600px; height: 450px;" alt=""
+ src="results/20040816/ADC4.DCin.badhist.png"><img
+ style="width: 600px; height: 450px;" alt=""
+ src="results/20040816/ADC4.DCin.badhist.diff.png"><br>
+<br>
+With the actual value histogram on the left and the diff histogram on
+the right. <br>
+When we take the output of the ADC, in averaging mode, for channel B
+(thus the first 16 bits we see there) we get<br>
+<br>
+<img align="left" style="width: 640px; height: 480px;" alt=""
+ src="results/20040816/scope%20out%20for%20bad%20histogram.averages.png">Note
+then that the low bits are -all- being triggered; this suggests some
+really fundamental signal integrity problems. <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+At the same time, the following is the histogram from the input shorted
+to ground:<br>
+<br>
+<img style="width: 600px; height: 450px;" alt=""
+ src="results/20040816/short-to-ground.hist.png"><br>
+<br>
+This really suggests the ADC is sucking for some number of reasons. <br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 </body>
 </html>

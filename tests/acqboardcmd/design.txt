@@ -1,0 +1,18 @@
+We have two socket classes:
+   AcqSocketOut: connects to /tmp/acqboard.in, sends the command that we form
+   AcqSockStat: reads /tmp/acqboard.status, detects status changes
+   
+
+AcqState: keeps acqboard state in the GUI:
+    Call update_gain(chan, value) to update gain display
+         update_hpf(chan, value) to update hpf display
+
+class AcqBoardCmd keeps track of the current command state of the acqboard, andprovides the reference implementation for commands. 
+
+We send a command by getting the
+   result = cmd.setgain(chan, value) 
+
+which will have the incremented command ID in it. Then, we wait for status to update the cmdid. 
+
+
+We would also like to be able to point to a file of 16-bit ints and 

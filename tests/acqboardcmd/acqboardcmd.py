@@ -88,7 +88,22 @@ class AcqBoardCmd:
         str = ""
 
         cmdbyte = (self.cmdid << 4) | 0x6
-        str = pack("BBBBBB", cmdbyte, addr, 0x00, value & 0xFF, (value >> 8) & 0xFF, 0x0);
+        #str = pack("BBBBBB", cmdbyte, addr, 0x00, value & 0xFF, (value >> 8) & 0xFF, 0x0);
+        str = pack("BBBBBB", cmdbyte, addr, 0x00, 0xFF, 0x0F, 0x00);
+        
+        return str
+
+    def writefilter(self, addr, value):
+        print "writefilter address ", addr, " with value ", value 
+        self.updatecmd()        
+        str = ""
+
+        cmdbyte = (self.cmdid << 4) | 0x5
+
+        x = pack("i", value);
+        y = unpack("BBB", x[0:3])
+        
+        str = pack("BBBBBB", cmdbyte, addr, y[2] ,y[1] , y[0], 0x0 );
 
         return str;
         

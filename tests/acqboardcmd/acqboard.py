@@ -212,13 +212,23 @@ class AcqBoardControl:
         self.acqs.startcmdid(self.acqcmd.cmdid, self.acqs.update_mode, (mode, 2))
         
     def load_buffer(self, widget):
-        print " and now we would load some stuff!"
+        print "Load Filter"
         fid = file("samples.dat")
         samples = fid.readlines()
         addr = 0 
         for str in samples:
-            print string.atoi(str)
-            self.blocksend(self.acqcmd.writesamplebuffer(addr, string.atoi(str)))
+            print "the value is ", string.atoi(str)
+            self.blocksend(self.acqcmd.writesamplebuffer(addr, string.atoi(str)*255))
+            addr += 1
+
+    def load_filter(self, widget):
+        print "Loading filter..."
+        fid = file("filter.dat")
+        samples = fid.readlines()
+        addr = 0 
+        for str in samples:
+            print "the value is", string.atoi(str)
+            self.blocksend(self.acqcmd.writefilter(addr, string.atoi(str)))
             addr += 1
 
      
@@ -342,6 +352,11 @@ class AcqBoardControl:
         self.box2.pack_start(self.loadbuffer, gtk.FALSE, gtk.FALSE, 0)
         self.loadbuffer.show();
         self.loadbuffer.connect("clicked", self.load_buffer)
+
+        self.loadfilter = gtk.Button("Load File Into Filter")
+        self.box2.pack_start(self.loadfilter, gtk.FALSE, gtk.FALSE, 0)
+        self.loadfilter.show();
+        self.loadfilter.connect("clicked", self.load_filter)
 
 
         self.cselbox = gtk.VBox(gtk.FALSE,0)

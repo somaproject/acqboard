@@ -1,0 +1,1 @@
+20040630.raw.sine.dat First acqboard data, taken from sine input at really low gain (1?) almost entirely proof of concept. 

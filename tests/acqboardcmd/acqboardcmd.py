@@ -88,8 +88,8 @@ class AcqBoardCmd:
         str = ""
 
         cmdbyte = (self.cmdid << 4) | 0x6
-        #str = pack("BBBBBB", cmdbyte, addr, 0x00, value & 0xFF, (value >> 8) & 0xFF, 0x0);
-        str = pack("BBBBBB", cmdbyte, addr, 0x00, 0xFF, 0x0F, 0x00);
+        str = pack("BBBBBB", cmdbyte, addr, 0x00, value & 0xFF, (value >> 8) & 0xFF, 0x0);
+        #str = pack("BBBBBB", cmdbyte, addr, 0x12, 0x34, 0x56, 0x78);
         
         return str
 

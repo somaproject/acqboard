@@ -28,13 +28,20 @@ SOURCE looptest.vhd
 SOURCE testdataout.vhd
 SOURCE testsamples.vhd
 SOURCE ledflash.vhd
+SOURCE tessteeprom.vhdl
+SOURCE ..\..\vhdl\EEPROMio.vhd
+STIMULUS testeeprom_test.tbw
+STIMULUS testeeprom_testbench.vhd
 DEPASSOC looptest looptest.ucf
 DEPASSOC testdataout constraints.ucf
 DEPASSOC testsamples testsamples.ucf
 DEPASSOC ledflash ledflash.ucf
+DEPASSOC tessteeprom testeeprom.ucf
 [Normal]
-p_ModelSimSimRunTime_tb=xstvhd, spartan2e, VHDL Test Bench.t_MSimulateBehavioralVhdlModel, 1043045114, 1000ms
-xilxBitgCfg_GenOpt_ASCIIFile=xstvhd, spartan3, VHDL.t_bitFile, 1042845683, True
+p_ModelSimSimRunTime_tb=xstvhd, spartan3, VHDL Test Bench.t_MSimulateBehavioralVhdlModel, 1043045114, 1000ms
+xilxBitgCfg_GenOpt_ASCIIFile=xstvhd, spartan3, Implementation.t_bitFile, 1042845683, True
 xilxSynthKeepHierarchy=xstvhd, spartan3, Schematic.t_synthesize, 1042841103, Yes
+[STATUS-ALL]
+tessteeprom.ngcFile=WARNINGS,1086296935
 [STRATEGY-LIST]
 Normal=True

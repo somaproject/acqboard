@@ -43,7 +43,7 @@ ScopeArea::ScopeArea(int width, int height)
   // scale
   offset_ = height/2;
   scale_ = (double)(height/2)/32768.0;
-  thold_ = -3; 
+  thold_ = 1000; 
   
 // set up buffers
   
@@ -59,7 +59,6 @@ ScopeArea::ScopeArea(int width, int height)
   bufpos_ = 0;
   pos_ = -1; 
 
-  channel_ = 0; 
   mode_ = 0; 
   channel_ = 0; 
 }
@@ -180,9 +179,9 @@ bool ScopeArea::newdata(Glib::IOCondition foo)
       
       
       if (pos_ < 0) { 
-	if ((sample > thold_) and (get_data(-1) <= thold_)) {
+	//if ((sample > thold_) and (get_data(-1) <= thold_)) {
 	  pos_ = 0;
-	}
+	  //}
       } else {
 	pos_++; 
 	if (pos_ == WINSIZE) {

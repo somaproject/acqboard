@@ -92,7 +92,7 @@ int main(int argc, char** argv)
     
     chanbuttons[i] = manage( new Gtk::RadioButton(group,chanlist[i]));
     chanbuttons[i]->show();
-    chanbuttons[i]->signal_clicked().connect(slot(callback)); 
+    //chanbuttons[i]->signal_clicked().connect(slot(callback)); 
     radiobox.pack_start(*chanbuttons[i]); 
   }
   radiobox.show();

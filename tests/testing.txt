@@ -69,3 +69,8 @@ But, using 5k Ohm pullups for all pullups and 200 ohm current-limiting resistors
 
 30 May 2004
 A short between VSS and GND on the analog side caused this board to be a loss, but luckily I was able to test the DL capabilities, and sure enough, the acqboard command interface appears to work correctly. However, the code is fragile for a number of reasons, including (but not limited to) 
+
+3 June 2004
+Can successfully download, boot, read filters, sample buffer from EEPROM, acqboard. Turns out there were problems with which exact bytes we were reading with the loader. Note EEPROM needs you to wait the FULL 5 MS before you try another operation following a write. 
+
+Mode 2 will only use channels 0, 4, and 8 for the sample buffer due to the way in which we write them. 

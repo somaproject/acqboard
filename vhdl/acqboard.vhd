@@ -25,7 +25,9 @@ entity acqboard is
 		     EEPROMLEN : in std_logic;  
            FIBERIN : in std_logic;
            FIBEROUT : out std_logic;
-		     CLK8_OUT : out std_logic);
+		     CLK8_OUT : out std_logic;
+			  LED0 : out std_logic;
+			  LED1 : out std_logic);
 end acqboard;
 
 architecture Behavioral of acqboard is
@@ -474,6 +476,7 @@ begin
 	een <= len when eesel = '1' else ceen; 
 
 	CLK8_OUT <= clk8; 
-
+	LED0 <= '1';
+	LED1 <= '1'; 
 
 end Behavioral;

@@ -29,3 +29,5 @@ tests/analysis :
    code to analyzie the resulting output
 tests/results :
    result data, result figures, result commentary
+tests/acqboardcmd:
+   program for interfacing with protoboard acqboard domain sockets

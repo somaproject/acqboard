@@ -1,0 +1,3 @@
+NET CLK2X TNM_NET = CLK_GRP;
+TIMESPEC "TS_clk2x" = PERIOD "CLK_GRP" 14.27 ns;
+NET "clk2x" TNM_NET = "clk2x";

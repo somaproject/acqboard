@@ -12,9 +12,17 @@ DEVSPEED -6
 DEVSPEEDTIME 0
 FLOW XST VHDL
 FLOWTIME 1061049059
+MODULE samplebuffer.vhd
+MODSTYLE samplebuffer Normal
+MODULE multiplier.vhd
+MODSTYLE multiplier Normal
 MODULE input.vhd
 MODSTYLE input Normal
+DEPASSOC multiplier multiplier.ucf SYSTEM
 [Normal]
 p_xstPackIORegister=xstvhd, spartan2e, VHDL.t_synthesize, 1061064066, Yes
+xilxPAReffortLevel=xstvhd, spartan2e, VHDL.t_placeAndRouteDes, 1061078311, Normal
+[STATUS-ALL]
+samplebuffer.ngcFile=WARNINGS,1061078624
 [STRATEGY-LIST]
 Normal=True

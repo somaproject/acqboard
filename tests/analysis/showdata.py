@@ -143,6 +143,15 @@ class bitstats:
                     bitarray[b][i] = 1
         return bitarray
 
+    def plotbits(self):
+        self.bitarray = self.makebitarray()
+        for i in range(self.bits):
+            vlines(find(self.bitarray[i, :]), 1.1*i, 1.1*i+1)
+        axis([0, len(self.vals), 0, self.bits*1.1])
+        show()
+            
+            
+        
     def var(self):
         """ computes variance"""
 

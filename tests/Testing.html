@@ -517,10 +517,68 @@ WEll, I re-wrote the input code for the ADCs, taking out the pipelining
 that I can hopefully eliminate it as a potential issue. But still...
 same errors. <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">18 July
+2004</span><br style="font-weight: bold; text-decoration: underline;">
+Wow, rapidly running out of ideas. The fixed ADC code hasn't helped
+any. I still get the quantization, even when I directly connect the
+unbalanced output of the function generator into the input of the ADC. <br>
+<br>
+Watching the output on the scope, we can see that all output values are
+being set. This can be seen by triggering off of CS and taking the
+average; any stuck value would be apparent. We see the same thing on
+the other side of the FPGA. Even having the FPGA latch bits suggests --
+there's no bit sticking!<br>
+<br>
+<br>
+In an attempt to re-evaluate where we are, I'm going to re-acquire a
+sample. <br>
+<br>
+Indeed, results/today/sineagain.h5 shows A1.g100.f1.a100 to be nearly
+the same as above, with the same problems. Let's look at the hist of
+the diffs...<br>
+<br>
+<img style="width: 600px; height: 450px;" alt=""
+ src="results/20040718/a1.g100.f0.a100.diff-hist.png"><img
+ style="width: 600px; height: 450px;" alt=""
+ src="results/20040718/a1.g100.f0.a100.diff-hist-zoom.png"><br>
+<br>
+Now, the diff histogram is similar to earlier (pre- New Input.vhd)
+data, but the odd multiples of 8 never showing up as diffs is totally
+an error. <br>
+<img style="width: 600px; height: 450px;" alt=""
+ src="results/20040718/sineagain.a1.mod16.png"><br>
+Interestingly, A3 &amp; A4 don't have this problem -- maybe it has to
+do with the pull-up resistor? Cutting resistor and rerunning...<br>
+<br>
+Nope, still the same problem. Here's a bit-plot:<br>
 <br>
 <br>
 <br>
 <br>
+<img style="width: 1200px; height: 900px;" alt=""
+ src="results/20040718/samebits.png"><br>
+This is for A1, g=100, data taken from sine_noresistor.h5. Both A1 and
+A2 exhibit this problem, but A3 does not. But <span
+ style="font-style: italic;">the shifted outputs of the ADC (as
+measured by averaging) don't appear to have this problem!<span
+ style="font-weight: bold;"> </span></span>In fact, both bits 2 and 3
+appear to be unaffected. This is now super-duper odd, esp. since it
+only affects ADC1. <br>
+<br>
+Went down, made timing constraints a bit tighter on CLK, and switched
+all input voltage levels to LVTTL. Didn't help with -either- problem;
+A1/2 still shows identical bits 2 &amp; 3; both ADCs 1 &amp; 2 still
+have 256 problems. <br>
+<br>
+<br>
+Now we get desperate: we're going to trash the input stage. Make it as
+simple as possible; all we'll get out is the input of chan 0 <br>
+<br>
+<span style="font-weight: bold;">Then I tried to totally rewrite the
+input code</span> to just do a quick hack, but I -still- get the 256
+errors. BUT that fixed the 2/3 bit stick error. Grrr. <br>
+<br>
+This does not make sense. <br>
 <br>
 <br>
 <br>

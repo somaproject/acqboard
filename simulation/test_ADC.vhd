@@ -55,7 +55,7 @@ begin
 		     SDOUT <= '0';	
 			  filedone <= '0';
 			  if filemode = '1' then
-			     mac
+			     file_open(inputfile, filename, read_mode); 
 			  end if; 
 			  
 		elsif CONVST'EVENT and CONVST = '0' then

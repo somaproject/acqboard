@@ -72,7 +72,7 @@ class AcqBoardCmd:
         str = ""
 
         cmdbyte = (self.cmdid << 4) | 0x3
-        str = pack("BBBBBB", cmdbyte, filter, gain, 0x0, 0x0, 0x0);
+        str = pack("BBBBBB", cmdbyte, chan, filter, 0x0, 0x0, 0x0);
 
         return str;
         

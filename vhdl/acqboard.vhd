@@ -10,6 +10,7 @@ use UNISIM.VComponents.all;
 
 entity acqboard is
     Port ( CLKIN : in std_logic;
+	 		  --RESET : in std_logic; 
            ADCIN : in std_logic_vector(4 downto 0);
            ADCCLK : out std_logic;
            ADCCS : out std_logic;
@@ -24,7 +25,6 @@ entity acqboard is
 		     EEPROMLEN : in std_logic;  
            FIBERIN : in std_logic;
            FIBEROUT : out std_logic;
-           RESET : in std_logic;
 		     CLK8_OUT : out std_logic);
 end acqboard;
 
@@ -33,7 +33,7 @@ architecture Behavioral of acqboard is
 -- See Overview.ai for details. 
 
 -- signals
-
+	signal reset : std_logic := '1'; 
 
 -- clock-related signals
    signal clk, clk8, insample, outsample, outbyte, spiclk : 
@@ -91,6 +91,16 @@ architecture Behavioral of acqboard is
 
 
 -- component definitions
+
+   component STARTUP_VIRTEX 
+   port (GSR: in std_logic);
+   end component;
+
+	
+        component TOC 
+        port (O : out std_logic); 
+   end component; 
+ 
 
 	component clocks is
 	    Port ( CLKIN : in std_logic;
@@ -279,7 +289,8 @@ architecture Behavioral of acqboard is
 	end component;
 
 begin
-
+   U1: TOC port map (O=>reset);
+ 
     clocks_inst : clocks port map (
     			CLKIN => CLKIN,
 			CLK => clk,
@@ -463,5 +474,7 @@ begin
 	een <= len when eesel = '1' else ceen; 
 
 	CLK8_OUT <= clk8; 
+
+
 
 end Behavioral;

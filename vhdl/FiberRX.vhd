@@ -11,11 +11,11 @@ use UNISIM.VComponents.all;
 entity FiberRX is
     Port ( CLK : in std_logic;
            FIBERIN : in std_logic;
-		 RESET : in std_logic; 
+		 	  RESET : in std_logic; 
            DATA : out std_logic_vector(31 downto 0) := (others => '0');
            CMD : out std_logic_vector(3 downto 0);
            NEWCMD : out std_logic;
-		 PENDING : in std_logic; 
+		 	  PENDING : in std_logic; 
            CMDID : out std_logic_vector(3 downto 0);
            CHKSUM : out std_logic_vector(7 downto 0));
 end FiberRX;

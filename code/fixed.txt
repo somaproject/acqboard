@@ -1,0 +1,5 @@
+To perform a realistic simulation of the entire subsystem, we need a fixed point math class and similar operations. However, in python, the thing is so horribly slow that it's unusable. 
+
+So we've written a new implementation of a fixed-point class in c++ which stores everything internally as a long-long and we simply keep track of the bits. 
+
+

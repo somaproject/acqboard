@@ -77,7 +77,8 @@ class fixed:
         # returns a value which is equal to the present value if
         # the present value can be expressed as an a.b number, otherwise
         # (i.e. overflow) returns the max or min value in a.base
-        
+
+        a--; 
         if self.val >= 2**(a+self.base - 1):
             return(fixed(2**(a+self.base-1)-1, self.base))
         elif self.val < -2**(a+self.base -1):

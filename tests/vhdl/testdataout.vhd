@@ -11,7 +11,6 @@ use UNISIM.VComponents.all;
 entity testdataout is
     Port ( CLK : in std_logic;
 	 		  KOUT : out std_logic;
-			  --encodeddataout: out std_logic_vector(9 downto 0);
 			  timerout: out std_logic;
            DOUT : out std_logic);
 end testdataout;
@@ -44,6 +43,7 @@ begin
 		clk => clk,
 		dout => encodeddata,
 		ce => timer);
+
 	dout <= outreg(0);
 	
 	KOUT <= KIN;
@@ -82,6 +82,8 @@ begin
 					end if; 
 				end if; 
 		end if; 
+
+
 			if shiftcount = "00" then
 				shift_timer <= '1';
 			else

@@ -23,16 +23,16 @@
 --     appliances, devices, or systems. Use in such applications are          --
 --     expressly prohibited.                                                  --
 --                                                                            --
---     (c) Copyright 1995-2002 Xilinx, Inc.                                   --
+--     (c) Copyright 1995-2003 Xilinx, Inc.                                   --
 --     All rights reserved.                                                   --
 --------------------------------------------------------------------------------
 -- You must compile the wrapper file encoder.vhd when simulating
 -- the core, encoder. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
--- instructions, please refer to the "Coregen Users Guide".
+-- instructions, please refer to the "CORE Generator Guide".
 
 -- The synopsys directives "translate_off/translate_on" specified
--- below are supported by XST, FPGA Express, Exemplar and Synplicity
+-- below are supported by XST, FPGA Compiler II, Mentor Graphics and Synplicity
 -- synthesis tools. Ensure they are correct for your synthesis tool(s).
 
 -- synopsys translate_off

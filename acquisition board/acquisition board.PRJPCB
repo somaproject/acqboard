@@ -82,6 +82,20 @@ AnnotateStartValue=1
 AnnotateSuffix=
 DoLibraryUpdate=1
 DoDatabaseUpdate=1
+[Document11]
+DocumentPath=acqboard 3.0.PcbDoc
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotateSuffix=
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+[Document12]
+DocumentPath=acqboard.PcbDoc
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotateSuffix=
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
 [GeneratedDocument1]
 DocumentPath=Project Outputs for acquisition board\acqboard.DRL
 [GeneratedDocument2]
@@ -201,7 +215,7 @@ OutputName3=Schematic Prints
 OutputDocumentPath3=
 OutputEnabled3=1
 OutputDefault3=0
-PageOptions3=Record=PageOptions|SelectedOnly=False|CenterHorizontal=False|CenterVertical=False|PrintScale=0.52|XCorrection=1.00|YCorrection=1.00|PrintKind=0|BorderSize=5000000|LeftOffset=0|BottomOffset=0|Orientation=2|PaperLength=0|PaperWidth=0|Scale=100|PaperSource=7|PrintQuality=600|MediaType=0|DitherType=0|PaperKind=Letter
+PageOptions3=Record=PageOptions|SelectedOnly=False|CenterHorizontal=False|CenterVertical=False|PrintScale=0.52|XCorrection=1.00|YCorrection=1.00|PrintKind=1|BorderSize=5000000|LeftOffset=0|BottomOffset=0|Orientation=2|PaperLength=0|PaperWidth=0|Scale=100|PaperSource=7|PrintQuality=600|MediaType=0|DitherType=0|PaperKind=Letter
 Configuration3_Name1=OutputConfigurationParameter1
 Configuration3_Item1=Record=SchPrintView|BooleanThing=False
 [OutputGroup4]

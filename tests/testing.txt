@@ -21,3 +21,9 @@ other board, just digial, no analog.
 
 Things to test:
 first, digital power supplies
+
+14 January 2004
+Okay, there's already some code in the "vhdl" subdirectory. Today, I'm going to create LEDFLASH.vhd which will just flash the leds to let us know things have booted correctly. 
+
+Baah! After all this work, the vias on the lower right side of the board didn't connect to the plane! I don't know why -- did I send them the wrong gerbers? Is this a power plane issue? WTF?
+

@@ -35,8 +35,7 @@ multiplier YourInstanceName (
 	.clk(clk),
 	.a(a),
 	.b(b),
-	.q(q),
-	.sclr(sclr));
+	.q(q));
 
 // INST_TAG_END ------ End INSTANTIATION Template ---------
 

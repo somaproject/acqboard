@@ -34,8 +34,7 @@ component multiplier
 	clk: IN std_logic;
 	a: IN std_logic_VECTOR(13 downto 0);
 	b: IN std_logic_VECTOR(21 downto 0);
-	q: OUT std_logic_VECTOR(35 downto 0);
-	sclr: IN std_logic);
+	q: OUT std_logic_VECTOR(35 downto 0));
 end component;
 
 -- XST black box declaration
@@ -61,8 +60,7 @@ your_instance_name : multiplier
 			clk => clk,
 			a => a,
 			b => b,
-			q => q,
-			sclr => sclr);
+			q => q);
 -- INST_TAG_END ------ End INSTANTIATION Template ------------
 
 -- You must compile the wrapper file multiplier.vhd when simulating

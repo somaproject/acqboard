@@ -1,31 +1,32 @@
-info x 649 510 0 0 0 0 0 0 0 0 0 0 0 0 0 0 VHDLvhdl_genericverilog_generic
+info x 697 510 0 0 0 0 0 0 0 0 0 0 0 0 0 0 VHDLvhdl_genericverilog_generic
 col x 12548 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 radix x 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-entity name 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 clocks
+entity name 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 CLOCKS
 term mark 12502 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 vlib save 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 LIBRARY  IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
-LIBRARY  SIMPRIM;
-USE SIMPRIM.VCOMPONENTS.ALL;
-USE SIMPRIM.VPACKAGE.ALL;
+LIBRARY  UNISIM;
+USE UNISIM.VComponents.all;
 
 var add 1 0 0 226 18 17 12548 62500 31250 31250 4500 4500 0 0 0 0 clkininstd_logicRISING_EDGEclkin
 var add 2 0 0 226 19 20 12548 62500 31250 31250 4500 4500 0 0 0 0 resetininstd_logicRISING_EDGEclkin
-var add 7 0 0 226 20 17 12548 62500 31250 31250 4500 4500 0 0 0 0 clk2xoutstd_logicRISING_EDGEclkin
-var add 6 0 0 226 21 16 12548 62500 31250 31250 4500 4500 0 0 0 0 clk8outstd_logicRISING_EDGEclkin
+var add 3 0 0 226 20 17 12548 62500 31250 31250 4500 4500 0 0 0 0 clk2xoutstd_logicRISING_EDGEclkin
+var add 4 0 0 226 21 16 12548 62500 31250 31250 4500 4500 0 0 0 0 clk8outstd_logicRISING_EDGEclkin
 var add 5 0 0 226 22 21 12548 62500 31250 31250 4500 4500 0 0 0 0 insampclkoutstd_logicRISING_EDGEclkin
-var add 4 0 0 226 23 22 12548 62500 31250 31250 4500 4500 0 0 0 0 outsampclkoutstd_logicRISING_EDGEclkin
-var add 8 0 0 226 24 19 12548 62500 31250 31250 4500 4500 0 0 0 0 outbyteoutstd_logicRISING_EDGEclkin
-var add 3 0 0 226 25 17 12548 62500 31250 31250 4500 4500 0 0 0 0 resetoutstd_logicRISING_EDGEclkin
+var add 6 0 0 226 23 22 12548 62500 31250 31250 4500 4500 0 0 0 0 outsampclkoutstd_logicRISING_EDGEclkin
+var add 7 0 0 226 24 19 12548 62500 31250 31250 4500 4500 0 0 0 0 outbyteoutstd_logicRISING_EDGEclkin
+var add 8 0 0 226 25 17 12548 62500 31250 31250 4500 4500 0 0 0 0 resetoutstd_logicRISING_EDGEclkin
 vdone xxx 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-npos xxx 103 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+npos xxx 138 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 cell fill 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
 cell fill 2 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 cell fill 2 10496 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 time info 50 50 4500 4500 31250 31250 1 1 0 0 0 0 0 0 0 0 psclkin
 font save -14 0 400 49 0 0 0 0 0 0 0 0 0 0 0 0 Times New Roman
-src mod 0 2761998464 29538191 0 0 0 0 0 0 0 0 0 0 0 0 0 clocks.vhd
+src mod 0 2267278208 29539452 0 0 0 0 0 0 0 0 0 0 0 0 0 clocks.vhd
 utd false 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 cellenab on 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 grid on 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
@@ -35,19 +36,20 @@ Source = clocks.vhd
 Sat Jan 04 23:54:02 2003
 com add 1 6399 -281250 -72500 23 -11 -46 0 0 0 0 0 0 0 0 0 Double click on me to edit.
 Click outside me to update
-type info 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_ulogicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_ulogic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 signedVECTORDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_ulogicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 STD_LOGICBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 STD_LOGICBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
@@ -617,6 +619,8 @@ type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
@@ -635,22 +639,67 @@ type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 STD_LOGICBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 STD_LOGICBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 STD_LOGICBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 STD_LOGICBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 STD_LOGICBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 STD_LOGICBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 STD_LOGICBITDOWNTO

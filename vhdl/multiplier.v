@@ -39,14 +39,12 @@ module multiplier (
 	clk,
 	a,
 	b,
-	q,
-	sclr);    // synthesis black_box
+	q);    // synthesis black_box
 
 input clk;
 input [13 : 0] a;
 input [21 : 0] b;
 output [35 : 0] q;
-input sclr;
 
 // synopsys translate_off
 
@@ -59,7 +57,7 @@ input sclr;
 		0,	// c_b_type
 		"0000000000000001",	// c_b_value
 		22,	// c_b_width
-		1,	// c_enable_rlocs
+		0,	// c_enable_rlocs
 		0,	// c_has_aclr
 		0,	// c_has_a_signed
 		1,	// c_has_b
@@ -71,7 +69,7 @@ input sclr;
 		1,	// c_has_q
 		0,	// c_has_rdy
 		0,	// c_has_rfd
-		1,	// c_has_sclr
+		0,	// c_has_sclr
 		0,	// c_has_swapb
 		"mem",	// c_mem_init_prefix
 		0,	// c_mem_type
@@ -90,7 +88,6 @@ input sclr;
 		.A(a),
 		.B(b),
 		.Q(q),
-		.SCLR(sclr),
 		.O(),
 		.A_SIGNED(),
 		.LOADB(),
@@ -98,6 +95,7 @@ input sclr;
 		.SWAPB(),
 		.CE(),
 		.ACLR(),
+		.SCLR(),
 		.RFD(),
 		.ND(),
 		.RDY());

@@ -36,8 +36,7 @@ architecture Behavioral of RMAC is
 		clk: IN std_logic;
 		a: IN std_logic_VECTOR(13 downto 0);
 		b: IN std_logic_VECTOR(21 downto 0);
-		q: OUT std_logic_VECTOR(35 downto 0);
-		sclr: IN std_logic);
+		q: OUT std_logic_VECTOR(35 downto 0));
 	END component;
 
 
@@ -48,8 +47,7 @@ begin
 			clk => CLK2X,
 			a => mina,
 			b => minb,
-			q => p,
-			sclr => CLR); 
+			q => p); 
 
 
 	rmac_core: process (CLK2X, XD, HD, mina, minb, p, pl, sum, macout) is

@@ -21,7 +21,7 @@ entity XSEL is
            ADDRA7 : in std_logic;
 			  RESET : in std_logic; 
            XD : out std_logic_vector(13 downto 0) := "00000000000000";
-           DOTS : in std_logic_vector(4 downto 0);
+           DOTS : in std_logic_vector(2 downto 0);
            DATAIN : in std_logic_vector(13 downto 0);
            WEB : in std_logic_vector(4 downto 0);
            ADDRB : in std_logic_vector(7 downto 0));
@@ -30,6 +30,8 @@ end XSEL;
 architecture Behavioral of XSEL is
 	signal addraindex, sampcntl: std_logic_vector(6 downto 0) := "0000000";
 	signal DOA0, DOA1, DOA2, DOA3, DOA4 : std_logic_vector(13 downto 0) := "00000000000000"; 
+	signal doal0, DoAl1, DoAl2, DoAl3, DoAl4 : std_logic_vector(13 downto 0) := "00000000000000"; 
+
 
 	signal DOA_dummy: std_logic_vector(1 downto 0); 
 	component RAMB4_S16_S16
@@ -230,13 +232,23 @@ begin
 				DOA(15 downto 14) => DOA_dummy,
 				DOB => open); 
 
-
-	XD <= DOA0 when DOTS = "00001" else
-			DOA1 when DOTS = "00010" else
-			DOA2 when DOTS = "00100" else
-			DOA3 when DOTS = "01000" else
-			DOA4 when DOTS = "10000" else
-			"00000000000000"; 
-			
-		 
+	 test: process(CLK2X, CLR, DOTS) is
+	 begin
+	 	--if rising_edge(CLK2X) then
+	 	case DOTS is
+			when "001" =>
+				XD <= DOA0;
+			when "010" =>
+				XD <= DOA1;
+			when "011" =>
+				XD <= DOA2;
+			when "100" =>
+				XD <= DOA3;
+			when "101" =>
+				XD <= DOA4;
+			when others =>
+				XD <= "00000000000000";
+		end case;  
+		--end if; 
+	end process test; 	 
 end Behavioral;

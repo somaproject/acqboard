@@ -13,7 +13,7 @@ entity rmacfsm is
            OUTSAMPCLK : in std_logic;
            OUTBYTE : in std_logic;
            CLR : out std_logic;
-           DOTS : out std_logic_vector(4 downto 0);
+           DOTS : out std_logic_vector(2 downto 0);
 			  MACMSB : out std_logic; 
            ADDRA7 : out std_logic);
 end rmacfsm;
@@ -21,6 +21,7 @@ end rmacfsm;
 architecture Behavioral of rmacfsm is
 	 type STATES is (NONE, RAM_ZERO, CLR_HIGH, RMAC_LOOP, NEXT_RAM, WAIT_OUTB);
 	 signal cs, ns : states := none;
+	 signal dotsl : std_logic_vector(2 downto 0); 
 
 	 signal rmac_cnt : integer range 200 downto 0 :=0;
 	 signal chancnt : integer range  10 downto 0 := 0; 
@@ -49,14 +50,45 @@ begin
 		end if; 
 	end process clocks;
 
-	DOTS <= "00001" when chancnt = 0 or chancnt = 5 else
-			  "00010" when chancnt = 1 or chancnt = 6 else
-			  "00100" when chancnt = 2 or chancnt = 7 else
-			  "01000" when chancnt = 3 or chancnt = 8 else
-			  "10000" when chancnt = 4 or chancnt = 9 or chancnt = 10 else
-			  	"00000";
-	ADDRA7 <= '0' when chancnt = 0 or chancnt = 1 or
-			chancnt = 2 or chancnt = 3 or chancnt = 4 else '1'; 
+
+	latchedbuf: process(chancnt, CLK2X, dotsl) is
+	begin
+		if rising_edge(CLK2X) then
+
+			case chancnt is
+				when 0 =>
+					DOTS <= "001";
+				when 1 =>
+					DOTS <= "010";
+				when 2 =>
+					DOTS <= "011";
+				when 3 =>
+					DOTS <= "100";
+				when 4 =>
+					DOTS <= "101";
+				when 5 =>
+					DOTS <= "001";
+				when 6 =>
+					DOTS <= "010";
+				when 7 =>
+					DOTS <= "011";
+				when 8 =>
+					DOTS <= "100";
+				when 9 =>
+					DOTS <= "101";
+				when 10 =>
+					DOTS <= "101";
+				when others =>
+					DOTS <= "000";
+			end case; 
+			if chancnt = 0 or chancnt = 1 or
+					chancnt = 2 or chancnt = 3 or chancnt = 4 then
+					ADDRA7 <= '0';
+			else
+					ADDRA7 <= '1';
+			end if; 
+		end if;
+	end process latchedbuf; 
 
 	fsm : process(cs, OUTSAMPCLK, OUTBYTE, rmac_cnt, chancnt) is
 	begin

@@ -27,7 +27,8 @@ architecture Behavioral of filter_test is
 	signal clk2x, clk8, insampclk, outsampclk, outbyte, reset : std_logic; 
 	signal sampcnt: std_logic_vector(6 downto 0);
 	signal addrb7, clr, addra7 : std_logic;
-	signal web, dots : std_logic_vector(4 downto 0); 
+	signal web : std_logic_vector(4 downto 0); 
+	signal dots: std_logic_vector(2 downto 0); 
    signal xd: std_logic_vector(13 downto 0); 
 	signal hd : std_logic_vector(21 downto 0); 
 
@@ -61,7 +62,7 @@ architecture Behavioral of filter_test is
 	           ADDRA7 : in std_logic;
 				  RESET : in std_logic; 
 	           XD : out std_logic_vector(13 downto 0);
-	           DOTS : in std_logic_vector(4 downto 0);
+	           DOTS : in std_logic_vector(2 downto 0);
 	           DATAIN : in std_logic_vector(13 downto 0);
 	           WEB : in std_logic_vector(4 downto 0);
 	           ADDRB : in std_logic_vector(7 downto 0));
@@ -88,7 +89,7 @@ architecture Behavioral of filter_test is
 	           OUTSAMPCLK : in std_logic;
 	           OUTBYTE : in std_logic;
 	           CLR : out std_logic;
-	           DOTS : out std_logic_vector(4 downto 0);
+	           DOTS : out std_logic_vector(2 downto 0);
 				  MACMSB : out std_logic; 
 	           ADDRA7 : out std_logic);
 	end component;

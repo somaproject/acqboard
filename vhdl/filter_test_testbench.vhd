@@ -77,7 +77,7 @@ BEGIN
 
 	simulator_in: process (CONVST, oeb) is
 			--subtype dataword is integer range -8192 to 8191;
-			file input_file : text open read_mode is "test.dat";
+			file input_file : text open read_mode is "\\shannon\HostFS\acquisition\development\acqboard\dsp\simulation\test.rtl.dat";
 			variable tempdata: dataword;
 			variable iline: line; 
 			
@@ -123,7 +123,7 @@ BEGIN
 	  	end process simulator_in;
 
 		simulator_out :process (outbyteout) is
-			 file output_file : text open write_mode is "output.dat";
+			 file output_file : text open write_mode is "\\shannon\HostFS\acquisition\development\acqboard\dsp\simulation\output.dat";
 			 variable oline : line; 
 		begin
 			 if rising_edge(outbyteout) then

@@ -1,6 +1,6 @@
 # Xilinx CORE Generator 5.1.03i
 SELECT Multiplier Spartan2 Xilinx,_Inc. 5.0
-CSET create_rpm = true
+CSET create_rpm = false
 CSET clock_enable = false
 CSET output_options = Registered
 CSET port_b_constant = false
@@ -19,7 +19,7 @@ CSET rdy = false
 CSET register_input = true
 CSET port_b_data = Signed
 CSET component_name = multiplier
-CSET synchronous_clear = true
+CSET synchronous_clear = false
 CSET asynchronous_clear = false
 CSET load_done_output = false
 CSET rfd = false

@@ -1,0 +1,3 @@
+TIMEGRP xstALLSEQ = FFS:LATCHES:RAMS; 
+TIMESPEC tsxstallclocknets = FROM xstALLSEQ 
+TO xstALLSEQ 64Mhz; 

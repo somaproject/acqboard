@@ -45,26 +45,39 @@ begin
 
 
 
-	clocks: process (clk2x_out, locked2x_inv) is
-		variable countInSample : integer range 250 downto 0 := 0;
-		variable countOutSample: integer range 2000 downto 0 := 0;
-		variable countOutByte : integer range 80 downto 0 := 0; 
+	clocks: process (clk2x_out, locked2x_inv, outsampletoggle,insampletoggle, outbytetoggle ) is
+		variable countInSample, countInSampleL : integer range 250 downto 0 := 0;
+		variable countOutSample, countOutSampleL : integer range 2000 downto 0 := 0;
+		variable countOutByte, countOutByteL : integer range 2000 downto 0 := 0; 
 
 		 
 	begin
 		if locked2x_inv = '1' then
 			countInSample := 0;
 			countOutSample := 0; 
+			countOutByte := 0; 
+			countInSampleL := 0;
+			countOutSampleL := 0; 
+			countOutByteL := 0; 
+
+
 			insampletoggle <= '0'; 
 			outsampletoggle <= '0';
+			outbytetoggle<= '0';
+
 		else
 			if rising_edge(clk2x_out) then	
 			
 				OUTSAMPCLK <= outsampletoggle; 
 				INSAMPCLK <= insampletoggle; 
 				OUTBYTE <= outbytetoggle;
+
+				countInSampleL := countInSample;
+				countOutSampleL := countOutSample;
+				countOutByteL := countOutByte; 
+
 				-- INSAMPLE -- every 250 clk4x				
-				if countInSample = 249 then
+				if countInSampleL = 249 then
 					countInSample := 0;
 					insampletoggle <= '1';
 				else
@@ -73,7 +86,7 @@ begin
 				end if;
 
 				-- OUTSAMPLE -- every 2000 clk4x
-				if countOutSample = 1999 then
+				if countOutSampleL = 1999 then
 					countOutSample := 0;
 					outsampletoggle <= '1';
 				else
@@ -82,7 +95,7 @@ begin
 				end if;
 
 				-- OUTBYTE -- every 80 clk4x
-				if countOutByte = 79 then
+				if countOutByteL = 79 then
 					countOutByte := 0;
 					outbytetoggle <= '1';
 				else

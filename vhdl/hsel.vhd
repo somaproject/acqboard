@@ -21,7 +21,8 @@ entity HSEL is
 end HSEL;
 
 architecture Behavioral of HSEL is
-	signal index: std_logic_vector(7 downto 0) := "00000000"; 		  
+	signal index: std_logic_vector(7 downto 0) := "00000000"; 
+	signal hdl: std_logic_vector(21 downto 0); 		  
 
 	signal DO_Dummy: std_logic_vector(9 downto 0); 
 	component RAMB4_S16
@@ -51,13 +52,15 @@ begin
 		if rising_edge(CLK2X) then
 			if CLR = '1' then
 				index <= "00000000";
+				--HD <= "0000000000000000000000";
 			else
 				index <= index + 1;
+				--HD <= hdl;
 			end if;
 		end if; 
 	
 	end process counter;  
-	
+	HD <= hdl; 
 	-- RAM instantiation
 
 	RAML: RAMB4_S16 
@@ -78,7 +81,7 @@ begin
 			RST => CLR,
 			CLK => CLK2X,
 			ADDR => 	index,
-			DO => HD(15 downto 0));
+			DO => hdl(15 downto 0));
 
 	RAMH: RAMB4_S16 
 		generic map (
@@ -98,7 +101,7 @@ begin
 			RST => CLR,
 			CLK => CLK2X,
 			ADDR => 	index,
-			DO(5 downto 0) => HD(21 downto 16),
+			DO(5 downto 0) => hdl(21 downto 16),
 			DO(15 downto 6)  => DO_dummy);
 
 

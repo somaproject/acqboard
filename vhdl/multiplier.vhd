@@ -45,8 +45,7 @@ ENTITY multiplier IS
 	clk: IN std_logic;
 	a: IN std_logic_VECTOR(13 downto 0);
 	b: IN std_logic_VECTOR(21 downto 0);
-	q: OUT std_logic_VECTOR(35 downto 0);
-	sclr: IN std_logic);
+	q: OUT std_logic_VECTOR(35 downto 0));
 END multiplier;
 
 ARCHITECTURE multiplier_a OF multiplier IS
@@ -56,8 +55,7 @@ component wrapped_multiplier
 	clk: IN std_logic;
 	a: IN std_logic_VECTOR(13 downto 0);
 	b: IN std_logic_VECTOR(21 downto 0);
-	q: OUT std_logic_VECTOR(35 downto 0);
-	sclr: IN std_logic);
+	q: OUT std_logic_VECTOR(35 downto 0));
 end component;
 
 -- Configuration specification 
@@ -68,11 +66,11 @@ end component;
 			c_b_type => 0,
 			c_has_b => 1,
 			c_has_rdy => 0,
-			c_has_sclr => 1,
+			c_has_sclr => 0,
 			bram_addr_width => 8,
 			c_has_nd => 0,
 			c_reg_a_b_inputs => 1,
-			c_enable_rlocs => 1,
+			c_enable_rlocs => 0,
 			c_mult_type => 0,
 			c_has_rfd => 0,
 			c_has_swapb => 0,
@@ -104,8 +102,7 @@ U0 : wrapped_multiplier
 			clk => clk,
 			a => a,
 			b => b,
-			q => q,
-			sclr => sclr);
+			q => q);
 END multiplier_a;
 
 -- synopsys translate_on

@@ -8,7 +8,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity test_SendCMD is
+entity SendCMD is
     Port ( CMDID : in std_logic_vector(3 downto 0);
            CMD : in std_logic_vector(3 downto 0);
            DATA0 : in std_logic_vector(7 downto 0);
@@ -20,9 +20,9 @@ entity test_SendCMD is
 		 CMDPENDING : out std_logic;
 		 DOUT : out std_logic 
 		 );
-end test_SendCMD;
+end SendCMD;
 
-architecture Behavioral of test_SendCMD is
+architecture Behavioral of SendCMD is
 -- TEST_SENDCMD.VHD -- sends commands present at inputs over an 8B/10B
 -- encoded datastream at 8 MHz, and sends idle(all 0s) otherwise. 
 -- CMD is sent on rising_edge(SENDCMD) and transmission is completed

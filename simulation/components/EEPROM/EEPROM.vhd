@@ -9,7 +9,7 @@ use std.textio.all;
 library UNISIM;
 use UNISIM.VComponents.all;
 
-entity test_EEPROM is
+entity EEPROM is
     Generic (  FILEIN : string := "eeprom_in.dat"; 
     			FILEOUT : string := "eeprom_out.dat"); 
     Port ( CLK : in std_logic;
@@ -19,10 +19,10 @@ entity test_EEPROM is
 		 SO : out std_logic; 
 		 RESET : in std_logic;
 		 SAVE : in std_logic);
-end test_EEPROM;
+end EEPROM;
 
-architecture Behavioral of test_EEPROM is
--- test_EEPROM.VHD. A testbench implementation of the serial EEPROM
+architecture Behavioral of EEPROM is
+-- EEPROM.VHD. A testbench implementation of the serial EEPROM
 -- with the ability to read from and write the output to a file.
 -- The data itself is actually kept in RAM. It's loaded from FILEIN
 -- passed as a generic, and written to FILEOUT passed as a generic, 

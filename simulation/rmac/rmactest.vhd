@@ -16,10 +16,10 @@ use std.textio.ALL;
 use IEEE.numeric_std.ALL;
 
 
-ENTITY testbench IS
-END testbench;
+ENTITY rmactest IS
+END rmactest;
 
-ARCHITECTURE behavior OF testbench IS 
+ARCHITECTURE behavior OF rmactest IS 
 
 	COMPONENT rmac
 	PORT(

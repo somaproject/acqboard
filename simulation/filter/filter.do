@@ -14,13 +14,13 @@ vcom -93 -explicit ../../vhdl/overflow.vhd
 vcom -93 -explicit ../../vhdl/rmac.vhd
 
 -- simulation entities
-vcom -93 -explicit ../test_ADC.vhd
-vcom -93 -explicit ../test_FilterLoad.vhdl
-vcom -93 -explicit testbench.vhd
+vcom -93 -explicit ../components/ADC/ADC.vhd
+vcom -93 -explicit ../components/FilterLoad/FilterLoad.vhdl
+vcom -93 -explicit filtertest.vhd
 
 
 
-vsim -t 1ps -L xilinxcorelib -lib work testbench
+vsim -t 1ps -L xilinxcorelib -lib work filtertest
 view wave
 add wave *
 view structure

@@ -39,15 +39,13 @@ SOURCE ..\..\vhdl\acqboard.vhd
 SOURCE ..\..\vhdl\RMAC.vhd
 SOURCE ..\..\vhdl\encode8b10b.xco
 SOURCE ..\..\vhdl\decode8b10b.xco
-STIMULUS testbench.vhd
-SOURCE ..\test_PGA.vhdl
-SOURCE ..\test_SendCMD.vhd
-SOURCE test_EEPROM.vhdl
-STIMULUS test_eeprom_test.tbw
-SOURCE ..\test_fiberin.vhdl
-SOURCE ..\test_deserialize.vhd
-SOURCE ..\test_ADC.vhd
 SOURCE ..\..\vhdl\raw.vhd
 SOURCE ..\..\vhdl\distram_dualport.vhd
+SOURCE acqcmdtest.vhd
+SOURCE ..\components\ADC\ADC.vhd
+SOURCE ..\components\deserialize\deserialize.vhd
+SOURCE ..\components\PGA\PGA.vhdl
+SOURCE ..\components\SendCMD\SendCMD.vhd
+SOURCE EEPROM.vhdl
 [STRATEGY-LIST]
 Normal=True

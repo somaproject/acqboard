@@ -10,7 +10,7 @@ use std.textio.ALL;
 library UNISIM;
 use UNISIM.VComponents.all;
 
-entity test_ADC is
+entity ADC is
     Generic (filename : string := "adcin.dat" ); 
     Port ( RESET : in std_logic;
            SCLK : in std_logic := '0';
@@ -24,9 +24,9 @@ entity test_ADC is
 		 FILEMODE: in std_logic; 
 		 BUSY: out std_logic; 
 		 INPUTDONE: out std_logic);
-end test_ADC;
+end ADC;
 
-architecture Behavioral of test_ADC is
+architecture Behavioral of ADC is
 -- a behavioral simulation of the AD7655, reads in input values from
 -- filename, or from cha/chb values, depending on filemode. 
 -- the filename has two columns of unsigned ints < 2^16-1

@@ -119,7 +119,7 @@ ARCHITECTURE behavior OF testbench IS
 
 	signal  outsample, outbyte : std_logic := '0';
 
-	component test_ADC is
+	component ADC is
 	    Generic (filename : string := "adcin.dat" ); 
 	    Port ( RESET : in std_logic;
 	           SCLK : in std_logic := '0';
@@ -143,7 +143,7 @@ ARCHITECTURE behavior OF testbench IS
    signal clk_enable : std_logic := '0'; 
 	signal syscnt : integer := 0; 
 
-	component test_FilterLoad is
+	component FilterLoad is
 	    Generic (filename : string := "adcin.dat" ); 
 	    Port ( CLK : in std_logic;
 	           DOUT : out std_logic_vector(15 downto 0);
@@ -176,7 +176,7 @@ BEGIN
 
 
 
-	adc0 : test_ADC  generic map (
+	adc0 : ADC  generic map (
 			filename => "adcin.0.dat")
 			port map (
 			RESET => adc_reset,
@@ -192,7 +192,7 @@ BEGIN
 			BUSY => open,
 			INPUTDONE => filedone); 
 			  
-	adc1 : test_ADC  generic map (
+	adc1 : ADC  generic map (
 			filename => "adcin.1.dat")
 			port map (
 			RESET => adc_reset,
@@ -208,7 +208,7 @@ BEGIN
 			BUSY => open,
 			INPUTDONE => open); 
 
-	adc2 : test_ADC  generic map (
+	adc2 : ADC  generic map (
 			filename => "adcin.2.dat")
 			port map (
 			RESET => adc_reset,
@@ -224,7 +224,7 @@ BEGIN
 			BUSY => open,
 			INPUTDONE => open); 
 
-	adc3 : test_ADC  generic map (
+	adc3 : ADC  generic map (
 			filename => "adcin.3.dat")
 			port map (
 			RESET => adc_reset,
@@ -240,7 +240,7 @@ BEGIN
 			BUSY => open,
 			INPUTDONE => open); 
 
-	adc4 : test_ADC  generic map (
+	adc4 : ADC  generic map (
 			filename => "adcin.4.dat")
 			port map (
 			RESET => adc_reset,
@@ -306,7 +306,7 @@ BEGIN
 			RESET => RESET, 
 			Y => Y);
 
-	filload: test_FilterLoad generic map
+	filload: FilterLoad generic map
 			(filename => "filter.dat")
 			port map(
 			clk => clk,

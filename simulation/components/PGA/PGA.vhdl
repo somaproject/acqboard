@@ -11,14 +11,14 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 
 
-entity test_PGA is
+entity PGA is
     Port ( SCLK : in std_logic;
            RCLK : in std_logic;
            SIN : in std_logic;
 			  bouts: out std_logic_vector(10*8-1 downto 0));
-end test_PGA;
+end  PGA;
 
-architecture Behavioral of test_PGA is
+architecture Behavioral of PGA is
 -- simple systme to map the serial input stream to actual values for the
 -- PGAs, filters, and input selection
 

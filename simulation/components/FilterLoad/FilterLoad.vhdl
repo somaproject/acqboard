@@ -11,16 +11,16 @@ use std.textio.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity test_FilterLoad is
+entity FilterLoad is
 	Generic (filename : string := "filter.dat" ); 
     Port ( CLK : in std_logic;
            DOUT : out std_logic_vector(15 downto 0);
            AOUT : out std_logic_vector(8 downto 0);
            WEOUT : out std_logic;
 			  LOAD : in std_logic);
-end test_FilterLoad;
+end FilterLoad;
 
-architecture Behavioral of test_FilterLoad is
+architecture Behavioral of FilterLoad is
 	
 
 	  	file inputfile : text; 

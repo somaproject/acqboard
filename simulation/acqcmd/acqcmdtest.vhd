@@ -12,10 +12,10 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY testbench IS
-END testbench;
+ENTITY acqcmdtest IS
+END acqcmdtest;
 
-ARCHITECTURE behavior OF testbench IS 
+ARCHITECTURE behavior OF acqcmdtest IS 
 
 	COMPONENT acqboard
 	PORT(
@@ -59,7 +59,7 @@ ARCHITECTURE behavior OF testbench IS
 	
 	signal bouts :  std_logic_vector(79 downto 0) := (others => '0'); 
 
-	component test_PGA is
+	component PGA is
 	    Port ( SCLK : in std_logic;
 	           RCLK : in std_logic;
 	           SIN : in std_logic;
@@ -70,7 +70,7 @@ ARCHITECTURE behavior OF testbench IS
 	signal cmddata0, cmddata1, cmddata2, cmddata3, cmdchksum: 
 				std_logic_vector(7 downto 0) := (others => '0'); 
 	signal sendcmd, cmdpending : std_logic := '0'; 
-	component test_SendCMD is
+	component SendCMD is
 	    Port ( CMDID : in std_logic_vector(3 downto 0);
 	           CMD : in std_logic_vector(3 downto 0);
 	           DATA0 : in std_logic_vector(7 downto 0);
@@ -106,7 +106,7 @@ ARCHITECTURE behavior OF testbench IS
 
 	signal outvals : intarray := (others => 0); 
 
-	component test_deserialize is
+	component deserialize is
 	    generic ( filename : string := "deserialize.output.dat"); 
 	    Port ( CLK8 : in std_logic;
 	           FIBEROUT : in std_logic;
@@ -122,7 +122,7 @@ ARCHITECTURE behavior OF testbench IS
 	signal newframe : std_logic := '0'; 
 	signal deser_data : std_logic_vector(159 downto 0) := (others =>'0'); 
 	signal adcval : intarray := (others => 32768); 
-	component test_ADC is
+	component ADC is
 	    Generic (filename : string := "adcin.dat" ); 
 	    Port ( RESET : in std_logic;
 	           SCLK : in std_logic := '0';
@@ -166,14 +166,14 @@ BEGIN
 		CLK8_OUT => CLK8_OUT
 	);
 
-	pga : test_PGA port map (
+	pga : PGA port map (
 		SCLK => pgasrck,
 		RCLK => pgarck,
 		SIN =>  pgasera,
 		bouts => bouts); 
 
 
-	cmdctl : test_SendCMD port map (
+	cmdctl : SendCMD port map (
 		CMDID => cmdid,
 		CMD => cmd,
 		DATA0 => cmddata0,
@@ -186,7 +186,7 @@ BEGIN
 		DOUT => FIBERIN); 
 
 
-   rom : test_EEPROM port map (
+   rom : EEPROM port map (
 		SCK => ESCK,
 		SO => ESO,
 		SI => ESI,
@@ -197,7 +197,7 @@ BEGIN
 		we => ewe); 
 
 
-	des : test_deserialize port map (
+	des : deserialize port map (
 		clk8 => clk8_out,
 		fiberout => fiberout,
 		newframe => newframe,
@@ -217,7 +217,7 @@ BEGIN
 
 
    adcs : for i in 0 to 4 generate
-		adc: test_ADC  port map (
+		adc: ADC  port map (
 			RESET => RESET,
 			SCLK => ADCCLK,
 			CONVST => ADCCONVST,

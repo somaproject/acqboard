@@ -10,7 +10,7 @@ USE ieee.numeric_std.ALL;
 library UNISIM;
 use UNISIM.VComponents.all;
 
-entity test_deserialize is
+entity deserialize is
     generic ( filename : string := "deserialize.output.dat"); 
     Port ( CLK8 : in std_logic;
            FIBEROUT : in std_logic;
@@ -20,10 +20,10 @@ entity test_deserialize is
 			  data : out std_logic_vector(159 downto 0);
 			  cmdid : out std_logic_vector(7 downto 0) 
 			  );
-end test_deserialize;
+end deserialize;
 
-architecture Behavioral of test_deserialize is
--- test_deserialize.vhd -- simple deserializer for output data.
+architecture Behavioral of deserialize is
+-- deserialize.vhd -- simple deserializer for output data.
 -- Samples falling_edge(CLK8), pushes data into 250-bit buffer, looking
 -- for starting k character. 
 -- 

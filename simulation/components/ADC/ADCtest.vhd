@@ -12,12 +12,12 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY test_adc_testbench IS
-END test_adc_testbench;
+ENTITY adctest IS
+END adctest;
 
-ARCHITECTURE behavior OF test_adc_testbench IS 
+ARCHITECTURE behavior OF adctest IS 
 
-	COMPONENT test_adc
+	COMPONENT adc
 	PORT(
 		reset : IN std_logic;
 		sclk : IN std_logic;
@@ -42,7 +42,7 @@ ARCHITECTURE behavior OF test_adc_testbench IS
 
 BEGIN
 
-	uut: test_adc PORT MAP(
+	uut: adc PORT MAP(
 		reset => reset,
 		sclk => sclk,
 		convst => convst,

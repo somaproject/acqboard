@@ -18,7 +18,6 @@ DEVSIMULATOR Modelsim
 SIMULATORTIME 0
 DEVGENERATEDSIMULATIONMODEL VHDL
 GENERATEDSIMULATIONMODELTIME 0
-STIMULUS testbench.vhd
 SOURCE ..\..\vhdl\samplebuffer.vhd
 SOURCE ..\..\vhdl\RMAC.vhd
 SOURCE ..\..\vhdl\input.vhd
@@ -28,8 +27,9 @@ SOURCE ..\..\vhdl\RMACcontrol.vhd
 SOURCE ..\..\vhdl\accumulator.vhd
 SOURCE ..\..\vhdl\FilterArray.vhd
 SOURCE ..\..\vhdl\rounding.vhd
-SOURCE ..\test_ADC.vhd
-SOURCE C:\desktop\acqboard\simulation\test_FilterLoad.vhdl
 STIMULUS test_filterload_test.tbw
+SOURCE filtertest.vhd
+SOURCE ..\components\ADC\ADC.vhd
+SOURCE ..\components\FilterLoad\FilterLoad.vhdl
 [STRATEGY-LIST]
 Normal=True

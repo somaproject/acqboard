@@ -10,15 +10,15 @@ use std.textio.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity test_serialize is
+entity serialize is
     Generic (filename : string := "input.dat"); 
     Port ( START : in std_logic;
            DOUT : out std_logic;
 		 DONE : out std_logic);
-end test_serialize;
+end serialize;
 
-architecture Behavioral of test_serialize is
--- TEST_SERIALIZE.VHD -- strictly behavioral implementation of
+architecture Behavioral of serialize is
+-- SERIALIZE.VHD -- strictly behavioral implementation of
 -- serializer for testbenches. We generate an internal 8 Mhz clock
 -- and then 8b/10b encode the data from the input filename. 
 -- That file has a '1' or a '0' based on whether or not this is

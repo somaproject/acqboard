@@ -12,12 +12,12 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY test_deserialize_testbench IS
-END test_deserialize_testbench;
+ENTITY deserializetest IS
+END deserializetest;
 
-ARCHITECTURE behavior OF test_deserialize_testbench IS 
+ARCHITECTURE behavior OF deserializetest IS 
 
-	COMPONENT test_deserialize
+	COMPONENT deserialize
     generic ( filename : string := "deserialize.output.dat"); 
 	PORT(
 		clk8 : IN std_logic;
@@ -30,7 +30,7 @@ ARCHITECTURE behavior OF test_deserialize_testbench IS
 	signal start,  done : std_logic; 
 
 
-	component test_serialize is
+	component serialize is
 	    Generic (filename : string := "input.dat"); 
 	    Port ( START : in std_logic;
 	           DOUT : out std_logic;
@@ -39,14 +39,14 @@ ARCHITECTURE behavior OF test_deserialize_testbench IS
 
 BEGIN
 
-	uut: test_deserialize 
+	uut: deserialize 
 		generic map (filename => "foo.dat")
 		PORT MAP(
 		clk8 => clk8,
 		fiberout => fiberout);
 
-	test_serializer : test_serialize
-			generic map ( filename => "test_deserialize.dat")	
+	test_serializer : serialize
+			generic map ( filename => "deserialize.dat")	
 			port map (
 				START => start,
 				DOUT => fiberout,

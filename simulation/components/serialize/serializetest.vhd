@@ -12,12 +12,12 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY test_serialize_testbench IS
-END test_serialize_testbench;
+ENTITY serializetest IS
+END serializetest;
 
-ARCHITECTURE behavior OF test_serialize_testbench IS 
+ARCHITECTURE behavior OF serializetest IS 
 
-	COMPONENT test_serialize
+	COMPONENT serialize
     Generic (filename : string := "input.dat"); 
     Port ( START : in std_logic;
            DOUT : out std_logic;
@@ -30,7 +30,7 @@ ARCHITECTURE behavior OF test_serialize_testbench IS
 
 BEGIN
 
-	uut: test_serialize PORT MAP(
+	uut: serialize PORT MAP(
 		start => start,
 		dout => dout,
 		done => done

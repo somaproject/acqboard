@@ -23,6 +23,6 @@ SOURCE ..\..\vhdl\overflow.vhd
 SOURCE ..\..\vhdl\multiplier.vhd
 SOURCE ..\..\vhdl\accumulator.vhd
 SOURCE ..\..\vhdl\rounding.vhd
-STIMULUS testbench.vhd
+SOURCE rmactest.vhd
 [STRATEGY-LIST]
 Normal=True

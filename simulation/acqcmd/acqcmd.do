@@ -30,16 +30,16 @@ vcom -93 -explicit ../../vhdl/acqboard.vhd
 
 
 -- simulation entities
-vcom -93 -explicit ../test_PGA.vhdl
-vcom -93 -explicit ../test_SendCMD.vhd
-vcom -93 -explicit ../test_deserialize.vhd
-vcom -93 -explicit ../test_ADC.vhd
-vcom -93 -explicit test_EEPROM.vhdl
-vcom -93 -explicit testbench.vhd
+vcom -93 -explicit ../components/PGA/PGA.vhdl
+vcom -93 -explicit ../components/SendCMD/SendCMD.vhd
+vcom -93 -explicit ../components/deserialize/deserialize.vhd
+vcom -93 -explicit ../components/ADC/ADC.vhd
+vcom -93 -explicit EEPROM.vhdl
+vcom -93 -explicit acqcmdtest.vhd
 
 
 
-vsim -t 1ps -L xilinxcorelib -lib work testbench
+vsim -t 1ps -L xilinxcorelib -lib work acqcmdtest
 view wave
 add wave *
 view structure

@@ -6,11 +6,11 @@ vlib work
 vcom -93 -explicit ../../vhdl/input.vhd
 
 -- simulation entities
-vcom -93 -explicit ../test_ADC.vhd
-vcom -93 -explicit testbench.vhd
+vcom -93 -explicit ../ADC/ADC.vhd
+vcom -93 -explicit inputtest.vhd
 
 
-vsim -t 1ps -L xilinxcorelib -lib work testbench
+vsim -t 1ps -L xilinxcorelib -lib work inputtest
 view wave
 add wave *
 view structure

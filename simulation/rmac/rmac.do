@@ -10,10 +10,10 @@ vcom -93 -explicit ../../vhdl/rounding.vhd
 vcom -93 -explicit ../../vhdl/RMAC.vhd
 
 -- simulation entities
-vcom -93 -explicit testbench.vhd
+vcom -93 -explicit rmactest.vhd
 
 
-vsim -t 1ps -L xilinxcorelib -lib work testbench
+vsim -t 1ps -L xilinxcorelib -lib work rmactest
 view wave
 add wave *
 view structure

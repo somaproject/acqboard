@@ -10,7 +10,7 @@ use IEEE.numeric_std.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity test_EEPROM is
+entity EEPROM is
     Port ( SCK : in std_logic;
            SO : out std_logic;
            SI : in std_logic;
@@ -19,10 +19,10 @@ entity test_EEPROM is
 			  DOUT : out integer;
 			  DIN : in integer; 
 			  WE : in std_logic);
-end test_EEPROM;
+end EEPROM;
 
-architecture Behavioral of test_EEPROM is
--- test_EEPROM: simple eeprom implmenetation that lets us also
+architecture Behavioral of EEPROM is
+-- EEPROM: simple eeprom implmenetation that lets us also
 -- read and write values externally. 
 
 	signal areg: std_logic_vector(15 downto 0) := (others => '0'); 

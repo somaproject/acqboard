@@ -12,10 +12,10 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY testbench IS
-END testbench;
+ENTITY inputtest IS
+END inputtest;
 
-ARCHITECTURE behavior OF testbench IS 
+ARCHITECTURE behavior OF inputtest IS 
 
 	COMPONENT input
 	PORT(
@@ -97,7 +97,7 @@ BEGIN
 		OSD => OSD
 	);	 
 
-	adc0 : test_ADC generic map (
+	adc0 : ADC generic map (
 		filename => "adc.0.dat")
 		port map(
 		RESET => adcreset,
@@ -113,7 +113,7 @@ BEGIN
 		BUSY => adcbusy(0),
 		INPUTDONE => adcinputdone(0));
 
-	adc1 : test_ADC generic map (
+	adc1 : ADC generic map (
 		filename => "adc.1.dat")
 		port map(
 		RESET => adcreset,
@@ -130,7 +130,7 @@ BEGIN
 		INPUTDONE => adcinputdone(1));
 
 
-	adc2 : test_ADC generic map (
+	adc2 : ADC generic map (
 		filename => "adc.2.dat")
 		port map(
 		RESET => adcreset,
@@ -146,7 +146,7 @@ BEGIN
 		BUSY => adcbusy(2),
 		INPUTDONE => adcinputdone(2));
 
-	adc3 : test_ADC generic map (
+	adc3 : ADC generic map (
 		filename => "adc.3.dat")
 		port map(
 		RESET => adcreset,
@@ -162,7 +162,7 @@ BEGIN
 		BUSY => adcbusy(3),
 		INPUTDONE => adcinputdone(3));
 
-	adc4 : test_ADC generic map (
+	adc4 : ADC generic map (
 		filename => "adc.4.dat")
 		port map(
 		RESET => adcreset,

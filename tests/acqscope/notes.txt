@@ -1,0 +1,32 @@
+Quick attempt at making an oscope for the acquisition board. Try and use IO monitoring signal to update draw area. Draw area will be 10 ms:
+
+5 ms * 32 samples/ms * 8x oversampling = 160 x 8 = 1280 pixels
+or something. Need to see how it scales and all. 
+
+Glib::RefPtr<Glib::IOChannel> ifile =
+   Glib::IOChannel::create_from_file("testfifo", "r");
+Glib::signal_io().connect(SigC::slot(*this, &ExampleApp::on_input_read),
+                           ifile, Glib::IO_IN);
+
+
+
+We have a double buffering scheme, bufferA and bufferB, each of points, and activebuffer, which is a pointer to one of the buffers, and bufpos, which is our current position inside of a buffer. 
+
+
+
+Hmm, it almost seems that a better plan would be to have a big circular buffer foo, and we just read in data and update that buffer by adding on data to it. 
+
+1. read in sample, save in buffer
+
+    if pos < 0:
+       if sample > thold :
+          pos = 0;
+    else
+       pos++
+       if pos == windowsize:
+          copy previous n samples to window buffer
+	  redraw buffer
+	  pos = -1; 
+
+	 
+Now, problems include intermediate redraws will perhaps see an incomplete buffer, but oh well. 

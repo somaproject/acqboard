@@ -510,4 +510,4 @@ if __name__  == "__main__":
     thread.start_new_thread(sockstat, (testing,0))
 
     gtk.threads_init()
-    gtk.mainloop()
+    gtk.main()

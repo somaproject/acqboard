@@ -1088,5 +1088,75 @@ Which is again spectacular. <br>
 I'm going to commit all of this; tomorrow, some more unit testing, then
 we move towards performance testing! <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">29 January
+2005: Organization of test suite code</span><br
+ style="font-weight: bold; text-decoration: underline;">
+<br>
+For performance analysis in raw mode we will organize data as:<br>
+<br>
+/CHANNAME/INPUTTYPE/RUNNAME<br>
+<br>
+where channame is A1-AC, B1-BC, <br>
+<br>
+input type is the input type, i.e. <br>
+<ul>
+  <li>noise : white / pink noise inputs</li>
+  <li>square : square wave</li>
+  <ul>
+    <li>Fields:</li>
+    <ul>
+      <li>Frequency <br>
+      </li>
+      <li>source VPP</li>
+    </ul>
+    <li><br>
+    </li>
+  </ul>
+  <li>sines : a set of sine waves, nominally a sweep</li>
+  <ul>
+    <li>Fields<br>
+    </li>
+    <ul>
+      <li>frequency (float) :<br>
+      </li>
+      <li>source vpp : vpp of ADC</li>
+      <li>data</li>
+    </ul>
+    <li>Table (run) metadata</li>
+    <ul>
+      <li>gain</li>
+      <li>filter settings</li>
+    </ul>
+  </ul>
+  <li>IMD</li>
+  <ul>
+    <li>[to implement]<br>
+    </li>
+  </ul>
+</ul>
+<br>
+We'll write some python code to wrap this up nicely:<br>
+rawf = RawHDF5("filename")<br>
+rafA1 = rawf.openChannel("A1")<br>
+sinerun = rafA1.addSineRun("Name", gain, filter, "note")<br>
+sinerun.append(frequency, vpp, datavect)<br>
+<br>
+<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">30 January
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+Even with a raw input (i.e. no anti-aliasing filter) I still can't get
+coherent sampling working. This is a bit troubling, because it suggests
+that there's something wrong someplace. I've tried with both the SRS
+360 and the ATS-2 to generate the inputs, all with no luck; we still
+get the skirt around the fundamental. <br>
+<br>
+Tomorrow we will begin THD+N measurements at a variety of frequencies
+in an attempt to characterize performance. <br>
+<br>
+<br>
+<br>
+<br>
 </body>
 </html>

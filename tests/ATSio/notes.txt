@@ -1,0 +1,6 @@
+This is my attempt to make linux-GPIB do the right thing. 
+
+
+board_type for /etc/gpib.conf is cbi_pci
+
+must run gpib_config after the kernel module is loaded

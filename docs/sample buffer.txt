@@ -1,0 +1,4 @@
+Sample buffer, when ALLCHAN is high, will allow writing of all higher chans. We obviously can't write _all_ the channels, as there's no way for a 128-word write to hit both high and low channels. 
+
+We've moved to the Spartan-3 buffers, giving us 256 samples per buffer. We use the CHAN[3:2] signals to select the block, and the CHAN[1:0] make up the 2 MSBs of the address lines. 
+

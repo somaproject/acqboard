@@ -34,6 +34,8 @@ entity Control is
 		     CMDSUCCESS : out std_logic; 
            OSEN : out std_logic;
            OSWE : out std_logic;
+			  RAWSEL : out std_logic; 
+			  RAWCHAN : out std_logic_vector(3 downto 0); 
            LOAD : out std_logic;
 		     PENDING : out std_logic;
            LDONE : in std_logic);
@@ -74,6 +76,9 @@ begin
    BUFSEL <= '1' when loading = '1' else
    		   '1' when loading = '0' and mode = "10" else
 		   '0';
+
+   RAWSEL <= '1' when mode = "11" else '0'; 
+
    -- command status bits
    CMDSTS(3) <= '0'; -- reserved for future use
    CMDSTS(2 downto 1) <= mode;
@@ -91,6 +96,7 @@ begin
 
 		if cs = ldmode then 
 			mode <= DATA(1 downto 0);
+			RAWCHAN <= DATA(11 downto 8); 
 		end if;
 
 	  end if; 
@@ -409,11 +415,8 @@ begin
 		  iset <= '0';
 		  fset <= '0';
 		  oswe <= '0';
-		  if DATA(1 downto 0) = "11" then -- invalid mode
-		  	ns <= badcmd;
-		  else
+		 
 		  	ns <= modecng;
-		  end if; 
 		when modecng => 
 		  pending <= '1';  
 		  loading <= '1';

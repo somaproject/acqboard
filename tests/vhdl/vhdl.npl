@@ -3,9 +3,9 @@ JDF G
 PROJECT vhdl
 DESIGN vhdl
 DEVFAM spartan3
-DEVFAMTIME 1085322441
-DEVICE xc3s50
-DEVICETIME 1085322441
+DEVFAMTIME 0
+DEVICE xc3s200
+DEVICETIME 1085435777
 DEVPKG vq100
 DEVPKGTIME 1085322441
 DEVSPEED -5
@@ -34,7 +34,7 @@ DEPASSOC testsamples testsamples.ucf
 DEPASSOC ledflash ledflash.ucf
 [Normal]
 p_ModelSimSimRunTime_tb=xstvhd, spartan2e, VHDL Test Bench.t_MSimulateBehavioralVhdlModel, 1043045114, 1000ms
-xilxBitgCfg_GenOpt_ASCIIFile=xstvhd, spartan3, Implementation.t_bitFile, 1042845683, True
+xilxBitgCfg_GenOpt_ASCIIFile=xstvhd, spartan3, VHDL.t_bitFile, 1042845683, True
 xilxSynthKeepHierarchy=xstvhd, spartan3, Schematic.t_synthesize, 1042841103, Yes
 [STRATEGY-LIST]
 Normal=True

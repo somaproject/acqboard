@@ -72,13 +72,19 @@ architecture Behavioral of acqboard is
    signal ain : std_logic_vector(7 downto 0) := (others => '0'); 
 
 -- MAC & MAC control signals
-   signal x, y : std_logic_vector(15 downto 0) := (others => '0');
+   signal x, ymac, y : std_logic_vector(15 downto 0) := (others => '0');
    signal xa, xabase, ha, sample : 
    	     std_logic_vector(7 downto 0) := (others => '0');
    signal h : std_logic_vector(21 downto 0) := (others => '0');
    signal startmac, macdone : std_logic := '0';
    signal macchan : std_logic_vector(3 downto 0) := (others => '0');
    signal sampouten : std_logic := '0';
+
+-- raw signals
+	signal yraw : std_logic_vector(15 downto 0) := (others => '0');
+	signal rawsel : std_logic := '0';
+	signal rawchan : std_logic_vector(3 downto 0) := (others => '0'); 
+
 
 -- command-related signals
    signal cmddata : std_logic_vector(31 downto 0) := (others => '0');
@@ -282,14 +288,25 @@ architecture Behavioral of acqboard is
 	           EDATA : out std_logic_vector(15 downto 0);
 	           EESEL : out std_logic;
 	           BUFSEL : out std_logic;
-			 CMDSUCCESS : out std_logic; 
+				 CMDSUCCESS : out std_logic;
+				  RAWSEL : out std_logic; 
+				  RAWCHAN : out std_logic_vector(3 downto 0);  
 	           OSEN : out std_logic;
 	           OSWE : out std_logic;
 	           LOAD : out std_logic;
 			 PENDING : out std_logic;
 	           LDONE : in std_logic);
 	end component;
-
+	component raw is
+	    Port ( CLK : in std_logic;
+	           OUTSAMPLE : in std_logic;
+	           OUTBYTE : in std_logic;
+	           WEIN : in std_logic;
+	           CIN : in std_logic_vector(3 downto 0);
+	           DIN : in std_logic_vector(15 downto 0);
+	           CHAN : in std_logic_vector(3 downto 0);
+	           Y : out std_logic_vector(15 downto 0));
+	end component;
 begin
    U1: TOC port map (O=>reset);
  
@@ -366,7 +383,7 @@ begin
 			STARTMAC => startmac,
 			MACDONE => macdone,
 			RESET => reset,
-			Y => y);
+			Y => ymac);
 			
 	pgaload_inst : PGAload port map (
 			CLK => clk,
@@ -459,6 +476,8 @@ begin
 			EDATA => edin,
 			EESEL => eesel,
 			BUFSEL => bufsel,
+			RAWSEL => rawsel,
+			RAWCHAN => rawchan,
 			CMDSUCCESS => cmdsuccess,
 			OSEN => osen,
 			OSWE => oswe,
@@ -466,8 +485,19 @@ begin
 			PENDING => pending,
 			LDONE => ldone);
 
- -- muxes
+	raw_inst: raw port map (
+			CLK => clk,
+			OUTSAMPLE => outsample,
+			OUTBYTE => outbyte,
+			WEIN => weout,
+			CIN => cout,
+			DIN => dout, 
+			CHAN => rawchan,
+			Y => yraw); 
 
+
+ -- muxes
+	y <= yraw when rawsel = '1' else ymac; 
  	bin <= dout when bufsel = '0' else edout;
 	bwe <= weout when bufsel = '0' else lswe;
 	ain <= laddr(7 downto 0) when bufsel = '1' else sample;

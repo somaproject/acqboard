@@ -15,31 +15,21 @@ entity PGA is
     Port ( SCLK : in std_logic;
            RCLK : in std_logic;
            SIN : in std_logic;
-			  bouts: out std_logic_vector(10*8-1 downto 0));
+		 BOUTS: out std_logic_vector(6*8-1 downto 0) );
 end  PGA;
 
 architecture Behavioral of PGA is
 -- simple systme to map the serial input stream to actual values for the
 -- PGAs, filters, and input selection
 
-   signal rbits, fbits : std_logic_vector(10*8-1 downto 0) := (others => '0'); 
+   signal rbits, fbits : std_logic_vector(6*8-1 downto 0) := (others => '0'); 
 
 begin
 
 	process (SCLK) is
 	begin
 		if rising_edge(SCLK) then
-			rbits <= rbits(10*8-2 downto 0) & SIN;
-			-- i.e. rbits(79) == first bit shifted in
-			-- so ideally rbits looks like:
-			-- rbits(8*i+0) =  
-			-- rbits(8*i+1) = G0 
-			-- rbits(8*i+2) = G1 
-			-- rbits(8*i+3) = G2 
-			-- rbits(8*i+4) = A0 
-			-- rbits(8*i+5) = A1 
-			-- rbits(8*i+6) = INMUXA 
-			-- rbits(8*i+7) = INMUXB 
+			rbits <= rbits(6*8-2 downto 0) & SIN;42
 
 		end if;
 	end process; 

@@ -19,8 +19,8 @@ entity ADC is
            SDOUT : out std_logic;
 		 CHA_VALUE: in integer;
 		 CHB_VALUE: in integer;
-		 CHA_OUT : out integer;
-		 CHB_OUT : out integer; 
+		 CHA_OUT : out integer := 32768;
+		 CHB_OUT : out integer := 32768; 
 		 FILEMODE: in std_logic; 
 		 BUSY: out std_logic; 
 		 INPUTDONE: out std_logic);
@@ -39,7 +39,8 @@ architecture Behavioral of ADC is
   
   signal channelA_bits, channelB_bits : std_logic_vector(15 downto 0); 
   signal bitpos : integer := 0;  
-  signal outputbits : std_logic_vector(31 downto 0);
+  signal outputbits : std_logic_vector(31 downto 0)
+  		:= (others => '0');
   signal filedone : std_logic := '0'; 
 begin
    -- reset closes the file, opens the file, etc. 
@@ -57,7 +58,14 @@ begin
 			  if filemode = '1' then
 			     file_open(inputfile, filename, read_mode); 
 			  end if; 
-			  
+			  bitpos <= 31;
+			  channelA_bits <= (others => '0');
+			  channelB_bits <= (others => '0');  
+			 CHA_OUT <= 32768;
+			 CHB_OUT <=  32768; 
+		elsif rising_edge(RESET) then
+			file_close(inputfile); 
+				  
 		elsif CONVST'EVENT and CONVST = '0' then
 		     SDOUT <= '0';
 			BUSY <= '1' after 10 ns, '0' after 1.75 us; 
@@ -69,9 +77,6 @@ begin
 				   read(L, channelB);
 
 				   -- now we have two integers; we need to turn them into std_logic
-
-
-
 				   channelA_bits <= conv_std_logic_vector(channelA, 16);
 				   channelB_bits <= conv_std_logic_vector(channelB, 16);
 					CHA_OUT <= channelA;
@@ -79,7 +84,16 @@ begin
 
 				else
 				   filedone <= '1';
-					--file_close(inputfile);
+				   bitpos <= 31; 
+				   channelA := 32768; 
+				   channelB := 32768; 
+
+				   -- now we have two integers; we need to turn them into std_logic
+				   channelA_bits <= conv_std_logic_vector(channelA, 16);
+				   channelB_bits <= conv_std_logic_vector(channelB, 16);
+					CHA_OUT <= channelA;
+					CHB_OUT <= channelB; 
+
 				end if; 
 			else
 			  	 bitpos <= 31; 
@@ -89,14 +103,12 @@ begin
 
 		else
 	      if rising_edge(SCLK) then
-			if filedone = '0' and RESET = '0' then		
-				if CS = '0'  then 
-					SDOUT <= outputbits(bitpos) after 25 ns;
-					bitpos <= bitpos -1;
-				end if;  
-			else
-				SDOUT <= '0';
-			end if; 
+
+			if CS = '0' then 
+				SDOUT <= outputbits(bitpos) after 25 ns;
+				bitpos <= bitpos -1;
+			end if;  
+
 		 end if; 
 	    end if; 
    end process; 

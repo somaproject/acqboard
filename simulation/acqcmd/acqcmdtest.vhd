@@ -33,8 +33,7 @@ ARCHITECTURE behavior OF acqcmdtest IS
 		ESI : OUT std_logic;
 		ESCK : OUT std_logic;
 		ECS : OUT std_logic;
-		FIBEROUT : OUT std_logic;
-		CLK8_OUT : OUT std_logic
+		FIBEROUT : OUT std_logic
 		);
 	END COMPONENT;
 
@@ -54,7 +53,9 @@ ARCHITECTURE behavior OF acqcmdtest IS
 	SIGNAL FIBERIN :  std_logic;
 	SIGNAL FIBEROUT :  std_logic;
 	SIGNAL RESET :  std_logic := '1';
-	SIGNAL CLK8_OUT :  std_logic;
+	SIGNAL CLK8 :  std_logic := '0';
+
+
 
 	
 	signal bouts :  std_logic_vector(79 downto 0) := (others => '0'); 
@@ -69,7 +70,7 @@ ARCHITECTURE behavior OF acqcmdtest IS
 	signal cmdid, cmd : std_logic_vector(3 downto 0) :=(others => '0');
 	signal cmddata0, cmddata1, cmddata2, cmddata3, cmdchksum: 
 				std_logic_vector(7 downto 0) := (others => '0'); 
-	signal sendcmd, cmdpending : std_logic := '0'; 
+	signal sendcmds, cmdpending : std_logic := '0'; 
 	component SendCMD is
 	    Port ( CMDID : in std_logic_vector(3 downto 0);
 	           CMD : in std_logic_vector(3 downto 0);
@@ -88,7 +89,7 @@ ARCHITECTURE behavior OF acqcmdtest IS
 
    signal eaddr, edin, edout : integer := 0;
 	signal ewe : std_logic := '0'; 
-	component test_EEPROM is
+	component EEPROM is
 	    Port ( SCK : in std_logic;
 	           SO : out std_logic;
 	           SI : in std_logic;
@@ -162,11 +163,10 @@ BEGIN
 		ESO => ESO,
 		EEPROMLEN => EEPROMLEN,
 		FIBERIN => FIBERIN,
-		FIBEROUT => FIBEROUT,
-		CLK8_OUT => CLK8_OUT
+		FIBEROUT => FIBEROUT
 	);
 
-	pga : PGA port map (
+	pgauut : PGA port map (
 		SCLK => pgasrck,
 		RCLK => pgarck,
 		SIN =>  pgasera,
@@ -181,7 +181,7 @@ BEGIN
 		DATA2 => cmddata2,
 		DATA3 => cmddata3,
 		chksum => cmdchksum,
-		SENDCMD => sendcmd,
+		SENDCMD => sendcmds,
 		cmdpending => cmdpending,
 		DOUT => FIBERIN); 
 
@@ -198,7 +198,7 @@ BEGIN
 
 
 	des : deserialize port map (
-		clk8 => clk8_out,
+		clk8 => clk8,
 		fiberout => fiberout,
 		newframe => newframe,
 		cmdst => decmdst,
@@ -217,7 +217,7 @@ BEGIN
 
 
    adcs : for i in 0 to 4 generate
-		adc: ADC  port map (
+		adcuut: ADC  port map (
 			RESET => RESET,
 			SCLK => ADCCLK,
 			CONVST => ADCCONVST,
@@ -238,7 +238,7 @@ BEGIN
 			
 
 	clkin <= not clkin after 15.625 ns;
-
+	clk8 <= not clk8 after 125 ns; 
 	reset <= '0' after 100 ns;
 	process (clkin) is
 	begin
@@ -288,9 +288,9 @@ BEGIN
 		cmd <= "0000"; 
 		cmddata0 <= X"00"; 
 		cmddata1 <= X"00";
-		sendcmd <= '1'; 
+		sendcmds <= '1'; 
 		wait until rising_edge(clkin);
-		sendcmd <= '0';  
+		sendcmds <= '0';  
 		wait until cmdpending = '0';
 	
 		report "Finished null command for frame alignment";
@@ -311,9 +311,9 @@ BEGIN
 		cmd <= "0001"; 
 		cmddata0 <= X"00"; 
 		cmddata1 <= X"07";
-		sendcmd <= '1'; 
+		sendcmds <= '1'; 
 		wait until rising_edge(clkin);
-		sendcmd <= '0';  
+		sendcmds <= '0';  
 		wait until cmdpending = '0';
 
 		wait until decmdid(4 downto 1) = "0011"; 
@@ -332,9 +332,9 @@ BEGIN
 		cmd <= "0011"; 
 		cmddata0 <= X"06"; 
 		cmddata1 <= X"02";
-		sendcmd <= '1'; 
+		sendcmds <= '1'; 
 		wait until rising_edge(clkin);
-		sendcmd <= '0';  
+		sendcmds <= '0';  
 		wait until cmdpending = '0';
 		
 		wait until decmdid(4 downto 1) = "0100"; 
@@ -352,9 +352,9 @@ BEGIN
 		cmd <= "0111"; 
 		cmddata0 <= X"01"; 
 		cmddata1 <= X"00";
-		sendcmd <= '1'; 
+		sendcmds <= '1'; 
 		wait until rising_edge(clkin);
-		sendcmd <= '0';  
+		sendcmds <= '0';  
 		wait until cmdpending = '0';
 		
 		wait until decmdst = X"02"; 
@@ -373,9 +373,9 @@ BEGIN
 		cmddata2 <= X"12";
 		cmddata3 <= X"34";
 
-		sendcmd <= '1'; 
+		sendcmds <= '1'; 
 		wait until rising_edge(clkin);
-		sendcmd <= '0';  
+		sendcmds <= '0';  
 		wait until cmdpending = '0';
 		
 		wait until decmdid(4 downto 1) = "0110"; 
@@ -391,9 +391,9 @@ BEGIN
 		cmd <= "0111"; 
 		cmddata0 <= X"00"; 
 		cmddata1 <= X"00";
-		sendcmd <= '1'; 
+		sendcmds <= '1'; 
 		wait until rising_edge(clkin);
-		sendcmd <= '0';  
+		sendcmds <= '0';  
 		wait until cmdpending = '0';
 		
 		wait until decmdid(4 downto 1) = "0111"; 
@@ -410,9 +410,9 @@ BEGIN
 		cmd <= "0001"; 
 		cmddata0 <= X"04"; 
 		cmddata1 <= X"03";
-		sendcmd <= '1'; 
+		sendcmds <= '1'; 
 		wait until rising_edge(clkin);
-		sendcmd <= '0';  
+		sendcmds <= '0';  
 		wait until cmdpending = '0';
 
 		wait until decmdid(4 downto 1) = "0011"; 
@@ -438,9 +438,9 @@ BEGIN
 		cmd <= "0111"; 
 		cmddata0 <= X"03"; 
 		cmddata1 <= X"02";
-		sendcmd <= '1'; 
+		sendcmds <= '1'; 
 		wait until rising_edge(clkin);
-		sendcmd <= '0';  
+		sendcmds <= '0';  
 		wait until cmdpending = '0';
 		
 		wait until decmdid(4 downto 1) = "0100"; 

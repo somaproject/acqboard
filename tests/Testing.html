@@ -1003,6 +1003,21 @@ SPI -&gt; isoloop -&gt; FPGA -&gt; optical 8b/10b -&gt; main fpga -&gt;
 FIFO FPGA -&gt; FIFO ram -&gt; FIFO FPGA -&gt; main FPGA -&gt; GPIF io
 on FX2 -&gt; USB -&gt; master -&gt; domain socket -&gt; client app<br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">21 January
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+<span style="font-weight: bold;"><span style="font-style: italic;">WOOHOOOOO!
+</span></span>Using<span style="font-style: italic;"></span> the logic
+analyzer, we can download raw digital output from the ADC side, and we
+get:<br>
+<br>
+<img alt="" src="results/20050121/sine-from-analyzer.png"
+ style="width: 1200px; height: 900px;"><br>
+Wow, although this begs the interesting question -where the hell is the
+problem-? <br>
+<br>
+The code to read this is under
+acqboard/tests/results/20050121/ADCreading.py<br>
+<br>
 <br>
 <br>
 </body>

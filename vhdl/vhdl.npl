@@ -72,8 +72,8 @@ _SynthMultStyle=xstvhd, spartan3, Schematic.t_synthesize, 1082297163, Auto
 _SynthOpt=xstvhd, spartan3, Schematic.t_synthesize, 1082297163, Area
 _SynthOptEffort=xstvhd, spartan3, Schematic.t_synthesize, 1056383182, High
 [STATUS-ALL]
-acqboard.bitFile=WARNINGS,1102541026
-acqboard.ngcFile=WARNINGS,1102540959
-acqboard.ngdFile=WARNINGS,1102540979
+acqboard.bitFile=WARNINGS,1106230744
+acqboard.ngcFile=WARNINGS,1106182676
+acqboard.ngdFile=WARNINGS,1106230653
 [STRATEGY-LIST]
 Normal=True

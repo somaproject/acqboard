@@ -77,3 +77,5 @@ I.e. create a filter with a not-as-tight passband. this results in us getting pa
 Part of me still wishes there were a better way. I'm just not seeing it though. But, happily, we now have correct output plots of the signal versus alias/noise for the total system. 
 
 The better way was to allow filters of length 144. 
+
+If we allow filters of this length, then we can alias-away the problems. 

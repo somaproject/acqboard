@@ -100,3 +100,52 @@ Goals:
 We use the OPA227UA in-amp as a 2-pole HPF
 
 Rational for design: Assume that there's a 5 V difference between the output node and the input pin of the opamp. That means that there's a 5V drop across Ron+R1. But, then, the voltage across Ron varies as Ron/(Ron+R1). I.e. if R5 = 5k, ad max Ron = 50 ohms, then Ron will see 1/100th the voltage difference, and (as far as I can tell from the 
+
+
+----------------------------------------------------------------------------
+FPGA to S-3 in a day!
+----------------------------------------------------------------------------
+18 April 2004
+So, today I'm going to explore the possibility of switching tothe 100-pin Spartan-3 -50 device. Why? 
+
+1. A pack of 24 is only $18.00 each, and that price will come down
+2. In 3 years, I'm sure they'll still be around, but cheaper. 
+3. since I can get a large quantity now, availability isn't as much of a concern
+4. They have dedicated 18x18 hardware multipliers, which should actually save me a lot of space. 
+5. I'm wasting time worrying about this "does it fit" mentality -- I hope the mulipliers will save me enough space that the device will easily fit in this logic.  
+6. They have a ton more ram (4x) which enables longer filters. This is a good thing because at the moment, I'm capped at a 120-tap filter. This sucks, because it will force me to use the approach for output frequency response I was considering earlier. 
+
+basically, I don't just want stuff down by 96 dB at the 16 kHz edge, because 7 additional copies of the stopband are going to alias into my passband. But given length constraints on h[n], it was impossible to get a FIR filter with a stopband ~-110 dB down. The solution was to push the stopband start out to 19 khz, which would yes, allow for aliasing into the 10-16 kHz region of up to -20 dB. But we only cared about the 0-10kHz region.
+
+
+Why this is a poor design decision: your output, by design, will have aliasing in the 10-16 kHz range, meaning that the output of the acqboard isn't "safe", i.e. it would need knowledgable post-processing to deal properly. 
+
+Switching to a Spartan-3 lets me eliminate this by using a longer filter, giving me the 10-16 kHz response I need. 
+
+7. It shouldn't take very long to make the switch; go modular design!
+
+The multiplier in the current design (not including the accumulator) takes up 342 slices, i.e. 312 flip flops and 366 LUTs. That's 44% of the design!
+
+
+
+
+There are three things we'll need to change:
+1. RMAC hardware: 
+    switch multiplier to use the 18x18 hardware mults
+    change expected pipeline delay
+    So, it looks as if, since XST is inferring things correctly, we don't need to actually explicitly declare them. This strongly suggests that our pipeline delays haven't changed either. 
+
+
+
+2. Buffers.
+   Each BlockSelect+ ram block has 4x the ram of one in a Spartan-IIE, but there are half as many. The net result is that we have double the ram we did before. We want to effectively double the amount of storage for each buffer, i.e. 256 16-bit words. This means each BlockSelect+ ram block can hold 4 buffers. We will need 3 of them to store all sample buffers. This will also necessitate widening the AIN, AOUT busses from 7 to 8 bits. 
+  Added extra pipeline stage to meet timing requirements. 
+3. Filter
+   Simple to do with a single buffer. 
+  Added extra pipeline stage to meet timing requiremetns. 
+
+4. EEPROM interface
+   Remapped some of the EEPROM so the loader can still sequentially load stuff. 
+5. Control
+   Had to be modified as a result of the new EEPROM addrs. Note now that we use DATA[7:0] 
+

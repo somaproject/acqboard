@@ -24,7 +24,7 @@ entity Control is
            ISET : out std_logic;
            FSET : out std_logic;
            PGARESET : out std_logic;
-           EADDR : out std_logic_vector(9 downto 0);
+           EADDR : out std_logic_vector(10 downto 0);
            EEN : out std_logic;
            EDONE : in std_logic;
            ERW : out std_logic;
@@ -65,10 +65,10 @@ begin
    -- eeprom-related muxes
    EDATA <= (DATA(23 downto 16) & DATA(31 downto 24)) when edatasel = '0'
    		   else "0000000000"  & DATA(13 downto 8); 
-   EADDR <= ("100" & DATA(3 downto 0) & DATA(10 downto 8)) when eaddrsel = 0 else
-   		  ("010" & DATA(6 downto 0)) when eaddrsel = 1 else
-		  ("00" & DATA(6 downto 0) & '0') when eaddrsel = 2 else
-		  ("00" & DATA(6 downto 0) & '1') when eaddrsel = 3; 
+   EADDR <= ("1000" & DATA(3 downto 0) & DATA(10 downto 8)) when eaddrsel = 0 else
+   		  ("010" & DATA(7 downto 0)) when eaddrsel = 1 else
+		  ("00" & DATA(7 downto 0) & '0') when eaddrsel = 2 else
+		  ("00" & DATA(7 downto 0) & '1') when eaddrsel = 3; 
 
    OSEN <= '0' when mode = "01" else '1';
    BUFSEL <= '1' when loading = '1' else

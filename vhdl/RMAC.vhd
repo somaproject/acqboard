@@ -13,13 +13,13 @@ use std.textio.ALL;
 entity RMAC is
     Port ( CLK : in std_logic;
            X : in std_logic_vector(15 downto 0);
-           XA : out std_logic_vector(6 downto 0);
+           XA : out std_logic_vector(7 downto 0);
            H : in std_logic_vector(21 downto 0);
-           HA : out std_logic_vector(6 downto 0);
-           XBASE : in std_logic_vector(6 downto 0);
+           HA : out std_logic_vector(7 downto 0);
+           XBASE : in std_logic_vector(7 downto 0);
            STARTMAC : in std_logic;
-		 MACDONE  : out std_logic; 
-		 RESET : in std_logic; 
+		     MACDONE  : out std_logic; 
+		     RESET : in std_logic; 
            Y : out std_logic_vector(15 downto 0));
 end RMAC;
 
@@ -27,8 +27,8 @@ architecture Behavioral of RMAC is
 -- RMAC.VHD -- main repeated multiply-accumulator system. 
    -- resolution of intermediate MAC
    constant n : positive := 26; 
-   
-   signal lxa, lha: std_logic_vector(6 downto 0) := (others => '0');
+   constant L : positive := 160; 
+   signal lxa, lha: std_logic_vector(7 downto 0) := (others => '0');
    signal p: std_logic_vector((n-1) downto 0) := (others => '0');
    signal acc, accl : std_logic_vector((7+n-1) downto 0) := (others=> '0');
    signal yrnd: std_logic_vector(22 downto 0) := (others => '0');
@@ -122,7 +122,7 @@ begin
 		    if cs = addrrst then
 		    	  lxa <= XBASE;
 			  lha <= (others => '0');
-	         elsif MACCNT < 120 then
+	         elsif MACCNT < L then
 			  lxa <= lxa -1; -- count backwards through samples, 
 			  lha <= lha + 1;-- count forward through FIR vector 
 		    end if; 
@@ -134,7 +134,7 @@ begin
   end process clock; 	
   
   -- clear for accumulator
-  clr <= '1' when maccnt = 4 else
+  clr <= '1' when maccnt = 5 else
   		'0'; 							
 
   fsm: process (cs, ns, STARTMAC, maccnt) is
@@ -152,7 +152,7 @@ begin
 		  ns <= macwait;
 		when macwait =>
 		  MACDONE <= '0'; 
-		  if maccnt  = 124 then
+		  if maccnt  = L+4 then
 		  	ns <= accen;
 		  else
 		  	ns <= macwait;

@@ -16,7 +16,7 @@ entity Loader is
            SWE : out std_logic;
            FWE : out std_logic;
 		 EEPROMEN : in std_logic; 
-           ADDR : out std_logic_vector(8 downto 0);
+           ADDR : out std_logic_vector(9 downto 0);
            EEEN : out std_logic;
            EEDONE : in std_logic);
 end Loader;
@@ -29,7 +29,7 @@ architecture Behavioral of Loader is
 -- eeprom so things can be easily read in. 
 --
 -- note that if EEPROMEN = 0, this function just returns done
-   signal address : std_logic_vector(8 downto 0) := (others => '0');
+   signal address : std_logic_vector(9 downto 0) := (others => '0');
    signal we : std_logic := '0';
 
    type states is (none, enable, ewait, write, incaddr, ldone);

@@ -48,8 +48,8 @@ architecture Behavioral of acqboard is
 
 -- loader and EEPROM-related signals
    signal edin, edout : std_logic_vector(15 downto 0);
-   signal laddr : std_logic_vector(8 downto 0) := (others => '0');
-   signal ewaddr : std_logic_vector(9 downto 0) := (others => '0');
+   signal laddr : std_logic_vector(9 downto 0) := (others => '0');
+   signal ewaddr : std_logic_vector(10 downto 0) := (others => '0');
    signal ea : std_logic_vector(10 downto 0) := (others => '0');
    signal edone, ceen, een, len, erw : std_logic := '0';
    signal lfwe, lswe, load, ldone : std_logic := '0';
@@ -67,12 +67,12 @@ architecture Behavioral of acqboard is
 -- buffer signals
    signal bin : std_logic_vector (15 downto 0) := (others => '0');
    signal bwe : std_logic := '0';
-   signal ain : std_logic_vector(6 downto 0) := (others => '0'); 
+   signal ain : std_logic_vector(7 downto 0) := (others => '0'); 
 
 -- MAC & MAC control signals
    signal x, y : std_logic_vector(15 downto 0) := (others => '0');
    signal xa, xabase, ha, sample : 
-   	     std_logic_vector(6 downto 0) := (others => '0');
+   	     std_logic_vector(7 downto 0) := (others => '0');
    signal h : std_logic_vector(21 downto 0) := (others => '0');
    signal startmac, macdone : std_logic := '0';
    signal macchan : std_logic_vector(3 downto 0) := (others => '0');
@@ -139,9 +139,9 @@ architecture Behavioral of acqboard is
 	           DIN : in std_logic_vector(15 downto 0);
 	           CHANIN : in std_logic_vector(3 downto 0);
 	           WE : in std_logic;
-	           AIN : in std_logic_vector(6 downto 0);
+	           AIN : in std_logic_vector(7 downto 0);
 	           DOUT : out std_logic_vector(15 downto 0);
-	           AOUT : in std_logic_vector(6 downto 0);
+	           AOUT : in std_logic_vector(7 downto 0);
 			     SAMPOUTEN : in std_logic; 
 				  ALLCHAN : in std_logic; 
 	           CHANOUT : in std_logic_vector(3 downto 0));
@@ -151,13 +151,13 @@ architecture Behavioral of acqboard is
 	    Port ( CLK : in std_logic;
 	           INSAMPLE : in std_logic;
 	           OUTSAMPLE : in std_logic;
-			 OUTBYTE : in std_logic; 
+			      OUTBYTE : in std_logic; 
 	           RESET : in std_logic;
 	           STARTMAC : out std_logic;
 	           MACDONE : in std_logic;
-	           SAMPLE : out std_logic_vector(6 downto 0);
-	           SAMPBASE : out std_logic_vector(6 downto 0);
-			 SAMPOUTEN : out std_logic; 
+	           SAMPLE : out std_logic_vector(7 downto 0);
+	           SAMPBASE : out std_logic_vector(7 downto 0);
+			     SAMPOUTEN : out std_logic; 
 	           RMACCHAN : out std_logic_vector(3 downto 0));
 	end component;
 
@@ -166,18 +166,18 @@ architecture Behavioral of acqboard is
 	           RESET : in std_logic;
 	           WE : in std_logic;
 	           H : out std_logic_vector(21 downto 0);
-	           HA : in std_logic_vector(6 downto 0);
-	           AIN : in std_logic_vector(7 downto 0);
+	           HA : in std_logic_vector(7 downto 0);
+	           AIN : in std_logic_vector(8 downto 0);
 	           DIN : in std_logic_vector(15 downto 0));
 	end component;
 
 	component RMAC is
 	    Port ( CLK : in std_logic;
 	           X : in std_logic_vector(15 downto 0);
-	           XA : out std_logic_vector(6 downto 0);
+	           XA : out std_logic_vector(7 downto 0);
 	           H : in std_logic_vector(21 downto 0);
-	           HA : out std_logic_vector(6 downto 0);
-	           XBASE : in std_logic_vector(6 downto 0);
+	           HA : out std_logic_vector(7 downto 0);
+	           XBASE : in std_logic_vector(7 downto 0);
 	           STARTMAC : in std_logic;
 			 MACDONE  : out std_logic; 
 			 RESET : in std_logic; 
@@ -236,7 +236,7 @@ architecture Behavioral of acqboard is
 	           SWE : out std_logic;
 	           FWE : out std_logic;
 			 EEPROMEN : in std_logic;
-	           ADDR : out std_logic_vector(8 downto 0);
+	           ADDR : out std_logic_vector(9 downto 0);
 	           EEEN : out std_logic;
 	           EEDONE : in std_logic);
 	end component;
@@ -273,7 +273,7 @@ architecture Behavioral of acqboard is
 	           ISET : out std_logic;
 	           FSET : out std_logic;
 	           PGARESET : out std_logic;
-	           EADDR : out std_logic_vector(9 downto 0);
+	           EADDR : out std_logic_vector(10 downto 0);
 	           EEN : out std_logic;
 	           EDONE : in std_logic;
 	           ERW : out std_logic;
@@ -351,7 +351,7 @@ begin
 			WE => lfwe,
 			H => h,
 			HA => ha,
-			AIN => laddr(7 downto 0),
+			AIN => laddr(8 downto 0),
 			DIN => edout);
 						 
 	rmac_inst: RMAC port map (	
@@ -468,9 +468,9 @@ begin
 
  	bin <= dout when bufsel = '0' else edout;
 	bwe <= weout when bufsel = '0' else lswe;
-	ain <= laddr(6 downto 0) when bufsel = '1' else sample;
+	ain <= laddr(7 downto 0) when bufsel = '1' else sample;
 
-	ea <= ("00" & laddr) when eesel = '1' else ('0' & ewaddr);
+	ea <= ('0' & laddr) when eesel = '1' else (ewaddr);
 	een <= len when eesel = '1' else ceen; 
 
 	CLK8_OUT <= clk8; 

@@ -12,19 +12,19 @@ entity RMACcontrol is
     Port ( CLK : in std_logic;
            INSAMPLE : in std_logic;
            OUTSAMPLE : in std_logic;
-		 OUTBYTE : in std_logic; 
+		 	  OUTBYTE : in std_logic; 
            RESET : in std_logic;
            STARTMAC : out std_logic;
            MACDONE : in std_logic;
-           SAMPLE : out std_logic_vector(6 downto 0);
-           SAMPBASE : out std_logic_vector(6 downto 0);
-		 SAMPOUTEN: out std_logic; 
+           SAMPLE : out std_logic_vector(7 downto 0);
+           SAMPBASE : out std_logic_vector(7 downto 0);
+		     SAMPOUTEN: out std_logic; 
            RMACCHAN : out std_logic_vector(3 downto 0));
 end RMACcontrol;
 
 architecture Behavioral of RMACcontrol is
 -- RMACCONTROL.VHD -- RMAC controller
-	signal lsample : std_logic_vector(6 downto 0) := (others => '0');
+	signal lsample : std_logic_vector(7 downto 0) := (others => '0');
 	signal chan : std_logic_vector(3 downto 0) := (others => '0');
 
 	type states is (none, addrrst, macwait, nextchan, wait_outbyte);
@@ -37,8 +37,8 @@ begin
 	begin
 	   if RESET = '1' then 
 	   	cs <= none;
-		lsample <= "1111111";
-		SAMPBASE <= "1111111";
+		lsample <= (others => '1');
+		SAMPBASE <= (others => '1');
 	   else
 	   	 if rising_edge(CLK) then
 		 	cs <= ns;

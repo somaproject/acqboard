@@ -14,167 +14,146 @@ entity samplebuffer is
            DIN : in std_logic_vector(15 downto 0);
            CHANIN : in std_logic_vector(3 downto 0);
            WE : in std_logic;
-           AIN : in std_logic_vector(6 downto 0);
+           AIN : in std_logic_vector(7 downto 0);
            DOUT : out std_logic_vector(15 downto 0);
-           AOUT : in std_logic_vector(6 downto 0);
+           AOUT : in std_logic_vector(7 downto 0);
 		     SAMPOUTEN: in std_logic;
 			  ALLCHAN : in std_logic;  
            CHANOUT : in std_logic_vector(3 downto 0));
 end samplebuffer;
 
 architecture Behavioral of samplebuffer is
--- SAMPLEBUFFER.VHD -- sample buffers. Use 5 BlockSelect+ RAMs with
--- high half for odd channels (CHAN(0)=0) and low half for odds. 
--- note that output is an extra clock cycle late!
+-- SAMPLEBUFFER.VHD -- sample buffers. Use 3 BlockSelect+ RAMs, 
+-- each containing 4 channels. 
+	signal we1, we2, we3 : std_logic := '0';
+	signal data1, data2, data3, ldout : std_logic_vector(15 downto 0)
+			:= (others => '0'); 
+	signal addra, addrb : std_logic_vector(9 downto 0) 
+			:= (others => '0'); 
 
-	signal data1, data2, data3, data4, data5 : 
-		std_logic_vector(15 downto 0) := (others => '0');
-	signal we1, we2, we3, we4, we5 : std_logic := '0'; 
-	signal addra, addrb : std_logic_vector(7 downto 0) := (others => '0');
-
-
-	 component RAMB4_S16_S16
+	component RAMB16_S18_S18 
 	  generic (
+	       WRITE_MODE_A : string := "WRITE_FIRST";
+	       WRITE_MODE_B : string := "WRITE_FIRST";
+	       INIT_A : bit_vector  := X"00000";
+	       SRVAL_A : bit_vector := X"00000";
+
+	       INIT_B : bit_vector  := X"00000";
+	       SRVAL_B : bit_vector := X"00000";
+
+	       INITP_00 : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000";
+	       INITP_01 : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000";
+	       INITP_02 : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000";
+	       INITP_03 : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000";
 	       INIT_00 : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000";
 	       INIT_01 : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000";
 	       INIT_02 : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000";
-	       INIT_03 : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000";
-	       INIT_04 : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000";
-	       INIT_05 : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000";
-	       INIT_06 : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000";
-	       INIT_07 : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000";
-	       INIT_08 : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000";
-	       INIT_09 : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000";
-	       INIT_0A : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000";
-	       INIT_0B : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000";
-	       INIT_0C : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000";
-	       INIT_0D : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000";
-	       INIT_0E : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000";
-	       INIT_0F : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000"
-		  );
-
+	       INIT_03 : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000"
+	  );
 
 	  port (DIA    : in STD_LOGIC_VECTOR (15 downto 0);
 	        DIB    : in STD_LOGIC_VECTOR (15 downto 0);
+	        DIPA    : in STD_LOGIC_VECTOR (1 downto 0);
+	        DIPB    : in STD_LOGIC_VECTOR (1 downto 0);
 	        ENA    : in STD_logic;
 	        ENB    : in STD_logic;
 	        WEA    : in STD_logic;
 	        WEB    : in STD_logic;
-	        RSTA   : in STD_logic;
-	        RSTB   : in STD_logic;
+	        SSRA   : in STD_logic;
+	        SSRB   : in STD_logic;
 	        CLKA   : in STD_logic;
 	        CLKB   : in STD_logic;
-	        ADDRA  : in STD_LOGIC_VECTOR (7 downto 0);
-	        ADDRB  : in STD_LOGIC_VECTOR (7 downto 0);
+	        ADDRA  : in STD_LOGIC_VECTOR (9 downto 0);
+	        ADDRB  : in STD_LOGIC_VECTOR (9 downto 0);
 	        DOA    : out STD_LOGIC_VECTOR (15 downto 0);
-	        DOB    : out STD_LOGIC_VECTOR (15 downto 0)); 
-	end component;
-
-	
+	        DOB    : out STD_LOGIC_VECTOR (15 downto 0);
+	        DOPA    : out STD_LOGIC_VECTOR (1 downto 0);
+	        DOPB    : out STD_LOGIC_VECTOR (1 downto 0)); 
+	end component; 
 
 begin
-   RAM1: RAMB4_S16_S16 port map (
-   		DIA => DIN,
-		DIB => "0000000000000000",
+	ram1 : RAMB16_S18_S18
+		port map (
+		DIA => DIN,
+		DIB => X"0000",
+		DIPA => "00",
+		DIPB => "00",
 		ENA => '1',
-		ENB => SAMPOUTEN,
-		WEA => WE1,
+		ENB => '1',
+		WEA => we1,
 		WEB => '0',
-		RSTA => RESET,
-		RSTB => RESET,
+		SSRA => RESET,
+		SSRB => RESET,
 		CLKA => CLK,
 		CLKB => CLK,
 		ADDRA => addra,
 		ADDRB => addrb,
 		DOA => open,
-		DOB => DATA1);
+		DOB => data1,
+		DOPA => open,
+		DOPB => open);
 
-   RAM2: RAMB4_S16_S16 port map (
-   		DIA => DIN,
-		DIB => "0000000000000000",
+
+	ram2 : RAMB16_S18_S18
+		port map (
+		DIA => DIN,
+		DIB => X"0000",
+		DIPA => "00",
+		DIPB => "00",
 		ENA => '1',
-		ENB => SAMPOUTEN,
-		WEA => WE2,
+		ENB => '1',
+		WEA => we2,
 		WEB => '0',
-		RSTA => RESET,
-		RSTB => RESET,
+		SSRA => RESET,
+		SSRB => RESET,
 		CLKA => CLK,
 		CLKB => CLK,
 		ADDRA => addra,
 		ADDRB => addrb,
 		DOA => open,
-		DOB => DATA2);
+		DOB => data2,
+		DOPA => open,
+		DOPB => open);
 
-   RAM3: RAMB4_S16_S16 port map (
-   		DIA => DIN,
-		DIB => "0000000000000000",
+
+	ram3 : RAMB16_S18_S18
+		port map (
+		DIA => DIN,
+		DIB => X"0000",
+		DIPA => "00",
+		DIPB => "00",
 		ENA => '1',
-		ENB => SAMPOUTEN,
-		WEA => WE3,
+		ENB => '1',
+		WEA => we3,
 		WEB => '0',
-		RSTA => RESET,
-		RSTB => RESET,
+		SSRA => RESET,
+		SSRB => RESET,
 		CLKA => CLK,
 		CLKB => CLK,
 		ADDRA => addra,
 		ADDRB => addrb,
 		DOA => open,
-		DOB => DATA3);
+		DOB => data3,
+		DOPA => open,
+		DOPB => open);
 
-   RAM4: RAMB4_S16_S16 port map (
-   		DIA => DIN,
-		DIB => "0000000000000000",
-		ENA => '1',
-		ENB => SAMPOUTEN,
-		WEA => WE4,
-		WEB => '0',
-		RSTA => RESET,
-		RSTB => RESET,
-		CLKA => CLK,
-		CLKB => CLK,
-		ADDRA => addra,
-		ADDRB => addrb,
-		DOA => open,
-		DOB => DATA4);
-
-   RAM5: RAMB4_S16_S16 port map (
-   	DIA => DIN,
-		DIB => "0000000000000000",
-		ENA => '1',
-		ENB => SAMPOUTEN,
-		WEA => WE5,
-		WEB => '0',
-		RSTA => RESET,
-		RSTB => RESET,
-		CLKA => CLK,
-		CLKB => CLK,
-		ADDRA => addra,
-		ADDRB => addrb,
-		DOA => open,
-		DOB => DATA5);
-
-   -- signals
-   addra <= (chanin(0) & ain) when ALLCHAN = '0' else ('1' & ain);
-	addrb <= (chanout(0) & aout);
-   -- write enable decoding
-   WE1 <= '1' when (WE = '1' and CHANIN(3 downto 1) = "000") 
-				or ALLCHAN = '1' else '0';
-  	WE2 <= '1' when (WE = '1' and CHANIN(3 downto 1) = "001")  
-				or ALLCHAN = '1' else '0';
-  	WE3 <= '1' when (WE = '1' and CHANIN(3 downto 1) = "010")  
-				or ALLCHAN = '1' else '0';
-  	WE4 <= '1' when (WE = '1' and CHANIN(3 downto 1) = "011")  
-				or ALLCHAN = '1' else '0';
-  	WE5 <= '1' when (WE = '1' and CHANIN(3 downto 1) = "100") 
-				or ALLCHAN = '1' else '0';
-
-	DOUT <= DATA1 when CHANOUT(3 downto 1) = "000" else
-				DATA2 when CHANOUT(3 downto 1) = "001" else
-				DATA3 when CHANOUT(3 downto 1) = "010" else
-				DATA4 when CHANOUT(3 downto 1) = "011" else
-				DATA5;
-
-
+	we1 <= '1' when WE = '1' and  CHANIN(3 downto 2) = "00" else '0';
+	we2 <= '1' when WE = '1' and  CHANIN(3 downto 2) = "01" else '0';
+	we3 <= '1' when WE = '1' and  CHANIN(3 downto 2) = "10" else '0';
+	addra(9 downto 8) <= CHANIN(1 downto 0); 
+	addra(7 downto 0) <= AIN; 
+	
+	addrb(9 downto 8) <= CHANOUT(1 downto 0); 
+	addrb(7 downto 0) <= AOUT; 
+	ldout <=  data1 when chanout(3 downto 2) = "00" else
+				data2 when chanout(3 downto 2) = "01" else
+				data3; 	
+	process(CLK) is
+	begin
+		if rising_edge(clk) then
+			DOUT <= ldout; 
+		end if; 
+	end process; 
 
 
 end Behavioral;

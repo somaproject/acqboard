@@ -8,11 +8,11 @@
 
 vin 1 0 ac 1
 vb 5 0 1.25
-R1 1 2 15.5k
-C2 2 0 0.047u
-R2 2 4 15.5k
-R3 2 3 3.48k
-C1 3 4 0.01u
+R1 1 2 1.87k
+C2 2 0 3900p
+R2 2 4 1.87k
+R3 2 3 1.87k
+C1 3 4 1300p
 eopamp 4 0 opamp 5 3 
 
 .options post

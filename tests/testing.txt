@@ -41,3 +41,9 @@ Please note that board 1 Channel A1 is using a 1.0% 475-ohm gain resistor that m
 23 February 2004
 We get what looks to be 150 uV P-P noise when shorting the inputs of the A1 AD221 together, at g=104, would translate into < 2 uV input noise. Strangely, it also looks like we've got a roughly 1.5 uV input Vos, which seems low. 
 
+16 March 2004
+Updated filter design
+corrected values to make second-stage 2nd-order LPF bessel with correct 
+values
+
+verified in SPICE

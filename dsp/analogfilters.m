@@ -1,7 +1,7 @@
 % now also takes in an h
 
 [bf2, af2] = besself(2, 38000);
-%[bbut, abut] = butter(2, 38000, 's');
+%[bf2, af2] = butter(2, 38000, 's');
 [bf1, af1] = besself(4, 15250); % 15300 is 10kHz -3dB
 bb = conv(bf2, bf1);
 ab = conv(af2, af1);

@@ -32,3 +32,22 @@ The second filter has a -3 db at 29829.14 Hz
 The combined (both) filter has a -3 db at 9605.82 Hz
 The combined (both) filter has a -96 db at 129371.07 Hz
 
+Using the equations fomr SLOA049A for a second-order bessel with:
+order 2
+FSF=1.2736
+Q=.5773
+
+we know R2=R1, thus the big variables are R2, R3, C1, and C2. 
+Fc=1/(FSF*2*pi*Q*(R3*C1+R2*C1+R3*C1)); 
+C2=(Q*(R3*C1+R2*C1+R3*C1))^2/(R2*R3*C1)
+so (per the app note)
+
+
+R2=1.870 k = R9 = R8
+R3=1.870 k = R10
+C1=1300 pF = C42
+C2=3900 pf = C44
+
+
+
+

@@ -67,5 +67,27 @@ So, general system properties, etc:
 
 AD8221 has amazing stuff... the new data sheet is an inspiration to all of humanity!
 
+--------------------------------------------------------------------------
+AA Filter component value selection:
+--------------------------------------------------------------------------
+
+For the LTC1653-3, the equation is:
+R = 10k * (256kHz)/Fc; 
+
+from the dsp folder:
+
+The first filter has a -3 db at 10056.32 Hz
+The second filter has a -3 db at 29829.14 Hz
+The combined (both) filter has a -3 db at 9605.82 Hz
+The combined (both) filter has a -96 db at 129371.07 Hz
+
+We assume that their Fc == -3 dB point, thus 
+The LTC1563-3 Resistors are 255k , part 9C08052A2553FKHFT from digikey
 
 
+
+
+---------------------------------------------------------------------------
+input stage
+---------------------------------------------------------------------------
+499 0hm .5% \0805 resistors, RR12P499DCT-ND from digikey

@@ -1,0 +1,53 @@
+JDF G
+// Created by Project Navigator ver 1.0
+PROJECT acqcmd
+DESIGN acqcmd
+DEVFAM spartan2e
+DEVFAMTIME 0
+DEVICE xc2s50e
+DEVICETIME 0
+DEVPKG tq144
+DEVPKGTIME 0
+DEVSPEED -6
+DEVSPEEDTIME 0
+DEVTOPLEVELMODULETYPE HDL
+TOPLEVELMODULETYPETIME 0
+DEVSYNTHESISTOOL XST (VHDL/Verilog)
+SYNTHESISTOOLTIME 0
+DEVSIMULATOR Modelsim
+SIMULATORTIME 0
+DEVGENERATEDSIMULATIONMODEL VHDL
+GENERATEDSIMULATIONMODELTIME 0
+SOURCE ..\..\vhdl\EEPROMio.vhd
+SOURCE ..\..\vhdl\samplebuffer.vhd
+SOURCE ..\..\vhdl\decoder.vhd
+SOURCE ..\..\vhdl\PGAload.vhd
+SOURCE ..\..\vhdl\input.vhd
+SOURCE ..\..\vhdl\overflow.vhd
+SOURCE ..\..\vhdl\multiplier.vhd
+SOURCE ..\..\vhdl\RMACcontrol.vhd
+SOURCE ..\..\vhdl\distRAM.vhd
+SOURCE ..\..\vhdl\Control.vhd
+SOURCE ..\..\vhdl\FiberRX.vhd
+SOURCE ..\..\vhdl\clocks.vhd
+SOURCE ..\..\vhdl\FiberTX.vhd
+SOURCE ..\..\vhdl\accumulator.vhd
+SOURCE ..\..\vhdl\Loader.vhd
+SOURCE ..\..\vhdl\FilterArray.vhd
+SOURCE ..\..\vhdl\rounding.vhd
+SOURCE ..\..\vhdl\acqboard.vhd
+SOURCE ..\..\vhdl\RMAC.vhd
+SOURCE ..\..\vhdl\encode8b10b.xco
+SOURCE ..\..\vhdl\decode8b10b.xco
+STIMULUS testbench.vhd
+SOURCE ..\test_PGA.vhdl
+SOURCE ..\test_SendCMD.vhd
+SOURCE test_EEPROM.vhdl
+STIMULUS test_eeprom_test.tbw
+SOURCE ..\test_fiberin.vhdl
+SOURCE ..\test_deserialize.vhd
+SOURCE ..\test_ADC.vhd
+SOURCE ..\..\vhdl\raw.vhd
+SOURCE ..\..\vhdl\distram_dualport.vhd
+[STRATEGY-LIST]
+Normal=True

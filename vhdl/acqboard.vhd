@@ -59,7 +59,7 @@ architecture Behavioral of acqboard is
 -- offset-connected signals from input, to sample buffer, and control
    signal din, dout : std_logic_vector(15 downto 0) := (others => '0');
    signal cin, cout : std_logic_vector(3 downto 0) := (others => '0');
-   signal wein, weout : std_logic  := '0';
+   signal weout : std_logic  := '0';
    signal osen, oswe : std_logic := '0';
 
 -- control signals
@@ -297,10 +297,12 @@ architecture Behavioral of acqboard is
 			 PENDING : out std_logic;
 	           LDONE : in std_logic);
 	end component;
+
 	component raw is
 	    Port ( CLK : in std_logic;
 	           OUTSAMPLE : in std_logic;
 	           OUTBYTE : in std_logic;
+				  INSAMPLE : in std_logic;
 	           WEIN : in std_logic;
 	           CIN : in std_logic_vector(3 downto 0);
 	           DIN : in std_logic_vector(15 downto 0);
@@ -489,6 +491,7 @@ begin
 			CLK => clk,
 			OUTSAMPLE => outsample,
 			OUTBYTE => outbyte,
+			INSAMPLE => insample, 
 			WEIN => weout,
 			CIN => cout,
 			DIN => dout, 

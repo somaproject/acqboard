@@ -23,8 +23,7 @@ ARCHITECTURE behavior OF testbench IS
 		ADCIN : IN std_logic_vector(4 downto 0);
 		ESO : IN std_logic;
 		EEPROMLEN : IN std_logic;
-		FIBERIN : IN std_logic;
-		RESET : IN std_logic;          
+		FIBERIN : IN std_logic;   
 		ADCCLK : OUT std_logic;
 		ADCCS : OUT std_logic;
 		ADCCONVST : OUT std_logic;
@@ -122,7 +121,7 @@ ARCHITECTURE behavior OF testbench IS
 	signal decmdst, decmdid: std_logic_vector(7 downto 0) := (others => '0'); 
 	signal newframe : std_logic := '0'; 
 	signal deser_data : std_logic_vector(159 downto 0) := (others =>'0'); 
-	signal adcval : integer := 32768; 
+	signal adcval : intarray := (others => 32768); 
 	component test_ADC is
 	    Generic (filename : string := "adcin.dat" ); 
 	    Port ( RESET : in std_logic;
@@ -139,6 +138,11 @@ ARCHITECTURE behavior OF testbench IS
 			 INPUTDONE: out std_logic);
 	end component;
 
+
+	type adcmodes is (const, inc);
+	signal adcmode : adcmodes := const; 
+
+								
 
 BEGIN
 
@@ -159,7 +163,6 @@ BEGIN
 		EEPROMLEN => EEPROMLEN,
 		FIBERIN => FIBERIN,
 		FIBEROUT => FIBEROUT,
-		RESET => RESET,
 		CLK8_OUT => CLK8_OUT
 	);
 
@@ -220,8 +223,8 @@ BEGIN
 			CONVST => ADCCONVST,
 			CS => ADCCS,
 			SDOUT => ADCIN(i),
-			CHA_VALUE => adcval,
-			CHB_VALUE => adcval,
+			CHA_VALUE => adcval(2*i),
+			CHB_VALUE => adcval(2*i+1),
 			CHA_OUT => open,
 			CHB_OUT => open,
 			BUSY => open,
@@ -254,6 +257,27 @@ BEGIN
 		end loop; 
 	end process; 
 
+
+	adcsmode : process(ADCCS) is
+	begin
+		if rising_edge(ADCCS) then
+			if adcmode = const then 
+				adcval <= (others => 32768);
+			elsif adcmode = inc then
+				-- we increment each read cycle, each one starting
+				-- with a different base
+				for i in  0 to 9 loop
+					if adcval(i) = 32765 then
+						adcval(i) <=  32768;	
+					else
+						adcval(i) <= adcval(i) + 1; 
+					end if;
+				end loop;
+			end if; 
+		end if; 
+
+	end process adcsmode;
+
 	commands : process is
 	begin
 		wait until syscnt = 1000;
@@ -269,6 +293,7 @@ BEGIN
 		sendcmd <= '0';  
 		wait until cmdpending = '0';
 	
+		report "Finished null command for frame alignment";
 
 
 	   -- set offset value for chan 0, gain = 7
@@ -294,9 +319,11 @@ BEGIN
 		wait until decmdid(4 downto 1) = "0011"; 
 
 		if gains(0) = 7 then 		  
-			error <= '0';				  
+			error <= '0';
+			report "Gain of channel 0 set to 0x7";				  
 		else	
 			error <= '1'; 
+			report "ERROR in setting gain of channel 0 to 0x7";
 		end if; 
 
 
@@ -314,7 +341,9 @@ BEGIN
 
 		if filters(6) /= 2 then 
 			error <= '1';
-		end if; 
+		else
+			report "set highpass filter for channel 7 to value 2";
+	   end if; 
 
 	   -- set mode = 1 (offset disable)
 
@@ -332,6 +361,8 @@ BEGIN
 		wait until rising_edge(clkin);
 		wait until rising_edge(clkin);
 		wait until rising_edge(clkin);
+
+		report "Set mode to 1 (offset disable); mode now 1";
 
 
 	   -- write offset value
@@ -352,6 +383,7 @@ BEGIN
 		eaddr <= (512 + 4*8+3)*2;
 		wait until rising_edge(clkin);
 
+		report "Wrote offset value of 0x1234 for chan 4, gain 3";
 
 
 	   -- set mode = 0 (normal)
@@ -369,6 +401,8 @@ BEGIN
 		if decmdst /= X"00" then 
 			error <= '1';
 		end if; 
+
+		report "Returned to mode 0";
 		
 		-- set gain of channel 4 to 3
 
@@ -389,10 +423,38 @@ BEGIN
 			error <= '1'; 
 		end if; 
 
-		wait until outvals(4) = X"1234"; 
+		report "Channel 4 gain to 3; waiting to see offset effect";
 
+		wait until outvals(4) = 4660;
 
+		report "Successfully read channel 4 with offset-added"; 
+		
+		-- now, change ADC values to increment 
+		adcmode <= inc; 
+		report "ADC inputs changed to increment mode";
 
+	   -- set mode = 3 (raw)
+		cmdid <= "0100";
+		cmd <= "0111"; 
+		cmddata0 <= X"03"; 
+		cmddata1 <= X"02";
+		sendcmd <= '1'; 
+		wait until rising_edge(clkin);
+		sendcmd <= '0';  
+		wait until cmdpending = '0';
+		
+		wait until decmdid(4 downto 1) = "0100"; 
+		wait until rising_edge(clkin);
+		if decmdst /= X"00" then 
+			error <= '1';
+		end if; 
+
+		report "Sitched to mode 3, with chan 0x02 as raw input";
+		
+		wait until outvals(0 to 7) = 
+		(111, 112, 113, 114, 115, 116, 117, 118); 
+
+		report "Successfully read raw data"; 
 			
 	end process commands; 
 		

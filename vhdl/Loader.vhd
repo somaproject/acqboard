@@ -32,7 +32,7 @@ architecture Behavioral of Loader is
    signal address : std_logic_vector(9 downto 0) := (others => '0');
    signal we : std_logic := '0';
 
-   type states is (none, enable, ewait, write, incaddr, ldone);
+   type states is (none, enable, ewait, write, incaddr, ldone, ldone2);
    signal cs, ns : states := none;
 
 
@@ -107,7 +107,12 @@ begin
 			EEEN <= '0';
 			WE <= '0';
 			DONE <= '1';
-			ns <= none;		
+			ns <= ldone2;		
+		when ldone2 => 
+			EEEN <= '0';
+			WE <= '0';
+			DONE <= '1';
+			ns <= none;	
 		when others => 
 			EEEN <= '0';
 			WE <= '0';

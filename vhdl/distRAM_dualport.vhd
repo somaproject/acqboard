@@ -27,7 +27,7 @@ architecture behavioral of distRAM_dualport is
 
 
 begin 
-  process(clk, we, ai) 
+  process(clk, we, ai, di) 
   begin 
       if (rising_edge(clk)) then 
           if (we = '1') then 

@@ -18,6 +18,8 @@ vcom -93 -explicit ../../vhdl/distram.vhd
 vcom -93 -explicit ../../vhdl/pgaload.vhd
 vcom -93 -explicit ../../vhdl/encode8b10b.vhd
 vcom -93 -explicit ../../vhdl/decode8b10b.vhd
+vcom -93 -explicit ../../vhdl/raw.vhd
+vcom -93 -explicit ../../vhdl/distram_dualport.vhd
 vcom -93 -explicit ../../vhdl/fibertx.vhd
 vcom -93 -explicit ../../vhdl/decoder.vhd
 vcom -93 -explicit ../../vhdl/fiberrx.vhd

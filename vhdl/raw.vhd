@@ -74,10 +74,10 @@ begin
 		ai => ai,
 		ao => ssel); 
 
-	wechan <= '1' when WEIN = '1' and CIN = CHAN else '0';
+	wechan <= '1' when WE11IN = '1' and CIN = CHAN else '0';
 	bwe <= (not bsel) and wechan;
 	awe <= bsel and wechan; 
-	Y <= doa when bsel = '1' else dob; 
+	Y <= doa when bsel = '0' else dob; 
 
 	ssel <= "000" when oaddr = 0 or oaddr = 1 or 
 						oaddr = 2 or oaddr = 3 else
@@ -90,7 +90,7 @@ begin
 			  "111";
 
 
-	main: process(CLK) is
+	main: process(CLK, OUTSAMPLE) is
 	begin
 		if rising_edge(CLK) then
 			if OUTSAMPLE = '1' then

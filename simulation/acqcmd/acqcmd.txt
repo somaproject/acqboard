@@ -22,6 +22,8 @@ Testbench order: (all assume single impulse-repsonse in filter)
 
 7. set the gain of channel 0x4 to 0x3, watch the loading of the offset value. Wait until the correct value appears at the output of the RMAC. Note that the system transmits MSByte first on the 8b/10b interface. 
 
+8. change ADC input mode to increment
 
+9. set mode to be mode 3, reading channel 2
 
-
+10. Successfully read, check for raw data out via sequential input. 

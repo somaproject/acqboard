@@ -30,7 +30,7 @@ architecture Behavioral of test_EEPROM is
 	signal ir : std_logic_vector(7 downto 0) := (others => '0'); 
 
    type storage_array is 
-   	array ( 0 to 2048) of std_logic_vector(15 downto 0);
+   	array ( 0 to 4095) of std_logic_vector(15 downto 0);
 
 	signal bitpos : integer := 0; 
 

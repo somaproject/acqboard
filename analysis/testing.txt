@@ -1,0 +1,23 @@
+13 January 2004
+
+Okay, this is the assembly and testing log of our (*pray*) final acquisition board. 
+
+First, some last-minute component shopping:
+25LC320/SN-ND		EEPROM
+SJ5523-0-ND		Little rubber feet
+399-1091-ND		extra bypass caps
+399-1096-ND		extra bypass caps
+67-1253-ND		RT < dual LED, red
+240-1001-1-ND		big analog supply ferrite
+240-1008-1-ND		smt ferrite bead
+RR08P10.0KBCT-ND	precision 10k resistors
+
+Now, testing plans:
+
+one board, just analog stuff -- no digital
+
+other board, just digial, no analog.
+
+
+Things to test:
+first, digital power supplies

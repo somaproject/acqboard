@@ -77,6 +77,7 @@ xilxPAReffortLevel=xstvhd, spartan2e, VHDL.t_placeAndRouteDes, 1055895324, Mediu
 _SynthMultStyle=xstvhd, spartan2e, Schematic.t_synthesize, 1058138004, Pipe_LUT
 _SynthOptEffort=xstvhd, spartan2e, Schematic.t_synthesize, 1056383182, High
 [STATUS-ALL]
-acqboard.twrFile=WARNINGS,1074028937
+acqboard.ngcFile=WARNINGS,1074043939
+acqboard.ngdFile=WARNINGS,1074043967
 [STRATEGY-LIST]
 Normal=True

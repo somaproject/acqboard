@@ -1,4 +1,4 @@
-function  vect_to_block22(input)
+function  vect_to_block22(input, init)
 % vect_to_block takes a vector of type double with between -1 and 1, 
 % quantizes the values to acceptable 22-bit twos-complement fixed
 % point values, and then writes out the values in hex in a format
@@ -37,18 +37,30 @@ end ;
 fprintf(' Lower Word Block Arrays: \n\n'); 
 
 for i = 1:8 
+  if (init == 1) 
+    fprintf('INIT_0%d => X"', i-1); 
+  end 
   for j = (i*16):-1:((i-1)*16+1)
     fprintf('%0.4X', bin2dec(sprintf('%d', values(j, 17:32))))
   end
+  if (init == 1) 
+    fprintf('",'); 
+  end 
   fprintf('\n'); 
 end 
     
 fprintf(' Upper Word Block Arrays: \n\n'); 
 
 for i = 1:8 
+  if (init == 1) 
+    fprintf('INIT_0%d => X"', i-1); 
+  end 
   for j = (i*16):-1:((i-1)*16+1)
     fprintf('%0.4X', bin2dec(sprintf('%d', values(j, 1:16))))
   end
+  if (init == 1) 
+    fprintf('",'); 
+  end 
   fprintf('\n'); 
 end 
 

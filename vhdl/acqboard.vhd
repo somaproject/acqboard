@@ -17,8 +17,10 @@ entity acqboard is
            PGARCK : out std_logic;
            PGASRCK : out std_logic;
            PGASERA : out std_logic;
-           EESCL : out std_logic;
-           EESDA : inout std_logic;
+           ESI : out std_logic;
+           ESCK : out std_logic;
+		 ECS : out std_logic;
+		 ESO : in std_logic; 
            FIBERIN : in std_logic;
            FIBEROUT : out std_logic;
            RESET : in std_logic);
@@ -31,7 +33,7 @@ architecture Behavioral of acqboard is
 -- signals
 
 -- clock-related signals
-   signal clk, clk8, insample, outsample, outbyte, i2cclk : 
+   signal clk, clk8, insample, outsample, outbyte, spiclk : 
    	 std_logic := '0';
 
 -- pga and input select signals
@@ -44,7 +46,8 @@ architecture Behavioral of acqboard is
 -- loader and EEPROM-related signals
    signal edin, edout : std_logic_vector(15 downto 0);
    signal laddr : std_logic_vector(8 downto 0) := (others => '0');
-   signal ewaddr, ea : std_logic_vector(9 downto 0) := (others => '0');
+   signal ewaddr : std_logic_vector(9 downto 0) := (others => '0');
+   signal ea : std_logic_vector(10 downto 0) := (others => '0');
    signal edone, ceen, een, len, erw : std_logic := '0';
    signal lfwe, lswe, load, ldone : std_logic := '0';
 
@@ -93,7 +96,7 @@ architecture Behavioral of acqboard is
 	           INSAMPLE : out std_logic;
 	           OUTSAMPLE : out std_logic;
 	           OUTBYTE : out std_logic;
-	           I2CCLK : out std_logic);
+	           SPICLK : out std_logic);
 	end component;
 
 	component input is
@@ -220,15 +223,18 @@ architecture Behavioral of acqboard is
 
 	component EEPROMio is
 	    Port ( CLK : in std_logic;
-	           I2CCLK : in std_logic;
+	    		 RESET : in std_logic; 
+	           SPICLK : in std_logic;
 	           DOUT : out std_logic_vector(15 downto 0);
 	           DIN : in std_logic_vector(15 downto 0);
-	           ADDR : in std_logic_vector(9 downto 0);
+	           ADDR : in std_logic_vector(10 downto 0);
 	           WR : in std_logic;
 	           EN : in std_logic;
 	           DONE : out std_logic;
-	           SCL : out std_logic;
-	           SDA : inout std_logic);
+	           ESCK : out std_logic;
+			 ECS : out std_logic; 
+			 ESI : out std_logic;
+	           ESO : in std_logic);
 	end component;
 
 	component Control is
@@ -272,7 +278,7 @@ begin
 			INSAMPLE => insample, 
 			OUTSAMPLE => outsample,
 			OUTBYTE => outbyte,
-			I2CCLK => i2cclk);
+			spiclk => spiclk);
 
     input_inst : input port map (
     			CLK => clk,
@@ -388,15 +394,18 @@ begin
 			
 	eepromio_inst : EEPROMio port map (
 			CLK => clk,
-			I2CCLK => i2cclk,
+			RESET => reset, 
+			SPICLK => spiclk,
 			DOUT => edout,
 			din => edin,
 			ADDR => ea,
 			WR => erw,
 			EN => een,
 			DONE => edone,
-			SCL => EESCL,
-			SDA => EESDA);
+			ESCK => ESCK,
+			ECS => ECS,
+			ESI => ESI,
+			ESO => ESO);
 					
 	control_inst : Control port map (
 			CLK => clk,
@@ -434,7 +443,7 @@ begin
 	bwe <= weout when bufsel = '0' else lswe;
 	ain <= laddr(6 downto 0) when bufsel = '0' else sample;
 
-	ea <= ("0" & laddr) when eesel = '0' else ewaddr;
+	ea <= ("00" & laddr) when eesel = '0' else ('0' & ewaddr);
 	een <= len when eesel = '0' else ceen; 
 
 

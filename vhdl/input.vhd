@@ -53,7 +53,7 @@ architecture Behavioral of input is
    
       
    -- output state machine
-   type ostates is (none, oneinc, incbitaddr, extraadd, nextchan1, nextchan2);
+   type ostates is (none, oneinc, incbitaddr, extraadd, nop1,  nextchan1, nop2, nextchan2);
    signal ocs, ons : ostates := none;
 
    -- input state machine
@@ -337,10 +337,14 @@ begin
  			"01" when ((inb = not osb) or 
 					 (inb = osb and inb = pdb(15))) 	
 					 and chan(0) = '1' else
-			"10" when ((ina = '0' and osa = '0' and pda(15) = '1') or
-					 (inb = '0' and osb = '0' and pdb(15) = '1')) else
-			"11" when ((ina = '1' and osa = '1' and pda(15) = '0') or
-					 (inb = '1' and osb = '1' and pdb(15) = '0')) else
+			"10" when ((ina = '0' and osa = '0' and pda(15) = '1' 
+						and chan(0) = '0') or
+					 (inb = '0' and osb = '0' and pdb(15) = '1'
+					 	and chan(0) = '1')) else
+			"11" when ((ina = '1' and osa = '1' and pda(15) = '0'
+						and chan(0) = '0') or
+					 (inb = '1' and osb = '1' and pdb(15) = '0'
+					 	and chan(0) = '1')) else
 
 		     "00";
  
@@ -382,10 +386,20 @@ begin
 				inr <= '0';
 				WEOUT <= '0';
 				adden <= '1'; 
+				ons <= nop1;
+			when nop1 => 
+				inr <= '0';
+				WEOUT <= '0';
+				adden <= '0'; 
 				ons <= nextchan1;
 			when nextchan1 => 
 				inr <= '0';
 				WEOUT <= '1';
+				adden <= '0'; 
+				ons <= nop2;
+			when nop2 => 
+				inr <= '0';
+				WEOUT <= '0';
 				adden <= '0'; 
 				ons <= nextchan2;
 			when nextchan2 => 
@@ -483,7 +497,7 @@ begin
 		  od(9);
 
 	-- Offset: FSM
-	offsetfsm: process(oscs, insample, osinbitsel) is
+	offsetfsm: process(oscs, insample, osinbitsel, oswe) is
 	begin
 		case oscs is
 			when none =>

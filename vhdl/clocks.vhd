@@ -16,7 +16,7 @@ entity clocks is
            INSAMPLE : out std_logic;
            OUTSAMPLE : out std_logic;
            OUTBYTE : out std_logic;
-           I2CCLK : out std_logic);
+           SPICLK : out std_logic);
 end clocks;
 
 architecture Behavioral of clocks is
@@ -221,7 +221,7 @@ begin
 		end if;
 	end process; 
 
-      I2CCLK <= div8b;  
+      SPICLK <= div8b;  
     
 
 

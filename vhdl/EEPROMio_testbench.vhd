@@ -12,51 +12,61 @@ ARCHITECTURE behavior OF testbench IS
 	COMPONENT eepromio
 	PORT(
 		clk : IN std_logic;
-		i2cclk : IN std_logic;
+		reset : IN std_logic;
+		spiclk : IN std_logic;
 		din : IN std_logic_vector(15 downto 0);
 		addr : IN std_logic_vector(10 downto 0);
 		wr : IN std_logic;
-		en : IN std_logic;    
-		sda : INOUT std_logic;      
+		en : IN std_logic;         
 		dout : OUT std_logic_vector(15 downto 0);
 		done : OUT std_logic;
-		scl : OUT std_logic
+		esi : out std_logic;
+		eso : in std_logic;
+		esck : out std_logic;
+		ecs : out std_logic
 		);
 	END COMPONENT;
 
 	SIGNAL clk :  std_logic := '0';
-	SIGNAL i2cclk :  std_logic;
+	SIGNAL spiclk :  std_logic;
 	SIGNAL dout :  std_logic_vector(15 downto 0);
 	SIGNAL din :  std_logic_vector(15 downto 0);
 	SIGNAL addr :  std_logic_vector(10 downto 0);
 	SIGNAL wr :  std_logic;
 	SIGNAL en :  std_logic;
 	SIGNAL done :  std_logic;
-	SIGNAL scl :  std_logic;
-	SIGNAL sda :  std_logic;
+	signal reset : std_logic := '1';
+	SIGNAL esi :  std_logic;
+	SIGNAL eso :  std_logic := '0';
+	signal esck : std_logic;
+	signal ecs : std_logic; 
 	signal cycle : integer := 0; 
  	constant clockperiod : time := 15 ns; 
 BEGIN
-    sda <= 'H'; 
+
 	uut: eepromio PORT MAP(
 		clk => clk,
-		i2cclk => i2cclk,
-		dout => dout,
+		reset => reset, 
+		spiclk => spiclk,
+		dout =>dout,
 		din => din,
 		addr => addr,
 		wr => wr,
 		en => en,
 		done => done,
-		scl => scl,
-		sda => sda
-	);
+		esi => esi,
+		eso => eso,
+		esck => esck,
+		ecs => ecs
+	);				
 
    clk <= not clk after clockperiod / 2; 
 
    -- input signals
    din <= "1001000011110011";
-   
-   ADDR <= "10110011100";
+   reset <= '0' after 40 ns; 
+
+   ADDR <= "11110000011";
    	
 
    tb : PROCESS(CLK, cycle) is
@@ -67,9 +77,9 @@ BEGIN
 	 end if; 
 
 	 if cycle mod 640 = 0 then
-	 	i2cclk <= '1';
+	 	spiclk <= '1';
 	 else
-	 	i2cclk <= '0';
+	 	spiclk <= '0';
 	 end if; 
 
 	 if cycle = 100 or cycle = 500000 then 

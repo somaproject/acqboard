@@ -1,13 +1,4 @@
 
--- VHDL Test Bench Created from source file input.vhd -- 21:20:56 07/06/2003
---
--- Notes: 
--- This testbench has been automatically generated using types std_logic and
--- std_logic_vector for the ports of the unit under test.  Xilinx recommends 
--- that these types always be used for the top-level I/O of a design in order 
--- to guarantee that the testbench will bind correctly to the post-implementation 
--- simulation model.
---
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL; 
@@ -42,7 +33,10 @@ ARCHITECTURE behavior OF testbench IS
 	    Port ( RESET : in std_logic;
 	           SCLK : in std_logic;
 	           CONVST : in std_logic;
-	           CS : in std_logic;
+	           CS : in std_logic;		 
+			 CHA_VALUE: in integer;
+		 	 CHB_VALUE: in integer;
+		 	 FILEMODE: in std_logic; 
 	           SDOUT : out std_logic;
 			 BUSY: out std_logic; 
 			 INPUTDONE: out std_logic);
@@ -66,7 +60,7 @@ ARCHITECTURE behavior OF testbench IS
 	SIGNAL inputdone : std_logic_vector(4 downto 0) := (others => '0');
      type outputvalues is array (0 to 9) of integer; 
 	signal outvals: outputvalues; 
-
+	signal cha_value, chb_value : integer := 0;
 
 BEGIN
 
@@ -90,20 +84,27 @@ BEGIN
 	SDIN <= "HHHHH";
 	input_ADCS : for i in 0 to 4 generate
 		begin
-		 	adc_in: test_ADC port map(
+		 	adc_in: test_ADC generic map (
+				filename => "adcin.dat")
+				
+			port map(
 				RESET => reset,
 				sclk => sclk,
 				CONVST => convst,
 				CS => adccs,
 				SDOUT => sdin(i),
 				BUSY	=> busy(i),
+				CHA_VALUE => cha_value,
+				CHB_VALUE => chb_value,
+				filemode => '0',
 				INPUTDONE => inputdone(i));
 		end generate; 
 
  clk <= not clk after 15.625 ns / 2; 
     reset <= '0' after 45 ns; 
 
- 
+
+
 
 -- *** Test Bench - User Defined Section ***
    tb : PROCESS(CLK) is
@@ -121,6 +122,17 @@ BEGIN
 	end if; 
    END PROCESS;
 -- *** End Test Bench - User Defined Section ***
+
+  -- input control 
+  process(CLK, INSAMPLE) is
+  begin
+  	if rising_edge(CLK) then
+	    if insample = '1' then
+		  cha_value <= cha_value + 1;
+		  chb_value <= chb_value + 1;
+	    end if;
+	end if; 
+  end process; 
 
   -- output process
   output_proc: process(CLK, cout, WEOUT, DOUT) is
@@ -147,8 +159,12 @@ BEGIN
 
 		if counter = 2000 then 
 			OSWE <= '1';
-			OSD <= "1111111111111111";
+			OSD <= "0111111111111111";
 			OSC <= "0000";
+		elsif counter = 2600 then
+			OSWE <= '1';
+			OSD <= "1000000000000000";
+			OSC <= "0001";
 		else
 			OSWE <= '0';
 		end if; 

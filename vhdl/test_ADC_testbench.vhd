@@ -26,6 +26,9 @@ ARCHITECTURE behavior OF testbench IS
 		sdout : OUT std_logic;
 		busy : OUT std_logic;
 		inputdone : OUT std_logic
+		 CHA_VALUE: in integer;
+		 CHB_VALUE: in integer;
+		 FILEMODE: in std_logic; 
 		);
 	END COMPONENT;
 

@@ -29,7 +29,7 @@ architecture Behavioral of EEPROMio is
    signal inbit, rombit, insel, sen, sclin, sclinl,
    		inrst, nextin, stop : std_logic := '0';
    signal sdats, sdaout, sdain, sdatsl, sdaoutl, lsdain : std_logic := '0';
-   signal lutout, lutoutl : std_logic_vector(7 downto 0) := (others => '0'); 
+   signal lutout  : std_logic_vector(7 downto 0) := (others => '0'); 
    signal incnt:  integer range 0 to 27 := 0;
    signal input : std_logic_vector(27 downto 0); 
    signal outreg : std_logic_vector(15 downto 0) := (others => '0'); 
@@ -78,7 +78,7 @@ begin
 	   sdatsl <= not sdats;
 	   sdaoutl <= sdaout; 
 	   sclinl <= sclin; 
-	   lutoutl <= lutout; 
+	    
 	   -- now, the meat of the system 
 
 	   -- LUT counter
@@ -417,205 +417,205 @@ begin
 	  when "011111110" => lutout <= "00000000";
 	  when "011111111" => lutout <= "00000000";
  -- RW = 1, i.e. reading code
-	  when "100000000" => lutout <= "00000000";
-	  when "100000001" => lutout <= "00000000";
-	  when "100000010" => lutout <= "00000000";
-	  when "100000011" => lutout <= "00000000";
-	  when "100000100" => lutout <= "00000000";
-	  when "100000101" => lutout <= "00000000";
-	  when "100000110" => lutout <= "00000000";
-	  when "100000111" => lutout <= "00000000";
-	  when "100001000" => lutout <= "00000000";
-	  when "100001001" => lutout <= "00000000";
-	  when "100001010" => lutout <= "00000000";
-	  when "100001011" => lutout <= "00000000";
-	  when "100001100" => lutout <= "00000000";
-	  when "100001101" => lutout <= "00000000";
-	  when "100001110" => lutout <= "00000000";
-	  when "100001111" => lutout <= "00000000";
-	  when "100010000" => lutout <= "00000000";
-	  when "100010001" => lutout <= "00000000";
-	  when "100010010" => lutout <= "00000000";
-	  when "100010011" => lutout <= "00000000";
-	  when "100010100" => lutout <= "00000000";
-	  when "100010101" => lutout <= "00000000";
-	  when "100010110" => lutout <= "00000000";
-	  when "100010111" => lutout <= "00000000";
-	  when "100011000" => lutout <= "00000000";
-	  when "100011001" => lutout <= "00000000";
-	  when "100011010" => lutout <= "00000000";
-	  when "100011011" => lutout <= "00000000";
-	  when "100011100" => lutout <= "00000000";
-	  when "100011101" => lutout <= "00000000";
-	  when "100011110" => lutout <= "00000000";
-	  when "100011111" => lutout <= "00000000";
-	  when "100100000" => lutout <= "00000000";
-	  when "100100001" => lutout <= "00000000";
-	  when "100100010" => lutout <= "00000000";
-	  when "100100011" => lutout <= "00000000";
-	  when "100100100" => lutout <= "00000000";
-	  when "100100101" => lutout <= "00000000";
-	  when "100100110" => lutout <= "00000000";
-	  when "100100111" => lutout <= "00000000";
-	  when "100101000" => lutout <= "00000000";
-	  when "100101001" => lutout <= "00000000";
-	  when "100101010" => lutout <= "00000000";
-	  when "100101011" => lutout <= "00000000";
-	  when "100101100" => lutout <= "00000000";
-	  when "100101101" => lutout <= "00000000";
-	  when "100101110" => lutout <= "00000000";
-	  when "100101111" => lutout <= "00000000";
-	  when "100110000" => lutout <= "00000000";
-	  when "100110001" => lutout <= "00000000";
-	  when "100110010" => lutout <= "00000000";
-	  when "100110011" => lutout <= "00000000";
-	  when "100110100" => lutout <= "00000000";
-	  when "100110101" => lutout <= "00000000";
-	  when "100110110" => lutout <= "00000000";
-	  when "100110111" => lutout <= "00000000";
-	  when "100111000" => lutout <= "00000000";
-	  when "100111001" => lutout <= "00000000";
-	  when "100111010" => lutout <= "00000000";
-	  when "100111011" => lutout <= "00000000";
-	  when "100111100" => lutout <= "00000000";
-	  when "100111101" => lutout <= "00000000";
-	  when "100111110" => lutout <= "00000000";
-	  when "100111111" => lutout <= "00000000";
-	  when "101000000" => lutout <= "00000000";
-	  when "101000001" => lutout <= "00000000";
-	  when "101000010" => lutout <= "00000000";
-	  when "101000011" => lutout <= "00000000";
-	  when "101000100" => lutout <= "00000000";
-	  when "101000101" => lutout <= "00000000";
-	  when "101000110" => lutout <= "00000000";
-	  when "101000111" => lutout <= "00000000";
-	  when "101001000" => lutout <= "00000000";
-	  when "101001001" => lutout <= "00000000";
-	  when "101001010" => lutout <= "00000000";
-	  when "101001011" => lutout <= "00000000";
-	  when "101001100" => lutout <= "00000000";
-	  when "101001101" => lutout <= "00000000";
-	  when "101001110" => lutout <= "00000000";
-	  when "101001111" => lutout <= "00000000";
-	  when "101010000" => lutout <= "00000000";
-	  when "101010001" => lutout <= "00000000";
-	  when "101010010" => lutout <= "00000000";
-	  when "101010011" => lutout <= "00000000";
-	  when "101010100" => lutout <= "00000000";
-	  when "101010101" => lutout <= "00000000";
+	  when "100000000" => lutout <= "00001010";-- start code
+	  when "100000001" => lutout <= "00001110";
+	  when "100000010" => lutout <= "00001111";
+	  when "100000011" => lutout <= "00001011";
+	  when "100000100" => lutout <= "00001010"; -- start done
+	  when "100000101" => lutout <= "00001010";
+	  when "100000110" => lutout <= "00001110"; -- control 0
+	  when "100000111" => lutout <= "00001111";
+	  when "100001000" => lutout <= "00001110"; 
+	  when "100001001" => lutout <= "00001010"; -- control 1
+	  when "100001010" => lutout <= "00001011";
+	  when "100001011" => lutout <= "00001010";
+	  when "100001100" => lutout <= "00001110"; -- control 2
+	  when "100001101" => lutout <= "00001111";
+	  when "100001110" => lutout <= "00001110";
+	  when "100001111" => lutout <= "00001010"; -- control 3
+	  when "100010000" => lutout <= "00001011";
+	  when "100010001" => lutout <= "00001010";
+	  when "100010010" => lutout <= "00001010"; -- control 4 (addr2)
+	  when "100010011" => lutout <= "00001011";
+	  when "100010100" => lutout <= "00001010";
+	  when "100010101" => lutout <= "00001010"; -- control 5 (addr1)
+	  when "100010110" => lutout <= "00001011";
+	  when "100010111" => lutout <= "00001010";
+	  when "100011000" => lutout <= "00001010"; -- control 6 (addr 0)
+	  when "100011001" => lutout <= "00001011";
+	  when "100011010" => lutout <= "00001010";
+	  when "100011011" => lutout <= "00001010"; -- control 7
+	  when "100011100" => lutout <= "00001011";
+	  when "100011101" => lutout <= "00001010";
+	  when "100011110" => lutout <= "00001000"; -- ack receive
+	  when "100011111" => lutout <= "00101001"; -- reset cnt
+	  when "100100000" => lutout <= "00001000";
+	  when "100100001" => lutout <= "00001010"; -- address bit 15
+	  when "100100010" => lutout <= "00001011";
+	  when "100100011" => lutout <= "00001010";
+	  when "100100100" => lutout <= "00001010"; -- address bit 14
+	  when "100100101" => lutout <= "00001011";
+	  when "100100110" => lutout <= "00001010";
+	  when "100100111" => lutout <= "00001010"; -- address bit 13
+	  when "100101000" => lutout <= "00001011";
+	  when "100101001" => lutout <= "00001010";
+	  when "100101010" => lutout <= "00001010"; -- address bit 12
+	  when "100101011" => lutout <= "00001011";
+	  when "100101100" => lutout <= "00001010";
+	  when "100101101" => lutout <= "00000010"; -- address bit 11
+	  when "100101110" => lutout <= "00000011";
+	  when "100101111" => lutout <= "00010010";
+	  when "100110000" => lutout <= "00000010"; -- address bit 10 
+	  when "100110001" => lutout <= "00000011";
+	  when "100110010" => lutout <= "00010010";
+	  when "100110011" => lutout <= "00000010"; -- address bit 9
+	  when "100110100" => lutout <= "00000011";
+	  when "100110101" => lutout <= "00010010";
+	  when "100110110" => lutout <= "00000010"; -- address bit 8 
+	  when "100110111" => lutout <= "00000011";
+	  when "100111000" => lutout <= "00000010";
+	  when "100111001" => lutout <= "00000000"; -- ack
+	  when "100111010" => lutout <= "00000001";
+	  when "100111011" => lutout <= "00010000";
+	  when "100111100" => lutout <= "00000010"; -- address bit 7
+	  when "100111101" => lutout <= "00000011";
+	  when "100111110" => lutout <= "00010010";
+	  when "100111111" => lutout <= "00000010"; -- address bit 6
+	  when "101000000" => lutout <= "00000011";
+	  when "101000001" => lutout <= "00010010";
+	  when "101000010" => lutout <= "00000010"; -- address bit 5
+	  when "101000011" => lutout <= "00000011";
+	  when "101000100" => lutout <= "00010010";
+	  when "101000101" => lutout <= "00000010"; -- address bit 4
+	  when "101000110" => lutout <= "00000011";
+	  when "101000111" => lutout <= "00010010";
+	  when "101001000" => lutout <= "00000010"; -- address bit 3
+	  when "101001001" => lutout <= "00000011";
+	  when "101001010" => lutout <= "00010010";
+	  when "101001011" => lutout <= "00000010"; -- address bit 2
+	  when "101001100" => lutout <= "00000011";
+	  when "101001101" => lutout <= "00010010";
+	  when "101001110" => lutout <= "00000010"; -- address bit 1
+	  when "101001111" => lutout <= "00000011";
+	  when "101010000" => lutout <= "00010010";
+	  when "101010001" => lutout <= "00000010"; -- address bit 0
+	  when "101010010" => lutout <= "00001011";
+	  when "101010011" => lutout <= "00000010";
+	  when "101010100" => lutout <= "00000000"; -- ack
+	  when "101010101" => lutout <= "00000001";
 	  when "101010110" => lutout <= "00000000";
-	  when "101010111" => lutout <= "00000000";
-	  when "101011000" => lutout <= "00000000";
-	  when "101011001" => lutout <= "00000000";
-	  when "101011010" => lutout <= "00000000";
-	  when "101011011" => lutout <= "00000000";
-	  when "101011100" => lutout <= "00000000";
-	  when "101011101" => lutout <= "00000000";
-	  when "101011110" => lutout <= "00000000";
-	  when "101011111" => lutout <= "00000000";
-	  when "101100000" => lutout <= "00000000";
-	  when "101100001" => lutout <= "00000000";
-	  when "101100010" => lutout <= "00000000";
-	  when "101100011" => lutout <= "00000000";
-	  when "101100100" => lutout <= "00000000";
-	  when "101100101" => lutout <= "00000000";
-	  when "101100110" => lutout <= "00000000";
-	  when "101100111" => lutout <= "00000000";
-	  when "101101000" => lutout <= "00000000";
-	  when "101101001" => lutout <= "00000000";
-	  when "101101010" => lutout <= "00000000";
-	  when "101101011" => lutout <= "00000000";
-	  when "101101100" => lutout <= "00000000";
-	  when "101101101" => lutout <= "00000000";
-	  when "101101110" => lutout <= "00000000";
-	  when "101101111" => lutout <= "00000000";
-	  when "101110000" => lutout <= "00000000";
-	  when "101110001" => lutout <= "00000000";
-	  when "101110010" => lutout <= "00000000";
-	  when "101110011" => lutout <= "00000000";
-	  when "101110100" => lutout <= "00000000";
-	  when "101110101" => lutout <= "00000000";
-	  when "101110110" => lutout <= "00000000";
+	  when "101010111" => lutout <= "00001010";-- start code
+	  when "101011000" => lutout <= "00001110"; 
+	  when "101011001" => lutout <= "00001111";
+	  when "101011010" => lutout <= "00001011";
+	  when "101011011" => lutout <= "00001010"; -- start done
+	  when "101011100" => lutout <= "00001010";
+	  when "101011101" => lutout <= "00001110"; -- control 0
+	  when "101011110" => lutout <= "00001111";
+	  when "101011111" => lutout <= "00001110";
+	  when "101100000" => lutout <= "00001010"; -- control 1
+	  when "101100001" => lutout <= "00001011";
+	  when "101100010" => lutout <= "00001010";
+	  when "101100011" => lutout <= "00001110"; -- control 2
+	  when "101100100" => lutout <= "00001111";
+	  when "101100101" => lutout <= "00001110";
+	  when "101100110" => lutout <= "00001010"; -- control 3
+	  when "101100111" => lutout <= "00001011";
+	  when "101101000" => lutout <= "00001010";
+	  when "101101001" => lutout <= "00001010"; -- control 4 (addr2)
+	  when "101101010" => lutout <= "00001011";
+	  when "101101011" => lutout <= "00001010";
+	  when "101101100" => lutout <= "00001010"; -- control 5 (addr1)
+	  when "101101101" => lutout <= "00001011";
+	  when "101101110" => lutout <= "00001010";
+	  when "101101111" => lutout <= "00001010"; -- control 6 (addr0)
+	  when "101110000" => lutout <= "00001011";
+	  when "101110001" => lutout <= "00001010";
+	  when "101110010" => lutout <= "00001110"; -- control 7
+	  when "101110011" => lutout <= "00001111";
+	  when "101110100" => lutout <= "00001110";
+	  when "101110101" => lutout <= "00000000"; -- ack receive
+	  when "101110110" => lutout <= "00000001";
 	  when "101110111" => lutout <= "00000000";
-	  when "101111000" => lutout <= "00000000";
-	  when "101111001" => lutout <= "00000000";
-	  when "101111010" => lutout <= "00000000";
-	  when "101111011" => lutout <= "00000000";
-	  when "101111100" => lutout <= "00000000";
-	  when "101111101" => lutout <= "00000000";
-	  when "101111110" => lutout <= "00000000";
+	  when "101111000" => lutout <= "00000000"; -- shift in bit 0  
+	  when "101111001" => lutout <= "01000001";
+	  when "101111010" => lutout <= "00000001";
+	  when "101111011" => lutout <= "00000000"; 
+	  when "101111100" => lutout <= "00000000"; -- shift in bit 1  
+	  when "101111101" => lutout <= "01000001";
+	  when "101111110" => lutout <= "00000001"; 
 	  when "101111111" => lutout <= "00000000";
-	  when "110000000" => lutout <= "00000000";
-	  when "110000001" => lutout <= "00000000";
-	  when "110000010" => lutout <= "00000000";
+	  when "110000000" => lutout <= "00000000"; -- shift in bit 2
+	  when "110000001" => lutout <= "01000001"; 
+	  when "110000010" => lutout <= "00000001";
 	  when "110000011" => lutout <= "00000000";
-	  when "110000100" => lutout <= "00000000";
-	  when "110000101" => lutout <= "00000000";
-	  when "110000110" => lutout <= "00000000";
-	  when "110000111" => lutout <= "00000000";
-	  when "110001000" => lutout <= "00000000";
-	  when "110001001" => lutout <= "00000000";
-	  when "110001010" => lutout <= "00000000";
+	  when "110000100" => lutout <= "00000000"; -- shift in bit 3 
+	  when "110000101" => lutout <= "01000001";
+	  when "110000110" => lutout <= "00000001";
+	  when "110000111" => lutout <= "00000000"; 
+	  when "110001000" => lutout <= "00000000"; -- shift in bit 4
+	  when "110001001" => lutout <= "01000001";
+	  when "110001010" => lutout <= "00000001"; 
 	  when "110001011" => lutout <= "00000000";
-	  when "110001100" => lutout <= "00000000";
-	  when "110001101" => lutout <= "00000000";
-	  when "110001110" => lutout <= "00000000";
+	  when "110001100" => lutout <= "00000000"; -- shift in bit 5
+	  when "110001101" => lutout <= "01000001";  
+	  when "110001110" => lutout <= "00000001";
 	  when "110001111" => lutout <= "00000000";
-	  when "110010000" => lutout <= "00000000";
-	  when "110010001" => lutout <= "00000000";
-	  when "110010010" => lutout <= "00000000";
+	  when "110010000" => lutout <= "00000000"; -- shift in bit 6
+	  when "110010001" => lutout <= "01000001";
+	  when "110010010" => lutout <= "00000001";
 	  when "110010011" => lutout <= "00000000";
-	  when "110010100" => lutout <= "00000000";
-	  when "110010101" => lutout <= "00000000";
-	  when "110010110" => lutout <= "00000000";
+	  when "110010100" => lutout <= "00000000"; -- shift in bit 7 
+	  when "110010101" => lutout <= "01000001"; 
+	  when "110010110" => lutout <= "00000001";
 	  when "110010111" => lutout <= "00000000";
-	  when "110011000" => lutout <= "00000000";
-	  when "110011001" => lutout <= "00000000";
-	  when "110011010" => lutout <= "00000000";
-	  when "110011011" => lutout <= "00000000";
-	  when "110011100" => lutout <= "00000000";
-	  when "110011101" => lutout <= "00000000";
-	  when "110011110" => lutout <= "00000000";
+	  when "110011000" => lutout <= "00001010"; -- ack
+	  when "110011001" => lutout <= "00001011";
+	  when "110011010" => lutout <= "00001011";
+	  when "110011011" => lutout <= "00001010";
+	  when "110011100" => lutout <= "00000000"; -- shift in bit 8
+	  when "110011101" => lutout <= "01000001";
+	  when "110011110" => lutout <= "00000001";
 	  when "110011111" => lutout <= "00000000";
-	  when "110100000" => lutout <= "00000000";
-	  when "110100001" => lutout <= "00000000";
-	  when "110100010" => lutout <= "00000000";
+	  when "110100000" => lutout <= "00000000"; -- shift in bit 9
+	  when "110100001" => lutout <= "01000001";
+	  when "110100010" => lutout <= "00000001";
 	  when "110100011" => lutout <= "00000000";
-	  when "110100100" => lutout <= "00000000";
-	  when "110100101" => lutout <= "00000000";
-	  when "110100110" => lutout <= "00000000";
+	  when "110100100" => lutout <= "00000000"; -- shift in bit 10
+	  when "110100101" => lutout <= "01000001";
+	  when "110100110" => lutout <= "00000001";
 	  when "110100111" => lutout <= "00000000";
-	  when "110101000" => lutout <= "00000000";
-	  when "110101001" => lutout <= "00000000";
-	  when "110101010" => lutout <= "00000000";
+	  when "110101000" => lutout <= "00000000"; -- shift in bit 11
+	  when "110101001" => lutout <= "01000001";
+	  when "110101010" => lutout <= "00000001";
 	  when "110101011" => lutout <= "00000000";
-	  when "110101100" => lutout <= "00000000";
-	  when "110101101" => lutout <= "00000000";
-	  when "110101110" => lutout <= "00000000";
+	  when "110101100" => lutout <= "00000000"; -- shift in bit 12
+	  when "110101101" => lutout <= "01000001";
+	  when "110101110" => lutout <= "00000001";
 	  when "110101111" => lutout <= "00000000";
-	  when "110110000" => lutout <= "00000000";
-	  when "110110001" => lutout <= "00000000";
-	  when "110110010" => lutout <= "00000000";
+	  when "110110000" => lutout <= "00000000"; -- shift in bit 13
+	  when "110110001" => lutout <= "01000001";
+	  when "110110010" => lutout <= "00000001";
 	  when "110110011" => lutout <= "00000000";
-	  when "110110100" => lutout <= "00000000";
-	  when "110110101" => lutout <= "00000000";
-	  when "110110110" => lutout <= "00000000";
+	  when "110110100" => lutout <= "00000000"; -- shift in bit 14
+	  when "110110101" => lutout <= "01000001";
+	  when "110110110" => lutout <= "00000001";
 	  when "110110111" => lutout <= "00000000";
-	  when "110111000" => lutout <= "00000000";
-	  when "110111001" => lutout <= "00000000";
-	  when "110111010" => lutout <= "00000000";
+	  when "110111000" => lutout <= "00000000"; -- shift in bit 15
+	  when "110111001" => lutout <= "01000001";
+	  when "110111010" => lutout <= "00000001";
 	  when "110111011" => lutout <= "00000000";
-	  when "110111100" => lutout <= "00000000";
-	  when "110111101" => lutout <= "00000000";
-	  when "110111110" => lutout <= "00000000";
-	  when "110111111" => lutout <= "00000000";
+	  when "110111100" => lutout <= "00001000"; -- end no ack
+	  when "110111101" => lutout <= "00001001";
+	  when "110111110" => lutout <= "00001001";
+	  when "110111111" => lutout <= "00001000";
 	  when "111000000" => lutout <= "00000000";
-	  when "111000001" => lutout <= "00000000";
-	  when "111000010" => lutout <= "00000000";
-	  when "111000011" => lutout <= "00000000";
-	  when "111000100" => lutout <= "00000000";
-	  when "111000101" => lutout <= "00000000";
-	  when "111000110" => lutout <= "00000000";
+	  when "111000001" => lutout <= "00001010"; -- stop  
+	  when "111000010" => lutout <= "00001011";
+	  when "111000011" => lutout <= "00001111";
+	  when "111000100" => lutout <= "00001110";
+	  when "111000101" => lutout <= "00000000"; -- done!
+	  when "111000110" => lutout <= "10000000"; -- stop
 	  when "111000111" => lutout <= "00000000";
 	  when "111001000" => lutout <= "00000000";
 	  when "111001001" => lutout <= "00000000";

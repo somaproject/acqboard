@@ -37,7 +37,7 @@ ARCHITECTURE behavior OF testbench IS
 	signal cycle : integer := 0; 
  	constant clockperiod : time := 15 ns; 
 BEGIN
-
+    sda <= 'H'; 
 	uut: eepromio PORT MAP(
 		clk => clk,
 		i2cclk => i2cclk,
@@ -55,7 +55,7 @@ BEGIN
 
    -- input signals
    din <= "1001000011110011";
-   wr <= '0';
+   
    ADDR <= "10110011100";
    	
 
@@ -72,10 +72,16 @@ BEGIN
 	 	i2cclk <= '0';
 	 end if; 
 
-	 if cycle = 100 then 
+	 if cycle = 100 or cycle = 500000 then 
 	 	en <= '1';
 	 else 	
 	 	en <= '0';
+	 end if; 
+
+	 if cycle < 499999 then 
+	 	wr <= '0';
+	 elsif cycle > 499999 and cycle < 1100000 then
+	 	wr <= '1';
 	 end if; 
    END PROCESS;
 

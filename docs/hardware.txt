@@ -101,6 +101,14 @@ We use the OPA227UA in-amp as a 2-pole HPF
 
 Rational for design: Assume that there's a 5 V difference between the output node and the input pin of the opamp. That means that there's a 5V drop across Ron+R1. But, then, the voltage across Ron varies as Ron/(Ron+R1). I.e. if R5 = 5k, ad max Ron = 50 ohms, then Ron will see 1/100th the voltage difference, and (as far as I can tell from the 
 
+We end up with a first-order HPF with a pole at 1/RC. Assume Rs = 5k, and thus, we want HPF at:
+
+50 Hz	 0.82 uF
+200 Hz   0.22 uF
+500 Hz = 0.12 uF
+
+
+
 
 ----------------------------------------------------------------------------
 FPGA to S-3 in a day!

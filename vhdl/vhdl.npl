@@ -13,11 +13,14 @@ DEVSPEEDTIME 0
 FLOW XST VHDL
 FLOWTIME 1061049059
 STIMULUS overflow_testbench.vhd Normal
+STIMULUS test_SendCMD_test.tbw Normal
 STIMULUS overflow_test.tbw Normal
 STIMULUS input_testbench.vhd Normal
 STIMULUS pgaload_test.tbw Normal
+STIMULUS acqboard_testbench.vhd Normal
 STIMULUS rounding_testbench.vhd Normal
 STIMULUS clocks_test.tbw Normal
+STIMULUS test_deserialize_testbench.vhd Normal
 STIMULUS rounding_test.tbw Normal
 STIMULUS test_EEPROM_test.tbw Normal
 STIMULUS test_eeprom_testbench.vhd Normal
@@ -64,6 +67,8 @@ MODULE PGAload.vhd
 MODSTYLE pgaload Normal
 MODULE overflow.vhd
 MODSTYLE overflow Normal
+MODULE test_SendCMD.vhd
+MODSTYLE test_sendcmd Normal
 MODULE acqboard.vhd
 MODSTYLE acqboard Normal
 MODULE clocks.vhd
@@ -78,6 +83,8 @@ MODULE distRAM.vhd
 MODSTYLE distram Normal
 MODULE test_EEPROM.vhd
 MODSTYLE test_eeprom Normal
+MODULE test_deserialize.vhd
+MODSTYLE test_deserialize Normal
 MODULE RMAC.vhd
 MODSTYLE rmac Normal
 DEPASSOC acqboard acqboard.ucf Normal

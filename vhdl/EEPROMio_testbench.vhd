@@ -27,6 +27,18 @@ ARCHITECTURE behavior OF testbench IS
 		);
 	END COMPONENT;
 
+	component test_EEPROM is
+	    Generic (  FILEIN : string := "eeprom_in.dat"; 
+	    			FILEOUT : string := "eeprom_out.dat"); 
+	    Port ( CLK : in std_logic;
+	           CS : in std_logic;
+	           SCK : in std_logic;
+			 SI : in std_logic;
+			 SO : out std_logic; 
+			 RESET : in std_logic;
+			 SAVE : in std_logic);
+	end component;
+
 	SIGNAL clk :  std_logic := '0';
 	SIGNAL spiclk :  std_logic;
 	SIGNAL dout :  std_logic_vector(15 downto 0);
@@ -41,6 +53,8 @@ ARCHITECTURE behavior OF testbench IS
 	signal esck : std_logic;
 	signal ecs : std_logic; 
 	signal cycle : integer := 0; 
+	signal save : std_logic := '0';
+
  	constant clockperiod : time := 15 ns; 
 BEGIN
 
@@ -58,7 +72,17 @@ BEGIN
 		eso => eso,
 		esck => esck,
 		ecs => ecs
-	);				
+	);	
+	
+	fake_eeprom: test_EEPROM port map (
+		CLK => clk,
+		CS => ecs,
+		SCK => esck,
+		SI => esi,
+		SO => eso,
+		RESET => reset, 
+		SAVE => save);
+					
 
    clk <= not clk after clockperiod / 2; 
 
@@ -66,14 +90,13 @@ BEGIN
    din <= "1001000011110011";
    reset <= '0' after 40 ns; 
 
-   ADDR <= "11110000011";
+
    	
 
    tb : PROCESS(CLK, cycle) is
    BEGIN
       if rising_edge(CLK) then
 	    cycle <= cycle + 1; 
-
 	 end if; 
 
 	 if cycle mod 640 = 0 then
@@ -92,7 +115,21 @@ BEGIN
 	 	wr <= '0';
 	 elsif cycle > 499999 and cycle < 1100000 then
 	 	wr <= '1';
+
 	 end if; 
+
+	 if cycle < 499999 then
+	 	ADDR <= "00000000011";
+	else
+		ADDR <= "00000000000";
+	end if; 
+
+	 if cycle = 1100000 then
+	 	save <= '1';
+	 else 
+	 	save <= '0';
+	 end if; 
+
    END PROCESS;
 
 END;

@@ -111,7 +111,7 @@ begin
 		   if OUTBYTE = '1' then
 		   	  dinl <= din;
 		   end if; 
-	
+						 
 		   dout <= ldout;
 
 		   -- loadable shift register

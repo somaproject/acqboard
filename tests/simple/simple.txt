@@ -1,0 +1,6 @@
+This is a very simple ADC reader, designed to try
+and read the adc at 32 kSPS, and use a very slow (i.e. impossible-to-break) serial link to do as such. 
+
+We perform no computation on the input values, and we keep an output value constant for the entire duration of OUTSAMPLE. 
+
+WE use the existing clock generator and the fiberTX, because re-doing those would be a horrible pain. 

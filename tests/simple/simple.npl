@@ -1,0 +1,35 @@
+JDF G
+// Created by Project Navigator ver 1.0
+PROJECT simple
+DESIGN simple
+DEVFAM spartan3
+DEVFAMTIME 0
+DEVICE xc3s200
+DEVICETIME 0
+DEVPKG vq100
+DEVPKGTIME 0
+DEVSPEED -4
+DEVSPEEDTIME 0
+DEVTOPLEVELMODULETYPE HDL
+TOPLEVELMODULETYPETIME 0
+DEVSYNTHESISTOOL XST (VHDL/Verilog)
+SYNTHESISTOOLTIME 0
+DEVSIMULATOR Modelsim
+SIMULATORTIME 0
+DEVGENERATEDSIMULATIONMODEL VHDL
+GENERATEDSIMULATIONMODELTIME 0
+SOURCE simple.vhd
+SOURCE ..\..\vhdl\FiberTX.vhd
+SOURCE ..\..\vhdl\clocks.vhd
+SOURCE encode8b10b.xco
+STIMULUS simpletest.vhd
+SOURCE ..\..\simulation\components\ADC\ADC.vhd
+DEPASSOC simple simple.ucf
+[Normal]
+xilxBitgCfg_GenOpt_ASCIIFile=xstvhd, spartan3, VHDL.t_bitFile, 1102552720, True
+xilxBitgCfg_GenOpt_BinaryFile=xstvhd, spartan3, VHDL.t_bitFile, 1102552720, True
+[STATUS-ALL]
+simple.ngcFile=WARNINGS,1102560053
+simple.ngdFile=WARNINGS,1102560062
+[STRATEGY-LIST]
+Normal=True

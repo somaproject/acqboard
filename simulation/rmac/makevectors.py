@@ -42,11 +42,11 @@ def sim_rmac(x, h):
     n = 26
     
     sum = fixed(0, 7+n);
-    for i in range(120):
+    for i in range(144):
         p=  x[i]*h[i]
         q = p
         sum += p.trunc(n-1) # because of the way sum does things
-        print "%d : %d (p) = %d (x) * %d (h), truncated to %d" % (i, q.val, x[i].val, h[i].val, p.trunc(n).val)
+        #print "%d : %d (p) = %d (x) * %d (h), truncated to %d" % (i, q.val, x[i].val, h[i].val, p.trunc(n).val)
         
         
     yrnd = sum.convrnd(15)
@@ -64,7 +64,7 @@ def sim_rmac(x, h):
 def xtobuf(x, xbase):
     # turns an array of x such that it can be read starting at xbase
     p  = x
-    for i in range(128 - len(x)):
+    for i in range(256 - len(x)):
         p.append(fixed(0, 15))
 
     p.reverse()
@@ -82,7 +82,7 @@ h = []
 
 
 # impulse and impulse
-for i in range (128):
+for i in range (256):
     x.append(fixed(0, 15))
     h.append(fixed(0,21))
 
@@ -96,25 +96,12 @@ bufs.add_vector(x, 0, h, fixed(32767, 15))
 
 # h[n] = 1-e, x[n] = lsb
 # to check and make sure we're only MACing 120 times
-for i in range (128):
+for i in range (256):
     x[i] = fixed(1, 15)
     h[i] = fixed(2097151, 22)
 
-bufs.add_vector(x, 0, h, fixed(120*1, 15))
+bufs.add_vector(x, 0, h, fixed(144*1, 15))
 
-
-# another one-off check
-for i in range (128):
-    x[i] = fixed(0, 21)
-    h[i] = fixed(0, 21)
-
-x[0] = fixed(100, 15)
-h[0] = fixed(2097151, 21)
-h[119] = fixed(2097151, 21)
-h[120] = fixed(2097151, 21)
-x[8] = fixed(1, 15)
-x[7] = fixed(200, 15)
-bufs.add_vector(x, 127, h, fixed(1, 15))
 
 
 # now, actual math checks:
@@ -123,12 +110,12 @@ bufs.add_vector(x, 127, h, fixed(1, 15))
 # test extended precision of the accumulator:
 ############################################################################
 
-for i in range(128) :
+for i in range(256) :
     x[i] = fixed(32767, 21)
-for i in range (0, 59):
+for i in range (0, 79):
     h[i] = fixed(2097151, 21)
     
-for i in range (59, 119):
+for i in range (71, 143):
     h[i] = fixed(-2097151, 21) # not -2097152 because 2s complement is asymmetric
     
 
@@ -136,12 +123,12 @@ bufs.add_vector(x, 0, h, fixed(0, 15))
 
 
 
-for i in range(128) :
+for i in range(256) :
     x[i] = fixed(-32768, 15)
-for i in range (0, 59):
+for i in range (0, 71):
     h[i] = fixed(2097151, 21)
     
-for i in range (59, 119):
+for i in range (71, 143):
     h[i] = fixed(-2097151, 21) # not -2097152 because 2s complement is asymmetric
     
 
@@ -149,12 +136,12 @@ bufs.add_vector(x, 0, h, fixed(0, 15))
 
 
 
-for i in range(128) :
+for i in range(256) :
     x[i] = fixed(32767, 15)
-for i in range (0, 59):
+for i in range (0, 71):
     h[i] = fixed(2097151, 21)
     
-for i in range (59, 119):
+for i in range (71, 143):
     h[i] = fixed(-2097152, 21) 
     
 
@@ -165,7 +152,7 @@ bufs.add_vector(x, 0, h, fixed(-1, 15)) #slightly less than -1, but we have roun
 ############################################################################
 
 
-for i in range (128):
+for i in range (256):
     x[i] = fixed(0, 15)
     h[i] = fixed(0, 21)
     
@@ -175,7 +162,7 @@ h[0] = fixed(1048576, 21)  #1/2
 bufs.add_vector(x, 0, h, fixed(3, 15)) # no rounding
 
 
-for i in range (128):
+for i in range (256):
     x[i] = fixed(0, 15)
     h[i] = fixed(0, 21)
     
@@ -185,7 +172,7 @@ h[0] = fixed(1048576, 21)  #1/2
 bufs.add_vector(x, 0, h, fixed(2, 15)) # round up towards two
 
 
-for i in range (128):
+for i in range (256):
     x[i] = fixed(0, 15)
     h[i] = fixed(0, 21)
 
@@ -200,7 +187,7 @@ bufs.add_vector(x, 0, h, fixed(2, 15)) #round down towards two
 
 
 #positive overflow
-for i in range (128):
+for i in range (256):
     x[i] = fixed(0, 15)
     h[i] = fixed(0, 21)
 
@@ -208,13 +195,13 @@ x[0] = fixed(32767, 15)
 h[0] = fixed(2097151, 21)
 bufs.add_vector(x, 0, h, fixed(32767, 15)) # equals
 
-x[127] = fixed(1, 15)
+x[255] = fixed(1, 15)
 h[1] = fixed(2097151, 21)
 bufs.add_vector(x, 0, h, fixed(32767, 15)) # won't overflow
 
 
 
-for i in range (128):
+for i in range (256):
     x[i] = fixed(0, 15)
     h[i] = fixed(0, 21)
 
@@ -222,7 +209,7 @@ x[0] = fixed( -32768, 15)
 h[0] = fixed(2097151, 21)
 bufs.add_vector(x, 0, h, fixed(-32768, 15)) # equals
 
-x[127] = fixed(-1, 15)
+x[255] = fixed(-1, 15)
 h[1] = fixed(2097151, 21)
 bufs.add_vector(x, 0, h, fixed(-32768, 15)) # won't overflow
 
@@ -237,12 +224,12 @@ for j in range(4000):
 
     x1 = []
     h1 = []
-    for i in range(120):
+    for i in range(144):
         x1.append(fixed(randrange(-32768, 32767), 15))
         h1.append(fixed(randrange(-2097152/4, 2097151/4), 21)) # slightly smaller
 
     # pad out h1
-    for i in range(8):
+    for i in range(256-144):
         h1.append(fixed(0, 21))
         
     y = sim_rmac(x1, h1)

@@ -75,3 +75,5 @@ B = remez(119, [0 10/128  22/128 1], [1 1 0 0 ], [0.5  1000]);
 I.e. create a filter with a not-as-tight passband. this results in us getting part of a high-frequency image in our output, but "who cares", as we're only interested in the band between 0-10 khz. This will mean, however, that all DSP boards will need to have an O(10) tap filter to further filter. Oh well. 
 
 Part of me still wishes there were a better way. I'm just not seeing it though. But, happily, we now have correct output plots of the signal versus alias/noise for the total system. 
+
+The better way was to allow filters of length 144. 

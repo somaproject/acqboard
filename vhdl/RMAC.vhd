@@ -27,7 +27,7 @@ architecture Behavioral of RMAC is
 -- RMAC.VHD -- main repeated multiply-accumulator system. 
    -- resolution of intermediate MAC
    constant n : positive := 26; 
-   constant L : positive := 160; 
+   constant L : positive := 144; 
    signal lxa, lha: std_logic_vector(7 downto 0) := (others => '0');
    signal p: std_logic_vector((n-1) downto 0) := (others => '0');
    signal acc, accl : std_logic_vector((7+n-1) downto 0) := (others=> '0');
@@ -152,7 +152,7 @@ begin
 		  ns <= macwait;
 		when macwait =>
 		  MACDONE <= '0'; 
-		  if maccnt  = L+4 then
+		  if maccnt  = L+5 then
 		  	ns <= accen;
 		  else
 		  	ns <= macwait;

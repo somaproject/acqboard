@@ -26,3 +26,4 @@ We've developed a fixed-point math implementation that lets us know exactly what
 
 2004.04.05 We have things working for edge cases and for large chunks of data. Wow. 
 
+2004.04.18 Now, we modify the testbench, etc. to deal with the new, longer filters and the XC3S. Appears to work. 

@@ -26,22 +26,22 @@ ARCHITECTURE behavior OF testbench IS
 		CLK : IN std_logic;
 		X : IN std_logic_vector(15 downto 0);
 		H : IN std_logic_vector(21 downto 0);
-		XBASE : IN std_logic_vector(6 downto 0);
+		XBASE : IN std_logic_vector(7 downto 0);
 		STARTMAC : IN std_logic;
 		RESET : IN std_logic;          
-		XA : OUT std_logic_vector(6 downto 0);
-		HA : OUT std_logic_vector(6 downto 0);
+		XA : OUT std_logic_vector(7 downto 0);
+		HA : OUT std_logic_vector(7 downto 0);
 		MACDONE : OUT std_logic;
 		Y : OUT std_logic_vector(15 downto 0)
 		);
 	END COMPONENT;
 
 	SIGNAL CLK :  std_logic := '0';
-	SIGNAL X :  std_logic_vector(15 downto 0);
-	SIGNAL XA :  std_logic_vector(6 downto 0);
-	SIGNAL H :  std_logic_vector(21 downto 0);
-	SIGNAL HA :  std_logic_vector(6 downto 0);
-	SIGNAL XBASE :  std_logic_vector(6 downto 0);
+	SIGNAL X, LX :  std_logic_vector(15 downto 0);
+	SIGNAL XA :  std_logic_vector(7 downto 0);
+	SIGNAL H, LH :  std_logic_vector(21 downto 0);
+	SIGNAL HA :  std_logic_vector(7 downto 0);
+	SIGNAL XBASE :  std_logic_vector(7 downto 0);
 	SIGNAL STARTMAC :  std_logic;
 	SIGNAL MACDONE :  std_logic;
 	SIGNAL RESET :  std_logic := '1';
@@ -75,17 +75,22 @@ BEGIN
 	-- read line
 	-- load values into fake-rams
 
+   process(clk) is
+	begin
+		if rising_edge(clk) then
+			X <= LX;
+			H <= LH;
+		end if; 
+	end process; 
 
 	tb: process is
 	  	file xfile, xbasefile, hfile, yfile : text; 
 	  	variable xline, xbaseline, hline, yline: line;
-		type bufarray is array (0 to 127) of integer;
+		type bufarray is array (0 to 255) of integer;
 		variable xbuf, hbuf : bufarray; 
 		variable yref : integer; 
 		variable temp: integer; 
-		variable lx : std_logic_vector(15 downto 0) := (others => '0');
-		variable lh : std_logic_vector(21 downto 0) := (others => '0');
-
+		
 
 	begin
 
@@ -103,19 +108,19 @@ BEGIN
 			readline(yfile, yline); 
 			
 			-- load the x-values
-			for i in 0 to 127 loop
+			for i in 0 to 255 loop
 				read(xline, temp);
 				xbuf(i) := temp;
 			end loop; 
 
 			-- load the h-values
-			for i in 0 to 127 loop
+			for i in 0 to 255 loop
 				read(hline, temp);
 				hbuf(i) := temp;
 			end loop; 
 		
 			read(xbaseline, temp);
-			xbase <= std_logic_vector(to_unsigned(temp, 7));  
+			xbase <= std_logic_vector(to_unsigned(temp, 8));  
 
 			read(yline, yref); 
 
@@ -128,10 +133,9 @@ BEGIN
 			while MACDONE = '0' loop
 				wait until rising_edge(clk); 
 				startmac <= '0'; 
-				lx := std_logic_vector(to_signed(xbuf(TO_INTEGER(unsigned(xa))), 16)); 
-				lh := std_logic_vector(to_signed(hbuf(TO_INTEGER(unsigned(ha))), 22));
-				x <= lx;
-				h <= lh; 
+				lx <= std_logic_vector(to_signed(xbuf(TO_INTEGER(unsigned(xa))), 16)); 
+				lh <= std_logic_vector(to_signed(hbuf(TO_INTEGER(unsigned(ha))), 22));
+
 
 			end loop; 
 			

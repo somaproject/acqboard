@@ -1,0 +1,35 @@
+JDF G
+// Created by Project Navigator ver 1.0
+PROJECT filter
+DESIGN filter
+DEVFAM spartan2e
+DEVFAMTIME 0
+DEVICE xc2s50e
+DEVICETIME 0
+DEVPKG tq144
+DEVPKGTIME 0
+DEVSPEED -6
+DEVSPEEDTIME 0
+DEVTOPLEVELMODULETYPE HDL
+TOPLEVELMODULETYPETIME 0
+DEVSYNTHESISTOOL XST (VHDL/Verilog)
+SYNTHESISTOOLTIME 0
+DEVSIMULATOR Modelsim
+SIMULATORTIME 0
+DEVGENERATEDSIMULATIONMODEL VHDL
+GENERATEDSIMULATIONMODELTIME 0
+STIMULUS testbench.vhd
+SOURCE ..\..\vhdl\samplebuffer.vhd
+SOURCE ..\..\vhdl\RMAC.vhd
+SOURCE ..\..\vhdl\input.vhd
+SOURCE ..\..\vhdl\overflow.vhd
+SOURCE ..\..\vhdl\multiplier.vhd
+SOURCE ..\..\vhdl\RMACcontrol.vhd
+SOURCE ..\..\vhdl\accumulator.vhd
+SOURCE ..\..\vhdl\FilterArray.vhd
+SOURCE ..\..\vhdl\rounding.vhd
+SOURCE ..\test_ADC.vhd
+SOURCE C:\desktop\acqboard\simulation\test_FilterLoad.vhdl
+STIMULUS test_filterload_test.tbw
+[STRATEGY-LIST]
+Normal=True

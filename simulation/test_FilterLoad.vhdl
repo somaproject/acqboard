@@ -15,7 +15,7 @@ entity test_FilterLoad is
 	Generic (filename : string := "filter.dat" ); 
     Port ( CLK : in std_logic;
            DOUT : out std_logic_vector(15 downto 0);
-           AOUT : out std_logic_vector(7 downto 0);
+           AOUT : out std_logic_vector(8 downto 0);
            WEOUT : out std_logic;
 			  LOAD : in std_logic);
 end test_FilterLoad;
@@ -38,7 +38,7 @@ begin
 
 				 file_open(inputfile, FILENAME, read_mode);
 				 
-				 for i in 0 to 127 loop
+				 for i in 0 to 255 loop
 				 	  if not endfile(inputfile) then 
 						  readline(inputfile, L);
 					     read(L, val);
@@ -47,7 +47,7 @@ begin
 					  
 						  wait until rising_edge(clk); 
 						  DOUT <= valbit(15 downto 0); 
-						  AOUT <= conv_std_logic_vector(i*2, 8); 
+						  AOUT <= conv_std_logic_vector(i*2, 9); 
 						  WEOUT <= '1';
 
 						  wait until rising_edge(clk); 
@@ -55,7 +55,7 @@ begin
 
 						  wait until rising_edge(clk); 
 						  DOUT <= ("0000000000" &  valbit(21 downto 16)); 
-						  AOUT <= conv_std_logic_vector(i*2+1, 8); 
+						  AOUT <= conv_std_logic_vector(i*2+1, 9); 
 						  WEOUT <= '1';
 
 						  wait until rising_edge(clk); 

@@ -61,9 +61,9 @@ ARCHITECTURE behavior OF testbench IS
 	           DIN : in std_logic_vector(15 downto 0);
 	           CHANIN : in std_logic_vector(3 downto 0);
 	           WE : in std_logic;
-	           AIN : in std_logic_vector(6 downto 0);
+	           AIN : in std_logic_vector(7 downto 0);
 	           DOUT : out std_logic_vector(15 downto 0);
-	           AOUT : in std_logic_vector(6 downto 0);
+	           AOUT : in std_logic_vector(7 downto 0);
 				  ALLCHAN : in std_logic;  
 				  SAMPOUTEN: in std_logic; 
 	           CHANOUT : in std_logic_vector(3 downto 0));
@@ -71,10 +71,10 @@ ARCHITECTURE behavior OF testbench IS
 	
 	signal X, fdin : std_logic_vector(15 downto 0) := (others => '0'); 
 	signal H : std_logic_vector(21 downto 0) := (others => '0'); 
-	signal XA, HA, XABASE, SAMPLE : std_logic_vector(6 downto 0) := (others => '0'); 
+	signal XA, HA, XABASE, SAMPLE : std_logic_vector(7 downto 0) := (others => '0'); 
 	signal startmac, macdone, fwe : std_logic := '0';
 	signal allchan : std_logic := '0'; 
-	signal fain : std_logic_vector(7 downto 0) := (others => '0'); 
+	signal fain : std_logic_vector(8 downto 0) := (others => '0'); 
 	signal macchan : std_logic_vector(3 downto 0) := (others => '0'); 
 	
 	   
@@ -83,8 +83,8 @@ ARCHITECTURE behavior OF testbench IS
 	           RESET : in std_logic;
 	           WE : in std_logic;
 	           H : out std_logic_vector(21 downto 0);
-	           HA : in std_logic_vector(6 downto 0);
-	           AIN : in std_logic_vector(7 downto 0);
+	           HA : in std_logic_vector(7 downto 0);
+	           AIN : in std_logic_vector(8 downto 0);
 	           DIN : in std_logic_vector(15 downto 0));
 	end component;
    
@@ -96,8 +96,8 @@ ARCHITECTURE behavior OF testbench IS
 	           RESET : in std_logic;
 	           STARTMAC : out std_logic;
 	           MACDONE : in std_logic;
-	           SAMPLE : out std_logic_vector(6 downto 0);
-	           SAMPBASE : out std_logic_vector(6 downto 0);
+	           SAMPLE : out std_logic_vector(7 downto 0);
+	           SAMPBASE : out std_logic_vector(7 downto 0);
 			     SAMPOUTEN: out std_logic; 
 	           RMACCHAN : out std_logic_vector(3 downto 0));
 	end component;
@@ -105,10 +105,10 @@ ARCHITECTURE behavior OF testbench IS
 	component RMAC is
 	    Port ( CLK : in std_logic;
 	           X : in std_logic_vector(15 downto 0);
-	           XA : out std_logic_vector(6 downto 0);
+	           XA : out std_logic_vector(7 downto 0);
 	           H : in std_logic_vector(21 downto 0);
-	           HA : out std_logic_vector(6 downto 0);
-	           XBASE : in std_logic_vector(6 downto 0);
+	           HA : out std_logic_vector(7 downto 0);
+	           XBASE : in std_logic_vector(7 downto 0);
 	           STARTMAC : in std_logic;
 			     MACDONE  : out std_logic; 
 			     RESET : in std_logic; 
@@ -147,7 +147,7 @@ ARCHITECTURE behavior OF testbench IS
 	    Generic (filename : string := "adcin.dat" ); 
 	    Port ( CLK : in std_logic;
 	           DOUT : out std_logic_vector(15 downto 0);
-	           AOUT : out std_logic_vector(7 downto 0);
+	           AOUT : out std_logic_vector(8 downto 0);
 	           WEOUT : out std_logic;
 				  LOAD : in std_logic);
 	end component;

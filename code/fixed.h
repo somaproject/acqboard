@@ -19,6 +19,8 @@ all numbers are 64-bit, with 34.30 format.
 
 */
 
+inline std::string hprint(Fixed x, int width, int bits);
+
 #define POINTPOS 48
 
 inline Fixed rshift(const Fixed x, int bits) {
@@ -37,6 +39,11 @@ inline Fixed lshift(const Fixed x, int bits) {
 
 }
 
+inline Fixed modulo(const Fixed x, const Fixed z) {
+  Fixed y; 
+  mpz_mod(y.get_mpz_t(), x.get_mpz_t(), z.get_mpz_t());
+  return y;
+}
 
 inline Fixed movepoint(Fixed x, int bits) {
   // takes in a long long x and moves the binary point
@@ -46,49 +53,56 @@ inline Fixed movepoint(Fixed x, int bits) {
   return y; 
 }
 
+
+
+inline Fixed trunc(Fixed x, int bits) {
+  // Truncate ; discard everything after the bits, so, 
+  // a.b becomes a.(b-bits)
+  
+  Fixed r = rshift(x, POINTPOS - bits);
+  return lshift(r, POINTPOS - bits); 
+}
+
 inline Fixed convrnd(Fixed x, int bits) {
   //
   // convergent rounding to a number with bits bits, i.e. 
-  // we turn a.b number into an a.bits number. A problem arises with these
-  // really-long precision numbers such that we want to truncate before we round. 
- 
-  
-  Fixed os = 1; 
-  os = lshift(os, POINTPOS-bits); 
+  // we turn a.b number into an a.bits number. 
 
-  Fixed div = x / (os);
-  Fixed rem = x % (os); 
-
-  if (x >= 0) {
-    if (rem < rshift(os, 1)) { 
-      return x - rem; 
-    } else if (rem > rshift(os, 1)) { 
+  if ( x > 0) {
+    Fixed os = lshift(Fixed(1), POINTPOS - bits); 
+    Fixed rem = modulo(x, os); 
+    if (rem > rshift(os, 1)) {
       return x - rem + os; 
-    } else {
-      if (div % 2 == 0) { 
-	// even, round down
+    }  else if (rem < rshift(os, 1)) {
+      return x - rem; 
+    } else { 
+      // rem == rshift(os, 1)
+      if (modulo(rshift(x, POINTPOS-bits), 2) == 0) {
 	return x - rem;
       } else {
 	return x - rem + os;
       }
     }
-  }
-  else {
-    // negatives
-    if (-rem < rshift(os, 1)) {
-      return x - rem; 
-      } else if (-rem > rshift(os, 1)) {
-	return x - rem -os ; 
-      } else {
-	if (div % 2 == 0) { 
-	  // even, round down
-	  return x - rem;
-	} else {
-	  return x - rem - os;
-	}
-      } 
-  }
+  } else {
+    // negative 
+    Fixed os = lshift(Fixed(1), POINTPOS - bits); 
+    Fixed rem = modulo(x, os); 
 
+    if (rem > rshift(os, 1)) {
+      return x - rem + os; 
+    }  else if (rem < rshift(os, 1)) {
+      return x - rem; 
+    } else { 
+      // rem == rshift(os, 1)
+      
+      if (modulo(rshift(x, POINTPOS-bits), 2) == 0) {
+	return x - rem;
+      } else {
+	return x - rem + os;
+      }
+    }
+  } 
+     
 }
 
 inline Fixed overf(Fixed x, int bits) {
@@ -113,15 +127,6 @@ inline Fixed overf(Fixed x, int bits) {
   }  
 }
 
-inline Fixed trunc(Fixed x, int bits) {
-  // Truncate ; discard everything after the bits, so, 
-  // a.b becomes a.(b-bits)
-  
-  Fixed r = rshift(x, POINTPOS - bits);
-  return lshift(r, POINTPOS - bits); 
-  
-  
-}
 
 inline long getint(Fixed x, int bits) {
   // returns an int where the LSBs are a.bits of the int

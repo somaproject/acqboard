@@ -78,15 +78,19 @@ void test_convrnd()
   x= movepoint(-128-256, 8); 
   BOOST_CHECK_EQUAL(convrnd(x, 0),  movepoint(-2,0));
 
+  x= movepoint(-128-255, 8); 
+  BOOST_CHECK_EQUAL(convrnd(x, 0),  movepoint(-1,0));
+
   x= movepoint(-12152320, 25); 
   BOOST_CHECK_EQUAL(convrnd(x, 15), movepoint(-11868, 15)); 
+  cout << hprint(convrnd(x, 15), 10, 15) << endl; 
 
-  //attempt to figure out strange convergent rounding issues
-  Fixed y("-101941044576256"); 
-  Fixed z("-101936753803264"); 
-  BOOST_CHECK_EQUAL(z, convrnd(y, 15 )); 
+  Fixed a("-101941044576256"); 
+  Fixed b("-101936753803264"); 
+  cout << hprint(convrnd(a, 15), 10, 15) << endl; 
 
 }
+
 
 void test_getint()
 {

@@ -35,9 +35,10 @@ architecture Behavioral of acqboard is
    	 std_logic := '0';
 
 -- pga and input select signals
-   signal gain : std_logic_vector(4 downto 0) := (others => '0');
+   signal gain : std_logic_vector(2 downto 0) := (others => '0');
+   signal filter : std_logic_vector(1 downto 0) := (others => '0'); 
    signal pgachan : std_logic_vector(3 downto 0) := (others => '0');
-   signal gset, iset : std_logic := '0';
+   signal gset, iset, fset : std_logic := '0';
    signal isel : std_logic_vector(3 downto 0) := (others => '0');
 
 -- loader and EEPROM-related signals
@@ -154,14 +155,18 @@ architecture Behavioral of acqboard is
 	           RCLK : out std_logic;
 	           SOUT : out std_logic;
 	           CHAN : in std_logic_vector(3 downto 0);
-	           GAIN : in std_logic_vector(4 downto 0);
+			 FILTER : in std_logic_vector(1 downto 0); 
+	           GAIN : in std_logic_vector(2 downto 0);
 	           GSET : in std_logic;
 	           ISET : in std_logic;
+			 FSET : in std_logic; 
 	           ISEL : in std_logic_vector(3 downto 0));
 	end component;
 
 
 begin
+
+		
 
 
 end Behavioral;

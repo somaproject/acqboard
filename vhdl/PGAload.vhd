@@ -15,9 +15,11 @@ entity PGAload is
            RCLK : out std_logic;
            SOUT : out std_logic;
            CHAN : in std_logic_vector(3 downto 0);
-           GAIN : in std_logic_vector(4 downto 0);
+           GAIN : in std_logic_vector(2 downto 0);
+		 FILTER : in std_logic_vector(1 downto 0); 
            GSET : in std_logic;
            ISET : in std_logic;
+		 FSET : in std_logic; 
            ISEL : in std_logic_vector(3 downto 0));
 end PGAload;
 
@@ -27,14 +29,12 @@ architecture Behavioral of PGAload is
 -- it to serialize out to the shift registers. It also has the gain-setting
 -- to PGA look-up table. 
 
-   signal isetl, gwe : std_logic := '0';
+   signal isetl, gwe, fwe : std_logic := '0';
    signal gainl : std_logic_vector(4 downto 0) := (others => '0');
    signal chanl, isell : std_logic_vector(3 downto 0) := (others => '0');
 
-   signal pgagain1, pgagain2, pgagain3, pgagain4, pgagain5,
-   		pgagain6, pgagain7, pgagain8, pgagain9, pgagain10, pgagain,
-		gainlookup, gainlookupl
-			: std_logic_vector(5 downto 0) := (others => '0');
+   signal cin, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c
+			: std_logic_vector(4 downto 0) := (others => '0');
    signal inputsel, input : std_logic_vector(1 downto 0) := (others => '0');
    signal msbout, shiften, latch, lsclk : std_logic := '0';
    signal shiftreg, shiftregin : 
@@ -52,8 +52,8 @@ architecture Behavioral of PGAload is
 
 begin
 
-   clock: process(CLK, cs, ns, ISEL, ISET, GAIN, GSET, CHAN, input, pgagain,
-   			shiftreg, msbout, lsclk, latch, RESET) is
+   clock: process(CLK, cs, ns, ISEL, ISET, GAIN, GSET, CHAN, FSET, input,
+      		  shiftreg, msbout, lsclk, latch, RESET) is
    begin
    	if RESET = '1' then
 		cs <= none; 
@@ -66,24 +66,44 @@ begin
 			 	isell <= ISEL;
 			end if; 
 			isetl <= ISET;
-			gainl <= GAIN;
+			cin <= (filter & gain) ; 
 			gwe <= GSET;
+			fwe <= FSET;
 			chanl <= CHAN;
-			gainlookupl <= gainlookup; 
+
 			-- gain registers for each channel
-			case chanl is
-				when "0000" => pgagain1 <= gainlookupl; 
-				when "0001" => pgagain2 <= gainlookupl; 
-				when "0010" => pgagain3 <= gainlookupl; 
-				when "0011" => pgagain4 <= gainlookupl; 
-				when "0100" => pgagain5 <= gainlookupl; 
-				when "0101" => pgagain6 <= gainlookupl; 
-				when "0110" => pgagain7 <= gainlookupl; 
-				when "0111" => pgagain8 <= gainlookupl; 
-				when "1000" => pgagain9 <= gainlookupl; 
-				when "1001" => pgagain10 <= gainlookupl; 
+			if gwe = '1' then 
+			  case chanl is
+				when "0000" => c1(2 downto 0) <= cin(2 downto 0); 
+				when "0001" => c2(2 downto 0) <= cin(2 downto 0); 
+				when "0010" => c3(2 downto 0) <= cin(2 downto 0); 
+				when "0011" => c4(2 downto 0) <= cin(2 downto 0); 
+				when "0100" => c5(2 downto 0) <= cin(2 downto 0); 
+				when "0101" => c6(2 downto 0) <= cin(2 downto 0); 
+				when "0110" => c7(2 downto 0) <= cin(2 downto 0); 
+				when "0111" => c8(2 downto 0) <= cin(2 downto 0); 
+				when "1000" => c9(2 downto 0) <= cin(2 downto 0); 
+				when "1001" => c10(2 downto 0) <= cin(2 downto 0); 
 				when others => Null;
-			end case; 
+				end case; 
+			end if; 
+
+			if fwe = '1' then 
+			  case chanl is
+				when "0000" => c1(4 downto 3) <= cin(4 downto 3); 
+				when "0001" => c2(4 downto 3) <= cin(4 downto 3); 
+				when "0010" => c3(4 downto 3) <= cin(4 downto 3); 
+				when "0011" => c4(4 downto 3) <= cin(4 downto 3); 
+				when "0100" => c5(4 downto 3) <= cin(4 downto 3); 
+				when "0101" => c6(4 downto 3) <= cin(4 downto 3); 
+				when "0110" => c7(4 downto 3) <= cin(4 downto 3); 
+				when "0111" => c8(4 downto 3) <= cin(4 downto 3); 
+				when "1000" => c9(4 downto 3) <= cin(4 downto 3); 
+				when "1001" => c10(4 downto 3) <= cin(4 downto 3); 
+				when others => Null;
+				end case; 
+			end if; 
+
 
  
 			
@@ -117,18 +137,18 @@ begin
    end process clock; 
 
    msbout <= shiftreg(7); 
-   shiftregin <= (input(1) & pgagain & input(0));
+   shiftregin <= (input(1) & '0' & c & input(0));
    -- PGA channel selection
-   pgagain <= pgagain1 when chancnt = 0 else
-   		    pgagain2 when chancnt = 1 else
-   		    pgagain3 when chancnt = 2 else
-   		    pgagain4 when chancnt = 3 else
-   		    pgagain5 when chancnt = 4 else
-   		    pgagain6 when chancnt = 5 else
-   		    pgagain7 when chancnt = 6 else
-   		    pgagain8 when chancnt = 7 else
-   		    pgagain9 when chancnt = 8 else
-   		    pgagain10;
+   c <= c1 when chancnt = 0 else
+   		    c2 when chancnt = 1 else
+   		    c3 when chancnt = 2 else
+   		    c4 when chancnt = 3 else
+   		    c5 when chancnt = 4 else
+   		    c6 when chancnt = 5 else
+   		    c7 when chancnt = 6 else
+   		    c8 when chancnt = 7 else
+   		    c9 when chancnt = 8 else
+   		    c10;
 
    -- input selection for PGA		    
    input <= isell(1 downto 0) when inputsel = "00" else
@@ -139,55 +159,16 @@ begin
    			"01" when chancnt = 6 else
 			"10"; 
    
-   -- gain settings LUT
-   gainlut: process(gainl) is
-   begin
-   	case gainl is
-		when "00000" => gainlookup <= "111111";
-		when "00001" => gainlookup <= "111110";
-		when "00010" => gainlookup <= "111101";
-		when "00011" => gainlookup <= "111100";
-		when "00100" => gainlookup <= "111011";
-		when "00101" => gainlookup <= "111010";
-		when "00110" => gainlookup <= "111001";
-		when "00111" => gainlookup <= "111000";
-		when "01000" => gainlookup <= "000011";
-		when "01001" => gainlookup <= "010001";
-		when "01010" => gainlookup <= "000001";
-		when "01011" => gainlookup <= "010111";
-		when "01100" => gainlookup <= "001001";
-		when "01101" => gainlookup <= "010001";
-		when "01110" => gainlookup <= "000000";
-		when "01111" => gainlookup <= "000101";
-		when "10000" => gainlookup <= "000001";
-		when "10001" => gainlookup <= "000101";
-		when "10010" => gainlookup <= "000111";
-		when "10011" => gainlookup <= "010000";
-		when "10100" => gainlookup <= "000001";
-		when "10101" => gainlookup <= "001001";
-		when "10110" => gainlookup <= "001101";
-		when "10111" => gainlookup <= "000001";
-		when "11000" => gainlookup <= "000001";
-		when "11001" => gainlookup <= "111001";
-		when "11010" => gainlookup <= "100101";
-		when "11011" => gainlookup <= "001100";
-		when "11100" => gainlookup <= "011001";
-		when "11101" => gainlookup <= "111111";
-		when "11110" => gainlookup <= "001001";
-		when "11111" => gainlookup <= "011001";
-		when others => null;
-	end case;   	
-   end process gainlut; 
 
 
-   fsm : process (cs, ns, gwe, isetl, shiftcnt, chancnt) is
+   fsm : process (cs, ns, gwe, fwe, isetl, shiftcnt, chancnt) is
    begin
    	case cs is 
 		when none => 
 			lsclk <= '0';
 			latch <= '0';
 			shiften <= '0';
-  			if gwe = '1' or isetl = '1' then
+  			if gwe = '1' or isetl = '1' or fwe = '1' then
 				ns <= rst_chan_cnt;
 			else	
 				ns <= none;

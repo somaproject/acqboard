@@ -979,7 +979,29 @@ model; is actually 350 mil high. <br>
 <br>
 Fuck; jtag interface is totally wrong. <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">15 January
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+The bit shifting of the LSBs for the individual-DVDD planes is better,
+although it still seems as if the 2 LSBs are excessively noisy; now we
+just have to see what our actual output looks like.<br>
 <br>
+Actually, strike that; the 4 LSBs on this channel are quite noisy. That
+sucks. But the lowpass capacitor for the input makes things -worse-.<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">20 January
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+Initial analysis suggested that, indeed, we only had two LSBs worth of
+noise, but we're back to exactly the same problems we had before, in
+previous iterations of the board. <br>
+<br>
+These measures definitly look better (more concrete data tomorrow) but
+most importantly, we're getting a logic analyzer to help us pull data
+right off the raw ADC instead of having to rely on our complete data
+processing stream, whcih involves:<br>
+<br>
+SPI -&gt; isoloop -&gt; FPGA -&gt; optical 8b/10b -&gt; main fpga -&gt;
+FIFO FPGA -&gt; FIFO ram -&gt; FIFO FPGA -&gt; main FPGA -&gt; GPIF io
+on FX2 -&gt; USB -&gt; master -&gt; domain socket -&gt; client app<br>
 <br>
 <br>
 <br>

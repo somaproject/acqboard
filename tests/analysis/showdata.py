@@ -108,6 +108,50 @@ def rawnoiseplots(sourceArray):
     a.set_xticks([0, fftlen/2])
     a.set_xticklabels(['0', r"$\pi$"])
     show()
+
+
+class bitstats:
+    """ class which is constructed with an array of integers, and returns
+    the statistics (as expected) for each bit in that array. We assume
+    input values are twos-complement"""
+
+    def __init__(self, x, bits):
+        self.vals = x
+        self.bits = bits
+        for i in x:
+            if i > (2**bits -1) or i < (-2**bits):
+                print "%d is not in the %d-bit range!!" % (i, bits)
+        self.bitsum = zeros(self.bits)
+
+    def sum(self):
+        
+        for n in self.vals:
+            for b in range(self.bits):
+                if n & (2**b) != 0:
+                    self.bitsum[b] += 1
+
+        return self.bitsum
+
+    def mean(self):
+        return self.sum()/float(len(self.vals))
+
+    def makebitarray(self):
+        bitarray = zeros((self.bits, len(self.vals)))
+        for i in range(len(self.vals)):
+            for b in range(self.bits):
+                if self.vals[i] & (2**b) != 0:
+                    bitarray[b][i] = 1
+        return bitarray
+
+    def var(self):
+        """ computes variance"""
+
+
+        return stats.var(self.makebitarray)
+
+        
+
+                
     
 
 import sys

@@ -133,9 +133,10 @@ class AcqBoardCmd:
 
         x = pack("i", value);
         y = unpack("BBB", x[0:3])
-        
+        fid = file('/tmp/filter.out', 'a')
         str = pack("BBBBBB", cmdbyte, addr, y[2] ,y[1] , y[0], 0x0 );
-
+        fid.write("value: %d, bytes : %d %d %d\n" % (value, y[2], y[1], y[0]))
+        fid.close()
         return str;
         
 

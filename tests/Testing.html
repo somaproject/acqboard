@@ -317,9 +317,90 @@ going on. In any case, that's a day!!<br>
 </div>
 </div>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">16 July
+2004</span><br style="font-weight: bold; text-decoration: underline;">
+Now, it seems that the sample input is having problems -- let's see
+what's up!<br>
 <br>
+THE OUTPUT VALUES GO FROM 0 to 248 BECAUSE IT IS DOWNSAMPLING THE
+OUTPUT! YOU FOOL!<br>
 <br>
+When we run with a random sequence of inputs, we don't have problems --
+we read out a reasonably random range between -32768 and 32768, without
+error. <br>
 <br>
+The thing is, this just -really- looks like an ADC problem -- I can't
+think of anything else it might be!<br>
+<br>
+Channel modifications<br>
+<ul>
+  <li>A3 has connected the output of the inamp to the input of the AA
+filter<br>
+  </li>
+  <li>A4 is shorts the input of the AA filter to nearby ground</li>
+</ul>
+So, we're still getting the noise problems (see
+results/date/rtinoise.modified), so we took the board and resoldered
+around the ADC. One pin on the A1/2 ADC wasn't soldered correctly. <br>
+<br>
+So, having soldered, now we'll take more data. And we get outputs (from
+results/data/rtinoise.modified.post-solder) like:<br>
+<br>
+<img style="width: 1200px; height: 900px;" alt=""
+ src="results/20040716/rtinoise.modified.post-solder.A3.g100.png"><br>
+<br>
+Which, umm, is crap. Look at that!!! Smilarly, for A1:<br>
+<img style="width: 1200px; height: 900px;" alt=""
+ src="results/20040716/rtinoise.modified.post-solder.A1.g10000.png"><br>
+<br>
+So, here we are, the same place we were yesterday, but with more
+inputs. I really have no freaking idea what to do. <br>
+<br>
+While out at dinner, came up with a few small ideas. First, per-bit
+statistics: mean, variance, distribution.<br>
+<br>
+Bit statistics appear to tell us nothing unusual. But look at this:<br>
+<br>
+<img style="width: 512px; height: 384px;" alt=""
+ src="results/20040716/a2.g10000.diff.hist.png">This is a histogram of
+the differences from the full record of A2. Wow, it sure does look
+like, say, 255 is getting randomly added or subtracted there!! But
+where? where is this coming from? ADC errors? <br>
+<br>
+Even on the sine data! Here's yesterday's sine recording, but a plot of
+the diff() of the signal!<br>
+<br>
+<img style="width: 1200px; height: 900px;" alt=""
+ src="results/20040716/sinediffs.png"><br>
+<br>
+Again, how horrible!! We're running out of potential candidates. Now,
+it -could- be a problem internal to the FPGA, but that's just so
+unlikely that I'm not even going to consider it. Although the above
+suggests either an -amplitude- or -phase- correlation. But rather than
+hyper-analyzing it, let's figure out our timings again. The only
+plausable candidate at the moment is the isolators, although I'll be
+damned if I can figure out how they'd cause -this- sort of error. <br>
+<br>
+Measuring on the scope, a SDOUT bit width is ~50 ns, which, when you
+sum the worst-case propagation times for the various components in the
+chain, "might" be an issue. Except that measuring the propagation
+delays of various bits of the system with the scope suggests that we're
+really looking at a P(delay) of, oh, 10 ns -total-. The ADC seems to be
+pretty good at sticking with 2 ns. At the same time, the sorts of
+single-bit errors (why always the same place) suggests a real
+fundamental problem. <br>
+<br>
+On a slight hunch (yikes!) I'm going to try and sample one cycle
+earlier. <br>
+<br>
+Umm, that appears to have made things worse! Sampling one cycle sooner
+(INCE one cycle ahead) gives... <br>
+<img style="width: 1200px; height: 900px;" alt=""
+ src="results/20040716/early-cycle.sinediffs.png"><br>
+<br>
+At least this strongly suggests what the real problem is. The downside
+is how to work around it -- how can we possibly hope to speed things up
+at all? <br>
 <br>
 <br>
 <br>

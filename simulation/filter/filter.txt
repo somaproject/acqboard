@@ -8,3 +8,25 @@ We begin by writing in filter array coefficients from the file filter.dat
 Then we begin the insample filtering. Whee. 
 
 We store the output in a file, again. 
+
+we have a filter.dat file which we keep filter coefficients in, as 22-bit signed ints. 
+
+The money here comes from analysis. We can obviously filter and save the output. 
+
+First, we wish to understand the relative downsampling locations and
+delays from the output of the simulation. This is going to be determined empirically, because well, i'm lame like that :) The best solution would be to preface each ADCIN signal with an impulse to allow for correct scaling and latency detection. 
+
+
+simy.m ::
+
+
+We want a script which will take in:
+outputs.dat : the 1x10 vector of outputs
+adcin.0-4.dat : the input vectors
+h : the filter
+
+our goal is the output of a vector "op" : that is, a vector of the exact dimensions of output, aligned to output, but is essentially "output" with all the math done in matlab. 
+
+This will let us measure per-sample MMSE, and make sure we're getting all of our math factors correct. 
+
+

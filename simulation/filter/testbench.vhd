@@ -12,6 +12,8 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
+use std.textio.all; 
+
 ENTITY testbench IS
 END testbench;
 											 
@@ -135,8 +137,8 @@ ARCHITECTURE behavior OF testbench IS
 
    type adc_intarray is array(0 to 4) of integer; 
 	signal cha_out, chb_out: adc_intarray := (others => 0) ;
-	signal adc_reset, sampouten : std_logic := '0'; 
-
+	signal sampouten : std_logic := '0'; 
+	signal adc_reset : std_logic; 
 
    signal clk_enable : std_logic := '0'; 
 	signal syscnt : integer := 0; 
@@ -150,7 +152,7 @@ ARCHITECTURE behavior OF testbench IS
 				  LOAD : in std_logic);
 	end component;
 	signal filterload : std_logic := '0'; 
-
+	signal filedone : std_logic := '0'; 
 
 BEGIN
 
@@ -188,7 +190,7 @@ BEGIN
 			CHB_OUT => chb_out(0),
 			FILEMODE => '1',
 			BUSY => open,
-			INPUTDONE => open); 
+			INPUTDONE => filedone); 
 			  
 	adc1 : test_ADC  generic map (
 			filename => "adcin.1.dat")
@@ -315,7 +317,7 @@ BEGIN
 
 
 	clk <= not clk after 7.8125 ns; 
-	reset <= '0' after 100 ns; 
+
 
 	process(clk, clk_enable) is
 		variable clkcnt : integer := 1; 
@@ -357,17 +359,46 @@ BEGIN
 			syscnt <= syscnt + 1; 
 		end if;
 	end process; 
+
+
+	process(clk, reset) is
+		
+		file outputfile : text; 
+	  	variable L: line;
+	begin
+		if falling_edge(reset) then
+			file_open(outputfile, "output.dat", write_mode);
+		end if; 
+ 		if rising_edge(clk) then
+			if outsample = '1' then
+				writeline(outputfile, L); 
+			end if; 
+
+			if macdone = '1' then
+				write(L, to_integer(signed(y)));	 
+				write(L, ' ');
+			end if; 
+
+		end if; 
+	end process; 
 	
 	tb: process is
+
 	begin
-		wait until RESET = '0';
-		 
+	   
+		adc_reset <= '0';  
 		filterload <= '1';
 		wait until rising_edge(clk);
+		adc_reset <= '1'; 
 		filterload <= '0'; 
 		wait until syscnt > 1000;
-		clk_enable <= '1'; 
+		adc_reset <= '0'; 
+		wait until rising_edge(clk); 
 
+		reset <= '0'; 
+		clk_enable <= '1'; 
+		wait until filedone = '1';
+		wait; 
 
 
 

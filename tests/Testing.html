@@ -463,7 +463,7 @@ could have glitches on the output (although how likely is this?) but
 ... it simplifies things tremendously. <br>
 <br>
 <table style="text-align: left; width: 255px; height: 74px;" border="1"
- cellspacing="2" cellpadding="2">
+ cellpadding="2" cellspacing="2">
   <tbody>
     <tr>
       <td style="vertical-align: top;">SCLK out of FPGA<br>
@@ -650,8 +650,9 @@ the right. <br>
 When we take the output of the ADC, in averaging mode, for channel B
 (thus the first 16 bits we see there) we get<br>
 <br>
-<img align="left" style="width: 640px; height: 480px;" alt=""
- src="results/20040816/scope%20out%20for%20bad%20histogram.averages.png">Note
+<img style="width: 640px; height: 480px;" alt=""
+ src="results/20040816/scope%20out%20for%20bad%20histogram.averages.png"
+ align="left">Note
 then that the low bits are -all- being triggered; this suggests some
 really fundamental signal integrity problems. <br>
 <br>
@@ -689,7 +690,207 @@ to ground:<br>
 <br>
 This really suggests the ADC is sucking for some number of reasons. <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">24
+September 2004: The Analog Test Board</span><br
+ style="font-weight: bold; text-decoration: underline;">
+The availability of the awesome Audio Precision ATS-2 for measurement
+has prompted me to build an analog test board, which will let me
+measure all aspects of the analog performance, including a comparison
+of three different op-amp AA filter designs. <br>
 <br>
+We've built the discrete AA filters using a 4-stage (8 pole) MFB
+architecture, and used TI's FilterPro to select component values. Now,
+I'm a bit confused by this FilterPro program, as it renders different
+stages differently, but it claims to work well. Ha. In any case, the
+Bessel MFB 8-pole with a 16.5 kHz cuttoff and a 10k seed resistor (with
+E24 resistors and E6 caps) gives us -95 dB at 128 kHz while having only
+-1.1 dB at 10 kHz. Booya. <br>
+<br>
+In some sort of sick conspiracy, I designed the board with the
+AD8513ARU instead of the AR, and now I get to wait for a shipment of
+them from digikey. Wow, I'm sure glad money isn't much of a constraint.
+<br>
+<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">26
+September 2004 : Analog test board results via ATS-2</span><br
+ style="font-weight: bold; text-decoration: underline;">
+The output of the ATS-2 is interesting; it is a fantastically complex
+instrument, or moreso, it does some complex DSP. Really, all I want is
+something that costs $10k and takes in / puts out the desired signal
+leves so I can do my own fucking DSP. But whatever.<br>
+<br>
+The device calculates THD via an FFT (by summing the harmonics) and a
+THD+N by the standard notch filter approach. This is important to
+recognize when trying to calculate and compare these sorts of numbers. <br>
+<br>
+I've buillt what I can manage on the test board; in particular I have
+the two working AA filters, as well as an input stage and a PGA stage.
+It is frustrating, because some components (like the PGA) have THD+N
+measurements where the THD+N number is a decreasing function of
+frequency. This is extra odd because the low frequency components
+should distort less. <br>
+<br>
+<span style="font-style: italic;"></span><span
+ style="font-weight: bold; text-decoration: underline;">1 October 2004:
+Wow, it's already october</span><br
+ style="font-weight: bold; text-decoration: underline;">
+Initial data, whee! The first thing we noticed was that the results are
+really poor unless we put a 0.1uF cap at the input to the voltage
+offset op-amp input. Then things suck a lot less. <br>
+<br>
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">Test<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Frequency Response, via 4.097Vpp
+input<br>
+      </td>
+      <td style="vertical-align: top;"><img
+ style="width: 600px; height: 450px;" alt=""
+ src="results/20041001/frequencyresponse.png"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">THD+N, using 4.097 Vpp input<br>
+      </td>
+      <td style="vertical-align: top;"><img
+ style="width: 600px; height: 450px;" alt=""
+ src="file:///home/jonas/soma/developer/acqboard/tests/results/20041001/thd+n.png">
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Harmonic Distortion (sum of
+harmonics 2+3)<br>
+      </td>
+      <td style="vertical-align: top;"><img
+ style="width: 600px; height: 450px;" alt=""
+ src="results/20041001/harmonicdistortion.png"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<br>
+<br>
+I think pretty much across the board the AD8028 is the superior choice.
+<br>
+<br>
+Now, there are other measurements we could make. But at the moment, the
+most depressing fact is the horrible performance of the HPF. The THD+N
+is like -70dB. So sad. The graph below is -without- any filter, i.e.
+mux in position zero. <br>
+<img style="width: 600px; height: 450px;" alt=""
+ src="results/20041001/thd+n.hpf.png"><br>
+<br>
+Horrible!<br>
+<br>
+The other parts look okay, for example the PGA (g=1) THD+N:<br>
+<img style="width: 600px; height: 450px;" alt=""
+ src="results/20041001/thd+n.pga.g1.png"><br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">3 October
+2004:</span><br style="font-weight: bold; text-decoration: underline;">
+Okay, so the new goal is to use the AD8513 for the filter, it's quite
+nice. I wish there was some way I could take the 3rd amp and use one as
+the PGA, but it's going to be totally different signal ranges. So I
+don't think that's the best idea; we'll also want something with lower
+noise. <br>
+<br>
+ADG619 looks to be the ideal&nbsp; switch, but the input resistance on
+the PGA is only 1k at g&gt;5. That's a bit concerning from the THD+N
+standpoint, due to the problems with the mux's nonlinearities. So I
+want to test two designs: <br>
+<br>
+Thus we're giving birth to Analog Test Board 2:<br>
+<ul>
+  <li>In-amp high pass configuration A, using a HPF coupled to the ref
+pin:</li>
+  <ul>
+    <li>SPDT or DPDT mux</li>
+    <li>single or double pole? <br>
+    </li>
+  </ul>
+  <li>In-amp high pass configuration B, using a separate HPF consisting
+of a single OA and the HPF being a double-pole, with the SPST switching
+between OA output and unfiltered output</li>
+</ul>
+The parts we're going to use include the ADG619. Now, it's interesting
+to note that the op amp for the HPF doesn't need to be a jfet input, so
+I might use the OP1177, which looks to be a really solid part. <br>
+<br>
+In any of these HPF cases, I worry a lot about the impact of the delay.
+I am abandoning my 2-pole connected to the op-amp approach because of
+challenges with filter design. And I suck. <br>
+<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">15
+November 2004:</span><br
+ style="font-weight: bold; text-decoration: underline;">
+<br>
+High pass filter configuration and analog test board 2. How to minimize
+group delay? <br>
+<br>
+For a 1-pole bessel HPF with cutoff = 300 Hz, 8 Hz is down by 30 dB and
+group delay in passband is 200 uS<br>
+2 pole bessel HPF with cutoff = 300 Hz, 8Hz is down by 59 dB, and group
+delay in passband is 500 uS<br>
+<br>
+A 1 mV theta will be reduced by a factor of 30 at 30 dB, i.e. 30 uV,
+which is pretty good. We can also do post-filtering. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">18
+November 2004: Analog test board 2 results</span><br
+ style="font-weight: bold; text-decoration: underline;">
+This is the <span style="font-weight: bold;">no-switch</span> test,
+measuring bipolar 80 mVpp input into the XLR input, through the g=100
+IA, and out of the HPF. <br>
+<br>
+<img alt="" src="results/20041118/frequencyresponse.nosw.png"
+ style="width: 600px; height: 450px;"><img alt=""
+ src="results/20041118/thdn.nosw.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+This is exactly what we'd expect, with the ~20 dB/decade fall off of a
+single pole filter. The THD+N measurements suffer because of the manner
+in which we are measuring: at each frequency, we are comparing the
+output power to the relative noise and input power. The highpass filter
+obviously reduces the power in the stopband, thus our THD+N
+measurements look like crap. Still, it's what you'd expect. <br>
+<br>
+Now, the THD+N measurements <span style="font-weight: bold;">for the
+single-pole version with the switch</span>:<br>
+<br>
+<img alt="" src="results/20041118/thdn.switch.disabled.png"
+ style="width: 600px; height: 450px;"><img alt=""
+ src="results/20041118/thdn.switch.enabled.png"
+ style="width: 600px; height: 450px;"><br>
+The left is with the filter enabled, the right is with it disabled.
+It's hard to understand how wonderful this performance is. However, we
+compare it to the performance of the lone analog in-amp (using the
+channel for the 2pole filter on analogtestboard2, but without having
+soldered any of the parts downstream from the IA) <span
+ style="font-weight: bold;">below</span>:<br>
+<img alt="" src="results/20041118/thdn.justIA.png"
+ style="width: 600px; height: 450px;"><br>
+This is by far a vote in favor of the current filter/switch
+design.&nbsp; <br>
+<br>
+Next, linearity for the four:<br>
+<img alt="" src="results/20041118/alin.png"
+ style="width: 1200px; height: 900px;"><br>
+<br>
+That's really exciting, too, if you remember that the crappy
+performance at the &lt;100uV range is most likely due to noise
+corrupting the measurements. This is "normalized gain", i.e. we removed
+the mean gain. <br>
 <br>
 <br>
 <br>

@@ -168,20 +168,13 @@ begin
   	WE5 <= '1' when (WE = '1' and CHANIN(3 downto 1) = "100") 
 				or ALLCHAN = '1' else '0';
 
+	DOUT <= DATA1 when CHANOUT(3 downto 1) = "000" else
+				DATA2 when CHANOUT(3 downto 1) = "001" else
+				DATA3 when CHANOUT(3 downto 1) = "010" else
+				DATA4 when CHANOUT(3 downto 1) = "011" else
+				DATA5;
 
-   -- output register
-   process(CLK, CHANOUT, DATA1, DATA2, DATA3, DATA4, DATA5) is
-   begin
-   	--if rising_edge(CLK) then	DEBUGGING
-		case CHANOUT(3 downto 1) is
-			when "000" => DOUT <= DATA1;
-			when "001" => DOUT <= DATA2;
-			when "010" => DOUT <= DATA3;
-			when "011" => DOUT <= DATA4;
-			when "100" => DOUT <= DATA5;
-			when others => Null;
-		end case; 
-	--end if;
-   end process; 
+
+
 
 end Behavioral;

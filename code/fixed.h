@@ -1,16 +1,19 @@
 #ifndef FIXED_H
 #define FIXED_H
 #include <iostream>
+#include <sstream>
+#include <string>
+#include <gmpxx.h>
 
-typedef long long Fixed;
+typedef mpz_class Fixed;
 
 inline Fixed pow2(int x); 
 
 /*
 
 This is my fixed-point class that hopefully works; everything is a long-long and we just use a series of functions. 
-
-all numbers are 64-bit, with 16.48 format. 
+x
+all numbers are 64-bit, with 34.30 format. 
 
 
 
@@ -18,36 +21,74 @@ all numbers are 64-bit, with 16.48 format.
 
 #define POINTPOS 48
 
-inline Fixed movepoint(long long x, int bits) {
-  // takes in a number x and assumes it is of the form a.bits
-  // and thus aligns it
-  Fixed y = x << (POINTPOS - bits); 
+inline Fixed rshift(const Fixed x, int bits) {
+  Fixed y; 
+   
+  mpz_fdiv_q_2exp(y.get_mpz_t(), x.get_mpz_t(), bits);  
+  return y ;
+
+}
+
+inline Fixed lshift(const Fixed x, int bits) {
+  Fixed y; 
+   
+  mpz_mul_2exp(y.get_mpz_t(), x.get_mpz_t(), bits);  
+  return y ;
+
+}
+
+
+inline Fixed movepoint(Fixed x, int bits) {
+  // takes in a long long x and moves the binary point
+  // bits -1 to the left. I.e. 
+  // movepoint(0x7FFF, 16) should give 0.1111111111111111
+  Fixed y = lshift(x, POINTPOS - bits); 
   return y; 
 }
 
 inline Fixed convrnd(Fixed x, int bits) {
   //
   // convergent rounding to a number with bits bits, i.e. 
-  // we turn a.b number into an a.bits number 
+  // we turn a.b number into an a.bits number. A problem arises with these
+  // really-long precision numbers such that we want to truncate before we round. 
+ 
   
   Fixed os = 1; 
-  os = os << (POINTPOS-bits); 
+  os = lshift(os, POINTPOS-bits); 
 
   Fixed div = x / (os);
   Fixed rem = x % (os); 
-  
-  if (rem < (os >> 1)) { 
-    return x - rem; 
-  } else if (rem > (os >> 1)) { 
-    return x - rem + os; 
-  } else {
-    if (div % 2 == 0) { 
-      // even, round down
-      return x - rem;
+
+  if (x >= 0) {
+    if (rem < rshift(os, 1)) { 
+      return x - rem; 
+    } else if (rem > rshift(os, 1)) { 
+      return x - rem + os; 
     } else {
-      return x - rem + os;
+      if (div % 2 == 0) { 
+	// even, round down
+	return x - rem;
+      } else {
+	return x - rem + os;
+      }
     }
   }
+  else {
+    // negatives
+    if (-rem < rshift(os, 1)) {
+      return x - rem; 
+      } else if (-rem > rshift(os, 1)) {
+	return x - rem -os ; 
+      } else {
+	if (div % 2 == 0) { 
+	  // even, round down
+	  return x - rem;
+	} else {
+	  return x - rem - os;
+	}
+      } 
+  }
+
 }
 
 inline Fixed overf(Fixed x, int bits) {
@@ -58,7 +99,7 @@ inline Fixed overf(Fixed x, int bits) {
   // turns it into a 1.b. 
 
   Fixed bitfact = 1; 
-  bitfact = bitfact << (POINTPOS + bits - 1);
+  bitfact = lshift(bitfact, POINTPOS + bits - 1);
   //std::cout << std::hex << bitfact << std::endl;
   if (x > (bitfact -1) ) {
     return bitfact -1; 
@@ -76,15 +117,49 @@ inline Fixed trunc(Fixed x, int bits) {
   // Truncate ; discard everything after the bits, so, 
   // a.b becomes a.(b-bits)
   
-  Fixed r = x >> (POINTPOS - bits);
-  return (r << (POINTPOS - bits)); 
+  Fixed r = rshift(x, POINTPOS - bits);
+  return lshift(r, POINTPOS - bits); 
   
   
 }
 
-inline int getint(Fixed x, int bits) {
+inline long getint(Fixed x, int bits) {
   // returns an int where the LSBs are a.bits of the int
-  return int(x >> (POINTPOS - bits));
+   mpz_class t(x >> (POINTPOS - bits));
+   return t.get_si(); 
 }
+
+inline Fixed mult(Fixed x, Fixed y) {
+  return rshift((x*y),  POINTPOS); 
+}
+
+inline std::string hprint(Fixed x, int width, int bits)
+{
+  /* Returns a hexadecimal printed string width chars 
+     wide representing the value of the number. We
+     assume that we want the lower points bits to be
+     to the right of the decimal point.
+
+  */
+
+  Fixed y = rshift(x, POINTPOS - bits); 
+  
+  std::ostringstream s; 
+  s.width(width); 
+  s.setf(std::ios::uppercase); 
+  if (x < 0) {
+    s.fill('0');
+    Fixed r(1); 
+    r = lshift(r, width * 4);
+    s << std::hex << r+y; 
+  } else {
+    s.fill('0');
+    s << std::hex << y; 
+  }
+  
+  
+  return s.str();
+  
+}  
 	 
 #endif //FIXED_H

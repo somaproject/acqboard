@@ -43,9 +43,9 @@ signal rmac(const signal & x, const signal& h, int precision)
   for(int n = h.size(); n < y.size(); ++n){
     Fixed yn(0), yp(0); 
     for (int k = 0; k < h.size(); ++k) {
-      Fixed yp = h[k] * xz[n-k]; 
+      Fixed yp = mult(h[k],  xz[n-k]); 
       
-      yn +=  trunc(yp, precision); 
+      yn = trunc(yp, precision) + yn; 
     }
     y[n - h.size()] = yn; 
   }

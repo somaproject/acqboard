@@ -14,6 +14,8 @@ FLOW XST VHDL
 FLOWTIME 0
 STIMULUS hsel_test.tbw Normal
 STIMULUS input_test.tbw Normal
+STIMULUS rmacfsm_test.tbw Normal
+STIMULUS rmac_test.tbw Normal
 STIMULUS clocks_test.tbw Normal
 MODULE rmac.vhd
 MODSTYLE rmac Normal
@@ -27,7 +29,9 @@ MODULE xsel.vhd
 MODSTYLE xsel Normal
 MODULE input.vhd
 MODSTYLE input Normal
+MODULE rmacfsm.vhd
+MODSTYLE rmacfsm Normal
 [STATUS-ALL]
-xsel.ngcFile=WARNINGS,1041837195
+xsel.ngcFile=WARNINGS,1041913540
 [STRATEGY-LIST]
 Normal=True

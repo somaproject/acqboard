@@ -31,11 +31,28 @@ architecture Behavioral of RMAC is
 	signal p, pl : std_logic_vector(31 downto 0); 
 	signal sum, macout: std_logic_vector(33 downto 0); 
 
+	component multiplier IS
+		port (
+		clk: IN std_logic;
+		a: IN std_logic_VECTOR(13 downto 0);
+		b: IN std_logic_VECTOR(17 downto 0);
+		q: OUT std_logic_VECTOR(31 downto 0);
+		sclr: IN std_logic);
+	END component;
 
 
 begin
 
-	process rmac_core(CLK4X, XD, HD, mina, minb, p, pl, sum, macout) is
+
+  	mult: multiplier port map (
+			clk => CLK4X,
+			a => mina,
+			b => minb,
+			q => p,
+			sclr => CLR); 
+
+
+	rmac_core: process (CLK4X, XD, HD, mina, minb, p, pl, sum, macout) is
 	begin
 		if rising_edge(CLK4X) then
 			if CLR = '1' then
@@ -52,6 +69,10 @@ begin
 				macout <= sum;
 			end if; 
 		end if; 
+
+		sum <= macout + (pl(31) & pl(31) & pl);
+
+		macrnd <= macout(30 downto 15);
 
 	end process rmac_core; 
 

@@ -15,8 +15,6 @@ entity INPUT is
 			  RESET : in std_logic; 
 			  CONVST: out std_logic; 
            WEB : out std_logic_vector(4 downto 0);
-           BUFBUS : in std_logic_vector(13 downto 0);
-           DATAIN : out std_logic_vector(13 downto 0);
            OEB : out std_logic_vector(9 downto 0));
 end INPUT;
 
@@ -28,14 +26,18 @@ architecture Behavioral of INPUT is
 	signal convstl : std_logic := '1'; 
 	signal outcnt : integer range 10 downto 0 := 0;
 	signal waitcnt : integer range 250 downto 0 := 0;  
+	signal chcnt : integer range 4 downto 0 := 0; 
+	signal sampcntind: std_logic_vector(6 downto 0) := "0000000";
+	signal tsel : std_logic := '0'; 
 	signal oe : std_logic := '0';
 	signal we : std_logic := '0';
 
 begin
-	clocks: process(CLK4X, INSAMPCLK, RESET, BUFBUS, cs) is
+	clocks: process(CLK4X, INSAMPCLK, RESET,  cs) is
 	begin
 		if RESET = '1' then
-			cs <= NONE;
+			cs <= NONE;						
+			sampcntind <= "0000000"; 
 		else
 			if rising_edge(CLK4X) then
 				cs <= ns;
@@ -44,7 +46,7 @@ begin
 
 				if cs = CONVST_4 then
 					waitcnt <= 0;
-				elsif cs = CONVWAIT then
+				else
 					waitcnt <= waitcnt +1;
 				end if; 
 
@@ -53,13 +55,74 @@ begin
 				elsif cs = REPEAT then
 					outcnt <= outcnt + 1;
 				end if; 
+
+				if cs = ZEROCNT then 
+					chcnt <= 0;
+				elsif cs = REPEAT then
+					if chcnt = 4 then
+						chcnt <= 0;
+					else
+						chcnt <= chcnt + 1;
+					end if;
+				end if; 
+
+				if cs = ZEROCNT then 
+					tsel <= '0';
+				else
+					if outcnt = 5 then
+						tsel <= '1';
+					end if;
+				end if;
+
+				if INSAMPCLK = '1' then
+					sampcntind <= sampcntind + 1;
+				end if; 
 					
 			end if; 
 		end if; 
 
-	end process clocks; 
+	end process clocks;
+	SAMPCNT <= sampcntind; 
+	memset: process (CLK4X,	outcnt, oe, chcnt, we, tsel) is
+	begin
+		if rising_edge(CLK4X) then
+			if outcnt < 10 then
+				OEB(outcnt) <= oe; 
+			end if; 
+		end if;
 
-	fsm: process(cs, INSAMPCLK, waitcnt) is
+		ADDRB7 <= tsel ; 
+
+		if chcnt = 0 then 
+			WEB(0) <= WE;
+		else
+			WEB(0) <= '0';
+		end if; 
+		if chcnt = 1 then 
+			WEB(1) <= WE;
+		else
+			WEB(1) <= '0';
+		end if; 
+		if chcnt = 2 then 
+			WEB(2) <= WE;
+		else
+			WEB(2) <= '0';
+		end if; 
+		if chcnt = 3 then 
+			WEB(3) <= WE;
+		else
+			WEB(3) <= '0';
+		end if; 
+		if chcnt = 4 then 
+			WEB(4) <= WE;
+		else
+			WEB(4) <= '0';
+		end if; 
+
+
+	end process memset;
+
+	fsm: process(cs, INSAMPCLK, waitcnt, outcnt) is
 	begin
 		case cs is
 			when NONE =>
@@ -95,33 +158,33 @@ begin
 				convstl <= '1'; 
 				oe <= '0';
 				we <= '0';
-				if waitcnt < 180 then 
-					ns <= CONVWAIT;
-				else
+				if waitcnt = 180 then 
 					ns <= ZEROCNT;
+				else
+					ns <= CONVWAIT;
 				end if;
 			when ZEROCNT =>
-				convstl <= '0'; 
+				convstl <= '1'; 
 				oe <= '0';
 				we <= '0';
 				ns <= OE_L1;
 			when OE_L1 =>
-				convstl <= '0'; 
+				convstl <= '1'; 
 				oe <= '1';
 				we <= '0';
 				ns <= OE_L2;
 			when OE_L2 =>
-				convstl <= '0'; 
+				convstl <= '1'; 
 				oe <= '1';
 				we <= '0';
 				ns <= STORE;
 			when STORE =>
-				convstl <= '0'; 
+				convstl <= '1'; 
 				oe <= '1';
 				we <= '1';
 				ns <= REPEAT;
 			when REPEAT =>
-				convstl <= '0'; 
+				convstl <= '1'; 
 				oe <= '0';
 				we <= '0';
 				if outcnt < 9 then
@@ -130,7 +193,7 @@ begin
 					ns <= NONE; 
 				end if;
 			when others =>
-				convstl <= '0';
+				convstl <= '1';
 				oe <= '0';
 				we <= '0';
 		end case; 

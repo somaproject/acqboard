@@ -13,6 +13,7 @@ DEVSPEEDTIME 1041752361
 FLOW XST VHDL
 FLOWTIME 0
 STIMULUS hsel_test.tbw Normal
+STIMULUS input_test.tbw Normal
 STIMULUS clocks_test.tbw Normal
 MODULE clocks.vhd
 MODSTYLE clocks Normal
@@ -23,7 +24,6 @@ MODSTYLE xsel Normal
 MODULE input.vhd
 MODSTYLE input Normal
 [STATUS-ALL]
-input.ngcFile=WARNINGS,1041813256
-xsel.ngcFile=WARNINGS,1041813256
+xsel.ngcFile=WARNINGS,1041832720
 [STRATEGY-LIST]
 Normal=True

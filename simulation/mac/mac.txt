@@ -1,0 +1,21 @@
+This is an attempt to simulate and understand all components of the multiply-accumulate logic including:
+
+
+Multiplication
+Accumulation
+Converget Rounding
+Overflow detection
+
+The data files are all named part.dat and contain inputs and outputs in hex. 
+
+
+Multiplication:
+
+We simulate with n = 26, i.e. the output of the multiplication is 1.25 bits. All the inputs and outputs are 32-bits wide
+
+
+Accumulate:
+
+We again simulate with n=26, but because the output is 33 bits we need to use a 48-bit input hex value. We test if aline'LENGTH = 0 to determine when we've reached the end of the line. 
+
+The form is input input input input product				   

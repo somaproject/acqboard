@@ -234,7 +234,7 @@ begin
 
 	 test: process(CLK2X, CLR, DOTS) is
 	 begin
-	 	--if rising_edge(CLK2X) then
+	 	if rising_edge(CLK2X) then
 	 	case DOTS is
 			when "001" =>
 				XD <= DOA0;
@@ -249,6 +249,6 @@ begin
 			when others =>
 				XD <= "00000000000000";
 		end case;  
-		--end if; 
+		end if; 
 	end process test; 	 
 end Behavioral;

@@ -52,15 +52,15 @@ begin
 		if rising_edge(CLK2X) then
 			if CLR = '1' then
 				index <= "00000000";
-				--HD <= "0000000000000000000000";
+				HD <= "0000000000000000000000";
 			else
 				index <= index + 1;
-				--HD <= hdl;
+				HD <= hdl;
 			end if;
 		end if; 
 	
 	end process counter;  
-	HD <= hdl; 
+	
 	-- RAM instantiation
 
 	RAML: RAMB4_S16 

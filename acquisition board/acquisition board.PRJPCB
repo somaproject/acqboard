@@ -104,60 +104,32 @@ AnnotateSuffix=
 DoLibraryUpdate=1
 DoDatabaseUpdate=1
 [GeneratedDocument1]
-DocumentPath=Project Outputs for acquisition board\acqboard.DRL
-[GeneratedDocument2]
 DocumentPath=outputs\acqboard.DRL
-[GeneratedDocument3]
-DocumentPath=Project Outputs for acquisition board\acqboard.DRR
-[GeneratedDocument4]
+[GeneratedDocument2]
 DocumentPath=outputs\acqboard.DRR
-[GeneratedDocument5]
-DocumentPath=Project Outputs for acquisition board\acqboard.GBL
-[GeneratedDocument6]
+[GeneratedDocument3]
 DocumentPath=outputs\acqboard.GBL
-[GeneratedDocument7]
-DocumentPath=Project Outputs for acquisition board\acqboard.GBS
-[GeneratedDocument8]
+[GeneratedDocument4]
 DocumentPath=outputs\acqboard.GBS
-[GeneratedDocument9]
-DocumentPath=Project Outputs for acquisition board\acqboard.GM5
-[GeneratedDocument10]
+[GeneratedDocument5]
 DocumentPath=outputs\acqboard.GM5
-[GeneratedDocument11]
-DocumentPath=Project Outputs for acquisition board\acqboard.GP1
-[GeneratedDocument12]
+[GeneratedDocument6]
 DocumentPath=outputs\acqboard.GP1
-[GeneratedDocument13]
-DocumentPath=Project Outputs for acquisition board\acqboard.GP2
-[GeneratedDocument14]
+[GeneratedDocument7]
 DocumentPath=outputs\acqboard.GP2
-[GeneratedDocument15]
-DocumentPath=Project Outputs for acquisition board\acqboard.GTL
-[GeneratedDocument16]
+[GeneratedDocument8]
 DocumentPath=outputs\acqboard.GTL
-[GeneratedDocument17]
-DocumentPath=Project Outputs for acquisition board\acqboard.GTO
-[GeneratedDocument18]
+[GeneratedDocument9]
 DocumentPath=outputs\acqboard.GTO
-[GeneratedDocument19]
-DocumentPath=Project Outputs for acquisition board\acqboard.GTS
-[GeneratedDocument20]
+[GeneratedDocument10]
 DocumentPath=outputs\acqboard.GTS
-[GeneratedDocument21]
-DocumentPath=Project Outputs for acquisition board\acqboard.LDP
-[GeneratedDocument22]
+[GeneratedDocument11]
 DocumentPath=outputs\acqboard.LDP
-[GeneratedDocument23]
-DocumentPath=Project Outputs for acquisition board\acqboard.REP
-[GeneratedDocument24]
+[GeneratedDocument12]
 DocumentPath=outputs\acqboard.REP
-[GeneratedDocument25]
-DocumentPath=Project Outputs for acquisition board\acqboard.RUL
-[GeneratedDocument26]
+[GeneratedDocument13]
 DocumentPath=outputs\acqboard.RUL
-[GeneratedDocument27]
-DocumentPath=Project Outputs for acquisition board\acqboard.TXT
-[GeneratedDocument28]
+[GeneratedDocument14]
 DocumentPath=outputs\acqboard.TXT
 [SearchPath1]
 Path=..\..\..\Program Files\Altium\Library\Pcb\*.*

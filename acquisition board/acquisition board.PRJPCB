@@ -2,8 +2,8 @@
 Version=1.0
 HierarchyMode=0
 ChannelRoomNamingStyle=2
-OutputPath=Project Outputs for acquisition board
-ChannelDesignatorFormatString=$Component.$RoomName
+OutputPath=outputs
+ChannelDesignatorFormatString=$Component.$ChannelIndex
 ChannelRoomLevelSeperator=.
 OpenOutputs=1
 ArchiveProject=0
@@ -106,33 +106,59 @@ DoDatabaseUpdate=1
 [GeneratedDocument1]
 DocumentPath=Project Outputs for acquisition board\acqboard.DRL
 [GeneratedDocument2]
-DocumentPath=Project Outputs for acquisition board\acqboard.DRR
+DocumentPath=outputs\acqboard.DRL
 [GeneratedDocument3]
-DocumentPath=Project Outputs for acquisition board\acqboard.GBL
+DocumentPath=Project Outputs for acquisition board\acqboard.DRR
 [GeneratedDocument4]
-DocumentPath=Project Outputs for acquisition board\acqboard.GBO
+DocumentPath=outputs\acqboard.DRR
 [GeneratedDocument5]
-DocumentPath=Project Outputs for acquisition board\acqboard.GBS
+DocumentPath=Project Outputs for acquisition board\acqboard.GBL
 [GeneratedDocument6]
-DocumentPath=Project Outputs for acquisition board\acqboard.GM5
+DocumentPath=outputs\acqboard.GBL
 [GeneratedDocument7]
-DocumentPath=Project Outputs for acquisition board\acqboard.GP1
+DocumentPath=Project Outputs for acquisition board\acqboard.GBS
 [GeneratedDocument8]
-DocumentPath=Project Outputs for acquisition board\acqboard.GP2
+DocumentPath=outputs\acqboard.GBS
 [GeneratedDocument9]
-DocumentPath=Project Outputs for acquisition board\acqboard.GTL
+DocumentPath=Project Outputs for acquisition board\acqboard.GM5
 [GeneratedDocument10]
-DocumentPath=Project Outputs for acquisition board\acqboard.GTO
+DocumentPath=outputs\acqboard.GM5
 [GeneratedDocument11]
-DocumentPath=Project Outputs for acquisition board\acqboard.GTS
+DocumentPath=Project Outputs for acquisition board\acqboard.GP1
 [GeneratedDocument12]
-DocumentPath=Project Outputs for acquisition board\acqboard.LDP
+DocumentPath=outputs\acqboard.GP1
 [GeneratedDocument13]
-DocumentPath=Project Outputs for acquisition board\acqboard.REP
+DocumentPath=Project Outputs for acquisition board\acqboard.GP2
 [GeneratedDocument14]
-DocumentPath=Project Outputs for acquisition board\acqboard.RUL
+DocumentPath=outputs\acqboard.GP2
 [GeneratedDocument15]
+DocumentPath=Project Outputs for acquisition board\acqboard.GTL
+[GeneratedDocument16]
+DocumentPath=outputs\acqboard.GTL
+[GeneratedDocument17]
+DocumentPath=Project Outputs for acquisition board\acqboard.GTO
+[GeneratedDocument18]
+DocumentPath=outputs\acqboard.GTO
+[GeneratedDocument19]
+DocumentPath=Project Outputs for acquisition board\acqboard.GTS
+[GeneratedDocument20]
+DocumentPath=outputs\acqboard.GTS
+[GeneratedDocument21]
+DocumentPath=Project Outputs for acquisition board\acqboard.LDP
+[GeneratedDocument22]
+DocumentPath=outputs\acqboard.LDP
+[GeneratedDocument23]
+DocumentPath=Project Outputs for acquisition board\acqboard.REP
+[GeneratedDocument24]
+DocumentPath=outputs\acqboard.REP
+[GeneratedDocument25]
+DocumentPath=Project Outputs for acquisition board\acqboard.RUL
+[GeneratedDocument26]
+DocumentPath=outputs\acqboard.RUL
+[GeneratedDocument27]
 DocumentPath=Project Outputs for acquisition board\acqboard.TXT
+[GeneratedDocument28]
+DocumentPath=outputs\acqboard.TXT
 [SearchPath1]
 Path=..\..\..\Program Files\Altium\Library\Pcb\*.*
 IncludeSubFolders=1

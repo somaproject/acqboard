@@ -15,6 +15,8 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_SIGNED.ALL;
 USE std.textio.ALL;
 
+library UNISIM;
+use UNISIM.VComponents.all;
 
 ENTITY testbench IS
 END testbench;
@@ -71,11 +73,11 @@ BEGIN
 
 -- *** Test Bench - User Defined Section ***
 
-   resetin <= '0' after 40 ns;
+   resetin <= '0' after 50 ns;
 
 	simulator_in: process (CONVST, oeb) is
 			--subtype dataword is integer range -8192 to 8191;
-			file input_file : text open read_mode is "../dsp/simulation/test.dat";
+			file input_file : text open read_mode is "test.dat";
 			variable tempdata: dataword;
 			variable iline: line; 
 			
@@ -94,62 +96,34 @@ BEGIN
 				end if; 
 			end if;
 
-			if falling_edge(oeb(0)) then
-				datain <= conv_std_logic_vector(dataouts(0), 14) after 20 ns;
-			elsif rising_edge(oeb(0)) then 
-				datain <= "ZZZZZZZZZZZZZZ" after 6 ns;
+			if oeb(0) = '0' then 
+				datain <= conv_std_logic_vector(dataouts(0), 14) after 10 ns;
+			elsif oeb(1) = '0' then 
+				datain <= conv_std_logic_vector(dataouts(1), 14) after 10 ns;
+			elsif oeb(2) = '0' then 
+				datain <= conv_std_logic_vector(dataouts(2), 14) after 10 ns;
+			elsif oeb(3) = '0' then 
+				datain <= conv_std_logic_vector(dataouts(3), 14) after 10 ns;
+			elsif oeb(4) = '0' then 
+				datain <= conv_std_logic_vector(dataouts(4), 14) after 10 ns;
+			elsif oeb(5) = '0' then 
+				datain <= conv_std_logic_vector(dataouts(5), 14) after 10 ns;
+			elsif oeb(6) = '0' then 
+				datain <= conv_std_logic_vector(dataouts(6), 14) after 10 ns;
+			elsif oeb(7) = '0' then 
+				datain <= conv_std_logic_vector(dataouts(7), 14) after 10 ns;
+			elsif oeb(8) = '0' then 
+				datain <= conv_std_logic_vector(dataouts(8), 14) after 10 ns;
+			elsif oeb(9) = '0' then 
+				datain <= conv_std_logic_vector(dataouts(9), 14) after 10 ns;
+			else 
+				datain <= "ZZZZZZZZZZZZZZ" after 10 ns;
 			end if; 
-			if falling_edge(oeb(1)) then
-				datain <= conv_std_logic_vector(dataouts(1), 14) after 20 ns;
-			elsif rising_edge(oeb(1)) then 
-				datain <= "ZZZZZZZZZZZZZZ" after 6 ns;
-			end if; 
-			if falling_edge(oeb(2)) then
-				datain <= conv_std_logic_vector(dataouts(2), 14) after 20 ns;
-			elsif rising_edge(oeb(2)) then 
-				datain <= "ZZZZZZZZZZZZZZ" after 6 ns;
-			end if; 
-			if falling_edge(oeb(3)) then
-				datain <= conv_std_logic_vector(dataouts(3), 14) after 20 ns;
-			elsif rising_edge(oeb(3)) then 
-				datain <= "ZZZZZZZZZZZZZZ" after 6 ns;
-			end if;
-			if falling_edge(oeb(4)) then
-				datain <= conv_std_logic_vector(dataouts(4), 14) after 20 ns;
-			elsif rising_edge(oeb(4)) then 
-				datain <= "ZZZZZZZZZZZZZZ" after 6 ns;
-			end if;
-			if falling_edge(oeb(5)) then
-				datain <= conv_std_logic_vector(dataouts(5), 14) after 20 ns;
-			elsif rising_edge(oeb(5)) then 
-				datain <= "ZZZZZZZZZZZZZZ" after 6 ns;
-			end if; 
-			if falling_edge(oeb(6)) then
-				datain <= conv_std_logic_vector(dataouts(6), 14) after 20 ns;
-			elsif rising_edge(oeb(6)) then 
-				datain <= "ZZZZZZZZZZZZZZ" after 6 ns;
-			end if; 
-			if falling_edge(oeb(7)) then
-				datain <= conv_std_logic_vector(dataouts(7), 14) after 20 ns;
-			elsif rising_edge(oeb(7)) then 
-				datain <= "ZZZZZZZZZZZZZZ" after 6 ns;
-			end if; 
-			if falling_edge(oeb(8)) then
-				datain <= conv_std_logic_vector(dataouts(8), 14) after 20 ns;
-			elsif rising_edge(oeb(8)) then 
-				datain <= "ZZZZZZZZZZZZZZ" after 6 ns;
-			end if; 
-			if falling_edge(oeb(9)) then
-				datain <= conv_std_logic_vector(dataouts(9), 14) after 20 ns;
-			elsif rising_edge(oeb(9)) then 
-				datain <= "ZZZZZZZZZZZZZZ" after 6 ns;
-			end if; 
-
 
 	  	end process simulator_in;
 
 		simulator_out :process (outbyteout) is
-			 file output_file : text open write_mode is "../dsp/simulation/output.dat";
+			 file output_file : text open write_mode is "output.dat";
 			 variable oline : line; 
 		begin
 			 if rising_edge(outbyteout) then
@@ -186,6 +160,8 @@ BEGIN
      begin
              if clkin = '1' then 
                      clkin <= '0' after 15625 ps, '1' after 31250 ps;  
+                     --clkin <= '0' after 40000 ps, '1' after 80000 ps;  
+
              end if;
      end process clk_one; 
 

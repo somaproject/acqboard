@@ -7,7 +7,6 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 library UNISIM;
 use UNISIM.VComponents.all;
 
-
 -- XSEL --------------------------------------------------------
 --  Input and sample buffer for data samples. 
 -- 

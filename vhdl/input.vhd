@@ -14,17 +14,19 @@ entity INPUT is
            ADDRB7 : out std_logic;
 			  RESET : in std_logic; 
 			  CONVST: out std_logic; 
+			  OUTTEST: out std_logic; 
+			  OUTTEST2: out std_logic_vector(3 downto 0); 
            WEB : out std_logic_vector(4 downto 0);
            OEB : out std_logic_vector(9 downto 0));
 end INPUT;
 
 architecture Behavioral of INPUT is
 	type states is (NONE, CONVST_1, CONVST_2, CONVST_3, CONVST_4, CONVWAIT,
-						 ZEROCNT, OE_L1, OE_L2, STORE, REPEAT);
+						 ZEROCNT, OE_L1, OE_L2, STORE,  REPEAT);
 	signal cs, ns: states := NONE; 
 
 	signal convstl : std_logic := '1'; 
-	signal outcnt : integer range 10 downto 0 := 0;
+	signal outcnt : std_logic_vector(3 downto 0) := "0000"; 
 	signal waitcnt : integer range 1025 downto 0 := 0;  
 	signal chcnt : integer range 4 downto 0 := 0; 
 	signal sampcntind: std_logic_vector(6 downto 0) := "0000000";
@@ -36,15 +38,17 @@ begin
 
 	SAMPCNT <= sampcntind; 
 
-	clocks: process(CLK2X, INSAMPCLK, RESET,  cs) is
+
+	OUTTEST2 <= outcnt; 
+	clocks: process(CLK2X, INSAMPCLK, RESET, sampcntind, cs) is
 	begin
 		if RESET = '1' then
 			cs <= NONE;						
-			sampcntind <= "0000000"; 
+			
 		else
 			if rising_edge(CLK2X) then
-				cs <= ns;
 
+				cs <= ns;
 				CONVST <= convstl; 
 
 				if cs = CONVST_4 then
@@ -54,7 +58,7 @@ begin
 				end if; 
 
 				if cs = ZEROCNT then
-					outcnt <= 0;
+					outcnt <= "0000";
 				elsif cs = REPEAT then
 					outcnt <= outcnt + 1;
 				end if; 
@@ -72,7 +76,7 @@ begin
 				if cs = ZEROCNT then 
 					tsel <= '0';
 				else
-					if outcnt = 5 then
+					if outcnt = "0101" then
 						tsel <= '1';
 					end if;
 				end if;
@@ -86,36 +90,62 @@ begin
 
 	end process clocks;
 
-	memset: process (CLK2X,	outcnt, oe, chcnt, we, tsel) is
+	memset: process (CLK2X,	outcnt, oe, chcnt, we, tsel, sampcntind) is
 	begin
 		if rising_edge(CLK2X) then
-			if outcnt < 10 then
-				case outcnt is
-					when 9 =>
-						OEB <= oe & "111111111";
-					when 8 =>
-						OEB <= "1" & oe & "11111111";
-					when 7 =>
-						OEB <= "11" & oe & "1111111";
-					when 6 =>
-						OEB <= "111" & oe & "111111";
-					when 5 =>
-						OEB <= "1111" & oe & "11111";
-					when 4 =>
-						OEB <= "11111" & oe & "1111";
-					when 3 =>
-						OEB <= "111111" & oe & "111";
-					when 2 =>
-						OEB <= "1111111" & oe & "11";
-					when 1 =>
-						OEB <= "11111111" & oe & "1";
-					when 0 =>
-						OEB <= "111111111" & oe;
-					when others =>
-						OEB <= "1111111111";
-				end case	;
-					 
-			end if; 
+			OUTTEST <= oe; 
+			if outcnt = "0000" then 
+				OEB(0) <= oe;
+			else
+				OEB(0) <= '1';
+			end if;
+			if outcnt = "0001" then 
+				OEB(1) <= oe;
+			else
+				OEB(1) <= '1';
+			end if;
+			if outcnt = "0010" then 
+				OEB(2) <= oe;
+			else
+				OEB(2) <= '1';
+			end if;
+			if outcnt = "0011" then 
+				OEB(3) <= oe;
+			else
+				OEB(3) <= '1';
+			end if;
+			if outcnt = "0100" then 
+				OEB(4) <= oe;
+			else
+				OEB(4) <= '1';
+			end if;
+			if outcnt = "0101" then 
+				OEB(5) <= oe;
+			else
+				OEB(5) <= '1';
+			end if;
+			if outcnt = "0110" then 
+				OEB(6) <= oe;
+			else
+				OEB(6) <= '1';
+			end if;
+			if outcnt = "0111" then 
+				OEB(7) <= oe;
+			else
+				OEB(7) <= '1';
+			end if;
+			if outcnt = "1000" then 
+				OEB(8) <= oe;
+			else
+				OEB(8) <= '1';
+			end if;
+			if outcnt = "1001" then 
+				OEB(9) <= oe;
+			else
+				OEB(9) <= '1';
+			end if;
+
+
 		end if;
 
 		ADDRB7 <= tsel ; 

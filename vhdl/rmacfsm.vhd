@@ -3,10 +3,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
---  Uncomment the following lines to use the declarations that are
---  provided for instantiating Xilinx primitive components.
---library UNISIM;
---use UNISIM.VComponents.all;
+
+library UNISIM;
+use UNISIM.VComponents.all;
 
 entity rmacfsm is
     Port ( CLK2X : in std_logic;
@@ -54,7 +53,8 @@ begin
 			  "00010" when chancnt = 1 or chancnt = 6 else
 			  "00100" when chancnt = 2 or chancnt = 7 else
 			  "01000" when chancnt = 3 or chancnt = 8 else
-			  "10000" when chancnt = 4 or chancnt = 9 or chancnt = 10;
+			  "10000" when chancnt = 4 or chancnt = 9 or chancnt = 10 else
+			  	"00000";
 	ADDRA7 <= '0' when chancnt = 0 or chancnt = 1 or
 			chancnt = 2 or chancnt = 3 or chancnt = 4 else '1'; 
 

@@ -5,6 +5,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 --  Uncomment the following lines to use the declarations that are
 --  provided for instantiating Xilinx primitive components.
+
 library UNISIM;
 use UNISIM.VComponents.all;
 
@@ -12,7 +13,7 @@ use UNISIM.VComponents.all;
 -- This generates all the clocks and clock-enables for the acquisiton
 -- board from the single 16 MHz input clock. See "Soma Acquisition Board
 -- Overview.ai" for a more detailed explanation. reset goes low once
--- all DLLs are locked. 
+-- all DLLs are locked.   
 
 entity CLOCKS is
     Port ( CLKIN : in std_logic;
@@ -42,9 +43,7 @@ begin
 
 	RESET <= locked2x_inv; 
 
-	INSAMPCLK <= insampletoggle; 
-	OUTSAMPCLK <= outsampletoggle;
-	OUTBYTE <= outbytetoggle;
+
 
 	clocks: process (clk2x_out, locked2x_inv) is
 		variable countInSample : integer range 250 downto 0 := 0;
@@ -57,9 +56,13 @@ begin
 			countInSample := 0;
 			countOutSample := 0; 
 			insampletoggle <= '0'; 
+			outsampletoggle <= '0';
 		else
-			if rising_edge(clk2x_out) then	 
-
+			if rising_edge(clk2x_out) then	
+			
+				OUTSAMPCLK <= outsampletoggle; 
+				INSAMPCLK <= insampletoggle; 
+				OUTBYTE <= outbytetoggle;
 				-- INSAMPLE -- every 250 clk4x				
 				if countInSample = 249 then
 					countInSample := 0;

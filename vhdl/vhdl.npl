@@ -5,11 +5,11 @@ DESIGN vhdl Normal
 DEVFAM spartan2e
 DEVFAMTIME 0
 DEVICE xc2s50e
-DEVICETIME 0
+DEVICETIME 1042149621
 DEVPKG tq144
-DEVPKGTIME 1041752361
+DEVPKGTIME 1042150858
 DEVSPEED -6
-DEVSPEEDTIME 1041752361
+DEVSPEEDTIME 1042149372
 FLOW XST VHDL
 FLOWTIME 0
 STIMULUS hsel_test.tbw Normal
@@ -37,5 +37,9 @@ MODULE rmacfsm.vhd
 MODSTYLE rmacfsm Normal
 [Normal]
 p_ModelSimSimRunTime_tb=xstvhd, spartan2e, Module VHDL Test Bench.t_MSimulateBehavioralVhdlModel, 1042005909, 1000us
+p_xstUseSynthConstFile=xstvhd, spartan2e, Schematic.t_synthesize, 1042157904, False
+xilxSynthKeepHierarchy=xstvhd, spartan2e, Schematic.t_synthesize, 1042091876, True
+_SynthConstraintsFile=xstvhd, spartan2e, Schematic.t_synthesize, 1042155658, constraints.xcf
+_SynthOptEffort=xstvhd, spartan2e, Schematic.t_synthesize, 1042151381, High
 [STRATEGY-LIST]
 Normal=True

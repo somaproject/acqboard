@@ -1,5 +1,5 @@
 (edif test (edifVersion 2 0 0) (edifLevel 0) (keywordMap (keywordLevel 0))
-(status (written (timeStamp 2003 1 8 15 35 52)
+(status (written (timeStamp 2003 1 9 14 10 51)
    (author "Xilinx, Inc.")
    (program "Xilinx CORE Generator" (version "Xilinx CORE Generator 5.1.03i"))))
    (comment "                                                                                

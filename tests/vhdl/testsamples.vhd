@@ -15,7 +15,9 @@ entity testsamples is
 			  timerout: out std_logic;
 			  CONVST: out std_logic;
 			  DATAIN : in std_logic_vector(13 downto 0);
-			  SAMP_OE: out std_logic; 
+			  SAMP_OE: out std_logic;
+			  OthersOE : out std_logic_vector(8 downto 0); 
+			   
            DOUT : out std_logic);
 end testsamples;
 
@@ -24,7 +26,7 @@ architecture Behavioral of testsamples is
 
 	signal data, datacnt : std_logic_vector(7 downto 0) := "00000000";
 	signal kin : std_logic := '0'; 
-
+	
 	signal timer: std_logic := '0';
 	signal shift_timer: std_logic := '0';
 		component encoder IS
@@ -53,7 +55,8 @@ begin
 		dout => encodeddata,
 		ce => timer);
 	dout <= outreg(0);
-	
+	othersOE <="111111111";
+
 	KOUT <= KIN;
 	--encodeddataout <= encodeddata;
 	timerout <= timer; 
@@ -132,7 +135,7 @@ begin
 			elsif samplecnt = 3 then
 				data <= databuffer(7 downto 0);
 			elsif samplecnt = 4 then
-				data <= ("00" & databuffer(13 downto 8));
+				data <= (databuffer(13) & databuffer(13) & databuffer(13 downto 8));
 			end if; 
 		end if; 
 	end process output; 
@@ -143,7 +146,7 @@ begin
 			SAMPCS <= SAMPNS; --- !!!!!
 
 			if SAMPNS = data_samp then
-				DATABUFFER <= datain; 
+				DATABUFFER <= DATAIN; 
 			end if; 
 		end if; 
 

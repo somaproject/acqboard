@@ -33,10 +33,12 @@ p_ModelSimSimRunTime_tb=xstvhd, spartan2e, Module VHDL Test Bench.t_MSimulateBeh
 xilxBitgCfg_GenOpt_ASCIIFile=xstvhd, spartan2e, Implementation.t_bitFile, 1042845683, True
 xilxSynthKeepHierarchy=xstvhd, spartan2e, Schematic.t_synthesize, 1042841103, True
 [STATUS-ALL]
-looptest.ngcFile=WARNINGS,1043047821
-looptest.ngdFile=WARNINGS,1043047821
-testdataout.ngcFile=WARNINGS,1043047821
-testdataout.ngdFile=WARNINGS,1043047821
-testsamples.ngdFile=WARNINGS,1043047821
+looptest.ngcFile=WARNINGS,1043101849
+looptest.ngdFile=WARNINGS,1043101849
+testdataout.ngcFile=WARNINGS,1043101849
+testdataout.ngdFile=WARNINGS,1043101849
+testsamples.ngcFile=WARNINGS,1043101849
+testsamples.ngdFile=WARNINGS,1043101849
+testsamples.vhd.jhdFile=WARNINGS,1043101849
 [STRATEGY-LIST]
 Normal=True

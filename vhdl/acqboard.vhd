@@ -20,13 +20,13 @@ entity acqboard is
            PGASERA : out std_logic;
            ESI : out std_logic;
            ESCK : out std_logic;
-		 	  ECS : out std_logic;
-		     ESO : in std_logic; 
-		     EEPROMLEN : in std_logic;  
+		 ECS : out std_logic;
+		 ESO : in std_logic; 
+		 EEPROMLEN : in std_logic;  
            FIBERIN : in std_logic;
            FIBEROUT : out std_logic;
-		     CLK8_OUT : out std_logic;
-			  LED0 : out std_logic;
+		 CLK8_OUT : out std_logic;
+		 LED0 : out std_logic;
 			  LED1 : out std_logic);
 end acqboard;
 
@@ -36,7 +36,8 @@ architecture Behavioral of acqboard is
 
 -- signals
 	signal reset : std_logic := '1'; 
-
+	signal debugdata: std_logic_vector(15 downto 0); 
+	signal debugen : std_logic := '0';
 -- clock-related signals
    signal clk, clk8, insample, outsample, outbyte, spiclk : 
    	 std_logic := '0';
@@ -109,7 +110,15 @@ architecture Behavioral of acqboard is
         port (O : out std_logic); 
    end component; 
  
-
+		component serdebug is
+	    Port ( CLK : in std_logic;
+	    		 RESET : in std_logic; 
+	           DIN : in std_logic_vector(15 downto 0);
+	           DINEN : in std_logic;
+	           SOUTCS : out std_logic;
+	           SOUTCLK : out std_logic;
+	           SOUTDATA : out std_logic);
+	end component;
 	component clocks is
 	    Port ( CLKIN : in std_logic;
 	           CLK : out std_logic;
@@ -136,7 +145,8 @@ architecture Behavioral of acqboard is
 			 OSEN : in std_logic;
 			 OSRST : in std_logic; 
 			 OSWE : in std_logic; 
-			 OSD : in std_logic_vector(15 downto 0)
+			 OSD : in std_logic_vector(15 downto 0);  
+		 	DEBUGDATA : out std_logic_vector(15 downto 0)
 			 );
 
 	end component;
@@ -150,8 +160,8 @@ architecture Behavioral of acqboard is
 	           AIN : in std_logic_vector(7 downto 0);
 	           DOUT : out std_logic_vector(15 downto 0);
 	           AOUT : in std_logic_vector(7 downto 0);
-			     SAMPOUTEN : in std_logic; 
-				  ALLCHAN : in std_logic; 
+			 SAMPOUTEN : in std_logic; 
+			 ALLCHAN : in std_logic; 
 	           CHANOUT : in std_logic_vector(3 downto 0));
 	end component;
 
@@ -221,7 +231,9 @@ architecture Behavioral of acqboard is
 	           CMDID : in std_logic_vector(3 downto 0);
 			 CMDSUCCESS : in std_logic; 
 			 OUTBYTE : in std_logic; 
-	           CHKSUM : in std_logic_vector(7 downto 0));
+	           CHKSUM : in std_logic_vector(7 downto 0);
+		 DEBUGWORD: out std_logic_vector(8 downto 0); 
+		 DEBUGEN : out std_logic);
 	end component;
 
 	component FiberRX is
@@ -337,7 +349,8 @@ begin
 			OSEN => osen,
 			OSRST => pgarst, 
 			OSWE => oswe,
-			OSD => edout); 
+			OSD => edout,
+			DEBUGDATA => debugdata); 
 	
 	samplebuffer_inst : samplebuffer port map (
 			CLK => clk,
@@ -390,9 +403,9 @@ begin
 	pgaload_inst : PGAload port map (
 			CLK => clk,
 			RESET => reset,
-			SCLK => PGASRCK,
-			RCLK => PGARCK,
-			SOUT => PGASERA,
+			SCLK => open ,
+			RCLK => open,
+			SOUT => open,
 			CHAN => pgachan,
 			GAIN => gain,
 			FILTER => filter,
@@ -414,7 +427,9 @@ begin
 			CMDID => cmdid,
 			CMDSUCCESS => cmdsuccess,
 			OUTBYTE => outbyte,
-			CHKSUM => chksum);
+			CHKSUM => chksum,
+			DEBUGWORD => open, 
+			DEBUGEN => debugen);
 
 
 	fiberrx_inst : FiberRX port map (
@@ -427,7 +442,7 @@ begin
 			PENDING => pending,
 			CMDID => cmdid, 
 			CHKSUM => chksum); 
-								
+					
 	loader_inst : Loader port map (
 			CLK => clk,
 			LOAD => load,
@@ -497,8 +512,17 @@ begin
 			DIN => dout, 
 			CHAN => rawchan,
 			Y => yraw); 
-
-
+	
+	
+ 	debugging: serdebug port map (
+			CLK => clk,
+			RESET => reset, 
+			dinen => INSAMPLE,	
+			din => debugdata,
+			soutcs => PGARCK,
+			SOUTCLK => PGASRCK,
+			SOUTDATA => PGASERA); 
+			 
  -- muxes
 	y <= yraw when rawsel = '1' else ymac; 
  	bin <= dout when bufsel = '0' else edout; 

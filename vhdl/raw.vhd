@@ -80,13 +80,13 @@ begin
 	Y <= doa when bsel = '0' else dob; 
 
 	ssel <= "000" when oaddr = 0 or oaddr = 1 or 
-						oaddr = 2 or oaddr = 3 else
-			  "001" when oaddr = 4 or oaddr = 5 else
-			  "010" when oaddr = 6 or oaddr = 7 else
-			  "011" when oaddr = 8 or oaddr = 9 else
-			  "100" when oaddr = 10 or oaddr = 11 else
-			  "101" when oaddr = 12 or oaddr = 13 else
-			  "110" when oaddr = 14 or oaddr = 15 else
+						oaddr = 2 or oaddr = 3 or oaddr =4 else
+			  "001" when oaddr = 5 or oaddr = 6 else
+			  "010" when oaddr = 7 or oaddr = 8 else
+			  "011" when oaddr = 9 or oaddr = 10 else
+			  "100" when oaddr = 11 or oaddr = 12 else
+			  "101" when oaddr = 13 or oaddr = 14 else
+			  "110" when oaddr = 15 or oaddr = 16 else
 			  "111";
 
 

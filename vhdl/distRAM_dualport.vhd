@@ -23,7 +23,7 @@ architecture behavioral of distRAM_dualport is
   type mem_type is array ( 
         mem_depth - 1 downto 0) of 
         STD_LOGIC_VECTOR (d_width - 1 downto 0); 
-  signal mem : mem_type; 
+  signal mem : mem_type := (others => X"0000"); 
 
 
 begin 

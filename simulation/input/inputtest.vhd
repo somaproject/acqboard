@@ -40,19 +40,19 @@ ARCHITECTURE behavior OF inputtest IS
 	SIGNAL CLK :  std_logic := '0';
 	SIGNAL INSAMPLE :  std_logic := '0';
 	SIGNAL RESET :  std_logic := '1';
-	SIGNAL CONVST :  std_logic;
-	SIGNAL ADCCS :  std_logic;
-	SIGNAL SCLK :  std_logic;
-	SIGNAL SDIN :  std_logic_vector(4 downto 0);
-	SIGNAL DOUT :  std_logic_vector(15 downto 0);
-	SIGNAL COUT :  std_logic_vector(3 downto 0);
-	SIGNAL WEOUT :  std_logic;
-	SIGNAL OSC :  std_logic_vector(3 downto 0);
+	SIGNAL CONVST :  std_logic := '0';
+	SIGNAL ADCCS :  std_logic := '0';
+	SIGNAL SCLK :  std_logic := '0';
+	SIGNAL SDIN :  std_logic_vector(4 downto 0) := (others => '0');
+	SIGNAL DOUT :  std_logic_vector(15 downto 0) := (others => '0');
+	SIGNAL COUT :  std_logic_vector(3 downto 0) := (others => '0');
+	SIGNAL WEOUT :  std_logic := '0';
+	SIGNAL OSC :  std_logic_vector(3 downto 0) := (others => '0');
 	SIGNAL OSEN :  std_logic := '0';
-	SIGNAL OSWE :  std_logic;
-	SIGNAL OSD :  std_logic_vector(15 downto 0);
+	SIGNAL OSWE :  std_logic := '0';
+	SIGNAL OSD :  std_logic_vector(15 downto 0) := (others => '0');
 	signal OSCALL : std_logic := '0'; 
-
+	signal err : std_logic := '0';
 	component ADC is
 	    Generic (filename : string := "adcin.dat" ); 
 	    Port ( RESET : in std_logic;
@@ -72,11 +72,12 @@ ARCHITECTURE behavior OF inputtest IS
 	signal adcbusy, adcinputdone : std_logic_vector(4 downto 0)
 		:= (others => '0');
 	signal adcreset : std_logic := '1';	
-	type intarray is array (9 downto 0) of integer; 	 
-	signal syscnt, chan : integer := 0;
+	type intarray is array (9 downto 0) of integer;
+	signal chan_in, chan_inl,
+	 chan_out, offsets : intarray := (others => 0); 
 	
-	signal ch_out, ch_outbipolar, ch_outbipolarl, offsets : intarray := (others => 0); 
-	signal err : std_logic := '0'; 
+
+
 BEGIN
 
 	uut: input PORT MAP(
@@ -97,311 +98,135 @@ BEGIN
 		OSD => OSD
 	);	 
 
-	adc0 : ADC generic map (
-		filename => "adc.0.dat")
-		port map(
-		RESET => adcreset,
-		SCLK => SCLK,
-		CONVST => CONVST,
-		CS => ADCCS,
-		SDOUT => SDIN(0),
-		CHA_VALUE => 0,
-		CHB_VALUE => 0,
-		CHA_OUT => ch_out(1),
-		CHB_OUT => ch_out(0),
-		FILEMODE => '1',
-		BUSY => adcbusy(0),
-		INPUTDONE => adcinputdone(0));
 
-	adc1 : ADC generic map (
-		filename => "adc.1.dat")
-		port map(
-		RESET => adcreset,
-		SCLK => SCLK,
-		CONVST => CONVST,
-		CS => ADCCS,
-		SDOUT => SDIN(1),
-		CHA_VALUE => 0,
-		CHB_VALUE => 0,
-		CHA_OUT => ch_out(3),
-		CHB_OUT => ch_out(2),
-		FILEMODE => '1',
-		BUSY => adcbusy(1),
-		INPUTDONE => adcinputdone(1));
-
-
-	adc2 : ADC generic map (
-		filename => "adc.2.dat")
-		port map(
-		RESET => adcreset,
-		SCLK => SCLK,
-		CONVST => CONVST,
-		CS => ADCCS,
-		SDOUT => SDIN(2),
-		CHA_VALUE => 0,
-		CHB_VALUE => 0,
-		CHA_OUT => ch_out(5),
-		CHB_OUT => ch_out(4),
-		FILEMODE => '1',
-		BUSY => adcbusy(2),
-		INPUTDONE => adcinputdone(2));
-
-	adc3 : ADC generic map (
-		filename => "adc.3.dat")
-		port map(
-		RESET => adcreset,
-		SCLK => SCLK,
-		CONVST => CONVST,
-		CS => ADCCS,
-		SDOUT => SDIN(3),
-		CHA_VALUE => 0,
-		CHB_VALUE => 0,
-		CHA_OUT => ch_out(7),
-		CHB_OUT => ch_out(6),
-		FILEMODE => '1',
-		BUSY => adcbusy(3),
-		INPUTDONE => adcinputdone(3));
-
-	adc4 : ADC generic map (
-		filename => "adc.4.dat")
-		port map(
-		RESET => adcreset,
-		SCLK => SCLK,
-		CONVST => CONVST,
-		CS => ADCCS,
-		SDOUT => SDIN(4),
-		CHA_VALUE => 0,
-		CHB_VALUE => 0,
-		CHA_OUT => ch_out(9),
-		CHB_OUT => ch_out(8),
-		FILEMODE => '1',
-		BUSY => adcbusy(4),
-		INPUTDONE => adcinputdone(4));
-
-
-	process (ch_out) is
-	begin
- 		for i in 0 to 9 loop
-			ch_outbipolar(i) <= ch_out(i) - 32768; 
-		end loop; 
-	end process; 
-
-	sdin <= (others => 'L'); 
-
-  	reset <= '0' after 100 ns;
+ 	reset <= '0' after 100 ns;
 	clk <= not clk after 7.8125 ns;
 
-	counter: process(clk) is
-	begin
-		if rising_edge(clk) then
-			syscnt <= syscnt + 1;
+	adcs: for i in 0 to 4 generate
+		ADCi : ADC generic map 
+			(filename => "adc." & integer'image(i) & ".dat")
+			port map (
+			RESET => adcreset,
+			SCLK => SCLK,
+			CONVST => CONVST,
+			CS => ADCCS,
+			SDOUT => SDIN(i),
+			CHA_VALUE => 0,
+			CHB_VALUE => 0,
+			CHA_OUT => chan_in(2*i),
+			CHB_OUT => chan_in(2*i+1),
+			FILEMODE => '1',
+			BUSY => adcbusy(i),
+			inputdone => adcinputdone(i)); 
+	end generate; 
 	
-		end if;
-	end process counter; 
 
+	clock: process(clk) is
+		variable cnt : integer := 0; 
 
-   -- main testbench code:
-	testbench: process is
 	begin
-
-		 -- normal operation
-
-		 wait until rising_edge(clk) and syscnt = 100; 
-		 adcreset <= '0'; 
-		 wait until rising_edge(clk) and syscnt = 1000; 
-		 while adcinputdone(0) = '0' loop
-		 	wait until rising_edge(clk);
-			INSAMPLE <= '1';
-			
-			for j in 0 to 9 loop
-				ch_outbipolarl(j) <= ch_outbipolar(j);
-			end loop; 
-			wait until rising_edge(clk);
-			INSAMPLE <= '0';
-			for j in 0 to 247 loop
-				wait until rising_edge(clk);
-
-			end loop;
-		end loop; 
-
-		-- set, load offsets
-		offsets(0) <= -1;
-		offsets(1) <= 1;
-		offsets(2) <= 0;
-		offsets(3) <= 100;
-		offsets(4) <= -100;
-		offsets(5) <= -32768; 
-		offsets(6) <= 32767; 
-		offsets(7) <= 00;
-		offsets(8) <= 10088;
-		offsets(9) <= -15678;
-		
-		-- write them 
-		for i in 0 to 9 loop
-		  wait until rising_edge(clk);
-		  osc <= std_logic_vector(TO_UNSIGNED(i, 4));
-		  osd <= std_logic_vector(TO_SIGNED(offsets(i), 16)); 
-		  wait until rising_edge(clk);
-		  oswe <= '1';
-		  wait until rising_edge(clk); 
-		  oswe <= '0';
-
-		  for j in 0 to 32 loop wait until rising_edge(clk); end loop;
-
-		end loop; 
-		
-	  wait until rising_edge(clk); 
-	  osen <= '1';  
-
-	  adcreset <= '1'; 
-
- 	  -- test with this
-		 for j in 0 to 400 loop 
-		 wait until rising_edge(clk); 
-		 end loop;
-
-		 adcreset <= '0'; 
-		 for j in 0 to 400 loop 
-		 wait until rising_edge(clk); 
-		 end loop;
-
-		 while adcinputdone(0) = '0' loop
-		 	wait until rising_edge(clk);
-			INSAMPLE <= '1';
-																				  
-			for j in 0 to 9 loop
-				ch_outbipolarl(j) <= ch_outbipolar(j);
-			end loop; 
-			wait until rising_edge(clk);
-			INSAMPLE <= '0';
-			for j in 0 to 247 loop
-				wait until rising_edge(clk);
-
-			end loop;
-		end loop; 
-
-	  osen <= '0';
-	  
-	  wait until rising_edge(clk);
-	  adcreset <= '1'; 
-	  offsets <= (others => 0); 
-	  -- now, test with offsets disabled
-		 for j in 0 to 100 loop 
-		 wait until rising_edge(clk); 
-		 end loop;
-
-		 adcreset <= '0'; 
-		 for j in 0 to 400 loop 
-		 wait until rising_edge(clk); 
-		 end loop;
-
-		 while adcinputdone(0) = '0' loop
-		 	wait until rising_edge(clk);
-			INSAMPLE <= '1';
-																				  
-			for j in 0 to 9 loop
-				ch_outbipolarl(j) <= ch_outbipolar(j);
-			end loop; 
-			wait until rising_edge(clk);
-			INSAMPLE <= '0';
-			for j in 0 to 247 loop
-				wait until rising_edge(clk);
-
-			end loop;
-		end loop; 
-
-	 
-	  adcreset <= '1'; 
-	  
- 	  
-	  oscall <= '1';
-	  osd <= X"0000";
-	  oswe <= '1';
-	  wait until rising_edge(clk);
-	  oswe <= '0'; 	
-	  oscall <= '0'; -- make sure to turn it off to test for latching
-	  
- 	  -- now, test after resetting offsets
-	      osen <= '1'; 
-		 for j in 0 to 100 loop 
-		 wait until rising_edge(clk); 
-		 end loop;
-
-		 adcreset <= '0'; 
-		 for j in 0 to 400 loop 
-		 wait until rising_edge(clk); 
-		 end loop;
-
-		 while adcinputdone(0) = '0' loop
-		 	wait until rising_edge(clk);
-			INSAMPLE <= '1';
-																				  
-			for j in 0 to 9 loop
-				ch_outbipolarl(j) <= ch_outbipolar(j);
-			end loop; 
-			wait until rising_edge(clk);
-			INSAMPLE <= '0';
-			for j in 0 to 247 loop
-				wait until rising_edge(clk);
-
-			end loop;
-		end loop; 
-	  		  
-		assert false
-			report "End of Simulation"
-			severity failure; 	
-		 
-	end process testbench; 	
-
-	verify: process(clk, COUT) is 
-		--variable chan : integer := 0; 
-	begin
-		chan <= to_integer(unsigned(COUT)); 
-
 		if rising_edge(clk) then
-			if WEOUT = '1' then	
-				if osen = '1' then 
-					if (ch_outbipolarl(chan) + offsets(chan)) > 32767 then
-						if to_integer(signed(dout)) /= 32767 then
-							err <= '1';
-							assert false
-								report "Offset enabled, output value incorrect"
-								severity error; 
-						else
-							err <= '0';
-						end if; 
-					elsif  (ch_outbipolarl(chan) + offsets(chan)) < -32768 then
-						if to_integer(signed(dout)) /= -32768 then
-							err <= '1';
-							assert false
-								report "Offset enabled, output value incorrect"
-								severity error; 
-						else
-							err <= '0';
-						end if; 
-					else 
-						if to_integer(signed(dout)) /= 
-							(ch_outbipolarl(chan) + offsets(chan)) then
-							err <= '1';
-							assert false
-								report "Offset enabled, output value incorrect"
-								severity error; 
-						else
-							err <= '0';
-						end if; 
-					end if;  
-				else
-					if to_integer(signed(dout)) /=  ch_outbipolarl(chan)  then
-							err <= '1';
-							assert false
-								report "Offset disabled, output value incorrect"
-								severity error; 
-					else
-						err <= '0';
-					end if; 
-				end if; 
-			end if;
+			if cnt = 250 then
+				INSAMPLE <= '1';
+				cnt := 0; 
+				chan_inl <= chan_in; 
+			else
+				INSAMPLE <= '0';
+				cnt := cnt + 1; 
+			end if; 
 		end if; 
-	end process verify; 
+	end process;
+	
+	
+	offsets(0) <= 127;
+	offsets(1) <= 0; 
+	offsets(2) <= 19755;
+	offsets(3) <= 0;
+	offsets(4) <= 0;
+	offsets(5) <= -1;
+	offsets(6) <= -128;
+	offsets(7) <= -15715;
+	offsets(8) <= 0;
+	offsets(9) <= 0; 
 
+
+	sequencer: process is
+	begin
+		wait for 100 ns; 
+		-- write some offsets:
+		for i in 0 to 9 loop 
+			OSC <= std_logic_vector(TO_UNSIGNED(i, OSC'Length));
+			OSD <= std_logic_vector(TO_SIGNED(offsets(i), 16)); 
+			OSWE <= '1';
+			wait until rising_edge(CLK);
+			OSWE <= '0';
+			wait until rising_edge(CLK); 
+
+
+		end loop; 
+		wait for 20 ns; 
+		adcreset <= '0';
+		wait until adcinputdone(0) = '1';
+		adcreset <= '1';
+		OSEN <= '1';
+		wait until rising_edge(clk);
+		adcreset <= '0';
+		wait until adcinputdone(0) = '1';
+		assert false
+			report "End of simulation"
+			severity failure; 
+
+	end process;
+	
+	channelreader: process(clk) is
+	begin
+		if rising_edge(clk) then
+			if WEOUT = '1' then
+				chan_out(TO_INTEGER(UNSIGNED(COUT)))
+					 <= TO_INTEGER(SIGNED(DOUT));
+			end if; 
+				
+		end if;
+	end process channelreader; 
+
+
+	channelverify: process(WEOUT, adcreset) is
+		variable firstread : integer := 3; 
+		variable tempresult: integer; 
+	begin
+		if adcreset = '1' then
+			firstread := 3;
+		else
+			if falling_edge(WEOUT) then
+				if firstread >0 then
+					firstread := firstread - 1;
+				else
+					if osen = '0' then
+						for i in 0 to 9 loop
+
+						assert chan_out(i) = (chan_inl(i) -32768) 
+							report "Incorrect output in chan " & integer'image(i)
+							severity error;
+						end loop; 
+
+					else 
+						for i in 0 to 9 loop
+						 	tempresult := (chan_inl(i) -32768) + offsets(i);
+							if tempresult < -32768 then
+								tempresult := -32768;
+							elsif tempresult > 32767 then
+								tempresult := 32767;
+							end if;
+							assert chan_out(i) = tempresult 
+								report "Incorrect output in chan " & integer'image(i)
+								severity error;
+						end loop; 
+					end if;
+						
+				end if; 
+			end if; 
+		end if; 
+
+
+	end process; 
 END;

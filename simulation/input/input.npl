@@ -21,5 +21,6 @@ GENERATEDSIMULATIONMODELTIME 0
 SOURCE ..\..\vhdl\input.vhd
 SOURCE inputtest.vhd
 SOURCE ..\components\ADC\ADC.vhd
+SOURCE ..\..\vhdl\distRAM_dualport.vhd
 [STRATEGY-LIST]
 Normal=True

@@ -20,7 +20,9 @@ entity FiberTX is
            CMDID : in std_logic_vector(3 downto 0);
 		 CMDSUCCESS : in std_logic; 
 		 OUTBYTE : in std_logic; 
-           CHKSUM : in std_logic_vector(7 downto 0));
+           CHKSUM : in std_logic_vector(7 downto 0);
+		 DEBUGWORD: out std_logic_vector(8 downto 0); 
+		 DEBUGEN : out std_logic);
 end FiberTX;
 
 architecture Behavioral of FiberTX is
@@ -136,6 +138,9 @@ begin
 		   	FIBEROUT <= sout; 
 		   end if; 	
 
+		   -- debugging
+		   DEBUGWORD <= kin & dinl; 
+		   DEBUGEN <= OUTBYTE; 
 
 
 

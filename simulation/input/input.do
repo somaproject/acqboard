@@ -4,6 +4,8 @@ vlib work
 
 # actual hardware 
 vcom -93 -explicit ../../vhdl/input.vhd
+vcom -93 -explicit ../../vhdl/distRAM_dualport.vhd
+
 
 -- simulation entities
 vcom -93 -explicit ../components/ADC/ADC.vhd

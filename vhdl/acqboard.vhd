@@ -18,7 +18,7 @@ entity acqboard is
            PGASRCK : out std_logic;
            PGASERA : out std_logic;
            EESCL : out std_logic;
-           EESCA : inout std_logic;
+           EESDA : inout std_logic;
            FIBERIN : in std_logic;
            FIBEROUT : out std_logic;
            RESET : in std_logic);
@@ -38,13 +38,14 @@ architecture Behavioral of acqboard is
    signal gain : std_logic_vector(2 downto 0) := (others => '0');
    signal filter : std_logic_vector(1 downto 0) := (others => '0'); 
    signal pgachan : std_logic_vector(3 downto 0) := (others => '0');
-   signal gset, iset, fset : std_logic := '0';
+   signal gset, iset, fset, pgareset : std_logic := '0';
    signal isel : std_logic_vector(3 downto 0) := (others => '0');
 
 -- loader and EEPROM-related signals
    signal edin, edout : std_logic_vector(15 downto 0);
-   signal laddr, ewaddr, ea : std_logic_vector(10 downto 0) := (others => '0');
-   signal edone, ceen, een, len : std_logic := '0';
+   signal laddr : std_logic_vector(8 downto 0) := (others => '0');
+   signal ewaddr, ea : std_logic_vector(9 downto 0) := (others => '0');
+   signal edone, ceen, een, len, erw : std_logic := '0';
    signal lfwe, lswe, load, ldone : std_logic := '0';
 
 -- offset-connected signals from input, to sample buffer, and control
@@ -58,19 +59,43 @@ architecture Behavioral of acqboard is
    signal bufsel, eesel : std_logic := '0';
 
 -- buffer signals
-   signal bdin : std_logic_vector (15 downto 0) := (others => '0');
+   signal bin : std_logic_vector (15 downto 0) := (others => '0');
    signal bwe : std_logic := '0';
    signal ain : std_logic_vector(6 downto 0) := (others => '0'); 
 
 -- MAC & MAC control signals
    signal x, y : std_logic_vector(15 downto 0) := (others => '0');
-   signal xa, xbase, ha, sample : 
+   signal xa, xabase, ha, sample : 
    	     std_logic_vector(6 downto 0) := (others => '0');
    signal h : std_logic_vector(21 downto 0) := (others => '0');
    signal startmac, macdone : std_logic := '0';
    signal macchan : std_logic_vector(3 downto 0) := (others => '0');
 
+-- command-related signals
+   signal cmddata : std_logic_vector(31 downto 0) := (others => '0');
+   signal cmd : std_logic_vector(3 downto 0) := (others => '0');
+   signal newcmd, pending : std_logic := '0';
+   signal cmdid : std_logic_vector(3 downto 0) := (others => '0');
+   signal chksum : std_logic_vector(7 downto 0) := (others => '0');
+   signal cmdsuccess, cmddone : std_logic := '0';
+   signal cmdsts : std_logic_vector(3 downto 0) := (others => '0');
+   
+
+
+
 -- component definitions
+
+	component clocks is
+	    Port ( CLKIN : in std_logic;
+	           CLK : out std_logic;
+	           CLK8 : out std_logic;
+			 RESET : in std_logic;  
+	           INSAMPLE : out std_logic;
+	           OUTSAMPLE : out std_logic;
+	           OUTBYTE : out std_logic;
+	           I2CCLK : out std_logic);
+	end component;
+
 	component input is
 	    Port ( CLK : in std_logic;				   
 	           INSAMPLE : in std_logic;
@@ -159,14 +184,279 @@ architecture Behavioral of acqboard is
 	           GAIN : in std_logic_vector(2 downto 0);
 	           GSET : in std_logic;
 	           ISET : in std_logic;
-			 FSET : in std_logic; 
+			 FSET : in std_logic;
+			 PGARESET : in std_logic;  
 	           ISEL : in std_logic_vector(3 downto 0));
 	end component;
 
 
+	component FiberTX is
+	    Port ( CLK : in std_logic;
+	           CLK8 : in std_logic;
+			 RESET : in std_logic; 
+	           OUTSAMPLE : in std_logic;
+	           FIBEROUT : out std_logic;
+	           CMDDONE : in std_logic;
+			 Y : in std_logic_vector(15 downto 0); 
+	           CMDSTS : in std_logic_vector(3 downto 0);
+	           CMDID : in std_logic_vector(3 downto 0);
+			 CMDSUCCESS : in std_logic; 
+			 OUTBYTE : in std_logic; 
+	           CHKSUM : in std_logic_vector(7 downto 0));
+	end component;
+
+	component FiberRX is
+	    Port ( CLK : in std_logic;
+	           FIBERIN : in std_logic;
+			 RESET : in std_logic; 
+	           DATA : out std_logic_vector(31 downto 0);
+	           CMD : out std_logic_vector(3 downto 0);
+	           NEWCMD : out std_logic;
+			 PENDING : in std_logic; 
+	           CMDID : out std_logic_vector(3 downto 0);
+	           CHKSUM : out std_logic_vector(7 downto 0));
+	end component;
+
+	component Loader is
+	    Port ( CLK : in std_logic;
+	           LOAD : in std_logic;
+	           DONE : out std_logic;
+			 RESET : in std_logic; 
+	           SWE : out std_logic;
+	           FWE : out std_logic;
+	           ADDR : out std_logic_vector(8 downto 0);
+	           EEEN : out std_logic;
+	           EEDONE : in std_logic);
+	end component;
+
+	component EEPROMio is
+	    Port ( CLK : in std_logic;
+	           I2CCLK : in std_logic;
+	           DOUT : out std_logic_vector(15 downto 0);
+	           DIN : in std_logic_vector(15 downto 0);
+	           ADDR : in std_logic_vector(9 downto 0);
+	           WR : in std_logic;
+	           EN : in std_logic;
+	           DONE : out std_logic;
+	           SCL : out std_logic;
+	           SDA : inout std_logic);
+	end component;
+
+	component Control is
+	    Port ( CLK : in std_logic;
+	           RESET : in std_logic;
+	           DATA : in std_logic_vector(31 downto 0);
+	           CMD : in std_logic_vector(3 downto 0);
+	           NEWCMD : in std_logic;
+	           CMDSTS : out std_logic_vector(3 downto 0);
+	           CMDDONE : out std_logic;
+	           PGACHAN : out std_logic_vector(3 downto 0);
+	           PGAGAIN : out std_logic_vector(2 downto 0);
+	           PGAISEL : out std_logic_vector(3 downto 0);
+	           PGAFIL : out std_logic_vector(1 downto 0);
+	           GSET : out std_logic;
+	           ISET : out std_logic;
+	           FSET : out std_logic;
+	           PGARESET : out std_logic;
+	           EADDR : out std_logic_vector(9 downto 0);
+	           EEN : out std_logic;
+	           EDONE : in std_logic;
+	           ERW : out std_logic;
+	           EDATA : out std_logic_vector(15 downto 0);
+	           EESEL : out std_logic;
+	           BUFSEL : out std_logic;
+			 CMDSUCCESS : out std_logic; 
+	           OSEN : out std_logic;
+	           OSWE : out std_logic;
+	           LOAD : out std_logic;
+			 PENDING : out std_logic;
+	           LDONE : in std_logic);
+	end component;
+
 begin
 
-		
+    clocks_inst : clocks port map (
+    			CLKIN => CLKIN,
+			CLK => clk,
+			CLK8 => clk8,
+			RESET => RESET,
+			INSAMPLE => insample, 
+			OUTSAMPLE => outsample,
+			OUTBYTE => outbyte,
+			I2CCLK => i2cclk);
+
+    input_inst : input port map (
+			CLK => clk,
+			INSAMPLE => insample,
+			RESET => RESET,
+			CONVST => ADCCONVST,
+			ADCCS => ADCCS,
+			SCLK => ADCCLK, 
+			SIN => ADCIN,
+			DATA => din,
+			CHAN => cin,
+			WE => wein);
+	
+	offset_inst : offset port map (
+			CLK => clk,
+			DIN => din,
+			DOUT => dout,
+			CIN => cin,
+			COUT => cout,
+			RESET => RESET,
+			WEIN => wein,
+			WEOUT => weout,
+			OSC => pgachan,
+			OSD => edout,
+			OSWE => oswe,
+			OSEN => osen);
+	
+	samplebuffer_inst : samplebuffer port map (
+			CLK => clk,
+			RESET => reset,
+			DIN => bin,
+			CHANIN => cout,
+			WE => bwe,
+			AIN => ain,
+			DOUT => x,
+			AOUT => xa,
+			CHANOUT => macchan);
+			
+	 
+	rmaccontrol_inst : RMACcontrol port map (
+			CLK => clk,
+			INSAMPLE => insample,
+			OUTSAMPLE => outsample,
+			RESET => reset, 
+			STARTMAC => startmac,
+			MACDONE => macdone,
+			SAMPLE => sample,
+			SAMPBASE => xabase,
+			RMACCHAN => macchan);
+
+	filterarray_inst : FilterArray port map (
+			CLK => clk,
+			RESET => RESET,
+			WE => lfwe,
+			H => h,
+			HA => ha,
+			AIN => laddr(7 downto 0),
+			DIN => edout);
+						 
+	rmac_inst: RMAC port map (	
+			CLK => clk,
+			X => x,
+			XA => xa,
+			H => h,
+			HA => ha,
+			XBASE => xabase,
+			STARTMAC => startmac,
+			MACDONE => macdone,
+			RESET => reset,
+			Y => y);
+			
+	pgaload_inst : PGAload port map (
+			CLK => clk,
+			RESET => reset,
+			SCLK => PGASRCK,
+			RCLK => PGARCK,
+			SOUT => PGASERA,
+			CHAN => pgachan,
+			GAIN => gain,
+			FILTER => filter,
+			GSET => gset,
+			ISET => iset,
+			FSET => fset,
+			PGARESET => pgareset,
+			ISEL => isel);
+
+	fibertx_inst : FiberTX port map (
+			CLK => clk,
+			CLK8 => clk8,
+			RESET => RESET,
+			OUTSAMPLE => outsample,
+			FIBEROUT => FIBEROUT,
+			CMDDONE => cmddone,
+			Y => y,
+			CMDSTS => cmdsts,
+			CMDID => cmdid,
+			CMDSUCCESS => cmdsuccess,
+			OUTBYTE => outbyte,
+			CHKSUM => chksum);
+
+
+	fiberrx_inst : FiberRX port map (
+			CLK => clk,
+			FIBERIN => FIBERIN,
+			RESET => RESET,
+			DATA => cmddata,
+			CMD => cmd,
+			NEWCMD => newcmd,
+			PENDING => pending,
+			CMDID => cmdid, 
+			CHKSUM => chksum); 
+								
+	loader_inst : Loader port map (
+			CLK => clk,
+			LOAD => load,
+			DONE => ldone,
+			RESET => RESET,
+			SWE => lswe,
+			FWE => lfwe,
+			ADDR => laddr,
+			EEEN => len,
+			EEDONE => edone);
+			
+	eepromio_inst : EEPROMio port map (
+			CLK => clk,
+			I2CCLK => i2cclk,
+			DOUT => edout,
+			din => edin,
+			ADDR => ea,
+			WR => erw,
+			EN => een,
+			DONE => edone,
+			SCL => EESCL,
+			SDA => EESDA);
+					
+	control_inst : Control port map (
+			CLK => clk,
+			RESET => reset,
+			DATA => cmddata,
+			CMD => cmd,
+			NEWCMD => newcmd,
+			CMDSTS => cmdsts,
+			CMDDONE => cmddone,
+			PGACHAN => pgachan,
+			PGAGAIN => gain,
+			PGAISEL => isel,
+			PGAFIL => filter,
+			GSET => gset,
+			ISET => iset,
+			FSET => fset,
+			PGARESET => pgareset,
+			EADDR => ewaddr,
+			EEN => ceen,
+			EDONE => edone,
+			ERW => erw,
+			EDATA => edin,
+			EESEL => eesel,
+			BUFSEL => bufsel,
+			CMDSUCCESS => cmdsuccess,
+			OSEN => osen,
+			OSWE => oswe,
+			LOAD => load,
+			PENDING => pending,
+			LDONE => ldone);
+
+ -- muxes
+
+ 	bin <= dout when bufsel = '0' else edout;
+	bwe <= weout when bufsel = '0' else lswe;
+	ain <= laddr(6 downto 0) when bufsel = '0' else sample;
+
+	ea <= ("0" & laddr) when eesel = '0' else ewaddr;
+	een <= len when eesel = '0' else ceen; 
 
 
 end Behavioral;

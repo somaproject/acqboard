@@ -13,7 +13,7 @@ entity EEPROMio is
            I2CCLK : in std_logic;
            DOUT : out std_logic_vector(15 downto 0);
            DIN : in std_logic_vector(15 downto 0);
-           ADDR : in std_logic_vector(10 downto 0);
+           ADDR : in std_logic_vector(9 downto 0);
            WR : in std_logic;
            EN : in std_logic;
            DONE : out std_logic;
@@ -140,7 +140,7 @@ begin
    		   rombit; 
 
 
-   input(0) <= addr(10);
+   input(0) <= '0';
    input(1) <= addr(9);
    input(2) <= addr(8);
    input(3) <= addr(7);

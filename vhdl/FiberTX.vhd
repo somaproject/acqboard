@@ -17,9 +17,10 @@ entity FiberTX is
            CMDDONE : in std_logic;
 		 Y : in std_logic_vector(15 downto 0); 
            CMDSTS : in std_logic_vector(3 downto 0);
-           CMD : in std_logic_vector(7 downto 0);
+           CMDID : in std_logic_vector(3 downto 0);
+		 CMDSUCCESS : in std_logic; 
 		 OUTBYTE : in std_logic; 
-           CHKSUM : in std_logic_vector(15 downto 0));
+           CHKSUM : in std_logic_vector(7 downto 0));
 end FiberTX;
 
 architecture Behavioral of FiberTX is
@@ -30,7 +31,7 @@ architecture Behavioral of FiberTX is
    		std_logic_vector(3 downto 0) := (others => '0');
    signal cmdinl, cmdl : std_logic_vector(7 downto 0):= (others => '0');
    signal chksuminl, chksuml :
-   		std_logic_vector(15 downto 0):= (others => '0');
+   		std_logic_vector(7 downto 0):= (others => '0');
 		
    signal din, dinl : std_logic_vector(7 downto 0):= (others => '0');
    
@@ -45,8 +46,8 @@ architecture Behavioral of FiberTX is
    type states is (kcomma, status, chan0h, chan0l, chan1h, chan1l,
    			    chan2h, chan2l, chan3h, chan3l, chan4h, chan4l, 
 			    chan5h, chan5l, chan6h, chan6l, chan7h, chan7l,
-			    chan8h, chan8l, chan9h, chan9l, cmdid, checksumh,
-			    checksuml); 
+			    chan8h, chan8l, chan9h, chan9l, cmdidsnd, checksum,
+			    nop); 
    signal cs, ns : states := kcomma;
    
    --8b/10b encoder
@@ -69,9 +70,9 @@ begin
    sout <= shiftreg(0); 
 
 
-   clock: process(CLK, CMDSTS, CMD, CHKSUM, din, RESET, ldout, OUTBYTE, CLK8, 
+   clock: process(CLK, CMDSTS, CMDID, CHKSUM, din, RESET, ldout, OUTBYTE, CLK8, 
    			   OUTSAMPLE, CMDDONE, y, cmdstsinl, cmdinl, cs, ns,
-			   chksuminl, insel, sout) is 
+			   chksuminl, insel, sout, CMDSUCCESS) is 
    begin
 	  if RESET = '1' then
 	  	cs <= kcomma;
@@ -79,7 +80,7 @@ begin
 	     if rising_edge(CLK) then
 		    if CMDDONE = '1' then
 		    		cmdstsinl <= CMDSTS;
-				cmdinl <= CMD;
+				cmdinl <= "000" & CMDID & CMDSUCCESS;
 				chksuminl <= CHKSUM;
 		    end if; 
 		    
@@ -142,8 +143,8 @@ begin
 		y(15 downto 8) when insel = "010" else
 		y(7 downto 0) when insel = "011" else
 		cmdl when insel = "100" else
-		chksuml(15 downto 8) when insel = "101" else
-		chksuml(7 downto 0) when insel = "110" else
+		chksuml(7 downto 0) when insel = "101" else
+		"00000000" when insel = "110" else
 		"11111100"; 
 
 
@@ -215,14 +216,14 @@ begin
 			ns <= chan9l;
 		when chan9l => 
 			insel <= "011";
-			ns <= cmdid;
-		when cmdid => 
+			ns <= cmdidsnd;
+		when cmdidsnd => 
 			insel <= "100";
-			ns <= checksumh;
-		when checksumh => 
+			ns <= checksum;
+		when checksum => 
 			insel <= "101";
-			ns <= checksuml;
-		when checksuml => 
+			ns <= nop;
+		when nop => 
 			insel <= "110";
 			ns <= kcomma;
 		when others => 

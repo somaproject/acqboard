@@ -35,6 +35,7 @@ entity Control is
            OSEN : out std_logic;
            OSWE : out std_logic;
            LOAD : out std_logic;
+		 PENDING : out std_logic;
            LDONE : in std_logic);
 end Control;
 
@@ -78,7 +79,7 @@ begin
    CMDSTS(2 downto 1) <= mode;
    CMDSTS(0) <= loading; 
 
-
+   EESEL <= loading; 
 	
    clock: process(CLK, RESET) is
    begin
@@ -101,6 +102,7 @@ begin
    begin
 	case cs is 
 		when cmdwait => 
+		  pending <= '0';
 		  loading <= '0';
 		  cmddone <= '0';
 		  cmdsuccess <= '0';
@@ -149,6 +151,7 @@ begin
 		  	ns <=  cmdwait;
 		  end if; 
 		when set_gain => 
+		  pending <= '1'; 
 		  loading <= '0';
 		  cmddone <= '0';
 		  cmdsuccess <= '0';
@@ -164,6 +167,7 @@ begin
 		  oswe <= '0';
 		  ns <= wait_gain_ee;
 		when wait_gain_ee => 
+		  pending <= '1';  
 		  loading <= '0';
 		  cmddone <= '0';
 		  cmdsuccess <= '0';
@@ -183,6 +187,7 @@ begin
 		  	ns <= wait_gain_ee;
 		  end if;
 		when wos_gain => 
+		  pending <= '1';  
 		  loading <= '0';
 		  cmddone <= '0';
 		  cmdsuccess <= '0';
@@ -197,7 +202,8 @@ begin
 		  fset <= '0';
 		  oswe <= '1';	
 		  ns <= done; 
-		when done => 	    
+		when done => 
+		  pending <= '1';  	    
 		  loading <= '0';
 		  cmddone <= '1';
 		  cmdsuccess <= '1';
@@ -213,6 +219,7 @@ begin
 		  oswe <= '0';	
 		  ns <= cmdwait;
 		when set_input => 
+		  pending <= '1';  
 		  loading <= '0';
 		  cmddone <= '0';
 		  cmdsuccess <= '0';
@@ -228,6 +235,7 @@ begin
 		  oswe <= '0';
 		  ns <= done;
 		when set_hp => 
+		  pending <= '1';  
 		  loading <= '0';
 		  cmddone <= '0';
 		  cmdsuccess <= '0';
@@ -243,6 +251,7 @@ begin
 		  oswe <= '0';
 		  ns <= done; 
 		when write_os => 
+		  pending <= '1';  
 		  loading <= '0';
 		  cmddone <= '0';
 		  cmdsuccess <= '0';
@@ -258,6 +267,7 @@ begin
 		  oswe <= '0';	    
 		  ns <= wait_os_ee; 
 		when wait_os_ee => 
+		  pending <= '1';  
 		  loading <= '0';
 		  cmddone <= '0';
 		  cmdsuccess <= '0';
@@ -277,6 +287,7 @@ begin
 		  	ns <= wait_os_ee;
 		  end if; 
 		when write_buf => 
+		  pending <= '1';  
 		  loading <= '0';
 		  cmddone <= '0';
 		  cmdsuccess <= '0';
@@ -292,6 +303,7 @@ begin
 		  oswe <= '0';	    
 		  ns <= wait_buf_ee; 
 		when wait_buf_ee => 
+		  pending <= '1';  
 		  loading <= '0';
 		  cmddone <= '0';
 		  cmdsuccess <= '0';
@@ -311,6 +323,7 @@ begin
 		  	ns <= wait_buf_ee;
 		  end if; 
 		when write_fl => 
+		  pending <= '1';  
 		  loading <= '0';
 		  cmddone <= '0';
 		  cmdsuccess <= '0';
@@ -326,6 +339,7 @@ begin
 		  oswe <= '0';
 		  ns <= wait_fl_ee; 
 		when wait_fl_ee => 
+		  pending <= '1';  
 		  loading <= '0';
 		  cmddone <= '0';
 		  cmdsuccess <= '0';
@@ -345,13 +359,14 @@ begin
 		  	ns <= wait_fl_ee;
 		  end if; 		   
 		when write_fh => 
+		  pending <= '1';  
 		  loading <= '0';
 		  cmddone <= '0';
 		  cmdsuccess <= '0';
 		  load <= '0';
 		  pgareset <= '0';
 		  eaddrsel <= 3;
-		  edatasel <= '0'; 
+		  edatasel <= '1'; 
 		  erw <= '1';
 		  een <= '1';
 		  gset <= '0';
@@ -360,13 +375,14 @@ begin
 		  oswe <= '0';
 		  ns <= wait_fh_ee; 
 		when wait_fh_ee => 
+		  pending <= '1';  
 		  loading <= '0';
 		  cmddone <= '0';
 		  cmdsuccess <= '0';
 		  load <= '0';
 		  pgareset <= '0';
 		  eaddrsel <= 3;
-		  edatasel <= '0'; 
+		  edatasel <= '1'; 
 		  erw <= '1';
 		  een <= '1';
 		  gset <= '0';
@@ -379,6 +395,7 @@ begin
 		  	ns <= wait_fh_ee;
 		  end if; 		  
 		when modechk => 
+		  pending <= '1';  
 		  loading <= '0';
 		  cmddone <= '0';
 		  cmdsuccess <= '0';
@@ -398,6 +415,7 @@ begin
 		  	ns <= modecng;
 		  end if; 
 		when modecng => 
+		  pending <= '1';  
 		  loading <= '1';
 		  cmddone <= '1';
 		  cmdsuccess <= '1';
@@ -413,6 +431,7 @@ begin
 		  oswe <= '0';
 		  ns <= ldmode; 
 		when ldmode => 
+		  pending <= '1';  
 		  loading <= '1';
 		  cmddone <= '0';
 		  cmdsuccess <= '0';
@@ -428,6 +447,7 @@ begin
 		  oswe <= '0';
 		  ns <= reset_pga;
 		when reset_pga => 
+		  pending <= '1'; 
 		  loading <= '1';
 		  cmddone <= '0';
 		  cmdsuccess <= '0';
@@ -443,6 +463,7 @@ begin
 		  oswe <= '0';
 		  ns <= load_wait;
 		when load_wait => 
+		  pending <= '1';  
 		  loading <= '1';
 		  cmddone <= '0';
 		  cmdsuccess <= '0';
@@ -462,6 +483,7 @@ begin
 		  	ns <= load_wait;
 		  end if; 
 		when load_done => 
+		  pending <= '1';  
 		  loading <= '0';
 		  cmddone <= '1';
 		  cmdsuccess <= '1';
@@ -477,6 +499,7 @@ begin
 		  oswe <= '0';
 		  ns <= cmdwait;
 		when others => 
+		  pending <= '1';  
 		  loading <= '0';
 		  cmddone <= '0';
 		  cmdsuccess <= '0';

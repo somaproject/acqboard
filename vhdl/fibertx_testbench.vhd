@@ -26,7 +26,8 @@ ARCHITECTURE behavior OF testbench IS
 		cmddone : IN std_logic;
 		y : IN std_logic_vector(15 downto 0);
 		cmdsts : IN std_logic_vector(3 downto 0);
-		cmd : IN std_logic_vector(7 downto 0);
+		cmdid : IN std_logic_vector(6 downto 0);
+		cmderr : in std_logic;
 		outbyte : IN std_logic;
 		chksum : IN std_logic_vector(15 downto 0);          
 		fiberout : OUT std_logic
@@ -41,7 +42,8 @@ ARCHITECTURE behavior OF testbench IS
 	SIGNAL cmddone :  std_logic;
 	SIGNAL y :  std_logic_vector(15 downto 0) := "0000000000000000";
 	SIGNAL cmdsts :  std_logic_vector(3 downto 0) := "0000";
-	SIGNAL cmd :  std_logic_vector(7 downto 0) := "00000000";
+	SIGNAL cmdid :  std_logic_vector(6 downto 0) := "0000000";
+	SIGNAL cmderr : std_logic := '0'
 	SIGNAL outbyte :  std_logic;
 	SIGNAL chksum :  std_logic_vector(15 downto 0) := (others => '0');
 	signal counter : integer := 0;
@@ -59,7 +61,8 @@ BEGIN
 		cmddone => cmddone,
 		y => y,
 		cmdsts => cmdsts,
-		cmd => cmd,
+		cmdid => cmdid,
+		cmderr => cmderr,
 		outbyte => outbyte,
 		chksum => chksum
 	);

@@ -66,3 +66,6 @@ Overlay text overlays some of the traces.
 The connector size for the jtag programmer is wrong. 
 
 But, using 5k Ohm pullups for all pullups and 200 ohm current-limiting resistors, we have things working. We can connect to the chain, program the PROM, directly download via the jtag chain to the FPGA. I'd say this jtag setup was a success. 
+
+30 May 2004
+A short between VSS and GND on the analog side caused this board to be a loss, but luckily I was able to test the DL capabilities, and sure enough, the acqboard command interface appears to work correctly. However, the code is fragile for a number of reasons, including (but not limited to) 

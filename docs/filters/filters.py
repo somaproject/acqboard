@@ -113,8 +113,10 @@ class filters:
         plot(flin[0, :]/1000, 20*log10(P[0, :]), 'b')
         grid(1)
         plot(flin[0, :]/1000, 20*log10(sum(P[1:8, ::-1])), 'r')
+        xlabel('Freqency (kHz)')
         
-
+        legend(('Signal', 'Aliases'))
+        
         
 from scipy import *
 

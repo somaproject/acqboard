@@ -35,7 +35,7 @@ ARCHITECTURE behavior OF testbench IS
 	SIGNAL reset :  std_logic := '0';
 	SIGNAL y :  std_logic_vector(15 downto 0);
 
-    constant clockperiod : time := 15.8 ns; 
+    constant clockperiod : time := 15.6 ns; 
     
 BEGIN
     clk <= not clk after clockperiod / 2;
@@ -71,10 +71,10 @@ BEGIN
 	 end if; 
 	 --
 	 -- lx <= llx + 1; 
-	 if xa = "1111111" then 
-	     lx <= "0000000000000001";
+	 if conv_integer(xa) >= 0 and conv_integer(xa) < 8 then 
+	     lx <= "0000000111111111";
 	 else
-	 	lx <= "0000000000000010";
+	 	lx <= "0000000000000001";
 	 end if; 
 	 if counter = 10 then
 	 	startmac <= '1' after 3 ns;

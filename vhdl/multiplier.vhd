@@ -25,21 +25,22 @@ architecture Behavioral of multiplier is
 
     signal al : std_logic_vector(15 downto 0) := (others => '0');
     signal bl: std_logic_vector(21 downto 0) := (others => '0');
-    signal lp, p1 : std_logic_vector(37 downto 0) := (others => '0'); 
+    signal lp : std_logic_vector(37 downto 0) := (others => '0'); 
+    signal p1, p2, p3 : std_logic_vector(n-1 downto 0) := (others => '0');
 
 begin
 	process(CLK) is
 	begin
 		if rising_edge(CLK) then
-			al <= A;
-			bl <= B;
-			--p1 <= lp;
-			p1 <= lp;  
-			P <= p1(36 downto (36-n+1)); 
+			--al <= a;
+			--bl <= b;
+			p1 <= lp(36 downto (36-n+1));
+			p2 <= p1;
+			P <= p2; 
 		end if;
 	end process; 
 
-    lp <= al * bl;  
+    lp <= a * b;  
 
 
 end Behavioral;

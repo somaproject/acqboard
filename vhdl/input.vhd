@@ -273,7 +273,7 @@ begin
 			  end if;
               end if; 
 
-		   
+		    outsell <= outsel; 
 
 		    -- output bit counter
 			       if ocs = incbitaddr or ocs = oneinc then
@@ -344,10 +344,10 @@ begin
 
 		     "00";
  
-	DOUT <= pda when outsel = "00" else
-		   pdb when outsel = "01" else
-		   "0111111111111111" when outsel = "10" else
-		   "1000000000000000" when outsel = "11"; 
+	DOUT <= pda when outsell = "00" else
+		   pdb when outsell = "01" else
+		   "0111111111111111" when outsell = "10" else
+		   "1000000000000000" when outsell = "11"; 
 
 	COUT <= chan; 
 

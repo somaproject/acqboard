@@ -53,9 +53,11 @@ class AcqState:
         self.insel = ["", "", "", "", "", "", "", "", "", ""]
         self.hpf = ["", "", "", "", "", "", "", "", "", ""]
         
-        self.clist = ["A.1", "A.2", "A.3", "A.4", "A.C", "B.C",  "B.1", "B.2", "B.3", "B.4"]
+        self.clist = ["A1", "A2", "A3", "A4", "AC", "BC",  "B1",\
+                      "B2", "B3", "B4"]
         self.gainlabel = []
-        self.glist = ["0", "1", "2", "5", "10", "20", "50", "100"]
+        self.glist = ["0", "100", "200", "500", "1000", \
+                      "2000", "5000", "10000"]
         self.hlist = ["DC", "100 Hz", "150 Hz", "300 Hz"] 
         self.chanlabel = []
         self.hpflabel = []
@@ -169,9 +171,10 @@ class AcqState:
         
 
 class AcqBoardControl:
-    clist = ["A.1", "A.2", "A.3", "A.4", "A.C", "B.C", "B.1", "B.2", "B.3", "B.4"]
+    clist = ["A1", "A2", "A3", "A4", "AC",
+             "BC", "B1", "B2", "B3", "B4"]
     hlist = ["DC", "100 Hz", "150 Hz", "300 Hz"]
-    glist = ["0", "1", "2", "5", "10", "20", "50", "100"]
+    glist = ["0", "100", "200", "500", "1000", "2000", "5000", "10000"]
 
 
     acqcmd = acqboardcmd.AcqBoardCmd()
@@ -186,14 +189,16 @@ class AcqBoardControl:
         chan = self.allchanchanopt.get_history()
         gain = self.allchangainopt.get_history()
         print "chan = %d gain = %d" % (chan, gain)
-        self.acqout.send(self.acqcmd.setgain(chan, gain))
-        self.acqs.startcmdid(self.acqcmd.cmdid, self.acqs.update_gain, (chan, gain))
+        self.acqout.send(self.acqcmd.setgain(self.clist[chan], \
+                                             int(self.glist[gain])))
+        self.acqs.startcmdid(self.acqcmd.cmdid, self.acqs.update_gain,\
+                             (chan, gain))
                              
     def button_set_hpf(self, widget):
         chan = self.allchanchanopt.get_history()
         filt = self.allchanhpfopt.get_history()
         
-        self.acqout.send(self.acqcmd.sethpfilter(chan, filt))
+        self.acqout.send(self.acqcmd.sethpfilter(self.clist[chan], filt))
         self.acqs.startcmdid(self.acqcmd.cmdid, self.acqs.update_hpf, (chan, filt))
                              
     def button_cselAset(self, widget):
@@ -374,7 +379,7 @@ class AcqBoardControl:
 
         self.cselAopt = gtk.OptionMenu()
         self.cselAmenu = gtk.Menu()
-        for i in ["A.1", "A.2", "A.3", "A.4"]:
+        for i in ["A1", "A2", "A3", "A4"]:
             item = gtk.MenuItem(i)
             self.cselAmenu.append(item)
             item.show()
@@ -404,7 +409,7 @@ class AcqBoardControl:
 
         self.cselBopt = gtk.OptionMenu()
         self.cselBmenu = gtk.Menu()
-        for i in ["B.1", "B.2", "B.3", "B.4"]:
+        for i in ["B1", "B2", "B3", "B4"]:
             item = gtk.MenuItem(i)
             self.cselBmenu.append(item)
             item.show()

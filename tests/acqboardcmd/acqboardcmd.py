@@ -21,6 +21,9 @@ from struct import *
 
 class AcqBoardCmd:
 
+    channames = { 'A1' : 0, 'A2' : 1, 'A3' : 2, 'A4' : 3, 'AC' : 4,
+                 'B1' : 6, 'B2' : 7, 'B3' : 8, 'B4' : 9, 'BC' : 5}
+
     def __init__(self):
         self.cmdid = 0
         
@@ -30,21 +33,49 @@ class AcqBoardCmd:
         else:
             self.cmdid += 1
             
-    def switchmode(self, mode, rawchan=0):
+    def switchmode(self, mode, rawchan='A1'):
         self.updatecmd()        
         str = ""
 
+
         cmdbyte = (self.cmdid << 4) | 0x7
-        str = pack("BBBBBB", cmdbyte, mode, rawchan, 0x0, 0x0, 0x0);
+        str = pack("BBBBBB", cmdbyte, mode, self.channames[rawchan], \
+                   0x0, 0x0, 0x0);
 
         return str;
     
     def setgain(self, chan, gain):
+        """ Gains are 'actual' gains, i.e. 0, 100, 200, 500,
+        1000, 2000, 5000, 10000"""
+
+        
+        if gain == 0:
+            gainset = 0
+        elif gain == 100:
+            gainset = 1
+        elif gain == 200:
+            gainset = 2
+        elif gain == 500:
+            gainset = 3
+        elif gain == 1000:
+            gainset = 4
+        elif gain == 2000:
+            gainset = 5
+        elif gain == 5000:
+            gainset = 6
+        elif gain == 10000:
+            gainset = 7
+        else:
+            print "NOT A VALID GAIN"
+
+            return None 
+
         self.updatecmd()        
         str = ""
-
+   
         cmdbyte = (self.cmdid << 4) | 0x1
-        str = pack("BBBBBB", cmdbyte, chan, gain, 0x0, 0x0, 0x0);
+        print "chan is ", chan
+        str = pack("BBBBBB", cmdbyte, self.channames[chan], gainset, 0x0, 0x0, 0x0);
         return str;
     
     def setinputch(self, chan, input):
@@ -71,15 +102,13 @@ class AcqBoardCmd:
         str = ""
 
         cmdbyte = (self.cmdid << 4) | 0x3
-        str = pack("BBBBBB", cmdbyte, chan, filter, 0x0, 0x0, 0x0);
+        str = pack("BBBBBB", cmdbyte, self.channames[chan], \
+                   filter, 0x0, 0x0, 0x0);
 
         return str;
         
         
     def writeoffset(self, chan, gain, value):
-        None
-        
-    def writefilter(self, addr, value):
         None
         
     def writesamplebuffer(self, addr, value):
@@ -112,6 +141,6 @@ if __name__ == "__main__":
     cmd = AcqBoardCmd()
 
     print unpack("BBBBBB", cmd.switchmode(4))
-    print unpack("BBBBBB", cmd.setgain(7, 4))
+    print unpack("BBBBBB", cmd.setgain('A3', 4))
     print unpack("BBBBBB", cmd.setinputch(0, 3))
     

@@ -105,7 +105,7 @@ begin
 	      if rising_edge(SCLK) then
 
 			if CS = '0' then 
-				SDOUT <= outputbits(bitpos) after 25 ns;
+				SDOUT <= outputbits(bitpos) after 30 ns;
 				bitpos <= bitpos -1;
 			end if;  
 

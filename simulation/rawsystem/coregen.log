@@ -1,0 +1,22 @@
+# Xilinx CORE Generator 6.2.03i
+# User = Eric Jonas
+Initializing default project...
+Loading plug-ins...
+All runtime messages will be recorded in E:\desktop\acqboard\simulation\rawsystem\coregen.log
+NEWPROJECT .
+SETPROJECT .
+# busformat=BusFormatAngleBracketNotRipped
+# designflow=VHDL
+# expandedprojectpath=E:\desktop\acqboard\simulation\rawsystem
+# flowvendor=Foundation_iSE
+# formalverification=None
+# simulationoutputproducts=VHDL
+# xilinxfamily=Virtex2
+# outputoption=DesignFlow
+# overwritefiles=Default
+# simvendor=ModelSim
+# expandedprojectpath=E:\desktop\acqboard\simulation\rawsystem
+Set current Project to E:\desktop\acqboard\simulation\rawsystem
+SET BusFormat = BusFormatAngleBracketNotRipped
+SETXIPCPORTHOST 2392
+XIPCPJSENDCORES spartan2e

@@ -1,0 +1,32 @@
+JDF G
+// Created by Project Navigator ver 1.0
+PROJECT raw
+DESIGN raw
+DEVFAM spartan3
+DEVFAMTIME 0
+DEVICE xc3s200
+DEVICETIME 0
+DEVPKG vq100
+DEVPKGTIME 0
+DEVSPEED -4
+DEVSPEEDTIME 0
+DEVTOPLEVELMODULETYPE HDL
+TOPLEVELMODULETYPETIME 0
+DEVSYNTHESISTOOL XST (VHDL/Verilog)
+SYNTHESISTOOLTIME 0
+DEVSIMULATOR Modelsim
+SIMULATORTIME 0
+DEVGENERATEDSIMULATIONMODEL VHDL
+GENERATEDSIMULATIONMODELTIME 0
+SOURCE ..\..\vhdl\input.vhd
+SOURCE ..\..\vhdl\clocks.vhd
+SOURCE ..\..\vhdl\raw.vhd
+SOURCE ..\..\vhdl\encode8b10b.xco
+SOURCE ..\..\vhdl\distRAM_dualport.vhd
+SOURCE ..\components\ADC\ADC.vhd
+SOURCE ..\..\vhdl\FiberTX.vhd
+SOURCE rawtest.vhd
+SOURCE ..\components\deserialize\deserialize.vhd
+SOURCE ..\..\vhdl\decode8b10b.xco
+[STRATEGY-LIST]
+Normal=True

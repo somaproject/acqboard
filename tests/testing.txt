@@ -83,3 +83,9 @@ AS of now, things are booting.
 
 18 June 2004
 Wow, mixed up OVDD and OGND pins on ADCs. I suck. 
+
+1 July 2004
+We can get sine data in raw mode. Now, I'm not sure why everything else isn't working, and I'm also not sure why we evidently have this damn jitter, but I'm going to write some analysis code today to look at it. 
+
+ 2 July 2004
+   Switching the inputs on the INPUT stage for A & B, such that things will behave like I expect them to. 

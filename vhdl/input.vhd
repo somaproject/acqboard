@@ -93,7 +93,7 @@ begin
     -- generate statement to wire things up
     serial_input : for i in 0 to 4 generate
 	   begin
-		chanB_slr16e: SRL16E generic map (
+		chanA_slr16e: SRL16E generic map (
 			INIT => X"8000" )
 			port map (
 			D => sdinl(i),
@@ -103,18 +103,18 @@ begin
 			A1 => bitaddr(1),
 			A2 => bitaddr(2),
 			A3 => bitaddr(3),
-			Q => doutb(i));
-		chanA_slr16e: SRL16E  generic map (
+			Q => douta(i));
+		chanB_slr16e: SRL16E  generic map (
 			INIT => X"8000" )
 			port map (
-			D => doutb(i),
+			D => douta(i),
 			CE => inen,
 			CLK => CLK,
 			A0 => bitaddr(0),
 			A1 => bitaddr(1),
 			A2 => bitaddr(2),
 			A3 => bitaddr(3),
-			Q => douta(i));
+			Q => doutb(i));
 
 	   end generate; 
 

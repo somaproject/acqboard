@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<article>
+  <articleinfo>
+    <title>Soma Acquisition Board</title>
+    <author>
+      <firstname>Eric</firstname>
+      <surname>Jonas</surname>
+    </author>
+  </articleinfo>
+  <section>
+    <title> Acquisition Board Overview </title> 
+    
+    <para>The Soma Acquisition Board is an 8 channel data acquisition
+    system designed for multiunit (tetrode-array)
+    electrophysiology. The board performs differential amplification
+    of eletrophyisological waveforms and digitizes them, ultimately
+    sending the sampled data over an optical fiber interface to the
+    Soma DSP Boards. </para>
+

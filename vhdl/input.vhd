@@ -23,7 +23,8 @@ entity input is
 			  OSRST : in std_logic; 
 		     OSEN : in std_logic;
 		     OSWE : in std_logic; 
-		     OSD : in std_logic_vector(15 downto 0)
+		     OSD : in std_logic_vector(15 downto 0);
+		SDINDEBUG : out std_logic  
 		  		);
 
 end input;
@@ -33,7 +34,6 @@ architecture Behavioral of input is
 
    -- ADC interface signals
    signal ladccs, lconvst, lsclk : std_logic := '0';
-   signal sdinl : std_logic_vector(4 downto 0) := (others => '0');
    signal convwait : integer range 0 to 150 := 0; 
    signal bitaddr: std_logic_vector(3 downto 0) := (others => '1');
 
@@ -96,7 +96,7 @@ begin
 		chanA_slr16e: SRL16E generic map (
 			INIT => X"8000" )
 			port map (
-			D => sdinl(i),
+			D => SDIN(i),
 			CE => inen,
 			CLK => CLK,
 			A0 => bitaddr(0),
@@ -128,22 +128,23 @@ begin
 		    ics <= ins;
 
 		    ADCCS <= ladccs;
-		    CONVST <= lconvst;
-		    SCLK <= lsclk; 
-		    sdinl <= SDIN; 
+		    CONVST <= not INSAMPLE;
 
-		    if ics = sclkh0 then
+		    if inen = '1' then
+		    	  SDINDEBUG <= SDIN(0); 
+			end if; 
+		    if ics = conv_done then
 		    	   sclkcnt <= (others => '0');
 		    else
-		       if ics = sclkl3 then
+		       if ics = sclkl2 then
 			     sclkcnt <= sclkcnt + 1;
  			  end if;
  		    end if; 
 
-		    	if ics = conv_start  then 
+		    	if INSAMPLE = '1'  then 
 		    		convwait <= 0;
 			else
-				if ics = conv_wait then
+				if convwait /= 140 then
 					convwait <= convwait + 1;
 				end if;
 			end if;
@@ -157,100 +158,52 @@ begin
 	begin
 		case ics is
 			when none => 
-				lconvst <= '1';
 				ladccs <= '1';
 				inen <= '0';
-				lsclk <= '0';
-				if INSAMPLE = '1' then
-					ins <= conv_start; 	
+				SCLK <= '0';
+				if convwait = 123 then
+					ins <= conv_wait; 	
 				else 
 					ins <= none;
 				end if;
-			when conv_start => 
-				lconvst <= '0';
-				ladccs <= '1';
-				inen <= '0';
-				lsclk <= '0';
-				ins <= conv_wait;
 			when conv_wait => 
-				lconvst <= '1';
-				ladccs <= '1';
-				inen <= '0';
-				lsclk <= '0';
-				if convwait = 139 then
-					ins <= conv_done; 	
-				else 
-					ins <= conv_wait;
-				end if;
-			when conv_done => 
-				lconvst <= '1';
 				ladccs <= '0';
 				inen <= '0';
-				lsclk <= '0';
+				SCLK <= '0';
+				ins <= conv_done;
+			when conv_done => 
+				ladccs <= '0';
+				inen <= '0';
+				SCLK <= '0';
 				ins <= sclkh0;
 			when sclkh0 => 
-				lconvst <= '1';
 				ladccs <= '0';
 				inen <= '0';
-				lsclk <= '1';
+				SCLK <= '1';
 				ins <= sclkl0;
 			when sclkl0 => 
-				lconvst <= '1';
 				ladccs <= '0';
 				inen <= '0';
-				lsclk <= '0';
+				SCLK <= '0';
 				ins <= sclkl1;
 			when sclkl1 => 
-				lconvst <= '1';
 				ladccs <= '0';
 				inen <= '0';
-				lsclk <= '0';
-				ins <= sclkh1;
-			when sclkh1 => 
-				lconvst <= '1';
-				ladccs <= '0';
-				inen <= '0';
-				lsclk <= '1';
+				SCLK <= '0';
 				ins <= sclkl2;
 			when sclkl2 => 
-				lconvst <= '1';
-				ladccs <= '0';
-				inen <= '0';
-				lsclk <= '0';
-				ins <= sclkl3;
-			when sclkl3 => 
-				lconvst <= '1';
 				ladccs <= '0';
 				inen <= '1';
-				lsclk <= '0';
-				if sclkcnt = "11110" then
-					ins <= sclkw0;
+				SCLK <= '0';
+				if sclkcnt = "11111" then
+					ins <= none;
 				else
-					ins <= sclkh1;
+					ins <= sclkh0;
 				end if;
-			when sclkw0 => 
-				lconvst <= '1';
-				ladccs <= '0';
-				inen <= '0';
-				lsclk <= '0';
-				ins <= sclkw1;
-			when sclkw1 => 
-				lconvst <= '1';
-				ladccs <= '0';
-				inen <= '0';
-				lsclk <= '0';
-				ins <= sclkw2;
-			when sclkw2 => 
-				lconvst <= '1';
-				ladccs <= '0';
-				inen <= '1';
-				lsclk <= '0';
-				ins <= none;
 			when others => 
-				lconvst <= '1';
 				ladccs <= '1';
 				inen <= '0';
-				lsclk <= '0';
+				SCLK <= '0';
 				ins <= none;
 		end case; 
 	end process infsm; 

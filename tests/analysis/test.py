@@ -78,8 +78,12 @@ class AcqSocketStat:
 class AcqState:
 
     def __init__(self):
-        self.gains = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        self.hpfs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] 
+        self.gains = {}
+        self.hpfs = {}
+        
+        for key in AcqBoardCmd.channames.keys():
+            self.gains[key] = 0
+            self.hpfs[key] = 0
         self.inchana = 0
         self.inchanb = 0
         self.mode = 0
@@ -151,7 +155,7 @@ class Test:
         
         # then, set gain for each channel
 
-        for i in range(10):
+        for i in AcqBoardCmd.channames.keys():
             
             acqout.send(acqcmd.setgain(i, self.acqstate.gains[i]))
             tmpcmdid = -1
@@ -227,8 +231,8 @@ def main():
 
     a = AcqState()
     a.setmode("raw")
-    a.rawchan = 1 
-    a.gains = [0, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+    a.rawchan = 'A1' 
+    a.gains['A1'] = 100
     
     t = Test(a,f)
 

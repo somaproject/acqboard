@@ -15,9 +15,10 @@ data
 
 """
 
-from  tables import *
-from numarray import * 
+from tables import *
+from numarray import *
 from test import *
+from run import *
 
 
 
@@ -92,8 +93,89 @@ class Run:
 
         a.foffset = self.fstate.offset
         
+class Runs:
+    """ This is a class where we keep often-used, often-needed runs.
+
     
-if __name__ == "__main__":
+
+    """
+
+    def rawSineSet(self, chan, gain, h5file, group):
+        """ coherent sampling, 128k samples, of multiple frequencies,
+        multiple amplitudes. maxAmp is a float describing the maximum
+        amplitude
+        """
+
+        # use N=[53, 141, 257, 1237, 2537]
+        # M = 2**16
+        freqs = [207.03125, 550.78125, 1003.90625, 4832.03125, 9910.15625]
+
+        maxAmp = 4.000 / gain
+
+        print "Beginning rawSineSet for channel %s, gain=%d, in group %s" \
+              % (chan, gain, group)
+        
+        for freqi  in range(len(freqs)):
+            for amp in [1.0, 0.20, 0.01]:
+                print "starting test: freq=%f amp=%f" % (freqs[freqi], amp)
+
+                
+                f = FuncState()
+                
+                f.setmode("sine")
+                f.freq = freqs[freqi]
+                f.amp = maxAmp * amp
+                
+
+                
+                a = AcqState()
+                a.setmode("raw")
+                a.rawchan = chan
+                a.gains[chan] = gain
+
+    
+                r = Run()
+                r.acqstate = a
+                r.fstate = f
+                r.run(128000)
+                r.save(h5file, group, "rawSineSet_g%d_f%d_a%d" \
+                       % (gain, freqi, amp*100))
+                
+    
+
+    def noInputSet(self, chan, gain, h5file, group):
+        """ Sampling of inputs shorted together. 
+        """
+
+        # use N=[53, 141, 257, 1237, 2537]
+        # M = 2**16
+        
+        f = FuncState()
+        
+        f.setmode("sine")
+        f.ffreq = 0
+        f.famp = 0.00
+        
+        
+        
+        a = AcqState()
+        a.setmode("raw")
+        a.rawchan = chan
+        a.gains[chan] = gain
+        
+    
+        r = Run()
+        r.acqstate = a
+        r.fstate = f
+        r.run(256000)
+        r.save(h5file, group, "noinput_g%d" \
+               % gain)
+                
+    
+
+
+
+def simple_test():
 
     h5file = openFile("test.h5", mode = "w", title = "Test file")
     group = h5file.createGroup("/", 'raw', 'Raw outputs')
@@ -102,9 +184,9 @@ if __name__ == "__main__":
     
     f = FuncState()
 
-    f.setmode("IMD")
-    f.freq = (964.84375, 2894.53125)
-    f.amp = (0.020, 0.020)
+    f.setmode("sine")
+    f.freq = 964.84375
+    f.amp = 0.038
 
 
 
@@ -122,3 +204,20 @@ if __name__ == "__main__":
     
     
     h5file.close()
+    
+def rawsintest():
+    
+    h5file = openFile("sin.test.h5", mode = "w", title = "Test file")
+    cgroup = h5file.createGroup("/", 'A1', 'Channel A1')
+    tgroup = h5file.createGroup("/A1", "sine", 'sine inputs')
+    
+    r = Runs()
+    r.rawSineSet("A1", 100, h5file, '/A1/sine')
+    
+    h5file.close()
+
+
+        
+if __name__ == "__main__":
+    f = FuncState()
+    #rawsintest()

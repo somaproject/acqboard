@@ -223,7 +223,11 @@ class AcqBoardControl:
         addr = 0 
         for str in samples:
             print "the value is ", string.atoi(str)
-            self.blocksend(self.acqcmd.writesamplebuffer(addr, string.atoi(str)*255))
+            self.blocksend(self.acqcmd.writesamplebuffer(\
+                addr, string.atoi(str)))
+            #self.blocksend(self.acqcmd.writesamplebuffer(\
+            #    addr, 257))
+            
             addr += 1
 
     def load_filter(self, widget):

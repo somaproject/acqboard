@@ -230,12 +230,97 @@ DTRT given an acqstate and a function state, and a number of samples. <br>
 <br>
 So, a "run" could be a hdf5 wrap of a test. That wouldn't suck. <br>
 <br>
-<span style="font-weight: bold; text-decoration: underline;">The tests
-to run: </span><br
- style="font-weight: bold; text-decoration: underline;">
+<span style="font-weight: bold; text-decoration: underline;">15 July
+2004</span><br style="font-weight: bold; text-decoration: underline;">
 First, we want to run the pure sine test, using a coherently sampled
 sine wave. Early tests suggest that we're not getting quite what we'd
-hope for... <br>
+hope for... so we've created this notion of "sets" of runs. <br>
+<br>
+<span style="font-weight: bold; color: rgb(0, 0, 102);">Generated
+results/20040715/simplerun.h5 sweeping through gains, freqencies on the
+first ADC, both inputs. </span><br
+ style="font-weight: bold; color: rgb(0, 0, 102);">
+<br>
+<img style="width: 1200px; height: 900px;" alt=""
+ src="results/20040715/simplerun.sine.g100.g0.a100.png"><br>
+The above is the result of <span style="font-weight: bold;">channel A1
+being fed a 207 Hz coherently-sampled sine, using a gain of 1 with
+DC-based HPF</span>.&nbsp; Similarly, <br>
+<br>
+This isnt' the best way of visualizing this, I think I'm going to write
+the "show" code to write parameters...<br>
+<br>
+Anywho, the results look similar across the board -- 76-77 dB of actual
+SNR. <br>
+<br>
+Now, let's look at raw noise. <br>
+<br>
+The noise data is truly bizzare. All of what follows is from
+rtinoise.h5. We get as-expected noise distributions for low gains on
+channel A1:<br>
+<br>
+<img style="width: 600px; height: 450px;" alt=""
+ src="results/20040715/rtinoise.A1.g100.png"><img
+ style="width: 600px; height: 450px;" alt=""
+ src="results/20040715/rtinoise.A2.g100.png"><img
+ style="width: 600px; height: 450px;" alt=""
+ src="results/20040715/rtinoise.A1.g10000.png"><img
+ style="width: 600px; height: 450px;" alt=""
+ src="results/20040715/rtinoise.A2.g10000.png"><br>
+<br>
+So, visually, the distributions for the high-gain outputs looks really
+poor. I have no idea where the spiking is coming from, although there
+are a few candidates:<br>
+<ul>
+  <li>external environment noise. Okay, maybe, but why the unusual
+distribution? The spikes appear truly random in time, but clearly
+quantized in amplitude. <br>
+  </li>
+  <li>They could potentially be bit-errors in the readout. But they
+show up in powers of two. For example:</li>
+</ul>
+<div style="text-align: center;"><img
+ style="width: 1200px; height: 900px;" alt=""
+ src="results/20040715/rtinoise.A2.g10000.ranges.png"><br>
+</div>
+<br>
+So hmm, that doesn't look suspicious?? But even if you assume errors in
+bits 7 &amp; 8, WHY those bits and WHY only at high gains? This does
+not make sense, at all! Perhaps the errors only manifest themselves
+when the input is in that region? It can't be an 8b/10b related issue,
+because that's a byte-encoding. The input-range hypothesis can be
+tested. <br>
+<br>
+So, could we potentially have an error -any- place we have a 16-bit
+interface? <br>
+<br>
+Wow, looking back, this is the histogram for the diff for the A1
+channel with freq 1 at g=100 with 100% amplitude:<br>
+<br>
+<div style="text-align: center;"><img
+ style="width: 1200px; height: 900px;" alt=""
+ src="results/20040715/simplerun.A1.sine.g100.a100.hist-of-diff.png"><br>
+<div style="text-align: left;">The red bars are at +-256 and +/- 512.
+Wow, wow, Wow. <br>
+<br>
+An interesting idea would be to see what we can get out of the
+simulated output mode. Inital inspections suggest nothing; maybe we
+only get errors for certain ranges? Let's program the sample buffer for
+a 0-255 sweep...<br>
+<br>
+<br>
+<br>
+Well, after investigating a bit more, there is some sever strangeness
+occuring with the sample buffer mode. I don't quite understand what's
+going on. In any case, that's a day!!<br>
+<br>
+</div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

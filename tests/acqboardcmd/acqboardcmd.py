@@ -74,7 +74,7 @@ class AcqBoardCmd:
         str = ""
    
         cmdbyte = (self.cmdid << 4) | 0x1
-        print "chan is ", chan
+        
         str = pack("BBBBBB", cmdbyte, self.channames[chan], gainset, 0x0, 0x0, 0x0);
         return str;
     
@@ -117,8 +117,10 @@ class AcqBoardCmd:
         str = ""
 
         cmdbyte = (self.cmdid << 4) | 0x6
-        str = pack("BBBBBB", cmdbyte, addr, 0x00, value & 0xFF, (value >> 8) & 0xFF, 0x0);
-        #str = pack("BBBBBB", cmdbyte, addr, 0x12, 0x34, 0x56, 0x78);
+        lowbyte = value & 0xFF
+        highbyte = (value >> 8 ) & 0xFF
+        print "Lowbyte", lowbyte, " higbyte", highbyte
+        str = pack("BBBBBB", cmdbyte, addr, 0x00, highbyte,lowbyte, 0x0);
         
         return str
 

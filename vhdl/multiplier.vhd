@@ -44,8 +44,8 @@ ENTITY multiplier IS
 	port (
 	clk: IN std_logic;
 	a: IN std_logic_VECTOR(13 downto 0);
-	b: IN std_logic_VECTOR(17 downto 0);
-	q: OUT std_logic_VECTOR(31 downto 0);
+	b: IN std_logic_VECTOR(21 downto 0);
+	q: OUT std_logic_VECTOR(35 downto 0);
 	sclr: IN std_logic);
 END multiplier;
 
@@ -55,8 +55,8 @@ component wrapped_multiplier
 	port (
 	clk: IN std_logic;
 	a: IN std_logic_VECTOR(13 downto 0);
-	b: IN std_logic_VECTOR(17 downto 0);
-	q: OUT std_logic_VECTOR(31 downto 0);
+	b: IN std_logic_VECTOR(21 downto 0);
+	q: OUT std_logic_VECTOR(35 downto 0);
 	sclr: IN std_logic);
 end component;
 
@@ -64,7 +64,7 @@ end component;
 	for all : wrapped_multiplier use entity XilinxCoreLib.mult_gen_v5_0(behavioral)
 		generic map(
 			c_a_width => 14,
-			c_out_width => 32,
+			c_out_width => 36,
 			c_b_type => 0,
 			c_has_b => 1,
 			c_has_rdy => 0,
@@ -94,7 +94,7 @@ end component;
 			c_standalone => 1,
 			c_mem_init_prefix => "mem",
 			c_a_type => 0,
-			c_b_width => 18,
+			c_b_width => 22,
 			c_b_value => "0000000000000001",
 			c_sqm_type => 0);
 BEGIN

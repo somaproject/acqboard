@@ -44,8 +44,8 @@ module multiplier (
 
 input clk;
 input [13 : 0] a;
-input [17 : 0] b;
-output [31 : 0] q;
+input [21 : 0] b;
+output [35 : 0] q;
 input sclr;
 
 // synopsys translate_off
@@ -58,7 +58,7 @@ input sclr;
 		0,	// c_b_constant
 		0,	// c_b_type
 		"0000000000000001",	// c_b_value
-		18,	// c_b_width
+		22,	// c_b_width
 		1,	// c_enable_rlocs
 		0,	// c_has_aclr
 		0,	// c_has_a_signed
@@ -77,7 +77,7 @@ input sclr;
 		0,	// c_mem_type
 		0,	// c_mult_type
 		0,	// c_output_hold
-		32,	// c_out_width
+		36,	// c_out_width
 		1,	// c_pipeline
 		1,	// c_reg_a_b_inputs
 		0,	// c_sqm_type

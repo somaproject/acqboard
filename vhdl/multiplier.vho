@@ -33,8 +33,8 @@ component multiplier
 	port (
 	clk: IN std_logic;
 	a: IN std_logic_VECTOR(13 downto 0);
-	b: IN std_logic_VECTOR(17 downto 0);
-	q: OUT std_logic_VECTOR(31 downto 0);
+	b: IN std_logic_VECTOR(21 downto 0);
+	q: OUT std_logic_VECTOR(35 downto 0);
 	sclr: IN std_logic);
 end component;
 

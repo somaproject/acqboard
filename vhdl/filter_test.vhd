@@ -28,7 +28,7 @@ architecture Behavioral of filter_test is
 	signal addrb7, clr, addra7 : std_logic;
 	signal web, dots : std_logic_vector(4 downto 0); 
    signal xd: std_logic_vector(13 downto 0); 
-	signal hd : std_logic_vector(17 downto 0); 
+	signal hd : std_logic_vector(21 downto 0); 
 
 	component CLOCKS is
 	    Port ( CLKIN : in std_logic;
@@ -70,14 +70,14 @@ architecture Behavioral of filter_test is
 	    Port ( CLK2X : in std_logic;
 	           CLR : in std_logic;
 				  RESET : in std_logic; 
-	           HD : out std_logic_vector(17 downto 0));
+	           HD : out std_logic_vector(21 downto 0));
 	end component;
 
  	component RMAC is
 	    Port ( CLK2X : in std_logic;
 	           CLR : in std_logic;
 	           XD : in std_logic_vector(13 downto 0);
-	           HD : in std_logic_vector(17 downto 0);
+	           HD : in std_logic_vector(21 downto 0);
 	           MACRND : out std_logic_vector(15 downto 0));
 	end component;
 

@@ -17,13 +17,13 @@ entity HSEL is
     Port ( CLK2X : in std_logic;
            CLR : in std_logic;
 			  RESET : in std_logic; 
-           HD : out std_logic_vector(17 downto 0));
+           HD : out std_logic_vector(21 downto 0));
 end HSEL;
 
 architecture Behavioral of HSEL is
 	signal index: std_logic_vector(7 downto 0) := "00000000"; 		  
 
-	signal DO_Dummy: std_logic_vector(13 downto 0); 
+	signal DO_Dummy: std_logic_vector(9 downto 0); 
 	component RAMB4_S16
 		generic (
 	       INIT_00 : bit_vector := X"0000000000000000000000000000000000000000000000000000000000000000";
@@ -82,7 +82,7 @@ begin
 
 	RAMH: RAMB4_S16 
 		generic map (
-			INIT_00 => X"0000000000000000000000000000000000000000000000000000000000000002",
+			INIT_00 => X"0000000000000000000000000000000000000000000000000000000000000020",
 			INIT_01 => X"0000000000000000000000000000000000000000000000000000000000000000",
 			INIT_02 => X"0000000000000000000000000000000000000000000000000000000000000000",
 			INIT_03 => X"0000000000000000000000000000000000000000000000000000000000000000",
@@ -98,8 +98,8 @@ begin
 			RST => CLR,
 			CLK => CLK2X,
 			ADDR => 	index,
-			DO(1 downto 0) => HD(17 downto 16),
-			DO(15 downto 2)  => DO_dummy);
+			DO(5 downto 0) => HD(21 downto 16),
+			DO(15 downto 6)  => DO_dummy);
 
 
 end Behavioral;

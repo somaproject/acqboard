@@ -6,7 +6,7 @@ CSET output_options = Registered
 CSET port_b_constant = false
 CSET port_a_input = Parallel
 CSET reloadable = false
-CSET port_b_width = 18
+CSET port_b_width = 22
 CSET nd = false
 CSET multiplier_type = Parallel
 CSET port_a_width = 14
@@ -28,5 +28,5 @@ CSET style = Rectangular_Shape
 CSET port_b_constant_value = 1
 CSET pipelined = Maximum
 CSET output_hold_register = false
-CSET output_width = 32
+CSET output_width = 36
 GENERATE

@@ -21,22 +21,22 @@ entity RMAC is
     Port ( CLK2X : in std_logic;
            CLR : in std_logic;
            XD : in std_logic_vector(13 downto 0);
-           HD : in std_logic_vector(17 downto 0);
+           HD : in std_logic_vector(21 downto 0);
            MACRND : out std_logic_vector(15 downto 0));
 end RMAC;
 
 architecture Behavioral of RMAC is
 	signal mina : std_logic_vector(13 downto 0) := "00000000000000";
-	signal minb : std_logic_vector(17 downto 0) := "000000000000000000"; 
-	signal p, pl : std_logic_vector(31 downto 0) := "00000000000000000000000000000000"; 
-	signal sum, macout: std_logic_vector(33 downto 0) := "0000000000000000000000000000000000"; 
+	signal minb : std_logic_vector(21 downto 0) := "0000000000000000000000"; 
+	signal p, pl : std_logic_vector(35 downto 0) := "000000000000000000000000000000000000"; 
+	signal sum, macout: std_logic_vector(37 downto 0) := "00000000000000000000000000000000000000"; 
 
 	component multiplier IS
 		port (
 		clk: IN std_logic;
 		a: IN std_logic_VECTOR(13 downto 0);
-		b: IN std_logic_VECTOR(17 downto 0);
-		q: OUT std_logic_VECTOR(31 downto 0);
+		b: IN std_logic_VECTOR(21 downto 0);
+		q: OUT std_logic_VECTOR(35 downto 0);
 		sclr: IN std_logic);
 	END component;
 
@@ -70,9 +70,9 @@ begin
 			end if; 
 		end if; 
 
-		sum <= macout + (pl(31) & pl(31) & pl);
+		sum <= macout + (pl(35) & pl(35) & pl);
 
-		macrnd <= macout(30 downto 15);
+		macrnd <= macout(34 downto 19);
 
 	end process rmac_core; 
 

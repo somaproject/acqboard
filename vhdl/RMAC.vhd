@@ -16,6 +16,7 @@ entity RMAC is
            HA : out std_logic_vector(6 downto 0);
            XBASE : in std_logic_vector(6 downto 0);
            STARTMAC : in std_logic;
+		 MACDONE  : out std_logic; 
 		 RESET : in std_logic; 
            Y : out std_logic_vector(15 downto 0));
 end RMAC;
@@ -35,7 +36,7 @@ architecture Behavioral of RMAC is
 
    -- fsm signals
    type states is (none, addrrst, macwait, accen, latch_out, 
-   				post_ovrf, post_rnd);
+   				post_ovrf, post_rnd, rmac_done);
    signal ns, cs : states := none;
    signal clr : std_logic := '0';
    signal maccnt : integer range 255 downto 0 := 0;
@@ -144,28 +145,38 @@ begin
   fsm: process (cs, ns, STARTMAC, maccnt) is
   begin
   	case cs is
-		when none => 
+		when none =>
+		  MACDONE <= '0';
 		  if STARTMAC = '1' then
 		  	ns <= addrrst;
 		  else
 		  	ns <= none;
 		  end if;
-		when addrrst => 
+		when addrrst =>
+		  MACDONE <= '0'; 
 		  ns <= macwait;
-		when macwait => 
-		  if maccnt  = 139 then
+		when macwait =>
+		  MACDONE <= '0'; 
+		  if maccnt  = 128 then
 		  	ns <= accen;
 		  else
 		  	ns <= macwait;
 		  end if;
-		when accen => 
+		when accen =>
+		  MACDONE <= '0'; 
 		  ns <= post_rnd;		  
-		when post_rnd => 
+		when post_rnd =>
+		  MACDONE <= '0'; 
 		  ns <= post_ovrf;		  
-		when post_ovrf => 
+		when post_ovrf =>
+		  MACDONE <= '0'; 
 		  ns <= latch_out;		  
-		when latch_out => 
-		  ns <= none;		  
+		when latch_out =>
+		  MACDONE <= '0'; 
+		  ns <= rmac_done;
+		when rmac_done =>
+		  MACDONE <= '1';
+		  ns <= none; 		  
 		when others => 
 		  ns <= none;		  
 	end case; 	  		

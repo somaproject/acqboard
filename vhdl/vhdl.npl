@@ -13,7 +13,10 @@ DEVSPEEDTIME 0
 FLOW XST VHDL
 FLOWTIME 1061049059
 STIMULUS pgaload_test.tbw Normal
+STIMULUS rmac_testbench.vhd Normal
 STIMULUS RMAC_test.tbw Normal
+STIMULUS overflow_testbench.vhd Normal
+STIMULUS rounding_testbench.vhd Normal
 STIMULUS overflow_test.tbw Normal
 STIMULUS rounding_test.tbw Normal
 MODULE samplebuffer.vhd
@@ -26,6 +29,8 @@ MODULE input.vhd
 MODSTYLE input Normal
 MODULE offset.vhd
 MODSTYLE offset Normal
+MODULE RMACcontrol.vhd
+MODSTYLE rmaccontrol Normal
 MODULE FilterArray.vhd
 MODSTYLE filterarray Normal
 MODULE multiplier.vhd
@@ -39,6 +44,7 @@ MODSTYLE rmac Normal
 DEPASSOC rmac RMAC.ucf Normal
 DEPASSOC multiplier multiplier.ucf Normal
 [Normal]
+p_ModelSimSimRunTime_tb=xstvhd, spartan2e, Module VHDL Test Bench.t_MSimulateBehavioralVhdlModel, 1056242168, 1000ms
 p_xstPackIORegister=xstvhd, spartan2e, Schematic.t_synthesize, 1061064066, Yes
 xilxPAReffortLevel=xstvhd, spartan2e, Implementation.t_placeAndRouteDes, 1055895324, High
 [STRATEGY-LIST]

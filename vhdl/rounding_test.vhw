@@ -1,7 +1,7 @@
 -- C:\DESKTOP\ACQBOARD\VHDL
 -- VHDL Test Bench created by
 -- HDL Bencher 5.1i
--- Sun Aug 17 14:38:07 2003
+-- Sat Jun 21 20:25:42 2003
 -- 
 -- Notes:
 -- 1) This testbench has been automatically generated from
@@ -13,8 +13,10 @@
 
 LIBRARY  IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
-USE IEEE.STD_LOGIC_ARITH.ALL;
-USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+LIBRARY  SIMPRIM;
+USE SIMPRIM.VCOMPONENTS.ALL;
+USE SIMPRIM.VPACKAGE.ALL;
 
 LIBRARY ieee;
 USE IEEE.STD_LOGIC_TEXTIO.ALL;
@@ -28,26 +30,20 @@ ARCHITECTURE testbench_arch OF testbench IS
 -- from the menu do Options->Configuration select VHDL 87
 FILE RESULTS: TEXT OPEN WRITE_MODE IS "results.txt";
 	COMPONENT rounding
-		GENERIC (
-			n : positive
-		);
 		PORT (
-			ACCL : in  std_logic_vector (30 DOWNTO 0);
-			YRND : out  std_logic_vector (22 DOWNTO 0)
+			YRND : out  std_logic_vector (22 DOWNTO 0);
+			ACCL : in  std_logic_vector (30 DOWNTO 0)
 		);
 	END COMPONENT;
 
-	SIGNAL ACCL : std_logic_vector (30 DOWNTO 0);
 	SIGNAL YRND : std_logic_vector (22 DOWNTO 0);
+	SIGNAL ACCL : std_logic_vector (30 DOWNTO 0);
 
 BEGIN
 	UUT : rounding
-	GENERIC MAP (
-		n => 24
-	)
 	PORT MAP (
-		ACCL => ACCL,
-		YRND => YRND
+		YRND => YRND,
+		ACCL => ACCL
 	);
 
 	PROCESS

@@ -9,7 +9,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 --use UNISIM.VComponents.all;
 
 entity rounding is
-    Generic ( n: positive := 24); 
+    Generic ( n: positive := 36); 
        Port ( ACCL : in std_logic_vector((n-1)+7 downto 0);
 	         YRND : out std_logic_vector(22 downto 0));
 end rounding;
@@ -18,12 +18,12 @@ architecture Behavioral of rounding is
 -- ROUNDING.VHD -- system for convergent rounding of variable-width
 -- input. 
    signal roundout : std_logic := '0';
-     signal bigand_y, bigor_y : std_logic; 
+     signal bigor_y: std_logic; 
 
 begin
-   lut: process(ACCL, bigand_y, bigor_y) is
+   lut: process(ACCL,  bigor_y) is
    begin
-	  if(ACCL((n-15)-2)='1' and (bigand_y = '1' or bigor_y = '0')) then
+	  if(ACCL((n-15)-2)='1' and bigor_y = '0') then
 	  	if ACCL((n-15)-1) = '1' then 
 			roundout <= '1';
 		else 
@@ -37,18 +37,7 @@ begin
    
    YRND <=  ACCL((7+(n-1)) downto (n-16)) + ("0000000000000000000000" & roundout);
 
-  bigand: process(ACCL) is
-	  	variable x: std_logic ; 
-  begin
-  	for i in 0 to (n-15)-3 loop
-	    if i = 0 then
-	      	x := ACCL(0);
-	    else
-		 	x := x and ACCL(i);
-		end if; 
-	end loop;
-	bigand_y <= x; 
-  end process;    
+
 
   bigor: process(ACCL) is
 	  	variable x: std_logic ; 

@@ -9,7 +9,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 --use UNISIM.VComponents.all;
 
 entity multiplier is	   
-    Generic ( n: positive := 24); 
+    Generic ( n: positive := 36); 
     Port ( CLK : in std_logic;
            A : in std_logic_vector(15 downto 0);
            B : in std_logic_vector(21 downto 0);

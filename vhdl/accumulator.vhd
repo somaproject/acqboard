@@ -9,7 +9,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 --use UNISIM.VComponents.all;
 
 entity accumulator is
-    Generic ( n: positive := 24); 
+    Generic ( n: positive := 36); 
     Port ( CLK : in std_logic;
 		 P : in std_logic_vector(n-1 downto 0);
            ACC : out std_logic_vector((n-1)+7 downto 0);

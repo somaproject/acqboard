@@ -1155,6 +1155,29 @@ get the skirt around the fundamental. <br>
 Tomorrow we will begin THD+N measurements at a variety of frequencies
 in an attempt to characterize performance. <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">1 February
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+sr = Raw.SineRun(rawh5file)<br>
+sr.name = "Name"<br>
+sr.channel = "A1"<br>
+sr.range =&nbsp; logspace(log10(20), log10(60000), num=100)<br>
+sr.gain = 100<br>
+sr.hpf = off<br>
+sr.vpp = 4.096<br>
+<br>
+Sine run will:<br>
+<ul>
+  <li>set the channel, gain, and hpf, and raw mode</li>
+  <li>set the ats mode, vpp</li>
+  <li>runs, collects, saves data</li>
+</ul>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

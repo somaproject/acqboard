@@ -1,0 +1,11 @@
+Notes for analysis. 
+
+readraw: 
+
+Returns a file object that will return the next N samples in an array when you call foo.read(N). 
+
+Similarly, there will be readchan, which you invoke with 
+
+x = readchan(filename, channelnum)
+
+and will do the same. 

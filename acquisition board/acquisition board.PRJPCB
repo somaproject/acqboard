@@ -1,10 +1,10 @@
 [Design]
 Version=1.0
 HierarchyMode=0
-ChannelRoomNamingStyle=0
+ChannelRoomNamingStyle=2
 OutputPath=
-ChannelDesignatorFormatString=$Component_$RoomName
-ChannelRoomLevelSeperator=_
+ChannelDesignatorFormatString=$Component.$RoomName
+ChannelRoomLevelSeperator=.
 OpenOutputs=1
 ArchiveProject=0
 TimestampOutput=0
@@ -63,6 +63,13 @@ DoLibraryUpdate=1
 DoDatabaseUpdate=1
 [Document8]
 DocumentPath=main.SCHDOC
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotateSuffix=
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+[Document9]
+DocumentPath=ADC.SCHDOC
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotateSuffix=

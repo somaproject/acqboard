@@ -38,6 +38,9 @@ public:
   virtual ~ScopeArea();
   bool newdata(Glib::IOCondition); 
   int datafd_;
+  int channel_; 
+
+  
 
 protected:
   //Overridden default signal handlers:
@@ -50,6 +53,7 @@ protected:
   float offset_; 
   float scale_; 
   short thold_; 
+  int mode_; // 0 == RAW, 1 == normal
 
   std::vector<short> databuffer_; 
   
@@ -66,6 +70,7 @@ protected:
   int WINSIZE; 
   int BUFSIZE; 
 
+  void change_mode(int); 
 
 };
 

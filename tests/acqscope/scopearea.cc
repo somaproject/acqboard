@@ -43,7 +43,7 @@ ScopeArea::ScopeArea(int width, int height)
   // scale
   offset_ = height/2;
   scale_ = (double)(height/2)/32768.0;
-  thold_ = -32768; 
+  thold_ = -3; 
   
 // set up buffers
   
@@ -58,7 +58,10 @@ ScopeArea::ScopeArea(int width, int height)
   
   bufpos_ = 0;
   pos_ = -1; 
-    
+
+  channel_ = 0; 
+  mode_ = 0; 
+  channel_ = 0; 
 }
 
 
@@ -122,11 +125,36 @@ bool ScopeArea::on_expose_event(GdkEventExpose*)
   // draw grid
   gc_->set_foreground(black_);
   window->draw_line(gc_, 0, offset_, WINSIZE, offset_); 
+
+  // draw threshold
+  gc_->set_foreground(red_); 
+  window->draw_line(gc_, 0, convsample(thold_), WINSIZE, convsample(thold_)); 
+
+
+  
+  // render plot
   gc_->set_foreground(blue_);
   for(int i = 0; i < WINSIZE-1; i++) {
     window->draw_line(gc_, i, winbuffer_[i], (i+1) , winbuffer_[i+1]);
     
   }
+
+  // text to be rendered
+  
+  if (mode_ == 0){
+    Glib::RefPtr<Pango::Layout> pangolayout = create_pango_layout("Mode: RAW");
+    Pango::FontDescription foo; 
+    foo.set_size(10000); 
+    pangolayout->set_font_description(foo); 
+    window->draw_layout(gc_, 5, 220, pangolayout);
+  } else {
+    Glib::RefPtr<Pango::Layout> pangolayout = create_pango_layout("Mode: Normal");
+    Pango::FontDescription foo; 
+    foo.set_size(10000); 
+    pangolayout->set_font_description(foo); 
+    window->draw_layout(gc_, 5, 220, pangolayout);
+  }    
+
   return true;
 }
 
@@ -140,27 +168,32 @@ bool ScopeArea::newdata(Glib::IOCondition foo)
   char buffer[24];
   int result = read(datafd_, buffer, 24); 
   
+  if ((buffer[1] >> 1) != mode_)
+    change_mode(buffer[1]>>1); 
+
   //cout << endl;
-  for (int i = 0; i < 1;  i++) { 
-    short sample  = buffer[(i+1)*2 + 1] + 256 * buffer[(i+1)*2+0];
-    add_data(sample); 
-    //cout << sample <<  ' ';
-
-
-    if (pos_ < 0) { 
-      //if ((sample > thold_) and (get_data(-1) <= thold_)) {
-	pos_ = 0;
-	//}
-    } else {
-      pos_++; 
-      if (pos_ == WINSIZE) {
-	// we've reached a full window
-	cout << "new window!";
-	for (int j = 0; j < WINSIZE; j++) { 
-	  winbuffer_[j] = convsample(get_data(-(WINSIZE-j)));
-	  
+  for (int i = 0; i < 10;  i++) { 
+    if ((mode_ == 0 and i < 8) or (mode_ == 1 and i == channel_)) { 
+      short sample  = buffer[(i+1)*2 + 1] + 256 * buffer[(i+1)*2+0];
+      add_data(sample); 
+      
+      
+      
+      if (pos_ < 0) { 
+	if ((sample > thold_) and (get_data(-1) <= thold_)) {
+	  pos_ = 0;
 	}
-	pos_ = -1;
+      } else {
+	pos_++; 
+	if (pos_ == WINSIZE) {
+	  // we've reached a full window
+	  
+	  for (int j = 0; j < WINSIZE; j++) { 
+	    winbuffer_[j] = convsample(get_data(-(WINSIZE-j)));
+	    
+	  }
+	  pos_ = -1;
+	}
       }
     }
   } 
@@ -172,4 +205,14 @@ void ScopeArea::redraw(void)
 {
 
   queue_draw();
+}
+
+void ScopeArea::change_mode(int newmode) 
+{
+  if (newmode == 3) {
+    mode_ = 0;
+  } else {
+    mode_ = 1;
+  }
+  
 }

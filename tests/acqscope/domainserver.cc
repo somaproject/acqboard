@@ -16,7 +16,7 @@ extern __inline__ unsigned long long int rdtsc()
   return x;
 }
 
-#define BUFSIZE 25
+#define BUFSIZE 24
 #define MCNT 1000000
 
 int
@@ -32,8 +32,8 @@ main (int argc, char** argv)
 
   bzero(&servaddr, sizeof(servaddr));
   servaddr.sun_family = AF_LOCAL;
-  unlink("/tmp/sock"); 
-  strncpy(servaddr.sun_path, "/tmp/sock", 9); 
+  unlink("/tmp/acqboard.out"); 
+  strncpy(servaddr.sun_path, "/tmp/acqboard.out", 18); 
   
   bind(listenfd, (sockaddr *) &servaddr, sizeof(servaddr));
 
@@ -47,6 +47,7 @@ main (int argc, char** argv)
  
   connections[0] = accept(listenfd, (sockaddr *) NULL, NULL); 
   cout << "Connection established!" << endl; 
+
 
 
   int pos = 0 ; 
@@ -68,8 +69,9 @@ main (int argc, char** argv)
 	*/
 	int q = 327*((pos % 200)-100); 
 	short x = (short)q; 
-	buffer[i*2] = x  % 256;
-	buffer[i*2+1] = x / 256;  
+	buffer[i*2+1] = x  % 256;
+	buffer[i*2] = x / 256;  
+	buffer[1] = 0x5; 
 	pos++; 
       }
       

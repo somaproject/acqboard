@@ -899,6 +899,27 @@ post-AA (for analog test board 2, of course): </span><br>
  style="width: 600px; height: 450px;"><br>
 That's with the HPF disabled and the PGAg=1. That's spectacular. <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">21
+November 2004 : </span><span style="font-weight: bold;">still problems<br>
+<span style="font-weight: bold;"><span style="font-weight: bold;"><span
+ style="font-weight: bold;">one problem: </span></span></span></span>continuous
+input channels have no way of getting unfiltered input from IAs using
+this feedback approach. 300<span style="font-weight: bold;"><span
+ style="font-weight: bold;"><span style="font-weight: bold;"><span
+ style="font-weight: bold;"></span></span></span><br
+ style="font-weight: bold; text-decoration: underline;">
+</span><br>
+So, I modified the channel with the 2-pole HPF to have only a single
+pole (RC) HPF centered at 300 Hz. The THD+N measurements (again, 40
+mVpp input, HPF off) are: <br>
+<img alt="" src="results/20041121/thdn.singlepole.png"
+ style="width: 1200px; height: 900px;"><br>
+Again, that looks great. Amplitude linearity for this configuration is
+between 39.98 and 40.015 dB between 100u and 40m at 1khz. Similar
+linearity measures are obtained for different frequencies. <br>
+<br>
+For cost, 397.69 for initial design, <br>
+<br>
 <br>
 <br>
 </body>

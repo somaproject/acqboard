@@ -512,7 +512,7 @@ begin
 			CLK => clk,
 			RESET => reset, 
 			dinen => debugsample,	
-			din => dout,
+			din => yraw,
 			soutcs => PGARCK,
 			SOUTCLK => PGASRCK,
 			SOUTDATA => PGASERA); 
@@ -527,7 +527,7 @@ begin
 
 	ea <= ('0' & laddr) when eesel = '1' else (ewaddr);
 	een <= len when eesel = '1' else ceen; 
-	debugsample <= '1' when cout = "0000" and weout = '1' else '0';
+	debugsample <= yenraw; 
 	 
 	CLK8_OUT <= clk8; 
 

@@ -113,8 +113,8 @@ BEGIN
 			SDOUT => SDIN(i),
 			CHA_VALUE => 0,
 			CHB_VALUE => 0,
-			CHA_OUT => chan_in(2*i),
-			CHB_OUT => chan_in(2*i+1),
+			CHA_OUT => chan_in(2*i+1),
+			CHB_OUT => chan_in(2*i),
 			FILEMODE => '1',
 			BUSY => adcbusy(i),
 			inputdone => adcinputdone(i)); 

@@ -239,21 +239,23 @@ BEGIN
 		while(RESET = '0') loop
 			wait until falling_edge(NEWFRAME);
 			for i in 0 to 7 loop
-				intout <= to_integer(SIGNED(data(i*16+15 downto i*16))); 
+				intout <= to_integer(SIGNED(
+					data(i*16+7 downto i*16) & 
+					data(i*16+15 downto i*16+8))); 
 				wait until CLK8 = '1'; 
 			end loop;
 		end loop; 
 	end process getsamples; 	
 	
-	checksamples: process(intout, cha_value) is
+	checksamples: process(intout, chb_value) is
 		variable inpos, outpos : integer := 0;
 		variable starting : integer := 1;
 		variable tmp : integer := 0; 
 		 
 	begin
 		-- we're using intlist as a circular buffer
-		if cha_value'EVENT then 
-			samplelist(inpos) <= cha_value; 
+		if chb_value'EVENT then 
+			samplelist(inpos) <= chb_value; 
 			inpos := (inpos + 1) mod 100; 
 		end if; 	
 

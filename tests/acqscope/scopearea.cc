@@ -164,18 +164,32 @@ bool ScopeArea::newdata(Glib::IOCondition foo)
     ohh, look, the interetsing part
   */
   
-  char buffer[24];
+  unsigned char buffer[24];
   int result = read(datafd_, buffer, 24); 
-  
+  for (int i = 0; i < 24; i++) {
+    // if (buffer[i] == -68) 
+      //cout << i << endl;
+  }
   if ((buffer[1] >> 1) != mode_)
     change_mode(buffer[1]>>1); 
 
   //cout << endl;
   for (int i = 0; i < 10;  i++) { 
     if ((mode_ == 0 and i < 8) or (mode_ == 1 and i == channel_)) { 
-      short sample  = buffer[(i+1)*2 + 1] + 256 * buffer[(i+1)*2+0];
-      add_data(sample); 
+      unsigned char lowbyte = buffer[(i+1)*2 + 1];
+      unsigned char highbyte = buffer[(i+1)*2];
+      unsigned short usample = highbyte * 256 + lowbyte; 
+      short sample(0); 
       
+      if (usample < 32768) {
+	sample = usample;
+      } else {
+	sample = usample; 
+      }
+
+      
+      add_data(sample); 
+      //cout << sample << '\n'    ; 
       
       
       if (pos_ < 0) { 

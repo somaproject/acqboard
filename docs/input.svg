@@ -239,9 +239,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.7946694"
-     inkscape:cx="355.21318"
-     inkscape:cy="580.20315"
+     inkscape:zoom="3.5893388"
+     inkscape:cx="258.32314"
+     inkscape:cy="544.60993"
      inkscape:window-width="1596"
      inkscape:window-height="1159"
      showgrid="true"
@@ -400,7 +400,7 @@
        sodipodi:role="line"
        id="tspan1142"
        x="29.537571"
-       y="648.41699">Sample A</tspan></text>
+       y="648.41699">Sample B</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:8.0000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans;text-anchor:start;writing-mode:lr;"
@@ -411,7 +411,7 @@
        sodipodi:role="line"
        id="tspan1145"
        x="29.537571"
-       y="648.41699">Sample B</tspan></text>
+       y="648.41699">Sample A</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:8.0000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans;text-anchor:start;writing-mode:lr;"
@@ -497,7 +497,7 @@
        sodipodi:role="line"
        id="tspan1874"
        x="194.80016"
-       y="658.92249">SAMPA[i][15:0]</tspan></text>
+       y="658.92249">SAMPB[i][15:0]</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:8.0000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans;text-anchor:start;writing-mode:lr;"
@@ -508,7 +508,7 @@
        sodipodi:role="line"
        id="tspan1877"
        x="190.04388"
-       y="705.03760">SAMPB[i][15:0]</tspan></text>
+       y="705.03760">SAMPA[i][15:0]</tspan></text>
   <path
      style="color:#000000;fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.2500000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000;marker:none;marker-start:none;marker-mid:none;marker-end:none;"
      d="M 196.87500,227.50000 L 265.62500,227.50000"

@@ -33,6 +33,10 @@ Scope::Scope()
   strncpy(cliaddr.sun_path, "/tmp/acqboard.out", 18); 
   connect(area_.datafd_, (sockaddr *) &cliaddr, sizeof(cliaddr));
   
+  // compensate for read offset?
+  //char dummybuff[100];
+  //int OFFSET = 0; 
+  //read(area_.datafd_, dummybuff, OFFSET); 
   
   add(mainbox_);
 

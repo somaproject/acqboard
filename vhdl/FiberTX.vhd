@@ -31,7 +31,10 @@ architecture Behavioral of FiberTX is
    -- input latches
    signal csl, csll : std_logic_vector(3 downto 0) := (others => '0');
    type samparray is array (0 to 9) of std_logic_vector(15 downto 0);
-   signal yl, yout : samparray := (others => X"0000"); 
+   signal yl, yout : samparray := (X"0000", X"1000", X"2000",
+   							X"3000", X"4000", X"5000",
+							X"6000", X"7000", X"8000", 
+							X"9000"); 
    signal cl, cll, ckl, ckll : std_logic_vector(7 downto 0)
    	:= (others => '0');
    
@@ -89,26 +92,26 @@ begin
 
    dmux <= X"BC" when bcnt = 0 else
    		"0000" & CSLL when bcnt = 1 else
-		yout(0)(7 downto 0) when bcnt = 2 else
-		yout(0)(15 downto 8) when bcnt = 3 else
-		yout(1)(7 downto 0) when bcnt = 4 else
-		yout(1)(15 downto 8) when bcnt = 5 else
-		yout(2)(7 downto 0) when bcnt = 6 else
-		yout(2)(15 downto 8) when bcnt = 7 else
-		yout(3)(7 downto 0) when bcnt = 8 else
-		yout(3)(15 downto 8) when bcnt = 9 else
-		yout(4)(7 downto 0) when bcnt = 10 else
-		yout(4)(15 downto 8) when bcnt = 11 else
-		yout(5)(7 downto 0) when bcnt = 12 else
-		yout(5)(15 downto 8) when bcnt = 13 else
-		yout(6)(7 downto 0) when bcnt = 14 else
-		yout(6)(15 downto 8) when bcnt = 15 else
-		yout(7)(7 downto 0) when bcnt = 16 else
-		yout(7)(15 downto 8) when bcnt = 17 else
-		yout(8)(7 downto 0) when bcnt = 18 else
-		yout(8)(15 downto 8) when bcnt = 19 else
-		yout(9)(7 downto 0) when bcnt = 20 else
-		yout(9)(15 downto 8) when bcnt = 21 else
+		yout(0)(15 downto  8) when bcnt = 2 else
+		yout(0)(7 downto 0) when bcnt = 3 else
+		yout(1)(15 downto  8) when bcnt = 4 else
+		yout(1)(7 downto 0) when bcnt = 5 else
+		yout(2)(15 downto  8) when bcnt = 6 else
+		yout(2)(7 downto 0) when bcnt = 7 else
+		yout(3)(15 downto  8) when bcnt = 8 else
+		yout(3)(7 downto 0) when bcnt = 9 else
+		yout(4)(15 downto  8) when bcnt = 10 else
+		yout(4)(7 downto 0) when bcnt = 11 else
+		yout(5)(15 downto  8) when bcnt = 12 else
+		yout(5)(7 downto 0) when bcnt = 13 else
+		yout(6)(15 downto  8) when bcnt = 14 else
+		yout(6)(7 downto 0) when bcnt = 15 else
+		yout(7)(15 downto  8) when bcnt = 16 else
+		yout(7)(7 downto 0) when bcnt = 17 else
+		yout(8)(15 downto  8) when bcnt = 18 else
+		yout(8)(7 downto 0) when bcnt = 19 else
+		yout(9)(15 downto  8) when bcnt = 20 else
+		yout(9)(7 downto 0) when bcnt = 21 else
 		cll when bcnt = 22 else
 		ckll when bcnt = 23 else
 		X"00"; 	  

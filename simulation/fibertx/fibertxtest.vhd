@@ -202,7 +202,9 @@ BEGIN
 			wait until falling_edge(NEWFRAME); 
 			for j in 0 to 9 loop 
 				yvalvect := std_logic_vector(to_unsigned(yval, 16)); 
-				assert data((j+1)*16 - 1 downto j*16) = yvalvect
+				assert (data(j*16 +7  downto j*16) & 
+					   data(j*16 + 15 downto j*16 + 8) )
+					 = yvalvect
 					report "Error decoding Data"
 					severity error; 
 

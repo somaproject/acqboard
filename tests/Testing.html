@@ -6,8 +6,7 @@
   <title>Soma Acquisition Board Testing</title>
 </head>
 <body>
-<span style="font-weight: bold; text-decoration: underline;"><br>
-13 January
+<span style="font-weight: bold; text-decoration: underline;">13 January
 2004</span><br style="font-weight: bold; text-decoration: underline;">
 <br style="font-weight: bold; text-decoration: underline;">
 Okay, this is the assembly and testing log of our (*pray*) final
@@ -1071,6 +1070,23 @@ be converted to new documentation nor be updated for the new testbench
 organization, I'm going to start refactoring and updating its
 documentation today. <br>
 <br>
+<span style="text-decoration: underline;"><span
+ style="font-weight: bold;">27 January 2005</span></span><br>
+Following the re-write of input, raw, and fiberTX, we now have a system
+that WORKS! Yes, you heard that right, from acqboard reader we have:<br>
+<br>
+<img alt="" src="results/20050127/sine.png"
+ style="width: 1200px; height: 900px;"><br>
+Strangely, to get this we had to adjust various offsets in the
+acqboard_reader. Acqscope gives:<br>
+<br>
+<img alt="" src="results/20050127/success.png"
+ style="width: 800px; height: 600px;"><br>
+<br>
+Which is again spectacular. <br>
+<br>
+I'm going to commit all of this; tomorrow, some more unit testing, then
+we move towards performance testing! <br>
 <br>
 </body>
 </html>

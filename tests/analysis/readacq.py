@@ -21,7 +21,7 @@ class RawFile(DataFile):
         self.fid = file(filename, 'rb')
 
         # correct for file offset... wtf? 
-        self.offset = 10
+        self.offset = 9
         self.fid.read(self.offset*2)
 
         self.pos = 0 

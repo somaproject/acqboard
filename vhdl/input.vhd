@@ -125,30 +125,30 @@ begin
 				
 				-- input
 				if biten = '1' then
-					sampleA0 <= 
-						sampleA0(14 downto 0) & sampleB0(15); 
 					sampleB0 <= 
-						sampleB0(14 downto 0) & sdinl(0); 
+						sampleB0(14 downto 0) & sampleA0(15); 
+					sampleA0 <= 
+						sampleA0(14 downto 0) & sdinl(0); 
 
-					sampleA1 <= 
-						sampleA1(14 downto 0) & sampleB1(15); 
 					sampleB1 <= 
-						sampleB1(14 downto 0) & sdinl(1); 
+						sampleB1(14 downto 0) & sampleA1(15); 
+					sampleA1 <= 
+						sampleA1(14 downto 0) & sdinl(1); 
 
-					sampleA2 <= 
-						sampleA2(14 downto 0) & sampleB2(15); 
 					sampleB2 <= 
-						sampleB2 (14 downto 0) & sdinl(2);
+						sampleB2(14 downto 0) & sampleA2(15); 
+					sampleA2 <= 
+						sampleA2 (14 downto 0) & sdinl(2);
 						 
-					sampleA3 <= 
-						sampleA3(14 downto 0) & sampleB3(15); 
 					sampleB3 <= 
-						sampleB3(14 downto 0) & sdinl(3);
+						sampleB3(14 downto 0) & sampleA3(15); 
+					sampleA3 <= 
+						sampleA3(14 downto 0) & sdinl(3);
 						 
-					sampleA4 <= 
-						sampleA4(14 downto 0) & sampleB4(15); 
 					sampleB4 <= 
-						sampleB4(14 downto 0) & sdinl(4); 
+						sampleB4(14 downto 0) & sampleA4(15); 
+					sampleA4 <= 
+						sampleA4(14 downto 0) & sdinl(4); 
 
 				end if; 
 

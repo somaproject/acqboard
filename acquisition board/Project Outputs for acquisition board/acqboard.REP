@@ -74,13 +74,23 @@ Generating : Bottom Layer
 
 
 Used DCodes :
+<<<<<<< .mine
+    D17
+    D19
+    D45
+    D46
+=======
     D21
     D23
     D45
     D46
+>>>>>>> .r577
     D47
     D49
+<<<<<<< .mine
+=======
     D50
+>>>>>>> .r577
     D52
     D53
     D54
@@ -100,10 +110,17 @@ Generating : Top Overlay
 
 
 Used DCodes :
+<<<<<<< .mine
+    D45
+    D46
+    D47
+    D48
+=======
     D45
     D46
     D47
     D49
+>>>>>>> .r577
     D61
     D62
     D63
@@ -126,7 +143,11 @@ Generating : Top Solder
 
 
 Used DCodes :
+<<<<<<< .mine
+    D38
+=======
     D20
+>>>>>>> .r577
     D69
     D70
     D71
@@ -181,8 +202,13 @@ Generating : Bottom Solder
 
 
 Used DCodes :
+<<<<<<< .mine
+    D76
+    D78
+=======
     D77
     D79
+>>>>>>> .r577
     D101
     D102
     D103
@@ -203,8 +229,13 @@ Generating : Internal Plane 1
 
 
 Used DCodes :
+<<<<<<< .mine
+    D45
+    D50
+=======
     D46
     D48
+>>>>>>> .r577
     D109
     D110
     D111
@@ -232,16 +263,29 @@ Generating : Internal Plane 2
 
 
 Used DCodes :
+<<<<<<< .mine
+    D45
+    D50
+=======
     D46
     D48
+>>>>>>> .r577
     D109
     D110
+<<<<<<< .mine
+    D113
+=======
     D112
     D113
     D114
+>>>>>>> .r577
     D115
     D118
-    D119
+    D120
+    D121
+    D122
+    D123
+    D124
     D121
     D122
     D123

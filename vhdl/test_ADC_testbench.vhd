@@ -58,9 +58,18 @@ BEGIN
    tb : PROCESS
    BEGIN
 	convst <= '0' after 100 ns, '1' after 110 ns; 
-	wait; 
+	
+	cs <= '0' after 1.9 us; 
 
+	wait for 1.9 us; 
 
+	for i in 0 to 31 loop
+		sclk <= '1' after 10 ns, '0' after 20 ns;
+		wait for 30 ns; 
+
+	end loop;  
+
+	
    END PROCESS;
 -- *** End Test Bench - User Defined Section ***
 

@@ -501,15 +501,17 @@ begin
 
  -- muxes
 	y <= yraw when rawsel = '1' else ymac; 
- 	bin <= dout when bufsel = '0' else edout;
-	bwe <= weout when bufsel = '0' else lswe;
+ 	bin <= dout when bufsel = '0' else edout; 
+	bwe <= weout when bufsel = '0' else lswe;	
+
 	ain <= laddr(7 downto 0) when bufsel = '1' else sample;
 
 	ea <= ('0' & laddr) when eesel = '1' else (ewaddr);
 	een <= len when eesel = '1' else ceen; 
 
 	CLK8_OUT <= clk8; 
-	LED0 <= '1';
-	LED1 <= '1'; 
+
+	LED0 <= bufsel; 	
+	LED1 <= lswe; 
 
 end Behavioral;

@@ -39,7 +39,7 @@ public:
   bool newdata(Glib::IOCondition); 
   int datafd_;
   int channel_; 
-
+  short thold_; 
   
 
 protected:
@@ -52,7 +52,7 @@ protected:
   int pos_;    // window position, sorta
   float offset_; 
   float scale_; 
-  short thold_; 
+
   int mode_; // 0 == RAW, 1 == normal
 
   std::vector<short> databuffer_; 

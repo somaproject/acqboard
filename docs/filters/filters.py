@@ -17,12 +17,16 @@ class filters:
         The anti-aliasing filter is composed of a cascade of a
         4th-order and a 2nd-order bessel
         """
+        
         self.f1 = signal.bessel(4, 15250, analog=1)
+        
+
         self.f2 = signal.bessel(2, 38000, analog=1)
+        
         self.Fs = 256000
         self.dsN = 8
         
-        self.h = signal.remez(143, [0, 10,  16, 127.99], [1,  0 ], [0.5,  1000], Hz=self.Fs/1000.0);
+        self.h = signal.remez(143, [0, 10,  16, 127.99], [1,  0 ], [0.5,  500], Hz=self.Fs/1000.0, maxiter=1000);
 
         
     def plotanalog(self):
@@ -59,12 +63,40 @@ class filters:
 
         grid(1)
 
+        figure(2)
+        semilogx(f, log10(magf1)*20, 'r')
+        semilogx(f, log10(magf2)*20, 'b')
+        semilogx(f, log10(magtotal)*20, 'g')
+
+        plot([128000, 128000], [0, -110])
+        axis([fstart, 10000, -6, 3])
+        xlabel('Frequency (Hz)')
+        ylabel('Magnitude (dB)')
+        title('Passband Frequency Response of analog filters')
+        legend(('4-pole bessel', '2-pole bessel', 'Total'))
+
+        grid(1)
+
+        figure(3)
+        semilogx(f, log10(magf1)*20, 'r')
+        semilogx(f, log10(magf2)*20, 'b')
+        semilogx(f, log10(magtotal)*20, 'g')
+
+        plot([128000, 128000], [0, -110])
+        axis([12000, fstop, -110, -70])
+        xlabel('Frequency (Hz)')
+        ylabel('Magnitude (dB)')
+        title('Stopband Frequency Response of analog filters')
+        legend(('4-pole bessel', '2-pole bessel', 'Total'))
+
+        grid(1)
+
         # calculate group delay in us
         grdf1 = -phasef1/f/360*1e6
         grdf2 = -phasef2/f/360*1e6
         grdtotal = -phasetotal/f/360*1e6
         
-        figure(2)
+        figure(4)
         semilogx(f, grdf1, 'r');
         semilogx(f, grdf2, 'b');
         semilogx(f, grdtotal, 'g');
@@ -90,7 +122,7 @@ class filters:
 
         H = signal.freqz(self.h, [1.0], w)
         
-        figure(1)
+        figure(5)
         plot(flin/1000, 20*log10(abs(H[1])), 'g')
         plot(flin/1000, 20*log10(abs(hanalog)), 'r')
         Y = abs(H[1])*abs(hanalog)
@@ -105,18 +137,36 @@ class filters:
         axis([0, 128, -180, 10])
         show()
 
+        # now zoom in on the passband
+        figure(6)
+        plot(flin/1000, 20*log10(abs(H[1])), 'g')
+        plot(flin/1000, 20*log10(abs(hanalog)), 'r')
+        
+        plot(flin/1000, 20*log10(Y), 'b')
+
+        grid(1)
+        plot([10, 10], [-200,10], 'k--');
+        plot([16, 16], [-200,10], 'k--');
+        ylabel('Magnitude (dB)'); 
+        xlabel('Frequency (kHz)'); 
+        title(r'$\rm{Aggregate Spectra}Y(e^{j\omega})$')
+        axis([0, 10, -5, 5])
+        show()
+
         # now plot the downsampled total spectra
-        figure(2)
-        P = abs(H[1])
+        figure(7)
+        # P = abs(H[1]) is this really what we want?
+        P = Y
         P.shape = (self.dsN, size(Y)/self.dsN)
         flin.shape = (self.dsN, size(flin)/self.dsN)
         plot(flin[0, :]/1000, 20*log10(P[0, :]), 'b')
         grid(1)
         plot(flin[0, :]/1000, 20*log10(sum(P[1:8, ::-1])), 'r')
         xlabel('Freqency (kHz)')
-        
+        plot(flin[0, :]/1000, r_[[-96]*len(flin[0,:])], 'g')
         legend(('Signal', 'Aliases'))
-        
+
+
         
 from scipy import *
 
@@ -125,8 +175,9 @@ from matplotlib.matlab import *
 
 def main():
     x = filters()
-    #x.plotanalog()
-    x.plotdigital()
+    x.plotanalog()
+    y = filters()
+    y.plotdigital()
     
     
 

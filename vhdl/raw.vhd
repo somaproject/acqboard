@@ -74,7 +74,7 @@ begin
 		ai => ai,
 		ao => ssel); 
 
-	wechan <= '1' when WE11IN = '1' and CIN = CHAN else '0';
+	wechan <= '1' when WEIN = '1' and CIN = CHAN else '0';
 	bwe <= (not bsel) and wechan;
 	awe <= bsel and wechan; 
 	Y <= doa when bsel = '0' else dob; 

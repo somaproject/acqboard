@@ -6,8 +6,8 @@ acquisition board/
 docs/
     Documentation, including Adobe Illustrator design documents,
     graphs from final filter responses, and comments on design decisions
-docs/code
-    code to do things like generate the filters, and to help with filter design
+docs/filters
+    Filter design and analysis and simulation code
 
 vhdl/
     main system vhdl

@@ -17,6 +17,7 @@
  */
 
 #include "scopearea.h"
+#include "scope.h"
 #include <gtkmm/main.h>
 #include <gtkmm/window.h>
 #include <gtkmm.h>
@@ -41,81 +42,13 @@ using std::auto_ptr;
 int main(int argc, char** argv)
 {
 
-  int listenfd, connfd;
-  struct sockaddr_un cliaddr;
   
   Gtk::Main app(argc, argv);
   
-  Gtk::Window win;
+  Scope scope; 
 
-  ScopeArea area(640, 240);
-  
-  area.datafd_ = socket(AF_LOCAL, SOCK_STREAM, 0);
-  
-  bzero(&cliaddr, sizeof(cliaddr));
-  cliaddr.sun_family = AF_LOCAL;
-  
-  strncpy(cliaddr.sun_path, "/tmp/acqboard.out", 18); 
-  
-  connect(area.datafd_, (sockaddr *) &cliaddr, sizeof(cliaddr));
-  
+  Gtk::Main::run(scope); 
 
-
-    
-  Gtk::VBox box; 
-  Gtk::Button button_exit("Exit"); 
-  win.add(box);
-
-  Gtk::HBox radiobox; 
-  
-  vector<string> chanlist; 
-  chanlist.resize(10); 
-  chanlist[0] = "A0";
-  chanlist[1] = "A1";
-  chanlist[2] = "A2";
-  chanlist[3] = "A3";
-  chanlist[4] = "AC";
-  chanlist[5] = "B1";
-  chanlist[6] = "B2";
-  chanlist[7] = "B3";
-  chanlist[8] = "B4";
-  chanlist[9] = "BC";
-
-  vector<Gtk::RadioButton*> chanbuttons;
-  chanbuttons.resize(10); 
-
-  Gtk::RadioButton::Group group;
-  Gtk::Label chanlbl("Channel Selected:"); 
-  chanlbl.show(); 
-  radiobox.pack_start(chanlbl); 
-  for(int i = 0; i < 10; i++) {
-    
-    chanbuttons[i] = manage( new Gtk::RadioButton(group,chanlist[i]));
-    chanbuttons[i]->show();
-    //chanbuttons[i]->signal_clicked().connect(slot(callback)); 
-    radiobox.pack_start(*chanbuttons[i]); 
-  }
-  radiobox.show();
-  box.pack_start(radiobox); 
-  box.pack_start(area); 
-  area.set_size_request(640, 240); 
-  area.show();
-  
-
-  box.pack_start(button_exit); 
-  button_exit.show(); 
-  box.show(); 
-  
-  win.resize(640, 240); 
-  
-   
-  cout << "Connecting signal ..." ;
-  Glib::signal_io().connect(slot(area, &ScopeArea::newdata),
-                           area.datafd_, Glib::IO_IN);
-  cout << "connected!" << endl; 
-  
-  
-  Gtk::Main::run(win);
 
   
    

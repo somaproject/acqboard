@@ -4,8 +4,8 @@ PROJECT vhdl
 DESIGN vhdl
 DEVFAM spartan3
 DEVFAMTIME 0
-DEVICE xc3s50
-DEVICETIME 1085441883
+DEVICE xc3s200
+DEVICETIME 1085932258
 DEVPKG vq100
 DEVPKGTIME 1082298069
 DEVSPEED -4
@@ -59,19 +59,20 @@ DEPASSOC rmac RMAC.ucf
 [Normal]
 p_ModelSimSimRunTime_tb=xstvhd, spartan2e, VHDL Test Bench.t_MSimulateBehavioralVhdlModel, 1059341326, 20 ms
 p_xstPackIORegister=xstvhd, spartan3, Schematic.t_synthesize, 1061064066, Yes
-xilxBitgCfg_GenOpt_ASCIIFile=xstvhd, spartan3, Implementation.t_bitFile, 1081779539, True
-xilxMapAllowLogicOpt=xstvhd, spartan3, Implementation.t_map, 1069448677, True
-xilxMapCoverMode=xstvhd, spartan3, Implementation.t_map, 1081776641, Speed
-xilxMapTimingDrivenPacking=xstvhd, spartan3, Implementation.t_map, 1081774588, True
-xilxPAReffortLevel=xstvhd, spartan3, Implementation.t_par, 1081443642, High
-xilxTriStateBuffTXMode=xstvhd, spartan3, Implementation.t_map, 1081443699, Off
+xilxBitgCfg_GenOpt_ASCIIFile=xstvhd, spartan3, VHDL.t_bitFile, 1081779539, True
+xilxBitgCfg_GenOpt_BinaryFile=xstvhd, spartan3, VHDL.t_bitFile, 1085932711, True
+xilxMapAllowLogicOpt=xstvhd, spartan3, Implementation.t_placeAndRouteDes, 1069448677, True
+xilxMapCoverMode=xstvhd, spartan3, Implementation.t_placeAndRouteDes, 1081776641, Speed
+xilxMapTimingDrivenPacking=xstvhd, spartan3, Implementation.t_placeAndRouteDes, 1081774588, True
+xilxPAReffortLevel=xstvhd, spartan3, Implementation.t_placeAndRouteDes, 1081443642, High
+xilxTriStateBuffTXMode=xstvhd, spartan3, Implementation.t_placeAndRouteDes, 1081443699, Off
 _SynthFsmEncode=xstvhd, spartan3, Schematic.t_synthesize, 1082297163, One-Hot
 _SynthMultStyle=xstvhd, spartan3, Schematic.t_synthesize, 1082297163, Auto
 _SynthOpt=xstvhd, spartan3, Schematic.t_synthesize, 1082297163, Area
 _SynthOptEffort=xstvhd, spartan3, Schematic.t_synthesize, 1056383182, High
 [STATUS-ALL]
-acqboard.ngcFileGroup=OK,1085518775
-acqboard.twrFile=WARNINGS,1085519796
-distram_dualport.ngcFileGroup=OK,1085508506
+acqboard.bitFile=WARNINGS,1086312741
+acqboard.ngcFile=WARNINGS,1086312594
+acqboard.ngdFile=WARNINGS,1086312630
 [STRATEGY-LIST]
 Normal=True

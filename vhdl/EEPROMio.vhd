@@ -29,7 +29,7 @@ architecture Behavioral of EEPROMio is
    signal muxin: std_logic_vector(47 downto 0) := (others => '0');
    signal siout, sen, soin, lcs, lsck : std_logic := '0';
    signal cnt : natural range 0 to 47 := 0;
-   signal waitcnt: natural range 0 to 512 := 0;
+   signal waitcnt: natural range 0 to 2048 := 0;
    signal doutreg : std_logic_vector(15 downto 0) := (others => '0');
    signal len, ldone, lldone : std_logic := '0'; 
    type states is (none, cslow1, clkh1, clkl1, inccnt1, cshigh1, 
@@ -59,7 +59,7 @@ begin
 	else
 	    	if rising_edge(CLK) then
 
-		     ECS <= lcs;
+		   ECS <= lcs;
 			ESCK <= lsck;
 			ESI <= siout;
 			soin <= ESO;
@@ -190,7 +190,7 @@ begin
 			lsck <= '0';
 			sen <= '0';
 			ldone <= '0';
-			if waitcnt = 511 or wr = '1' then
+			if waitcnt = 2047 or wr = '1' then
 				ns <= dones;
 			else
 				ns <= waitinc;

@@ -38,8 +38,8 @@ architecture Behavioral of Loader is
 
 
 begin
-   FWE <= (not address(8)) and we;
-   SWE <= address(8) and we;
+   FWE <= (not address(9)) and we;
+   SWE <= address(9) and we;
    ADDR <= address;
 
    clock: process(CLK) is
@@ -98,7 +98,7 @@ begin
 			EEEN <= '0';
 			WE <= '0';
 			DONE <= '0';
-			if address = "101111111" then
+			if address = "1011111111" then
 				ns <= ldone;
 			else
 				ns <= enable;

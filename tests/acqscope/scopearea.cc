@@ -179,9 +179,9 @@ bool ScopeArea::newdata(Glib::IOCondition foo)
       
       
       if (pos_ < 0) { 
-	//if ((sample > thold_) and (get_data(-1) <= thold_)) {
+	if ((sample > thold_) and (get_data(-1) <= thold_)) {
 	  pos_ = 0;
-	  //}
+	}
       } else {
 	pos_++; 
 	if (pos_ == WINSIZE) {

@@ -1,9 +1,5 @@
 ---------------------------------------------------------------------------
-<<<<<<< .mine
-NCDrill File Report For: acqboard.PcbDoc   5/17/2004  8:33:13 AM
-=======
-NCDrill File Report For: acqboard.PcbDoc   4/20/2004  4:17:41 PM
->>>>>>> .r577
+NCDrill File Report For: acqboard.PcbDoc   6/8/2004  10:27:14 AM
 ---------------------------------------------------------------------------
 
 
@@ -14,36 +10,17 @@ EIA File   : NCDrillOutput.DRL
 
 Tool         Hole Size          Hole Count Plated       Tool Travel
 ---------------------------------------------------------------------------
-<<<<<<< .mine
-T1        13.5mil (0.3429mm)       791              154.50 Inch (3924.21 mm)
-T2        18mil (0.4572mm)         4                10.31 Inch (261.90 mm)
-T3        25mil (0.635mm)          12               12.56 Inch (319.14 mm)
-T4        35mil (0.889mm)          4                9.76 Inch (247.89 mm)
-T5        35.4mil (0.89916mm)      34               20.02 Inch (508.63 mm)
-T6        40mil (1.016mm)          12               11.60 Inch (294.65 mm)
-T7        70.9mil (1.80086mm)      8                11.88 Inch (301.75 mm)
-T8        100mil (2.54mm)          4                25.13 Inch (638.26 mm)
-T9        126mil (3.2004mm)        4                12.11 Inch (307.71 mm)
-=======
-T1        13.5mil (0.3429mm)       791              155.44 Inch (3948.18 mm)
+T1        13.5mil (0.3429mm)       792              154.95 Inch (3935.78 mm)
 T2        18mil (0.4572mm)         4                10.31 Inch (261.90 mm)
 T3        25mil (0.635mm)          12               12.67 Inch (321.84 mm)
-T4        35mil (0.889mm)          4                9.76 Inch (247.89 mm)
-T5        35.4mil (0.89916mm)      34               19.62 Inch (498.47 mm)
-T6        40mil (1.016mm)          12               11.60 Inch (294.65 mm)
-T7        70.9mil (1.80086mm)      8                11.88 Inch (301.75 mm)
-T8        100mil (2.54mm)          4                25.13 Inch (638.26 mm)
-T9        126mil (3.2004mm)        4                12.11 Inch (307.71 mm)
->>>>>>> .r577
+T4        27.6mil (0.70104mm)      14               10.89 Inch (276.62 mm)
+T5        35mil (0.889mm)          4                9.76 Inch (247.89 mm)
+T6        35.4mil (0.89916mm)      20               7.37 Inch (187.18 mm)
+T7        40mil (1.016mm)          12               11.60 Inch (294.65 mm)
+T8        70.9mil (1.80086mm)      8                11.88 Inch (301.75 mm)
+T9        100mil (2.54mm)          4                25.13 Inch (638.26 mm)
+T10       126mil (3.2004mm)        4                12.11 Inch (307.71 mm)
 ---------------------------------------------------------------------------
-<<<<<<< .mine
-Totals                             873              267.88 Inch (6804.15 mm)
-=======
-Totals                             873              268.53 Inch (6820.66 mm)
->>>>>>> .r577
+Totals                             874              266.68 Inch (6773.59 mm)
 
-<<<<<<< .mine
-Total Processing Time : 12:00:04 AM
-=======
-Total Processing Time : 12:00:07 AM
->>>>>>> .r577
+Total Processing Time : 12:00:08 AM

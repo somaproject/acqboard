@@ -17,7 +17,10 @@ First, we need a digital low-pass decimating filter which will (for data sampled
 Oh, and max it can only be 120 taps long. 
 
 
-h_01.mat : good example of filter. 
+h_01.mat : good example of filter.
+h_02.mat is another good example. The problem is that we still aren't getting the response we want, but this'll be good enough. 
+
+
 
 
 for our analog filters, they are approximated by:

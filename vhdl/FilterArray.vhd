@@ -8,15 +8,16 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 library UNISIM;
 use UNISIM.VComponents.all;
 
-entity FilterArray is
-    Port ( CLK : in std_logic;
-           RESET : in std_logic;
-           WE : in std_logic;
-           H : out std_logic_vector(21 downto 0);
-           HA : in std_logic_vector(6 downto 0);
-           AIN : in std_logic_vector(7 downto 0);
-           DIN : in std_logic_vector(15 downto 0));
-end FilterArray;
+
+	entity FilterArray is
+	    Port ( CLK : in std_logic;
+	           RESET : in std_logic;
+	           WE : in std_logic;
+	           H : out std_logic_vector(21 downto 0);
+	           HA : in std_logic_vector(6 downto 0);
+	           AIN : in std_logic_vector(7 downto 0);
+	           DIN : in std_logic_vector(15 downto 0));
+	end entity;
 
 architecture Behavioral of FilterArray is
 -- FILTERARRAY.VHD -- Array of filter coefficients. 22-bit values, 
@@ -142,11 +143,11 @@ begin
 		  DOB => LH(31 downto 16)
 	 );
 	  	  
-
+  H <= lh(21 downto 0);
 	process(CLK) is
 	begin
 	   if rising_edge(CLK) then
-	      H <= lh(21 downto 0);
+	      --H <= lh(21 downto 0); DEBUGGING
 	   end if;								 
 	end process; 
 

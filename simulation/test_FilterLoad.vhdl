@@ -12,7 +12,7 @@ use std.textio.ALL;
 --use UNISIM.VComponents.all;
 
 entity test_FilterLoad is
-	Generic (filename : string := "adcin.dat" ); 
+	Generic (filename : string := "filter.dat" ); 
     Port ( CLK : in std_logic;
            DOUT : out std_logic_vector(15 downto 0);
            AOUT : out std_logic_vector(7 downto 0);
@@ -39,26 +39,28 @@ begin
 				 file_open(inputfile, FILENAME, read_mode);
 				 
 				 for i in 0 to 127 loop
-				     read(L, val);
-					  -- we write the low word first
-					  valbit := conv_std_logic_vector(val, 22); 
+				 	  if not endfile(inputfile) then 
+						  readline(inputfile, L);
+					     read(L, val);
+						  -- we write the low word first
+						  valbit := conv_std_logic_vector(val, 22); 
 					  
-					  wait until rising_edge(clk); 
-					  DOUT <= valbit(15 downto 0); 
-					  AOUT <= conv_std_logic_vector(i*2, 8); 
-					  WEOUT <= '1';
+						  wait until rising_edge(clk); 
+						  DOUT <= valbit(15 downto 0); 
+						  AOUT <= conv_std_logic_vector(i*2, 8); 
+						  WEOUT <= '1';
 
-					  wait until rising_edge(clk); 
-					  WEOUT <= '0';
+						  wait until rising_edge(clk); 
+						  WEOUT <= '0';
 
-					  wait until rising_edge(clk); 
-					  DOUT <= ("0000000000" &  valbit(21 downto 16)); 
-					  AOUT <= conv_std_logic_vector(i*2+1, 8); 
-					  WEOUT <= '1';
+						  wait until rising_edge(clk); 
+						  DOUT <= ("0000000000" &  valbit(21 downto 16)); 
+						  AOUT <= conv_std_logic_vector(i*2+1, 8); 
+						  WEOUT <= '1';
 
-					  wait until rising_edge(clk); 
-					  WEOUT  <= '0'; 
-
+						  wait until rising_edge(clk); 
+						  WEOUT  <= '0'; 
+						end if; 
 				 end loop;  
 				 file_close(inputfile); 
 

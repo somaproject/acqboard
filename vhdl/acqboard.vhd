@@ -132,7 +132,8 @@ architecture Behavioral of acqboard is
 	           AIN : in std_logic_vector(6 downto 0);
 	           DOUT : out std_logic_vector(15 downto 0);
 	           AOUT : in std_logic_vector(6 downto 0);
-			 SAMPOUTEN : in std_logic; 
+			     SAMPOUTEN : in std_logic; 
+				  ALLCHAN : in std_logic; 
 	           CHANOUT : in std_logic_vector(3 downto 0));
 	end component;
 
@@ -316,6 +317,7 @@ begin
 			DOUT => x,
 			AOUT => xa,
 			SAMPOUTEN => sampouten, 
+			ALLCHAN => lswe, 
 			CHANOUT => macchan);
 			
 	 

@@ -17,7 +17,8 @@ entity samplebuffer is
            AIN : in std_logic_vector(6 downto 0);
            DOUT : out std_logic_vector(15 downto 0);
            AOUT : in std_logic_vector(6 downto 0);
-		 SAMPOUTEN: in std_logic; 
+		     SAMPOUTEN: in std_logic;
+			  ALLCHAN : in std_logic;  
            CHANOUT : in std_logic_vector(3 downto 0));
 end samplebuffer;
 
@@ -137,7 +138,7 @@ begin
 		DOB => DATA4);
 
    RAM5: RAMB4_S16_S16 port map (
-   		DIA => DIN,
+   	DIA => DIN,
 		DIB => "0000000000000000",
 		ENA => '1',
 		ENB => SAMPOUTEN,
@@ -153,20 +154,25 @@ begin
 		DOB => DATA5);
 
    -- signals
-     addra <= (chanin(0) & ain);
+   addra <= (chanin(0) & ain) when ALLCHAN = '0' else ('1' & ain);
 	addrb <= (chanout(0) & aout);
    -- write enable decoding
-   	WE1 <= '1' when WE = '1' and CHANIN(3 downto 1) = "000" else '0';
-  	WE2 <= '1' when WE = '1' and CHANIN(3 downto 1) = "001" else '0';
-  	WE3 <= '1' when WE = '1' and CHANIN(3 downto 1) = "010" else '0';
-  	WE4 <= '1' when WE = '1' and CHANIN(3 downto 1)= "011" else '0';
-  	WE5 <= '1' when WE = '1' and CHANIN(3 downto 1) = "100" else '0';
+   WE1 <= '1' when (WE = '1' and CHANIN(3 downto 1) = "000") 
+				or ALLCHAN = '1' else '0';
+  	WE2 <= '1' when (WE = '1' and CHANIN(3 downto 1) = "001")  
+				or ALLCHAN = '1' else '0';
+  	WE3 <= '1' when (WE = '1' and CHANIN(3 downto 1) = "010")  
+				or ALLCHAN = '1' else '0';
+  	WE4 <= '1' when (WE = '1' and CHANIN(3 downto 1) = "011")  
+				or ALLCHAN = '1' else '0';
+  	WE5 <= '1' when (WE = '1' and CHANIN(3 downto 1) = "100") 
+				or ALLCHAN = '1' else '0';
 
 
    -- output register
-   process(CLK) is
+   process(CLK, CHANOUT, DATA1, DATA2, DATA3, DATA4, DATA5) is
    begin
-   	if rising_edge(CLK) then
+   	--if rising_edge(CLK) then	DEBUGGING
 		case CHANOUT(3 downto 1) is
 			when "000" => DOUT <= DATA1;
 			when "001" => DOUT <= DATA2;
@@ -175,7 +181,7 @@ begin
 			when "100" => DOUT <= DATA5;
 			when others => Null;
 		end case; 
-	end if;
+	--end if;
    end process; 
 
 end Behavioral;

@@ -132,6 +132,7 @@ BEGIN
 				lh := std_logic_vector(to_signed(hbuf(TO_INTEGER(unsigned(ha))), 22));
 				x <= lx;
 				h <= lh; 
+
 			end loop; 
 			
 			-- mac should be done; compare with Y

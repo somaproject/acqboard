@@ -46,8 +46,8 @@ begin
    outputbits <= channelA_bits & channelB_bits;
 	INPUTDONE <= filedone; 
    process(CONVST, SCLK, RESET, FILEMODE, CHA_VALUE, CHB_VALUE) is
-  	file inputfile : text; 
-  	variable L: line;
+	  	file inputfile : text; 
+	  	variable L: line;
 
     	variable channelA, channelB: integer; 
    begin 
@@ -55,7 +55,7 @@ begin
 		     SDOUT <= '0';	
 			  filedone <= '0';
 			  if filemode = '1' then
-			      file_open(inputfile, filename, read_mode); 
+			     mac
 			  end if; 
 			  
 		elsif CONVST'EVENT and CONVST = '0' then
@@ -79,7 +79,7 @@ begin
 
 				else
 				   filedone <= '1';
-					file_close(inputfile);
+					--file_close(inputfile);
 				end if; 
 			else
 			  	 bitpos <= 31; 

@@ -1,0 +1,20 @@
+JDF F
+// Created by Project Navigator ver 1.0
+PROJECT vhdl
+DESIGN vhdl Normal
+DEVFAM spartan2e
+DEVFAMTIME 0
+DEVICE xc2s50e
+DEVICETIME 0
+DEVPKG pq208
+DEVPKGTIME 1061049026
+DEVSPEED -6
+DEVSPEEDTIME 0
+FLOW XST VHDL
+FLOWTIME 1061049059
+MODULE input.vhd
+MODSTYLE input Normal
+[Normal]
+p_xstPackIORegister=xstvhd, spartan2e, VHDL.t_synthesize, 1061064066, Yes
+[STRATEGY-LIST]
+Normal=True

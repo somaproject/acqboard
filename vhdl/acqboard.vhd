@@ -20,13 +20,14 @@ entity acqboard is
            PGASERA : out std_logic;
            ESI : out std_logic;
            ESCK : out std_logic;
-		 ECS : out std_logic;
-		 ESO : in std_logic; 
-		 EEPROMLEN : in std_logic;  
+		 	  ECS : out std_logic;
+		     ESO : in std_logic; 
+		     EEPROMLEN : in std_logic;  
            FIBERIN : in std_logic;
            FIBEROUT : out std_logic;
-		 LED0 : out std_logic;
-		 LED1 : out std_logic);
+		     CLK8_OUT : out std_logic;
+			  LED0 : out std_logic;
+			  LED1 : out std_logic);
 end acqboard;
 
 architecture Behavioral of acqboard is
@@ -135,8 +136,7 @@ architecture Behavioral of acqboard is
 			 OSEN : in std_logic;
 			 OSRST : in std_logic; 
 			 OSWE : in std_logic; 
-			 OSD : in std_logic_vector(15 downto 0);
-			 SDINDEBUG : out std_logic
+			 OSD : in std_logic_vector(15 downto 0)
 			 );
 
 	end component;
@@ -337,8 +337,7 @@ begin
 			OSEN => osen,
 			OSRST => pgarst, 
 			OSWE => oswe,
-			OSD => edout,
-			SDINDEBUG => LED1); 
+			OSD => edout); 
 	
 	samplebuffer_inst : samplebuffer port map (
 			CLK => clk,
@@ -510,8 +509,9 @@ begin
 	ea <= ('0' & laddr) when eesel = '1' else (ewaddr);
 	een <= len when eesel = '1' else ceen; 
 
+	CLK8_OUT <= clk8; 
 
-	LED0 <= osen; 	
-	
+	LED0 <= bufsel; 	
+	LED1 <= lswe; 
 
 end Behavioral;

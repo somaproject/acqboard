@@ -11,7 +11,7 @@ use UNISIM.VComponents.all;
 entity input is
     Port ( CLK : in std_logic;				   
            INSAMPLE : in std_logic;
-		 RESET : in std_logic; 
+		 	  RESET : in std_logic; 
            CONVST : out std_logic;
            ADCCS : out std_logic;
            SCLK : out std_logic;
@@ -19,12 +19,11 @@ entity input is
            DOUT : out std_logic_vector(15 downto 0);
            COUT : out std_logic_vector(3 downto 0);
            WEOUT : out std_logic;
-		 OSC : in std_logic_vector(3 downto 0);
-		 OSRST : in std_logic; 
-		 OSEN : in std_logic;
-		 OSWE : in std_logic; 
-		 OSD : in std_logic_vector(15 downto 0);
-		 SDINDEBUG : out std_logic  
+		 	  OSC : in std_logic_vector(3 downto 0);
+			  OSRST : in std_logic; 
+		     OSEN : in std_logic;
+		     OSWE : in std_logic; 
+		     OSD : in std_logic_vector(15 downto 0)
 		  		);
 
 end input;
@@ -34,6 +33,7 @@ architecture Behavioral of input is
 
    -- ADC interface signals
    signal ladccs, lconvst, lsclk : std_logic := '0';
+   signal sdinl : std_logic_vector(4 downto 0) := (others => '0');
    signal convwait : integer range 0 to 150 := 0; 
    signal bitaddr: std_logic_vector(3 downto 0) := (others => '1');
 
@@ -74,11 +74,6 @@ architecture Behavioral of input is
    type osstates  is (none, oswinc);
    signal oscs, osns : osstates := none; 
 
-   -- THIS IS DEBUGGING CODE!!!
-   signal outbits1, outbits2, outbits3, outbits4, outbits5
-   	 : std_logic_vector(31 downto 0) := (others => '0'); 
-   signal d0, d1, d2, d3, d4, d5, d6, d7, d8, d9 :
-   	std_logic_vector(15 downto 0) := (others => '0'); 
 
 
 	component SRL16E
@@ -95,6 +90,34 @@ architecture Behavioral of input is
 	end component;
 begin
 
+    -- generate statement to wire things up
+    serial_input : for i in 0 to 4 generate
+	   begin
+		chanA_slr16e: SRL16E generic map (
+			INIT => X"8000" )
+			port map (
+			D => sdinl(i),
+			CE => inen,
+			CLK => CLK,
+			A0 => bitaddr(0),
+			A1 => bitaddr(1),
+			A2 => bitaddr(2),
+			A3 => bitaddr(3),
+			Q => douta(i));
+		chanB_slr16e: SRL16E  generic map (
+			INIT => X"8000" )
+			port map (
+			D => douta(i),
+			CE => inen,
+			CLK => CLK,
+			A0 => bitaddr(0),
+			A1 => bitaddr(1),
+			A2 => bitaddr(2),
+			A3 => bitaddr(3),
+			Q => doutb(i));
+
+	   end generate; 
+
 	-- Input: clock portion
 	inclock: process(CLK, RESET) is 
 	begin
@@ -105,139 +128,413 @@ begin
 		    ics <= ins;
 
 		    ADCCS <= ladccs;
-		    CONVST <= not INSAMPLE;
+		    CONVST <= lconvst;
+		    SCLK <= lsclk; 
+		    sdinl <= SDIN; 
 
-		    if inen = '1' then
-		    	  SDINDEBUG <= SDIN(0); 
-		    end if;
-		    
-		     
-		    if ics = conv_done then
+		    if ics = sclkh0 then
 		    	   sclkcnt <= (others => '0');
 		    else
-		       if ics = sclkl2 then
+		       if ics = sclkl3 then
 			     sclkcnt <= sclkcnt + 1;
  			  end if;
  		    end if; 
 
-
-		    	if INSAMPLE = '1'  then 
+		    	if ics = conv_start  then 
 		    		convwait <= 0;
 			else
-				if convwait /= 140 then
+				if ics = conv_wait then
 					convwait <= convwait + 1;
 				end if;
 			end if;
-		    -- debugging!!!
-
-		    if inen = '1' then
-		    	outbits1 <= outbits1(30 downto 0) & SDIN(0); 
-		    	outbits2 <= outbits2(30 downto 0) & SDIN(1); 
-		    	outbits3 <= outbits3(30 downto 0) & SDIN(2); 
-		    	outbits4 <= outbits4(30 downto 0) & SDIN(3); 
-		    	outbits5 <= outbits5(30 downto 0) & SDIN(4); 
-		    end if; 
-
-		    d0 <= outbits1(15 downto 0) - 32768; 
-		    d1 <= outbits1(31 downto 16) - 32768; 
-		    d2 <= outbits2(15 downto 0) - 32768; 
-		    d3 <= outbits2(31 downto 16) - 32768; 
-		    d4 <= outbits3(15 downto 0) - 32768; 
-		    d5 <= outbits3(31 downto 16) - 32768; 
-		    d6 <= outbits4(15 downto 0) - 32768; 
-		    d7 <= outbits4(31 downto 16) - 32768; 
-		    d8 <= outbits5(15 downto 0) - 32768; 
-		    d9 <= outbits5(31 downto 16) - 32768; 
-		    	
+		
 		end if; 
 	   end if;
 	end process inclock; 
-
-	dout <= d0 when convwait = 10 else
-			d1 when convwait = 20 else
-			d2 when convwait = 30 else
-			d3 when convwait = 40 else
-			d4 when convwait = 50 else
-			d5 when convwait = 60 else
-			d6 when convwait = 70 else
-			d7 when convwait = 80 else
-			d8 when convwait = 90 else
-			d9;
-
-	cout <= X"0" when convwait = 10 else
-		   X"1" when convwait = 20 else
-		   X"2" when convwait = 30 else
-		   X"3" when convwait = 40 else
-		   X"4" when convwait = 50 else
-		   X"5" when convwait = 60 else
-		   X"6" when convwait = 70 else
-		   X"7" when convwait = 80 else
-		   X"8" when convwait = 90 else
-		   X"9";
-	weout <= '1' when convwait =10 or convwait = 20 
-	or convwait = 30 or convwait = 40 or convwait = 50
-	or convwait =60 or convwait = 70 or convwait = 80 
-	or convwait = 90 or convwait = 100 else '0'; 
-
-		   	
 
 	-- input : FSM
 	infsm : process(ics, INSAMPLE, convwait, sclkcnt, bitaddr) is
 	begin
 		case ics is
 			when none => 
+				lconvst <= '1';
 				ladccs <= '1';
 				inen <= '0';
-				SCLK <= '0';
-				if convwait = 123 then
-					ins <= conv_wait; 	
+				lsclk <= '0';
+				if INSAMPLE = '1' then
+					ins <= conv_start; 	
 				else 
 					ins <= none;
 				end if;
-			when conv_wait => 
-				ladccs <= '0';
-				inen <= '0';
-				SCLK <= '0';
-				ins <= conv_done;
-			when conv_done => 
-				ladccs <= '0';
-				inen <= '0';
-				SCLK <= '0';
-				ins <= sclkh0;
-			when sclkh0 => 
-				ladccs <= '0';
-				inen <= '0';
-				SCLK <= '1';
-				ins <= sclkl0;
-			when sclkl0 => 
-				ladccs <= '0';
-				inen <= '0';
-				SCLK <= '0';
-				ins <= sclkl1;
-			when sclkl1 => 
-				ladccs <= '0';
-				inen <= '0';
-				SCLK <= '0';
-				ins <= sclkl2;
-			when sclkl2 => 
-				ladccs <= '0';
-				inen <= '1';
-				SCLK <= '0';
-				if sclkcnt = "11111" then
-					ins <= none;
-				else
-					ins <= sclkh0;
-				end if;
-			when others => 
+			when conv_start => 
+				lconvst <= '0';
 				ladccs <= '1';
 				inen <= '0';
-				SCLK <= '0';
+				lsclk <= '0';
+				ins <= conv_wait;
+			when conv_wait => 
+				lconvst <= '1';
+				ladccs <= '1';
+				inen <= '0';
+				lsclk <= '0';
+				if convwait = 139 then
+					ins <= conv_done; 	
+				else 
+					ins <= conv_wait;
+				end if;
+			when conv_done => 
+				lconvst <= '1';
+				ladccs <= '0';
+				inen <= '0';
+				lsclk <= '0';
+				ins <= sclkh0;
+			when sclkh0 => 
+				lconvst <= '1';
+				ladccs <= '0';
+				inen <= '0';
+				lsclk <= '1';
+				ins <= sclkl0;
+			when sclkl0 => 
+				lconvst <= '1';
+				ladccs <= '0';
+				inen <= '0';
+				lsclk <= '0';
+				ins <= sclkl1;
+			when sclkl1 => 
+				lconvst <= '1';
+				ladccs <= '0';
+				inen <= '0';
+				lsclk <= '0';
+				ins <= sclkh1;
+			when sclkh1 => 
+				lconvst <= '1';
+				ladccs <= '0';
+				inen <= '0';
+				lsclk <= '1';
+				ins <= sclkl2;
+			when sclkl2 => 
+				lconvst <= '1';
+				ladccs <= '0';
+				inen <= '0';
+				lsclk <= '0';
+				ins <= sclkl3;
+			when sclkl3 => 
+				lconvst <= '1';
+				ladccs <= '0';
+				inen <= '1';
+				lsclk <= '0';
+				if sclkcnt = "11110" then
+					ins <= sclkw0;
+				else
+					ins <= sclkh1;
+				end if;
+			when sclkw0 => 
+				lconvst <= '1';
+				ladccs <= '0';
+				inen <= '0';
+				lsclk <= '0';
+				ins <= sclkw1;
+			when sclkw1 => 
+				lconvst <= '1';
+				ladccs <= '0';
+				inen <= '0';
+				lsclk <= '0';
+				ins <= sclkw2;
+			when sclkw2 => 
+				lconvst <= '1';
+				ladccs <= '0';
+				inen <= '1';
+				lsclk <= '0';
+				ins <= none;
+			when others => 
+				lconvst <= '1';
+				ladccs <= '1';
+				inen <= '0';
+				lsclk <= '0';
 				ins <= none;
 		end case; 
 	end process infsm; 
 
-	
+	-- Output calculation : clock portion
+	outclock: process(CLK, reset) is 
+	begin
+	   if RESET = '1' then
+	   	ocs <= none;
+ 	   else
+	   	if rising_edge(CLK) then
+		    ocs <= ons;
 
+		    if adden = '1' then 
+		    	  pda <= suma & pda(15 downto 1); 
+			  pdb <= sumb & pdb(15 downto 1);
+		    end if; 
+
+		    -- output channel counter
+		    if ocs = none then
+		    	  chan <= (others => '0');	
+		    else
+		       if ocs = nextchan1 or ocs = nextchan2 then
+			  	chan <= chan + 1;
+			  end if;
+              end if; 
+
+		    outsell <= outsel; 
+
+		    -- output bit counter
+			       if ocs = incbitaddr or ocs = oneinc then
+				  	 bitaddr <= bitaddr + 1;
+	 			  end if; 
+		    -- carry registers for bit-serial math
+		    if inr = '1' then 	
+		    	  cina <= '0';
+			  cinb <= '0';
+		    else
+			  if adden = '1' then
+			  	cina <= couta;
+				cinb <= coutb;
+			  end if;
+		    end if; 	 
+
+		end if;
+	   end if;
+	end process outclock; 
+
+    -- Output : full adders 
+	fulladders : process(ina, inb, osa, osb, cina, cinb, OSEN) is
+		variable suma_temp, sumb_temp : std_logic; 
+	begin
+	   suma_temp := ina xor osa;
+	   sumb_temp := inb xor osb;
+
+	   if OSEN = '1' then 
+	       suma <= suma_temp xor cina;
+		  sumb <= sumb_temp xor cinb; 
+	   else 
+	   	  suma <= ina;
+		  sumb <= inb; 
+	   end if; 
+	   couta <= (ina and osa) or (ina and cina) or (osa and cina); 
+	   coutb <= (inb and osb) or (inb and cinb) or (osb and cinb); 
+
+
+	end process fulladders;    
+    			
+    -- Output : general signals
+	da <= douta(0) when chan(3 downto 1) = "000" else
+		  douta(1) when chan(3 downto 1) = "001" else
+		  douta(2) when chan(3 downto 1) = "010" else
+		  douta(3) when chan(3 downto 1) = "011" else
+		  douta(4); 
+	db <= doutb(0) when chan(3 downto 1) = "000" else
+		  doutb(1) when chan(3 downto 1) = "001" else
+		  doutb(2) when chan(3 downto 1) = "010" else
+		  doutb(3) when chan(3 downto 1) = "011" else
+		  doutb(4);
+
+	ina <= (not da) when bitaddr = "1111" else da;
+	inb <= (not db) when bitaddr = "1111" else db; 
+
+		   
+	--Output : overflow calculatons
+	outsel <= "00" when ((ina = not osa) or 
+					 (ina = osa and ina = pda(15))) 	
+					 and chan(0) = '0' else
+ 			"01" when ((inb = not osb) or 
+					 (inb = osb and inb = pdb(15))) 	
+					 and chan(0) = '1' else
+			"10" when ((ina = '0' and osa = '0' and pda(15) = '1' 
+						and chan(0) = '0') or
+					 (inb = '0' and osb = '0' and pdb(15) = '1'
+					 	and chan(0) = '1')) else
+			"11" when ((ina = '1' and osa = '1' and pda(15) = '0'
+						and chan(0) = '0') or
+					 (inb = '1' and osb = '1' and pdb(15) = '0'
+					 	and chan(0) = '1')) else
+
+		     "00";
+ 
+	DOUT <= pda when outsell = "00" else
+		   pdb when outsell = "01" else
+		   "0111111111111111" when outsell = "10" else
+		   "1000000000000000" when outsell = "11"; 
+
+	COUT <= chan; 
+
+	-- Output : FSM
+	outfsm : process(ocs, INSAMPLE, outsel, chan, bitaddr ) is
+	begin
+		case ocs is
+			when none => 
+				inr <= '1';
+				WEOUT <= '0';
+				adden <= '0';
+				if INSAMPLE = '1' then
+				   ons <= oneinc;
+				else
+					ons <= none; 
+				end if;
+			when oneinc => 
+				inr <= '0';
+				WEOUT <= '0';
+				adden <= '0'; 
+				ons <= incbitaddr;		
+			when incbitaddr => 
+				inr <= '0';
+				WEOUT <= '0';
+				adden <= '1'; 
+				if bitaddr = "1110" then
+				   ons <= extraadd;
+				else
+					ons <= incbitaddr; 
+				end if;
+			when extraadd => 
+				inr <= '0';
+				WEOUT <= '0';
+				adden <= '1'; 
+				ons <= nop1;
+			when nop1 => 
+				inr <= '0';
+				WEOUT <= '0';
+				adden <= '0'; 
+				ons <= nextchan1;
+			when nextchan1 => 
+				inr <= '0';
+				WEOUT <= '1';
+				adden <= '0'; 
+				ons <= nop2;
+			when nop2 => 
+				inr <= '0';
+				WEOUT <= '0';
+				adden <= '0'; 
+				ons <= nextchan2;
+			when nextchan2 => 
+				inr <= '1';
+				WEOUT <= '1';
+				adden <= '0'; 
+				if chan = "1001" then
+				   ons <= none;
+				else
+					ons <= oneinc; 
+				end if; 		 
+			when others =>
+				inr <= '0';
+				WEOUT <= '0';
+				adden <= '0';
+		end case; 
+	end process outfsm; 
+	
+	-- Offset : clock portion
+	offsetclock: process(CLK, RESET, oscs) is 
+	begin
+	   if RESET = '1' then
+	   	oscs <= none;
+ 	   else
+	   	if rising_edge(CLK) then
+			   oscs <= osns;
+
+			   if oscs = none then
+			   	osinbitsel <= (others => '1');
+	 		   elsif oscs = oswinc then
+			   	osinbitsel <= osinbitsel - 1;
+			   end if;
+
+				if oswe = '1' then
+					osrstl <= OSRST;
+					osdl <= OSD;
+					oscl <= OSC; 
+				end if;  
+					
+
+		end if;
+	  end if;
+	end process offsetclock;
+
+	-- Offset : general signals
+    offset_registers : for j in 0 to 9 generate
+    	   signal ce: std_logic := '0'; 
+	   begin
+		osreg: SRL16E generic map (
+			INIT => X"0000")
+			port map (
+			D => osin,
+			CE => ce,
+			CLK => CLK,
+			A0 => bitaddr(0),
+			A1 => bitaddr(1),
+			A2 => bitaddr(2),
+			A3 => bitaddr(3),
+			Q => od(j));
+		ce <= oswen(j) and oswes; 
+	  end generate; 	   	
+
+	oswen(0) <= '1' when oscl = "0000" or osrstl = '1'  else '0';
+	oswen(1) <= '1' when oscl = "0001" or osrstl = '1' else '0';
+	oswen(2) <= '1' when oscl = "0010" or osrstl = '1' else '0';
+	oswen(3) <= '1' when oscl = "0011" or osrstl = '1' else '0';
+	oswen(4) <= '1' when oscl = "0100" or osrstl = '1' else '0';
+	oswen(5) <= '1' when oscl = "0101" or osrstl = '1' else '0';
+	oswen(6) <= '1' when oscl = "0110" or osrstl = '1' else '0';
+	oswen(7) <= '1' when oscl = "0111" or osrstl = '1' else '0';
+	oswen(8) <= '1' when oscl = "1000" or osrstl = '1' else '0';
+	oswen(9) <= '1' when oscl = "1001" or osrstl = '1' else '0';
+
+
+
+	osinmux <= osdl(0) when osinbitsel = "0000" else
+		   osdl(1) when osinbitsel = "0001" else
+		   osdl(2) when osinbitsel = "0010" else
+		   osdl(3) when osinbitsel = "0011" else
+		   osdl(4) when osinbitsel = "0100" else
+		   osdl(5) when osinbitsel = "0101" else
+		   osdl(6) when osinbitsel = "0110" else
+		   osdl(7) when osinbitsel = "0111" else
+		   osdl(8) when osinbitsel = "1000" else
+		   osdl(9) when osinbitsel = "1001" else
+		   osdl(10) when osinbitsel = "1010" else
+		   osdl(11) when osinbitsel = "1011" else
+		   osdl(12) when osinbitsel = "1100" else
+		   osdl(13) when osinbitsel = "1101" else
+		   osdl(14) when osinbitsel = "1110" else
+		   osdl(15);
+
+     osin <= osinmux when osrstl /= '1' else '0'; 
+
+
+     osa <= od(0) when chan(3 downto 1) = "000" else
+		  od(2) when chan(3 downto 1) = "001" else
+		  od(4) when chan(3 downto 1) = "010" else
+		  od(6) when chan(3 downto 1) = "011" else
+		  od(8);
+     osb <= od(1) when chan(3 downto 1) = "000" else
+		  od(3) when chan(3 downto 1) = "001" else
+		  od(5) when chan(3 downto 1) = "010" else
+		  od(7) when chan(3 downto 1) = "011" else
+		  od(9);
+
+	-- Offset: FSM
+	offsetfsm: process(oscs, insample, osinbitsel, oswe) is
+	begin
+		case oscs is
+			when none =>
+				oswes <= '0';
+				if OSWE = '1' then
+				   osns <= oswinc;
+				else
+				   osns <= none;
+				end if;
+			when oswinc =>
+				oswes <= '1';
+				if osinbitsel = "0000" then
+					osns <= none;
+				else
+					osns <= oswinc;
+				end if;
+			when others =>
+				oswes <= '0';
+				osns <= none;
+		end case;
+	end process offsetfsm;
+	
 	 																																									
 end Behavioral;
 																														    						

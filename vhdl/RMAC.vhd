@@ -134,7 +134,7 @@ begin
   end process clock; 	
   
   -- clear for accumulator
-  clr <= '1' when maccnt = 4 else
+  clr <= '1' when maccnt = 5 else
   		'0'; 							
 
   fsm: process (cs, ns, STARTMAC, maccnt) is

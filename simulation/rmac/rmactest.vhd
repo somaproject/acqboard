@@ -48,7 +48,7 @@ ARCHITECTURE behavior OF rmactest IS
 	SIGNAL Y :  std_logic_vector(15 downto 0);
 
 
-   signal error : std_logic := '0';
+   signal err : std_logic := '0';
 
 
 BEGIN
@@ -141,12 +141,19 @@ BEGIN
 			
 			-- mac should be done; compare with Y
 			if Y = std_logic_vector(to_signed(yref, 16)) then 
-				error <= '0';
+				err <= '0';
 			else
-				error <= '1';
+				err <= '1';
 			end if; 
 
+			assert Y = std_logic_vector(to_signed(yref, 16))
+				report "Output of RMAC differs from expected value"
+				severity error; 
+
 	  end loop; 
+	  assert false
+	  	report "End of simulation"
+		severity Failure; 
 	end process tb; 
 
 END;

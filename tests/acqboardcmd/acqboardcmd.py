@@ -21,8 +21,9 @@ from struct import *
 
 class AcqBoardCmd:
 
-    cmdid = 0;
-
+    def __init__(self):
+        self.cmdid = 0
+        
     def updatecmd(self):
         if self.cmdid == 15 :
             self.cmdid = 0

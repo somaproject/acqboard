@@ -43,21 +43,24 @@ class AcqSocketStat:
 
 
 class AcqState:
-    gain = ["x", "x", "x", "x", "x", "x", "x", "x", "x", "x"]
-    insel = ["", "", "", "", "", "", "", "", "", ""]
-    hpf = ["", "", "", "", "", "", "", "", "", ""]
-
-    clist = ["A.1", "A.2", "A.3", "A.4", "A.C", "B.1", "B.2", "B.3", "B.4", "B.C"]
-    gainlabel = []
-    glist = ["0", "1", "2", "5", "10", "20", "50", "100"]
-    hlist = ["DC", "100 Hz", "150 Hz", "300 Hz"] 
-    chanlabel = []
-    hpflabel = []
-    insellabel = []
-    
-
     
     def __init__(self):
+        self.gain = ["x", "x", "x", "x", "x", "x", "x", "x", "x", "x"]
+        self.insel = ["", "", "", "", "", "", "", "", "", ""]
+        self.hpf = ["", "", "", "", "", "", "", "", "", ""]
+        
+        self.clist = ["A.1", "A.2", "A.3", "A.4", "A.C", "B.1", "B.2", "B.3", "B.4", "B.C"]
+        self.gainlabel = []
+        self.glist = ["0", "1", "2", "5", "10", "20", "50", "100"]
+        self.hlist = ["DC", "100 Hz", "150 Hz", "300 Hz"] 
+        self.chanlabel = []
+        self.hpflabel = []
+        self.insellabel = []
+    
+
+
+
+
        self.table = gtk.Table(rows=11, columns=4, homogeneous=gtk.FALSE)
        self.cheader = gtk.Label("Channel")
        self.table.attach(self.cheader, 0, 1, 0, 1)

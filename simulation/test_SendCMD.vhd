@@ -63,9 +63,9 @@ begin
    reading: process(clk, SENDCMD) is
    begin
 	   if rising_edge(SENDCMD) then
-	   	 cmdbytepos <= 0;
+	    cmdbytepos <= 0;
 		 cmdbits <= chksum & data3 & data2 & data1 & data0 & 
-		 		  cmd & cmdid & "10111100";
+		 		  cmdid & cmd & "10111100";
 		 CMDPENDING <= '1';
 
 	  elsif rising_edge(clk) then

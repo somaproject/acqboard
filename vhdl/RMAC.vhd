@@ -1,7 +1,9 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
+
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use std.textio.ALL;
 
 --  Uncomment the following lines to use the declarations that are
 --  provided for instantiating Xilinx primitive components.
@@ -135,7 +137,7 @@ begin
   end process clock; 	
   
   -- clear for accumulator
-  clr <= '1' when maccnt = 5 else
+  clr <= '1' when maccnt = 4 else
   		'0'; 							
 
   fsm: process (cs, ns, STARTMAC, maccnt) is
@@ -153,7 +155,7 @@ begin
 		  ns <= macwait;
 		when macwait =>
 		  MACDONE <= '0'; 
-		  if maccnt  = 125 then
+		  if maccnt  = 124 then
 		  	ns <= accen;
 		  else
 		  	ns <= macwait;

@@ -19,9 +19,9 @@ entity acqboard is
            PGASERA : out std_logic;
            ESI : out std_logic;
            ESCK : out std_logic;
-		 ECS : out std_logic;
-		 ESO : in std_logic; 
-		 EEPROMLEN : in std_logic;  
+		 	  ECS : out std_logic;
+		     ESO : in std_logic; 
+		     EEPROMLEN : in std_logic;  
            FIBERIN : in std_logic;
            FIBEROUT : out std_logic;
            RESET : in std_logic;

@@ -126,7 +126,11 @@ begin
 			end if; 
 		when cmdl => 
 			NEWCMD <= '0';
-			ns <= data1w;
+			if indata(3 downto 0) = "0000" then
+				ns <= none;
+			else
+				ns <= data1w;
+			end if; 
 		when data1w =>			
 		     NEWCMD <= '0';
 			if newpkt = '1' then

@@ -51,3 +51,4 @@ CSET b_synchronous_reset_value = B_D_0_0_pos
 CSET b_symbol_disparity_out = false
 CSET implementation = LUT_Based
 GENERATE
+

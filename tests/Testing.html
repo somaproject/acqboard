@@ -402,6 +402,124 @@ At least this strongly suggests what the real problem is. The downside
 is how to work around it -- how can we possibly hope to speed things up
 at all? <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">17 July
+2004</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+Okay, new day, new calculations. Currently we allow for 139 ticks (2.17
+us) between CONVST assertion and when we start reading. That's way too
+long. Really, we could go to 112 ticks and be fine. Maybe even 120 to
+compensate for propagation delay. Alas, even after adding the extra
+cycle, we're still getting the same errors, although perhaps the DL to
+the board didn't go correctly? <br>
+<br>
+So we reverted to the original input code and made a simulation of the
+inputs.. no problems. Ass. Even when we have raw mode disable the
+offsets, we're still getting the errors. <br>
+<br>
+Simulations seem to suggest that we can endure aggregate propagation
+delays of 44 ns between when we actually output SCLK and when we get
+the result. <br>
+<br>
+There appears to be a dependence on the amplitude here. <br>
+<br>
+Rapidly running out of ideas, fish found some unsoldered bypass caps
+and soldered them, with no result. Similarly, I've changed the ADCIN
+inputs on the FPGA to use internal pull-downs. Again, no luck. What
+about a pull-down on the analog side of the IO converter? Still no
+difference. At this point, I'm willing to say that the sticky bits
+hypothesis has no real luck of going anywhere. <br>
+<br>
+Okay, there are two types of problems: those I can fix and those I
+can't. Those I can't fix fall into<br>
+<ul>
+  <li>Something wrong with the ADC:</li>
+  <ul>
+    <li>it just sucks, and you're SOL</li>
+    <li>There's some problem related to the reference</li>
+    <li>there's some problem related to the internal converter</li>
+    <li>there's some problem related to the input</li>
+  </ul>
+  <li>Something's wrong with the GMR Isolators</li>
+  <ul>
+    <li>You just can't drive them this way, i.e. they get stuck
+sometimes and there's just nothing you can do about it</li>
+  </ul>
+</ul>
+<br>
+Moving INEN to the SCLKH1 line hasn't accomplished anything... I feel
+like I'm going about this all wrong... <br>
+<br>
+<br>
+When I intentionally read too few bits, I get the following from
+channel A1:<br>
+<img style="width: 600px; height: 450px;" alt=""
+ src="results/20040717/intentional-bit-error.png"><br>
+This, while pretty, is -not- what we're getting, although it -does-
+look somewhat familiar. A2 looks near-identical. Frustration, coupled
+with near-insanity, is forcing me to ditch the output registers, and
+just focus on a simple interface with no output registers. Yea, we
+could have glitches on the output (although how likely is this?) but
+... it simplifies things tremendously. <br>
+<br>
+<table style="text-align: left; width: 255px; height: 74px;" border="1"
+ cellspacing="2" cellpadding="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">SCLK out of FPGA<br>
+      </td>
+      <td style="vertical-align: top;">4 ns<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">cross 1st ISO<br>
+      </td>
+      <td style="vertical-align: top;">15 ns<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">SCLK to SDOUT<br>
+      </td>
+      <td style="vertical-align: top;">18 ns<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">cross second ISO <br>
+      </td>
+      <td style="vertical-align: top;">18 ns<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">into FPGA<br>
+      </td>
+      <td style="vertical-align: top;">4 ns<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">setup<br>
+      </td>
+      <td style="vertical-align: top;">2 ns<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-weight: bold;">TOTAL<br>
+      </td>
+      <td style="vertical-align: top; font-weight: bold;">61 ns<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+For comparison, the full 4 cycle setup will take... 62.5 ns!!!<br>
+<br>
+WEll, I re-wrote the input code for the ADCs, taking out the pipelining
+(but also removing some of the registering -- whatever) and I'm excited
+that I can hopefully eliminate it as a potential issue. But still...
+same errors. <br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

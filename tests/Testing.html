@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>Soma Acquisition Board Testing</title>
+</head>
+<body>
+<span style="font-weight: bold; text-decoration: underline;">13 January
+2004</span><br style="font-weight: bold; text-decoration: underline;">
+<br style="font-weight: bold; text-decoration: underline;">
+Okay, this is the assembly and testing log of our (*pray*) final
+acquisition board. <br>
+<br>
+First, some last-minute component shopping:<br>
+25LC320/SN-ND EEPROM<br>
+SJ5523-0-ND Little rubber feet<br>
+399-1091-ND extra bypass caps<br>
+399-1096-ND extra bypass caps<br>
+67-1253-ND RT &lt; dual LED, red<br>
+240-1001-1-ND big analog supply ferrite<br>
+240-1008-1-ND smt ferrite bead<br>
+RR08P10.0KBCT-ND precision 10k resistors<br>
+<br>
+Now, testing plans:<br>
+<br>
+one board, just analog stuff -- no digital<br>
+<br>
+other board, just digial, no analog.<br>
+<br>
+<br>
+Things to test:<br>
+first, digital power supplies<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">14 January
+2004</span><br style="font-weight: bold; text-decoration: underline;">
+Okay, there's already some code in the "vhdl" subdirectory. Today, I'm
+going to create LEDFLASH.vhd which will just flash the leds to let us
+know things have booted correctly. <br>
+<br>
+Baah! After all this work, the vias on the lower right side of the
+board didn't connect to the plane! I don't know why -- did I send them
+the wrong gerbers? Is this a power plane issue? WTF?<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">9
+Februrary 2004</span><br
+ style="font-weight: bold; text-decoration: underline;">
+After working on the DSP board and getting it + it's accompanying FPGA
+code mostly done, we can return our focus to the Acqboard, the
+make-or-break component of the system. <br>
+<br>
+First, Analog power system, which appears to work. <br>
+<br>
+<br>
+Just the output of the AD8221, nothing else. Just A1. <br>
+<br>
+So, first, just going to solder up an AD8221 and see what we get. <br>
+Please note that board 1 Channel A1 is using a 1.0% 475-ohm gain
+resistor that measures 476 ohms. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">23
+February 2004</span><br
+ style="font-weight: bold; text-decoration: underline;">
+We get what looks to be 150 uV P-P noise when shorting the inputs of
+the A1 AD221 together, at g=104, would translate into &lt; 2 uV input
+noise. Strangely, it also looks like we've got a roughly 1.5 uV input
+Vos, which seems low. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">16 March
+2004</span><br style="font-weight: bold; text-decoration: underline;">
+Updated filter design<br>
+corrected values to make second-stage 2nd-order LPF bessel with correct
+<br>
+values<br>
+<br>
+verified in SPICE<br>
+<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">15 April
+2004</span><br style="font-weight: bold; text-decoration: underline;">
+isolators + shift registers appear to produce correct outputs for at
+least a subset of the outputs (i.e. didn't test all)<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">17 April
+2004</span><br style="font-weight: bold; text-decoration: underline;">
+Discovered that the wrong packaging was used for the EEPROM -- TSSOP
+and SOIC packages have different pinouts, and was using the TSSOP
+pinout withthe SOIC package. Obviously, this won't work. Solved by
+removing IC, soldering CS\ and SO pins together, so all values read
+should be zero. This will prevent testing EEPROM reading, writing, on
+this version of the acqboard, and will require us having loaden == 0.
+Which sucks. But it will still let us measure a great deal of analog
+performance. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">23 May 2004</span><br
+ style="font-weight: bold; text-decoration: underline;">
+Getting ready for tomorrow's testing and assembly. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">24 May 2004</span><br
+ style="font-weight: bold; text-decoration: underline;">
+Well, look who didn't remember to update the overlays. This really
+sucks. So, pending the arrival of the jtag hardware today, we'll test
+to make sure we can boot, but that's about it. <br>
+<br>
+Things wrong on the acqboard:<br>
+Overlay text overlays some of the traces. <br>
+The connector size for the jtag programmer is wrong. <br>
+<br>
+But, using 5k Ohm pullups for all pullups and 200 ohm current-limiting
+resistors, we have things working. We can connect to the chain, program
+the PROM, directly download via the jtag chain to the FPGA. I'd say
+this jtag setup was a success. <br>
+<br style="font-weight: bold; text-decoration: underline;">
+<span style="font-weight: bold; text-decoration: underline;">30 May 2004</span><br
+ style="font-weight: bold; text-decoration: underline;">
+A short between VSS and GND on the analog side caused this board to be
+a loss, but luckily I was able to test the DL capabilities, and sure
+enough, the acqboard command interface appears to work correctly.
+However, the code is fragile for a number of reasons, including (but
+not limited to) <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">3 June 2004</span><br
+ style="font-weight: bold; text-decoration: underline;">
+Can successfully download, boot, read filters, sample buffer from
+EEPROM, acqboard. Turns out there were problems with which exact bytes
+we were reading with the loader. Note EEPROM needs you to wait the FULL
+5 MS before you try another operation following a write. <br>
+<br>
+Mode 2 will only use channels 0, 4, and 8 for the sample buffer due to
+the way in which we write them. <br>
+<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">17 June
+2004</span><br style="font-weight: bold; text-decoration: underline;">
+So, the new connector size is correct, but the connectors we bought
+don't have the correct notch and so in general don't fit. But the
+bigger issue was that the solder mask expansion on the connector wasn't
+large enough, thus scraping ,and the hole's werent' big enough, hence
+drilling. The problem was the VCC and the GND connectors, which needed
+jumpers. <br>
+<br>
+AS of now, things are booting. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">18 June
+2004</span><br style="font-weight: bold; text-decoration: underline;">
+Wow, mixed up OVDD and OGND pins on ADCs. I suck. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">1 July 2004</span><br
+ style="font-weight: bold; text-decoration: underline;">
+We can get sine data in raw mode. Now, I'm not sure why everything else
+isn't working, and I'm also not sure why we evidently have this damn
+jitter, but I'm going to write some analysis code today to look at it. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;"> 2 July
+2004</span><br style="font-weight: bold; text-decoration: underline;">
+Switching the inputs on the INPUT stage for A &amp; B, such that things
+will behave like I expect them to. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">10 July
+2004 </span><br style="font-weight: bold; text-decoration: underline;">
+Today we begin writing the batch data collection code... we'll see if
+this really works!<br>
+<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">14 July
+2004</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+Initial tests show the second harmonic to be down by only 60 dB; I'm
+not sure what's causing it, but I've devised a plan to check. We're
+switching the test write-up to HTML and we're storing all data in HDF5.
+<br>
+<br>
+The format will be as follows. We're doing all of this with <a
+ href="http://pytables.sf.net">pytables</a> as a really nice interface.
+Lovely, though, it appears pytables doesn't support storing of arrays
+as attributes (metadata). So we use... strings!!!<br>
+<br>
+All files will have a "notes". We can also attach&nbsp; notes to each
+channel. <br>
+<br>
+each file will have a channelname (A1, AC, etc) off the root, which
+will be the data for that channel. In general, then, a file might have:<br>
+<br>
+/A1/sine/run0 <br>
+/A1/sine/run1 <br>
+/A2/noise/run0<br>
+/A2/noise/run1<br>
+/BC/IMD/run0<br>
+/B1/real/run0<br>
+<br>
+The root will always have a "notes" field, as well as <br>
+<br>
+now, each "run" has the necessary metadata to fully describe both the
+state of the acqboard and the function generator:<br>
+Function generator:<br>
+<br>
+amplitude tuple of 2 floats (for IMD)<br>
+frequency tuple of 2 floats (for IMD)<br>
+mode (any of the noted modes, 0=sin, 1=sqr 2=white, 3=pink, 4=2tone)<br>
+offset (float) <br>
+<br>
+Aqboard:<br>
+mode (int)<br>
+inchanA<br>
+inchanB<br>
+gains = tuple of 10 ints, as string<br>
+hpfs = tuple of 10 ints, as string<br>
+rawchan : raw channel<br>
+<br>
+<br>
+Now, how to organize the code? <br>
+<br>
+Ideally, we do:<br>
+create acqstate object<br>
+create fstate object<br>
+perform run, take data<br>
+save as "location", acqstate, fstate<br>
+<br>
+really, all this code should live under "analysis"<br>
+<br>
+<br>
+"test" handles interfacing with all the components and retrieving the
+results<br>
+<br>
+"run" will handle putting the data in the relevant format for hdf5,
+saving the results, etc. <br>
+<br>
+How to organize "runs"? what we really want is something that will just
+DTRT given an acqstate and a function state, and a number of samples. <br>
+<br>
+<br>
+<br>
+<br>
+So, a "run" could be a hdf5 wrap of a test. That wouldn't suck. <br>
+</body>
+</html>

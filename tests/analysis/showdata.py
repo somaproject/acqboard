@@ -16,7 +16,7 @@ def plotfft(source, location = None, entry = None):
         x = raw.read(2**16)/32768.0
     else :
         # HD5f data
-        x = source['data'][0:2**16]
+        x = source[0:2**16]
 
     Fs = 256000
     phix = fft(x)
@@ -40,8 +40,8 @@ def plotfft(source, location = None, entry = None):
 import sys
 def main():
     
-    h5file = openFile("../results/test.h5", "r")
-    plotfft(h5file.root.raw.sineruns[0])
+    h5file = openFile("test.h5", "r")
+    plotfft(h5file.root.raw.testrun)
 
 
 if __name__ == "__main__":

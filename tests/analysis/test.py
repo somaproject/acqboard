@@ -26,24 +26,19 @@ class FuncState:
     def __init__(self):
         self.amp = 0.0
         self.freq = 0.0
-        self.sine = False
-        self.square = False
-        self.noise = False
+        self.mode = 0
+        self.offset = 0.0
+        
 
     def setmode(self, modestr):
         if modestr == "sine":
-            self.sine = True
-            self.square = False
-            self.noise = False
-
+            self.mode = 0 
         elif modestr == "square":
-            self.sine = False
-            self.square = True
-            self.noise = False
+            self.mode = 1
         elif modestr == "noise":
-            self.sine = False
-            self.square = False
-            self.noise = True
+            self.mode = 2 
+        elif modestr == "IMD":
+            self.mode = 4
         else:
             print "INVALID MODE"
 
@@ -124,10 +119,7 @@ class Test:
         funcgen.setoutputenable("off")
 
         # configure parameters:
-        if self.funcstate.sine :
-            funcgen.setsine()
-        elif self.funcstate.noise:
-            funcgen.setnoise()
+        funcgen.setmode(self.funcstate.mode)
 
         funcgen.setamp(self.funcstate.amp)
         self.funcstate.amp = funcgen.amp  # update with actual set value
@@ -135,7 +127,9 @@ class Test:
         funcgen.setfreq(self.funcstate.freq)
         self.funcstate.freq = funcgen.freq # update with actual, set value
 
-
+        funcgen.setoffset(self.funcstate.offset)
+        self.funcstate.offset = funcgen.offset
+        
 
         # now, the acqboard:
         acqout = AcqSocketOut()
@@ -145,7 +139,8 @@ class Test:
         acqstat.open()        
         
         # first, set mode
-        acqout.send(acqcmd.switchmode(self.acqstate.mode))
+        acqout.send(acqcmd.switchmode(self.acqstate.mode, \
+                                      self.acqstate.rawchan))
 
         tmpcmdid = -1
         while tmpcmdid != acqcmd.cmdid:
@@ -225,18 +220,19 @@ class Test:
 
 def main():
     f = FuncState()
-    f.setmode("sine")
-    f.freq = 964.84375
-    f.amp = 0.038
+    f.setmode("IMD")
+    f.freq = (964.84375, 2894.53125)
+    f.amp = (0.020, 0.020)
 
 
     a = AcqState()
     a.setmode("raw")
-    a.gains = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    a.rawchan = 1 
+    a.gains = [0, 1, 0, 0, 0, 0, 0, 0, 0, 0]
     
     t = Test(a,f)
 
-    plot(t.run(200000))
+    plot(t.rawrun(200000))
     show()
     
     

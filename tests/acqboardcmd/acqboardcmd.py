@@ -30,12 +30,12 @@ class AcqBoardCmd:
         else:
             self.cmdid += 1
             
-    def switchmode(self, mode):
+    def switchmode(self, mode, rawchan=0):
         self.updatecmd()        
         str = ""
 
         cmdbyte = (self.cmdid << 4) | 0x7
-        str = pack("BBBBBB", cmdbyte, mode, 0x1, 0x0, 0x0, 0x0);
+        str = pack("BBBBBB", cmdbyte, mode, rawchan, 0x0, 0x0, 0x0);
 
         return str;
     

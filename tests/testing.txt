@@ -89,3 +89,7 @@ We can get sine data in raw mode. Now, I'm not sure why everything else isn't wo
 
  2 July 2004
    Switching the inputs on the INPUT stage for A & B, such that things will behave like I expect them to. 
+
+10 July 2004 
+Today we begin writing the batch data collection code... we'll see if this really works!
+

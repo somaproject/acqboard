@@ -1,0 +1,14 @@
+Python interface to the Stanford Research Systems DS360 digital function generator via serial interface. 
+
+Ohh, pyserial appears not to suck. That's good.
+python setup.py install --home=/home/jonas/python
+or apt-get install python-serial
+
+
+stty -a -F /dev/ttyS0
+
+We'll have a simple interface:
+
+
+
+

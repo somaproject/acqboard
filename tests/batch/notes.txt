@@ -1,0 +1,17 @@
+Batch test notes:
+
+
+
+Save files as:
+
+for raw:
+type.amplitude.frequency.gain.hpf.raw.dat
+
+
+
+we'll collect (100 MB?) of each type?
+	      
+
+
+mode:
+	

@@ -162,11 +162,11 @@ void convgen(void)
     fdata << hprint(x, 12, 25) << ' ' << hprint(convrnd(x, 15), 12, 15)  << ' '
 	  << x << ' ' << convrnd(x, 15) << endl; 
   }
-
-    for (int i = 0; i < 1000; i++) { 
+  
+  for (int i = 0; i < 1000; i++) { 
     
     x  = (-r.get_z_range(1<<26)) << (48-26);
-    fdata << hprint(x, 12, 25) << ' ' << hprint(convrnd(x, 15), 12, 15) << ' ' 
+    fdata << hprint(x, 12, 25) << ' ' << hprint(convrnd(trunc(x, 25), 15), 12, 15) << ' ' 
       << x << ' ' << convrnd(x, 15) << endl;  
   }
 

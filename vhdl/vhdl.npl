@@ -37,5 +37,11 @@ MODULE rmacfsm.vhd
 MODSTYLE rmacfsm Normal
 [Normal]
 p_ModelSimSimRunTime_tb=xstvhd, spartan2e, Module VHDL Test Bench.t_MSimulateBehavioralVhdlModel, 1042005909, 1000us
+[STATUS-ALL]
+filter_test.ncdFile=WARNINGS,1042063709
+filter_test.ngcFile=WARNINGS,1042063709
+filter_test.ngdFile=WARNINGS,1042063709
+filter_test.postParVHDLSimModel=WARNINGS,1042063709
+filter_test.postXlateVHDLSimModel=WARNINGS,1042063709
 [STRATEGY-LIST]
 Normal=True

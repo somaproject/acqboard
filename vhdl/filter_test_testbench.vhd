@@ -53,6 +53,9 @@ ARCHITECTURE behavior OF testbench IS
 	type inputarray is array (0 to 9) of dataword;
 			signal dataouts : inputarray := (others => 0); 
 
+	signal convstcount : integer := 0;
+	signal outbytecount : integer := 0; 
+
 BEGIN
 
 	uut: filter_test PORT MAP(
@@ -84,6 +87,11 @@ BEGIN
 					read(iline, tempdata);
 					dataouts(channelnumber) <= tempdata; 
 				end loop; 
+				if convstcount = 7 then
+					convstcount <= 0;
+				else
+					convstcount <= convstcount + 1;
+				end if; 
 			end if;
 
 			if falling_edge(oeb(0)) then
@@ -142,9 +150,35 @@ BEGIN
 
 		simulator_out :process (outbyteout) is
 			 file output_file : text open write_mode is "../dsp/simulation/output.dat";
+			 variable oline : line; 
 		begin
 			 if rising_edge(outbyteout) then
-			 	macrndl<= macrnd;
+			 	-- crude hack to sample the output at the right times
+			 	if  outbytecount = 2 or
+						outbytecount = 4 or
+						outbytecount = 6 or
+						outbytecount = 8 or
+						outbytecount = 10 or
+						outbytecount = 12 or
+						outbytecount = 14 or
+						outbytecount = 16 or
+						outbytecount = 18 or
+						outbytecount = 0 then
+						macrndl <= macrnd;
+						write(oline, conv_integer(macrnd));
+						write(oline, ' '); 
+
+
+				end if; 
+			  	if outbytecount = 22 then
+					writeline(output_file, oline); 
+				end if; 
+
+				if outbytecount = 24 then
+					outbytecount <= 0;
+				else
+					outbytecount <= outbytecount + 1;
+				end if; 
 			 end if;
 		end process simulator_out; 
 

@@ -30,3 +30,9 @@ our goal is the output of a vector "op" : that is, a vector of the exact dimensi
 This will let us measure per-sample MMSE, and make sure we're getting all of our math factors correct. 
 
 
+Analysis:
+
+The pwelch periodogram with a hanning window of 512, a fft length of 512, and no overlap, appears to give the best visual output. Open questions:
+1. Why does the output of the pure sine input (output(:,3)) look like such total crap?
+2. why is the peak always down by so much? I.e. the random output data is down by -55 dB. 
+

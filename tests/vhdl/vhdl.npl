@@ -2,14 +2,14 @@ JDF G
 // Created by Project Navigator ver 1.0
 PROJECT vhdl
 DESIGN vhdl
-DEVFAM spartan2e
-DEVFAMTIME 0
-DEVICE xc2s50e
-DEVICETIME 0
-DEVPKG tq144
-DEVPKGTIME 0
-DEVSPEED -6
-DEVSPEEDTIME 0
+DEVFAM spartan3
+DEVFAMTIME 1085322441
+DEVICE xc3s50
+DEVICETIME 1085322441
+DEVPKG vq100
+DEVPKGTIME 1085322441
+DEVSPEED -5
+DEVSPEEDTIME 1085322441
 DEVTOPLEVELMODULETYPE HDL
 TOPLEVELMODULETYPETIME 0
 DEVSYNTHESISTOOL XST (VHDL/Verilog)
@@ -34,7 +34,7 @@ DEPASSOC testsamples testsamples.ucf
 DEPASSOC ledflash ledflash.ucf
 [Normal]
 p_ModelSimSimRunTime_tb=xstvhd, spartan2e, VHDL Test Bench.t_MSimulateBehavioralVhdlModel, 1043045114, 1000ms
-xilxBitgCfg_GenOpt_ASCIIFile=xstvhd, spartan2e, Implementation.t_bitFile, 1042845683, True
-xilxSynthKeepHierarchy=xstvhd, spartan2e, Schematic.t_synthesize, 1042841103, Yes
+xilxBitgCfg_GenOpt_ASCIIFile=xstvhd, spartan3, Implementation.t_bitFile, 1042845683, True
+xilxSynthKeepHierarchy=xstvhd, spartan3, Schematic.t_synthesize, 1042841103, Yes
 [STRATEGY-LIST]
 Normal=True

@@ -8,7 +8,7 @@ library UNISIM;
 use UNISIM.VComponents.all;
 
 entity INPUT is
-    Port ( CLK4X : in std_logic;
+    Port ( CLK2X : in std_logic;
            INSAMPCLK : in std_logic;
            SAMPCNT : out std_logic_vector(6 downto 0);
            ADDRB7 : out std_logic;
@@ -33,13 +33,16 @@ architecture Behavioral of INPUT is
 	signal we : std_logic := '0';
 
 begin
-	clocks: process(CLK4X, INSAMPCLK, RESET,  cs) is
+
+	SAMPCNT <= sampcntind; 
+
+	clocks: process(CLK2X, INSAMPCLK, RESET,  cs) is
 	begin
 		if RESET = '1' then
 			cs <= NONE;						
 			sampcntind <= "0000000"; 
 		else
-			if rising_edge(CLK4X) then
+			if rising_edge(CLK2X) then
 				cs <= ns;
 
 				CONVST <= convstl; 
@@ -83,9 +86,9 @@ begin
 
 	end process clocks;
 
-	memset: process (CLK4X,	outcnt, oe, chcnt, we, tsel) is
+	memset: process (CLK2X,	outcnt, oe, chcnt, we, tsel) is
 	begin
-		if rising_edge(CLK4X) then
+		if rising_edge(CLK2X) then
 			if outcnt < 10 then
 				OEB(outcnt) <= oe; 
 			end if; 

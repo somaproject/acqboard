@@ -16,7 +16,7 @@ use UNISIM.VComponents.all;
 -- 
 entity XSEL is
     Port ( OUTSAMPCLK : in std_logic;
-           CLK4X : in std_logic;
+           CLK2X : in std_logic;
            CLR : in std_logic;
            SAMPCNT : in std_logic_vector(6 downto 0);
            ADDRA7 : in std_logic;
@@ -64,9 +64,9 @@ architecture Behavioral of XSEL is
 begin
 
 	-- x output sample counter
-	xcount: process(CLR, CLK4X, sampcntl) is
+	xcount: process(CLR, CLK2X, sampcntl) is
 	begin
-		if rising_edge(CLK4X) then
+		if rising_edge(CLK2X) then
 			if CLR ='1' then
 				addraindex <= sampcntl;
 			else
@@ -76,9 +76,9 @@ begin
 	end process xcount; 
 
 	-- sample number latch
-	sampcntlatch: process (CLK4X, OUTSAMPCLK, SAMPCNT) is
+	sampcntlatch: process (CLK2X, OUTSAMPCLK, SAMPCNT) is
 	begin
-		if rising_edge(CLK4X) then
+		if rising_edge(CLK2X) then
 			if OUTSAMPCLK = '1' then
 				sampcntl <= SAMPCNT;
 			end if;
@@ -106,8 +106,8 @@ begin
 				WEB => WEB(0),
 				RSTA => RESET,
 				RSTB => RESET,
-				CLKA => CLK4X,
-				CLKB => CLK4X,
+				CLKA => CLK2X,
+				CLKB => CLK2X,
 				ADDRA(7) => ADDRA7,
 				ADDRA(6 downto 0) =>addraindex,
 				ADDRB => ADDRB,
@@ -135,8 +135,8 @@ begin
 				WEB => WEB(1),
 				RSTA => RESET,
 				RSTB => RESET,
-				CLKA => CLK4X,
-				CLKB => CLK4X,
+				CLKA => CLK2X,
+				CLKB => CLK2X,
 				ADDRA(7) => ADDRA7,
 				ADDRA(6 downto 0) =>addraindex,
 				ADDRB => ADDRB,
@@ -146,7 +146,7 @@ begin
 		 
 	-- ram block 2 : holds channel 3 for input A and B
 	SampleRAM2:  RAMB4_S16_S16  generic map (
-		      INIT_00 => X"0000000000000000000000000000000000000000000000000000000000000000",
+		      INIT_00 => X"0000000000000000000000000000000000000006000500040003000200010000",
 		      INIT_01 => X"0000000000000000000000000000000000000000000000000000000000000000",
 		      INIT_02 => X"0000000000000000000000000000000000000000000000000000000000000000",
 		      INIT_03 => X"0000000000000000000000000000000000000000000000000000000000000000",
@@ -164,8 +164,8 @@ begin
 				WEB => WEB(2),
 				RSTA => RESET,
 				RSTB => RESET,
-				CLKA => CLK4X,
-				CLKB => CLK4X,
+				CLKA => CLK2X,
+				CLKB => CLK2X,
 				ADDRA(7) => ADDRA7,
 				ADDRA(6 downto 0) =>addraindex,
 				ADDRB => ADDRB,
@@ -193,8 +193,8 @@ begin
 				WEB => WEB(3),
 				RSTA => RESET,
 				RSTB => RESET,
-				CLKA => CLK4X,
-				CLKB => CLK4X,
+				CLKA => CLK2X,
+				CLKB => CLK2X,
 				ADDRA(7) => ADDRA7,
 				ADDRA(6 downto 0) =>addraindex,
 				ADDRB => ADDRB,
@@ -222,8 +222,8 @@ begin
 				WEB => WEB(4),
 				RSTA => RESET,
 				RSTB => RESET,
-				CLKA => CLK4X,
-				CLKB => CLK4X,
+				CLKA => CLK2X,
+				CLKB => CLK2X,
 				ADDRA(7) => ADDRA7,
 				ADDRA(6 downto 0) =>addraindex,
 				ADDRB => ADDRB,
@@ -236,7 +236,8 @@ begin
 			DOA1 when DOTS = "00010" else
 			DOA2 when DOTS = "00100" else
 			DOA3 when DOTS = "01000" else
-			DOA4 when DOTS = "10000"; 
+			DOA4 when DOTS = "10000" else
+			"ZZZZZZZZZZZZZZ"; 
 			
 		 
 end Behavioral;

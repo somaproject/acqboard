@@ -9,7 +9,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 --use UNISIM.VComponents.all;
 
 entity rmacfsm is
-    Port ( CLK4X : in std_logic;
+    Port ( CLK2X : in std_logic;
            RESET : in std_logic;
            OUTSAMPCLK : in std_logic;
            OUTBYTE : in std_logic;
@@ -27,12 +27,12 @@ architecture Behavioral of rmacfsm is
 	 signal chancnt : integer range  10 downto 0 := 0; 
 begin
 
-	clocks: process(CLK4X, cs, ns) is
+	clocks: process(CLK2X, cs, ns, RESET) is
 	begin
 		if RESET = '1' then
 			cs <= NONE;
 		else
-			if rising_edge(CLK4X) then
+			if rising_edge(CLK2X) then
 				cs <= ns; 
 				if cs = RAM_ZERO then
 					chancnt <= 0;
@@ -54,7 +54,7 @@ begin
 			  "00010" when chancnt = 1 or chancnt = 6 else
 			  "00100" when chancnt = 2 or chancnt = 7 else
 			  "01000" when chancnt = 3 or chancnt = 8 else
-			  "10000" when chancnt = 4 or chancnt = 9;
+			  "10000" when chancnt = 4 or chancnt = 9 or chancnt = 10;
 	ADDRA7 <= '0' when chancnt = 0 or chancnt = 1 or
 			chancnt = 2 or chancnt = 3 or chancnt = 4 else '1'; 
 

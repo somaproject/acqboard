@@ -18,7 +18,7 @@ use UNISIM.VComponents.all;
 
 
 entity RMAC is
-    Port ( CLK4X : in std_logic;
+    Port ( CLK2X : in std_logic;
            CLR : in std_logic;
            XD : in std_logic_vector(13 downto 0);
            HD : in std_logic_vector(17 downto 0);
@@ -45,16 +45,16 @@ begin
 
 
   	mult: multiplier port map (
-			clk => CLK4X,
+			clk => CLK2X,
 			a => mina,
 			b => minb,
 			q => p,
 			sclr => CLR); 
 
 
-	rmac_core: process (CLK4X, XD, HD, mina, minb, p, pl, sum, macout) is
+	rmac_core: process (CLK2X, XD, HD, mina, minb, p, pl, sum, macout) is
 	begin
-		if rising_edge(CLK4X) then
+		if rising_edge(CLK2X) then
 			if CLR = '1' then
 				-- reset all latches to zero
 				mina <= (others => '0');

@@ -16,6 +16,7 @@ STIMULUS hsel_test.tbw Normal
 STIMULUS input_test.tbw Normal
 STIMULUS rmacfsm_test.tbw Normal
 STIMULUS xsel_test.tbw Normal
+STIMULUS filter_test_testbench.vhd Normal
 STIMULUS rmac_test.tbw Normal
 STIMULUS clocks_test.tbw Normal
 MODULE rmac.vhd
@@ -24,6 +25,8 @@ MODULE clocks.vhd
 MODSTYLE clocks Normal
 MODULE multiplier.xco
 MODSTYLE multiplier Normal
+MODULE filter_test.vhd
+MODSTYLE filter_test Normal
 MODULE hsel.vhd
 MODSTYLE hsel Normal
 MODULE xsel.vhd
@@ -32,8 +35,5 @@ MODULE input.vhd
 MODSTYLE input Normal
 MODULE rmacfsm.vhd
 MODSTYLE rmacfsm Normal
-[STATUS-ALL]
-hsel.ngcFile=WARNINGS,1041917397
-xsel.ngcFile=WARNINGS,1041917397
 [STRATEGY-LIST]
 Normal=True

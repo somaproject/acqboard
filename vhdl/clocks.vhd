@@ -17,7 +17,7 @@ use UNISIM.VComponents.all;
 entity CLOCKS is
     Port ( CLKIN : in std_logic;
 	 		  RESETIN: in std_logic; 
-           CLK4X : out std_logic;
+           CLK2X : out std_logic;
            CLK8 : out std_logic;
            INSAMPCLK : out std_logic;
            OUTSAMPCLK : out std_logic;
@@ -27,8 +27,6 @@ end clocks;
 
 architecture Behavioral of clocks is
 	signal clk2x_fb, clk2x_out, clk2x_outg, locked2x, locked2x_inv : std_logic; 
-	signal clk4x_fb, clk4x_out, clk4x_outg, locked4x, locked4x_inv : std_logic; 
-
 
 	signal insampletoggle, outsampletoggle, outbytetoggle : std_logic; 
 	 
@@ -40,33 +38,27 @@ begin
 	clk2xg : BUFG   port map (I=>clk2x_out,   O=>clk2x_outg);
 	locked2x_inv <= not locked2x; 
 
-	dll4x  : CLKDLL port map (clkin=>clk2x_outg,   clkfb=>clk4x_outg, rst=>locked2x_inv,
-	                          clk0=>open, clk90=>open, clk180=>open, clk270=>open,
-	                          clk2x=>clk4x_out, clkdv=>open, locked=>locked4x);
-	clk4xg : BUFG   port map (I=>clk4x_out,   O=>clk4x_outg);
-	locked4x_inv <= not locked4x;
+	CLK2X <= clk2x_outg; 
 
-	CLK4X <= clk4x_out; 
-
-	RESET <= locked4x_inv; 
+	RESET <= locked2x_inv; 
 
 	INSAMPCLK <= insampletoggle; 
 	OUTSAMPCLK <= outsampletoggle;
 	OUTBYTE <= outbytetoggle;
 
-	clocks: process (clk4x_out, locked4x_inv) is
+	clocks: process (clk2x_out, locked2x_inv) is
 		variable countInSample : integer range 250 downto 0 := 0;
 		variable countOutSample: integer range 2000 downto 0 := 0;
 		variable countOutByte : integer range 80 downto 0 := 0; 
 
 		 
 	begin
-		if locked4x_inv = '1' then
+		if locked2x_inv = '1' then
 			countInSample := 0;
 			countOutSample := 0; 
 			insampletoggle <= '0'; 
 		else
-			if rising_edge(clk4x_out) then	 
+			if rising_edge(clk2x_out) then	 
 
 				-- INSAMPLE -- every 250 clk4x				
 				if countInSample = 249 then

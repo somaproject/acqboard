@@ -14,7 +14,7 @@ use UNISIM.VComponents.all;
 -- always lag one tick behind CLR due to the sync. nature of the
 -- counter reset and sync nature of the ram.  
 entity HSEL is
-    Port ( CLK4X : in std_logic;
+    Port ( CLK2X : in std_logic;
            CLR : in std_logic;
 			  RESET : in std_logic; 
            HD : out std_logic_vector(17 downto 0));
@@ -46,9 +46,9 @@ architecture Behavioral of HSEL is
 begin
 	
 	-- counter vhdl
-	counter: process(CLK4X) is
+	counter: process(CLK2X) is
 	begin
-		if rising_edge(CLK4X) then
+		if rising_edge(CLK2X) then
 			if CLR = '1' then
 				index <= "00000000";
 			else
@@ -76,7 +76,7 @@ begin
 			EN => '1',
 			WE => '0',
 			RST => CLR,
-			CLK => CLK4X,
+			CLK => CLK2X,
 			ADDR => 	index,
 			DO => HD(15 downto 0));
 
@@ -96,7 +96,7 @@ begin
 			EN => '1',
 			WE => '0',
 			RST => CLR,
-			CLK => CLK4X,
+			CLK => CLK2X,
 			ADDR => 	index,
 			DO(1 downto 0) => HD(17 downto 16),
 			DO(15 downto 2)  => DO_dummy);

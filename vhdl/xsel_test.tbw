@@ -42,7 +42,7 @@ cell fill 9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 00000
 cell fill 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 00000000
 time info 50 50 4500 4500 7182 7182 1 1 0 0 0 0 0 0 0 0 psCLK4X
 font save -14 0 400 49 0 0 0 0 0 0 0 0 0 0 0 0 Times New Roman
-src mod 0 543557120 29537780 0 0 0 0 0 0 0 0 0 0 0 0 0 xsel.vhd
+src mod 0 4073557120 29537780 0 0 0 0 0 0 0 0 0 0 0 0 0 xsel.vhd
 utd false 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 cellenab on 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 grid on 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
@@ -51,9 +51,9 @@ HDL Bencher 5.1i
 Source = xsel.vhd
 Mon Jan 06 21:10:59 2003
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 signedVECTORDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_ulogicBITDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_ulogic_vectorVECTORDOWNTO
+type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 signedVECTORDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
 type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO

@@ -1,0 +1,31 @@
+
+acquisition board/
+    All Protel-related files for schematic capture and board design
+
+docs/
+    Documentation, including Adobe Illustrator design documents,
+    graphs from final filter responses, and comments on design decisions
+docs/code
+    code to do things like generate the filters, and to help with filter design
+
+vhdl/
+    main system vhdl
+
+simulation/
+    code to simulate the vhdl, and for spice sims
+    .do files
+    simulated parts (acqboard, etc)
+    analysis of the output
+simulation/vectors
+    test input and output data from the system
+    code to generate the fake data
+
+tests
+   code to test various parts of the system in the real world
+
+tests/vhdl : 
+   bits of vhdl for testing
+tests/analysis : 
+   code to analyzie the resulting output
+tests/results :
+   result data, result figures, result commentary

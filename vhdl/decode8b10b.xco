@@ -1,4 +1,4 @@
-# Xilinx CORE Generator 5.2.03i; Cores Update # 2
+# Xilinx CORE Generator 6.1.01i
 # Username = Eric Jonas
 # COREGenPath = C:\Xilinx\coregen
 # ProjectPath = C:\desktop\acqboard\vhdl
@@ -18,17 +18,16 @@
 # Number of REG used in design: 0
 # Number of SRL16s used in design: 0
 # Number of Distributed RAM primitives used in design: 0
-# Number of Block Memories cannot be determined when there is no RPMed logic
-# Number of Dedicated Multipliers cannot be determined when there is no RPMed logic
+# Number of Block Memories used in design: 0
+# Number of Dedicated Multipliers used in design: 0
 # Number of HU_SETs used: 0
 # 
-SET BusFormat = BusFormatAngleBracket
-SET SimulationOutputProducts = Verilog VHDL
+SET BusFormat = BusFormatAngleBracketNotRipped
 SET XilinxFamily = Spartan2
-SET OutputOption = DesignFlow
-SET DesignFlow = Vhdl
+SET OutputOption = OutputProducts
 SET FlowVendor = Foundation_iSE
 SET FormalVerification = None
+SET OutputProducts = ImpNetlist ASYSymbol VHDLSim VerilogSim
 SELECT Decode_8b/10b Spartan2 Xilinx,_Inc. 5.0
 CSET b_synchronous_reset = false
 CSET clock_enable = true
@@ -52,4 +51,3 @@ CSET symbol_disparity_out = false
 CSET b_symbol_disparity_out = false
 CSET implementation = LUT_Based
 GENERATE
-

@@ -1,4 +1,4 @@
-# Xilinx CORE Generator 5.2.03i; Cores Update # 2
+# Xilinx CORE Generator 6.1.01i
 # Username = Eric Jonas
 # COREGenPath = C:\Xilinx\coregen
 # ProjectPath = C:\desktop\acqboard\vhdl
@@ -18,8 +18,8 @@
 # Number of REG used in design: 0
 # Number of SRL16s used in design: 0
 # Number of Distributed RAM primitives used in design: 0
-# Number of Block Memories cannot be determined when there is no RPMed logic
-# Number of Dedicated Multipliers cannot be determined when there is no RPMed logic
+# Number of Block Memories used in design: 0
+# Number of Dedicated Multipliers used in design: 0
 # Number of HU_SETs used: 0
 # 
 SET BusFormat = BusFormatAngleBracket
@@ -48,4 +48,3 @@ CSET component_name = encode8b10b
 CSET code_error_output = false
 CSET b_force_code = false
 GENERATE
-

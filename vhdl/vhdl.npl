@@ -1,5 +1,5 @@
-JDF F
-// Created by Project Navigator ver 1.0
+JDF G
+// Converted from an earlier version by Project Navigator version 5
 PROJECT vhdl
 DESIGN vhdl Normal
 DEVFAM spartan2e
@@ -10,8 +10,14 @@ DEVPKG tq144
 DEVPKGTIME 1055894492
 DEVSPEED -6
 DEVSPEEDTIME 0
-FLOW XST VHDL
-FLOWTIME 1061049059
+DEVTOPLEVELMODULETYPE HDL
+TOPLEVELMODULETYPETIME 0
+DEVSYNTHESISTOOL XST (VHDL/Verilog)
+SYNTHESISTOOLTIME 0
+DEVSIMULATOR Modelsim
+SIMULATORTIME 0
+DEVGENERATEDSIMULATIONMODEL VHDL
+GENERATEDSIMULATIONMODELTIME 0
 STIMULUS overflow_testbench.vhd Normal
 STIMULUS test_SendCMD_test.tbw Normal
 STIMULUS overflow_test.tbw Normal
@@ -90,10 +96,12 @@ DEPASSOC input input.ucf Normal
 DEPASSOC multiplier multiplier.ucf Normal
 DEPASSOC pgaload pgaload.ucf Normal
 [Normal]
-p_ModelSimSimRunTime_tb=xstvhd, spartan2e, Module VHDL Test Bench.t_MSimulateBehavioralVhdlModel, 1059341326, 20 ms
+p_ModelSimSimRunTime_tb=xstvhd, spartan2e, VHDL Test Bench.t_MSimulateBehavioralVhdlModel, 1059341326, 20 ms
 p_xstPackIORegister=xstvhd, spartan2e, Schematic.t_synthesize, 1061064066, Yes
-xilxPAReffortLevel=xstvhd, spartan2e, Implementation.t_placeAndRouteDes, 1055895324, High
+xilxPAReffortLevel=xstvhd, spartan2e, Implementation.t_placeAndRouteDes, 1055895324, Medium
 _SynthMultStyle=xstvhd, spartan2e, Schematic.t_synthesize, 1058138004, Pipe_LUT
 _SynthOptEffort=xstvhd, spartan2e, Schematic.t_synthesize, 1056383182, High
+[STATUS-ALL]
+acqboard.twrFile=WARNINGS,1066769478
 [STRATEGY-LIST]
 Normal=True

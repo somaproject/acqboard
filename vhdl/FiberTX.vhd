@@ -15,44 +15,38 @@ entity FiberTX is
            OUTSAMPLE : in std_logic;
            FIBEROUT : out std_logic;
            CMDDONE : in std_logic;
-		 Y : in std_logic_vector(15 downto 0); 
+		 Y : in std_logic_vector(15 downto 0);
+		 YEN : std_logic; 
            CMDSTS : in std_logic_vector(3 downto 0);
            CMDID : in std_logic_vector(3 downto 0);
 		 CMDSUCCESS : in std_logic; 
 		 OUTBYTE : in std_logic; 
-           CHKSUM : in std_logic_vector(7 downto 0);
-		 DEBUGWORD: out std_logic_vector(8 downto 0); 
-		 DEBUGEN : out std_logic);
+           CHKSUM : in std_logic_vector(7 downto 0));
 end FiberTX;
 
 architecture Behavioral of FiberTX is
 -- FIBERTX.VHD -- System which forms packets and serializes the 8b/10b
--- encoded result. Needs careful synchronization with RMAC output Y
+-- encoded result. 
 
-   signal cmdstsinl, cmdstsl :
-   		std_logic_vector(3 downto 0) := (others => '0');
-   signal cmdinl, cmdl : std_logic_vector(7 downto 0):= (others => '0');
-   signal chksuminl, chksuml :
-   		std_logic_vector(7 downto 0):= (others => '0');
-		
-   signal din, dinl : std_logic_vector(7 downto 0):= (others => '0');
-   signal yl: std_logic_vector(15 downto 0) := (others => '0');
+   -- input latches
+   signal csl, csll : std_logic_vector(3 downto 0) := (others => '0');
+   type samparray is array (0 to 9) of std_logic_vector(15 downto 0);
+   signal yl, yout : samparray; 
+   signal cl, cll, ckl, ckll : std_logic_vector(7 downto 0)
+   	:= (others => '0');
+   
+   -- counters
+   signal incnt : integer range 0 to 9 := 0;
+   signal bcnt : integer range 0 to 24 := 0; 
 
-   signal dout, shiftreg : 
-   		std_logic_vector(9 downto 0):= (others => '0');
-   
-   signal kin, sout : std_logic := '0';
-   
-   signal insel : std_logic_vector(2 downto 0) := (others => '0');
+   -- output signals
+   signal dmux, dmuxl : std_logic_vector(7 downto 0) := (others => '0');
+   signal kin : std_logic := '0';
+   signal dout : std_logic_vector(9 downto 0) := (others => '0'); 
+   signal sout : std_logic := '0'; 
+   signal shiftreg: std_logic_vector(9 downto 0) := (others => '0'); 
 
-   -- fsm signals
-   type states is (kcomma, status, chan0h, chan0l, chan1h, chan1l,
-   			    chan2h, chan2l, chan3h, chan3l, chan4h, chan4l, 
-			    chan5h, chan5l, chan6h, chan6l, chan7h, chan7l,
-			    chan8h, chan8l, chan9h, chan9l, cmdidsnd, checksum,
-			    nop); 
-   signal cs, ns : states := kcomma;
-   
+
    --8b/10b encoder
 
 	component encode8b10b IS
@@ -68,7 +62,7 @@ begin
 
 
    encode: encode8b10b port map (
-   		din => dinl,
+   		din => dmuxl,
 		dout => dout,
 		clk => CLK,
 		kin => kin,
@@ -77,172 +71,113 @@ begin
    sout <= shiftreg(0); 
 
 
-   clock: process(CLK, CMDSTS, CMDID, CHKSUM, din, RESET, OUTBYTE, CLK8, 
-   			   OUTSAMPLE, CMDDONE, y, cmdstsinl, cmdinl, cs, ns,
-			   chksuminl, insel, sout, CMDSUCCESS) is 
-   begin
-	  if RESET = '1' then
-	  	cs <= kcomma;
-	  else
-	     if rising_edge(CLK) then
-		    if CMDDONE = '1' then
-		    		cmdstsinl <= CMDSTS;
-				cmdinl <= "000" & CMDID & CMDSUCCESS;
-				chksuminl <= CHKSUM;
-		    end if; 
-		    
-		    if OUTSAMPLE = '1' then
-		    		cmdstsl <= cmdstsinl;
-				cmdl <= cmdinl;
-				chksuml <= chksuminl;
+
+   ylatches: for i in 0 to 9 generate
+	begin
+		process(clk) is
+		begin
+			if rising_edge(CLK) then
+				if incnt = i and YEN = '1' then
+					yl(i) <= Y;
+				end if; 
+				if OUTSAMPLE = '1' then
+					yout(i) <= yl(i); 
+				end if; 
 			end if;
-			
-		    -- special FSM code 
-		    if OUTSAMPLE = '1' then
-		    		cs <= kcomma;
-		    else
-		    	   if OUTBYTE = '1' then
-			   	 cs <= ns; 
-			   end if; 
-		    end if; 
+		end process;
+	end generate; 
+
+   dmux <= X"BC" when bcnt = 0 else
+   		"0000" & CSLL when bcnt = 1 else
+		yout(0)(7 downto 0) when bcnt = 2 else
+		yout(0)(15 downto 8) when bcnt = 3 else
+		yout(1)(7 downto 0) when bcnt = 4 else
+		yout(1)(15 downto 8) when bcnt = 5 else
+		yout(2)(7 downto 0) when bcnt = 6 else
+		yout(2)(15 downto 8) when bcnt = 7 else
+		yout(3)(7 downto 0) when bcnt = 8 else
+		yout(3)(15 downto 8) when bcnt = 9 else
+		yout(4)(7 downto 0) when bcnt = 10 else
+		yout(4)(15 downto 8) when bcnt = 11 else
+		yout(5)(7 downto 0) when bcnt = 12 else
+		yout(5)(15 downto 8) when bcnt = 13 else
+		yout(6)(7 downto 0) when bcnt = 14 else
+		yout(6)(15 downto 8) when bcnt = 15 else
+		yout(7)(7 downto 0) when bcnt = 16 else
+		yout(7)(15 downto 8) when bcnt = 17 else
+		yout(8)(7 downto 0) when bcnt = 18 else
+		yout(8)(15 downto 8) when bcnt = 19 else
+		yout(9)(7 downto 0) when bcnt = 20 else
+		yout(9)(15 downto 8) when bcnt = 21 else
+		cll when bcnt = 22 else
+		ckll when bcnt = 23 else
+		X"00"; 	  
 
 
-		    if OUTBYTE = '1' then
-		    	   if insel = "000" then
-			   	kin <= '1';
- 			   else
-			   	kin <= '0';
-			   end if;
+   main: process(clk, reset) is
+   begin
+   	if RESET = '1' then	
+		bcnt <= 0;
+		incnt <= 0; 
+	else
+		if rising_edge(clk) then
+			if CMDDONE = '1' then
+				csl <= CMDSTS; 
+				cl <= "000" & CMDID & CMDSUCCESS;
+				ckl <= CHKSUM; 
 			end if; 
 
-		   if OUTBYTE = '1' then
-		   	  dinl <= din;
-		   end if; 
+			if OUTSAMPLE = '1' then
+				csll <= csl; 
+				cll <= cl;
+				ckll <= ckl; 
+			end if; 
 
-		   if OUTBYTE = '1' then
-		   	  yl <= y;
-		   end if; 
-					
+			if OUTSAMPLE = '1' then
+				incnt <= 0; 
+			else
+				if YEN = '1' then
+					incnt <= incnt + 1;
+				end if;
+			end if; 
 
-		   -- loadable shift register
+			if OUTBYTE = '1' then
+				if bcnt = 24 then
+					bcnt <= 0;
+				else
+					bcnt <= bcnt + 1;
+				end if; 
+			end if; 
 
-		   if OUTBYTE = '1' then
-		   	  shiftreg <= dout;
-		   else
-		   	  if clk8 = '1' then
-			  	shiftreg <= '0' & shiftreg(9 downto 1);
-			  end if;
-		   end if;
+			if OUTBYTE = '1' then
+				dmuxl <= dmux;
+				if bcnt = 0 then
+					kin <= '1' ;
+				else
+					kin <= '0';
+				end if; 
+			end if; 
 
-		   if CLK8 = '1' then
-		   	FIBEROUT <= sout; 
-		   end if; 	
+			-- shift register
+			if OUTBYTE = '1' then
+				shiftreg <= dout;
+			else
+				if clk8 = '1' then
+					shiftreg <= '0' & shiftreg(9 downto 1); 
+				end if; 
+			end if; 
 
-		   -- debugging
-		   DEBUGWORD <= kin & dinl; 
-		   DEBUGEN <= OUTBYTE; 
-
-
-
-		end if;
-	  end if; 
-
-
-   end process clock; 
-
-   -- din mux;
-   din <= "10111100" when insel = "000" else
-   		("0000" & cmdstsl) when insel = "001" else
-		yl(15 downto 8) when insel = "010" else
-		yl(7 downto 0) when insel = "011" else
-		cmdl when insel = "100" else
-		chksuml(7 downto 0) when insel = "101" else
-		"00000000" when insel = "110" else
-		"10111100"; 
+			if CLK8 = '1' then
+				FIBEROUT <= sout;
+			end if; 
 
 
-   fsm: process(CS) is
-   begin
-   	case cs is
-		when kcomma => 
-			insel <= "000";
-			ns <= status;
-		when status => 
-			insel <= "001";
-			ns <= chan0h;
-		when chan0h => 
-			insel <= "010";
-			ns <= chan0l;
-		when chan0l => 
-			insel <= "011";
-			ns <= chan1h;
-		when chan1h => 
-			insel <= "010";
-			ns <= chan1l;
-		when chan1l => 
-			insel <= "011";
-			ns <= chan2h;		
-		when chan2h => 
-			insel <= "010";
-			ns <= chan2l;
-		when chan2l => 
-			insel <= "011";
-			ns <= chan3h;
-		when chan3h => 
-			insel <= "010";
-			ns <= chan3l;
-		when chan3l => 
-			insel <= "011";
-			ns <= chan4h;
-		when chan4h => 
-			insel <= "010";
-			ns <= chan4l;
-		when chan4l => 
-			insel <= "011";
-			ns <= chan5h;
-		when chan5h => 
-			insel <= "010";
-			ns <= chan5l;
-		when chan5l => 
-			insel <= "011";
-			ns <= chan6h;
-		when chan6h => 
-			insel <= "010";
-			ns <= chan6l;
-		when chan6l => 
-			insel <= "011";
-			ns <= chan7h;
-		when chan7h => 
-			insel <= "010";
-			ns <= chan7l;
-		when chan7l => 
-			insel <= "011";
-			ns <= chan8h;
-		when chan8h => 
-			insel <= "010";
-			ns <= chan8l;
-		when chan8l => 
-			insel <= "011";
-			ns <= chan9h;
-		when chan9h => 
-			insel <= "010";
-			ns <= chan9l;
-		when chan9l => 
-			insel <= "011";
-			ns <= cmdidsnd;
-		when cmdidsnd => 
-			insel <= "100";
-			ns <= checksum;
-		when checksum => 
-			insel <= "101";
-			ns <= nop;
-		when nop => 
-			insel <= "110";
-			ns <= kcomma;
-		when others => 
-			insel <= "111";
-			ns <= kcomma;
-	end case; 
-   end process fsm; 
+
+
+		end if; 
+	end if; 
+
+
+   end process main; 
 
 end Behavioral;

@@ -11,21 +11,24 @@ bit two : SDIN
 
 
 """
+ADCCS = 10
+SCLK = 11
+SDIN = 12
 
-from matplotlib.matlab import *
+from matplotlib.pylab import *
 
 def getbit(val, pos):
     return  ( val >> pos) % 2
 
 
 def readdbit(reader):
-    while( getbit(int(reader.next()[1]), 1) == 0):
+    while( getbit(int(reader.next()[1]), SCLK) == 0):
         pass
     rbits = int(reader.next()[1])
-    while( getbit(rbits,1) == 1):
+    while( getbit(rbits,SCLK) == 1):
         rbits =int(reader.next()[1])
 
-    return getbit(rbits, 2)
+    return getbit(rbits, SDIN)
     
 def readsamp(reader):
     x = 0
@@ -36,7 +39,7 @@ def readsamp(reader):
         if s == 1 :
             x += f
         f = f /  2
-
+        
     return x
 
 import csv
@@ -47,14 +50,15 @@ sampleb = []
 try:
     while(1):
         x = reader.next()
-        if int(x[1]) % 2 == 1 :
+        if getbit(int(x[1]), ADCCS)  == 1 :
             # high edge
-            while( getbit(int(reader.next()[1]), 0) == 1):
+            while( getbit(int(reader.next()[1]), ADCCS) == 1):
                 pass
             samplea.append(readsamp(reader))
             sampleb.append(readsamp(reader))
         
 except StopIteration:
+    
     plot(sampleb)
     show()
     

@@ -1019,6 +1019,58 @@ The code to read this is under
 acqboard/tests/results/20050121/ADCreading.py<br>
 <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">22 January
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+We are almost certainly dealing with a problem with the serial
+interface, due to timing concerns, propagation delays, and the isoloop
+converters. We are going to try and use the "simple" test to interface
+witht he ADC. <br>
+<br>
+10:00 pm We have changed the input side to use a shorter CS and use
+4-tick CLK pulses, and eventually will simplify the entire input
+subsystem considerably. At the moment, however:<br>
+<ul>
+  <li>we can read the serial output from the DIGITAL side of the
+isoloop isolators, meaning that we're doing something right</li>
+  <li>More importantly, we created a simple serial debugging module and
+used the serial PGA programming pins to connect it to the logic
+analyzer; the output is PERFECT, while the output from the
+protoboard/usb still shows the same bugs. This gets more and more
+confusing each time</li>
+</ul>
+<br>
+Bug source candidates: <br>
+<ul>
+  <li>inside of the FPGA on the acqboard<br>
+  </li>
+  <li>inside of the protoboard FPGA, or any other place on the
+protoboard</li>
+</ul>
+To help narrow this down, we are going to attach the same serial
+debugging code to the FPGA on the protoboard; there's some mild concern
+because that code hasn't been touched in years, but oh well. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">24 January
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+So close! The corruption is somehow happening <span
+ style="font-weight: bold;">inside</span> of the FPGA; we can see this
+via tying the input to the 8b/10b encoder on FiberTX inside the
+acqboard FPGA to the debugging output. <br>
+<br>
+How frustrating and confusing. This rules out, or at least
+substantially reduces the probability of, the problem being in:<br>
+<ul>
+  <li>protointerface board</li>
+  <li>8b/10b encoder being too slow</li>
+</ul>
+At this point, we can be sure without a doubt that the problem exists
+in the FPGA. This means that either we have strange higher-order
+hardware problems inside of the FPGA, or that our unit tests have
+failed. Given that the acqboard code is old and busted, and has yet to
+be converted to new documentation nor be updated for the new testbench
+organization, I'm going to start refactoring and updating its
+documentation today. <br>
+<br>
 <br>
 </body>
 </html>

@@ -28,8 +28,5 @@ DEPASSOC simple simple.ucf
 [Normal]
 xilxBitgCfg_GenOpt_ASCIIFile=xstvhd, spartan3, VHDL.t_bitFile, 1102552720, True
 xilxBitgCfg_GenOpt_BinaryFile=xstvhd, spartan3, VHDL.t_bitFile, 1102552720, True
-[STATUS-ALL]
-simple.ngcFile=WARNINGS,1102560053
-simple.ngdFile=WARNINGS,1102560062
 [STRATEGY-LIST]
 Normal=True

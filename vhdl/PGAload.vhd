@@ -45,6 +45,8 @@ architecture Behavioral of PGAload is
 
    signal cs, ns  : states := none;
    signal chancnt, shiftcnt : integer range 10 downto 0 := 0;
+ 
+
 
 
 
@@ -141,14 +143,14 @@ begin
    gainlut: process(gainl) is
    begin
    	case gainl is
-		when "00000" => gainlookup <= "000001";
-		when "00001" => gainlookup <= "000101";
-		when "00010" => gainlookup <= "001001";
-		when "00011" => gainlookup <= "011001";
-		when "00100" => gainlookup <= "010001";
-		when "00101" => gainlookup <= "011100";
-		when "00110" => gainlookup <= "010001";
-		when "00111" => gainlookup <= "000101";
+		when "00000" => gainlookup <= "111111";
+		when "00001" => gainlookup <= "111110";
+		when "00010" => gainlookup <= "111101";
+		when "00011" => gainlookup <= "111100";
+		when "00100" => gainlookup <= "111011";
+		when "00101" => gainlookup <= "111010";
+		when "00110" => gainlookup <= "111001";
+		when "00111" => gainlookup <= "111000";
 		when "01000" => gainlookup <= "000011";
 		when "01001" => gainlookup <= "010001";
 		when "01010" => gainlookup <= "000001";

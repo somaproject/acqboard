@@ -35,7 +35,7 @@ ARCHITECTURE behavior OF testbench IS
 	SIGNAL reset :  std_logic := '0';
 	SIGNAL y :  std_logic_vector(15 downto 0);
 
-    constant clockperiod : time := 15 ns; 
+    constant clockperiod : time := 15.8 ns; 
     
 BEGIN
     clk <= not clk after clockperiod / 2;
@@ -55,7 +55,7 @@ BEGIN
 	);
 
    H <= "0111111111111111111111";
-   xbase <= "0000000";
+   xbase <= "1111111";
 
 -- *** Test Bench - User Defined Section ***
    tb : PROCESS(clk) is
@@ -63,15 +63,19 @@ BEGIN
    BEGIN
    	if rising_edge(CLK) then
    	 x <= lx after 3 ns;
-	 lx <= llx after 3 ns; 
+	
 	 if RESET = '1' then
 	 	counter := 0;
 	 else 
 	 	counter := counter + 1;
 	 end if; 
 	 --
-	 -- llx <= llx + 1; 
-	 llx <= "0000000000000001";
+	 -- lx <= llx + 1; 
+	 if xa = "1111111" then 
+	     lx <= "0000000000000001";
+	 else
+	 	lx <= "0000000000000010";
+	 end if; 
 	 if counter = 10 then
 	 	startmac <= '1' after 3 ns;
 	 else

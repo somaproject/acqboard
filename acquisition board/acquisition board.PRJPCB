@@ -188,7 +188,7 @@ ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 
 [Document14]
-DocumentPath=..\..\parts\mydevices\My devices.lib
+DocumentPath=parts.PCBLIB
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotateSuffix=
@@ -201,7 +201,7 @@ ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 
 [Document15]
-DocumentPath=..\..\parts\mydevices\my packages.lib
+DocumentPath=parts.SCHLIB
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotateSuffix=

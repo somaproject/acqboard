@@ -12,10 +12,10 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY testbench IS
-END testbench;
+ENTITY decoder_testbench IS
+END decoder_testbench;
 
-ARCHITECTURE behavior OF testbench IS 
+ARCHITECTURE behavior OF decoder_testbench IS 
 
 	COMPONENT decoder
 	PORT(

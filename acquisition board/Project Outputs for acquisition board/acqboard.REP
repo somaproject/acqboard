@@ -71,13 +71,13 @@ Generating : Bottom Layer
 
 
 Used DCodes :
-    D11
-    D28
+    D16
+    D18
     D40
     D41
+    D42
     D43
     D44
-    D45
     D47
     D48
     D49
@@ -101,8 +101,8 @@ Generating : Top Overlay
 Used DCodes :
     D40
     D41
+    D42
     D43
-    D44
     D58
     D59
     D60
@@ -178,8 +178,8 @@ Generating : Bottom Solder
 
 
 Used DCodes :
-    D66
-    D83
+    D71
+    D73
     D95
     D96
     D97
@@ -203,7 +203,7 @@ Generating : Internal Plane 1
 
 Used DCodes :
     D40
-    D42
+    D45
     D105
     D106
     D107
@@ -233,15 +233,15 @@ Generating : Internal Plane 2
 
 Used DCodes :
     D40
-    D42
+    D45
     D105
-    D106
-    D108
+    D107
     D109
-    D111
+    D110
     D112
-    D114
+    D113
     D115
+    D116
     D117
     D118
     D119

@@ -4,10 +4,10 @@ USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
-ENTITY testbench IS
-END testbench;
+ENTITY rounding_testbench IS
+END rounding_testbench;
 
-ARCHITECTURE behavior OF testbench IS 
+ARCHITECTURE behavior OF rounding_testbench IS 
 -- this testbench is completely combinatorial, so it should be real fast. 
 	COMPONENT rounding
 	Generic ( n: positive := 36); 

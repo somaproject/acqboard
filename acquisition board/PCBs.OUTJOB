@@ -149,6 +149,14 @@ OutputDocumentPath22=
 OutputVariantName22=
 OutputEnabled22=0
 OutputDefault22=0
+Configuration22_Name1=General
+Configuration22_Item1=OpenExported=False|ForceFit=False|TemplateFilename=|BatchMode=2|FormWidth=875|FormHeight=665
+Configuration22_Name2=GroupOrder
+Configuration22_Item2=LibRef=True|Value=True
+Configuration22_Name3=SortOrder
+Configuration22_Item3=Description=Down
+Configuration22_Name4=VisibleOrder
+Configuration22_Item4=Description=100|Footprint=100|LibRef=100|Quantity=100|Value=100
 OutputType23=ComponentCrossReference
 OutputName23=Component Cross Reference Report
 OutputDocumentPath23=

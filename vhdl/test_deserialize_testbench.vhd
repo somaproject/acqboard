@@ -12,10 +12,10 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY testbench IS
-END testbench;
+ENTITY test_deserialize_testbench IS
+END test_deserialize_testbench;
 
-ARCHITECTURE behavior OF testbench IS 
+ARCHITECTURE behavior OF test_deserialize_testbench IS 
 
 	COMPONENT test_deserialize
     generic ( filename : string := "deserialize.output.dat"); 

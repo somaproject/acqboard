@@ -5,10 +5,10 @@ USE ieee.numeric_std.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
-ENTITY testbench IS
-END testbench;
+ENTITY rmac_testbench IS
+END rmac_testbench;
 
-ARCHITECTURE behavior OF testbench IS 
+ARCHITECTURE behavior OF rmac_testbench IS 
 
 	COMPONENT rmac
 	PORT(

@@ -4,10 +4,10 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY testbench IS
-END testbench;
+ENTITY EEPROMio_testbench IS
+END EEPROMio_testbench;
 
-ARCHITECTURE behavior OF testbench IS 
+ARCHITECTURE behavior OF EEPROMio_testbench IS 
 
 	COMPONENT eepromio
 	PORT(

@@ -1,7 +1,7 @@
 JDF G
-// Converted from an earlier version by Project Navigator version 5
+// Created by Project Navigator ver 1.0
 PROJECT vhdl
-DESIGN vhdl Normal
+DESIGN vhdl
 DEVFAM spartan2e
 DEVFAMTIME 0
 DEVICE xc2s50e
@@ -18,90 +18,65 @@ DEVSIMULATOR Modelsim
 SIMULATORTIME 0
 DEVGENERATEDSIMULATIONMODEL VHDL
 GENERATEDSIMULATIONMODELTIME 0
-STIMULUS overflow_testbench.vhd Normal
-STIMULUS test_SendCMD_test.tbw Normal
-STIMULUS overflow_test.tbw Normal
-STIMULUS input_testbench.vhd Normal
-STIMULUS pgaload_test.tbw Normal
-STIMULUS acqboard_testbench.vhd Normal
-STIMULUS rounding_testbench.vhd Normal
-STIMULUS clocks_test.tbw Normal
-STIMULUS test_deserialize_testbench.vhd Normal
-STIMULUS rounding_test.tbw Normal
-STIMULUS test_EEPROM_test.tbw Normal
-STIMULUS rmac_testbench.vhd Normal
-STIMULUS RMAC_test.tbw Normal
-STIMULUS EEPROMio_testbench.vhd Normal
-STIMULUS decoder_testbench.vhd Normal
-STIMULUS test_ADC_testbench.vhd Normal
-STIMULUS test_serialize_testbench.vhd Normal
-STIMULUS test_serialize_test.tbw Normal
-STIMULUS FiberRX_testbench.vhd Normal
-STIMULUS fibertx_testbench.vhd Normal
-MODULE samplebuffer.vhd
-MODSTYLE samplebuffer Normal
-MODULE EEPROMio.vhd
-MODSTYLE eepromio Normal
-MODULE Loader.vhd
-MODSTYLE loader Normal
-MODULE test_ADC.vhd
-MODSTYLE test_adc Normal
-MODULE input.vhd
-MODSTYLE input Normal
-MODULE test_serialize.vhd
-MODSTYLE test_serialize Normal
-MODULE decode8b10b.xco
-MODSTYLE decode8b10b Normal
-MODULE encode8b10b.xco
-MODSTYLE encode8b10b Normal
-MODULE RMACcontrol.vhd
-MODSTYLE rmaccontrol Normal
-MODULE FilterArray.vhd
-MODSTYLE filterarray Normal
-MODULE Control.vhd
-MODSTYLE control Normal
-MODULE multiplier.vhd
-MODSTYLE multiplier Normal
-MODULE accumulator.vhd
-MODSTYLE accumulator Normal
-MODULE decoder.vhd
-MODSTYLE decoder Normal
-MODULE PGAload.vhd
-MODSTYLE pgaload Normal
-MODULE overflow.vhd
-MODSTYLE overflow Normal
-MODULE test_SendCMD.vhd
-MODSTYLE test_sendcmd Normal
-MODULE acqboard.vhd
-MODSTYLE acqboard Normal
-MODULE clocks.vhd
-MODSTYLE clocks Normal
-MODULE FiberTX.vhd
-MODSTYLE fibertx Normal
-MODULE FiberRX.vhd
-MODSTYLE fiberrx Normal
-MODULE rounding.vhd
-MODSTYLE rounding Normal
-MODULE distRAM.vhd
-MODSTYLE distram Normal
-MODULE test_EEPROM.vhd
-MODSTYLE test_eeprom Normal
-MODULE test_deserialize.vhd
-MODSTYLE test_deserialize Normal
-MODULE RMAC.vhd
-MODSTYLE rmac Normal
-DEPASSOC acqboard acqboard.ucf Normal
-DEPASSOC rmac RMAC.ucf Normal
-DEPASSOC input input.ucf Normal
-DEPASSOC multiplier multiplier.ucf Normal
-DEPASSOC pgaload pgaload.ucf Normal
+STIMULUS overflow_testbench.vhd
+STIMULUS test_SendCMD_test.tbw
+STIMULUS overflow_test.tbw
+STIMULUS input_testbench.vhd
+STIMULUS pgaload_test.tbw
+STIMULUS acqboard_testbench.vhd
+STIMULUS rounding_testbench.vhd
+STIMULUS clocks_test.tbw
+STIMULUS test_deserialize_testbench.vhd
+STIMULUS rounding_test.tbw
+STIMULUS test_EEPROM_test.tbw
+STIMULUS rmac_testbench.vhd
+STIMULUS RMAC_test.tbw
+STIMULUS EEPROMio_testbench.vhd
+STIMULUS decoder_testbench.vhd
+STIMULUS test_ADC_testbench.vhd
+STIMULUS test_serialize_testbench.vhd
+STIMULUS test_serialize_test.tbw
+STIMULUS FiberRX_testbench.vhd
+STIMULUS fibertx_testbench.vhd
+SOURCE samplebuffer.vhd
+SOURCE EEPROMio.vhd
+SOURCE Loader.vhd
+SOURCE test_ADC.vhd
+SOURCE input.vhd
+SOURCE test_serialize.vhd
+SOURCE decode8b10b.xco
+SOURCE encode8b10b.xco
+SOURCE RMACcontrol.vhd
+SOURCE FilterArray.vhd
+SOURCE Control.vhd
+SOURCE multiplier.vhd
+SOURCE accumulator.vhd
+SOURCE decoder.vhd
+SOURCE PGAload.vhd
+SOURCE overflow.vhd
+SOURCE test_SendCMD.vhd
+SOURCE acqboard.vhd
+SOURCE clocks.vhd
+SOURCE FiberTX.vhd
+SOURCE FiberRX.vhd
+SOURCE rounding.vhd
+SOURCE distRAM.vhd
+SOURCE test_EEPROM.vhd
+SOURCE test_deserialize.vhd
+SOURCE RMAC.vhd
+DEPASSOC input input.ucf
+DEPASSOC multiplier multiplier.ucf
+DEPASSOC pgaload pgaload.ucf
+DEPASSOC acqboard acqboard.ucf
+DEPASSOC rmac RMAC.ucf
 [Normal]
 p_ModelSimSimRunTime_tb=xstvhd, spartan2e, VHDL Test Bench.t_MSimulateBehavioralVhdlModel, 1059341326, 20 ms
 p_xstPackIORegister=xstvhd, spartan2e, Schematic.t_synthesize, 1061064066, Yes
-xilxPAReffortLevel=xstvhd, spartan2e, Implementation.t_placeAndRouteDes, 1055895324, Medium
+xilxMapAllowLogicOpt=xstvhd, spartan2e, VHDL.t_placeAndRouteDes, 1069448677, True
+xilxPAReffortLevel=xstvhd, spartan2e, VHDL.t_placeAndRouteDes, 1055895324, Medium
 _SynthMultStyle=xstvhd, spartan2e, Schematic.t_synthesize, 1058138004, Pipe_LUT
 _SynthOptEffort=xstvhd, spartan2e, Schematic.t_synthesize, 1056383182, High
 [STATUS-ALL]
-acqboard.twrFile=WARNINGS,1066769478
+acqboard.twrFile=WARNINGS,1069449978
 [STRATEGY-LIST]
 Normal=True

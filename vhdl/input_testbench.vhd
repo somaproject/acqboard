@@ -4,10 +4,10 @@ USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL; 
 
 
-ENTITY testbench IS
-END testbench;
+ENTITY input_testbench IS
+END input_testbench;
 
-ARCHITECTURE behavior OF testbench IS 
+ARCHITECTURE behavior OF input_testbench IS 
 
 	COMPONENT input
 	PORT(

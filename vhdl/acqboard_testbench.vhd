@@ -12,10 +12,10 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY testbench IS
-END testbench;
+ENTITY acqboard_testbench IS
+END acqboard_testbench;
 
-ARCHITECTURE behavior OF testbench IS 
+ARCHITECTURE behavior OF acqboard_testbench IS 
 -- acqboard_testbench.vhd -- This is the main testbench for the acquisition
 -- board, designed to test command processing, DSP, and the like.
 -- 

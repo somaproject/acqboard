@@ -11,10 +11,10 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY testbench IS
-END testbench;
+ENTITY fiberrx_testbench IS
+END fiberrx_testbench;
 
-ARCHITECTURE behavior OF testbench IS 
+ARCHITECTURE behavior OF fiberrx_testbench IS 
 
 	component FiberRX is
 	    Port ( CLK : in std_logic;

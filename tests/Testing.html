@@ -1209,5 +1209,69 @@ opencores project and get it to work. The ATS-2 gives a roughly-flat
 Secondary measurements suggest jitter on the order of 500 ps for
 CONVST. Similar jitter effects are seen, however, on the output of the
 clock oscillator near the FPGA. <br>
+<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">21
+Februrary 2005</span><br>
+There appear to be errors in accurately receiving the optical output of
+the acqboard via ADC 5. This was made apparent when we tried to read
+the input on channel B of ADC 5 and realized that, no, we apparently
+can't read or write the B input with our SPDIF code, at all. <br>
+<br>
+I am going to write a debugging interface to see if it is an ADC
+artifact, using our cool new logic analyzer. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">25
+February 2005</span><br
+ style="font-weight: bold; text-decoration: underline;">
+I had suspected, nay <span style="font-style: italic;">hoped</span> it
+was a jitter problem, because there exist numerous commercial resources
+to help me with board redesign to minimize jitter. But looking at the
+actual output of the CONVST pin in the 100kHz 50% duty-cycle mode we
+see:<br>
+<img alt="" src="results/20050225/j3.png"
+ style="width: 640px; height: 480px;"><br>
+<br>
+This is the post-isoloop plot; note the roughly 1 ns p-p jitter. <br>
+<br>
+<img alt="" src="results/20050225/j2.png"
+ style="width: 640px; height: 480px;"><br>
+<br>
+<br>
+<br>
+This is the input to the isoloop; note the smaller but still-present
+jitter. <br>
+<br>
+That said, my calculations via AD's website suggest that this is just
+fine; that 1ns p-p jitter is on the order of, -at worst-, 500 ps RMS
+jitter (probably more like 170ps RMS). -20*log(1/(2*pi*10kHz*500ps)) =
+-90 dB SNR. <br>
+<br>
+That said, there's not a lot of legroom there. The Dallas semi folks
+have a DS1077 oscillator that will let me use an arbitrary clock, and
+claim that it will easily get me down to 100ps jitter. Passing it
+through some sort of CONVST-clock-distribution IC would probably help
+too. <br>
+<br>
+But the issue still remains: if not jitter, what? We should really look
+at intrinsic noise, and performance with DC.<br>
+<br>
+The primary causes for the classes of jitter problems all deal with
+ground bounce and similar signal integrity issues. More testing is
+necessary. <br>
+<br>
+The first thing I want to do is <span style="font-style: italic;">just
+measure noise</span>, by shorting all pins to ground. <br>
+<br>
+For ADC1, we short both A and B inputs to ground, but in the current
+iteration our ADC has the last (offset-adding) channel of the AA filter
+connected in A1. A2 directly shorts Vos to the ADC input. <br>
+<br>
+The plot of the two is below. A2 is the one that doesn't suck:<br>
+<br>
+<img alt="" src="results/20050225/a1vsa2_zero-input.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+This is very, very odd. <br>
 </body>
 </html>

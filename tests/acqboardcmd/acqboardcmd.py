@@ -45,7 +45,6 @@ class AcqBoardCmd:
 
         cmdbyte = (self.cmdid << 4) | 0x1
         str = pack("BBBBBB", cmdbyte, chan, gain, 0x0, 0x0, 0x0);
-
         return str;
     
     def setinputch(self, chan, input):

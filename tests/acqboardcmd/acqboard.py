@@ -49,7 +49,7 @@ class AcqState:
         self.insel = ["", "", "", "", "", "", "", "", "", ""]
         self.hpf = ["", "", "", "", "", "", "", "", "", ""]
         
-        self.clist = ["A.1", "A.2", "A.3", "A.4", "A.C", "B.1", "B.2", "B.3", "B.4", "B.C"]
+        self.clist = ["A.1", "A.2", "A.3", "A.4", "A.C", "B.C",  "B.1", "B.2", "B.3", "B.4"]
         self.gainlabel = []
         self.glist = ["0", "1", "2", "5", "10", "20", "50", "100"]
         self.hlist = ["DC", "100 Hz", "150 Hz", "300 Hz"] 
@@ -137,7 +137,7 @@ class AcqState:
         
 
 class AcqBoardControl:
-    clist = ["A.1", "A.2", "A.3", "A.4", "A.C", "B.1", "B.2", "B.3", "B.4", "B.C"]
+    clist = ["A.1", "A.2", "A.3", "A.4", "A.C", "B.C", "B.1", "B.2", "B.3", "B.4"]
     hlist = ["DC", "100 Hz", "150 Hz", "300 Hz"]
     glist = ["0", "1", "2", "5", "10", "20", "50", "100"]
 
@@ -153,7 +153,7 @@ class AcqBoardControl:
     def button_set_gain(self, widget):
         chan = self.allchanchanopt.get_history()
         gain = self.allchangainopt.get_history()
-        
+        print "chan = %d gain = %d" % (chan, gain)
         self.acqout.send(self.acqcmd.setgain(chan, gain))
         self.acqs.startcmdid(self.acqcmd.cmdid, self.acqs.update_gain, (chan, gain))
                              

@@ -8,3 +8,20 @@ Create test_EEPROM to test eeprom capabilities. We can write to it, read from it
 
 For the test_EEPROM code, remember that the actual eerpom address =  eeprom_io address *2 because we're shifting the 11-bit input addrs to the right by one. 
 
+Testbench order: (all assume single impulse-repsonse in filter)
+
+1. Send null command
+2. Set EEPROM location 519 (2*519 physical) to have 0xFF value, giving an offset, and write. Then we switch gain on channel 0 to 7 and observe the correct value being read from the EEPROM., and the correct gain settnig being clicked out the pga serial interface. 
+
+3. Set the highpass filter for channel 7 to value 2, watch output serial response. 
+
+4. Set mode 1 (offset disable) and wait until the mode bit has changed to mode 1
+5. send the command to write an offset for channel 0x4, gain setting 0x3, of value 0x1234. Check the correct value is written into the EEPROM
+
+6. return to mode 0
+
+7. set the gain of channel 0x4 to 0x3, watch the loading of the offset value. Wait until the correct value appears at the output of the RMAC. Note that the system transmits MSByte first on the 8b/10b interface. 
+
+
+
+

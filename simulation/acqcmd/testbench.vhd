@@ -51,12 +51,13 @@ ARCHITECTURE behavior OF testbench IS
 	SIGNAL ESCK :  std_logic;
 	SIGNAL ECS :  std_logic;
 	SIGNAL ESO :  std_logic;
-	SIGNAL EEPROMLEN :  std_logic := '0';
+	SIGNAL EEPROMLEN :  std_logic := '0';										
 	SIGNAL FIBERIN :  std_logic;
 	SIGNAL FIBEROUT :  std_logic;
 	SIGNAL RESET :  std_logic := '1';
 	SIGNAL CLK8_OUT :  std_logic;
 
+	
 	signal bouts :  std_logic_vector(79 downto 0) := (others => '0'); 
 
 	component test_PGA is
@@ -205,7 +206,9 @@ BEGIN
    process(deser_data) is
 	begin
 		for i in 0 to 9 loop
-		  	outvals(i) <= TO_INTEGER(signed(deser_data(i*8+15 downto i*8)));
+		  	outvals(i) <= TO_INTEGER(signed(deser_data(i*16+7 downto i*16+0) & 
+				deser_data(i*16+15 downto i*16+8))
+				);
 		end loop;
 	end process; 
 
@@ -290,11 +293,12 @@ BEGIN
 
 		wait until decmdid(4 downto 1) = "0011"; 
 
-		if gains(0) = 7 then 
-			error <= '0';
+		if gains(0) = 7 then 		  
+			error <= '0';				  
 		else	
 			error <= '1'; 
 		end if; 
+
 
 	   -- set highpass filter for channel 7 to value 2
 		cmdid <= "0100";
@@ -313,6 +317,8 @@ BEGIN
 		end if; 
 
 	   -- set mode = 1 (offset disable)
+
+
 		cmdid <= "0101";
 		cmd <= "0111"; 
 		cmddata0 <= X"01"; 
@@ -345,6 +351,8 @@ BEGIN
 		wait until rising_edge(clkin);
 		eaddr <= (512 + 4*8+3)*2;
 		wait until rising_edge(clkin);
+
+
 
 	   -- set mode = 0 (normal)
 		cmdid <= "0111";
@@ -380,6 +388,10 @@ BEGIN
 		else	
 			error <= '1'; 
 		end if; 
+
+		wait until outvals(4) = X"1234"; 
+
+
 
 			
 	end process commands; 

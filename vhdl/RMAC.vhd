@@ -9,7 +9,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 --use UNISIM.VComponents.all;
 
 entity RMAC is
-    Port ( CLK2X : in std_logic;
+    Port ( CLK : in std_logic;
            X : in std_logic_vector(15 downto 0);
            XA : out std_logic_vector(6 downto 0);
            H : in std_logic_vector(21 downto 0);
@@ -43,7 +43,7 @@ architecture Behavioral of RMAC is
    -- component declarations
    component multiplier is	   
     Generic ( n: positive := 24); 
-    Port ( CLK2X : in std_logic;
+    Port ( CLK : in std_logic;
            A : in std_logic_vector(15 downto 0);
            B : in std_logic_vector(21 downto 0);
            P : out std_logic_vector(n-1 downto 0));
@@ -51,7 +51,7 @@ architecture Behavioral of RMAC is
 
    component accumulator is
     Generic ( n: positive := 24); 
-    Port ( CLK2X : in std_logic;
+    Port ( CLK : in std_logic;
 		 P : in std_logic_vector(n-1 downto 0);
            ACC : out std_logic_vector((n-1)+7 downto 0);
            CLR : in std_logic);
@@ -72,14 +72,14 @@ begin
   -- component instantiation:
   multiplier_inst: multiplier
   	generic map (n => n)
-  	port map( CLK2X => CLK2X,
+  	port map( CLK => CLK,
 			A => xl,
 			B => hl,
 			P => p);
 	
   accumulator_inst: accumulator
   	generic map (n => n)
-	port map( CLK2X => CLK2X,
+	port map( CLK => CLK,
 			P => p,
 			ACC => acc,
 			CLR => clr);
@@ -96,12 +96,12 @@ begin
   HA <= lha; 
 			
   -- clock 
-  clock: process (CLK2X, RESET, cs, ns, STARTMAC) is
+  clock: process (CLK, RESET, cs, ns, STARTMAC) is
   begin
   	if RESET = '1' then
 		cs <= none;
 	else
-		if rising_edge(CLK2X) then
+		if rising_edge(CLK) then
 		    cs <= ns; 
 
 		    -- latch inputs

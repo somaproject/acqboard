@@ -10,7 +10,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity accumulator is
     Generic ( n: positive := 24); 
-    Port ( CLK2X : in std_logic;
+    Port ( CLK : in std_logic;
 		 P : in std_logic_vector(n-1 downto 0);
            ACC : out std_logic_vector((n-1)+7 downto 0);
            CLR : in std_logic);
@@ -25,9 +25,9 @@ architecture Behavioral of accumulator is
    
 
 begin
-	clock: process (CLK2X, clr) is
+	clock: process (CLK, clr) is
 	begin
-		if rising_edge(CLK2X) then
+		if rising_edge(CLK) then
 		   pl <= P; 
 		   if clr = '0' then
 		   	accint <= sum;

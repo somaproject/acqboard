@@ -10,7 +10,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity multiplier is	   
     Generic ( n: positive := 24); 
-    Port ( CLK2X : in std_logic;
+    Port ( CLK : in std_logic;
            A : in std_logic_vector(15 downto 0);
            B : in std_logic_vector(21 downto 0);
            P : out std_logic_vector(n-1 downto 0));
@@ -28,9 +28,9 @@ architecture Behavioral of multiplier is
     signal lp, p1, p2 : std_logic_vector(37 downto 0) := (others => '0'); 
 
 begin
-	process(CLK2X) is
+	process(CLK) is
 	begin
-		if rising_edge(CLK2X) then
+		if rising_edge(CLK) then
 			a1 <= A;
 			al <= a1;
 			b1 <= B;

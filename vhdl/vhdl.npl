@@ -12,27 +12,34 @@ DEVSPEED -6
 DEVSPEEDTIME 0
 FLOW XST VHDL
 FLOWTIME 1061049059
+STIMULUS pgaload_test.tbw Normal
 STIMULUS RMAC_test.tbw Normal
 STIMULUS overflow_test.tbw Normal
 STIMULUS rounding_test.tbw Normal
 MODULE samplebuffer.vhd
 MODSTYLE samplebuffer Normal
+MODULE PGAload.vhd
+MODSTYLE pgaload Normal
 MODULE overflow.vhd
 MODSTYLE overflow Normal
+MODULE input.vhd
+MODSTYLE input Normal
+MODULE offset.vhd
+MODSTYLE offset Normal
+MODULE FilterArray.vhd
+MODSTYLE filterarray Normal
 MODULE multiplier.vhd
 MODSTYLE multiplier Normal
 MODULE accumulator.vhd
 MODSTYLE accumulator Normal
 MODULE rounding.vhd
 MODSTYLE rounding Normal
-MODULE input.vhd
-MODSTYLE input Normal
 MODULE RMAC.vhd
 MODSTYLE rmac Normal
-DEPASSOC rmac RMAC.ucf SYSTEM
+DEPASSOC rmac RMAC.ucf Normal
 DEPASSOC multiplier multiplier.ucf Normal
 [Normal]
 p_xstPackIORegister=xstvhd, spartan2e, Schematic.t_synthesize, 1061064066, Yes
-xilxPAReffortLevel=xstvhd, spartan2e, VHDL.t_placeAndRouteDes, 1055895324, High
+xilxPAReffortLevel=xstvhd, spartan2e, Implementation.t_placeAndRouteDes, 1055895324, High
 [STRATEGY-LIST]
 Normal=True

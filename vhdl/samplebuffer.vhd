@@ -9,7 +9,7 @@ library UNISIM;
 use UNISIM.VComponents.all;
 
 entity samplebuffer is
-    Port ( CLK2X : in std_logic;
+    Port ( CLK : in std_logic;
            RESET : in std_logic;
            DIN : in std_logic_vector(15 downto 0);
            CHANIN : in std_logic_vector(3 downto 0);
@@ -80,8 +80,8 @@ begin
 		WEB => '0',
 		RSTA => RESET,
 		RSTB => RESET,
-		CLKA => CLK2X,
-		CLKB => CLK2X,
+		CLKA => CLK,
+		CLKB => CLK,
 		ADDRA => addra,
 		ADDRB => addrb,
 		DOA => open,
@@ -96,8 +96,8 @@ begin
 		WEB => '0',
 		RSTA => RESET,
 		RSTB => RESET,
-		CLKA => CLK2X,
-		CLKB => CLK2X,
+		CLKA => CLK,
+		CLKB => CLK,
 		ADDRA => addra,
 		ADDRB => addrb,
 		DOA => open,
@@ -112,8 +112,8 @@ begin
 		WEB => '0',
 		RSTA => RESET,
 		RSTB => RESET,
-		CLKA => CLK2X,
-		CLKB => CLK2X,
+		CLKA => CLK,
+		CLKB => CLK,
 		ADDRA => addra,
 		ADDRB => addrb,
 		DOA => open,
@@ -128,8 +128,8 @@ begin
 		WEB => '0',
 		RSTA => RESET,
 		RSTB => RESET,
-		CLKA => CLK2X,
-		CLKB => CLK2X,
+		CLKA => CLK,
+		CLKB => CLK,
 		ADDRA => addra,
 		ADDRB => addrb,
 		DOA => open,
@@ -144,8 +144,8 @@ begin
 		WEB => '0',
 		RSTA => RESET,
 		RSTB => RESET,
-		CLKA => CLK2X,
-		CLKB => CLK2X,
+		CLKA => CLK,
+		CLKB => CLK,
 		ADDRA => addra,
 		ADDRB => addrb,
 		DOA => open,
@@ -163,9 +163,9 @@ begin
 
 
    -- output register
-   process(CLK2X) is
+   process(CLK) is
    begin
-   	if rising_edge(CLK2X) then
+   	if rising_edge(CLK) then
 		case CHANOUT(3 downto 1) is
 			when "000" => DOUT <= DATA1;
 			when "001" => DOUT <= DATA2;

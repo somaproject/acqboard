@@ -9,7 +9,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 --use UNISIM.VComponents.all;
 
 entity input is
-    Port ( CLK2X : in std_logic;				   
+    Port ( CLK : in std_logic;				   
            INSAMPLE : in std_logic;
 		 RESET : in std_logic; 
            CONVST : out std_logic;
@@ -18,16 +18,12 @@ entity input is
            SIN : in std_logic_vector(4 downto 0);
            DATA : out std_logic_vector(15 downto 0);
            CHAN : out std_logic_vector(3 downto 0);
-           WE : out std_logic;
-		 OSCHANW : in std_logic_vector(3 downto 0);
-		 OSDATAW : in std_logic_vector(15 downto 0);
-		 OSWE : in std_logic);
+           WE : out std_logic);
 
 end input;
 
 architecture Behavioral of input is
--- INPUT.VHD : input from serial converter. Subtracts out offsets and 
--- writes to RAM. 
+-- INPUT.VHD : input from serial converter. 
 
 	type states is (none, conv_start, conv_wait, conv_done, sclkh, sclkl1, sclkl2, 
 				 sclk_nop1, sclk_nop2, chan_rst, chan_inc);
@@ -36,33 +32,27 @@ architecture Behavioral of input is
 	signal shiften : std_logic := '0';
 	signal pout1, pout2, pout3, pout4, pout5 : 
 			std_logic_vector(31 downto 0) := (others => '0');
-	signal chanin, chaninl, chaninll, chaninlll :
-			std_logic_vector(3 downto 0)  := (others => '0');
+	signal chanin : std_logic_vector(3 downto 0)  := (others => '0');
 	signal wein, weinl, weinll, weinlll: std_logic := '0';
-	signal muxout, aus, as, ain, bin, osout, youtmux :
-			std_logic_vector(15 downto 0) := (others => '0');
-	signal yout, youtl : std_logic_vector(16 downto 0) := (others => '0');
+	signal muxout : std_logic_vector(15 downto 0) := (others => '0');
 	signal lconvst, ladccs, lsclk : std_logic := '0'; 
 	-- counters for FSMs
 	signal convwait : integer range 255 downto 0 := 0;
 	signal sclkcnt : integer range 63 downto 0 := 0; 
 
-	-- offset LUT signals
-	signal os1, os2, os3, os4, os5, os6, os7, os8, os9, os10, osdatar : 
-			std_logic_vector(15 downto 0) := (others => '0');
-	signal oschanr : std_logic_vector(3 downto 0) := (others => '0');
-
-
 
 begin
-	clock: process (CLK2X, RESET, SIN, shiften, INSAMPLE, cs, ns, 
-				 muxout, aus, as, yout, lsclk, ladccs, OSWE, OSDATAW,
-				 OSCHANW, convwait) is
+	WE <= wein;
+	CHAN <= chanin; 
+
+	clock: process (CLK, RESET, SIN, shiften, INSAMPLE, cs, ns, 
+				 muxout,lsclk, ladccs, convwait, pout1, pout2,
+				 pout3, pout4, pout5) is
 	begin
 		if RESET = '1' then
 			cs <= none;
 		else
-			if rising_edge(CLK2X) then
+			if rising_edge(CLK) then
 			   cs <= ns; 
 
 			   if shiften = '1' then 
@@ -73,21 +63,6 @@ begin
 			   	pout5 <= (pout5(30 downto 0) & SIN(4));
 			   end if; 
 
-			   aus <= muxout; 
-			   ain <= as;
-			   bin <= osdatar;
-			   youtl <= yout;
-			   DATA <= youtmux; 
-
-			   -- pipeline stages for channel, write-enable
-			   chaninl <= chanin;
-			   chaninll <= chaninl;
-			   chaninlll <= chaninll;
-			   chan <= chaninlll;
-			   weinl <= wein;
-			   weinll <= weinl;
-			   weinlll <= weinll;
-			   we <= weinlll;
 
 			   -- counters
 			   if cs = conv_start then
@@ -113,22 +88,7 @@ begin
 			   ADCCS <= ladccs;
 			   CONVST <= lconvst; 
 
-			   -- latch in offset values
-			   if OSWE = '1' then 
-			   	case OSCHANW is
-					when "0000" => os1 <= OSDATAW;
-					when "0001" => os2 <= OSDATAW;
-					when "0010" => os3 <= OSDATAW;
-					when "0011" => os4 <= OSDATAW;
-					when "0100" => os5 <= OSDATAW;
-					when "0101" => os6 <= OSDATAW;
-					when "0110" => os7 <= OSDATAW;
-					when "0111" => os8 <= OSDATAW;
-					when "1000" => os9 <= OSDATAW;
-					when "1001" => os10 <= OSDATAW;
-					when others => Null;
-				end case;
-			   end if;
+
 			end if; 
 		end if; 
 	end process clock; 
@@ -257,33 +217,7 @@ begin
 			pout5(31 downto 16) when chanin = "1001" else
 			"0000000000000000";
 
-     -- twos-complementer
-		as <= aus - "1000000000000000"; 
-	
-	-- adder 
-		yout <= (ain(15) & ain) + (bin(15) & bin);
-	
-	-- output overflow detection
-		youtmux <= youtl(15 downto 0) when youtl(16 downto 15) = "00" else
-				 "1000000000000000" when youtl(16 downto 15) = "01" else
-				 "0111111111111111" when youtl(16 downto 15) = "10" else
-				 youtl(15 downto 0); 
-
-	-- outputs of offset LUT
-		osdatar <= os1 when oschanr = "0000" else
-				 os2 when oschanr = "0001" else
-				 os3 when oschanr = "0010" else
-				 os4 when oschanr = "0011" else
-				 os5 when oschanr = "0100" else
-				 os6 when oschanr = "0101" else
-				 os7 when oschanr = "0110" else
-				 os8 when oschanr = "0111" else
-				 os9 when oschanr = "1000" else
-				 os10 when oschanr = "1001" else
-				 "0000000000000000";
-
-	    oschanr <= chaninl; 
-
+    DATA <= muxout; 
 																																											
 end Behavioral;
 																														    						

@@ -14,10 +14,11 @@ USE ieee.numeric_std.ALL;
 
 use std.textio.all; 
 
-ENTITY testbench IS
-END testbench;
+ENTITY filtertest IS
+	generic (simname : string := "basic"); 
+END filtertest;
 											 
-ARCHITECTURE behavior OF testbench IS 
+ARCHITECTURE behavior OF filtertest IS 
 
 	COMPONENT input
 	PORT(
@@ -151,7 +152,7 @@ ARCHITECTURE behavior OF testbench IS
 	           WEOUT : out std_logic;
 				  LOAD : in std_logic);
 	end component;
-	signal filterload : std_logic := '0'; 
+	signal loadfilter : std_logic := '0'; 
 	signal filedone : std_logic := '0'; 
 
 BEGIN
@@ -177,7 +178,7 @@ BEGIN
 
 
 	adc0 : ADC  generic map (
-			filename => "adcin.0.dat")
+			filename => simname & ".adcin.0.dat")
 			port map (
 			RESET => adc_reset,
 			SCLK => SCLK,
@@ -193,7 +194,7 @@ BEGIN
 			INPUTDONE => filedone); 
 			  
 	adc1 : ADC  generic map (
-			filename => "adcin.1.dat")
+			filename => simname & ".adcin.1.dat")
 			port map (
 			RESET => adc_reset,
 			SCLK => SCLK,
@@ -209,7 +210,7 @@ BEGIN
 			INPUTDONE => open); 
 
 	adc2 : ADC  generic map (
-			filename => "adcin.2.dat")
+			filename => simname & ".adcin.2.dat")
 			port map (
 			RESET => adc_reset,
 			SCLK => SCLK,
@@ -225,7 +226,7 @@ BEGIN
 			INPUTDONE => open); 
 
 	adc3 : ADC  generic map (
-			filename => "adcin.3.dat")
+			filename => simname &  ".adcin.3.dat")
 			port map (
 			RESET => adc_reset,
 			SCLK => SCLK,
@@ -241,7 +242,7 @@ BEGIN
 			INPUTDONE => open); 
 
 	adc4 : ADC  generic map (
-			filename => "adcin.4.dat")
+			filename => simname & ".adcin.4.dat")
 			port map (
 			RESET => adc_reset,
 			SCLK => SCLK,
@@ -307,13 +308,13 @@ BEGIN
 			Y => Y);
 
 	filload: FilterLoad generic map
-			(filename => "filter.dat")
+			(filename => simname & ".filter.dat")
 			port map(
 			clk => clk,
 			DOUT => fdin, 
 			AOUT => fain,
 			WEOUT => fwe,
-			load => filterload); 
+			load => loadfilter); 
 
 
 	clk <= not clk after 7.8125 ns; 
@@ -367,7 +368,7 @@ BEGIN
 	  	variable L: line;
 	begin
 		if falling_edge(reset) then
-			file_open(outputfile, "output.dat", write_mode);
+			file_open(outputfile, simname &  ".output.dat", write_mode);
 		end if; 
  		if rising_edge(clk) then
 			if outsample = '1' then
@@ -387,10 +388,10 @@ BEGIN
 	begin
 	   
 		adc_reset <= '0';  
-		filterload <= '1';
+		loadfilter <= '1';
 		wait until rising_edge(clk);
 		adc_reset <= '1'; 
-		filterload <= '0'; 
+		loadfilter <= '0'; 
 		wait until syscnt > 1000;
 		adc_reset <= '0'; 
 		wait until rising_edge(clk); 

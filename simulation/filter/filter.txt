@@ -2,6 +2,23 @@ This is our attempt to simulate the entire filtering subsystem.
 
 We combine the Input/Offset block, the sample buffer, the RMAC control, the Filter Array, the RMAC, and read the resulting Y output values. We try and use the same signal names as are used in the actual acqboard. 
 
+The challenge here is the delay and thus sample offset that arise from a downsampling system -- the system itself is fundamentally not time invariant. Thus to accurately simulate the output, and compare, we must consider this delay. 
+
+This is done by prefixing any input vector with an impulse surrounded by silence. By comparing the resulting subsampled portions of the impulse response, we can determine the offset of the input vector and thus which output samples to use. 
+
+The resulting unit test code is somewhat unique in that it actually writes a file of outputs that we then run analysis on; this means the resulting unit test code will be a bit different. 
+
+
+Thus, we ultimately want: 
+    filter(runname), which will call modelsim appropriately with the right
+    generics set to have the vhdl read in:
+
+    runname.adcin.0.dat .. runname.adcin.4.dat,
+    runname.filter.dat
+
+    And then -we- should also be able to take that data, read it in, perform our fixed-point convolution on it, and compare it with the output. 
+
+    
 
 We begin by writing in filter array coefficients from the file filter.dat
 

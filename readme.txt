@@ -40,8 +40,32 @@ After contacting people, it looks like I may just be SOL wrt getting tempco-matc
 
 Now, let's assume values of 10k each, and let's assume that TCo is positive. Now, the tempcos are potentially going to co-vary, because they are in close physical proximity. But ignore that -- let's assume R2 stays constant, and R1 varies at 25 ppm/C, for maximum difference. That works out to Vout = Vin(1+Tco)/(2+Tco), or (for 25 ppm/c) roughly 6 ppm/C. This puts a lot of the responsibility for stability on the voltage reference. We can use a OPA227 to buffer the output. 
 
+--------------------------------------------------------------------------
+Soma Command configuration
+--------------------------------------------------------------------------
+The soma command interface over fiber is spartan at best. 
+
+Each transmit packet has a CMDST byte, a CMDID byte, and a CHKSUM byte.
+
+The acqboard can be in one of three modes:
+    Mode 0: normal mode, acquiring and filtering data. 
+    Mode 1: offset disable -- dc offset compensation is disabled
+    Mode 2: disables the input and disables offsets. Just outputs programmed sample buffer. 
+
+Each of these modes has a "loading" bit.
+
+Note that there is this "problem" with there only being one acqboard interface but two DSPs. this means channel modification commands have to be very careful!!!
+
+
+
+
+
+
 
 --------------------------------------------------------------------------
 So, general system properties, etc: 
 
 AD8221 has amazing stuff... the new data sheet is an inspiration to all of humanity!
+
+
+

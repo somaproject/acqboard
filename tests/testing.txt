@@ -27,3 +27,17 @@ Okay, there's already some code in the "vhdl" subdirectory. Today, I'm going to 
 
 Baah! After all this work, the vias on the lower right side of the board didn't connect to the plane! I don't know why -- did I send them the wrong gerbers? Is this a power plane issue? WTF?
 
+9 Februrary 2004
+After working on the DSP board and getting it + it's accompanying FPGA code mostly done, we can return our focus to the Acqboard, the make-or-break component of the system. 
+
+First, Analog power system, which appears to work. 
+
+
+Just the output of the AD8221, nothing else. Just A1. 
+
+So, first, just going to solder up an AD8221 and see what we get. 
+Please note that board 1 Channel A1 is using a 1.0% 475-ohm gain resistor that measures 476 ohms. 
+
+23 February 2004
+We get what looks to be 150 uV P-P noise when shorting the inputs of the A1 AD221 together, at g=104, would translate into < 2 uV input noise. Strangely, it also looks like we've got a roughly 1.5 uV input Vos, which seems low. 
+

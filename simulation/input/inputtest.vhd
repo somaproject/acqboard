@@ -48,12 +48,12 @@ ARCHITECTURE behavior OF inputtest IS
 	SIGNAL COUT :  std_logic_vector(3 downto 0);
 	SIGNAL WEOUT :  std_logic;
 	SIGNAL OSC :  std_logic_vector(3 downto 0);
-	SIGNAL OSEN :  std_logic;
+	SIGNAL OSEN :  std_logic := '0';
 	SIGNAL OSWE :  std_logic;
 	SIGNAL OSD :  std_logic_vector(15 downto 0);
 	signal OSCALL : std_logic := '0'; 
 
-	component test_ADC is
+	component ADC is
 	    Generic (filename : string := "adcin.dat" ); 
 	    Port ( RESET : in std_logic;
 	           SCLK : in std_logic := '0';
@@ -62,8 +62,8 @@ ARCHITECTURE behavior OF inputtest IS
 	           SDOUT : out std_logic;
 			 	CHA_VALUE: in integer;
 			 	CHB_VALUE: in integer;
-				CHA_OUT : out integer;
-				CHB_OUT : out integer; 
+				CHA_OUT : out integer := 32768;
+				CHB_OUT : out integer := 32768; 
 			 	FILEMODE: in std_logic; 
 			 	BUSY: out std_logic; 
 			 	INPUTDONE: out std_logic);
@@ -76,7 +76,7 @@ ARCHITECTURE behavior OF inputtest IS
 	signal syscnt, chan : integer := 0;
 	
 	signal ch_out, ch_outbipolar, ch_outbipolarl, offsets : intarray := (others => 0); 
-	signal error : std_logic := '0'; 
+	signal err : std_logic := '0'; 
 BEGIN
 
 	uut: input PORT MAP(
@@ -107,8 +107,8 @@ BEGIN
 		SDOUT => SDIN(0),
 		CHA_VALUE => 0,
 		CHB_VALUE => 0,
-		CHA_OUT => ch_out(0),
-		CHB_OUT => ch_out(1),
+		CHA_OUT => ch_out(1),
+		CHB_OUT => ch_out(0),
 		FILEMODE => '1',
 		BUSY => adcbusy(0),
 		INPUTDONE => adcinputdone(0));
@@ -123,8 +123,8 @@ BEGIN
 		SDOUT => SDIN(1),
 		CHA_VALUE => 0,
 		CHB_VALUE => 0,
-		CHA_OUT => ch_out(2),
-		CHB_OUT => ch_out(3),
+		CHA_OUT => ch_out(3),
+		CHB_OUT => ch_out(2),
 		FILEMODE => '1',
 		BUSY => adcbusy(1),
 		INPUTDONE => adcinputdone(1));
@@ -140,8 +140,8 @@ BEGIN
 		SDOUT => SDIN(2),
 		CHA_VALUE => 0,
 		CHB_VALUE => 0,
-		CHA_OUT => ch_out(4),
-		CHB_OUT => ch_out(5),
+		CHA_OUT => ch_out(5),
+		CHB_OUT => ch_out(4),
 		FILEMODE => '1',
 		BUSY => adcbusy(2),
 		INPUTDONE => adcinputdone(2));
@@ -156,8 +156,8 @@ BEGIN
 		SDOUT => SDIN(3),
 		CHA_VALUE => 0,
 		CHB_VALUE => 0,
-		CHA_OUT => ch_out(6),
-		CHB_OUT => ch_out(7),
+		CHA_OUT => ch_out(7),
+		CHB_OUT => ch_out(6),
 		FILEMODE => '1',
 		BUSY => adcbusy(3),
 		INPUTDONE => adcinputdone(3));
@@ -172,8 +172,8 @@ BEGIN
 		SDOUT => SDIN(4),
 		CHA_VALUE => 0,
 		CHB_VALUE => 0,
-		CHA_OUT => ch_out(8),
-		CHB_OUT => ch_out(9),
+		CHA_OUT => ch_out(9),
+		CHB_OUT => ch_out(8),
 		FILEMODE => '1',
 		BUSY => adcbusy(4),
 		INPUTDONE => adcinputdone(4));
@@ -251,12 +251,12 @@ BEGIN
 		end loop; 
 		
 	  wait until rising_edge(clk); 
-	  osen <= '1';
+	  osen <= '1';  
 
 	  adcreset <= '1'; 
 
  	  -- test with this
-		 for j in 0 to 100 loop 
+		 for j in 0 to 400 loop 
 		 wait until rising_edge(clk); 
 		 end loop;
 
@@ -322,7 +322,7 @@ BEGIN
 	  oscall <= '0'; -- make sure to turn it off to test for latching
 	  
  	  -- now, test after resetting offsets
-	   osen <= '1'; 
+	      osen <= '1'; 
 		 for j in 0 to 100 loop 
 		 wait until rising_edge(clk); 
 		 end loop;
@@ -347,43 +347,57 @@ BEGIN
 			end loop;
 		end loop; 
 	  		  
-		
+		assert false
+			report "End of Simulation"
+			severity failure; 	
 		 
 	end process testbench; 	
 
 	verify: process(clk, COUT) is 
 		--variable chan : integer := 0; 
 	begin
-		chan <= to_integer(unsigned(cout)); 
+		chan <= to_integer(unsigned(COUT)); 
 
 		if rising_edge(clk) then
 			if WEOUT = '1' then	
 				if osen = '1' then 
 					if (ch_outbipolarl(chan) + offsets(chan)) > 32767 then
 						if to_integer(signed(dout)) /= 32767 then
-							error <= '1';
+							err <= '1';
+							assert false
+								report "Offset enabled, output value incorrect"
+								severity error; 
 						else
-							error <= '0';
+							err <= '0';
 						end if; 
 					elsif  (ch_outbipolarl(chan) + offsets(chan)) < -32768 then
 						if to_integer(signed(dout)) /= -32768 then
-							error <= '1';
+							err <= '1';
+							assert false
+								report "Offset enabled, output value incorrect"
+								severity error; 
 						else
-							error <= '0';
+							err <= '0';
 						end if; 
 					else 
 						if to_integer(signed(dout)) /= 
 							(ch_outbipolarl(chan) + offsets(chan)) then
-							error <= '1';
+							err <= '1';
+							assert false
+								report "Offset enabled, output value incorrect"
+								severity error; 
 						else
-							error <= '0';
+							err <= '0';
 						end if; 
 					end if;  
 				else
 					if to_integer(signed(dout)) /=  ch_outbipolarl(chan)  then
-						error <= '1';
+							err <= '1';
+							assert false
+								report "Offset disabled, output value incorrect"
+								severity error; 
 					else
-						error <= '0';
+						err <= '0';
 					end if; 
 				end if; 
 			end if;

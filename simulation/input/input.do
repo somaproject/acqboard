@@ -6,7 +6,7 @@ vlib work
 vcom -93 -explicit ../../vhdl/input.vhd
 
 -- simulation entities
-vcom -93 -explicit ../ADC/ADC.vhd
+vcom -93 -explicit ../components/ADC/ADC.vhd
 vcom -93 -explicit inputtest.vhd
 
 

@@ -19,30 +19,33 @@ STIMULUS xsel_test.tbw Normal
 STIMULUS filter_test_testbench.vhd Normal
 STIMULUS rmac_test.tbw Normal
 STIMULUS clocks_test.tbw Normal
+STIMULUS control_test.tbw Normal
 DOCUMENT filter_test.xcf
 MODULE rmac.vhd
 MODSTYLE rmac Normal
-MODULE clocks.vhd
-MODSTYLE clocks Normal
-MODULE multiplier.xco
-MODSTYLE multiplier Normal
 MODULE filter_test.vhd
 MODSTYLE filter_test Normal
-MODULE hsel.vhd
-MODSTYLE hsel Normal
+MODULE rmacfsm.vhd
+MODSTYLE rmacfsm Normal
 MODULE xsel.vhd
 MODSTYLE xsel Normal
 MODULE input.vhd
 MODSTYLE input Normal
-MODULE rmacfsm.vhd
-MODSTYLE rmacfsm Normal
-DEPASSOC filter_test constraints.ucf SYSTEM
+MODULE multiplier.xco
+MODSTYLE multiplier Normal
+MODULE clocks.vhd
+MODSTYLE clocks Normal
+MODULE control.vhd
+MODSTYLE control Normal
+MODULE hsel.vhd
+MODSTYLE hsel Normal
+DEPASSOC filter_test constraints.ucf Normal
 [Normal]
 p_ModelSimSimRunTime_tb=xstvhd, spartan2e, Module VHDL Test Bench.t_MSimulatePostPlace&RouteVhdlModel, 1042005909, 1000us
 xilxSynthKeepHierarchy=xstvhd, spartan2e, Schematic.t_synthesize, 1042091876, True
 _SynthConstraintsFile=xstvhd, spartan2e, Schematic.t_synthesize, 1042616754, filter_test.xcf
 _SynthOptEffort=xstvhd, spartan2e, Schematic.t_synthesize, 1042151381, High
 [STATUS-ALL]
-clocks.ngcFile=WARNINGS,1043015553
+filter_test.ngcFile=WARNINGS,1044728520
 [STRATEGY-LIST]
 Normal=True

@@ -157,3 +157,5 @@ There are three things we'll need to change:
 5. Control
    Had to be modified as a result of the new EEPROM addrs. Note now that we use DATA[7:0] 
 
+
+Debug -- adding an extra mode. We're going to add a new "RAW" mode that will just take a single channel and output all of its 256 ksps. 

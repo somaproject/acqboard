@@ -9,3 +9,8 @@ Similarly, there will be readchan, which you invoke with
 x = readchan(filename, channelnum)
 
 and will do the same. 
+
+
+Oh, so we discover the IEEE papers on "coherent sampling" and similar topics. Will now read. In particular, "Frequency Domain Testing of ADCs" in the Spring, 1996 "IEEE Design & Test of Computer" (pp 64) looks really good. 
+
+Also, there's an IEEE standard on testing ADCs 

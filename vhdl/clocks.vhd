@@ -38,7 +38,7 @@ architecture Behavioral of clocks is
    signal div10b_o, div10b_l, div10b : std_logic := '0';
    signal div10al, div10all : std_logic := '0';
    signal outenable : std_logic := '0';
-   signal outsamplel, outbytel, clk8l, insamplel : std_logic := '0';
+   signal loutsample, loutbyte, lclk8, linsample : std_logic := '0';
 
 -- components
 	component dll_standard is
@@ -207,27 +207,21 @@ begin
 		   	outenable <= '1';
 		   end if; 
 		   
-		   	insamplel <= div10b;
-		   	outbytel <= div10all;
-             	outsamplel <= div5b; 
-         	   	clk8l <= div8c;  
+		   	linsample <= div10b;
+		   	loutbyte <= div10all;
+             	loutsample <= div5b; 
+         	   	lclk8 <= div8c;  
 		    
 		   if outenable = '1' then 
-		   	INSAMPLE <= insamplel;
-		   	OUTBYTE <= outbytel;
-             	OUTSAMPLE <= outsamplel; 
-         	   	CLK8 <= clk8l;  
+		   	INSAMPLE <= linsample;
+		   	OUTBYTE <= loutbyte;
+             	OUTSAMPLE <= loutsample; 
+         	   	CLK8 <= lclk8;  
 		   end if;
 		end if;
 	end process; 
 
-
-
-
-
-   
-
-    I2CCLK <= div8b;  
+      I2CCLK <= div8b;  
     
 
 

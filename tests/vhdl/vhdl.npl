@@ -12,25 +12,31 @@ DEVSPEED -6
 DEVSPEEDTIME 0
 FLOW XST VHDL
 FLOWTIME 0
+STIMULUS testdataout_test.tbw Normal
+STIMULUS testsamples_test.tbw Normal
 STIMULUS looptest_test.tbw Normal
 STIMULUS testdataout_testbench.vhd Normal
-STIMULUS testdataout_test.tbw Normal
+STIMULUS testsamples_testbench.vhd Normal
 MODULE encoder.xco
 MODSTYLE encoder Normal
 MODULE looptest.vhd
 MODSTYLE looptest Normal
 MODULE testdataout.vhd
 MODSTYLE testdataout Normal
+MODULE testsamples.vhd
+MODSTYLE testsamples Normal
 DEPASSOC looptest looptest.ucf Normal
 DEPASSOC testdataout constraints.ucf Normal
+DEPASSOC testsamples testsamples.ucf SYSTEM
 [Normal]
-p_ModelSimSimRunTime_tb=xstvhd, spartan2e, Module VHDL Test Bench.t_MSimulateBehavioralVhdlModel, 1042958654, 100ms
+p_ModelSimSimRunTime_tb=xstvhd, spartan2e, Module VHDL Test Bench.t_MSimulateBehavioralVhdlModel, 1043045114, 1000ms
 xilxBitgCfg_GenOpt_ASCIIFile=xstvhd, spartan2e, Implementation.t_bitFile, 1042845683, True
 xilxSynthKeepHierarchy=xstvhd, spartan2e, Schematic.t_synthesize, 1042841103, True
 [STATUS-ALL]
-looptest.ngcFile=WARNINGS,1042965244
-looptest.ngdFile=WARNINGS,1042965244
-testdataout.ngcFile=WARNINGS,1042965244
-testdataout.ngdFile=WARNINGS,1042965244
+looptest.ngcFile=WARNINGS,1043047821
+looptest.ngdFile=WARNINGS,1043047821
+testdataout.ngcFile=WARNINGS,1043047821
+testdataout.ngdFile=WARNINGS,1043047821
+testsamples.ngdFile=WARNINGS,1043047821
 [STRATEGY-LIST]
 Normal=True

@@ -30,6 +30,17 @@ begin
 	begin
 		if rising_edge(SCLK) then
 			rbits <= rbits(10*8-2 downto 0) & SIN;
+			-- i.e. rbits(79) == first bit shifted in
+			-- so ideally rbits looks like:
+			-- rbits(8*i+0) =  
+			-- rbits(8*i+1) = G0 
+			-- rbits(8*i+2) = G1 
+			-- rbits(8*i+3) = G2 
+			-- rbits(8*i+4) = A0 
+			-- rbits(8*i+5) = A1 
+			-- rbits(8*i+6) = INMUXA 
+			-- rbits(8*i+7) = INMUXB 
+
 		end if;
 	end process; 
 

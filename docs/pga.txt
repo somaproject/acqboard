@@ -1,0 +1,15 @@
+The shift registers are SN75LV595APWRs, which have independent shift and latch bits
+
+inputs are such that QA->QB, such that
+First bit shifted in will be QG
+last bit will be QA
+
+This maps to 
+0    INMUXB
+1    INMUXA
+2    A1
+3    A0
+4    G2
+5    G1
+6    G0
+7    X

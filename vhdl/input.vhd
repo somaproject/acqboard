@@ -20,9 +20,10 @@ entity input is
            COUT : out std_logic_vector(3 downto 0);
            WEOUT : out std_logic;
 		 	  OSC : in std_logic_vector(3 downto 0);
+			  OSCALL : in std_logic; 
 		     OSEN : in std_logic;
 		     OSWE : in std_logic; 
-		      OSD : in std_logic_vector(15 downto 0)
+		     OSD : in std_logic_vector(15 downto 0)
 		  		);
 
 end input;
@@ -459,16 +460,16 @@ begin
 		ce <= oswen(j) and oswes; 
 	  end generate; 	   	
 
-	oswen(0) <= '1' when osc = "0000" else '0';
-	oswen(1) <= '1' when osc = "0001" else '0';
-	oswen(2) <= '1' when osc = "0010" else '0';
-	oswen(3) <= '1' when osc = "0011" else '0';
-	oswen(4) <= '1' when osc = "0100" else '0';
-	oswen(5) <= '1' when osc = "0101" else '0';
-	oswen(6) <= '1' when osc = "0110" else '0';
-	oswen(7) <= '1' when osc = "0111" else '0';
-	oswen(8) <= '1' when osc = "1000" else '0';
-	oswen(9) <= '1' when osc = "1001" else '0';
+	oswen(0) <= '1' when OSC = "0000" or OSCALL = '1'  else '0';
+	oswen(1) <= '1' when OSC = "0001" or OSCALL = '1' else '0';
+	oswen(2) <= '1' when OSC = "0010" or OSCALL = '1' else '0';
+	oswen(3) <= '1' when OSC = "0011" or OSCALL = '1' else '0';
+	oswen(4) <= '1' when OSC = "0100" or OSCALL = '1' else '0';
+	oswen(5) <= '1' when OSC = "0101" or OSCALL = '1' else '0';
+	oswen(6) <= '1' when OSC = "0110" or OSCALL = '1' else '0';
+	oswen(7) <= '1' when OSC = "0111" or OSCALL = '1' else '0';
+	oswen(8) <= '1' when OSC = "1000" or OSCALL = '1' else '0';
+	oswen(9) <= '1' when OSC = "1001" or OSCALL = '1' else '0';
 
 
 

@@ -118,7 +118,7 @@ begin
 		  oswe <= '0';
 		  if newcmd = '1' then
 			case cmd is
-				when "0000" =>
+				when "0111" =>
 					ns <= modechk;
 				when "0001" =>
 					ns <= set_gain;
@@ -176,7 +176,7 @@ begin
 		  eaddrsel <= 0;
 		  edatasel <= '0'; 
 		  erw <= '1';
-		  een <= '1';
+		  een <= '0';
 		  gset <= '0';
 		  iset <= '0';
 		  fset <= '0';
@@ -276,7 +276,7 @@ begin
 		  eaddrsel <= 0;
 		  edatasel <= '0'; 
 		  erw <= '0';
-		  een <= '1';
+		  een <= '0';
 		  gset <= '0';
 		  iset <= '0';
 		  fset <= '0';
@@ -312,7 +312,7 @@ begin
 		  eaddrsel <= 1;
 		  edatasel <= '0'; 
 		  erw <= '0';
-		  een <= '1';
+		  een <= '0';
 		  gset <= '0';
 		  iset <= '0';
 		  fset <= '0';

@@ -60,21 +60,21 @@ begin
 		WE => gwe,
 		A => addr,
 		DI => g(0),
-		DO => LBIT(0));
+		DO => LBIT(6));
 
    gain_RAM_1: distRAM port map (
    		CLK => CLK,
 		WE => gwe,
 		A => addr,
 		DI => g(1),
-		DO => LBIT(1));
+		DO => LBIT(5));
 
    gain_RAM_2: distRAM port map (
    		CLK => CLK,
 		WE => gwe,
 		A => addr,
 		DI => g(2),
-		DO => LBIT(2));
+		DO => LBIT(4));
 
    filter_RAM_0: distRAM port map (
    		CLK => CLK,
@@ -88,21 +88,21 @@ begin
 		WE => fwe,
 		A => addr,
 		DI => f(1),
-		DO => LBIT(4));
+		DO => LBIT(2));
 
    input_RAM_0: distRAM port map (
    		CLK => CLK,
 		WE => iwe,
 		A => addr,
 		DI => i(0),
-		DO => LBIT(5));
+		DO => LBIT(1));
 
    input_RAM_1: distRAM port map (
    		CLK => CLK,
 		WE => iwe,	 
 		A => addr,
 		DI => i(1),
-		DO => LBIT(6));
+		DO => LBIT(0));
 
 
 
@@ -142,7 +142,7 @@ begin
 
 
    -- FSM for output
-   fsm: process(cs, gset, iset, pgareset, osel) is
+   fsm: process(cs, gset, iset, pgareset, fset, osel) is
    begin
    	case cs is
 		when none =>

@@ -1,0 +1,9 @@
+EEPROM data storage is somewhat complicated
+
+For each cycle, we always send:
+Write enable latch set
+a full two bytes
+
+Since we have 12 bits of address, we place the 11 input bits on the line and always have the LSB be zero. 
+
+We use the two-byte read and two-byte write seqence capability of the eeprom for both reads and writes. Never cross page boundary since we always start with LSB = 0

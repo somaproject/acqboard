@@ -2,5 +2,9 @@ Testbench to test command reading/writing on the acqboard.
 
 Commands are divided into two categories, those that write eeprom and those that send stuff out over shift regs. 
 
-We use test_PGA for decoding the SCLK/RCLK/SOUT stream, which we will test first. 
+We use test_PGA for decoding the SCLK/RCLK/SOUT stream, which we will test first.
+
+Create test_EEPROM to test eeprom capabilities. We can write to it, read from it.  
+
+For the test_EEPROM code, remember that the actual eerpom address =  eeprom_io address *2 because we're shifting the 11-bit input addrs to the right by one. 
 

@@ -39,3 +39,4 @@ An input FSM stores the data in the appropriate register sets.
 
 Keep in mind that INR needs to be cleared after every computation. 
 
+Note that, coming out of mode change, we'll need to reset the offsets. This is done by asserting OSCALL, which enables writing for all the offset pins. 

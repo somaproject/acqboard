@@ -26,23 +26,35 @@ architecture Behavioral of test_EEPROM is
 -- read and write values externally. 
 
 	signal areg: std_logic_vector(15 downto 0) := (others => '0'); 
-	signal do, di : std_logic_vector(7 downto 0) := (others => '0');
+	signal do, di : std_logic_vector(15 downto 0) := (others => '0');
 	signal ir : std_logic_vector(7 downto 0) := (others => '0'); 
 
    type storage_array is 
-   	array ( 0 to 4095) of std_logic_vector(7 downto 0);
+   	array ( 0 to 2048) of std_logic_vector(15 downto 0);
 
 	signal bitpos : integer := 0; 
 
 	signal writeenable : std_logic := '0'; 
-	 
+	
 begin
 		
-	 
+	process (CS, sck ) is
+	begin
+		if falling_edge(CS) then	
+			bitpos <= 0;
+		else
+			if rising_edge(sck) then
+				
+				if cs = '0' then
+					bitpos <= bitpos + 1;
+				end if; 
+			end if;
+		end if; 
+	end process;  
 				
 
 	process(SCK, ADDR, WE, DIN,  areg, CS) is
-		variable ram : storage_array := (others => X"00"); 
+		variable ram : storage_array := (others => X"0000"); 
 
 	begin
 
@@ -52,12 +64,6 @@ begin
 		--end if; 
 
 		if rising_edge(sck) then
-			if cs = '1' then
-				bitpos <= 0;
-			else
-				bitpos <= bitpos + 1;
-			end if; 
-		
 			-- instruction
 			if bitpos < 8 then
 				ir <=  ir(6 downto 0 ) & SI;
@@ -65,22 +71,22 @@ begin
 
 			-- address
 			if bitpos > 7 and bitpos < 24 then
-				areg <= areg(14 downto 0) & SI; 
+				areg(15-(bitpos-8)) <= SI; 
 			end if; 
 
-			if bitpos >23 and bitpos < 32 then 
-				SO <= do(7-(bitpos - 24)); 
+			if bitpos >23 and bitpos < 40 then 
+				SO <= do(15-(bitpos - 24)); 
 			end if; 
 
-			if bitpos >23 and bitpos < 32 then 
-				di(7-(bitpos - 24)) <= SI; 
+			if bitpos >23 and bitpos < 40 then 
+				di(15-(bitpos - 24)) <= SI; 
 			end if; 
 
 
 		end if; 
 
 		if rising_edge(WE) then
-			ram(addr) := std_logic_vector(to_signed(din, 16))
+			ram(addr) := std_logic_vector(to_signed(din, 16))	;
 		end if; 
 
 		if rising_edge(CS) then
@@ -95,6 +101,9 @@ begin
 			end if; 
 
 	  end if;
+
+
+
 			
 	end process; 
 

@@ -86,10 +86,10 @@ begin
 			   	  cnt <= 0;
 			   elsif cs = inccnt1 or cs = inccnt2 then
 			   	if cnt = 47 then 
-					cnt <= 0;
-				else
-			   	     cnt <= cnt + 1;
-				end if; 
+					   cnt <= 0;
+				   else
+			   	   cnt <= cnt + 1;
+				   end if; 
 			   end if;
 
 			   if cs = none then

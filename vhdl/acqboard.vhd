@@ -25,7 +25,7 @@ entity acqboard is
            FIBERIN : in std_logic;
            FIBEROUT : out std_logic;
            RESET : in std_logic;
-		 CLK8_OUT : out std_logic);
+		     CLK8_OUT : out std_logic);
 end acqboard;
 
 architecture Behavioral of acqboard is

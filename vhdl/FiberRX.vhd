@@ -102,7 +102,7 @@ begin
    
    end process clock;   
 
-   fsm : process(cs, ns, newpkt, err, kout, indata, chksumvalid) is
+   fsm : process(cs, ns, newpkt, err, kout, indata, chksumvalid, PENDING) is
    begin
    	case cs is
 		when none => 

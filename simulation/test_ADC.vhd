@@ -54,34 +54,39 @@ begin
   		if falling_edge(RESET) then
 		     SDOUT <= '0';	
 			  filedone <= '0';
-			  file_open(inputfile, filename, read_mode); 
-
+			  if filemode = '1' then
+			      file_open(inputfile, filename, read_mode); 
+			  end if; 
 			  
 		elsif CONVST'EVENT and CONVST = '0' then
 		     SDOUT <= '0';
 			BUSY <= '1' after 10 ns, '0' after 1.75 us; 
-			if not endfile(inputfile) then
-			   bitpos <= 31; 
-			   readline(inputfile, L);
-			   read(L, channelA);
-			   read(L, channelB);
+			if filemode = '1' then 
+				if not endfile(inputfile) then
+				   bitpos <= 31; 
+				   readline(inputfile, L);
+				   read(L, channelA);
+				   read(L, channelB);
 
-			   -- now we have two integers; we need to turn them into std_logic
+				   -- now we have two integers; we need to turn them into std_logic
 
-			   if FILEMODE = '1' then 
+
+
 				   channelA_bits <= conv_std_logic_vector(channelA, 16);
 				   channelB_bits <= conv_std_logic_vector(channelB, 16);
 					CHA_OUT <= channelA;
 					CHB_OUT <= channelB; 
-	   	   else
-				   channelA_bits <= conv_std_logic_vector(CHA_VALUE, 16);
-				   channelB_bits <= conv_std_logic_vector(CHB_VALUE, 16);
-			   end if; 				   	   	
 
+				else
+				   filedone <= '1';
+					file_close(inputfile);
+				end if; 
 			else
-			   filedone <= '1';
-				file_close(inputfile);
-			end if; 
+			  	 bitpos <= 31; 
+			   channelA_bits <= conv_std_logic_vector(CHA_VALUE, 16);
+			   channelB_bits <= conv_std_logic_vector(CHB_VALUE, 16);
+		   end if; 				   	   	
+
 		else
 	      if rising_edge(SCLK) then
 			if filedone = '0' and RESET = '0' then		

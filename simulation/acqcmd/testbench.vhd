@@ -98,9 +98,49 @@ ARCHITECTURE behavior OF testbench IS
 				  DIN : in integer; 
 				  WE : in std_logic);
 	end component;	
+   type intarray is array(0 to 9) of integer;
+	signal gains :  intarray := (others => 0); 
+	signal filters : intarray  := (others => 0);
+
+	signal error : std_logic := '0'; 
+
+	signal outvals : intarray := (others => 0); 
+
+	component test_deserialize is
+	    generic ( filename : string := "deserialize.output.dat"); 
+	    Port ( CLK8 : in std_logic;
+	           FIBEROUT : in std_logic;
+				  newframe : out std_logic; 
+				  kchar : out std_logic_vector(7 downto 0);
+				  cmdst : out std_logic_vector(7 downto 0);
+				  data : out std_logic_vector(159 downto 0);
+				  cmdid : out std_logic_vector(7 downto 0)		  			   
+				  );
+	end component;
+
+	signal decmdst, decmdid: std_logic_vector(7 downto 0) := (others => '0'); 
+	signal newframe : std_logic := '0'; 
+	signal deser_data : std_logic_vector(159 downto 0) := (others =>'0'); 
+	signal adcval : integer := 32768; 
+	component test_ADC is
+	    Generic (filename : string := "adcin.dat" ); 
+	    Port ( RESET : in std_logic;
+	           SCLK : in std_logic := '0';
+	           CONVST : in std_logic;
+	           CS : in std_logic;
+	           SDOUT : out std_logic;
+			 CHA_VALUE: in integer;
+			 CHB_VALUE: in integer;
+			 CHA_OUT : out integer;
+			 CHB_OUT : out integer; 
+			 FILEMODE: in std_logic; 
+			 BUSY: out std_logic; 
+			 INPUTDONE: out std_logic);
+	end component;
 
 
 BEGIN
+
 
 	uut: acqboard PORT MAP(
 		CLKIN => CLKIN,
@@ -152,10 +192,48 @@ BEGIN
 		DOUT => edout,
 		we => ewe); 
 
+
+	des : test_deserialize port map (
+		clk8 => clk8_out,
+		fiberout => fiberout,
+		newframe => newframe,
+		cmdst => decmdst,
+		cmdid => decmdid,
+		data=> deser_data,
+		kchar => open);  
+
+   process(deser_data) is
+	begin
+		for i in 0 to 9 loop
+		  	outvals(i) <= TO_INTEGER(signed(deser_data(i*8+15 downto i*8)));
+		end loop;
+	end process; 
+
+
+   adcs : for i in 0 to 4 generate
+		adc: test_ADC  port map (
+			RESET => RESET,
+			SCLK => ADCCLK,
+			CONVST => ADCCONVST,
+			CS => ADCCS,
+			SDOUT => ADCIN(i),
+			CHA_VALUE => adcval,
+			CHB_VALUE => adcval,
+			CHA_OUT => open,
+			CHB_OUT => open,
+			BUSY => open,
+			FILEMODE => '0',
+			INPUTDONE => open); 
+		end generate; 
+
+			 
+			
+			
+			
+
 	clkin <= not clkin after 15.625 ns;
 
 	reset <= '0' after 100 ns;
-
 	process (clkin) is
 	begin
 		if rising_edge(clkin)  then
@@ -164,6 +242,14 @@ BEGIN
 	end process;
 
 
+	process(bouts) is
+	begin
+		for i in 0 to 9 loop
+			gains(9-i) <= TO_INTEGER(unsigned(bouts(i*8+3 downto i*8+1)));
+			filters(9-i) <= TO_INTEGER(unsigned(bouts(i*8+5 downto i*8+4)));
+
+		end loop; 
+	end process; 
 
 	commands : process is
 	begin
@@ -180,7 +266,17 @@ BEGIN
 		sendcmd <= '0';  
 		wait until cmdpending = '0';
 	
-		eaddr <= 
+
+
+	   -- set offset value for chan 0, gain = 7
+		eaddr <= 519*2;
+		edin <= 255;
+		ewe <= '1';
+		
+		wait until rising_edge(clkin);
+		ewe <= '0'; 
+
+		-- set gain of chan 0 to 0x7
 		wait until syscnt = 3000;
 		
 		cmdid <= "0011";
@@ -191,6 +287,99 @@ BEGIN
 		wait until rising_edge(clkin);
 		sendcmd <= '0';  
 		wait until cmdpending = '0';
+
+		wait until decmdid(4 downto 1) = "0011"; 
+
+		if gains(0) = 7 then 
+			error <= '0';
+		else	
+			error <= '1'; 
+		end if; 
+
+	   -- set highpass filter for channel 7 to value 2
+		cmdid <= "0100";
+		cmd <= "0011"; 
+		cmddata0 <= X"06"; 
+		cmddata1 <= X"02";
+		sendcmd <= '1'; 
+		wait until rising_edge(clkin);
+		sendcmd <= '0';  
+		wait until cmdpending = '0';
+		
+		wait until decmdid(4 downto 1) = "0100"; 
+
+		if filters(6) /= 2 then 
+			error <= '1';
+		end if; 
+
+	   -- set mode = 1 (offset disable)
+		cmdid <= "0101";
+		cmd <= "0111"; 
+		cmddata0 <= X"01"; 
+		cmddata1 <= X"00";
+		sendcmd <= '1'; 
+		wait until rising_edge(clkin);
+		sendcmd <= '0';  
+		wait until cmdpending = '0';
+		
+		wait until decmdid(4 downto 1) = "0101"; 
+		wait until rising_edge(clkin);
+		if decmdst /= X"01" then 
+			error <= '1';
+		end if; 
+
+	   -- write offset value
+		cmdid <= "0110";
+		cmd <= "0100"; 
+		cmddata0 <= X"04"; 
+		cmddata1 <= X"03";
+		cmddata2 <= X"12";
+		cmddata3 <= X"34";
+
+		sendcmd <= '1'; 
+		wait until rising_edge(clkin);
+		sendcmd <= '0';  
+		wait until cmdpending = '0';
+		
+		wait until decmdid(4 downto 1) = "0110"; 
+		wait until rising_edge(clkin);
+		eaddr <= (512 + 4*8+3)*2;
+		wait until rising_edge(clkin);
+
+	   -- set mode = 0 (normal)
+		cmdid <= "0111";
+		cmd <= "0111"; 
+		cmddata0 <= X"00"; 
+		cmddata1 <= X"00";
+		sendcmd <= '1'; 
+		wait until rising_edge(clkin);
+		sendcmd <= '0';  
+		wait until cmdpending = '0';
+		
+		wait until decmdid(4 downto 1) = "0111"; 
+		wait until rising_edge(clkin);
+		if decmdst /= X"01" then 
+			error <= '1';
+		end if; 
+		
+		-- set gain of channel 4 to 3
+
+		cmdid <= "0011";
+		cmd <= "0001"; 
+		cmddata0 <= X"04"; 
+		cmddata1 <= X"03";
+		sendcmd <= '1'; 
+		wait until rising_edge(clkin);
+		sendcmd <= '0';  
+		wait until cmdpending = '0';
+
+		wait until decmdid(4 downto 1) = "0011"; 
+
+		if gains(0) = 7 then 
+			error <= '0';
+		else	
+			error <= '1'; 
+		end if; 
 
 			
 	end process commands; 

@@ -4,8 +4,8 @@ PROJECT vhdl
 DESIGN vhdl Normal
 DEVFAM spartan2e
 DEVFAMTIME 0
-DEVICE xc2s50e
-DEVICETIME 1057175311
+DEVICE xc2s100e
+DEVICETIME 1057602409
 DEVPKG tq144
 DEVPKGTIME 1055894492
 DEVSPEED -6
@@ -62,8 +62,6 @@ MODULE PGAload.vhd
 MODSTYLE pgaload Normal
 MODULE overflow.vhd
 MODSTYLE overflow Normal
-MODULE offset.vhd
-MODSTYLE offset Normal
 MODULE acqboard.vhd
 MODSTYLE acqboard Normal
 MODULE clocks.vhd
@@ -78,6 +76,7 @@ MODULE RMAC.vhd
 MODSTYLE rmac Normal
 DEPASSOC acqboard acqboard.ucf Normal
 DEPASSOC rmac RMAC.ucf Normal
+DEPASSOC input input.ucf SYSTEM
 DEPASSOC multiplier multiplier.ucf Normal
 [Normal]
 p_ModelSimSimRunTime_tb=xstvhd, spartan2e, Module VHDL Test Bench.t_MSimulateBehavioralVhdlModel, 1056480462, 100us

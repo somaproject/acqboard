@@ -66,7 +66,6 @@ BEGIN
 	for i in 0 to 31 loop
 		sclk <= '1' after 10 ns, '0' after 20 ns;
 		wait for 30 ns; 
-
 	end loop;  
 
 	

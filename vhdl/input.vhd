@@ -34,7 +34,7 @@ architecture Behavioral of input is
    signal ladccs, lconvst, lsclk : std_logic := '0';
    signal sdinl : std_logic_vector(4 downto 0) := (others => '0');
    signal convwait : integer range 0 to 150 := 0; 
-   signal bitaddr: std_logic_vector(3 downto 0) := (others => '0');
+   signal bitaddr: std_logic_vector(3 downto 0) := (others => '1');
 
 
    -- bit-serial adder signals
@@ -42,7 +42,7 @@ architecture Behavioral of input is
    signal douta, doutb : std_logic_vector(4 downto 0) := (others => '0');
    signal chan : std_logic_vector(3 downto 0) := (others => '0');
    signal  spen, inr : std_logic := '0';
-   signal ina, inb : std_logic := '0';
+   signal ina, inb , da, db: std_logic := '0';
    signal suma, sumb : std_logic := '0';
    signal cina, cinb, couta, coutb : std_logic := '0';
    signal osa, osb: std_logic := '0';
@@ -53,7 +53,7 @@ architecture Behavioral of input is
    
       
    -- output state machine
-   type ostates is (none, decbitaddr, nextchan1, nextchan2);
+   type ostates is (none, oneinc, incbitaddr, extraadd, nextchan1, nextchan2);
    signal ocs, ons : ostates := none;
 
    -- input state machine
@@ -275,14 +275,9 @@ begin
 
 
 		    -- output bit counter
-		    if inr = '1' then
-		    	  bitaddr <= (others => '1');
-		    else
-		       if ocs = decbitaddr then
-			  	 bitaddr <= bitaddr - 1;
- 			  end if;
-		    end if; 
-
+			       if ocs = incbitaddr or ocs = oneinc then
+				  	 bitaddr <= bitaddr + 1;
+	 			  end if; 
 		    -- carry registers for bit-serial math
 		    if inr = '1' then 	
 		    	  cina <= '0';
@@ -319,25 +314,34 @@ begin
 	end process fulladders;    
     			
     -- Output : general signals
-	ina <= douta(0) when chan(3 downto 1) = "000" else
+	da <= douta(0) when chan(3 downto 1) = "000" else
 		  douta(1) when chan(3 downto 1) = "001" else
 		  douta(2) when chan(3 downto 1) = "010" else
 		  douta(3) when chan(3 downto 1) = "011" else
 		  douta(4); 
-	inb <= doutb(0) when chan(3 downto 1) = "000" else
+	db <= doutb(0) when chan(3 downto 1) = "000" else
 		  doutb(1) when chan(3 downto 1) = "001" else
 		  doutb(2) when chan(3 downto 1) = "010" else
 		  doutb(3) when chan(3 downto 1) = "011" else
 		  doutb(4);
+
+	ina <= (not da) when bitaddr = "1111" else da;
+	inb <= (not db) when bitaddr = "1111" else db; 
+
 		   
 	--Output : overflow calculatons
-	outsel <= "00" when suma = pda(15) and chan(0) = '0' else
-		"10" when sumb = pdb(15) and chan(0) = '1' else
-		"01" when (suma = '1' and pda(15) = '0') or
-				(sumb = '1' and pdb(15) = '0') else
-		"11" when (suma = '0' and pda(15) = '1') or
-				(sumb = '0' and pdb(15) = '1') else
-		"00";
+	outsel <= "00" when ((ina = not osa) or 
+					 (ina = osa and ina = pda(15))) 	
+					 and chan(0) = '0' else
+ 			"01" when ((inb = not osb) or 
+					 (inb = osb and inb = pdb(15))) 	
+					 and chan(0) = '1' else
+			"10" when ((ina = '0' and osa = '0' and pda(15) = '1') or
+					 (inb = '0' and osb = '0' and pdb(15) = '1')) else
+			"11" when ((ina = '1' and osa = '1' and pda(15) = '0') or
+					 (inb = '1' and osb = '1' and pdb(15) = '0')) else
+
+		     "00";
  
 	DOUT <= pda when outsel = "00" else
 		   pdb when outsel = "01" else
@@ -347,7 +351,7 @@ begin
 	COUT <= chan; 
 
 	-- Output : FSM
-	outfsm : process(ocs, INSAMPLE, outsel, chan ) is
+	outfsm : process(ocs, INSAMPLE, outsel, chan, bitaddr ) is
 	begin
 		case ocs is
 			when none => 
@@ -355,42 +359,52 @@ begin
 				WEOUT <= '0';
 				adden <= '0';
 				if INSAMPLE = '1' then
-				   ons <= decbitaddr;
+				   ons <= oneinc;
 				else
 					ons <= none; 
-				end if; 
-			when decbitaddr => 
+				end if;
+			when oneinc => 
+				inr <= '0';
+				WEOUT <= '0';
+				adden <= '0'; 
+				ons <= incbitaddr;		
+			when incbitaddr => 
 				inr <= '0';
 				WEOUT <= '0';
 				adden <= '1'; 
-				if bitaddr = "0000" then
-				   ons <= nextchan1;
+				if bitaddr = "1110" then
+				   ons <= extraadd;
 				else
-					ons <= decbitaddr; 
-				end if; 
+					ons <= incbitaddr; 
+				end if;
+			when extraadd => 
+				inr <= '0';
+				WEOUT <= '0';
+				adden <= '1'; 
+				ons <= nextchan1;
 			when nextchan1 => 
 				inr <= '0';
 				WEOUT <= '1';
 				adden <= '0'; 
 				ons <= nextchan2;
 			when nextchan2 => 
-				inr <= '1';
+				inr <= '0';
 				WEOUT <= '1';
 				adden <= '0'; 
 				if chan = "1001" then
 				   ons <= none;
 				else
-					ons <= decbitaddr; 
+					ons <= oneinc; 
 				end if; 		 
 			when others =>
-				inr <= '1';
+				inr <= '0';
 				WEOUT <= '0';
 				adden <= '0';
 		end case; 
 	end process outfsm; 
 	
 	-- Offset : clock portion
-	offsetclock: process(CLK, RESET) is 
+	offsetclock: process(CLK, RESET, oscs) is 
 	begin
 	   if RESET = '1' then
 	   	oscs <= none;
@@ -412,7 +426,9 @@ begin
     offset_registers : for j in 0 to 9 generate
     	   signal ce: std_logic := '0'; 
 	   begin
-		osreg: SRL16E port map (
+		osreg: SRL16E generic map (
+			INIT => X"0000")
+			port map (
 			D => osin,
 			CE => ce,
 			CLK => CLK,
@@ -435,24 +451,24 @@ begin
 	oswen(8) <= '1' when osc = "1000" else '0';
 	oswen(9) <= '1' when osc = "1001" else '0';
 
-	osdin <= (not osd(15)) & osd(14 downto 0);
 
-	osin <= osdin(0) when osinbitsel = "0000" else
-		   osdin(1) when osinbitsel = "0001" else
-		   osdin(2) when osinbitsel = "0010" else
-		   osdin(3) when osinbitsel = "0011" else
-		   osdin(4) when osinbitsel = "0100" else
-		   osdin(5) when osinbitsel = "0101" else
-		   osdin(6) when osinbitsel = "0110" else
-		   osdin(7) when osinbitsel = "0111" else
-		   osdin(8) when osinbitsel = "1000" else
-		   osdin(9) when osinbitsel = "1001" else
-		   osdin(10) when osinbitsel = "1010" else
-		   osdin(11) when osinbitsel = "1011" else
-		   osdin(12) when osinbitsel = "1100" else
-		   osdin(13) when osinbitsel = "1101" else
-		   osdin(14) when osinbitsel = "1110" else
-		   osdin(15);
+
+	osin <= osd(0) when osinbitsel = "0000" else
+		   osd(1) when osinbitsel = "0001" else
+		   osd(2) when osinbitsel = "0010" else
+		   osd(3) when osinbitsel = "0011" else
+		   osd(4) when osinbitsel = "0100" else
+		   osd(5) when osinbitsel = "0101" else
+		   osd(6) when osinbitsel = "0110" else
+		   osd(7) when osinbitsel = "0111" else
+		   osd(8) when osinbitsel = "1000" else
+		   osd(9) when osinbitsel = "1001" else
+		   osd(10) when osinbitsel = "1010" else
+		   osd(11) when osinbitsel = "1011" else
+		   osd(12) when osinbitsel = "1100" else
+		   osd(13) when osinbitsel = "1101" else
+		   osd(14) when osinbitsel = "1110" else
+		   osd(15);
 
      osa <= od(0) when chan(3 downto 1) = "000" else
 		  od(2) when chan(3 downto 1) = "001" else

@@ -103,26 +103,15 @@ architecture Behavioral of acqboard is
 	           CONVST : out std_logic;
 	           ADCCS : out std_logic;
 	           SCLK : out std_logic;
-	           SIN : in std_logic_vector(4 downto 0);
-	           DATA : out std_logic_vector(15 downto 0);
-	           CHAN : out std_logic_vector(3 downto 0);
-	           WE : out std_logic);
-
-	end component;
-
-	component offset is
-	    Port ( CLK : in std_logic;				   
-	           DIN : in std_logic_vector(15 downto 0);
-			 DOUT : out std_logic_vector(15 downto 0);
-			 CIN : in std_logic_vector(3 downto 0);
-			 COUT : out std_logic_vector(3 downto 0);
-			 RESET : in std_logic; 
-			 WEIN : in std_logic;
-			 WEOUT : out std_logic; 
+	           SDIN : in std_logic_vector(4 downto 0);
+	           DOUT : out std_logic_vector(15 downto 0);
+	           COUT : out std_logic_vector(3 downto 0);
+	           WEOUT : out std_logic;
 			 OSC : in std_logic_vector(3 downto 0);
-			 OSD : in std_logic_vector(15 downto 0);
-			 OSWE : in std_logic;
-			 OSEN : in std_logic);
+			 OSEN : in std_logic;
+			 OSWE : in std_logic; 
+			 OSD : in std_logic_vector(15 downto 0)
+			 );
 
 	end component;
 
@@ -286,30 +275,20 @@ begin
 			I2CCLK => i2cclk);
 
     input_inst : input port map (
-			CLK => clk,
+    			CLK => clk,
 			INSAMPLE => insample,
-			RESET => RESET,
+			RESET => reset,
 			CONVST => ADCCONVST,
 			ADCCS => ADCCS,
-			SCLK => ADCCLK, 
-			SIN => ADCIN,
-			DATA => din,
-			CHAN => cin,
-			WE => wein);
-	
-	offset_inst : offset port map (
-			CLK => clk,
-			DIN => din,
-			DOUT => dout,
-			CIN => cin,
+			SCLK => ADCCLK,
+			SDIN => ADCIN,
+			DOUT => dout, 
 			COUT => cout,
-			RESET => RESET,
-			WEIN => wein,
 			WEOUT => weout,
 			OSC => pgachan,
-			OSD => edout,
+			OSEN => osen,
 			OSWE => oswe,
-			OSEN => osen);
+			OSD => edout); 
 	
 	samplebuffer_inst : samplebuffer port map (
 			CLK => clk,

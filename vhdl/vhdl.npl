@@ -25,12 +25,16 @@ MODULE rmac.vhd
 MODSTYLE rmac Normal
 MODULE filter_test.vhd
 MODSTYLE filter_test Normal
+MODULE deserializer.vhd
+MODSTYLE deserializer Normal
 MODULE rmacfsm.vhd
 MODSTYLE rmacfsm Normal
 MODULE xsel.vhd
 MODSTYLE xsel Normal
 MODULE input.vhd
 MODSTYLE input Normal
+MODULE decode8b10b.xco
+MODSTYLE decode8b10b Normal
 MODULE multiplier.xco
 MODSTYLE multiplier Normal
 MODULE clocks.vhd
@@ -46,6 +50,7 @@ xilxSynthKeepHierarchy=xstvhd, spartan2e, Schematic.t_synthesize, 1042091876, Tr
 _SynthConstraintsFile=xstvhd, spartan2e, Schematic.t_synthesize, 1042616754, filter_test.xcf
 _SynthOptEffort=xstvhd, spartan2e, Schematic.t_synthesize, 1042151381, High
 [STATUS-ALL]
-filter_test.ngcFile=WARNINGS,1044728520
+deserializer.ngcFile=WARNINGS,1044729951
+filter_test.ngcFile=WARNINGS,1044729951
 [STRATEGY-LIST]
 Normal=True

@@ -1381,6 +1381,126 @@ Based on this, we're going to push out a new acqboard using these as
 the voltage references. <br>
 <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">6 April
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+Okay, so now we're using the new Maxim voltage references which should
+have a super-low voltage noise; we've got more low-pass filters and
+buffers than you can shake a stick at. We're <span
+ style="font-style: italic;">just</span> using Vos directly into the
+ADC from the buffer. Only one ADC, recording from A1, we get: <br>
+<br>
+<img alt="" src="results/20050406/initial.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+*sigh* <br>
+<br>
+Added a LPF on the output of the voltage reference prior to the ADC
+input buffers using a 10k resistor and co-opting the 10uF tantalum; no
+difference. <br>
+<br>
+<br>
+What the heck could the problem be? This is -so- frustrating.<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">7 April
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+Using the Tektronix differential probe, measuring the output we get the
+following noise bandwidths (p-p). Assuming noise is zero-mean white
+gaussian, the variances will add; let's also assume that pp = 6 *
+stddev. First number is measured peak-to-peak, second is calculated
+variance. <br>
+<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">BW<br>
+      </td>
+      <td style="vertical-align: top;">None (probes shorted)<br>
+      </td>
+      <td style="vertical-align: top;">VREF (After hacked-on LPF)<br>
+      </td>
+      <td style="vertical-align: top;">Vos<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">1k<br>
+      </td>
+      <td style="vertical-align: top;">30 uV pp (25uV^2)<br>
+      </td>
+      <td style="vertical-align: top;">40 uV (44uV^2)<br>
+      </td>
+      <td style="vertical-align: top;">48uV (64uV^2)<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">3k<br>
+      </td>
+      <td style="vertical-align: top;">32 uV (28uV^2)<br>
+      <br>
+      </td>
+      <td style="vertical-align: top;">81 uV (180uV^2)<br>
+      </td>
+      <td style="vertical-align: top;">87uV (210uV^2)<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">100k<br>
+      </td>
+      <td style="vertical-align: top;">90 uV (225uV^2)<br>
+      </td>
+      <td style="vertical-align: top;">142 uV (560uV^2)<br>
+      </td>
+      <td style="vertical-align: top;">239uV (1590uV^2)<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">1 MHz<br>
+      </td>
+      <td style="vertical-align: top;">313 uV (2720uV^2)<br>
+      </td>
+      <td style="vertical-align: top;">500 uV (6940uV^2)<br>
+      </td>
+      <td style="vertical-align: top;">1770uV (87025uV^2)<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+Given that we're measuring a stddev on our ADC-captured voltage of 120
+uV (var = 14400 uV^2).<br>
+<br>
+Replace C4 with 1.0 uF ceramic. Caused no difference in measured std
+dev. <br>
+<br>
+I added a 20 ohm-3800pf LPF as suggested in the app note to the very
+front of the ADC. <br>
+<br>
+"Whoa", that gave us our best response yet: <br>
+<img alt="" src="results/20050407/with-lpf-at-front.png"
+ style="width: 600px; height: 450px;"><br>
+Rock on. That also suggests very strongly that a large part of the
+noise problem was an artifact of the VOS itself. <br>
+<br>
+<span style="text-decoration: underline;"><span
+ style="font-weight: bold;">8 April 2005</span></span><br>
+So the real LPF coupled with a 20-ohm-3800pF LPF doesn't get better
+than -50 dB THD+N; I'm going to be severe and try an 0.1uF cap instead.
+No effect. <br>
+<br>
+However, THD+N measurements using the ATS-2 are much improved; in
+particular: <br>
+<img alt="" src="results/20050408/thd.png"
+ style="width: 640px; height: 608px;"><br>
+<br>
+<br>
+<br>
+<br>
+God that's ugly. Basically it says that we do better than -80 dB THD+N
+below 1.5 kHz, but above that we get as high as -55 dB. Again, this is
+-with- the extra low-pass filter. And also keep in mind that these
+numbers disagree with our home-grown THD+N calculations. <br>
 <br>
 <br>
 </body>

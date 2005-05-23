@@ -1,273 +1,54 @@
-info x 266 510 0 0 0 0 0 0 0 0 0 0 0 0 0 0 VHDLvhdl_genericverilog_generic
-col x 332 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-radix x 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-entity name 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 RMAC
-term mark 229 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-vlib save 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 LIBRARY  IEEE;
-USE IEEE.STD_LOGIC_1164.ALL;
-USE IEEE.STD_LOGIC_ARITH.ALL;
-USE IEEE.STD_LOGIC_UNSIGNED.ALL;
-
-var add 1 0 0 226 12 17 332 15624 7812 7812 3000 7000 0 0 0 0 CLK2Xinstd_logicRISING_EDGECLK2X
-var add 2 15 0 228 13 13 332 15624 7812 7812 3000 7000 0 0 0 0 Xinstd_logic_vectorRISING_EDGECLK2X
-var add 4 21 0 228 15 13 332 15624 7812 7812 3000 7000 0 0 0 0 Hinstd_logic_vectorRISING_EDGECLK2X
-var add 6 6 0 228 17 17 332 15624 7812 7812 3000 7000 0 0 0 0 XBASEinstd_logic_vectorRISING_EDGECLK2X
-var add 7 31 0 226 18 20 332 15624 7812 7812 3000 7000 0 0 0 0 STARTMACinstd_logicRISING_EDGECLK2X
-var add 8 31 0 226 19 13 332 15624 7812 7812 3000 7000 0 0 0 0 RESETinstd_logicRISING_EDGECLK2X
-var add 3 6 0 228 14 14 332 15624 7812 7812 3000 7000 0 0 0 0 XAoutstd_logic_vectorRISING_EDGECLK2X
-var add 5 6 0 228 16 14 332 15624 7812 7812 3000 7000 0 0 0 0 HAoutstd_logic_vectorRISING_EDGECLK2X
-var add 9 15 0 228 20 13 332 15624 7812 7812 3000 7000 0 0 0 0 Youtstd_logic_vectorRISING_EDGECLK2X
-vdone xxx 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-npos xxx 110 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-cell fill 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0000000000000000
-cell fill 2 68 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1000000000000000
-cell fill 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0000000000000000000000
-cell fill 3 68 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1000000000000000000000
-cell fill 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0000000
-cell fill 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-cell fill 5 48 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
-cell fill 5 52 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-cell fill 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
-cell fill 6 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-time info 50 50 3000 7000 7812 7812 1 1 0 0 0 0 0 0 0 0 psCLK2X
-font save -14 0 400 49 0 0 0 0 0 0 0 0 0 0 0 0 Times New Roman
-src mod 0 3654797072 29570351 0 0 0 0 0 0 0 0 0 0 0 0 0 RMAC.vhd
-utd false 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-cellenab on 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-grid on 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-com add 1 0 2968 25935 11 0 -67 0 0 0 0 0 0 0 0 0 Waveform created by
-HDL Bencher 5.1i
-Source = RMAC.vhd
-Tue Jun 17 20:28:46 2003
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logic_vectorVECTORDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-type info 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 std_logicBITDOWNTO
-opt vhdl87 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-NumClocks x 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-clock_1 name 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 CLK2X
+version 3
+RMAC.vhd
+RMAC
+VHDL
+VHDL
+RMAC_test.xwv
+Clocked
+-
+-
+340000000
+ps
+GSR:false
+PRLD:false
+100000000
+CLOCK_LIST_BEGIN
+CLK2X
+7812000000
+7812000000
+3000000000
+7000000000
+0
+RISING
+CLOCK_LIST_END
+SIGNAL_LIST_BEGIN
+X
+CLK2X
+H
+CLK2X
+XBASE
+CLK2X
+STARTMAC
+CLK2X
+RESET
+CLK2X
+XA
+CLK2X
+HA
+CLK2X
+Y
+CLK2X
+SIGNAL_LIST_END
+SIGNALS_NOT_ON_DISPLAY
+XA_DIFF
+HA_DIFF
+Y_DIFF
+SIGNALS_NOT_ON_DISPLAY_END
+MARKER_LIST_BEGIN
+MARKER_LIST_END
+MEASURE_LIST_BEGIN
+MEASURE_LIST_END
+SIGNAL_ORDER_BEGIN
+SIGNAL_ORDER_END
+-X-X-X-
+NOTE: This file was converted from the Granite version

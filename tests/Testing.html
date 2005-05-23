@@ -1391,7 +1391,7 @@ buffers than you can shake a stick at. We're <span
 ADC from the buffer. Only one ADC, recording from A1, we get: <br>
 <br>
 <img alt="" src="results/20050406/initial.png"
- style="width: 600px; height: 450px;"><br>
+ style="width: 600px; height: 450px;">2<br>
 <br>
 *sigh* <br>
 <br>
@@ -1502,6 +1502,50 @@ below 1.5 kHz, but above that we get as high as -55 dB. Again, this is
 -with- the extra low-pass filter. And also keep in mind that these
 numbers disagree with our home-grown THD+N calculations. <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">23 May 2005</span><br
+ style="font-weight: bold; text-decoration: underline;">
 <br>
+Analog acqboard results based on my own sine -fitting 2algorithm using
+scipy:<br>
+<table style="text-align: left; width: 354px; height: 112px;" border="1"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">freq<br>
+      </td>
+      <td style="vertical-align: top;">THD+N<br>
+      </td>
+      <td style="vertical-align: top;">Amp<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">1 kHz<br>
+      </td>
+      <td style="vertical-align: top;">-83 dB<br>
+      </td>
+      <td style="vertical-align: top;">.99<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">5 kHz<br>
+      </td>
+      <td style="vertical-align: top;">-73 dB<br>
+      </td>
+      <td style="vertical-align: top;">.97<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">10kHz <br>
+      </td>
+      <td style="vertical-align: top;">-63 dB<br>
+      </td>
+      <td style="vertical-align: top;">.94<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+This is depressing, and I'm really quite unsure why it is the case. <br>
 </body>
 </html>

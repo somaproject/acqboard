@@ -39,16 +39,21 @@ def findlsq(p0, x, t):
 
     
 def main():
-    N = 100000
+    RN = 100000
     fs = 256000.0
     r = readacq.RawFile('/home/jonas/test.dat');
-    x = r.read(N);
+    xin = r.read(RN);
 
-    x = x/32768.0
+    xin = xin/32768.0
+    hlen = 120 
+    h = signal.remez(hlen, r_[0, 0.1, 0.15, 0.5], r_[1.0, 0.0])
+    xh = signal.convolve(h, xin)
+    x = xh[hlen:(RN-hlen)]
 
-    p0 = [0.99, 8000.0, 0.0, mean(x)];
+    # phase calculation 
+    p0 = [0.93, 10000.0, 2.0, mean(x)];
 
-    t = r_[0.0:N]/fs
+    t = r_[0.0:len(x)]/fs
 
     plsq = findlsq(p0, x, t);
 

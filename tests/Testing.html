@@ -1546,6 +1546,28 @@ scipy:<br>
 </table>
 <br>
 <br>
-This is depressing, and I'm really quite unsure why it is the case. <br>
+This is depressing, and I'm really quite unsure why it is the case.<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">24 May 2005</span><br
+ style="font-weight: bold; text-decoration: underline;">
+<br>
+I'm going to solder up another ADC and attempt to measure the&nbsp;
+THD+N without the AA filter. <br>
+<br>
+If we just take analog input from the SRS signal generator directly
+into A1.B, we get -71 dB THD+N across the spectrum; however if we
+FIR-filter we get -83 dB.&nbsp; Sadly, FIR-filtering the output of the
+AA filter doesn't help at all. <br>
+<br>
+What the hell -- now the data sheet for the AD7655 says the minimum
+input reference voltage is 2.3V. Also, the AD7654 looks to be a
+slightly better part. I sent e-mail to AD asking if my reference
+voltage being out of spec might be causing problems, and if I could
+also just use the 7654 as a drop-in replacement. <br>
+<br>
+<br>
+I ordered samples of both the 2.5V regulator and the new ADC to try and
+use on our acqboard. <br>
+<span style="font-weight: bold;"><span style="font-weight: bold;"></span></span><br>
 </body>
 </html>

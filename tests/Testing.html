@@ -1329,6 +1329,8 @@ This is ADC2 measuring vos using our custom ADC VOS measurement where
 we first go through a 16k ohm 10uF LPF. Top is A3 where Vos directly
 connects to ADC; bottom is Vos through AD8513:<br>
 <br>
+Real per-chan cost for relevant quantity<br>
+6.85<br>
 <img alt="" src="results/20050322/Vos-custom1.png"
  style="width: 600px; height: 450px;"><br>
 <br>
@@ -1371,6 +1373,8 @@ For Vos With and Without AD8513, which is really awesome. <br>
 <br>
 Now, we'll try with both reference and Vos as AD780s:<br>
 <br>
+Real per-chan cost for relevant quantity<br>
+6.85<br>
 <img alt="" src="results/20050323/dual-chan.AD780-as-both.png"
  style="width: 600px; height: 450px;"><br>
 <br>
@@ -1487,7 +1491,7 @@ noise problem was an artifact of the VOS itself. <br>
  style="font-weight: bold;">8 April 2005</span></span><br>
 So the real LPF coupled with a 20-ohm-3800pF LPF doesn't get better
 than -50 dB THD+N; I'm going to be severe and try an 0.1uF cap instead.
-No effect. <br>
+No effect. oss the board the AD8028 is the su<br>
 <br>
 However, THD+N measurements using the ATS-2 are much improved; in
 particular: <br>
@@ -1565,9 +1569,164 @@ slightly better part. I sent e-mail to AD asking if my reference
 voltage being out of spec might be causing problems, and if I could
 also just use the 7654 as a drop-in replacement. <br>
 <br>
-<br>
 I ordered samples of both the 2.5V regulator and the new ADC to try and
 use on our acqboard. <br>
 <span style="font-weight: bold;"><span style="font-weight: bold;"></span></span><br>
+<span style="font-weight: bold; text-decoration: underline;">4 June 2005</span><br
+ style="font-weight: bold; text-decoration: underline;">
+<br>
+Have new voltage references, going to replace them on the acqboard and
+begin testing thd+n information; still haven't heard back from chris at
+AD -- those people have really extreme latency. <br>
+<br>
+Nope, didn't work; still get -60 THD+N on the 10kHz side of things
+through A1. Damn it.<br>
+<br>
+I guess I'll try A2? <br>
+<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">6 June 2005</span><br
+ style="font-weight: bold; text-decoration: underline;">
+<br>
+Well, here we are. I either need to change the ADC or change the AAs.
+Given the effort we've put into designing the AA filter, I'd like to
+avoid changing them, and I just don't think we could get RRIO OAs that
+have low enough distortion. <br>
+<br>
+ADC options<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">Part<br>
+      </td>
+      <td style="vertical-align: top;">kSPS<br>
+      </td>
+      <td style="vertical-align: top;">ENOB to 20 kHz<br>
+      </td>
+      <td style="vertical-align: top;">Real per-chan cost for relevant
+quantity<br>
+      </td>
+      <td style="vertical-align: top;">Notes<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">AD7655<br>
+      </td>
+      <td style="vertical-align: top;">500<br>
+      </td>
+      <td style="vertical-align: top;">14.0<br>
+      </td>
+      <td style="vertical-align: top;">6.85<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">AD7687<br>
+      </td>
+      <td style="vertical-align: top;">250<br>
+      </td>
+      <td style="vertical-align: top;">95dB (S/(N+D))<br>
+      </td>
+      <td style="vertical-align: top;">9.90<br>
+      </td>
+      <td style="vertical-align: top;">Fully differential<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">AD7685ARM<br>
+      </td>
+      <td style="vertical-align: top;">250<br>
+      </td>
+      <td style="vertical-align: top;">93.5<br>
+      </td>
+      <td style="vertical-align: top;">8.650<br>
+      </td>
+      <td style="vertical-align: top;">pseudo-differential<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">AD7685BRM<br>
+      </td>
+      <td style="vertical-align: top;">250<br>
+      </td>
+      <td style="vertical-align: top;">93.5<br>
+      </td>
+      <td style="vertical-align: top;">8.85<br>
+      </td>
+      <td style="vertical-align: top;">pseudo-differential<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">AD7686BRM<br>
+      </td>
+      <td style="vertical-align: top;">500<br>
+      </td>
+      <td style="vertical-align: top;">92<br>
+      </td>
+      <td style="vertical-align: top;">13.50<br>
+      </td>
+      <td style="vertical-align: top;">pseudo-differentail<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+So, the question is, is it worth it to use the AD7686 part, given that
+each one is $13.50? This will potentially add $800 to the cost of the
+system. Ummm, no.&nbsp; <br>
+<br>
+So our current solution is:<br>
+<ul>
+  <li>Switch to other AD7685BRM</li>
+  <li>Figure out what we're going to do about the voltage references</li>
+  <li>Figure out what we're going to do about the biasing -- it's
+possible that everything is okay if input tracks output closely. <br>
+  </li>
+</ul>
+Let's try another analog test board, but (perhaps) with an ADC stuck on
+there or something. We can do this FAST and read off the bits via our
+logic analyzer. <br>
+<br>
+Timing concerns: <br>
+<br>
+<ul>
+  <li>We can run the FPGA at 72 MHz</li>
+  <li>As a result, INSAMPLE will be 375, or 192 kHz<br>
+  </li>
+  <li>OUTSAMPLE will be 2250</li>
+  <li>A single tick will be 13.9 ns</li>
+  <li>two ticks will be 13.9*2 = 27.8 ns</li>
+  <li>A sampling period wil be 5208 ns</li>
+  <li>since it takes 2200 ns from conv to sample available, we'll have
+107 bits, which at 5 converters times 16 bits is more than enough</li>
+  <li>We can easily meet these sorts of params with our AA filter if
+we're willing to have a bit more droop at 10kHz. For example, if the
+cutoff frequency is at 13 kHz, we get -93dB attenuation at 96kHz&nbsp;
+and -1.83 dB of droop at 10 kHz</li>
+</ul>
+Okay, now we're only downsampling by a factor of six. Alas, this makes
+our filter a bit tighter, but on the up side, we have more space / etc.
+to do with it as we please. <br>
+<br>
+Next: acq board 3: complete channel, with optional places to plug in. <br>
+<br>
+<br>
+<br>
+<br>
 </body>
 </html>

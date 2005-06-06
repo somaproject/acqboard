@@ -44,14 +44,18 @@ def main():
     r = readacq.RawFile('/home/jonas/test.dat');
     xin = r.read(RN);
 
+    
     xin = xin/32768.0
     hlen = 120 
-    h = signal.remez(hlen, r_[0, 0.1, 0.15, 0.5], r_[1.0, 0.0])
-    xh = signal.convolve(h, xin)
-    x = xh[hlen:(RN-hlen)]
-
-    # phase calculation 
-    p0 = [0.93, 10000.0, 2.0, mean(x)];
+    #h = signal.remez(hlen, r_[0, 0.1, 0.15, 0.5], r_[1.0, 0.0])
+    #xh = signal.convolve(h, xin)
+    #x = xh[hlen:(RN-hlen)]
+    x = xin
+    
+    # phase calculation
+    print mean(x)
+    
+    p0 = [max(x)-min(x), 10000.0, 4, mean(x)];
 
     t = r_[0.0:len(x)]/fs
 
@@ -78,7 +82,11 @@ def main():
     
     ENOB = log2(2/(rmsnoise*sqrt(12)))
     print "ENOB = %0.5f" % ENOB
-    
+
+    plot(x[:1000])
+    plot(xprime[:1000])
+    plot(err[:1000]*1e6)
+    show()
 
 if __name__ == "__main__":
     main()

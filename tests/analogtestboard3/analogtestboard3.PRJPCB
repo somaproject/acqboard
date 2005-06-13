@@ -123,45 +123,6 @@ ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 
 [Document9]
-DocumentPath=output.OUTJOB
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=-1
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-
-[Document10]
-DocumentPath=..\..\acquisition board\parts.PCBLIB
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=-1
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-
-[Document11]
-DocumentPath=..\..\acquisition board\parts.SCHLIB
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=-1
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-
-[Document12]
 DocumentPath=aa8028.SCHDOC
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -174,7 +135,7 @@ ClassGenCCAutoEnabled=1
 ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 
-[Document13]
+[Document10]
 DocumentPath=ADC.SCHDOC
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -187,7 +148,7 @@ ClassGenCCAutoEnabled=1
 ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 
-[Document14]
+[Document11]
 DocumentPath=power.SCHDOC
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -200,7 +161,7 @@ ClassGenCCAutoEnabled=1
 ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 
-[Document15]
+[Document12]
 DocumentPath=FPGA.SCHDOC
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -213,7 +174,7 @@ ClassGenCCAutoEnabled=1
 ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 
-[Document16]
+[Document13]
 DocumentPath=FPGA Power.SCHDOC
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -226,50 +187,63 @@ ClassGenCCAutoEnabled=1
 ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 
+[Document14]
+DocumentPath=output.OUTJOB
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+
 [GeneratedDocument1]
-DocumentPath=outputs\analogtestboard2.DRL
+DocumentPath=outputs\analogtestboard3.DRL
 
 [GeneratedDocument2]
-DocumentPath=outputs\analogtestboard2.DRR
+DocumentPath=outputs\analogtestboard3.DRR
 
 [GeneratedDocument3]
-DocumentPath=outputs\analogtestboard2.GBL
+DocumentPath=outputs\analogtestboard3.GBL
 
 [GeneratedDocument4]
-DocumentPath=outputs\analogtestboard2.GBO
+DocumentPath=outputs\analogtestboard3.GBO
 
 [GeneratedDocument5]
-DocumentPath=outputs\analogtestboard2.GBS
+DocumentPath=outputs\analogtestboard3.GBS
 
 [GeneratedDocument6]
-DocumentPath=outputs\analogtestboard2.GM5
+DocumentPath=outputs\analogtestboard3.GM5
 
 [GeneratedDocument7]
-DocumentPath=outputs\analogtestboard2.GP1
+DocumentPath=outputs\analogtestboard3.GP1
 
 [GeneratedDocument8]
-DocumentPath=outputs\analogtestboard2.GP2
+DocumentPath=outputs\analogtestboard3.GP2
 
 [GeneratedDocument9]
-DocumentPath=outputs\analogtestboard2.GTL
+DocumentPath=outputs\analogtestboard3.GTL
 
 [GeneratedDocument10]
-DocumentPath=outputs\analogtestboard2.GTO
+DocumentPath=outputs\analogtestboard3.GTO
 
 [GeneratedDocument11]
-DocumentPath=outputs\analogtestboard2.GTS
+DocumentPath=outputs\analogtestboard3.GTS
 
 [GeneratedDocument12]
-DocumentPath=outputs\analogtestboard2.LDP
+DocumentPath=outputs\analogtestboard3.LDP
 
 [GeneratedDocument13]
-DocumentPath=outputs\analogtestboard2.REP
+DocumentPath=outputs\analogtestboard3.REP
 
 [GeneratedDocument14]
-DocumentPath=outputs\analogtestboard2.RUL
+DocumentPath=outputs\analogtestboard3.RUL
 
 [GeneratedDocument15]
-DocumentPath=outputs\analogtestboard2.TXT
+DocumentPath=outputs\analogtestboard3.TXT
 
 [OutputGroup1]
 Name=Netlist Outputs

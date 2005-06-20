@@ -1730,9 +1730,91 @@ is entirely possible that the GBP isn't high enough on the AA Amps,
 such that the input doesn't track the output close enough and as a
 result, we exceed the 2.5V input range recommendation. <br>
 <br>
+</span></span><span style="text-decoration: underline;"><span
+ style="text-decoration: underline;"><span style="font-weight: bold;">17
+June 2005<br>
+</span><span style="text-decoration: underline;"></span></span></span>So,
+we have the new analog test board version 3; we're going to measure:<br>
+<ul>
+  <li>THD+N of all channel subcomponents across 2 AA filters:</li>
+  <ul>
+    <li>&nbsp;Pure AA</li>
+    <li>&nbsp;AA + PGA, for different gains<br>
+    </li>
+    <li>&nbsp;AA + PGA + LPF for different gains</li>
+    <li>Full channel</li>
+    <li>All of the above with Vos</li>
+  </ul>
+  <li>Linearity of the above</li>
+  <li>ADC performance with no AA</li>
+  <li>ADC performance with AA</li>
+  <li>ADC performance with AA + PGA</li>
+</ul>
+19 June 2005<br>
+What a horrible horrible weekend; the results we're getting make no
+sense. <br>
 <br>
-But it<br>
-</span></span><br>
+<span style="font-weight: bold; text-decoration: underline;">20 June
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+What a fascinating problem; no matter what we do we get a graph which
+looks like :<br>
+<br>
+<img alt="" src="results/20050620/thdn.png"
+ style="width: 1017px; height: 1003px;"><br>
+<br>
+<br>
+This does not make sense. <br>
+<br>
+We get this graph with<br>
+<ul>
+  <li>AD8513 on analogtestboard3 <br>
+  </li>
+  <li>a AD8513 from a different batch with resistors and capacitors
+from previous digikey order</li>
+  <li>AD8513 soldered up fresh on analogtestboard2</li>
+  <li>AD8028 on analogtestboard3</li>
+</ul>
+Notably, we also see:<br>
+<ul>
+  <li>AD8513 on analogtestboard1 (in TSSOP package) performs as
+expected, with -105 dB across all freq. <br>
+  </li>
+  <li>Simply shorting input and output connectors on analogtestboard3
+gives -110 dB across frew</li>
+</ul>
+So, every hypothesis I can come up with is eliminated by the above: <br>
+<ol>
+  <li><span style="font-style: italic;">It is a problem with this given
+batch of AD8513s</span>. But I'm using AD8513s from analog from sample
+and some from digikey. <br>
+  </li>
+  <li><span style="font-style: italic;">It's a problem with the latest
+order of passives</span>. But I measured all of the values, and they're
+all correct, so nothing was mislabeled. And I used the passives from
+another box for this AA. <br>
+  </li>
+  <li><span style="font-style: italic;">Your test equipment is busted</span>.
+Then why does it show expected results for analogtestboard1's ad8513? <br>
+  </li>
+  <li><span style="font-style: italic;">It's a fundamental issue with
+the SOIC design of the AD8513</span>. Then why is it also showing up
+for/on the AD8028 filter on analogtestboard3.</li>
+  <li><span style="font-style: italic;">It's a problem with your
+benchtop power supply.</span> Again, then why does it work with the
+analogtestboard1? <br>
+  </li>
+  <li><span style="font-style: italic;">It's a problem with the BNC
+connectors you're using</span>. But when I solder two on the board and
+short their signals together, I get good performance. '</li>
+  <li><span style="font-style: italic;">It's some issue with noise
+generation on this particular PCB. </span>But we're measuring THD, not
+THD+N, i.e. using the DFT and selecting components. <br>
+  </li>
+</ol>
+<br>
+<br>
+<br>
 <br>
 </body>
 </html>

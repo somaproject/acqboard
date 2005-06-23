@@ -1812,7 +1812,52 @@ generation on this particular PCB. </span>But we're measuring THD, not
 THD+N, i.e. using the DFT and selecting components. <br>
   </li>
 </ol>
+&nbsp;<br>
+<span style="font-weight: bold; text-decoration: underline;">22 June
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+So, we tried building a new analogtestboard1 via some freshly-ordered
+components. It didn't work. So then we tried slowly replacing the
+components on the original analogtestboard1 (The one that works) with
+new components. Well, it turns out the 1500 pF cap we were using from
+digikey is an X7R. This shouldn't make a difference. Yet when we
+replaced the analogous component on analogtestboard1, it stopped
+working. When we put a COG 1500 pF cap back, it worked. What. The.
+Fuck. A lot of our other components are NPO. <br>
 <br>
+Now I'm going to go through and try and replace all of the X7R
+components on the analogtestboard3 with their !x7r equivalents<br>
+<br>
+Wow, booyea, that fixed it. Rock on. <br>
+<br>
+For the AD8513 we get ~100 dB THD+N across the 10kHz band. <br>
+<br>
+This is just with the amps; I think we might get slightly better
+performance once everything, and I do mean everything, is wired up, but
+we'll see. <br>
+<br>
+<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20050622/thdnAndHD.aa.png"
+ style="width: 600px; height: 450px;"><br>
+THD+N, harmonic distortion of harmonics 2+3, for the AD8028 and AD8513.
+Note that while the 2nd and 3rd harmonics are lower for the
+AD8028,&nbsp; ultimately the AD8513 has better THD+N. <br>
+      <br>
+This is with no VOS; next up is using the maxim ref IC as an offset
+voltage. <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+There was no negative impact to THD+N when we switched to using VOS; in
+fact it improved.<br>
+<br>
+For the analog test FPGA. <br>
 <br>
 <br>
 <br>

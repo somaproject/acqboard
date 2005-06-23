@@ -1,0 +1,359 @@
+iMPACT Version: H.38
+iMPACT log file started on 2005/06/22 21:18:08
+// *** BATCH CMD : setPreference -pref UserLevel:NOVICE
+// *** BATCH CMD : setPreference -pref MessageLevel:DETAILED
+// *** BATCH CMD : setPreference -pref ConcurrentMode:FALSE
+// *** BATCH CMD : setPreference -pref UseHighz:FALSE
+// *** BATCH CMD : setPreference -pref ConfigOnFailure:STOP
+// *** BATCH CMD : setPreference -pref StartupCLock:AUTO_CORRECTION
+// *** BATCH CMD : setPreference -pref AutoSignature:FALSE
+// *** BATCH CMD : setPreference -pref KeepSVF:FALSE
+// *** BATCH CMD : setPreference -pref svfUseTime:FALSE
+// *** BATCH CMD : setPreference -pref UserLevel:NOVICE
+// *** BATCH CMD : setPreference -pref MessageLevel:DETAILED
+// *** BATCH CMD : setPreference -pref ConcurrentMode:FALSE
+// *** BATCH CMD : setPreference -pref UseHighz:FALSE
+// *** BATCH CMD : setPreference -pref ConfigOnFailure:STOP
+// *** BATCH CMD : setPreference -pref StartupCLock:AUTO_CORRECTION
+// *** BATCH CMD : setPreference -pref AutoSignature:FALSE
+// *** BATCH CMD : setPreference -pref KeepSVF:FALSE
+// *** BATCH CMD : setPreference -pref svfUseTime:FALSE
+// *** BATCH CMD : setMode -bs
+// *** BATCH CMD : setMode -pff
+// *** BATCH CMD : setMode -pff
+// *** BATCH CMD : addConfigDevice -size 128 -name "xcf01s" -path "e:\desktop\acqboard\tests\analogtestboard3\vhdl/"
+// *** BATCH CMD : setSubmode -pffserial
+// *** BATCH CMD : addPromDevice -position 1 -size -1 -name "xcf01s"
+'1': Added Device xcf01s successfully.
+----------------------------------------------------------------------
+// *** BATCH CMD : setMode -pff
+// *** BATCH CMD : setSubmode -pffserial
+// *** BATCH CMD : setAttribute -configdevice -attr size -value "0"
+// *** BATCH CMD : addCollection -name "Untitled"
+// *** BATCH CMD : setAttribute -collection -attr dir -value "UP"
+// *** BATCH CMD : addDesign -version 0 -name "0000"
+// *** BATCH CMD : addDeviceChain -index 0
+// *** BATCH CMD : addDevice -position 1 -file "E:\desktop\acqboard\tests\analogtestboard3\vhdl\main.bit"
+'1': Loading file 'E:\desktop\acqboard\tests\analogtestboard3\vhdl\main.bit' ...
+INFO:iMPACT - Elapsed time =      0 sec.
+done.
+INFO:iMPACT:501 - '1': Added Device xc3s200 successfully.
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+GUI --- Add one device.
+// *** BATCH CMD : setMode -pff
+Collection : Untitled
+Design : 0
+Device Chain : 0
+----------------------------------------------------------------------
+Position	PartName       	FileName            
+1       	xc3s200        	E:\desktop\acqboard\tests\analogtestboard3\vhdl\main.bit
+----------------------------------------------------------------------
+// *** BATCH CMD : setAttribute -configdevice -attr fillValue -value "FF"
+// *** BATCH CMD : setAttribute -configdevice -attr fileFormat -value "mcs"
+// *** BATCH CMD : setAttribute -collection -attr dir -value "UP"
+// *** BATCH CMD : setAttribute -configdevice -attr path -value "e:\desktop\acqboard\tests\analogtestboard3\vhdl/"
+// *** BATCH CMD : setAttribute -collection -attr name -value "Untitled"
+// *** BATCH CMD : generate
+0x1ff88 (130952) bytes loaded up from 0x0
+Using user-specified prom size of 128K
+Writing file "e:\desktop\acqboard\tests\analogtestboard3\vhdl//Untitled.mcs".
+Writing file "e:\desktop\acqboard\tests\analogtestboard3\vhdl//Untitled.prm".
+Writing file "e:\desktop\acqboard\tests\analogtestboard3\vhdl//Untitled.sig".
+GUI --- Total configuration bit size = 1047616 bits.
+GUI --- Total configuration byte size = 130952 bytes.
+// *** BATCH CMD : setCurrentDesign -version 0
+// *** BATCH CMD : setCurrentDesign -version 0
+GUI --- Switch to Configuration Mode
+// *** BATCH CMD : setMode -bs
+GUI --- Auto connect to cable...
+// *** BATCH CMD : setCable -port auto
+AutoDetecting cable. Please wait.
+CB_PROGRESS_START - Starting Operation.
+Connecting to cable (USB Port).
+Cable connection failed.
+Connecting to cable (Parallel Port - LPT1).
+Checking cable driver.
+ Driver windrvr6.sys version = 6.2.2.2. LPT base address = 03BCh.
+ ECP base address = 07BCh.
+ ECP hardware is detected.
+Cable connection established.
+Connecting to cable (Parallel Port - LPT1) in ECP mode.
+Checking cable driver.
+ Driver xpc4drvr.sys version = 1.0.4.0. LPT base address = 03BCh.
+ Cable Type = 1, Revision = 3.
+ Setting cable speed to 5 MHz.
+Cable connection established.
+CB_PROGRESS_END - End Operation.
+Elapsed time =      2 sec.
+// *** BATCH CMD : Identify
+PROGRESS_START - Starting Operation.
+Identifying chain contents ....'1': : Manufacturer's ID =Xilinx xc3s200, Version : 0
+INFO:iMPACT:1777 - 
+Reading C:/Xilinx/spartan3/data/xc3s200.bsd...
+Reading C:/Xilinx/spartan3/data/xc3s200.bsd...
+INFO:iMPACT:501 - '1': Added Device xc3s200 successfully.
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+'2': : Manufacturer's ID =Xilinx xcf01s, Version : 0
+INFO:iMPACT:1777 - 
+Reading C:/Xilinx/xcf/data/xcf01s.bsd...
+Reading C:/Xilinx/xcf/data/xcf01s.bsd...
+INFO:iMPACT:501 - '1': Added Device xcf01s successfully.
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+ DeviceIoControl LPT_WRITE_READ_BUFFER Failed.
+ DeviceIoControl LPT_WRITE_CMD_BUFFER Failed.
+done.
+ DeviceIoControl LPT_WRITE_CMD_BUFFER Failed.
+ DeviceIoControl LPT_WRITE_CMD_BUFFER Failed.
+ DeviceIoControl LPT_WRITE_CMD_BUFFER Failed.
+ DeviceIoControl LPT_WRITE_CMD_BUFFER Failed.
+ DeviceIoControl LPT_WRITE_CMD_BUFFER Failed.
+ DeviceIoControl LPT_WRITE_CMD_BUFFER Failed.
+ DeviceIoControl LPT_WRITE_CMD_BUFFER Failed.
+ DeviceIoControl LPT_WRITE_CMD_BUFFER Failed.
+ DeviceIoControl LPT_WRITE_CMD_BUFFER Failed.
+ DeviceIoControl LPT_WRITE_CMD_BUFFER Failed.
+ DeviceIoControl LPT_WRITE_CMD_BUFFER Failed.
+ DeviceIoControl LPT_WRITE_CMD_BUFFER Failed.
+ DeviceIoControl LPT_WRITE_CMD_BUFFER Failed.
+ERROR:iMPACT:583 - '1': The idcode read from the device does not match the idcode in the bsdl File.
+INFO:iMPACT:1578 - '1':  Device IDCODE :        00000000000000000000000000000000
+INFO:iMPACT:1579 - '1': Expected IDCODE:    00000101000001000100000010010011
+ DeviceIoControl LPT_WRITE_CMD_BUFFER Failed.
+ DeviceIoControl LPT_WRITE_CMD_BUFFER Failed.
+ DeviceIoControl LPT_WRITE_CMD_BUFFER Failed.
+ DeviceIoControl LPT_WRITE_CMD_BUFFER Failed.
+ DeviceIoControl LPT_WRITE_CMD_BUFFER Failed.
+ DeviceIoControl LPT_WRITE_CMD_BUFFER Failed.
+PROGRESS_END - End Operation.
+Elapsed time =     96 sec.
+Cable is not connected.
+xaf01s_vo20
+xaf02s_vo20
+xaf04s_vo20
+xc18v01_pc20
+xc18v01_so20
+xc18v01_vq44
+xc18v02_pc44
+xc18v02_vq44
+xc18v04_pc44
+xc18v04_vq44
+xcf01s_vo20
+xcf02s_vo20
+xcf04s_vo20
+xcf08p_fs48
+xcf08p_vo48
+xcf16p_fs48
+xcf16p_vo48
+xcf32p_fs48
+xcf32p_vo48
+// *** BATCH CMD : setAttribute -position 1 -attr devicePartName -value "xcf01s"
+// *** BATCH CMD : setAttribute -position 1 -attr configFileName -value "E:\desktop\acqboard\tests\analogtestboard3\vhdl\Untitled.mcs"
+'1': Loading file 'E:\desktop\acqboard\tests\analogtestboard3\vhdl\Untitled.mcs' ...
+done.
+GUI --- Auto connect to cable...
+// *** BATCH CMD : setCable -port auto
+AutoDetecting cable. Please wait.
+CB_PROGRESS_START - Starting Operation.
+Connecting to cable (USB Port).
+Cable connection failed.
+Connecting to cable (Parallel Port - LPT1).
+Checking cable driver.
+ Driver windrvr6.sys version = 6.2.2.2. LPT base address = 03BCh.
+ ECP base address = 07BCh.
+ ECP hardware is detected.
+Cable connection established.
+Connecting to cable (Parallel Port - LPT1) in ECP mode.
+Checking cable driver.
+ Driver xpc4drvr.sys version = 1.0.4.0. LPT base address = 03BCh.
+ DeviceIoControl LPT_READ_BUFFER Failed.
+Cable connection failed.
+Connecting to cable (Parallel Port - LPT1).
+Checking cable driver.
+ Driver windrvr6.sys version = 6.2.2.2. LPT base address = 03BCh.
+ ECP base address = 07BCh.
+Cable connection established.
+ECP port test failed. Using download cable in compatibility mode.
+CB_PROGRESS_END - End Operation.
+Elapsed time =      4 sec.
+// *** BATCH CMD : Program -p 1 -e -v 
+PROGRESS_START - Starting Operation.
+Validating chain...
+Boundary-scan chain validated successfully.
+'1': Erasing device...
+Erasure completed successfully.
+done.
+'1': Putting device in ISP mode...done.
+'1': Putting device in ISP mode...done.
+'1': Verifying device...done.
+'1': Verification completed successfully.
+'1': Calculated checksum matches expected checksum, 00000e38a
+'1': Putting device in ISP mode...done.
+'1': Putting device in ISP mode...done.
+'1': Setting user-programmable bits...
+done.
+'1': Putting device in ISP mode...done.
+'1': Programming completed successfully.
+Programming completed successfully.
+PROGRESS_END - End Operation.
+Elapsed time =     32 sec.
+GUI --- Switch to File Mode
+// *** BATCH CMD : setMode -pff
+// *** BATCH CMD : setMode -pff
+Collection : Untitled
+Design : 0
+Device Chain : 0
+----------------------------------------------------------------------
+Position	PartName       	FileName            
+1       	xc3s200        	E:\desktop\acqboard\tests\analogtestboard3\vhdl\main.bit
+----------------------------------------------------------------------
+// *** BATCH CMD : setAttribute -configdevice -attr fillValue -value "FF"
+// *** BATCH CMD : setAttribute -configdevice -attr fileFormat -value "mcs"
+// *** BATCH CMD : setAttribute -collection -attr dir -value "UP"
+// *** BATCH CMD : setAttribute -configdevice -attr path -value "e:\desktop\acqboard\tests\analogtestboard3\vhdl/"
+// *** BATCH CMD : setAttribute -collection -attr name -value "Untitled"
+// *** BATCH CMD : generate
+0x1ff88 (130952) bytes loaded up from 0x0
+Using user-specified prom size of 128K
+Writing file "e:\desktop\acqboard\tests\analogtestboard3\vhdl//Untitled.mcs".
+Writing file "e:\desktop\acqboard\tests\analogtestboard3\vhdl//Untitled.prm".
+Writing file "e:\desktop\acqboard\tests\analogtestboard3\vhdl//Untitled.sig".
+GUI --- Total configuration bit size = 1047616 bits.
+GUI --- Total configuration byte size = 130952 bytes.
+// *** BATCH CMD : setCurrentDesign -version 0
+GUI --- Switch to Configuration Mode
+// *** BATCH CMD : setMode -bs
+// *** BATCH CMD : Program -p 1 -e -v 
+Updating config file E:\desktop\acqboard\tests\analogtestboard3\vhdl\Untitled.mcs...
+PROGRESS_START - Starting Operation.
+Validating chain...
+Boundary-scan chain validated successfully.
+'1': Erasing device...
+Erasure completed successfully.
+done.
+'1': Putting device in ISP mode...done.
+'1': Putting device in ISP mode...done.
+'1': Verifying device...done.
+'1': Verification completed successfully.
+'1': Calculated checksum matches expected checksum, 0000100d8
+'1': Putting device in ISP mode...done.
+'1': Putting device in ISP mode...done.
+'1': Setting user-programmable bits...
+done.
+'1': Putting device in ISP mode...done.
+'1': Programming completed successfully.
+Programming completed successfully.
+PROGRESS_END - End Operation.
+Elapsed time =     31 sec.
+GUI --- Switch to File Mode
+// *** BATCH CMD : setMode -pff
+// *** BATCH CMD : setMode -pff
+Collection : Untitled
+Design : 0
+Device Chain : 0
+----------------------------------------------------------------------
+Position	PartName       	FileName            
+1       	xc3s200        	E:\desktop\acqboard\tests\analogtestboard3\vhdl\main.bit
+----------------------------------------------------------------------
+// *** BATCH CMD : setAttribute -configdevice -attr fillValue -value "FF"
+// *** BATCH CMD : setAttribute -configdevice -attr fileFormat -value "mcs"
+// *** BATCH CMD : setAttribute -collection -attr dir -value "UP"
+// *** BATCH CMD : setAttribute -configdevice -attr path -value "e:\desktop\acqboard\tests\analogtestboard3\vhdl/"
+// *** BATCH CMD : setAttribute -collection -attr name -value "Untitled"
+// *** BATCH CMD : generate
+0x1ff88 (130952) bytes loaded up from 0x0
+Using user-specified prom size of 128K
+Writing file "e:\desktop\acqboard\tests\analogtestboard3\vhdl//Untitled.mcs".
+Writing file "e:\desktop\acqboard\tests\analogtestboard3\vhdl//Untitled.prm".
+Writing file "e:\desktop\acqboard\tests\analogtestboard3\vhdl//Untitled.sig".
+GUI --- Total configuration bit size = 1047616 bits.
+GUI --- Total configuration byte size = 130952 bytes.
+// *** BATCH CMD : setCurrentDesign -version 0
+GUI --- Switch to Configuration Mode
+// *** BATCH CMD : setMode -bs
+// *** BATCH CMD : Program -p 1 -e -v 
+Updating config file E:\desktop\acqboard\tests\analogtestboard3\vhdl\Untitled.mcs...
+PROGRESS_START - Starting Operation.
+Validating chain...
+Boundary-scan chain validated successfully.
+'1': Erasing device...
+Erasure completed successfully.
+done.
+'1': Putting device in ISP mode...done.
+'1': Putting device in ISP mode...done.
+'1': Verifying device...done.
+'1': Verification completed successfully.
+'1': Calculated checksum matches expected checksum, 000010b21
+'1': Putting device in ISP mode...done.
+'1': Putting device in ISP mode...done.
+'1': Setting user-programmable bits...
+done.
+'1': Putting device in ISP mode...done.
+'1': Programming completed successfully.
+Programming completed successfully.
+PROGRESS_END - End Operation.
+Elapsed time =     32 sec.
+GUI --- Switch to File Mode
+// *** BATCH CMD : setMode -pff
+// *** BATCH CMD : setMode -pff
+Collection : Untitled
+Design : 0
+Device Chain : 0
+----------------------------------------------------------------------
+Position	PartName       	FileName            
+1       	xc3s200        	E:\desktop\acqboard\tests\analogtestboard3\vhdl\main.bit
+----------------------------------------------------------------------
+// *** BATCH CMD : setAttribute -configdevice -attr fillValue -value "FF"
+// *** BATCH CMD : setAttribute -configdevice -attr fileFormat -value "mcs"
+// *** BATCH CMD : setAttribute -collection -attr dir -value "UP"
+// *** BATCH CMD : setAttribute -configdevice -attr path -value "e:\desktop\acqboard\tests\analogtestboard3\vhdl/"
+// *** BATCH CMD : setAttribute -collection -attr name -value "Untitled"
+// *** BATCH CMD : generate
+0x1ff88 (130952) bytes loaded up from 0x0
+Using user-specified prom size of 128K
+Writing file "e:\desktop\acqboard\tests\analogtestboard3\vhdl//Untitled.mcs".
+Writing file "e:\desktop\acqboard\tests\analogtestboard3\vhdl//Untitled.prm".
+Writing file "e:\desktop\acqboard\tests\analogtestboard3\vhdl//Untitled.sig".
+GUI --- Total configuration bit size = 1047616 bits.
+GUI --- Total configuration byte size = 130952 bytes.
+// *** BATCH CMD : setCurrentDesign -version 0
+GUI --- Switch to Configuration Mode
+// *** BATCH CMD : setMode -bs
+// *** BATCH CMD : Program -p 1 -e -v 
+Updating config file E:\desktop\acqboard\tests\analogtestboard3\vhdl\Untitled.mcs...
+PROGRESS_START - Starting Operation.
+Validating chain...
+Boundary-scan chain validated successfully.
+'1': Erasing device...
+Erasure completed successfully.
+done.
+'1': Putting device in ISP mode...done.
+'1': Putting device in ISP mode...done.
+'1': Verifying device...done.
+'1': Verification completed successfully.
+'1': Calculated checksum matches expected checksum, 000010b21
+'1': Putting device in ISP mode...done.
+'1': Putting device in ISP mode...done.
+'1': Setting user-programmable bits...
+done.
+'1': Putting device in ISP mode...done.
+'1': Programming completed successfully.
+Programming completed successfully.
+PROGRESS_END - End Operation.
+Elapsed time =     33 sec.
+GUI --- Switch to File Mode
+// *** BATCH CMD : setMode -pff
+// *** BATCH CMD : setMode -pff
+Collection : Untitled
+Design : 0
+Device Chain : 0
+----------------------------------------------------------------------
+Position	PartName       	FileName            
+1       	xc3s200        	E:\desktop\acqboard\tests\analogtestboard3\vhdl\main.bit
+----------------------------------------------------------------------
+// *** BATCH CMD : setAttribute -configdevice -attr fillValue -value "FF"
+// *** BATCH CMD : setAttribute -configdevice -attr fileFormat -value "mcs"
+// *** BATCH CMD : setAttribute -collection -attr dir -value "UP"
+// *** BATCH CMD : setAttribute -configdevice -attr path -value "e:\desktop

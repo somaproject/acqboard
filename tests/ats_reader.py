@@ -29,7 +29,7 @@ def read3(filename):
     fid.readline()
     fid.readline()
     
-    return io.read_array(fid, ",", (0, 1, 2))
+    return io.read_array(fid, ",", (0, 1, 2, 3))
     
 
 

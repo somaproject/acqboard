@@ -11,8 +11,8 @@ yi = A sin (2*pi*k*xi +theta)
 
 """
 from scipy import *
-from pylab import * 
-import readacq
+#from pylab import * 
+import gologicread
 
 def residuals(p, y, x):
     A, k, theta, os = p
@@ -40,22 +40,22 @@ def findlsq(p0, x, t):
     
 def main():
     RN = 100000
-    fs = 256000.0
-    r = readacq.RawFile('/home/jonas/test.dat');
-    xin = r.read(RN);
+    fs = 32e6/161
+    xin = gologicread.serial(sys.argv[1]);
+    
 
     
-    xin = xin/32768.0
+    xin = array(xin)/32768.0 - 1.0
     hlen = 120 
     #h = signal.remez(hlen, r_[0, 0.1, 0.15, 0.5], r_[1.0, 0.0])
     #xh = signal.convolve(h, xin)
     #x = xh[hlen:(RN-hlen)]
-    x = xin
+    x = xin[100:]
     
     # phase calculation
-    print mean(x)
+    print "mean = ", mean(x)
     
-    p0 = [max(x)-min(x), 10000.0, 4, mean(x)];
+    p0 = [max(x)-min(x), float(sys.argv[2]),  sys.argv[3], mean(x)];
 
     t = r_[0.0:len(x)]/fs
 
@@ -75,7 +75,7 @@ def main():
 
     rmsnoise = sqrt(sum(err)/len(x))
 
-    rmssignal = p[0]/sqrt(2)
+    rmssignal = abs(p[0])/sqrt(2)
 
     print rmssignal, rmsnoise
     print "THD+N = %0.3f" % (20*log10(rmsnoise/rmssignal))
@@ -83,10 +83,12 @@ def main():
     ENOB = log2(2/(rmsnoise*sqrt(12)))
     print "ENOB = %0.5f" % ENOB
 
-    plot(x[:1000])
-    plot(xprime[:1000])
-    plot(err[:1000]*1e6)
-    show()
-
+    errreal = xprime -x
+    #plot(x[:10000])
+    #plot(xprime[:10000])
+    #plot(errreal[:10000] * 1e4)
+    #show()
+    #hist(errreal[:10000])
+    #show()
 if __name__ == "__main__":
     main()

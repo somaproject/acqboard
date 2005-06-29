@@ -1857,7 +1857,230 @@ voltage. <br>
 There was no negative impact to THD+N when we switched to using VOS; in
 fact it improved.<br>
 <br>
-For the analog test FPGA. <br>
+For the analog test FPGA, we'll just configure the output to run tests.
+<br>
+<ul>
+  <li>Flash the LED to signal correct boot</li>
+  <li>trigger the sampling</li>
+</ul>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">23 June
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+<br>
+So, the gologic signal analyzer has a very constrained depth, so we're
+going to have to do something somewhat creative to actually read out
+the data... this means that we're going to have to effectively compress
+it by using the FPGA to perform some preliminary decoding. <br>
+<br>
+So the FPGA code is going to clock in the serial word, and on the next
+cycle present first the low byte and then the high byte, using a
+three-cycle 10-wire bus:<br>
+<ol>
+  <li>WD HIGH</li>
+  <li>WD LOW, BYTE LOW, D: low byte</li>
+  <li>WD LOW, BYTE HIGH, D: high byte</li>
+</ol>
+<br>
+We modified our original serial analysis code; we get 60 dB SNR at 1
+kHz 3.8 vPP; which is rather sad. I'm going to try and add in a
+resistor to make the LPF at the ADC input not suck (right now it's just
+a short). <br>
+<br>
+We get<span style="font-weight: bold;"> 80 dB SNR</span> at 1kHz 3.8Vpp
+when we add a 56 Ohm resistor for the input LPF. With <span
+ style="font-weight: bold;">4.0 Vpp we get 84 dB SNR. Alas, we only get
+72 dB at 10 kHz. </span><br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">28 June
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+Done moving. The graph we get of THD+N vs input frequency looks like: <br>
+<img alt="" src="results/20050628/thdngraph.png"
+ style="width: 1200px; height: 900px;"><br>
+<br>
+<br>
+Wow, I wonder why? <br>
+<br>
+<br>
+So, I get a flat -103 dB THD+N when the ADC is not connected. <br>
+<br>
+I get better performance when I disconnect the ADC input amp (80 dB SNR
+at 10 kHz and also at 1 kHz)<br>
+<br>
+Performance is much much worse (60 dB) at 10 ohm/0.1uF cap<br>
+Performance is even worse at (50 dB) at 100 ohm/0.1uF cap<br>
+<br>
+Wow, well, that doesn't help. I'm going to make the last stage a simple
+inverting amp <br>
+<ul>
+  <li>C24 is open</li>
+  <li>R23 is value R</li>
+  <li>R16 is value R <br>
+  </li>
+  <li>R24 is 0-ohm</li>
+</ul>
+<br>
+down to 60. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">29 June
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">LPF Res<br>
+      </td>
+      <td style="vertical-align: top;">LPF Cap<br>
+      </td>
+      <td style="vertical-align: top;">ref res<br>
+      </td>
+      <td style="vertical-align: top;">10kHz Response<br>
+      </td>
+      <td style="vertical-align: top;">5 kHz response<br>
+      </td>
+      <td style="vertical-align: top;">1kHz response<br>
+      </td>
+      <td style="vertical-align: top;">notes<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">2.7 ohm<br>
+      </td>
+      <td style="vertical-align: top;">none<br>
+      </td>
+      <td style="vertical-align: top;">54.9<br>
+      </td>
+      <td style="vertical-align: top;">-79.9 dB<br>
+      </td>
+      <td style="vertical-align: top;">-80.6 dB<br>
+      </td>
+      <td style="vertical-align: top;">-80.6 dB<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">2.7 ohm<br>
+      </td>
+      <td style="vertical-align: top;">0.01 uF<br>
+      </td>
+      <td style="vertical-align: top;">54.9<br>
+      </td>
+      <td style="vertical-align: top;">-77.9 dB<br>
+      </td>
+      <td style="vertical-align: top;">-78.36 dB<br>
+      </td>
+      <td style="vertical-align: top;">-78.5 dB<br>
+      </td>
+      <td style="vertical-align: top;">appears to have resonance peak
+at 9.5kHz<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">33 ohm<br>
+      </td>
+      <td style="vertical-align: top;">0.01 uF<br>
+      </td>
+      <td style="vertical-align: top;">54.9<br>
+      </td>
+      <td style="vertical-align: top;">-79.7<br>
+      </td>
+      <td style="vertical-align: top;">-83.2 dB<br>
+      </td>
+      <td style="vertical-align: top;">-84.73 dB<br>
+      </td>
+      <td style="vertical-align: top;">resonance peak at the same place
+(via ATS THD)<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">33 ohm<br>
+      </td>
+      <td style="vertical-align: top;">none<br>
+      </td>
+      <td style="vertical-align: top;">54.9<br>
+      </td>
+      <td style="vertical-align: top;">-79.32<br>
+      </td>
+      <td style="vertical-align: top;">-80.55<br>
+      </td>
+      <td style="vertical-align: top;">-80.5 dB<br>
+      </td>
+      <td style="vertical-align: top;">all at -96 or lower. <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">0 ohm<br>
+      </td>
+      <td style="vertical-align: top;">none<br>
+      </td>
+      <td style="vertical-align: top;">54.9<br>
+      </td>
+      <td style="vertical-align: top;">-79.97<br>
+      </td>
+      <td style="vertical-align: top;">-80.43<br>
+      </td>
+      <td style="vertical-align: top;">-80.52<br>
+      </td>
+      <td style="vertical-align: top;">same as above<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">0 ohm<br>
+      </td>
+      <td style="vertical-align: top;">0.01 uF<br>
+      </td>
+      <td style="vertical-align: top;">54.9<br>
+      </td>
+      <td style="vertical-align: top;">-62 dB<br>
+      </td>
+      <td style="vertical-align: top;">-60<br>
+      </td>
+      <td style="vertical-align: top;">-67 dB<br>
+      </td>
+      <td style="vertical-align: top;">same as above<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

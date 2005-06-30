@@ -39,18 +39,17 @@ def findlsq(p0, x, t):
 
     
 def main():
-    RN = 100000
     fs = 32e6/161
     xin = gologicread.serial(sys.argv[1]);
     
-
+    RN = len(xin)
     
     xin = array(xin)/32768.0 - 1.0
-    hlen = 120 
-    #h = signal.remez(hlen, r_[0, 0.1, 0.15, 0.5], r_[1.0, 0.0])
-    #xh = signal.convolve(h, xin)
-    #x = xh[hlen:(RN-hlen)]
-    x = xin[100:]
+    hlen = 200 
+    h = signal.remez(hlen, r_[0, 0.05, 0.12, 0.5], r_[1.0, 0.0])
+    xh = signal.convolve(h, xin)
+    x = xh[2*hlen:(RN-2*hlen)]
+    #x = xh
     
     # phase calculation
     print "mean = ", mean(x)

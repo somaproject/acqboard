@@ -1,0 +1,13 @@
+Conversion log:
+
+The goal is to complete the conversion of the acqboard to:
+
+72 MHz frequency core
+192 kSPS sampling rate (6x oversampling)
+
+
+INAMPLE is 192kHz (or 375 ticks of base)
+OUTSAMPLE is 32 kHz (or 2250 ticks of base)
+OUTBYTE is 800kHz (or 90 ticks of base)
+
+

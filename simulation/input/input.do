@@ -8,7 +8,7 @@ vcom -93 -explicit ../../vhdl/distRAM_dualport.vhd
 
 
 -- simulation entities
-vcom -93 -explicit ../components/ADC/ADC.vhd
+vcom -93 -explicit ../components/ADC/AD7685.vhd
 vcom -93 -explicit inputtest.vhd
 
 

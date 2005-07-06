@@ -88,7 +88,7 @@ begin
   
   process(clk_g, RESET)
   begin
-    if RESET = '1' then
+    if RESET = '1' or LOCKED = '0' then
       INSAMPLE      <= '0';
       OUTBYTE       <= '0';
       OUTSAMPLE     <= '0';

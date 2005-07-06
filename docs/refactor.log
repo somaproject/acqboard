@@ -6,8 +6,36 @@ The goal is to complete the conversion of the acqboard to:
 192 kSPS sampling rate (6x oversampling)
 
 
-INAMPLE is 192kHz (or 375 ticks of base)
+INSAMPLE is 192kHz (or 375 ticks of base)
 OUTSAMPLE is 32 kHz (or 2250 ticks of base)
 OUTBYTE is 800kHz (or 90 ticks of base)
+CLK8 is 8 Mhz (or 9 ticks of base)
+
+Things I care about with the clock: 
+
+right frequency
+right simultanaeity 
+
+192 ksps == 5.20833 us/sample
+tconv is at most 2.2 us
+
+so we have 3000 ns to work with; our serial configuration has us at 37.5 ns/bit. 72 MHz is a clock tick of 13.9 ns. That's just barely over 3 ticks per bit, so we'll need to use a small 2 bits/tick, 
 
 
+
+-------------------------------------------------------------------------
+INPUT
+-------------------------------------------------------------------------
+
+First, we'll need to update/change our ADC model to be a single ADC, i.e. goodbye dual-channel behavior. 
+
+Then we'll need to redesign our ADC serial control model. Luckily this one is simpler. 
+
+* ADC model: 
+
+for the ADC model, we'll:
+1. read in a word on the rising_edge of CNV
+2. wait a while
+3. clock in the relevant bits
+
+The model only emulates the chain mode with no busy indicator. 

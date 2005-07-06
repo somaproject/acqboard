@@ -1,15 +1,14 @@
 Signal definitions for input.vhd:
 
-CLK      : 64 MHz input clock
+CLK      : 72 MHz input clock
 INSAMPLE :  Take new sample, 32 kHz CE
 RESET	 : standard reset
 
 
 output signals to ADCs:
-CONVST	 : start conversion
-ADCCS    : ADC chip select
+CNV	 : start conversion
 SCLK     : serial clock out
-SDIN     : serial data input, unipolar (0x0000 to 0xFFFF), ADC A and then B, per the AD7655
+SDI     : serial data input, unipolar (0x0000 to 0xFFFF), from sequenced ADCs
 
 
 
@@ -25,11 +24,8 @@ OSWE     : write this offset value
 OSD	 : offset value to write
 
 
-Data is acquired via serial interface over galvanic isolators from the 5 dual ADCs. 
+Data is acquired via serial interface over galvanic isolators from the two sets of serial ADCs. 
 
-SRL16Es are used to store, reverse the bit direction of the samples for bit-arithmatic
-
-We use bit-wide math to cut down on storage requirements. 
 
 Writing offsets:
 

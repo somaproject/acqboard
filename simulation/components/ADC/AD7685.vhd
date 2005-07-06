@@ -20,9 +20,9 @@ entity ADC7685 is
          FILEMODE   : in  std_logic;
          BUSY       : out std_logic;
          INPUTDONE  : out std_logic);
-end ADC;
+end AD7685;
 
-architecture Behavioral of ADC is
+architecture Behavioral of AD7685 is
 -- a behavioral simulation of the AD7685, reads in input values from
 -- filename, or from channel values, depending on filemode.
 -- the filename has a column of unsigned INTS < 2**16-1

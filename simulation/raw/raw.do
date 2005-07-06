@@ -15,7 +15,7 @@ vcom -93 -explicit ../../vhdl/raw.vhd
 -- simulation entities
 vcom -93 -explicit ../../vhdl/decode8b10b.vhd
 vcom -93 -explicit ../components/deserialize/deserialize.vhd
-vcom -93 -explicit ../components/ADC/ADC.vhd
+vcom -93 -explicit ../components/ADC/AD7685.vhd
 vcom -93 -explicit rawtest.vhd
 
 

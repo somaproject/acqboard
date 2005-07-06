@@ -8,7 +8,7 @@ use std.textio.all;
 library UNISIM;
 use UNISIM.VComponents.all;
 
-entity ADC7685 is
+entity AD7685 is
   generic (filename :     string    := "adcin.dat" );
   port ( RESET      : in  std_logic;
          SCK       : in  std_logic := '0';
@@ -30,13 +30,11 @@ architecture Behavioral of AD7685 is
 -- the input file is reached.
 --
 
-  constant sclk_to_sdout : time := 10 ns;
+  constant sck_to_sdo : time := 14 ns;
   constant cnv_delay  : time := 2.2 us;
 
   signal     channel_bits : std_logic_vector(15 downto 0);
   signal     bitpos                       : integer   := 0;
-  signal     outputbits                   : std_logic_vector(15 downto 0)
-                                                      := (others => '0');
   signal     filedone                     : std_logic := '0';
 
 begin
@@ -44,20 +42,19 @@ begin
 -- reset closes the file, opens the file, etc. 
 
 
-  outputbits <= channel_bits & channelB_bits;
   INPUTDONE  <= filedone;
 
 
-  SDO <= channel_bits(15);
+  SDO <= channel_bits(15) after sck_to_sdo;
   
-  process(CONVST, SCLK, RESET, FILEMODE, CHA_VALUE, CHB_VALUE)
+  process(CNV, SCK, RESET, FILEMODE, CH_VALUE)
     file inputfile                        : text;
     variable L                            : line;
 
-    variable channelA, channelB : integer;
+    variable channel : integer;
   begin
     if falling_edge(RESET) then
-      SDO         <= '0';
+      
       filedone      <= '0';
       if filemode = '1' then
         file_open(inputfile, filename, read_mode);
@@ -71,7 +68,7 @@ begin
       file_close(inputfile);
 
     elsif rising_edge(CNV) then
-      SDOUT      <= '0';
+      
 
       if filemode = '1' then
         if not endfile(inputfile) then

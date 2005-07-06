@@ -131,17 +131,17 @@ begin
 
         -- input
         if biten = '1' then
-          sampA1 <= sampA1(14 downto 0) & sampA2(15);
-          sampA2 <= sampA2(14 downto 0) & sampA3(15);
-          sampA3 <= sampA3(14 downto 0) & sampA4(15);
-          sampA4 <= sampA4(14 downto 0) & sampAC(15);
-          sampAC <= sampAC(14 downto 0) & sdial;
+          sampAC <= sampAC(14 downto 0) & sampA4(15);
+          sampA4 <= sampA4(14 downto 0) & sampA3(15);
+          sampA3 <= sampA3(14 downto 0) & sampA2(15);
+          sampA2 <= sampA2(14 downto 0) & sampA1(15);
+          sampA1 <= sampA1(14 downto 0) & sdial;
 
-          sampB1 <= sampB1(14 downto 0) & sampB2(15);
-          sampB2 <= sampB2(14 downto 0) & sampB3(15);
-          sampB3 <= sampB3(14 downto 0) & sampB4(15);
-          sampB4 <= sampB4(14 downto 0) & sampBC(15);
-          sampBC <= sampBC(14 downto 0) & sdial;
+          sampBC <= sampBC(14 downto 0) & sampB4(15);
+          sampB4 <= sampB4(14 downto 0) & sampB3(15);
+          sampB3 <= sampB3(14 downto 0) & sampB2(15);
+          sampB2 <= sampB2(14 downto 0) & sampB1(15);
+          sampB1 <= sampB1(14 downto 0) & sdibl;
 
         end if;
 

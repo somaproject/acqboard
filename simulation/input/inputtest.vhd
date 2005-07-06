@@ -37,21 +37,22 @@ architecture behavior of inputtest is
       );
   end component;
 
-  signal CLK        : std_logic                     := '0';
-  signal INSAMPLE   : std_logic                     := '0';
-  signal RESET      : std_logic                     := '1';
-  signal CNV        : std_logic                     := '0';
-  signal SCK        : std_logic                     := '0';
-  signal SDIA, SDIB : std_logic                     := (others => '0');
-  signal DOUT       : std_logic_vector(15 downto 0) := (others => '0');
-  signal COUT       : std_logic_vector(3 downto 0)  := (others => '0');
-  signal WEOUT      : std_logic                     := '0';
-  signal OSC        : std_logic_vector(3 downto 0)  := (others => '0');
-  signal OSEN       : std_logic                     := '0';
-  signal OSWE       : std_logic                     := '0';
-  signal OSD        : std_logic_vector(15 downto 0) := (others => '0');
-  signal OSCALL     : std_logic                     := '0';
-  signal err        : std_logic                     := '0';
+  signal CLK            : std_logic                     := '0';
+  signal INSAMPLE       : std_logic                     := '0';
+  signal RESET          : std_logic                     := '1';
+  signal CNV            : std_logic                     := '0';
+  signal SCK, SCK_pre   : std_logic                     := '0';
+  signal SDIB, SDIB_pre : std_logic                     := '0';
+  signal SDIA, SDIA_pre : std_logic                     := '0';
+  signal DOUT           : std_logic_vector(15 downto 0) := (others => '0');
+  signal COUT           : std_logic_vector(3 downto 0)  := (others => '0');
+  signal WEOUT          : std_logic                     := '0';
+  signal OSC            : std_logic_vector(3 downto 0)  := (others => '0');
+  signal OSEN           : std_logic                     := '0';
+  signal OSWE           : std_logic                     := '0';
+  signal OSD            : std_logic_vector(15 downto 0) := (others => '0');
+  signal OSCALL         : std_logic                     := '0';
+  signal err            : std_logic                     := '0';
   component AD7685
 
     generic (filename :     string    := "adcin.dat" );
@@ -68,8 +69,8 @@ architecture behavior of inputtest is
   end component;
 
   signal adcbusy, adcinputdone :
-    std_logic_vector(4 downto 0)
-    := (others => '0');
+    std_logic_vector(9 downto 0)
+                                                     := (others => '0');
   signal adcreset     : std_logic                    := '1';
   type intarray is array (9 downto 0) of integer;
   signal chan_in, chan_inl,
@@ -84,8 +85,9 @@ begin
     INSAMPLE => INSAMPLE,
     RESET    => RESET,
     CNV      => CNV,
-    SCK      => SCK,
-    SINA     => SINA
+    SCK      => SCK_pre,
+    SDIA     => SDIA,
+    SDIB     => SDIB,
     DOUT     => DOUT,
     COUT     => COUT,
     WEOUT    => WEOUT,
@@ -118,28 +120,34 @@ begin
 
 
   -- configuration:
-  sdi(0) <= '0';
-  sdi(1) <= sdo(0);
-  sdi(2) <= sdo(1);
-  sdi(3) <= sdo(2);
-  sdi(4) <= sdo(3);
-  SDIA   <= sdo(4);
+  sdi(0)   <= '0';
+  sdi(1)   <= sdo(0);
+  sdi(2)   <= sdo(1);
+  sdi(3)   <= sdo(2);
+  sdi(4)   <= sdo(3);
+  SDIA_pre <= sdo(4);
 
-  sdi(5) <= '0';
-  sdi(6) <= sdo(5);
-  sdi(7) <= sdo(6);
-  sdi(8) <= sdo(7);
-  sdi(9) <= sdo(8);
-  SDIA   <= sdo(9);
+  sdi(5)   <= '0';
+  sdi(6)   <= sdo(5);
+  sdi(7)   <= sdo(6);
+  sdi(8)   <= sdo(7);
+  sdi(9)   <= sdo(8);
+  SDIB_pre <= sdo(9);
 
+  -- circuit board and isolator delays
 
+  SDIA <= SDIA_pre after 20 ns;
+  SDIB <= SDIB_pre after 20 ns;
 
+  SCK <= SCK_pre after 10 ns; 
+  
+  
   clock          : process(clk)
     variable cnt : integer := 0;
 
   begin
     if rising_edge(clk) then
-      if cnt = 250 then
+      if cnt = 375 then
         INSAMPLE <= '1';
         cnt := 0;
         chan_inl <= chan_in;

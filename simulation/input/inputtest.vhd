@@ -53,8 +53,9 @@ architecture behavior of inputtest is
   signal OSD            : std_logic_vector(15 downto 0) := (others => '0');
   signal OSCALL         : std_logic                     := '0';
   signal err            : std_logic                     := '0';
-  component AD7685
 
+
+  component AD7685
     generic (filename :     string    := "adcin.dat" );
     port ( RESET      : in  std_logic;
            SCK        : in  std_logic := '0';
@@ -73,6 +74,7 @@ architecture behavior of inputtest is
                                                      := (others => '0');
   signal adcreset     : std_logic                    := '1';
   type intarray is array (9 downto 0) of integer;
+
   signal chan_in, chan_inl,
     chan_out, offsets : intarray                     := (others => 0);
   signal sdi, sdo     : std_logic_vector(9 downto 0) := (others => '0');

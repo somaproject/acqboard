@@ -14,7 +14,7 @@ vcom -93 -explicit ../../vhdl/overflow.vhd
 vcom -93 -explicit ../../vhdl/rmac.vhd
 
 -- simulation entities
-vcom -93 -explicit ../components/ADC/ADC.vhd
+vcom -93 -explicit ../components/ADC/AD7685.vhd
 vcom -93 -explicit ../components/FilterLoad/FilterLoad.vhdl
 vcom -93 -explicit filtertest.vhd
 

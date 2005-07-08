@@ -20,13 +20,13 @@ architecture behavior of acqcmdtest is
   component acqboard
     port(
       CLKIN     : in  std_logic;
-      ADCIN     : in  std_logic_vector(4 downto 0);
+      ADCSDIA     : in  std_logic;
+      ADCSDIB   : in std_logic; 
       ESO       : in  std_logic;
       EEPROMLEN : in  std_logic;
       FIBERIN   : in  std_logic;
-      ADCCLK    : out std_logic;
-      ADCCS     : out std_logic;
-      ADCCONVST : out std_logic;
+      ADCSCK    : out std_logic;
+      ADCCNV : out std_logic;
       PGARCK    : out std_logic;
       PGASRCK   : out std_logic;
       PGASERA   : out std_logic;
@@ -38,7 +38,7 @@ architecture behavior of acqcmdtest is
   end component;
 
   signal CLKIN     : std_logic := '0';
-  signal ADCIN     : std_logic_vector(4 downto 0);
+  signal ADCSDIA, ADCSDIB  : std_logic;
   signal ADCCLK    : std_logic;
   signal ADCCS     : std_logic;
   signal ADCCONVST : std_logic;
@@ -55,7 +55,10 @@ architecture behavior of acqcmdtest is
   signal RESET     : std_logic := '1';
   signal CLK8      : std_logic := '0';
 
+  signal SDI, SDO : std_logic_vector(9 downto 0) := (others => '0');
+  signal SDIA, SDIB, SDIA_pre, SDIB_pre : std_logic := '0';
 
+  
 
 
   signal bouts : std_logic_vector(79 downto 0) := (others => '0');
@@ -87,21 +90,21 @@ architecture behavior of acqcmdtest is
 
   signal syscnt : integer := 0;
 
-  signal eaddr, edin, edout      :     integer   := 0;
-  signal ewe                     :     std_logic := '0';
-  component EEPROM is
-                     port ( SCK  : in  std_logic;
-                            SO   : out std_logic;
-                            SI   : in  std_logic;
-                            CS   : in  std_logic;
-                            ADDR : in  integer;
-                            DOUT : out integer;
-                            DIN  : in  integer;
-                            WE   : in  std_logic);
+  signal eaddr, edin, edout :     integer   := 0;
+  signal ewe                :     std_logic := '0';
+  component EEPROM
+    port ( SCK              : in  std_logic;
+           SO               : out std_logic;
+           SI               : in  std_logic;
+           CS               : in  std_logic;
+           ADDR             : in  integer;
+           DOUT             : out integer;
+           DIN              : in  integer;
+           WE               : in  std_logic);
   end component;
   type intarray is array(0 to 9) of integer;
-  signal gains                   :     intarray  := (others => 0);
-  signal filters                 :     intarray  := (others => 0);
+  signal gains              :     intarray  := (others => 0);
+  signal filters            :     intarray  := (others => 0);
 
   signal error : std_logic := '0';
 
@@ -119,25 +122,23 @@ architecture behavior of acqcmdtest is
            );
   end component;
 
-  signal decmdst : std_logic_vector(7 downto 0)   := (others => '0');
-  signal decmdid : std_logic_vector(7 downto 0)   := (others => '0');
-  signal newframe         : std_logic                      := '0';
-  signal deser_data       : std_logic_vector(159 downto 0) := (others => '0');
-  signal adcval           : intarray                       := (others => 32768);
+  signal decmdst    : std_logic_vector(7 downto 0)   := (others => '0');
+  signal decmdid    : std_logic_vector(7 downto 0)   := (others => '0');
+  signal newframe   : std_logic                      := '0';
+  signal deser_data : std_logic_vector(159 downto 0) := (others => '0');
+  signal adcval     : intarray                       := (others => 32768);
 
 
 
-  component ADC
+  component AD7685
     generic (filename :     string    := "adcin.dat" );
     port ( RESET      : in  std_logic;
-           SCLK       : in  std_logic := '0';
-           CONVST     : in  std_logic;
-           CS         : in  std_logic;
-           SDOUT      : out std_logic;
-           CHA_VALUE  : in  integer;
-           CHB_VALUE  : in  integer;
-           CHA_OUT    : out integer;
-           CHB_OUT    : out integer;
+           SCK       : in  std_logic := '0';
+           CNV     : in  std_logic;
+           SDI : in std_logic;
+           SDO      : out std_logic;
+           CH_VALUE  : in  integer;
+           CH_OUT    : out integer;
            FILEMODE   : in  std_logic;
            BUSY       : out std_logic;
            INPUTDONE  : out std_logic);
@@ -210,7 +211,7 @@ begin
     data     => deser_data,
     kchar    => open);
 
-  process(deser_data) is
+  process(deser_data)
   begin
     for i in 0 to 9 loop
       outvals(i) <= TO_INTEGER(signed(deser_data(i*16+7 downto i*16+0) &
@@ -220,22 +221,43 @@ begin
   end process;
 
 
-  adcs     : for i in 0 to 4 generate
-    adcuut : ADC port map (
-      RESET     => RESET,
-      SCLK      => ADCCLK,
-      CONVST    => ADCCONVST,
-      CS        => ADCCS,
-      SDOUT     => ADCIN(i),
-      CHA_VALUE => adcval(2*i),
-      CHB_VALUE => adcval(2*i+1),
-      CHA_OUT   => open,
-      CHB_OUT   => open,
-      BUSY      => open,
-      FILEMODE  => '0',
-      INPUTDONE => open);
-  end generate;
+  -- configuration:
+  sdi(0)   <= '0';
+  sdi(1)   <= sdo(0);
+  sdi(2)   <= sdo(1);
+  sdi(3)   <= sdo(2);
+  sdi(4)   <= sdo(3);
+  SDIA_pre <= sdo(4);
 
+  sdi(5)   <= '0';
+  sdi(6)   <= sdo(5);
+  sdi(7)   <= sdo(6);
+  sdi(8)   <= sdo(7);
+  sdi(9)   <= sdo(8);
+  SDIB_pre <= sdo(9);
+
+  -- circuit board and isolator delays
+
+  SDIA <= SDIA_pre after 20 ns;
+  SDIB <= SDIB_pre after 20 ns;
+
+  SCK <= SCK_pre after 10 ns;
+
+  adcs   : for i in 0 to 9 generate
+    ADCi : AD7685 generic map
+      (filename   => simname & ".adcin." & integer'image(i) & ".dat")
+      port map (
+        RESET     => RESET,
+        SCK       => SCK,
+        CNV       => CNV,
+        SDO       => sdo(i),
+        SDI       => sdi(i),
+        CH_VALUE  => adcval(i),
+        CH_OUT    => open,
+        FILEMODE  => '0',
+        BUSY      => open,
+        inputdone => open);
+  end generate;
 
 
 
@@ -244,7 +266,7 @@ begin
   clkin      <= not clkin after 13.889 ns;
   clk8       <= not clk8  after 125 ns;
   reset      <= '0'       after 100 ns;
-  process (clkin) is
+  process (clkin)
   begin
     if rising_edge(clkin) then
       syscnt <= syscnt + 1;
@@ -252,7 +274,7 @@ begin
   end process;
 
 
-  process(bouts) is
+  process(bouts)
   begin
     for i in 0 to 9 loop
       gains(9-i)   <= TO_INTEGER(unsigned(bouts(i*8+3 downto i*8+1)));
@@ -262,7 +284,7 @@ begin
   end process;
 
 
-  adcsmode : process(ADCCS) is
+  adcsmode : process(ADCCS)
   begin
     if rising_edge(ADCCS) then
       if adcmode = const then

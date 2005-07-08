@@ -17,7 +17,7 @@ for r in range(10):
     for i in range(150):
         f.write("32768\n")
         
-        f.write("65535\n")
+    f.write("65535\n")
 
     for i in range(150):
         f.write("32768\n")

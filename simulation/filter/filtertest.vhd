@@ -34,7 +34,7 @@ architecture behavior of filtertest is
   signal INSAMPLE       : std_logic;
   signal RESET          : std_logic := '1';
   signal CNV            : std_logic := '0';
-  signal SCK            : std_logic := '0';
+  signal SCK, SCK_pre   : std_logic := '0';
   signal SDIA, SDIA_pre : std_logic := '-';
   signal SDIB, SDIB_pre : std_logic := '0';
   signal DOUT           : std_logic_vector(15 downto 0);
@@ -156,10 +156,10 @@ begin
     CLK      => CLK,
     INSAMPLE => INSAMPLE,
     RESET    => RESET,
-    CONVST   => CONVST,
-    ADCCS    => ADCCS,
-    SCLK     => SCLK,
-    SDIN     => SDIN,
+    CNV      => CNV,
+    SCK      => SCK_pre,
+    SDIA     => SDIA,
+    SDIB     => SDIB,
     DOUT     => DOUT,
     COUT     => COUT,
     WEOUT    => WEOUT,
@@ -199,13 +199,13 @@ begin
     ADCi : AD7685 generic map
       (filename   => simname & ".adcin." & integer'image(i) & ".dat")
       port map (
-        RESET     => adcreset,
+        RESET     => RESET,
         SCK       => SCK,
         CNV       => CNV,
         SDO       => sdo(i),
         SDI       => sdi(i),
         CH_VALUE  => 0,
-        CH_OUT    => chan_in(i),
+        CH_OUT    => open,
         FILEMODE  => '1',
         BUSY      => open,
         inputdone => adcinputdone(i));
@@ -353,9 +353,11 @@ begin
 
     reset      <= '0';
     clk_enable <= '1';
-    wait until filedone = '1';
-    wait;
+    wait until adcinputdone = "1111111111";
 
+    assert false
+      report "End of simulation"
+      severity failure;
 
 
   end process;

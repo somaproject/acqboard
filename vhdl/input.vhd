@@ -35,16 +35,16 @@ architecture Behavioral of input is
   signal sdial, sdibl : std_logic := '0';
 
 
-  signal sampA1 : std_logic_vector(15 downto 0) := (others => '0');
-  signal sampA2 : std_logic_vector(15 downto 0) := (others => '0');
-  signal sampA3 : std_logic_vector(15 downto 0) := (others => '0');
-  signal sampA4 : std_logic_vector(15 downto 0) := (others => '0');
-  signal sampAC : std_logic_vector(15 downto 0) := (others => '0');
-  signal sampB1 : std_logic_vector(15 downto 0) := (others => '0');
-  signal sampB2 : std_logic_vector(15 downto 0) := (others => '0');
-  signal sampB3 : std_logic_vector(15 downto 0) := (others => '0');
-  signal sampB4 : std_logic_vector(15 downto 0) := (others => '0');
-  signal sampBC : std_logic_vector(15 downto 0) := (others => '0');
+  signal sampA1 : std_logic_vector(15 downto 0) := X"8000";
+  signal sampA2 : std_logic_vector(15 downto 0) := X"8000";
+  signal sampA3 : std_logic_vector(15 downto 0) := X"8000";
+  signal sampA4 : std_logic_vector(15 downto 0) := X"8000";
+  signal sampAC : std_logic_vector(15 downto 0) := X"8000";
+  signal sampB1 : std_logic_vector(15 downto 0) := X"8000";
+  signal sampB2 : std_logic_vector(15 downto 0) := X"8000";
+  signal sampB3 : std_logic_vector(15 downto 0) := X"8000";
+  signal sampB4 : std_logic_vector(15 downto 0) := X"8000";
+  signal sampBC : std_logic_vector(15 downto 0) := X"8000";
 
 
 

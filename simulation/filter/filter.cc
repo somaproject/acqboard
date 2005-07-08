@@ -15,22 +15,20 @@ int main(void)
   string simname = "basic";
 
   vector<signal > x(10); 
-  for (int i = 0 ; i < 5; ++i)
+  for (int i = 0 ; i < 10; ++i)
     {
       boost::format fname("%s.adcin.%d.dat");
       fname % simname % i;
       ifstream adcs(fname.str().c_str()); 
       cout << "Opening " << fname << endl; 
       int a, b;
-      x[i*2].reserve(4000000); 
-      x[i*2+1].reserve(4000000); 
-      
+      x[i].reserve(4000000); 
+            
       // we're actually just reading in a few
       int q = 11000; 
       while (q-- > 0 & !adcs.eof()) {
-	adcs >> a >> b; 
-	x[i*2+1].push_back(trunc(movepoint(a-32768, 15), 15));
-	x[i*2].push_back(trunc(movepoint(b-32768, 15), 15));
+	adcs >> a; 
+	x[i].push_back(trunc(movepoint(a-32768, 15), 15));
       }
     }
 

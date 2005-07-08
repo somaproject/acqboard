@@ -13,7 +13,7 @@ Thus, we ultimately want:
     filter(runname), which will call modelsim appropriately with the right
     generics set to have the vhdl read in:
 
-    runname.adcin.0.dat .. runname.adcin.4.dat,
+    runname.adcin.0.dat .. runname.adcin.9.dat,
     runname.filter.dat
 
     And then -we- should also be able to take that data, read it in, perform our fixed-point convolution on it, and compare it with the output. 

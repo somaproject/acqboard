@@ -213,19 +213,6 @@ ClassGenCCAutoEnabled=1
 ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 
-[Document16]
-DocumentPath=ADCset.SCHDOC
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=11
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-
 [GeneratedDocument1]
 DocumentPath=outputs\acqboard.DRL
 

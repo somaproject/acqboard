@@ -11,7 +11,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
-
+use WORK.Silly.all;
 entity pgaloadtest is
 end pgaloadtest;
 
@@ -33,6 +33,7 @@ architecture behavior of pgaloadtest is
       RCLK     : out std_logic;
       SOUT     : out std_logic
       );
+    
   end component;
 
   signal CLK      : std_logic                    := '0';
@@ -50,19 +51,22 @@ architecture behavior of pgaloadtest is
   signal ISEL     : std_logic_vector(1 downto 0) := (others => '0');
 
   component PGA
-    port ( SCLK  : in  std_logic;
-           RCLK  : in  std_logic;
-           SIN   : in  std_logic;
-           BOUTS : out std_logic_vector(6*8-1 downto 0) );
-  end component;
+  port ( SCLK  : in  std_logic;
+         RCLK  : in  std_logic;
+         SIN   : in  std_logic;
+         GAINS : out chanarray;
+         FILTERS : out  chanarray;
+         INSELA : out integer;
+         INSELB : out integer
+         );
+end component;
 
   signal pgadata : std_logic_vector(6*8-1 downto 0);
 
   -- parsing
-  type gainarray is array(9 downto 0) of std_logic_vector(2 downto 0);
-  signal gains          : gainarray                    := (others => "000");
-  signal filters        : std_logic_vector(9 downto 0) := (others => '0');
-  signal inselA, inselb : std_logic_vector(1 downto 0);
+  signal gains          : chanarray   := (others => 0);
+  signal filters        : chanarray := (others => 0); 
+  signal inselA, inselb : integer := 0;
 
 
 begin
@@ -84,39 +88,6 @@ begin
     ISEL     => ISEL
     );
 
-  -- hook up the gains
-  filters(1) <= pgadata(47);
-  gains(1)   <= pgadata(44) & pgadata(45) & pgadata(46);
-  gains(0)   <= pgadata(43 downto 41);
-  filters(0) <= pgadata(40);
-
-  filters(3) <= pgadata(39);
-  gains(3)   <= pgadata(36) & pgadata(37) & pgadata(38);
-  gains(2)   <= pgadata(35 downto 33);
-  filters(2) <= pgadata(32);
-
-  inselA(1) <= pgadata(29);
-  inselA(0) <= pgadata(28);
-
-  gains(4)   <= pgadata(27 downto 25);
-  filters(4) <= pgadata(24);
-
-  inselB(1) <= pgadata(21);
-  inselB(0) <= pgadata(20);
-
-  gains(5)   <= pgadata(19 downto 17);
-  filters(5) <= pgadata(16);
-
-  filters(7) <= pgadata(15);
-  gains(7)   <= pgadata(12) & pgadata(13) & pgadata(14);
-  gains(6)   <= pgadata(11 downto 9);
-  filters(6) <= pgadata(8);
-
-  filters(9) <= pgadata(7);
-  gains(9)   <= pgadata(4) & pgadata(5) & pgadata(6);
-  gains(8)   <= pgadata(3 downto 1);
-  filters(8) <= pgadata(0);
-
 
   CLK   <= not CLK after 6.944 ns;
   RESET <= '0'     after 40 ns;
@@ -125,7 +96,10 @@ begin
     (SCLK  => SCLK,
      RCLK  => RCLK,
      SIN   => SOUT,
-     BOUTS => pgadata);
+     FILTERS => filters,
+     GAINS => gains,
+     INSELA => insela,
+     INSELB => inselb); 
 
   -- running code
   main : process is
@@ -142,7 +116,7 @@ begin
     for i in 1 to 300 loop
       wait until rising_edge(CLK);
     end loop;
-    assert gains(0) = "110"
+    assert gains(0) = 6
       report "Error setting gains(0)"
       severity error;
 
@@ -154,7 +128,7 @@ begin
     for i in 1 to 300 loop
       wait until rising_edge(CLK);
     end loop;
-    assert gains(1) = "101"
+    assert gains(1) = 5
       report "Error setting gains(1)"
       severity error;
 
@@ -166,7 +140,7 @@ begin
     for i in 1 to 300 loop
       wait until rising_edge(CLK);
     end loop;
-    assert filters(1) = '1'
+    assert filters(1) = 1
       report "Error setting filters(1)"
       severity error;
 
@@ -178,14 +152,14 @@ begin
     GSET <= '0';
     for i in 1 to 300 loop
       wait until rising_edge(CLK);
-    end loop; 
-    assert gains(8) = "111" 
+    end loop;
+    assert gains(8) = 7
       report "Error setting gains(8)"
-      severity error; 
+      severity error;
 
     assert false
       report "End of simulation"
-      severity failure; 
+      severity failure;
 
-  end process main; 
-END;
+  end process main;
+end;

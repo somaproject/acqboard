@@ -56,15 +56,18 @@ for r in range(10):
         # sum and proudct of two freqs. 
         for i in range(vlen):
            x1 = math.sin(float(i)/256.0*2*math.pi)
-           x1rnd = to_16bit((x1 + x2)/4.0+0.5)
+           x2 = math.sin(float(i)/32.0*2*math.pi)
+                      
+           x1rnd = to_16bit((x1 + x2)/4.0 + 0.5)
      
            f.write("%d\n" %(x1rnd));
 
     if r == 5:
         # sum and proudct of two freqs. 
         for i in range(vlen):
-           
-           x2 = math.cos(float(i)/25.6*2*math.pi)
+           x1 = math.cos(float(i)/25.6*2*math.pi)
+           x2 = math.cos(float(i)/256*2*math.pi)
+
            x2rnd = to_16bit((x1*x2)/2+0.5);
            f.write("%d\n" %(x2rnd));
            

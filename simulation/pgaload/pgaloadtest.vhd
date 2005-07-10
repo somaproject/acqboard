@@ -33,7 +33,7 @@ architecture behavior of pgaloadtest is
       RCLK     : out std_logic;
       SOUT     : out std_logic
       );
-    
+
   end component;
 
   signal CLK      : std_logic                    := '0';
@@ -51,22 +51,22 @@ architecture behavior of pgaloadtest is
   signal ISEL     : std_logic_vector(1 downto 0) := (others => '0');
 
   component PGA
-  port ( SCLK  : in  std_logic;
-         RCLK  : in  std_logic;
-         SIN   : in  std_logic;
-         GAINS : out chanarray;
-         FILTERS : out  chanarray;
-         INSELA : out integer;
-         INSELB : out integer
-         );
-end component;
+    port ( SCLK    : in  std_logic;
+           RCLK    : in  std_logic;
+           SIN     : in  std_logic;
+           GAINS   : out chanarray;
+           FILTERS : out chanarray;
+           INSELA  : out integer;
+           INSELB  : out integer
+           );
+  end component;
 
   signal pgadata : std_logic_vector(6*8-1 downto 0);
 
   -- parsing
-  signal gains          : chanarray   := (others => 0);
-  signal filters        : chanarray := (others => 0); 
-  signal inselA, inselb : integer := 0;
+  signal gains          : chanarray := (others => 0);
+  signal filters        : chanarray := (others => 0);
+  signal inselA, inselb : integer   := 0;
 
 
 begin
@@ -93,17 +93,18 @@ begin
   RESET <= '0'     after 40 ns;
 
   PGAuut : PGA port map
-    (SCLK  => SCLK,
-     RCLK  => RCLK,
-     SIN   => SOUT,
+    (SCLK    => SCLK,
+     RCLK    => RCLK,
+     SIN     => SOUT,
      FILTERS => filters,
-     GAINS => gains,
-     INSELA => insela,
-     INSELB => inselb); 
+     GAINS   => gains,
+     INSELA  => insela,
+     INSELB  => inselb);
 
   -- running code
   main : process is
   begin
+
     wait until falling_edge(RESET);
     wait for 20 ns;
     wait until rising_edge(CLK);

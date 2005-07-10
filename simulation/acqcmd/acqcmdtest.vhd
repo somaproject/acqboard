@@ -11,6 +11,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use WORK.Silly.all;
 
 entity acqcmdtest is
 end acqcmdtest;
@@ -20,13 +21,13 @@ architecture behavior of acqcmdtest is
   component acqboard
     port(
       CLKIN     : in  std_logic;
-      ADCSDIA     : in  std_logic;
-      ADCSDIB   : in std_logic; 
+      ADCSDIA   : in  std_logic;
+      ADCSDIB   : in  std_logic;
+      ADCSCK    : out std_logic;
+      ADCCNV    : out std_logic;
       ESO       : in  std_logic;
       EEPROMLEN : in  std_logic;
       FIBERIN   : in  std_logic;
-      ADCSCK    : out std_logic;
-      ADCCNV : out std_logic;
       PGARCK    : out std_logic;
       PGASRCK   : out std_logic;
       PGASERA   : out std_logic;
@@ -37,43 +38,47 @@ architecture behavior of acqcmdtest is
       );
   end component;
 
-  signal CLKIN     : std_logic := '0';
-  signal ADCSDIA, ADCSDIB  : std_logic;
-  signal ADCCLK    : std_logic;
-  signal ADCCS     : std_logic;
-  signal ADCCONVST : std_logic;
-  signal PGARCK    : std_logic;
-  signal PGASRCK   : std_logic;
-  signal PGASERA   : std_logic;
-  signal ESI       : std_logic;
-  signal ESCK      : std_logic;
-  signal ECS       : std_logic;
-  signal ESO       : std_logic;
-  signal EEPROMLEN : std_logic := '0';
-  signal FIBERIN   : std_logic;
-  signal FIBEROUT  : std_logic;
-  signal RESET     : std_logic := '1';
-  signal CLK8      : std_logic := '0';
+  signal CLKIN      : std_logic := '0';
+  signal SDIA, SDIB : std_logic;
+  signal CNV        : std_logic;
+  signal PGARCK     : std_logic;
+  signal PGASRCK    : std_logic;
+  signal PGASERA    : std_logic;
+  signal ESI        : std_logic;
+  signal ESCK       : std_logic;
+  signal ECS        : std_logic;
+  signal ESO        : std_logic;
+  signal EEPROMLEN  : std_logic := '1';
+  signal FIBERIN    : std_logic;
+  signal FIBEROUT   : std_logic;
+  signal RESET      : std_logic := '1';
+  signal CLK8       : std_logic := '0';
 
-  signal SDI, SDO : std_logic_vector(9 downto 0) := (others => '0');
-  signal SDIA, SDIB, SDIA_pre, SDIB_pre : std_logic := '0';
+  signal SDI, SDO           : std_logic_vector(9 downto 0) := (others => '0');
+  signal SDIA_pre, SDIB_pre : std_logic                    := '0';
+  signal SCK, SCK_pre       : std_logic                    := '0';
 
-  
+  signal insela, inselb : integer := 0;
 
 
-  signal bouts : std_logic_vector(79 downto 0) := (others => '0');
 
   component PGA
-    port ( SCLK  : in  std_logic;
-           RCLK  : in  std_logic;
-           SIN   : in  std_logic;
-           bouts : out std_logic_vector(10*8-1 downto 0));
+    port ( SCLK    : in  std_logic;
+           RCLK    : in  std_logic;
+           SIN     : in  std_logic;
+           GAINS   : out chanarray;
+           FILTERS : out chanarray;
+           INSELA  : out integer;
+           INSELB  : out integer
+           );
   end component;
 
-  signal cmdid, cmd           :     std_logic_vector(3 downto 0) := (others => '0');
+
+  signal cmdid, cmd : std_logic_vector(3 downto 0) := (others => '0');
   signal cmddata0, cmddata1, cmddata2, cmddata3, cmdchksum :
-    std_logic_vector(7 downto 0)                                 := (others => '0');
-  signal sendcmds, cmdpending :     std_logic                    := '0';
+    std_logic_vector(7 downto 0)                   := (others => '0');
+
+  signal sendcmds, cmdpending :     std_logic := '0';
   component SendCMD
     port ( CMDID              : in  std_logic_vector(3 downto 0);
            CMD                : in  std_logic_vector(3 downto 0);
@@ -90,25 +95,26 @@ architecture behavior of acqcmdtest is
 
   signal syscnt : integer := 0;
 
-  signal eaddr, edin, edout :     integer   := 0;
-  signal ewe                :     std_logic := '0';
+  signal eaddr, edin, edout : integer   := 0;
+  signal ewe                : std_logic := '0';
+
   component EEPROM
-    port ( SCK              : in  std_logic;
-           SO               : out std_logic;
-           SI               : in  std_logic;
-           CS               : in  std_logic;
-           ADDR             : in  integer;
-           DOUT             : out integer;
-           DIN              : in  integer;
-           WE               : in  std_logic);
+    port ( SCK  : in  std_logic;
+           SO   : out std_logic;
+           SI   : in  std_logic;
+           CS   : in  std_logic;
+           ADDR : in  integer;
+           DOUT : out integer;
+           DIN  : in  integer;
+           WE   : in  std_logic);
   end component;
-  type intarray is array(0 to 9) of integer;
-  signal gains              :     intarray  := (others => 0);
-  signal filters            :     intarray  := (others => 0);
+
+  signal gains   : chanarray := (others => 0);
+  signal filters : chanarray := (others => 0);
 
   signal error : std_logic := '0';
 
-  signal outvals : intarray := (others => 0);
+  signal outvals : chanarray := (others => 0);
 
   component deserialize
     generic ( filename :     string := "deserialize.output.dat");
@@ -126,19 +132,19 @@ architecture behavior of acqcmdtest is
   signal decmdid    : std_logic_vector(7 downto 0)   := (others => '0');
   signal newframe   : std_logic                      := '0';
   signal deser_data : std_logic_vector(159 downto 0) := (others => '0');
-  signal adcval     : intarray                       := (others => 32768);
+  signal adcval     : chanarray                      := (others => 32768);
 
 
 
   component AD7685
     generic (filename :     string    := "adcin.dat" );
     port ( RESET      : in  std_logic;
-           SCK       : in  std_logic := '0';
-           CNV     : in  std_logic;
-           SDI : in std_logic;
-           SDO      : out std_logic;
-           CH_VALUE  : in  integer;
-           CH_OUT    : out integer;
+           SCK        : in  std_logic := '0';
+           CNV        : in  std_logic;
+           SDI        : in  std_logic;
+           SDO        : out std_logic;
+           CH_VALUE   : in  integer;
+           CH_OUT     : out integer;
            FILEMODE   : in  std_logic;
            BUSY       : out std_logic;
            INPUTDONE  : out std_logic);
@@ -152,13 +158,12 @@ architecture behavior of acqcmdtest is
 
 begin
 
-
   uut : acqboard port map(
     CLKIN     => CLKIN,
-    ADCIN     => ADCIN,
-    ADCCLK    => ADCCLK,
-    ADCCS     => ADCCS,
-    ADCCONVST => ADCCONVST,
+    ADCSDIA   => SDIA,
+    ADCSDIB   => SDIB,
+    ADCSCK    => SCK_pre,
+    ADCCNV    => CNV,
     PGARCK    => PGARCK,
     PGASRCK   => PGASRCK,
     PGASERA   => PGASERA,
@@ -172,10 +177,13 @@ begin
     );
 
   pgauut : PGA port map (
-    SCLK  => pgasrck,
-    RCLK  => pgarck,
-    SIN   => pgasera,
-    bouts => bouts);
+    SCLK    => pgasrck,
+    RCLK    => pgarck,
+    SIN     => pgasera,
+    gains   => gains,
+    filters => filters,
+    INSELA  => insela,
+    INSELB  => inselb);
 
 
   cmdctl : SendCMD port map (
@@ -244,8 +252,7 @@ begin
   SCK <= SCK_pre after 10 ns;
 
   adcs   : for i in 0 to 9 generate
-    ADCi : AD7685 generic map
-      (filename   => simname & ".adcin." & integer'image(i) & ".dat")
+    ADCi : AD7685 
       port map (
         RESET     => RESET,
         SCK       => SCK,
@@ -261,10 +268,8 @@ begin
 
 
 
-
-
   clkin      <= not clkin after 13.889 ns;
-  clk8       <= not clk8  after 125 ns;
+  clk8       <= not clk8  after 62.5 ns;
   reset      <= '0'       after 100 ns;
   process (clkin)
   begin
@@ -274,19 +279,9 @@ begin
   end process;
 
 
-  process(bouts)
+  adcsmode : process(CNV)
   begin
-    for i in 0 to 9 loop
-      gains(9-i)   <= TO_INTEGER(unsigned(bouts(i*8+3 downto i*8+1)));
-      filters(9-i) <= TO_INTEGER(unsigned(bouts(i*8+5 downto i*8+4)));
-
-    end loop;
-  end process;
-
-
-  adcsmode : process(ADCCS)
-  begin
-    if rising_edge(ADCCS) then
+    if falling_edge(CNV) then
       if adcmode = const then
         adcval        <= (others => 32768);
       elsif adcmode = inc then
@@ -353,11 +348,11 @@ begin
     end if;
 
 
-    -- set highpass filter for channel 7 to value 2
+    -- set highpass filter for channel 7 to value 1
     cmdid    <= "0100";
     cmd      <= "0011";
     cmddata0 <= X"06";
-    cmddata1 <= X"02";
+    cmddata1 <= X"01";
     sendcmds <= '1';
     wait until rising_edge(clkin);
     sendcmds <= '0';
@@ -365,10 +360,10 @@ begin
 
     wait until decmdid(4 downto 1) = "0100";
 
-    if filters(6) /= 2 then
+    if filters(6) /= 1 then
       error <= '1';
     else
-      report "set highpass filter for channel 7 to value 2";
+      report "set highpass filter for channel 7 to value 1";
     end if;
 
     -- set mode = 1 (offset disable)
@@ -477,8 +472,8 @@ begin
 
     report "Sitched to mode 3, with chan 0x02 as raw input";
 
-    wait until outvals(0 to 7) =
-      (111, 112, 113, 114, 115, 116, 117, 118);
+    wait until outvals(7 downto 0) =
+      (118, 117, 116, 115, 114, 113, 112, 111);
 
     report "Successfully read raw data";
 

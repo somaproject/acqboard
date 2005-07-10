@@ -17,13 +17,13 @@ use WORK.Silly.all;
 
 
 entity PGA is
-  port ( SCLK  : in  std_logic;
-         RCLK  : in  std_logic;
-         SIN   : in  std_logic;
-         GAINS : out chanarray ;
-         FILTERS : out  chanarray ;
-         INSELA : out integer;
-         INSELB : out integer
+  port ( SCLK    : in  std_logic;
+         RCLK    : in  std_logic;
+         SIN     : in  std_logic;
+         GAINS   : out chanarray;
+         FILTERS : out chanarray;
+         INSELA  : out integer;
+         INSELB  : out integer
          );
 end PGA;
 
@@ -34,13 +34,13 @@ architecture Behavioral of PGA is
   signal rbits, fbits : std_logic_vector(6*8-1 downto 0) := (others => '0');
 
   type gainarray is array (9 downto 0) of std_logic_vector(2 downto 0);
-  
+
   signal gain_bits : gainarray := (others => "000");
 
   signal filter_bits : std_logic_vector(9 downto 0) := (others => '0');
-  
+
   signal insela_bits, inselb_bits : std_logic_vector(1 downto 0) := (others => '0');
-  
+
 
 begin
 
@@ -60,22 +60,22 @@ begin
       fbits <= rbits;
     end if;
   end process;
-  
+
 
   process(gain_bits, filter_bits, inselA_bits, inselB_bits)
   begin
     for i in 0 to 9 loop
-      gains(i)   <= TO_INTEGER(unsigned(gain_bits(i)));
+      gains(i)      <= TO_INTEGER(unsigned(gain_bits(i)));
       if filter_bits(i) = '1' then
         filters (i) <= 1;
       else
         filters (i) <= 0;
       end if;
-                    
+
     end loop;
     INSELA <= TO_INTEGER(unsigned(inselA_bits));
-    INSELB <= TO_INTEGER(unsigned(inselB_bits));    
-    
+    INSELB <= TO_INTEGER(unsigned(inselB_bits));
+
   end process;
 
   -- hook up the gains

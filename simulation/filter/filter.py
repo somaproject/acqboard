@@ -21,12 +21,13 @@ DDELAY = 150
 
 def verify(simname):
 
-    siglen = 200 
+    siglen = 1600
     simfid = file("%s.simoutput.dat" % simname)
     simout = io.read_array(simfid, lines=((0, siglen*N),))
 
     fid = file("%s.output.dat" % simname)
     out = io.read_array(fid, lines=((1, siglen+1),))
+    print out.shape
 
     print simout.shape
     shifts = []
@@ -54,29 +55,15 @@ def verify(simname):
                 shift = i
                 os = argmax(offset)
 
-        print os, maxos, shift
         shifts.append(shift)
+        
+    for chan in range(10) :
+        # Now we actually verify the outputs
+        shiftedout = simout[shifts[chan]:(siglen*N):N, chan]
+        outchan = out[:len(shiftedout), chan]
+        print "Channel %d, error %f" % (chan, sum(shiftedout - outchan))
 
-    chan = 0
     
-    shiftedout = simout[shifts[chan]:(siglen*N):N, chan]
-    print shiftedout.shape
-    print out.shape
-    outchan = out[:len(shiftedout), chan]
-    print outchan.shape
-    #plot (shiftedout - outchan)
-    plot (outchan)
-    #plot(out[0:1000, chan])
-    
-    #print len(simout[shifts[chan]:((siglen-1)*8):8, chan]),
-    #len(out[0:siglen, chan])
-    #plot((simout[shifts[chan]:((siglen-1)*N):N, chan] - out[0:siglen, chan])*1000)
-    #plot(simout[:, chan])
-    show()
-    
-    #show()
-    
-
 def main():
     
     verify("basic")

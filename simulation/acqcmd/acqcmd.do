@@ -33,7 +33,7 @@ vcom -93 -explicit ../../vhdl/acqboard.vhd
 vcom -93 -explicit ../components/PGA/PGA.vhdl
 vcom -93 -explicit ../components/SendCMD/SendCMD.vhd
 vcom -93 -explicit ../components/deserialize/deserialize.vhd
-vcom -93 -explicit ../components/ADC/ADC.vhd
+vcom -93 -explicit ../components/ADC/AD7685.vhd
 vcom -93 -explicit EEPROM.vhdl
 vcom -93 -explicit acqcmdtest.vhd
 

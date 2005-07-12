@@ -175,7 +175,7 @@ bool ScopeArea::newdata(Glib::IOCondition foo)
 
   //cout << endl;
   for (int i = 0; i < 10;  i++) { 
-    if ((mode_ == 0 and i < 8) or (mode_ == 1 and i == channel_)) { 
+    if ((mode_ == 0 and i < 6) or (mode_ == 1 and i == channel_)) { 
       unsigned char lowbyte = buffer[(i+1)*2 + 1];
       unsigned char highbyte = buffer[(i+1)*2];
       unsigned short usample = highbyte * 256 + lowbyte; 

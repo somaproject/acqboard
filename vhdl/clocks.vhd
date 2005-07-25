@@ -20,6 +20,7 @@ entity clocks is
 end clocks;
 
 architecture Behavioral of clocks is
+
 -- CLOCKS.VHD : implementation of clocks and various clock-enables for
 -- our system. Uses Xilinx Spartan-IIE DLL to give us a 2x clock, and
 -- then additionally uses SRL16Es to generate the clock enables to save

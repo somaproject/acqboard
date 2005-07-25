@@ -31,8 +31,8 @@ entity acqboard is
 end acqboard;
 
 architecture Behavioral of acqboard is
--- ACQBOARD.VHD                         -- master file for entire Acquisition Board FPGA. 
--- See Overview.ai for details. 
+-- ACQBOARD.VHD : master file for entire Acquisition Board FPGA. 
+-- See FPGA.svg for details. 
 
 -- signals
   signal reset     : std_logic := '1';
@@ -506,7 +506,7 @@ begin
 
   -- muxes
   y   <= yraw   when rawsel = '1' else ymac;
-  yen <= yenraw when rawsel = '1' else yenmac;
+  yen <= yenraw when rawsel = '1' else macdone;
   bin <= dout   when bufsel = '0' else edout;
   bwe <= weout  when bufsel = '0' else lswe;
 

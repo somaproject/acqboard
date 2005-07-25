@@ -3,11 +3,6 @@ use IEEE.STD_LOGIC_1164.all;
 use IEEE.STD_LOGIC_ARITH.all;
 use IEEE.STD_LOGIC_UNSIGNED.all;
 
--- Uncomment the following lines to use the declarations that are
--- provided for instantiating Xilinx primitive components.
---library UNISIM;
---use UNISIM.VComponents.all;
-
 entity PGAload is
   port ( CLK      : in  std_logic;
          RESET    : in  std_logic;
@@ -25,7 +20,7 @@ entity PGAload is
 end PGAload;
 
 architecture Behavioral of PGAload is
--- PGALOAD.VHD                          -- This maintains gain settings for the PGAs and input
+-- PGALOAD.VHD: This maintains gain settings for the PGAs and input
 -- selection for the two continuous-data channels. Every change causes
 -- it to serialize out to the shift registers.  The use of LUTs as 
 -- 16x1bit RAMs with async reads makes the design really compact. 
@@ -56,7 +51,7 @@ architecture Behavioral of PGAload is
                   incsel, latchl, latchh1, latchh2);
   signal cs, ns : states := none;
 
-  component distRAM is
+  component distRAM 
                       port ( CLK : in  std_logic;
                              WE  : in  std_logic;
                              A   : in  std_logic_vector(3 downto 0);
@@ -187,7 +182,7 @@ begin
           "1000011" when oaddr = "101111" else
           "0000000";
 
-  clock : process(CLK, RESET) is
+  clock : process(CLK, RESET)
   begin
     if RESET = '1' then
       cs   <= none;

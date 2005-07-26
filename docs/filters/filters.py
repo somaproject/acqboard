@@ -4,7 +4,9 @@
 
    Generates necessary plots, as well. 
 
+an explanation of why the bessel cutoff isn't exactly -3 db
 
+http://groups-beta.google.com/group/comp.soft-sys.matlab/msg/f96918240a97fbe6?dmode=source&hl=en
 
 
 
@@ -14,99 +16,92 @@ class filters:
     def __init__(self):
        
         """
-        The anti-aliasing filter is composed of a cascade of a
-        4th-order and a 2nd-order bessel
+        The anti-aliasing filter is an 8-pole bessel
         """
+        cutoff3db = 13500 
+        self.wc = cutoff3db 
         
-        self.f1 = signal.bessel(4, 15250, analog=1)
+        self.f = signal.bessel(2, self.wc*1.27, analog=1)
         
 
-        self.f2 = signal.bessel(2, 38000, analog=1)
         
-        self.Fs = 256000
-        self.dsN = 8
         
-        self.h = signal.remez(143, [0, 10,  16, 127.99], [1,  0 ], [0.5,  500], Hz=self.Fs/1000.0, maxiter=1000);
+        self.Fs = 192000.
+        self.dsN = 6.
+        
+        self.h = signal.remez(143, r_[0, 10000,  16000, self.Fs/2 -1],
+                              [1,  0 ],
+                              r_[0.5,  500], Hz=self.Fs, maxiter=1000);
 
         
+
     def plotanalog(self):
         
-        totalaf = (convolve(self.f1[0], self.f2[0]), convolve(self.f1[1], self.f2[1]))
         fstart = 1000
         fstop = 250000
-        f = logspace(log10(fstart), log10(fstop), 10000)
-        s = f*1j
+        fr = logspace(log10(fstart), log10(fstop), 10000)
+        s = fr*1j
 
-        hf1 = polyval(self.f1[0], s)/polyval(self.f1[1], s)
-        hf2 = polyval(self.f2[0], s)/polyval(self.f2[1], s)
-        hftotal = polyval(totalaf[0], s)/polyval(totalaf[1], s)
+        hf = polyval(self.f[0], s)/polyval(self.f[1], s)
 
-        magf1 = abs(hf1)
-        magf2 = abs(hf2)
-        magtotal = abs(hftotal)
+        mag = abs(hf)
 
-        phasef1 = unwrap(angle(hf1))*180/pi;
-        phasef2 = unwrap(angle(hf2))*180/pi;
-        phasetotal = unwrap(angle(hftotal))*180/pi;
+        phase = unwrap(angle(hf))*180/pi;
 
         figure(1)
-        semilogx(f, log10(magf1)*20, 'r')
-        semilogx(f, log10(magf2)*20, 'b')
-        semilogx(f, log10(magtotal)*20, 'g')
+        semilogx(fr, log10(mag)*20, 'r')
 
-        plot([128000, 128000], [0, -110])
+        
+
+        plot([self.Fs/2, self.Fs/2], [0, -110])
+        plot([self.wc, self.wc], [0, -110], 'r')
         axis([fstart, fstop, -110, 0])
         xlabel('Frequency (Hz)')
         ylabel('Magnitude (dB)')
         title('Frequency Response of analog filters')
-        legend(('4-pole bessel', '2-pole bessel', 'Total'))
-
+        
         grid(1)
+        show()
+        return
 
         figure(2)
-        semilogx(f, log10(magf1)*20, 'r')
-        semilogx(f, log10(magf2)*20, 'b')
-        semilogx(f, log10(magtotal)*20, 'g')
+        semilogx(fr, log10(mag)*20, 'r')
+        
 
-        plot([128000, 128000], [0, -110])
+        plot([self.Fs/2, self.Fs/2], [0, -110])
         axis([fstart, 10000, -6, 3])
         xlabel('Frequency (Hz)')
         ylabel('Magnitude (dB)')
         title('Passband Frequency Response of analog filters')
-        legend(('4-pole bessel', '2-pole bessel', 'Total'))
+
 
         grid(1)
 
         figure(3)
-        semilogx(f, log10(magf1)*20, 'r')
-        semilogx(f, log10(magf2)*20, 'b')
-        semilogx(f, log10(magtotal)*20, 'g')
+        semilogx(fr, log10(mag)*20, 'r')
 
-        plot([128000, 128000], [0, -110])
+
+        plot([self.Fs/2, self.Fs/2], [0, -110])
         axis([12000, fstop, -110, -70])
         xlabel('Frequency (Hz)')
         ylabel('Magnitude (dB)')
         title('Stopband Frequency Response of analog filters')
-        legend(('4-pole bessel', '2-pole bessel', 'Total'))
-
+       
         grid(1)
 
         # calculate group delay in us
-        grdf1 = -phasef1/f/360*1e6
-        grdf2 = -phasef2/f/360*1e6
-        grdtotal = -phasetotal/f/360*1e6
+        grd = -phase/fr/360*1e6
+        
+        
         
         figure(4)
-        semilogx(f, grdf1, 'r');
-        semilogx(f, grdf2, 'b');
-        semilogx(f, grdtotal, 'g');
-
+        semilogx(fr, grd)
+        
         ylabel(r'Group Delay ($\mu s$)') 
         xlabel('Frequency (Hz)') 
         grid(1)
         title('Group delay of analog filters')
-        legend(('4-pole bessel', '2-pole bessel', 'Total'))
-
+        
         show()
     def plotdigital(self):
         # uniting analog and digital
@@ -114,9 +109,9 @@ class filters:
         # frequency response
 
         w = linspace(0, pi, 32768);
-        flin = w/pi*128000;
+        flin = w/pi*self.Fs/2;
         slin = flin*1j; 
-        totalaf = (convolve(self.f1[0], self.f2[0]), convolve(self.f1[1], self.f2[1]))
+        totalaf = self.f
 
         hanalog = polyval(totalaf[0], slin)/polyval(totalaf[1], slin)
 
@@ -134,7 +129,7 @@ class filters:
         ylabel('Magnitude (dB)'); 
         xlabel('Frequency (kHz)'); 
         title(r'$\rm{Aggregate Spectra}Y(e^{j\omega})$')
-        axis([0, 128, -180, 10])
+        axis([0, 96, -180, 10])
         show()
 
         # now zoom in on the passband
@@ -167,18 +162,40 @@ class filters:
         legend(('Signal', 'Aliases'))
 
 
-        
+def find3db(co):
+    cutoff3db = co
+    wc = cutoff3db
+    
+    f = signal.bessel(2, wc, analog=1)
+
+    (w, h) = signal.freqs(f[0], f[1], linspace(1000, 30000, 100))
+
+    h = abs(h)
+    hlog = 20*log10(h)
+
+    err = 1000000;
+    minf = 0
+    for i in range(len(hlog)):
+        e = (hlog[i] - 20*log10(1/sqrt(2)))**2 
+        if e < err:
+            err = e
+            minf = i
+            
+    print co, w[minf], hlog[minf], co/w[minf]
+    
+  
 from scipy import *
 
 
-from matplotlib.matlab import *
+from matplotlib.pylab import *
 
 def main():
     x = filters()
     x.plotanalog()
-    y = filters()
-    y.plotdigital()
-    
+    #y = filters()
+    #y.plotdigital()
+    #for i in linspace(1000, 90000, 200):
+    #    find3db(i)
     
 
 if __name__ == "__main__":

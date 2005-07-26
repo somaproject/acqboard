@@ -128,8 +128,10 @@ begin
       incnt   <= 0;
     else
       if rising_edge(clk) then
+
+        csl <= CMDSTS;
+                  
         if CMDDONE = '1' then
-          csl <= CMDSTS;
           cl  <= "000" & CMDID & CMDSUCCESS;
           ckl <= CHKSUM;
         end if;

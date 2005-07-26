@@ -1,4 +1,4 @@
-    *  Overview
+    * Overview
     * Problem formulation
           o What our real goal is
           o The importance of
@@ -13,10 +13,8 @@
           o Programmable Gain
           o Cost?
           o Number of channels
-          o
-
+      
           o Electrical Isolation -- the challenges of mixed-signal design
-    * 
     * Hardware Filter design:
 	  o We desire 16-bit resolution with an input bandwidth of 10 kHz. 
 	  o to achieve this, we oversample, downsample, and filter
@@ -35,9 +33,14 @@
                 + Anti-aliasing Filter Design
                       # Spice modles
                 + ADCs, voltage selection
-          o
 
-    * Digital:
+    * Fiber Interface:
+          o four modes
+            1. describe modes
+          o output interface
+          o input interface and bus protocol
+          o actual commands
+    * digital hardware implementation
           o FPGA selection
           o Digital offsets
           o fixed-point math

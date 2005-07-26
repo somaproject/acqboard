@@ -421,8 +421,8 @@ begin
       when modecng   =>
         pending    <= '1';
         loading    <= '1';
-        cmddone    <= '1';
-        cmdsuccess <= '1';
+        cmddone    <= '0';
+        cmdsuccess <= '0';
         load       <= '0';
         pgareset   <= '0';
         eaddrsel   <= 0;

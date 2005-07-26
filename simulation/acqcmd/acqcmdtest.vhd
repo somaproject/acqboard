@@ -299,12 +299,18 @@ begin
 
   end process adcsmode;
 
-  commands : process is
+  process
+                       
   begin
-    wait until syscnt = 1000;
+    
+    wait until syscnt > 100; 
 
+    if eepromlen = '1' then
+      wait until decmdst(0) = '0';
+      
+    end if;
     -- null command for frame alignment
-
+    wait until rising_edge(CLKIN) and cmdpending = '0';  
     cmdid    <= "0000";
     cmd      <= "0000";
     cmddata0 <= X"00";
@@ -312,7 +318,18 @@ begin
     sendcmds <= '1';
     wait until rising_edge(clkin);
     sendcmds <= '0';
-    wait until cmdpending = '0';
+
+    wait for 100 us; 
+
+
+    sendcmds <= '1';
+    wait until rising_edge(clkin);
+    sendcmds <= '0';
+
+    wait for 100 us; 
+
+    
+    wait until rising_edge(clkin) and cmdpending =  '0';
 
     report "Finished null command for frame alignment";
 
@@ -326,7 +343,7 @@ begin
     ewe <= '0';
 
     -- set gain of chan 0 to 0x7
-    wait until syscnt = 3000;
+    
 
     cmdid    <= "0011";
     cmd      <= "0001";
@@ -335,9 +352,9 @@ begin
     sendcmds <= '1';
     wait until rising_edge(clkin);
     sendcmds <= '0';
-    wait until cmdpending = '0';
+    wait until rising_edge(clkin)  and cmdpending = '0';
 
-    wait until decmdid(4 downto 1) = "0011";
+    wait until rising_edge(clkin)  and decmdid(4 downto 1) = "0011";
 
     if gains(0) = 7 then
       error <= '0';
@@ -356,12 +373,13 @@ begin
     sendcmds <= '1';
     wait until rising_edge(clkin);
     sendcmds <= '0';
-    wait until cmdpending = '0';
+    wait until rising_edge(clkin)  and  cmdpending = '0';
 
-    wait until decmdid(4 downto 1) = "0100";
+    wait until rising_edge(clkin)  and decmdid(4 downto 1) = "0100";
 
     if filters(6) /= 1 then
       error <= '1';
+      report "Error in setting highpass filter for channel 7 to value 1";
     else
       report "set highpass filter for channel 7 to value 1";
     end if;
@@ -376,9 +394,9 @@ begin
     sendcmds <= '1';
     wait until rising_edge(clkin);
     sendcmds <= '0';
-    wait until cmdpending = '0';
+    wait until rising_edge(clkin)  and  cmdpending = '0';
 
-    wait until decmdst = X"02";
+    wait until decmdst = X"02" and rising_edge(clkin);
     wait until rising_edge(clkin);
     wait until rising_edge(clkin);
     wait until rising_edge(clkin);
@@ -397,34 +415,77 @@ begin
     sendcmds <= '1';
     wait until rising_edge(clkin);
     sendcmds <= '0';
-    wait until cmdpending = '0';
+    wait until rising_edge(clkin)  and  cmdpending = '0';
 
-    wait until decmdid(4 downto 1) = "0110";
+    wait until rising_edge(clkin)  and decmdid(4 downto 1) = "0110";
     wait until rising_edge(clkin);
     eaddr <= (512 + 4*8+3)*2;
     wait until rising_edge(clkin);
 
     report "Wrote offset value of 0x1234 for chan 4, gain 3";
 
-
-    -- set mode = 0 (normal)
+    
+    
+    -- set mode = 2 (filter write)
     cmdid    <= "0111";
     cmd      <= "0111";
-    cmddata0 <= X"00";
+    cmddata0 <= X"10";
     cmddata1 <= X"00";
     sendcmds <= '1';
     wait until rising_edge(clkin);
     sendcmds <= '0';
-    wait until cmdpending = '0';
+    wait until rising_edge(clkin)  and cmdpending = '0';
 
-    wait until decmdid(4 downto 1) = "0111";
+    wait until rising_edge(clkin)  and  decmdid(4 downto 1) = "0111";
+
+    if decmdst /= X"04" then
+      error <= '1';
+      report "error checking decmdst in mode 2";
+    end if;
+
+    report "moved to mode 2";
+
+    -- write filter value
+    cmdid    <= "0000";
+    cmd      <= "0101";
+    cmddata0 <= X"00";
+    cmddata1 <= X"3F";
+    cmddata2 <= X"FF";
+    cmddata3 <= X"FF";
+
+    sendcmds <= '1';
     wait until rising_edge(clkin);
+    sendcmds <= '0';
+    wait until rising_edge(clkin)  and  cmdpending = '0';
+
+    wait until rising_edge(clkin)  and decmdid(4 downto 1) = "0000";
+    wait until rising_edge(clkin);
+    wait until rising_edge(clkin);
+
+    report "Wrote filter coefficient h[0]  to be 0x3FFFFF";
+
+
+    -- set mode = 0 (normal)
+    cmdid    <= "0001";
+    cmd      <= "0111";
+    cmddata0 <= X"10";
+    cmddata1 <= X"00";
+    sendcmds <= '1';
+    wait until rising_edge(clkin);
+    sendcmds <= '0';
+    wait until rising_edge(clkin)  and cmdpending = '0';
+
+    wait until rising_edge(clkin)  and  decmdid(4 downto 1) = "0001";
+                                                         -- done with loading
     if decmdst /= X"00" then
       error <= '1';
+      report "error checking decmdst in mode 0";
     end if;
 
     report "Returned to mode 0";
 
+
+    
     -- set gain of channel 4 to 3
 
     cmdid    <= "0011";
@@ -434,19 +495,20 @@ begin
     sendcmds <= '1';
     wait until rising_edge(clkin);
     sendcmds <= '0';
-    wait until cmdpending = '0';
+    wait until rising_edge(clkin) and cmdpending = '0';
 
-    wait until decmdid(4 downto 1) = "0011";
+    wait until rising_edge(clkin) and decmdid(4 downto 1) = "0011";
 
     if gains(4) = 3 then
       error <= '0';
     else
       error <= '1';
+      report "Error seytting channel 4 gain.";
     end if;
 
     report "Channel 4 gain to 3; waiting to see offset effect";
 
-    wait until outvals(4) = 4660;
+    wait until rising_edge(clkin) and outvals(4) = 4660;
 
     report "Successfully read channel 4 with offset-added";
 
@@ -462,9 +524,9 @@ begin
     sendcmds <= '1';
     wait until rising_edge(clkin);
     sendcmds <= '0';
-    wait until cmdpending = '0';
+    wait until rising_edge(clkin) and cmdpending = '0';
 
-    wait until decmdid(4 downto 1) = "0100";
+    wait until rising_edge(clkin) and decmdid(4 downto 1) = "0100";
     wait until rising_edge(clkin);
     if decmdst /= X"00" then
       error <= '1';
@@ -477,7 +539,7 @@ begin
 
     report "Successfully read raw data";
 
-  end process commands;
+  end process;
 
 
 end;

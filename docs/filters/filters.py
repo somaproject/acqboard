@@ -12,29 +12,41 @@ http://groups-beta.google.com/group/comp.soft-sys.matlab/msg/f96918240a97fbe6?dm
 
 """
 
-class filters:
+import fxquant
+
+class ADFilter:
     def __init__(self):
+        self.cutoff3db = None
+        self.Fs = None
+        self.dsN = None
+        self.poles = None
+        self.f = None
+        self.h = None
+        self.fbits = None
+        
+        
+class filters:
+    def __init__(self, ad):
        
         """
         The anti-aliasing filter is an 8-pole bessel
         """
-        cutoff3db = 13500 
-        self.wc = cutoff3db 
-        
-        self.f = signal.bessel(2, self.wc*1.27, analog=1)
-        
-
-        
-        
-        self.Fs = 192000.
-        self.dsN = 6.
-        
-        self.h = signal.remez(143, r_[0, 10000,  16000, self.Fs/2 -1],
-                              [1,  0 ],
-                              r_[0.5,  500], Hz=self.Fs, maxiter=1000);
-
+        cutoff3db = ad.cutoff3db 
+        self.wc = cutoff3db
+        self.poles = ad.poles
+        self.f = ad.f
         
 
+        
+        
+        self.Fs = ad.Fs
+        self.dsN = ad.dsN
+        self.hfloat = ad.h
+        self.fbits = ad.fbits
+        self.fxquant = fxquant.fxquant(self.fbits)
+        
+        self.h = array(self.fxquant.toInts(self.hfloat), Float)/(2**(self.fbits -1))
+        
     def plotanalog(self):
         
         fstart = 1000
@@ -61,8 +73,6 @@ class filters:
         title('Frequency Response of analog filters')
         
         grid(1)
-        show()
-        return
 
         figure(2)
         semilogx(fr, log10(mag)*20, 'r')
@@ -108,7 +118,7 @@ class filters:
         # first, we convert the analog response into the corresponding digital
         # frequency response
 
-        w = linspace(0, pi, 32768);
+        w = linspace(0, pi, 5000*self.dsN);
         flin = w/pi*self.Fs/2;
         slin = flin*1j; 
         totalaf = self.f
@@ -160,13 +170,13 @@ class filters:
         xlabel('Freqency (kHz)')
         plot(flin[0, :]/1000, r_[[-96]*len(flin[0,:])], 'g')
         legend(('Signal', 'Aliases'))
+        show()
 
-
-def find3db(co):
+def find3db(co, poles):
     cutoff3db = co
     wc = cutoff3db
     
-    f = signal.bessel(2, wc, analog=1)
+    f = signal.bessel(poles, wc, analog=1)
 
     (w, h) = signal.freqs(f[0], f[1], linspace(1000, 30000, 100))
 
@@ -181,7 +191,7 @@ def find3db(co):
             err = e
             minf = i
             
-    print co, w[minf], hlog[minf], co/w[minf]
+    return (co, w[minf], hlog[minf], co/w[minf])
     
   
 from scipy import *
@@ -190,14 +200,33 @@ from scipy import *
 from matplotlib.pylab import *
 
 def main():
-    x = filters()
-    x.plotanalog()
-    #y = filters()
-    #y.plotdigital()
-    #for i in linspace(1000, 90000, 200):
-    #    find3db(i)
-    
 
+    ad = ADFilter
+    
+    ad.cutoff3db = 13500
+    ad.Fs = 192000
+    ad.dsN = 6
+    ad.poles = 8 
+    ad.f = signal.bessel(8,
+                         ad.cutoff3db*(1.27 + .213*(ad.poles/2-1)),
+                         analog=1)
+    ad.fbits = 22
+    ad.h = signal.remez(143,
+                        r_[0, 10000,  16000, ad.Fs/2 -1],
+                        [1,  0 ],
+                        r_[0.5,  500],
+                        Hz=ad.Fs,
+                        maxiter=1000);
+    
+    y = filters(ad)
+    y.plotanalog()
+    y.plotdigital()
+
+
+
+
+
+        
 if __name__ == "__main__":
     main()
     

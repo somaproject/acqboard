@@ -17,7 +17,7 @@ entity SendCMD is
          DATA3      : in  std_logic_vector(7 downto 0);
          CHKSUM     : in  std_logic_vector(7 downto 0);
          SENDCMD    : in  std_logic;
-         CMDPENDING : out std_logic;
+         CMDPENDING : out std_logic := '0';
          DOUT       : out std_logic
          );
 end SendCMD;

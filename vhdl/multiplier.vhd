@@ -32,15 +32,15 @@ begin
   process(CLK)
   begin
     if rising_edge(CLK) then
-      --al <= a;
-      --bl <= b;
+      al <= a;
+      bl <= b;
       p1 <= lp(36 downto (36-n+1));
-      p2 <= p1;
-      P  <= p2;
+      --p2 <= p1;
+      P  <= p1;
     end if;
   end process;
 
-  lp <= a * b;
+  lp <= al * bl;
 
 
 end Behavioral;

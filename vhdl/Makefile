@@ -30,7 +30,7 @@ build/$(PROJECT).ngc: $(SOURCES) $(PROJECT).xst $(PROJECT).prj
 	xst -ifn .$<.xst
 
 #second stage : ngdbuild, produces .ngd
-build/$(PROJECT).ngd: $(PROJECT).ngc $(PROJECT).ucf 
+build/$(PROJECT).ngd: build/$(PROJECT).ngc $(PROJECT).ucf 
 	ngdbuild -p $(PART) -uc $(PROJECT).ucf -dd build $(PROJECT).ngc build/$(PROJECT).ngd
 
 
@@ -44,3 +44,10 @@ build/$(PROJECT).ncd: build/$(PROJECT).pcf
 
 build/$(PROJECT).bit: build/$(PROJECT).pcf build/$(PROJECT).ncd
 	bitgen -w build/$(PROJECT).ncd build/$(PROJECT).bit build/$(PROJECT).pcf
+# timing reports
+timing: build/$(PROJECT).twr
+	less build/$(PROJECT).twr
+
+
+build/$(PROJECT).twr: build/$(PROJECT).ncd build/$(PROJECT).pcf
+	trce -intstyle ise -e 3 -l 3 -s 4 -xml $(PROJECT) build/$(PROJECT).ncd -o build/$(PROJECT).twr build/$(PROJECT).pcf

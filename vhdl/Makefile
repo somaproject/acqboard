@@ -18,7 +18,7 @@ $(PROJECT): build/$(PROJECT).ncd
 
 $(PROJECT).bit: build/$(PROJECT).bit
 	rm -rf $(PROJECT).bit
-	ln -s build/$(PROJECT).bit
+	cp build/$(PROJECT).bit . 
 
 # first stage : xst, produces ngc
 

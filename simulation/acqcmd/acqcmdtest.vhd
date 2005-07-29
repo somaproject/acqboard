@@ -115,7 +115,8 @@ architecture behavior of acqcmdtest is
   signal error : std_logic := '0';
 
   signal outvals : chanarray := (others => 0);
-
+  signal ov : integer := 0;
+  
   component deserialize
     generic ( filename :     string := "deserialize.output.dat");
     port ( CLK8        : in  std_logic;
@@ -429,7 +430,7 @@ begin
     -- set mode = 2 (filter write)
     cmdid    <= "0111";
     cmd      <= "0111";
-    cmddata0 <= X"10";
+    cmddata0 <= X"02";
     cmddata1 <= X"00";
     sendcmds <= '1';
     wait until rising_edge(clkin);
@@ -449,7 +450,7 @@ begin
     cmdid    <= "0000";
     cmd      <= "0101";
     cmddata0 <= X"00";
-    cmddata1 <= X"3F";
+    cmddata1 <= X"1F";
     cmddata2 <= X"FF";
     cmddata3 <= X"FF";
 
@@ -462,7 +463,7 @@ begin
     wait until rising_edge(clkin);
     wait until rising_edge(clkin);
 
-    report "Wrote filter coefficient h[0]  to be 0x3FFFFF";
+    report "Wrote filter coefficient h[0]  to be 0x1FFFFF";
 
 
     -- set mode = 0 (normal)
@@ -528,17 +529,26 @@ begin
 
     wait until rising_edge(clkin) and decmdid(4 downto 1) = "0100";
     wait until rising_edge(clkin);
-    if decmdst /= X"00" then
+    if decmdst /= X"06" then
       error <= '1';
     end if;
 
-    report "Sitched to mode 3, with chan 0x02 as raw input";
+    report "Switched to mode 3, with chan 0x02 as raw input";
 
-    wait until outvals(7 downto 0) =
-      (118, 117, 116, 115, 114, 113, 112, 111);
+    wait until outvals(5) = 800 or outvals(4) = 800 or outvals(3) = 800
+    or outvals(2) = 800 or outvals(1) = 800 or outvals(0) = 800;
+
+    ov <= outvals(0);
+    wait until outvals(5 downto 0) =
+      (ov+5, ov+4, ov+3, ov+2, ov+1, ov) and rising_edge(CLKIN);
 
     report "Successfully read raw data";
 
+    assert false
+      report "End of simulation"
+      severity failure;
+
+    
   end process;
 
 

@@ -36,8 +36,8 @@ class RawFile(DataFile):
         for i in range(N):
             x = struct.unpack(">h", self.fid.read(2))
 
-            if self.pos == 7:
-                self.fid.read(4*2)
+            if self.pos == 5:
+                self.fid.read(6*2)
                 self.pos = 0
             else:
                 self.pos += 1

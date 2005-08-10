@@ -4,7 +4,7 @@ Attempt to use least squares to fit a sinusoid to our input data
 
 
 We use the example in the scipy tutorial with
-
+4
 yi = A sin (2*pi*k*xi +theta)
 
 
@@ -37,20 +37,26 @@ def findlsq(p0, x, t):
 
     return plsq
 
+def lpf(x, hen, freq, fs):
+    """
+    low-pass filter input data, with a filter of length hlen, frequencey of
+    freq and sampling frequency of fs
+
+    """
     
-def main():
-    fs = 32e6/161
-    xin = gologicread.serial(sys.argv[1]);
+    RN = len(x)
     
-    RN = len(xin)
-    
-    xin = array(xin)/32768.0 - 1.0
     hlen = 200 
     h = signal.remez(hlen, r_[0, 0.05, 0.12, 0.5], r_[1.0, 0.0])
-    xh = signal.convolve(h, xin)
-    x = xh[2*hlen:(RN-2*hlen)]
-    #x = xh
-    
+    xh = signal.convolve(h, x  )
+    return xh[2*hlen:(RN-2*hlen)]
+
+def measureTHDN(x, fs, ploterror= False)
+    """
+    calcualte the THD+N of an input sine sampled at fs.
+    This assumes an input sine that is floating point, normalized to +/- 1.0
+
+    """
     # phase calculation
     print "mean = ", mean(x)
     
@@ -83,11 +89,13 @@ def main():
     print "ENOB = %0.5f" % ENOB
 
     errreal = xprime -x
-    #plot(x[:10000])
-    #plot(xprime[:10000])
-    #plot(errreal[:10000] * 1e4)
-    #show()
-    #hist(errreal[:10000])
-    #show()
+    if ploterror:
+        plot(x[:10000])
+        plot(xprime[:10000])
+        plot(errreal[:10000] * 1e4)
+        show()
+        hist(errreal[:10000])
+        show()
+        
 if __name__ == "__main__":
     main()

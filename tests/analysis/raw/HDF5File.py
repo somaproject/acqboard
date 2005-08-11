@@ -12,7 +12,7 @@ from Numeric import *
 class SineRecord(IsDescription):
     frequency     = FloatCol()
     sourcevpp     = FloatCol()
-    data          = Int16Col(shape=(65536,))
+    data          = Int16Col(shape=(2**17,))
 
 
 class H5File:

@@ -101,7 +101,7 @@ architecture Behavioral of acqboard is
   signal cmddone         : std_logic                     := '0';
   signal cmdsts          : std_logic_vector(3 downto 0)  := (others => '0');
 
-  signal debugsample : std_logic := '0';
+
 
 
 -- component definitions
@@ -343,7 +343,8 @@ begin
     OSEN     => osen,
     OSRST    => pgarst,
     OSWE     => oswe,
-    OSD      => edout);
+    OSD      => edout
+    );
 
   samplebuffer_inst : samplebuffer port map (
     CLK       => clk,
@@ -514,7 +515,7 @@ begin
 
   ea          <= ('0' & laddr) when eesel = '1' else (ewaddr);
   een         <= len           when eesel = '1' else ceen;
-  debugsample <= yenraw;
+
 
   CLK8_OUT <= clk8;
 

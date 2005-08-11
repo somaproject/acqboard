@@ -73,7 +73,8 @@ begin
            ("00" & DATA(7 downto 0) & '0')           when eaddrsel = 2 else
            ("00" & DATA(7 downto 0) & '1')           when eaddrsel = 3;
 
-  OSEN   <= '0' when mode = "01"                   else '1';
+  --OSEN   <= '0' when mode = "01"                   else '1';  
+  OSEN <= '0';                          -- DEBUGGING
   BUFSEL <= '1' when loading = '1'                 else
             '1' when loading = '0' and mode = "10" else
             '0';

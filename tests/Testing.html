@@ -2289,6 +2289,27 @@ at 9.5kHz<br>
 This is using a low-pass filter to band-limit to 10kHz. 62 ohm and 2200
 pF LPF and through the AA filter. <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">30 July
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+Okay, new acqboard, less of a delay; refactored all code, redesigned
+filters, etc. so everything can work at 192 ksps. Re-wrote filter code.
+Device passes all vhdl unit tests. Can take data off of board. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">8 August
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+From straight-up SRS input (no AA filter) plus FIR post-filtering we
+can get 90 dB THD+N. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">10 August
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+New filter design uses 13.5 kHz center freq, E24 res/cap. <br>
+<br>
+Wow, this thing actually works; using post-filtering I actually get
+90dB THD+N<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

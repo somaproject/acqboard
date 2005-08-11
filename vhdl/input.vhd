@@ -1,7 +1,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.STD_LOGIC_ARITH.all;
-use IEEE.STD_LOGIC_UNSIGNED.all;
+use IEEE.STD_LOGIC_SIGNED.all;
 
 library UNISIM;
 use UNISIM.VComponents.all;
@@ -114,7 +114,7 @@ begin
           sampB4 when chancnt = "1000" else
           sampBC;
 
-  biten <= bitendelay(4);
+  biten <= bitendelay(2);
 
   main : process(CLK, RESET)
   begin
@@ -128,6 +128,7 @@ begin
         CNV   <= not INSAMPLE;
         sdial <= SDIA;
         sdibl <= SDIB;
+
 
         -- input
         if biten = '1' then

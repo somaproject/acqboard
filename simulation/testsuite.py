@@ -14,7 +14,7 @@ if len(sys.argv) > 1 :
         suite.addTest(vhdltest.VhdlSimTestCase(i))
         
 else:
-    suite.addTest(vhdltest.VhdlSimTestCase("acqcmd"))
+    #suite.addTest(vhdltest.VhdlSimTestCase("acqcmd"))
     suite.addTest(vhdltest.VhdlSimTestCase("fibertx"))
     suite.addTest(vhdltest.VhdlSimTestCase("filter"))
     suite.addTest(vhdltest.VhdlSimTestCase("input"))

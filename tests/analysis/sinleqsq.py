@@ -11,8 +11,7 @@ yi = A sin (2*pi*k*xi +theta)
 
 """
 from scipy import *
-#from pylab import * 
-import gologicread
+import pylab
 
 def residuals(p, y, x):
     A, k, theta, os = p
@@ -51,7 +50,7 @@ def lpf(x, hen, freq, fs):
     xh = signal.convolve(h, x  )
     return xh[2*hlen:(RN-2*hlen)]
 
-def measureTHDN(x, fs, ploterror= False)
+def measureTHDN(x, fs, freq=1000.0, phase=0.0, ploterror = False):
     """
     calcualte the THD+N of an input sine sampled at fs.
     This assumes an input sine that is floating point, normalized to +/- 1.0
@@ -60,7 +59,7 @@ def measureTHDN(x, fs, ploterror= False)
     # phase calculation
     print "mean = ", mean(x)
     
-    p0 = [max(x)-min(x), float(sys.argv[2]),  sys.argv[3], mean(x)];
+    p0 = [0.9, freq,  phase, mean(x)];
 
     t = r_[0.0:len(x)]/fs
 
@@ -90,12 +89,12 @@ def measureTHDN(x, fs, ploterror= False)
 
     errreal = xprime -x
     if ploterror:
-        plot(x[:10000])
-        plot(xprime[:10000])
-        plot(errreal[:10000] * 1e4)
-        show()
-        hist(errreal[:10000])
-        show()
+        pylab.plot(x[:10000], color='b')
+        pylab.plot(xprime[:10000], color='r')
+        #pylab.plot(errreal[:10000] * 1e4)
+        pylab.show()
+        pylab.hist(errreal[:10000])
+        pylab.show()
         
 if __name__ == "__main__":
     main()

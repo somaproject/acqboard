@@ -1,8 +1,34 @@
 This is my attempt to make linux-GPIB do the right thing. 
 
+This is using the NI GPIB card. 
 
-board_type for /etc/gpib.conf is cbi_pci
+First, apt-get gpib-modules-source
+then, in your kernel source dir, make-kpg modules_image
+install the resulting deb
 
-must run gpib_config after the kernel module is loaded
-modprobe cb7210
 
+interface {
+	minor = 0
+	board_type = "ni_pci_accel"
+	pad = 0
+	sad = 0	
+	master = yes
+	timeout = T3s
+}
+
+
+device {
+        minor = 0
+        name = "ats2"
+        pad = 1
+        sad = 0
+
+        eos = 0xa       /* EOS Byte */
+        set-reos = no /* Terminate read if EOS */
+        set-bin = no /* Compare EOS 8-bit */
+}
+
+
+ibtest can help
+
+pad above shows that the device is on GPIB address 1

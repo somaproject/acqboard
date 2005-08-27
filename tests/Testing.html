@@ -2313,8 +2313,19 @@ Wow, this thing actually works; using post-filtering I actually get
 To begin testing the acqboard, we have reconfigured the ATS2 for
 standard GPIB interfacing. <br>
 <br>
-<span style="font-weight: bold; text-decoration: underline;">25 August
+<span style="font-weight: bold; text-decoration: underline;">27 August
 2005</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+We are plagued by the protointerface not transmitting acqboard commands
+properly. Hours have been spent debugging this. We modified
+acqboard.vhd to toggle external pins whenever CMD or CMDID changed, and
+when the system hangs we're not seeing any change. I am going to
+attempt to fix this via a retransmit mode in the python control
+software. <br>
+<br>
+We fixed this by creating SendCommandAndRetransmit and a version of acq
+state that has timeouts. At the moment, everything appears to work. <br>
+<br>
 <br>
 <br>
 <br>

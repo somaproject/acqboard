@@ -22,8 +22,17 @@ class AcqSocketOut:
        self.s.connect("/tmp/acqboard.in")
         
     def send(self, str):
-        outstr = str + "123456789012345678"
+
+        print "AcqSockOut.send",
+        for s in str:
+            print hex(ord(s)),
+        print " with cmdid = ", hex(ord(str[0]) >> 4)
+        outstr = str +"\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
+                       
         self.s.send(outstr)
+
+
+        
     def close(self):
         self.s.close()
 
@@ -37,7 +46,30 @@ class AcqSocketStat:
         self.s.connect("/tmp/acqboard.status")
 
     def read(self):
-        return self.s.recv(3)
+        return self.s.recv(4)
+    
+    def close(self):
+        self.s.close()
+
+class AcqSocketStatTimeout:
+    # actually handles the socket communication, but also times out
+    
+
+    def __init__(self, timeout):
+        self.s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        self.s.settimeout(timeout)
+        
+    def open(self):
+        self.s.connect("/tmp/acqboard.status")
+
+    def read(self):
+        # returns a none if you don't get anything
+        try:        
+            resultstr = self.s.recv(4)
+        except socket.timeout:
+            resultstr = None
+
+        return resultstr
     
     def close(self):
         self.s.close()

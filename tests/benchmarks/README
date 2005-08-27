@@ -1,0 +1,49 @@
+How do we want to do our benchmarks? why are we doing this again? 
+
+I just don't understand. 
+
+There's this notion of an "Experiment". Each experiment consists of an acqboard/function generator in a single common wiring configuration. Note that we also cannot mix raw and simultaneous data within a single file. 
+
+Whatever, stop wasting time on this. 
+
+
+For a raw file:
+
+we store each channel in /channame/runtype/gain/hpfstatus/
+
+with: 
+   runtype == sine, square, noise, etc. 
+   gain == the gain of the channel 
+   hpfstatus ==   "HPFon" or "HPFoff"
+
+
+Each table will contain metadata consisting of the 
+   1. signal generator settings
+   2. board state settings for that channel
+
+
+
+
+what do we want from our RAW interface
+
+s = SineRuns() # simply a container class
+
+s.gains = [] # defalt = 1
+s.hpfen = [] # default = off
+s.freqs = [] # default = 1 kHz
+s.volts = [] # default = 4.0
+
+n = NoiseRuns()
+n.chans
+n.gains
+n.hpfen
+n.volts
+
+e = Experiment(filename, note):
+e.atsout = unbalanced
+
+e.A1.append(s)
+e.A2.append(s) : # append sine run, check if sine run is valid
+e.append(n) :
+
+e.run()

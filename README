@@ -32,3 +32,9 @@ tests/results :
    result data, result figures, result commentary
 tests/acqboardcmd:
    program for interfacing with protoboard acqboard domain sockets
+tests/benchmarks:
+   The actual benchmarks; this is the code that generates and saves the results of a series of runs in HDF5 format. These files are saved to results, and analysized with analysis
+
+
+	
+

@@ -64,6 +64,7 @@ class ATS2(object):
             return "unbal"
         else:
             raise TypeError
+        
     output = property(getOutput, setOutput)
 
     def setFreq1(self, val):

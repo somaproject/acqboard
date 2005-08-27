@@ -38,18 +38,38 @@ class RawH5Chan:
         self.group = group
         self.h5file = h5file
 
-    def addSineRun(self, name, notes, gain, hpfen):
+    def addSineRunTable(self, name, notes, gain, hpfen):
         
         # /first try and create the group something something
         try:
             sinegroup = self.h5file.createGroup(self.group, "sine",
                                                 "Sinusoidal data ")
-        except NameError:
+        except NodeError:
             sinegroup = self.h5file.getNode(self.group, "sine",
                                             classname="Group")
-          
-        
-        table = self.h5file.createTable(sinegroup, name, SineRecord, notes)
+
+        try:
+            gaingroup = self.h5file.createGroup(sinegroup, "gain%d" % gain,
+                                                "gain")
+        except NodeError:
+            gaingroup = self.h5file.getNode(sinegroup, "gain%d" % gain,
+                                            classname="Group")
+
+
+        if hpfen :
+            hpfstr = "HPFon"
+        else:
+            hpfstr = "HFPoff"
+
+        try:
+            setgroup = self.h5file.createGroup(gaingroup, hpfstr,
+                                                "gain")
+        except NodeError:
+            setgroup = self.h5file.getNode(gaingroup, hpfstr,
+                                            classname="Group")
+
+
+        table = self.h5file.createTable(setgroup, name, SineRecord, notes)
         table.attrs.gain = gain
         table.attrs.hpfen = False
         
@@ -76,23 +96,23 @@ class SineRun:
 def main ():
 
     # a simple test:
-    rf = RawH5File("simpletest.h5", "My simple test")
+    rf = H5File("simpletest.h5", "My simple test")
     chA1 = rf.openChan('A1')
-    sinetest = chA1.addSineRun("testsine", "A very nice sine test", 1, False)
-    sinetest.append(997.0, 0.0001, zeros(65536))
-    sinetest.append(31.0, 0.0001, zeros(65536))
-    sinetest.append(997.0, 0.0001, zeros(65536))
+    sinetest = chA1.addSineRunTable("testsine", "A very nice sine test", 1, False)
+    sinetest.append(997.0, 0.0001, zeros(2**17))
+    sinetest.append(31.0, 0.0001, zeros(2**17))
+    sinetest.append(997.0, 0.0001, zeros(2**17))
 
     sinetest = chA1.addSineRun("testsine2", "A very nice sine test", 10, True)
-    sinetest.append(997.0, 0.0001, zeros(65536))
-    sinetest.append(31.0, 0.0001, zeros(65536))
-    sinetest.append(997.0, 0.0001, zeros(65536))
+    sinetest.append(997.0, 0.0001, zeros(2**17))
+    sinetest.append(31.0, 0.0001, zeros(2**17))
+    sinetest.append(997.0, 0.0001, zeros(2**17))
 
     chA2 = rf.openChan('A2')
     sinetest = chA2.addSineRun("testsine", "A very nice sine test", 10, False)
-    sinetest.append(997.0, 0.0001, zeros(65536))
-    sinetest.append(31.0, 0.0001, zeros(65536))
-    sinetest.append(997.0, 0.0001, zeros(65536))
+    sinetest.append(997.0, 0.0001, zeros(2**17))
+    sinetest.append(31.0, 0.0001, zeros(2**17))
+    sinetest.append(997.0, 0.0001, zeros(2**17))
     
 if __name__ == "__main__":
     main()

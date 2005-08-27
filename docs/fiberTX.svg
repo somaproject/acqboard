@@ -10,7 +10,7 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="svg1"
    sodipodi:version="0.32"
-   inkscape:version="0.41+devel"
+   inkscape:version="0.42+devel"
    width="612.00000pt"
    height="792.00000pt"
    sodipodi:docbase="/home/jonas/soma/developer/acqboard/docs"
@@ -537,7 +537,7 @@
        sodipodi:role="line"
        id="tspan2445"
        x="38.463722"
-       y="264.35910">Y[15:0]</tspan></text>
+       y="264.3591">Y[15:0]</tspan></text>
   <path
      style="color:#000000;fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.2500000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000;marker:none;marker-start:none;marker-mid:none;marker-end:none;"
      d="M 134.37500,299.37500 L 134.37500,324.37500 L 81.250000,324.37500"
@@ -604,7 +604,7 @@
        sodipodi:role="line"
        id="tspan2463"
        x="38.463722"
-       y="264.35910">YEN</tspan></text>
+       y="264.3591">YEN</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:11.000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans;text-anchor:end;writing-mode:lr;"
@@ -616,7 +616,7 @@
        sodipodi:role="line"
        id="tspan2466"
        x="38.463722"
-       y="264.35910">OUTSAMPLE</tspan></text>
+       y="264.3591">OUTSAMPLE</tspan></text>
   <path
      style="color:#000000;fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.2500002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000;marker:none;marker-start:none;marker-mid:none;marker-end:none;"
      d="M 193.75003,218.12500 L 246.87505,218.12500"
@@ -631,7 +631,7 @@
        sodipodi:role="line"
        id="tspan2471"
        x="205.88564"
-       y="188.39130">YL[n]</tspan></text>
+       y="188.3913">YL[n]</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:8.0000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans;text-anchor:start;writing-mode:lr;"
@@ -852,7 +852,7 @@
        sodipodi:role="line"
        id="tspan2538"
        x="38.463722"
-       y="264.35910">CMDDONE</tspan></text>
+       y="264.3591">CMDDONE</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:11.000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans;text-anchor:end;writing-mode:lr;"
@@ -864,10 +864,10 @@
        sodipodi:role="line"
        id="tspan2541"
        x="38.463722"
-       y="264.35910">CHKSUM[7:0]</tspan></text>
+       y="264.3591">CHKSUM[7:0]</tspan></text>
   <text
      xml:space="preserve"
-     style="font-size:11.000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans;text-anchor:end;writing-mode:lr;"
+     style="font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100%;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
      x="38.463722"
      y="264.3591"
      id="text2543"
@@ -876,7 +876,7 @@
        sodipodi:role="line"
        id="tspan2544"
        x="38.463722"
-       y="264.35910">CMD[6:0] &amp; CMDSUCCESS</tspan></text>
+       y="264.3591">CMDID[3:0] &amp; CMDSUCCESS</tspan></text>
   <path
      style="color:#000000;fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.2500000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000;marker:none;marker-start:none;marker-mid:none;marker-end:none;"
      d="M 90.625000,371.25000 L 109.37500,371.25000"
@@ -955,7 +955,7 @@
        sodipodi:role="line"
        id="tspan2564"
        x="297.57687"
-       y="77.003540">K28.7 (0xBC)</tspan></text>
+       y="77.00354">K28.7 (0xBC)</tspan></text>
   <g
      id="g2566"
      transform="translate(34.37497,-256.2499)">
@@ -1018,7 +1018,7 @@
        sodipodi:role="line"
        id="tspan2581"
        x="38.463722"
-       y="264.35910">CMDSTS[3:0]</tspan></text>
+       y="264.3591">CMDSTS[3:0]</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:11.000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans;text-anchor:end;writing-mode:lr;"
@@ -1030,7 +1030,7 @@
        sodipodi:role="line"
        id="tspan2584"
        x="38.463722"
-       y="264.35910">OUTSAMPLE</tspan></text>
+       y="264.3591">OUTSAMPLE</tspan></text>
   <path
      style="color:#000000;fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.2500000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000;marker:none;marker-start:none;marker-mid:none;marker-end:none;"
      d="M 96.875000,158.75000 L 184.37500,158.75000 L 184.37500,136.87500"
@@ -1235,7 +1235,7 @@
        sodipodi:role="line"
        id="tspan2642"
        x="421.03302"
-       y="289.79480">DIN[7:0]</tspan></text>
+       y="289.7948">DIN[7:0]</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:8.0000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans;text-anchor:start;writing-mode:lr;"
@@ -1301,7 +1301,7 @@
        sodipodi:role="line"
        id="tspan2659"
        x="38.463722"
-       y="264.35910">OUTBYTE</tspan></text>
+       y="264.3591">OUTBYTE</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:11.000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans;text-anchor:end;writing-mode:lr;"
@@ -1313,7 +1313,7 @@
        sodipodi:role="line"
        id="tspan2665"
        x="38.463722"
-       y="264.35910">OUTBYTE</tspan></text>
+       y="264.3591">OUTBYTE</tspan></text>
   <path
      style="color:#000000;fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.2500000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000;marker:none;marker-start:none;marker-mid:none;marker-end:none;"
      d="M 500.00000,290.00000 L 500.00000,308.75000"
@@ -1457,7 +1457,7 @@
        sodipodi:role="line"
        id="tspan2705"
        x="38.463722"
-       y="264.35910">OUTBYTE</tspan></text>
+       y="264.3591">OUTBYTE</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:11.000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans;text-anchor:end;writing-mode:lr;"
@@ -1469,7 +1469,7 @@
        sodipodi:role="line"
        id="tspan2708"
        x="38.463722"
-       y="264.35910">CLK8</tspan></text>
+       y="264.3591">CLK8</tspan></text>
   <path
      style="color:#000000;fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.2500000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000;marker:none;marker-start:none;marker-mid:none;marker-end:none;"
      d="M 621.87500,315.00000 L 643.75000,315.00000"
@@ -1532,7 +1532,7 @@
        sodipodi:role="line"
        id="tspan2725"
        x="38.463722"
-       y="264.35910">CLK8</tspan></text>
+       y="264.3591">CLK8</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:11.000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans;text-anchor:start;writing-mode:lr;"
@@ -1589,7 +1589,7 @@
        sodipodi:role="line"
        id="tspan2743"
        x="238.64017"
-       y="394.56940">CLL</tspan></text>
+       y="394.5694">CLL</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:8.0000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans;text-anchor:start;writing-mode:lr;"
@@ -1723,7 +1723,7 @@
        sodipodi:role="line"
        id="tspan2780"
        x="38.463722"
-       y="264.35910">OUTBYTE</tspan></text>
+       y="264.3591">OUTBYTE</tspan></text>
   <path
      style="color:#000000;fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.2500000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000;marker:none;marker-start:none;marker-mid:none;marker-end:none;"
      d="M 296.87500,452.50000 L 296.87500,471.25000"
@@ -1824,7 +1824,7 @@
        sodipodi:role="line"
        id="tspan2836"
        x="572.12549"
-       y="449.06250">INCNT</tspan></text>
+       y="449.0625">INCNT</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:11.000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100.00000%;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
@@ -1835,7 +1835,7 @@
        sodipodi:role="line"
        id="tspan2839"
        x="557.34619"
-       y="502.50000">YEN</tspan></text>
+       y="502.5">YEN</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:11.000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100.00000%;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
@@ -1845,7 +1845,7 @@
      sodipodi:linespacing="100.00000%"><tspan
        sodipodi:role="line"
        id="tspan2842"
-       x="495.50000"
+       x="495.5"
        y="449.21921">OUTSAMPLE</tspan></text>
   <path
      style="color:#000000;fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.2500000;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4.0000000;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000"
@@ -1876,16 +1876,16 @@
      x="73.507812"
      style="font-size:8.0000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
      xml:space="preserve"><tspan
-       y="61.875000"
+       y="61.875"
        x="73.507812"
        id="tspan1654"
        sodipodi:role="line">The mode and the loading state</tspan><tspan
        id="tspan1656"
        sodipodi:role="line"
-       x="74.781250"
-       y="71.875000">are always updated, not just when </tspan><tspan
+       x="74.78125"
+       y="71.875">are always updated, not just when </tspan><tspan
        id="tspan1658"
-       y="81.875000"
+       y="81.875"
        x="73.507812"
        sodipodi:role="line">there's a new command</tspan></text>
 </svg>

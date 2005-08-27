@@ -1,0 +1,33 @@
+This is the expeirment design and configuration for running our suite of Raw Benchmarks. 
+
+
+Each HDF5 file corresponds to an "experiment". An experiment consists of a series of "runs" per channel. It is possible that, between the runs, there is a user-selectable pause to allow manual reconfiguration of some aspect of board parameters. 
+
+States:
+
+
+use: 
+
+BoardState: object which encapsulates a single channel's baoard state set, and also handles interfacing to the board via iterators
+
+
+b = BoardState
+
+b.gains = [100, 200, ...]
+b.hpfs = [True, False]
+
+
+
+e = Experiment(name) 
+e.A1.append(b)
+e.allchan(b)
+
+
+then inside experiment.run():
+
+
+for set in self.A1:
+  self.bs.setup(channel)
+  for g in set.bs.gainiter():
+    for hpf in set.bs.gainiter():
+      

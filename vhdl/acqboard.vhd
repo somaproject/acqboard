@@ -398,7 +398,7 @@ begin
     CLK      => clk,
     RESET    => reset,
     SCLK     => PGASRCK,
-    RCLK     => PGARCK,
+    RCLK     => PGARCK, 
     SOUT     => PGASERA,
     CHAN     => pgachan,
     GAIN     => gain,
@@ -517,9 +517,34 @@ begin
   een         <= len           when eesel = '1' else ceen;
 
 
-  CLK8_OUT <= clk8;
+  LED0 <= not RESET;
 
-  LED0 <= bufsel;
-  LED1 <= lswe;
+  commandblink : process(CLK)
+    variable cnt : std_logic_vector(20 downto 0) := (others => '0');
+    variable oldcmdid : std_logic_vector(3 downto 0) := (others => '0');
+    
+    begin
+      if rising_edge(CLK) then
+        if cmdid /= oldcmdid then
+          cnt := "000000000000000000000";
+        else
+          if cnt /= "111111111111111111111" then
+            cnt := cnt + 1; 
+          end if;
+        end if;
+        oldcmdid := cmdid;
+                    
+        if cnt /= "111111111111111111111" then
+          LED1 <= '1';
+        else
+          LED1 <= '0' ;
+        end if;
+        
+        
+      end if;
+    end process commandblink;
+    
+                              
+  CLK8_OUT <= clk8; 
 
 end Behavioral;

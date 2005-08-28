@@ -27,7 +27,7 @@ def read(nsamples):
     sample = s.recv(512)
     
     
-    while (nsamp < (2*nsamples*24.0/16.0 + 200)):
+    while (nsamp < (2*nsamples*24.0/12.0 + 200)):
         tmpstr =s.recv(1024)
         nsamp += len(tmpstr)
         resultstr += tmpstr
@@ -44,7 +44,7 @@ def read(nsamples):
     for i in range(len(datastr)/2):
 
         #print i, len(datastr), len(datastr)/2, pos
-        if i % 12 < 8 :
+        if i % 12 < 6 :
             if pos < nsamples:
                 data[pos] = unpack(">h", datastr[(2*i):(2*(i+1))])[0]
                 pos += 1             

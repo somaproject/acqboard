@@ -13,6 +13,7 @@ yi = A sin (2*pi*k*xi +theta)
 from scipy import *
 import pylab
 
+
 def residuals(p, y, x):
     A, k, theta, os = p
     
@@ -82,11 +83,14 @@ def measureTHDN(x, fs, freq=1000.0, phase=0.0, ploterror = False):
     rmssignal = abs(p[0])/sqrt(2)
 
     print rmssignal, rmsnoise
-    print "THD+N = %0.3f" % (20*log10(rmsnoise/rmssignal))
+    thdn = (20*log10(rmsnoise/rmssignal))
+    print "THD+N = %0.3f" % thdn
     
     ENOB = log2(2/(rmsnoise*sqrt(12)))
     print "ENOB = %0.5f" % ENOB
 
+    return (thdn, ENOB)
+    
     errreal = xprime -x
     if ploterror:
         pylab.plot(x[:10000], color='b')

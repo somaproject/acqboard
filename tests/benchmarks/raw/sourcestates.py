@@ -6,7 +6,7 @@ sys.path.append("../../")
 import ATSio
 
 
-class SineStates:
+class SineStates(object):
 
     def __init__(self):
 
@@ -17,13 +17,11 @@ class SineStates:
 
     def setFreqs(self, value):
 
-        if not isinstance(value, list):
-            raise "Freqs is not a list"
         for f in value:
             if not isinstance(f, float):
                 raise "Gain is not an float"
 
-        s.__freqs = value
+        self.__freqs = value
                 
     def getFreqs(self):
         return self.__freqs
@@ -36,10 +34,10 @@ class SineStates:
         if not isinstance(value, list):
             raise "Vpps is not a list"
         for v in value:
-            if not isinstance(v, int):
-                raise "Vpp is not an int"
+            if not isinstance(v, float):
+                raise "Vpp is not an float"
 
-        s.__vpps = value
+        self.__vpps = value
                 
     def getVpps(self):
         return self.__vpps
@@ -54,7 +52,7 @@ class SineStates:
             self.ats2.output = 'bal'
         else:
             self.ats2.output = 'unbal'
-            
+      
         self.ats2.mode = 0
         self.ats2.onA = True
 
@@ -62,20 +60,18 @@ class SineStates:
         for freq in self.__freqs:
             self.ats2.freq1 = freq
             readFreq = self.ats2.freq1
-            #result = read.read(2**16)
-            # we're not actually doing anything with it yet
-            #plot(result[0:2048])
-            #sinerun.append(freq, self.vpp, result)
         
 
     def vppIter(self):
         for v in self.__vpps:
+            print "Source voltage set to ", v
             self.ats2.ampVppA = v
 
             yield v
 
     def freqIter(self):
         for f in self.__freqs:
+            print "source frequency set to ", f
             self.ats2.freq1 = f
             yield f
             

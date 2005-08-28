@@ -5,12 +5,12 @@ import sourcestates
 import boardstates
 from read import * 
 import tables
-
+from scipy import * 
 
 class SineRecord(tables.IsDescription):
     frequency     = tables.FloatCol()
     sourcevpp     = tables.FloatCol()
-    data          = tables.Int16Col(shape=(2**17,))
+    data          = tables.Int16Col(shape=(2**16,))
 
 
 class Experiment(object):
@@ -70,7 +70,6 @@ class Experiment(object):
                 # open node in file
                 for h in bs.hpfIter():
                     # open node in file
-
                     try:
                         hpfgroup = self.h5file.createGroup(gaingroup,
                                                            "hpf%d" % h, "hpf")
@@ -81,13 +80,11 @@ class Experiment(object):
                     # if this is a sine, we do one thing:
                     if isinstance(ss, sourcestates.SineStates):
                         # create sine node
-
-
                         table = self.h5file.createTable(hpfgroup, "sine",
                                                         SineRecord, "notes")
 
                         # create table inside of sine node
-                        ss.setup(chanName)
+                        ss.setup(False) # output is unbalanced
                         
                         for f in ss.freqIter():
                             for v in ss.vppIter():
@@ -100,8 +97,7 @@ class Experiment(object):
                                 
                                 # read the data
                                 x = read(2**17)
-
-                                row['data'] = x
+                                row['data'] = x[2**16:]
                                 row.append()
 
                         table.flush()
@@ -113,9 +109,11 @@ def simpleTest():
 
     b = boardstates.BoardStates()
     s = sourcestates.SineStates()
-    b.gains = [1, 100, 200]
-
-    e.A1.append((b, s))
+    b.gains = [1]
+    s.freqs = r_[100:12100:100.0]
+    s.vpps = [0.1, 0.5, 1.0, 2.0, 4.0, 4.09]
+    
+    e.AC.append((b, s))
     print "ready to run" 
     e.run()
 

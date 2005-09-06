@@ -32,3 +32,36 @@ device {
 ibtest can help
 
 pad above shows that the device is on GPIB address 1
+
+It appears that in 2.6.13 there have been changes that make it such that the GPIB interface no longer compiles properly. I've been forced to go back to a 2.6.12 kernel. 
+
+Similarly, there are problems with the current gpib-modules-source package such that I had to get the latest tar.gz off the web. 
+
+
+Make sure when building the modules this way:
+ 1. the EXTRAVERSION in the current kernel headers (under /usr/src/kernelversion/) is properly set; I'm really surprised that Debian doesn't set this properly. 
+ 2. you pass this directory in on the ./configure command line with --with-linux-srcdir
+
+then it should build and place the modules in /lib/modules/kernelname/gpib where they will be automatically found. yay!
+
+
+
+-----------------------------------------------------------
+attempts with the stock debian smp kernel, ugh
+----------------------------------------------------------
+checked out latest linux-gpib source
+aptitude install autotools automake1.9 libtool
+
+ran bootstrap
+
+
+so then we got debian's kernel-source package for 2.6.8, untarred it, and copied our preferred .config into there
+
+That didn't work
+
+
+so we actually just downloaded the 2.6.11 amd64-smp deb and installed it, with no real problems. which was nice. 
+
+
+also installed 
+approrpiate kernel headers deb, kernel-headers-2.6.11-9

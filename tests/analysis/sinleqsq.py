@@ -13,6 +13,7 @@ yi = A sin (2*pi*k*xi +theta)
 from scipy import *
 import pylab
 
+import readacq
 
 def residuals(p, y, x):
     A, k, theta, os = p
@@ -59,8 +60,9 @@ def measureTHDN(x, fs, freq=1000.0, phase=0.0, ploterror = False):
     """
     # phase calculation
     print "mean = ", mean(x)
+
     
-    p0 = [0.9, freq,  phase, mean(x)];
+    p0 = [max(x) - min(x), freq,  phase, mean(x)];
 
     t = r_[0.0:len(x)]/fs
 
@@ -89,7 +91,7 @@ def measureTHDN(x, fs, freq=1000.0, phase=0.0, ploterror = False):
     ENOB = log2(2/(rmsnoise*sqrt(12)))
     print "ENOB = %0.5f" % ENOB
 
-    return (thdn, ENOB)
+
     
     errreal = xprime -x
     if ploterror:
@@ -99,6 +101,23 @@ def measureTHDN(x, fs, freq=1000.0, phase=0.0, ploterror = False):
         pylab.show()
         pylab.hist(errreal[:10000])
         pylab.show()
-        
+
+    return (thdn, ENOB)
+
+def main():
+    N = 50000
+    fs = 192000.0
+    r = readacq.RawFile('/home/jonas/test.dat');
+    x = r.read(N);
+    x = x/32768.0
+
+    y = lpf(x, 100, 10000., fs)
+    #x = sin(r_[0:(N)]/fs*2*pi*500)
+    
+    measureTHDN(y[N/2:], fs, freq=10000.0, phase=1.0, ploterror = True)
+    
 if __name__ == "__main__":
+
+
+
     main()

@@ -98,23 +98,23 @@ class AcqState:
 
 
 
-        self.mainbox = gtk.VBox(gtk.FALSE, 0);
+        self.mainbox = gtk.VBox(False, 0);
         
         self.modelabel = gtk.Label("Mode:")
         self.modelabel.show()
-        self.modebox = gtk.HBox(gtk.FALSE, 0);
+        self.modebox = gtk.HBox(False, 0);
         self.modebox.show()
         self.modecurrent = gtk.Label("0")
         self.modecurrent.show()
-        self.modebox.pack_start(self.modelabel, gtk.FALSE, gtk.FALSE, 0)
-        self.modebox.pack_start(self.modecurrent, gtk.FALSE, gtk.FALSE, 0)
+        self.modebox.pack_start(self.modelabel, False, False, 0)
+        self.modebox.pack_start(self.modecurrent, False, False, 0)
 
         
-        self.mainbox.pack_start(self.modebox, gtk.FALSE, gtk.FALSE, 0)
+        self.mainbox.pack_start(self.modebox, False, False, 0)
         
         
             
-        self.table = gtk.Table(rows=11, columns=4, homogeneous=gtk.FALSE)
+        self.table = gtk.Table(rows=11, columns=4, homogeneous=False)
         self.cheader = gtk.Label("Channel")
         self.table.attach(self.cheader, 0, 1, 0, 1, xpadding=6)
         self.cheader.show()
@@ -151,7 +151,7 @@ class AcqState:
            
         self.table.show()    
 
-        self.mainbox.pack_start(self.table, gtk.FALSE, gtk.FALSE, 0);
+        self.mainbox.pack_start(self.table, False, False, 0);
         self.mainbox.show()
         
         self.cmddict = {}
@@ -275,18 +275,18 @@ class AcqBoardControl:
      
     def delete_event(self, widget, event, data=None):
         gtk.main_quit()
-        return gtk.FALSE
+        return False
         
     def create_everychan(self):
 
 
         # mode widgets
-        self.modetable = gtk.Table(rows=1, columns=4, homogeneous=gtk.FALSE)
+        self.modetable = gtk.Table(rows=1, columns=4, homogeneous=False)
         self.modetable.show()
         self.modebutton0 = gtk.Button("Mode 0")
         self.modebutton0.show()
         self.modetable.attach(self.modebutton0, 0, 1, 0, 1)
-        self.box0.pack_start(self.modetable, gtk.FALSE, gtk.FALSE, 0)
+        self.box0.pack_start(self.modetable, False, False, 0)
         self.modebutton0.connect("clicked", self.button_setmode, 0)
 
         self.modebutton1 = gtk.Button("Mode 1")
@@ -309,7 +309,7 @@ class AcqBoardControl:
 
         #widgets that exist for each channel
         
-        self.allchantable = gtk.Table(rows=3, columns=3, homogeneous=gtk.FALSE)
+        self.allchantable = gtk.Table(rows=3, columns=3, homogeneous=False)
 
 
         self.allchanlabel = gtk.Label("Channel")
@@ -379,37 +379,37 @@ class AcqBoardControl:
         self.allchanframe = gtk.Frame("Channel Settings")
         self.allchanframe.add(self.allchantable)
         self.allchanframe.show()
-        self.box2 = gtk.VBox(gtk.FALSE, 0)
+        self.box2 = gtk.VBox(False, 0)
 
-        self.box2.pack_start(self.allchanframe, gtk.FALSE, gtk.FALSE, 0)
+        self.box2.pack_start(self.allchanframe, False, False, 0)
 
         self.cselframe = gtk.Frame("Continuous Chan")
         self.cselframe.show()
-        self.box2.pack_start(self.cselframe, gtk.FALSE, gtk.FALSE, 0)
-        self.box1.pack_start(self.box2, gtk.FALSE, gtk.FALSE, 0)
+        self.box2.pack_start(self.cselframe, False, False, 0)
+        self.box1.pack_start(self.box2, False, False, 0)
         self.box2.show()
 
         self.loadbuffer = gtk.Button("Load File Into Sample Buffer")
-        self.box2.pack_start(self.loadbuffer, gtk.FALSE, gtk.FALSE, 0)
+        self.box2.pack_start(self.loadbuffer, False, False, 0)
         self.loadbuffer.show();
         self.loadbuffer.connect("clicked", self.load_buffer)
 
         self.loadfilter = gtk.Button("Load File Into Filter")
-        self.box2.pack_start(self.loadfilter, gtk.FALSE, gtk.FALSE, 0)
+        self.box2.pack_start(self.loadfilter, False, False, 0)
         self.loadfilter.show();
         self.loadfilter.connect("clicked", self.load_filter)
 
 
-        self.cselbox = gtk.VBox(gtk.FALSE,0)
+        self.cselbox = gtk.VBox(False,0)
 
         
         # continuous channel A box
         
-        self.cselAbox = gtk.HBox(gtk.FALSE, 0)
+        self.cselAbox = gtk.HBox(False, 0)
 
         self.cselAlabel = gtk.Label("Chan A: ")
         
-        self.cselAbox.pack_start(self.cselAlabel, gtk.FALSE, gtk.FALSE, 0)
+        self.cselAbox.pack_start(self.cselAlabel, False, False, 0)
         self.cselAlabel.show()
 
 
@@ -421,25 +421,25 @@ class AcqBoardControl:
             item.show()
         self.cselAopt.set_menu(self.cselAmenu)
         self.cselAopt.show()
-        self.cselAbox.pack_start(self.cselAopt, gtk.FALSE, gtk.FALSE,0)
+        self.cselAbox.pack_start(self.cselAopt, False, False,0)
         self.cselAbox.show()
 
         self.cselAset = gtk.Button("set")
         self.cselAset.connect("clicked", self.button_cselAset)
-        self.cselAbox.pack_start(self.cselAset, gtk.FALSE, gtk.FALSE, 0)
+        self.cselAbox.pack_start(self.cselAset, False, False, 0)
         self.cselAset.show()
 
 
-        self.cselbox.pack_start(self.cselAbox, gtk.FALSE, gtk.FALSE, 0)
+        self.cselbox.pack_start(self.cselAbox, False, False, 0)
         self.cselbox.show()
 
         # continuous channel B box
         
-        self.cselBbox = gtk.HBox(gtk.FALSE, 0)
+        self.cselBbox = gtk.HBox(False, 0)
 
         self.cselBlabel = gtk.Label("Chan B: ")
         
-        self.cselBbox.pack_start(self.cselBlabel, gtk.FALSE, gtk.FALSE, 0)
+        self.cselBbox.pack_start(self.cselBlabel, False, False, 0)
         self.cselBlabel.show()
 
 
@@ -451,15 +451,15 @@ class AcqBoardControl:
             item.show()
         self.cselBopt.set_menu(self.cselBmenu)
         self.cselBopt.show()
-        self.cselBbox.pack_start(self.cselBopt, gtk.FALSE, gtk.FALSE,0)
+        self.cselBbox.pack_start(self.cselBopt, False, False,0)
         self.cselBbox.show()
 
         self.cselBset = gtk.Button("set")
         self.cselBset.connect("clicked", self.button_cselBset)
-        self.cselBbox.pack_start(self.cselBset, gtk.FALSE, gtk.FALSE, 0)
+        self.cselBbox.pack_start(self.cselBset, False, False, 0)
         self.cselBset.show()
 
-        self.cselbox.pack_start(self.cselBbox, gtk.FALSE, gtk.FALSE, 0)
+        self.cselbox.pack_start(self.cselBbox, False, False, 0)
         
         self.cselframe.add(self.cselbox)
                 
@@ -478,17 +478,17 @@ class AcqBoardControl:
 
         self.window.set_border_width(10)
 
-        self.box0 = gtk.VBox(gtk.FALSE, 0)
-        self.box1 = gtk.HBox(gtk.FALSE, 0)
+        self.box0 = gtk.VBox(False, 0)
+        self.box1 = gtk.HBox(False, 0)
         self.window.add(self.box0)
-        self.box0.pack_start(self.box1, gtk.FALSE, gtk.FALSE, 0)
+        self.box0.pack_start(self.box1, False, False, 0)
         self.box0.show()
 
     
 
         self.create_everychan()
         self.acqs = AcqState()
-        self.box1.pack_start(self.acqs.mainbox, gtk.FALSE, gtk.FALSE, 0)
+        self.box1.pack_start(self.acqs.mainbox, False, False, 0)
     
         self.box1.show()
         self.window.show()
@@ -524,8 +524,11 @@ def sockstat(acqboard, foo):
     acqstat.open()
     print "Status socket opened"
     while 1:
-        stat = unpack("BBB", acqstat.read())
-        print "Status is %d %d %d" % stat
+
+        readstring = acqstat.read()
+        print "sockstat read", len(readstring), "bytes"
+        stat = unpack("BBBB", readstring)
+        print "Status is %d %d %d %d" % stat
         
         acqboard.acqs.commitcmdid(stat[1]/2)
         

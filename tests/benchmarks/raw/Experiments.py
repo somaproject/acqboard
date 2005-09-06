@@ -6,6 +6,7 @@ import boardstates
 from read import * 
 import tables
 from scipy import * 
+from matplotlib import pylab
 
 class SineRecord(tables.IsDescription):
     frequency     = tables.FloatCol()
@@ -111,7 +112,7 @@ def simpleTest():
     s = sourcestates.SineStates()
     b.gains = [1]
     s.freqs = r_[100:12100:100.0]
-    s.vpps = [0.1, 0.5, 1.0, 2.0, 4.0, 4.09]
+    s.vpps = [4.0]
     
     e.AC.append((b, s))
     print "ready to run" 

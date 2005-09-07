@@ -182,7 +182,6 @@ double findPrimaryFrequency(ublas::vector<double> & xin, double fs) {
   }
   fftw_free(out);  
   double binwidth = fs/N*3.1415*2; 
-  cout << "The bin width is " << binwidth << endl; 
   return (double(pos)*binwidth);
 
 }
@@ -203,6 +202,40 @@ double computeSqErr(ublas::vector<double> & x, sineParams s, double fs) {
   return err; 
 }
 
+
+double computeTHDN(ublas::vector<double> & x, double fs) {
+ 
+  double detect = findPrimaryFrequency(x, fs); 
+
+  int N = 2<<14; 
+  if (x.size() < N)
+    N = x.size();
+    
+  ublas::vector<double> xnorm(N);
+  double xsum = 0.0; 
+  for (int i = 0; i < N; i++)
+    xsum += x[i];
+  
+  for (int i = 0; i < N; i++)
+    xnorm[i] = x[i] - (xsum/N); 
+  
+
+  sineParams s, s1, s2; 
+  s.A = 0.0; 
+  s.B = 0.0; 
+  s.C = 0.0; 
+  s.w = detect; 
+
+  s1 = threeParamFit(s, xnorm, fs); 
+  s2 = fourParamFit(s1, xnorm, fs); 
+
+  double sqerr = computeSqErr(xnorm, s2, fs); 
+  double rmsnoise = sqrt(sqerr / xnorm.size()); 
+  double rmssignal = sqrt(s2.A*s2.A + s2.B*s2.B)/sqrt(2.0);
+  double thdn = 20*log(rmsnoise/rmssignal)/log(10.0); 
+  
+  return thdn ; 
+}
 
 int main(void){ 
 
@@ -229,52 +262,9 @@ int main(void){
   }
   x = x / 32768.0; 
     
-  cout << x[0] << ' ' << x[1] << endl; 
+  double thdn = computeTHDN(x, fs); 
 
-  sineParams q; 
-  q.A = A; 
-  q.B = B; 
-  q.C = C; 
-  q.w = w; 
-  double sqerrstart = computeSqErr(x, q, fs); 
-
-  cout << "The frequency is " << w << endl; 
- 
-  double detect = findPrimaryFrequency(x, fs); 
-  cout << "We detected a frequency at " << detect << endl; 
-
-    
-
-
-  sineParams s; 
-  s.A = 0.0; 
-  s.B = 0.0; 
-  s.C = 0.0; 
-  s.w = detect; 
-
-  cout << "A = " << s.A << " B = " << s.B << " C = " 
-       << s.C << " w=" << s.w <<  endl; 
-
-  s = threeParamFit(s, x, fs); 
-  cout << "After 3-param fit" << endl;  cout << "A = " << s.A << " B = " << s.B << " C = " 
-       << s.C << " w=" << s.w <<  endl; 
-
-
-  s = fourParamFit(s, x, fs); 
-  cout << " With four params fit: "<<endl;
-  cout << "A = " << s.A << " B = " << s.B 
-       << " C = " << s.C << " w = " << s.w << endl ;
-
-  cout << "Now to calculate error" << endl; 
-
-  double sqerr = computeSqErr(x, s, fs); 
-  double rmsnoise = sqrt(sqerr / x.size()); 
-  double rmssignal = sqrt(s.A*s.A + s.B*s.B)/sqrt(2.0);
-  double thdn = 20*log(rmsnoise/rmssignal)/log(10.0); 
   
-  cout <<  "The A delta is " << s.A - q.A << endl; 
-  cout <<  "The B delta is " << s.B - q.B << endl; 
-  cout <<  "The C delta is " << s.C - q.C << endl; 
 
   cout << " The error is "  << thdn << " dB" << endl;; 
   

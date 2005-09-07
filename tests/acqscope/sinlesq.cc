@@ -6,8 +6,11 @@ Simple project to compute the ieee-based four-parameter model of a sine wave.
 
 #include <fftw3.h>
 #include <iostream>
+#include <fstream>
+
 #include <vector>
 #include <math.h>
+#include <stdlib.h>
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/io.hpp>
 #include "sinlesq.h"
@@ -90,7 +93,7 @@ sineParams fourParamFit(sineParams init,
 
   ublas::matrix<double> DiT (N, 4), DiTprod(N, 4), e2(4, 4);
  
-  while (i < 10) {
+  while (i < 500) {
     //cout << "Iteration " << i <<  " with " << x << endl;
     A = x(0); 
     B = x(1); 
@@ -140,13 +143,22 @@ sineParams fourParamFit(sineParams init,
   
 }  
 
-
-
-double findPrimaryFrequency(const std::vector<double> & x, double fs) {
-  // returns the greatest spectral component of x
+void normalize(ublas::vector<double> x) {
   
-  int N = x.size(); 
+  double s = ublas::sum(x); 
+  x = x/s; 
+  
+}
 
+double findPrimaryFrequency(ublas::vector<double> & xin, double fs) {
+  // returns the greatest spectral component of x
+  // NOTE: will return zero (DC) if the input is not zero-mean
+
+  std::vector<double> x(xin.size()); 
+  std::copy(xin.begin(), xin.end(), x.begin()); 
+
+  int N = x.size(); 
+  
   
   fftw_complex *out;
   fftw_plan p;
@@ -169,37 +181,69 @@ double findPrimaryFrequency(const std::vector<double> & x, double fs) {
     }
   }
   fftw_free(out);  
-  return double(pos)/N*fs*2*3.141592; 
+  double binwidth = fs/N*3.1415*2; 
+  cout << "The bin width is " << binwidth << endl; 
+  return (double(pos)*binwidth);
 
+}
+
+double computeSqErr(ublas::vector<double> & x, sineParams s, double fs) {
+  // takes in a sine parameter set s
+  // computes the squared error between that sine parameter set 
+  // and the input vector x
+  
+  int  N = x.size(); 
+  double err = 0.0; 
+  for(int i = 0; i < N; i++) {
+    double t = (double)i/fs; 
+    double diff =  (s.A*cos(t*s.w) + s.B * sin(t*s.w) + s.C) - x[i]; 
+    err += diff * diff; 
+  }
+  
+  return err; 
 }
 
 
 int main(void){ 
 
-  int N(1<<19); 
+  int N(2<<14); 
+  double noise(0.01); 
 
-  std::vector<double> x(N); 
+  ublas::vector<double> x(N); 
   double fs = 192000.0; 
-  double w = 2000.0; 
+  double w = 10000.0; 
   double A, B, C;
   A = 3.2; 
-  B = 2.70; 
-  C = 0.0; 
+  B = 0.0; 
+  C = 1.0; 
   for (int i = 0; i < N; i++){
     double t = i/fs; 
-    x[i] = A*cos(t*w) + B * sin(t*w) + C; 
+    x[i] = A*cos(t*w) + B * sin(t*w) + C 
+      + noise* (double(rand())/RAND_MAX - 0.5); 
     
   }
+
+  ifstream infile("nocap.1000hz.txt"); 
+  for (int i = 0; i < N; i++) {
+    infile >> x[i]; 
+  }
+  x = x / 32768.0; 
+    
+  cout << x[0] << ' ' << x[1] << endl; 
+
+  sineParams q; 
+  q.A = A; 
+  q.B = B; 
+  q.C = C; 
+  q.w = w; 
+  double sqerrstart = computeSqErr(x, q, fs); 
 
   cout << "The frequency is " << w << endl; 
  
   double detect = findPrimaryFrequency(x, fs); 
   cout << "We detected a frequency at " << detect << endl; 
 
-  
-  ublas::vector<double> x1(N); 
-  std::copy(x.begin(), x.end(), x1.begin()); 
-  
+    
 
 
   sineParams s; 
@@ -208,15 +252,31 @@ int main(void){
   s.C = 0.0; 
   s.w = detect; 
 
-  s = threeParamFit(s, x1, fs); 
-  
   cout << "A = " << s.A << " B = " << s.B << " C = " 
        << s.C << " w=" << s.w <<  endl; 
 
-  s = fourParamFit(s, x1, fs); 
+  s = threeParamFit(s, x, fs); 
+  cout << "After 3-param fit" << endl;  cout << "A = " << s.A << " B = " << s.B << " C = " 
+       << s.C << " w=" << s.w <<  endl; 
+
+
+  s = fourParamFit(s, x, fs); 
   cout << " With four params fit: "<<endl;
   cout << "A = " << s.A << " B = " << s.B 
        << " C = " << s.C << " w = " << s.w << endl ;
+
+  cout << "Now to calculate error" << endl; 
+
+  double sqerr = computeSqErr(x, s, fs); 
+  double rmsnoise = sqrt(sqerr / x.size()); 
+  double rmssignal = sqrt(s.A*s.A + s.B*s.B)/sqrt(2.0);
+  double thdn = 20*log(rmsnoise/rmssignal)/log(10.0); 
+  
+  cout <<  "The A delta is " << s.A - q.A << endl; 
+  cout <<  "The B delta is " << s.B - q.B << endl; 
+  cout <<  "The C delta is " << s.C - q.C << endl; 
+
+  cout << " The error is "  << thdn << " dB" << endl;; 
   
 }  
   

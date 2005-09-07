@@ -9,7 +9,7 @@ main: main.o scopearea.o scope.o
 	 g++ main.o scopearea.o scope.o  -o main `pkg-config gtkmm-2.0 --cflags --libs`
 
 sinlesq.o: sinlesq.cc sinlesq.h
-	g++ -O2 -c sinlesq.cc -DNDEBUG
+	g++ -O2 -c sinlesq.cc  -DNDEBUG
 sinlesq: sinlesq.o
 	g++ sinlesq.o -o sinlesq -lfftw3 -lm
 clean:

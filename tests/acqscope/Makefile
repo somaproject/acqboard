@@ -8,11 +8,11 @@ main.o: main.cc scope.o
 main: main.o scopearea.o scope.o
 	 g++ main.o scopearea.o scope.o  -o main `pkg-config gtkmm-2.0 --cflags --libs`
 
-sinlesq.o: sinlesq.cc
-	g++ -c sinlesq.cc 
+sinlesq.o: sinlesq.cc sinlesq.h
+	g++ -O2 -c sinlesq.cc -DNDEBUG
 sinlesq: sinlesq.o
 	g++ sinlesq.o -o sinlesq -lfftw3 -lm
 clean:
-	rm *.o main
+	rm *.o main sinlesq
 domainserver: domainserver.cc
 	g++ domainserver.cc -o domainserver

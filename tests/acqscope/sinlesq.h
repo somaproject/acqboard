@@ -8,7 +8,6 @@
 
 using namespace boost::numeric::ublas;
 
-
 template<class E1, class E2> void inverse (matrix_expression<E1> &e1, matrix_expression<E2> &e2) {
 
    typedef BOOST_UBLAS_TYPENAME E2::size_type size_type;
@@ -22,8 +21,9 @@ template<class E1, class E2> void inverse (matrix_expression<E1> &e1, matrix_exp
       // processing column n
       // find the row that has the largest number at this column (in absolute value)
       size_type best_row = index_norm_inf(row(e1(), n));
+      //std::cout << "The best row is " << best_row << std::endl;
       // check wether this number is'nt zero
-        BOOST_UBLAS_CHECK (e1 () (best_row, n) != value_type (), singular ());
+      BOOST_UBLAS_CHECK (e1 () (best_row, n) != value_type (), singular ());
 
       { // swap this row with the n-th row
          vector<value_type> temp = row(e1(), best_row);

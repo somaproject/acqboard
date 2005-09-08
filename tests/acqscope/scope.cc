@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 #include <sigc++/sigc++.h>
+#include "thdn.h"
 
 
 Scope::Scope()
@@ -18,7 +19,8 @@ Scope::Scope()
     box_chansel_(),
     chanlbl_("Channel Selected:"),
     tholdadjust_(0.0, -32768.0, 32767, 1000.0, 5000.0),  
-    tholdsel_(tholdadjust_)
+    tholdsel_(tholdadjust_),
+    thdn_()
 {
   set_title("SOMA Acquisition Board Scope"); 
   
@@ -113,8 +115,9 @@ void Scope::change_mode(int newmode)
 
 void Scope::add_data(short x) 
 {
-  cout << "new data " << x << endl; 
+
   area_.add_data(x); 
+  thdn_.add_data(x); 
 }
 
 bool Scope::newdata(Glib::IOCondition foo)
@@ -149,6 +152,8 @@ bool Scope::newdata(Glib::IOCondition foo)
     }
   } 
   return true; 
+
+
 }
 
 void Scope::on_chansel() 

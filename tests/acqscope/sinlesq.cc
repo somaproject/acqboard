@@ -19,14 +19,6 @@ using namespace std;
 
 namespace ublas = boost::numeric::ublas;
 
-
-struct sineParams {
-  double A; 
-  double B;
-  double C; 
-  double w;
-};
-
 sineParams threeParamFit(sineParams init, 
 			 ublas::vector<double> &y, 
 			 double fs)
@@ -205,8 +197,7 @@ double computeSqErr(ublas::vector<double> & x, sineParams s, double fs) {
 
 double computeTHDN(ublas::vector<double> & x, double fs) {
  
-  double detect = findPrimaryFrequency(x, fs); 
-
+  double detect = findPrimaryFrequency(x, fs);
   int N = 2<<14; 
   if (x.size() < N)
     N = x.size();
@@ -237,7 +228,7 @@ double computeTHDN(ublas::vector<double> & x, double fs) {
   return thdn ; 
 }
 
-int main(void){ 
+int main2(void){ 
 
   int N(2<<14); 
   double noise(0.01); 

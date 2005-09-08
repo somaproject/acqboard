@@ -7,6 +7,7 @@
 #include "scopearea.h"
 #include <string>
 #include <vector>
+#include "thdn.h"
 
 using namespace std;
 
@@ -35,9 +36,9 @@ protected:
   Gtk::VScale tholdsel_; 
 
   
-  vector<string> chanlist_; 
+  std::vector<string> chanlist_; 
 
-  vector<Gtk::RadioButton*> chanbuttons_;
+  std::vector<Gtk::RadioButton*> chanbuttons_;
 
   Gtk::RadioButton::Group changroup_;
   Gtk::Label chanlbl_;
@@ -48,6 +49,8 @@ protected:
   int datafd_;
   int channel_; 
   int mode_; // 0 == RAW, 1 == normal
+
+  THDN thdn_; 
 
 };
 

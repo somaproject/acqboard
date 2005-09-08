@@ -1,18 +1,26 @@
+
+CCX=g++-3.4
+CFLAGS=-g  -DNDEBUG -O2
+
 all: main
 scopearea.o: scopearea.cc scopearea.h
-	g++ -c scopearea.cc `pkg-config gtkmm-2.4 --cflags  sigc++-2.0`
+	$(CXX) $(CFLAGS) -c scopearea.cc `pkg-config gtkmm-2.4 --cflags  sigc++-2.0`
 scope.o: scopearea.o scope.cc scope.h
-	g++ -c scope.cc `pkg-config gtkmm-2.4 --cflags  sigc++-2.0`
+	$(CXX) $(CFLAGS) -c scope.cc `pkg-config gtkmm-2.4 --cflags  sigc++-2.0`
 main.o: main.cc scope.o
-	g++ -c main.cc `pkg-config gtkmm-2.4 --cflags  sigc++-2.0`
-main: main.o scopearea.o scope.o
-	 g++ main.o scopearea.o scope.o  -o main `pkg-config gtkmm-2.4 --cflags --libs`
+	$(CXX) $(CFLAGS) -c main.cc `pkg-config gtkmm-2.4 --cflags  sigc++-2.0`
+main: main.o scopearea.o scope.o sinlesq.o thdn.o
+	 $(CXX) $(CFLAGS) main.o scopearea.o scope.o sinlesq.o thdn.o  -o main `pkg-config gtkmm-2.4 --cflags --libs` -lfftw3 -lm
 
 sinlesq.o: sinlesq.cc sinlesq.h
-	g++ -O2 -c sinlesq.cc  -DNDEBUG
+	$(CXX) $(CFLAGS) -O2 -c sinlesq.cc  -DNDEBUG
+
+thdn.o: thdn.cc thdn.h
+	$(CXX) $(CFLAGS) -O2 -c thdn.cc -DNDEBUG
+
 sinlesq: sinlesq.o
-	g++ sinlesq.o -o sinlesq -lfftw3 -lm
+	$(CXX) $(CFLAGS) sinlesq.o -o sinlesq -lfftw3 -lm
 clean:
 	rm *.o main sinlesq
 domainserver: domainserver.cc
-	g++ domainserver.cc -o domainserver
+	$(CXX) $(CFLAGS) domainserver.cc -o domainserver

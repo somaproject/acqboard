@@ -1,18 +1,47 @@
-
+#ifndef SINLESQ_H
+#define SINLESQ_H
 #include <fftw3.h>
 #include <iostream>
 #include <vector>
 #include <math.h>
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/io.hpp>
+#include <boost/numeric/ublas/expression_types.hpp>
+#include <boost/numeric/ublas/exception.hpp>
+#include <boost/numeric/ublas/traits.hpp>
+#include <boost/numeric/ublas/functional.hpp>
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/matrix_proxy.hpp>
+#include <boost/numeric/ublas/io.hpp>
 
 using namespace boost::numeric::ublas;
 
-template<class E1, class E2> void inverse (matrix_expression<E1> &e1, matrix_expression<E2> &e2) {
+struct sineParams {
+  double A; 
+  double B;
+  double C; 
+  double w;
+};
 
-   typedef BOOST_UBLAS_TYPENAME E2::size_type size_type;
-   typedef BOOST_UBLAS_TYPENAME E2::difference_type difference_type;
-   typedef BOOST_UBLAS_TYPENAME E2::value_type value_type;
+sineParams threeParamFit(sineParams init, 
+			 boost::numeric::ublas::vector<double> &y, 
+			 double fs);
+
+sineParams fourParamFit(sineParams init, 
+			boost::numeric::ublas::vector<double> &y, 
+			double fs);
+
+void normalize(boost::numeric::ublas::vector<double> x);
+double findPrimaryFrequency(boost::numeric::ublas::vector<double> & xin, double fs);
+double computeSqErr(boost::numeric::ublas::vector<double> & x, sineParams s, double fs); 
+double computeTHDN(boost::numeric::ublas::vector<double> & x, double fs); 
+
+
+template<class E1, class E2> void inverse (matrix_expression<E1> &e1, matrix_expression<E2> &e2) {
+  
+  typedef typename E2::size_type size_type;
+  typedef typename E2::difference_type difference_type;
+  typedef typename E2::value_type value_type;
 
    BOOST_UBLAS_CHECK (e1 ().size1 () == e2 ().size1 (), bad_size ());
    BOOST_UBLAS_CHECK (e1 ().size2 () == e2 ().size2 (), bad_size ());
@@ -21,7 +50,7 @@ template<class E1, class E2> void inverse (matrix_expression<E1> &e1, matrix_exp
       // processing column n
       // find the row that has the largest number at this column (in absolute value)
       size_type best_row = index_norm_inf(row(e1(), n));
-      //std::cout << "The best row is " << best_row << std::endl;
+
       // check wether this number is'nt zero
       BOOST_UBLAS_CHECK (e1 () (best_row, n) != value_type (), singular ());
 
@@ -51,3 +80,5 @@ template<class E1, class E2> void inverse (matrix_expression<E1> &e1, matrix_exp
    }
 
 }
+
+#endif

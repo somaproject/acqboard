@@ -8,6 +8,7 @@
 #include <arpa/inet.h>
 #include <vector>
 #include <string>
+#include <sigc++/sigc++.h>
 
 
 Scope::Scope()
@@ -25,13 +26,13 @@ Scope::Scope()
   // establish network connectivity
   int listenfd, connfd;
   struct sockaddr_un cliaddr;
-  area_.datafd_ = socket(AF_LOCAL, SOCK_STREAM, 0);
+  datafd_ = socket(AF_LOCAL, SOCK_STREAM, 0);
 
   bzero(&cliaddr, sizeof(cliaddr));
   cliaddr.sun_family = AF_LOCAL;
   
   strncpy(cliaddr.sun_path, "/tmp/acqboard.out", 18); 
-  connect(area_.datafd_, (sockaddr *) &cliaddr, sizeof(cliaddr));
+  connect(datafd_, (sockaddr *) &cliaddr, sizeof(cliaddr));
   
   // compensate for read offset?
   //char dummybuff[100];
@@ -62,7 +63,7 @@ Scope::Scope()
     
     chanbuttons_[i] = manage( new Gtk::RadioButton(changroup_,chanlist_[i]));
     chanbuttons_[i]->show();
-    chanbuttons_[i]->signal_clicked().connect(slot(*this, &Scope::on_chansel)); 
+    chanbuttons_[i]->signal_clicked().connect(sigc::mem_fun(*this, &Scope::on_chansel)); 
     chanbox_.pack_start(*chanbuttons_[i]); 
   }
   chanbox_.show();
@@ -73,7 +74,7 @@ Scope::Scope()
   
   tholdareabox_.pack_start(area_); 
   
-  tholdadjust_.signal_value_changed().connect( SigC::slot(*this, &Scope::on_tholdchange) );
+  tholdadjust_.signal_value_changed().connect(sigc::mem_fun(*this, &Scope::on_tholdchange) );
 
   mainbox_.pack_start(chanbox_); 
   mainbox_.pack_start(tholdareabox_);
@@ -88,10 +89,10 @@ Scope::Scope()
   
   resize(640, 240); 
   
-   
+  mode_ = 1; 
   cout << "Connecting signal ..." ;
-  Glib::signal_io().connect(slot(area_, &ScopeArea::newdata),
-                           area_.datafd_, Glib::IO_IN);
+  Glib::signal_io().connect(sigc::mem_fun(this, &Scope::newdata),
+                           datafd_, Glib::IO_IN);
   cout << "connected!" << endl; 
   
   
@@ -99,14 +100,64 @@ Scope::Scope()
 }
 
 
+void Scope::change_mode(int newmode) 
+{
+  if (newmode == 3) {
+    mode_ = 0;
+  } else {
+    mode_ = 1;
+  }
+  
+}
+
+
+void Scope::add_data(short x) 
+{
+  cout << "new data " << x << endl; 
+  area_.add_data(x); 
+}
+
+bool Scope::newdata(Glib::IOCondition foo)
+{
+
+  /*
+    ohh, look, the interetsing part
+  */
+
+
+  unsigned char buffer[24];
+  int result = read(datafd_, buffer, 24); 
+
+  if ((buffer[1] >> 1) != mode_)
+    change_mode(buffer[1]>>1); 
+  
+  //cout << endl;
+  for (int i = 0; i < 10;  i++) { 
+    if ((mode_ == 0 and i < 6) or (mode_ == 1 and i == channel_)) { 
+      unsigned char lowbyte = buffer[(i+1)*2 + 1];
+      unsigned char highbyte = buffer[(i+1)*2];
+      unsigned short usample = highbyte * 256 + lowbyte; 
+      short sample(0); 
+      
+      if (usample < 32768) {
+	sample = usample;
+      } else {
+	sample = usample; 
+      }
+      
+      add_data(sample); 
+    }
+  } 
+  return true; 
+}
+
 void Scope::on_chansel() 
 {
   // handler for every time one of the radio button thingies is clicked
 
-
   for (int i = 0; i < 10; i++) 
     if (chanbuttons_[i]->get_active()) 
-      area_.channel_ = i; 
+      channel_ = i; 
 
 }
 

@@ -36,10 +36,8 @@ class ScopeArea : public Gtk::DrawingArea
 public:
   ScopeArea(int, int);
   virtual ~ScopeArea();
-  bool newdata(Glib::IOCondition); 
-  int datafd_;
-  int channel_; 
   short thold_; 
+  void add_data(short); 
   
 
 protected:
@@ -52,12 +50,10 @@ protected:
   int pos_;    // window position, sorta
   float offset_; 
   float scale_; 
-
-  int mode_; // 0 == RAW, 1 == normal
+  int mode_; 
 
   std::vector<short> databuffer_; 
   
-  void add_data(short); 
   short get_data(int); 
 
   void redraw(void); 

@@ -41,6 +41,13 @@ protected:
 
   Gtk::RadioButton::Group changroup_;
   Gtk::Label chanlbl_;
+  void add_data(short x);
+  
+  void change_mode(int newmode);
+  bool newdata(Glib::IOCondition); 
+  int datafd_;
+  int channel_; 
+  int mode_; // 0 == RAW, 1 == normal
 
 };
 

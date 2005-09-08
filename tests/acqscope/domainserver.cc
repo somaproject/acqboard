@@ -52,6 +52,7 @@ main (int argc, char** argv)
 
   int pos = 0 ; 
   int period = 200; 
+  double fs; 
 
   
   while(1) { 
@@ -59,15 +60,15 @@ main (int argc, char** argv)
     usleep(1000); 
     for (int j = 0; j < 64; j++) {
 
-      for (int i = 1; i < 9; i++) { 
-	/*
-	int q = (32768*sin(pos * 3.141592*2.0/period)) + (1+(int) (10000.0*rand()/(RAND_MAX+1.0)));
+      for (int i = 1; i < 7; i++) { 
+
+	int q = (32768*sin(pos * 3.141592*2.0/period)); 
 	if (q < -32768) 
 	  q = -32768; 
 	if (q > 32767)
 	  q = 32767; 
-	*/
-	int q = 327*((pos % 200)-100); 
+
+
 	short x = (short)q; 
 	buffer[i*2+1] = x  % 256;
 	buffer[i*2] = x / 256;  

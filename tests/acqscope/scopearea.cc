@@ -60,7 +60,7 @@ ScopeArea::ScopeArea(int width, int height)
   pos_ = -1; 
 
   mode_ = 0; 
-  channel_ = 0; 
+
 }
 
 
@@ -76,7 +76,28 @@ void ScopeArea::add_data(short x) {
   } else { 
     bufpos_++;
   }
+  
 
+  if (pos_ < 0) { 
+    if ((x > thold_) and (get_data(-1) <= thold_)) {
+      pos_ = 0;
+    }
+  } else {
+    pos_++; 
+    if (pos_ == WINSIZE) {
+      // we've reached a full window
+      
+      for (int j = 0; j < WINSIZE; j++) { 
+	winbuffer_[j] = convsample(get_data(-(WINSIZE-j)));
+	
+      }
+      pos_ = -1;
+      redraw(); 
+      
+    }
+    
+  }
+  
 }
 
 short ScopeArea::get_data(int pos) {
@@ -89,6 +110,7 @@ short ScopeArea::get_data(int pos) {
     newpos += BUFSIZE;
   }
   return databuffer_[newpos];
+  
 }
 
 
@@ -157,62 +179,6 @@ bool ScopeArea::on_expose_event(GdkEventExpose*)
   return true;
 }
 
-bool ScopeArea::newdata(Glib::IOCondition foo)
-{
-
-  /*
-    ohh, look, the interetsing part
-  */
-  
-  unsigned char buffer[24];
-  int result = read(datafd_, buffer, 24); 
-  for (int i = 0; i < 24; i++) {
-    // if (buffer[i] == -68) 
-      //cout << i << endl;
-  }
-  if ((buffer[1] >> 1) != mode_)
-    change_mode(buffer[1]>>1); 
-
-  //cout << endl;
-  for (int i = 0; i < 10;  i++) { 
-    if ((mode_ == 0 and i < 6) or (mode_ == 1 and i == channel_)) { 
-      unsigned char lowbyte = buffer[(i+1)*2 + 1];
-      unsigned char highbyte = buffer[(i+1)*2];
-      unsigned short usample = highbyte * 256 + lowbyte; 
-      short sample(0); 
-      
-      if (usample < 32768) {
-	sample = usample;
-      } else {
-	sample = usample; 
-      }
-
-      
-      add_data(sample); 
-      //cout << sample << '\n'    ; 
-      
-      
-      if (pos_ < 0) { 
-	if ((sample > thold_) and (get_data(-1) <= thold_)) {
-	  pos_ = 0;
-	}
-      } else {
-	pos_++; 
-	if (pos_ == WINSIZE) {
-	  // we've reached a full window
-	  
-	  for (int j = 0; j < WINSIZE; j++) { 
-	    winbuffer_[j] = convsample(get_data(-(WINSIZE-j)));
-	    
-	  }
-	  pos_ = -1;
-	}
-      }
-    }
-  } 
-  redraw(); 
-  return true; 
-}
 
 void ScopeArea::redraw(void)
 {

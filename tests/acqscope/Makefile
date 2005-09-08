@@ -1,12 +1,12 @@
 all: main
 scopearea.o: scopearea.cc scopearea.h
-	g++ -c scopearea.cc `pkg-config gtkmm-2.0 --cflags`
+	g++ -c scopearea.cc `pkg-config gtkmm-2.4 --cflags  sigc++-2.0`
 scope.o: scopearea.o scope.cc scope.h
-	g++ -c scope.cc `pkg-config gtkmm-2.0 --cflags`
+	g++ -c scope.cc `pkg-config gtkmm-2.4 --cflags  sigc++-2.0`
 main.o: main.cc scope.o
-	g++ -c main.cc `pkg-config gtkmm-2.0 --cflags`
+	g++ -c main.cc `pkg-config gtkmm-2.4 --cflags  sigc++-2.0`
 main: main.o scopearea.o scope.o
-	 g++ main.o scopearea.o scope.o  -o main `pkg-config gtkmm-2.0 --cflags --libs`
+	 g++ main.o scopearea.o scope.o  -o main `pkg-config gtkmm-2.4 --cflags --libs`
 
 sinlesq.o: sinlesq.cc sinlesq.h
 	g++ -O2 -c sinlesq.cc  -DNDEBUG

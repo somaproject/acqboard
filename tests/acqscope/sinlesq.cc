@@ -85,7 +85,7 @@ sineParams fourParamFit(sineParams init,
 
   ublas::matrix<double> DiT (N, 4), DiTprod(N, 4), e2(4, 4);
  
-  while (i < 500) {
+  while (i < 200) {
     //cout << "Iteration " << i <<  " with " << x << endl;
     A = x(0); 
     B = x(1); 
@@ -178,6 +178,30 @@ double findPrimaryFrequency(ublas::vector<double> & xin, double fs) {
 
 }
 
+void filter(ublas::vector<double> & x, 
+	    const ublas::vector<double> & h, 
+	    ublas::vector<double>* y) 
+{
+  // convolve , and then trim
+
+  // h is the filter vector. 
+
+  y->resize(x.size() - h.size()); 
+
+  
+  for (int i = h.size(); i < (y->size() + h.size()); i++) {
+    double sum(0.0); 
+
+
+    for (int k = 0; k < h.size(); k++) {
+      sum += h[k] * x[i-k]; 
+    }  
+    (*y)[i-h.size()]  = sum; 
+
+  }
+  
+  
+}
 double computeSqErr(ublas::vector<double> & x, sineParams s, double fs) {
   // takes in a sine parameter set s
   // computes the squared error between that sine parameter set 
@@ -194,11 +218,24 @@ double computeSqErr(ublas::vector<double> & x, sineParams s, double fs) {
   return err; 
 }
 
+double computeBandLimitedTHDN(ublas::vector<double> & x, 
+			      const ublas::vector<double> & h, 
+			      double fs)
+{
+  ublas::vector<double> y; 
+  filter(x, h, &y); 
 
-double computeTHDN(ublas::vector<double> & x, double fs) {
+  
+  return computeTHDN(y, fs);
+}
+
+double computeTHDN(ublas::vector<double> & x, 
+		   double fs) {
  
   double detect = findPrimaryFrequency(x, fs);
   int N = 2<<14; 
+
+  
   if (x.size() < N)
     N = x.size();
     
@@ -222,40 +259,50 @@ double computeTHDN(ublas::vector<double> & x, double fs) {
 
   double sqerr = computeSqErr(xnorm, s2, fs); 
   double rmsnoise = sqrt(sqerr / xnorm.size()); 
-  double rmssignal = sqrt(s2.A*s2.A + s2.B*s2.B)/sqrt(2.0);
+
+  double rmssignal = sqrt(s2.A*s2.A + s2.B*s2.B);
   double thdn = 20*log(rmsnoise/rmssignal)/log(10.0); 
-  
   return thdn ; 
 }
 
 int main2(void){ 
 
   int N(2<<14); 
-  double noise(0.01); 
+  double noise(0.00); 
+
+  int i = 0; 
+  ublas::vector<double> h(202); 
+  
+  std::ifstream hfile("10kHz_LPF.dat"); 
+
+  while (!hfile.eof()) {
+    double hval; 
+    hfile >> hval;
+    h[i] = hval; 
+    i++; 
+  }
+  h.resize(i); 
+
+
 
   ublas::vector<double> x(N); 
   double fs = 192000.0; 
-  double w = 10000.0; 
+  double w = 1000.0; 
   double A, B, C;
   A = 3.2; 
-  B = 0.0; 
-  C = 1.0; 
+  B = 2.0; 
+  C = 0.0; 
   for (int i = 0; i < N; i++){
     double t = i/fs; 
-    x[i] = A*cos(t*w) + B * sin(t*w) + C 
-      + noise* (double(rand())/RAND_MAX - 0.5); 
+    //x[i] = round(32767*(A*cos(t*w) + B * sin(t*w) + C 
+    //  + noise* (double(rand())/RAND_MAX - 0.5))); 
+    x[i] = round(32767*(cos(t*w+1.518251))); 
     
   }
 
-  ifstream infile("nocap.1000hz.txt"); 
-  for (int i = 0; i < N; i++) {
-    infile >> x[i]; 
-  }
   x = x / 32768.0; 
-    
-  double thdn = computeTHDN(x, fs); 
-
-  
+ 
+  double thdn = computeBandLimitedTHDN(x, h, fs); 
 
   cout << " The error is "  << thdn << " dB" << endl;; 
   

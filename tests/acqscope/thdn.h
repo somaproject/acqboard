@@ -21,6 +21,7 @@ class THDN
   
  private:
   ublas::vector<double> data_; 
+  ublas::vector<double> h_; 
   int N_; 
   int pos_; 
   double recentTHDN_; 

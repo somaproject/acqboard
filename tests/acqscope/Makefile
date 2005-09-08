@@ -1,6 +1,6 @@
 
-CCX=g++-3.4
-CFLAGS=-g  -DNDEBUG -O2
+CCX=ccache g++-3.4
+CFLAGS=  -O2
 
 all: main
 scopearea.o: scopearea.cc scopearea.h

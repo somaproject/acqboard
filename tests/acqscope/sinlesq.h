@@ -34,8 +34,13 @@ sineParams fourParamFit(sineParams init,
 void normalize(boost::numeric::ublas::vector<double> x);
 double findPrimaryFrequency(boost::numeric::ublas::vector<double> & xin, double fs);
 double computeSqErr(boost::numeric::ublas::vector<double> & x, sineParams s, double fs); 
-double computeTHDN(boost::numeric::ublas::vector<double> & x, double fs); 
-
+double computeTHDN(boost::numeric::ublas::vector<double> &, double); 
+double computeBandLimitedTHDN(boost::numeric::ublas::vector<double> &, 
+			      const boost::numeric::ublas::vector<double> &,
+			      double); 
+void filter(boost::numeric::ublas::vector<double> & x,
+	    const boost::numeric::ublas::vector<double> & h, 
+	    boost::numeric::ublas::vector<double>* y); 
 
 template<class E1, class E2> void inverse (matrix_expression<E1> &e1, matrix_expression<E2> &e2) {
   

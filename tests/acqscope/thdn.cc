@@ -15,15 +15,14 @@ THDN::THDN() :
   std::cout << "THDN constructor called" << std::endl; 
   data_.resize(N_); 
 
-  std::ifstream hfile("10kHz_LPF.dat"); 
   
   int i = 0; 
-  ublas::vector<double> invect(1000); 
-  
-  while (!hfile.eof()) {
-    double hval; 
-    hfile >> hval;
-    h_[i] = hval;
+  int flen = sizeof(LPF10kHz)/ sizeof(double); 
+
+  std::cout << sizeof(LPF10kHz) << std::endl; 
+    
+  while (i < flen) {
+    h_[i] = LPF10kHz[i];
     i++; 
   }
   

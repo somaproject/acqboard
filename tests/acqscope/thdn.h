@@ -3,6 +3,7 @@
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/io.hpp>
 #include "sinlesq.h"
+#include "filters.h"
 
 namespace ublas = boost::numeric::ublas;
 
@@ -25,6 +26,7 @@ class THDN
   int N_; 
   int pos_; 
   double recentTHDN_; 
+
 
 
 }; 

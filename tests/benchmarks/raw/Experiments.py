@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+import sys
 import time
 import sourcestates
 import boardstates
@@ -104,14 +104,14 @@ class Experiment(object):
                         table.flush()
 
 
-def simpleTest():
+def simpleTest(filename):
 
-    e = Experiment("test.h5", "A test experiment")
+    e = Experiment(filename, "A test experiment")
 
     b = boardstates.BoardStates()
     s = sourcestates.SineStates()
     b.gains = [1]
-    s.freqs = r_[100:12100:100.0]
+    s.freqs = r_[500:12500:500.0]
     s.vpps = [4.0]
     
     e.AC.append((b, s))
@@ -119,7 +119,7 @@ def simpleTest():
     e.run()
 
 if __name__ == "__main__":
-    simpleTest()
+    simpleTest(sys.argv[1])
     
 
     

@@ -48,7 +48,7 @@ def lpf(x, hen, freq, fs):
     RN = len(x)
     
     hlen = 200 
-    h = signal.remez(hlen, r_[0, 0.05, 0.12, 0.5], r_[1.0, 0.0])
+    h = signal.remez(hlen, r_[0, freq/fs*0.8, freq/fs*1.2, 0.5], r_[1.0, 0.0])
     xh = signal.convolve(h, x  )
     return xh[2*hlen:(RN-2*hlen)]
 
@@ -105,16 +105,18 @@ def measureTHDN(x, fs, freq=1000.0, phase=0.0, ploterror = False):
     return (thdn, ENOB)
 
 def main():
-    N = 50000
+    N = 2**14
     fs = 192000.0
-    r = readacq.RawFile('/home/jonas/test.dat');
-    x = r.read(N);
-    x = x/32768.0
+    #r = readacq.RawFile('/home/jonas/test.dat');
+    #x = r.read(N);
+    #x = x/32768.0
 
-    y = lpf(x, 100, 10000., fs)
+    #y = lpf(x, 100, 10000., fs)
     #x = sin(r_[0:(N)]/fs*2*pi*500)
-    
-    measureTHDN(y[N/2:], fs, freq=10000.0, phase=1.0, ploterror = True)
+    t = r_[0:N]
+    t = t/fs
+    x = round(32767*(sin(t*3.1415*2*1000)))/32768; 
+    measureTHDN(x, fs, freq=1000.0, phase=1.0, ploterror = True)
     
 if __name__ == "__main__":
 

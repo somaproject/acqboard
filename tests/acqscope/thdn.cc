@@ -45,6 +45,7 @@ void THDN::add_data(short x){
 
   if (pos_ == N_) {
     recentTHDN_  = computeBandLimitedTHDN(data_, h_, 192000.0); 
+    //recentTHDN_  = computeTHDN(data_, 192000.0); 
     pos_ = -65536; 
     std::cout << "THe calculated thd+n is " << recentTHDN_ << "dB" 
 	      << std::endl; 

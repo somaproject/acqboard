@@ -2337,6 +2337,161 @@ filtered.<br>
 Not quite sure what to make of this, but it's -almost- encouraging. <br>
 <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">10
+September 2005</span><br
+ style="font-weight: bold; text-decoration: underline;">
+We can now robustly get -91 dB at 10kHz post-filtering. Let's measure
+it:<br>
+<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">R<br>
+      </td>
+      <td style="vertical-align: top;">C<br>
+      </td>
+      <td style="vertical-align: top;">1000 Hz<br>
+      </td>
+      <td style="vertical-align: top;">5000 Hz<br>
+      </td>
+      <td style="vertical-align: top;">10000 Hz<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">10 ohm<br>
+      </td>
+      <td style="vertical-align: top;">2200 pF<br>
+      </td>
+      <td style="vertical-align: top;">-80 dB<br>
+      </td>
+      <td style="vertical-align: top;">-84 dB<br>
+      </td>
+      <td style="vertical-align: top;">-91 dB<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">10 ohm<br>
+      </td>
+      <td style="vertical-align: top;">270 pF<br>
+      </td>
+      <td style="vertical-align: top;">-79 dB<br>
+      </td>
+      <td style="vertical-align: top;">-83 dB<br>
+      </td>
+      <td style="vertical-align: top;">-90 dB<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+Okay, if we directly feed the output of the SRS into the ADC _and_
+remove the Reference Buffer, we get... &gt; 90dB (filtered) across the
+entire board!!!!&nbsp; This decreases to ~ -89 dB when we go to AC
+power, but whatever! This is with no AA filter and no input LPF. <br>
+<br>
+Now, with: ATS-2 input, bipolar, through the AA filter, with no lpf
+(zero-ohm resistor between AAf and ADC, no cap),&nbsp; and the input
+directly from the voltage reference with no capacitor.... <br>
+<br>
+This produces a very odd situation in which we get the THD+N better
+than -90dB for 1k and for 10k but -85 dB for 6k; running formal
+tests... oh, shit, there's no GPIB card in that machine. Grr. <br>
+<br>
+Well, we'll just try with a LPF (2200pF/10 ohm) to see what we get...
+which is this:<br>
+<br>
+<img alt="" src="results/20050910/test.lpf.1200pF.10ohm.noRefBuf.png"
+ style="width: 683px; height: 511px;"><br>
+<br>
+<br>
+That's really strange -- the absolute value of the numbers is also
+slightly off from the IEEE values, which we'll use for the final
+analysis. <br>
+<br>
+<br>
+Now, after I put a 10uF tantalum cap at the output of the voltage
+reference and got rid of the LPF, ATS-2 input through the AAf gives:<br>
+<br>
+<img alt="" src="results/20050910/test.nolpf.10uFonRef.png"
+ style="width: 745px; height: 557px;"><br>
+<br>
+<br>
+I really don't understand the apparent 1 kHz peak. <br>
+<br>
+Now we'll try with a LPF -- no difference at all. Really, I think the
+best conclusion we can come up with is that the input LPF does
+-nothing-, and it's almost all in the quality of the references. <br>
+<br>
+Now, with a 1uf Cap on the output of the reference: <br>
+<br>
+<img alt="" src="results/20050910/test.lpf.1200pF.10ohm.1uFOnRef.png"
+ style="width: 683px; height: 512px;"><img alt=""
+ src="results/20050910/test.lpf.1200pF.10ohm.1uFOnRef.png"
+ style="width: 683px; height: 512px;"><br>
+<br>
+<br>
+Now, we'll try a 1 uF ceramic... no difference from above graph. So we
+try 22 uF (test7) and 47 uf (test8)<br>
+<br>
+<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20050910/10uF.png" style="width: 388px; height: 291px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20050910/22uF.png" style="width: 400px; height: 300px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20050910/47uF.png" style="width: 400px; height: 300px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">1 uF<br>
+      </td>
+      <td style="vertical-align: top;">22 uF<br>
+      </td>
+      <td style="vertical-align: top;">47 uF<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Now that we have an idea of where the problem lies, we're going to try
+and systematically figure out the source. <br>
+<br>
+We reinstalled the amp, using the 47uF reference cap, and put a 10uF
+output cap between it and the ADC (as the schematic says, although it
+calls for a 10uF). WE get:<br>
+<br>
+<img alt="" src="results/20050910/withamp.10uFafterAmp.png"
+ style="width: 716px; height: 537px;"><br>
+<br>
+Adding extra capacitance had no effect. In today's results, the
+"withrefamp.h5" file reflects this state, namely:<br>
+<ul>
+  <li>Existing LPF, with 2200pf/10 Ohm</li>
+  <li>10 uF TANTALUM between ref amp and ADC</li>
+  <li>47 uF tantalum between ref and ref amp</li>
+</ul>
+<br>
+<br>
 <br>
 <br>
 <br>

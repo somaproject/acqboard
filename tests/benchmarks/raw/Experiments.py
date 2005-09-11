@@ -111,8 +111,8 @@ def simpleTest(filename):
     b = boardstates.BoardStates()
     s = sourcestates.SineStates()
     b.gains = [1]
-    s.freqs = r_[500:12500:500.0]
-    s.vpps = [4.0]
+    s.freqs = r_[100:12100:100.0]
+    s.vpps = [2.0, 3.0, 4.0, 4.1]
     
     e.AC.append((b, s))
     print "ready to run" 

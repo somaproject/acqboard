@@ -64,6 +64,23 @@ sineParams threeParamFit(sineParams init,
 }  
 
 
+void genMainMatrix(ublas::matrix<double> & Di,
+		   int N, 
+		   double A, 
+		   double B, 
+		   double C, 
+		   double w, 
+		   double fs) {
+
+  for (int j = 0; j < N; j++){
+    double t = j/fs; 
+    Di(j, 0) = cos(w * t);
+    Di(j, 1) = sin(w *  t);
+    Di(j, 2) = 1.0;
+    Di(j, 3) = - A * t * sin(w*t) + B * t * cos(w*t); 
+  }
+}
+
 sineParams fourParamFit(sineParams init, 
 			ublas::vector<double> &y, 
 			double fs)
@@ -85,7 +102,7 @@ sineParams fourParamFit(sineParams init,
 
   ublas::matrix<double> DiT (N, 4), DiTprod(N, 4), e2(4, 4);
  
-  while (i < 200) {
+  while (i < 20) {
     //cout << "Iteration " << i <<  " with " << x << endl;
     A = x(0); 
     B = x(1); 
@@ -93,15 +110,7 @@ sineParams fourParamFit(sineParams init,
 
     w = x(3) + w; 
     
-    
-    for (int j = 0; j < N; j++){
-      double t = j/fs; 
-      Di(j, 0) = cos(w * t);
-      Di(j, 1) = sin(w *  t);
-      Di(j, 2) = 1.0;
-      Di(j, 3) = - A * t * sin(w*t) + B * t * cos(w*t); 
-    }
-    
+    genMainMatrix(Di, N, A, B, C, w, fs); 
     
     DiT  = ublas::trans(Di); 
 
@@ -116,11 +125,11 @@ sineParams fourParamFit(sineParams init,
 	}
     inverse(DiTprod, e2); 
 
-    ublas::vector<double> v(4); 
-    v = ublas::prod(DiT, y); 
-
+    
+    
+    ublas::vector<double> v(ublas::prod(DiT, y)); 
     x = ublas::prod(e2, v); 
-    //cout << x << endl; 
+    
     i++; 
     
   }
@@ -302,7 +311,7 @@ int main2(void){
 
   x = x / 32768.0; 
  
-  double thdn = computeBandLimitedTHDN(x, h, fs); 
+  double thdn = computeTHDN(x,fs); 
 
   cout << " The error is "  << thdn << " dB" << endl;; 
   

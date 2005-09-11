@@ -1,6 +1,6 @@
 
-CCX=ccache g++-3.4
-CFLAGS=  -O2
+CCX=ccache g++
+CFLAGS=  -O2 -DNDEBUG 
 
 all: main
 scopearea.o: scopearea.cc scopearea.h
@@ -13,10 +13,10 @@ main: main.o scopearea.o scope.o sinlesq.o thdn.o
 	 $(CXX) $(CFLAGS) main.o scopearea.o scope.o sinlesq.o thdn.o  -o main `pkg-config gtkmm-2.4 --cflags --libs` -lfftw3 -lm
 
 sinlesq.o: sinlesq.cc sinlesq.h
-	$(CXX) $(CFLAGS) -O2 -c sinlesq.cc  -DNDEBUG
+	$(CXX) $(CFLAGS) -O2 -c sinlesq.cc
 
 thdn.o: thdn.cc thdn.h
-	$(CXX) $(CFLAGS) -O2 -c thdn.cc -DNDEBUG
+	$(CXX) $(CFLAGS) -O2 -c thdn.cc
 
 sinlesq: sinlesq.o
 	$(CXX) $(CFLAGS) sinlesq.o -o sinlesq -lfftw3 -lm

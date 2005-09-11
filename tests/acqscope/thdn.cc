@@ -3,7 +3,7 @@
 #include "thdn.h"
 #include <fstream>
 #include <istream>
-
+#include "filters.h"
 
 THDN::THDN() :
   N_(1024),
@@ -15,11 +15,10 @@ THDN::THDN() :
   std::cout << "THDN constructor called" << std::endl; 
   data_.resize(N_); 
 
-  
   int i = 0; 
+
   int flen = sizeof(LPF10kHz)/ sizeof(double); 
 
-  std::cout << sizeof(LPF10kHz) << std::endl; 
     
   while (i < flen) {
     h_[i] = LPF10kHz[i];

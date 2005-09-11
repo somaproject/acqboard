@@ -6,7 +6,6 @@
 #include <math.h>
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/io.hpp>
-#include <boost/numeric/ublas/expression_types.hpp>
 #include <boost/numeric/ublas/exception.hpp>
 #include <boost/numeric/ublas/traits.hpp>
 #include <boost/numeric/ublas/functional.hpp>
@@ -23,6 +22,9 @@ struct sineParams {
   double w;
 };
 
+char const * greet();
+
+double computeTHDNpy(double* x, int N, int fs); 
 sineParams threeParamFit(sineParams init, 
 			 boost::numeric::ublas::vector<double> &y, 
 			 double fs);

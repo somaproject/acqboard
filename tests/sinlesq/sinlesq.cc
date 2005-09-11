@@ -14,6 +14,7 @@ Simple project to compute the ieee-based four-parameter model of a sine wave.
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/io.hpp>
 #include "sinlesq.h"
+#include "filters.h"
 
 using namespace std; 
 
@@ -25,6 +26,7 @@ char const * greet()
   // debugging
   return "HELLO WORLD";
 }
+
 double computeTHDNpy(double* x, int N, int fs){
 
   ublas::vector<double> xprime(N); 
@@ -35,6 +37,18 @@ double computeTHDNpy(double* x, int N, int fs){
   }
   
   return computeTHDN(xprime, double(fs)); 
+
+}
+
+double compute10kHzBLTHDNpy(double* x, int N, int fs){
+
+  ublas::vector<double> xprime(N); 
+  
+  for (int i =0; i < N; i++) {
+    xprime[i] = x[i]; 
+  }
+  
+  return compute10kHzBandLimitedTHDN(xprime, double(fs)); 
 
 }
 
@@ -246,15 +260,31 @@ double computeSqErr(ublas::vector<double> & x, sineParams s, double fs) {
   return err; 
 }
 
+
+double 
+compute10kHzBandLimitedTHDN(ublas::vector<double> & x, 
+			  double fs)
+{
+  ublas::vector<double> hdef(1000);
+  int flen = sizeof(LPF10kHz)/ sizeof(double); 
+
+  for (int i = 0; i < flen; i++){
+    hdef[i] = LPF10kHz[i];
+  }
+  hdef.resize(flen); 
+
+  return computeBandLimitedTHDN(x, hdef, fs); 
+}
+
 double computeBandLimitedTHDN(ublas::vector<double> & x, 
 			      const ublas::vector<double> & h, 
 			      double fs)
 {
-  ublas::vector<double> y; 
-  filter(x, h, &y); 
 
-  
-  return computeTHDN(y, fs);
+  ublas::vector<double> y;
+  filter(x, h, &y);
+    return computeTHDN(y, fs);
+
 }
 
 double computeTHDN(ublas::vector<double> & x, 

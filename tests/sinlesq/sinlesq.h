@@ -25,6 +25,10 @@ struct sineParams {
 char const * greet();
 
 double computeTHDNpy(double* x, int N, int fs); 
+double compute10kHzBLTHDNpy(double* x, int N, int fs); 
+
+double compute10kHzBandLimitedTHDN(boost::numeric::ublas::vector<double> & x, 
+				 double fs);
 sineParams threeParamFit(sineParams init, 
 			 boost::numeric::ublas::vector<double> &y, 
 			 double fs);

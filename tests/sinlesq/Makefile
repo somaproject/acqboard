@@ -1,5 +1,5 @@
 
-CXX=ccache g++
+CXX=g++
 CFLAGS=  -O2 -DNDEBUG -fpic
 
 all: sinlesq python

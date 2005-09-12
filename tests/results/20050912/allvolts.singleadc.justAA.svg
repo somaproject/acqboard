@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with matplotlib (http://matplotlib.sourceforge.net/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docbase="/home/jonas/soma/developer/acqboard/tests/results/20050912"
+   sodipodi:docname="allvolts.singleadc.justAA.svg"
+   inkscape:version="0.41"
+   sodipodi:version="0.32"
+   id="svg1"
+   height="432"
+   width="576"
+   y="0.0"
+   x="0.0"
+   version="1.0">
+  <metadata
+     id="metadata272">
+    <rdf:RDF
+       id="RDF274">
+      <cc:Work
+         id="Work276"
+         rdf:about="">
+        <dc:format
+           id="format278">image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage"
+           id="type280" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs270" />
+  <sodipodi:namedview
+     inkscape:current-layer="svg1"
+     inkscape:window-y="0"
+     inkscape:window-x="0"
+     inkscape:cy="171.95194"
+     inkscape:cx="238.77910"
+     inkscape:zoom="1.6759259"
+     inkscape:window-height="1173"
+     inkscape:window-width="1598"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base" />
+  <polygon
+     id="polygon7"
+     points="72.000000,388.800000 72.000000,43.200000 518.400000,43.200000 518.400000,388.800000"
+     style="fill:#ffffff;opacity:1.0000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:1.0000000;stroke:#000000" />
+  <g
+     id="matplotlib.axis1">
+    <g
+       id="xtick1">
+      <defs
+         id="defs11">
+        <clipPath
+           id="789695421804425603">
+          <rect
+             id="rect14"
+             style="stroke: gray; fill: none;"
+             height="345.600000"
+             width="446.400000"
+             y="43.200000"
+             x="72.000000" />
+        </clipPath>
+      </defs>
+      <path
+         id="path16"
+         d="M 95.494737,388.800000 L 95.494737,43.200000 "
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; fill: none; clip-path:url(#789695421804425603);" />
+      <path
+         id="path18"
+         d="M 95.494737,388.800000 L 95.494737,384.800000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path20"
+         d="M 95.494737,388.800000 L 95.494737,384.800000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path22"
+         d="M 95.494737,47.200000 L 95.494737,43.200000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path24"
+         d="M 95.494737,47.200000 L 95.494737,43.200000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <text
+         id="text26"
+         y="399.800000"
+         x="83.994737"
+         style="font-size: 10.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;">1000</text>
+    </g>
+    <g
+       id="xtick2">
+      <path
+         id="path29"
+         d="M 142.484211,388.800000 L 142.484211,43.200000 "
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; fill: none; clip-path:url(#789695421804425603);" />
+      <path
+         id="path31"
+         d="M 142.484211,388.800000 L 142.484211,384.800000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path33"
+         d="M 142.484211,388.800000 L 142.484211,384.800000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path35"
+         d="M 142.484211,47.200000 L 142.484211,43.200000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path37"
+         d="M 142.484211,47.200000 L 142.484211,43.200000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <text
+         id="text39"
+         y="399.800000"
+         x="130.984211"
+         style="font-size: 10.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;">2000</text>
+    </g>
+    <g
+       id="xtick3">
+      <path
+         id="path42"
+         d="M 189.473684,388.800000 L 189.473684,43.200000 "
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; fill: none; clip-path:url(#789695421804425603);" />
+      <path
+         id="path44"
+         d="M 189.473684,388.800000 L 189.473684,384.800000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path46"
+         d="M 189.473684,388.800000 L 189.473684,384.800000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path48"
+         d="M 189.473684,47.200000 L 189.473684,43.200000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path50"
+         d="M 189.473684,47.200000 L 189.473684,43.200000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <text
+         id="text52"
+         y="399.800000"
+         x="177.973684"
+         style="font-size: 10.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;">3000</text>
+    </g>
+    <g
+       id="xtick4">
+      <path
+         id="path55"
+         d="M 236.463158,388.800000 L 236.463158,43.200000 "
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; fill: none; clip-path:url(#789695421804425603);" />
+      <path
+         id="path57"
+         d="M 236.463158,388.800000 L 236.463158,384.800000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path59"
+         d="M 236.463158,388.800000 L 236.463158,384.800000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path61"
+         d="M 236.463158,47.200000 L 236.463158,43.200000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path63"
+         d="M 236.463158,47.200000 L 236.463158,43.200000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <text
+         id="text65"
+         y="399.800000"
+         x="224.963158"
+         style="font-size: 10.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;">4000</text>
+    </g>
+    <g
+       id="xtick5">
+      <path
+         id="path68"
+         d="M 283.452632,388.800000 L 283.452632,43.200000 "
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; fill: none; clip-path:url(#789695421804425603);" />
+      <path
+         id="path70"
+         d="M 283.452632,388.800000 L 283.452632,384.800000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path72"
+         d="M 283.452632,388.800000 L 283.452632,384.800000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path74"
+         d="M 283.452632,47.200000 L 283.452632,43.200000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path76"
+         d="M 283.452632,47.200000 L 283.452632,43.200000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <text
+         id="text78"
+         y="399.800000"
+         x="271.952632"
+         style="font-size: 10.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;">5000</text>
+    </g>
+    <g
+       id="xtick6">
+      <path
+         id="path81"
+         d="M 330.442105,388.800000 L 330.442105,43.200000 "
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; fill: none; clip-path:url(#789695421804425603);" />
+      <path
+         id="path83"
+         d="M 330.442105,388.800000 L 330.442105,384.800000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path85"
+         d="M 330.442105,388.800000 L 330.442105,384.800000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path87"
+         d="M 330.442105,47.200000 L 330.442105,43.200000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path89"
+         d="M 330.442105,47.200000 L 330.442105,43.200000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <text
+         id="text91"
+         y="399.800000"
+         x="318.942105"
+         style="font-size: 10.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;">6000</text>
+    </g>
+    <g
+       id="xtick7">
+      <path
+         id="path94"
+         d="M 377.431579,388.800000 L 377.431579,43.200000 "
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; fill: none; clip-path:url(#789695421804425603);" />
+      <path
+         id="path96"
+         d="M 377.431579,388.800000 L 377.431579,384.800000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path98"
+         d="M 377.431579,388.800000 L 377.431579,384.800000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path100"
+         d="M 377.431579,47.200000 L 377.431579,43.200000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path102"
+         d="M 377.431579,47.200000 L 377.431579,43.200000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <text
+         id="text104"
+         y="399.800000"
+         x="365.931579"
+         style="font-size: 10.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;">7000</text>
+    </g>
+    <g
+       id="xtick8">
+      <path
+         id="path107"
+         d="M 424.421053,388.800000 L 424.421053,43.200000 "
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; fill: none; clip-path:url(#789695421804425603);" />
+      <path
+         id="path109"
+         d="M 424.421053,388.800000 L 424.421053,384.800000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path111"
+         d="M 424.421053,388.800000 L 424.421053,384.800000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path113"
+         d="M 424.421053,47.200000 L 424.421053,43.200000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path115"
+         d="M 424.421053,47.200000 L 424.421053,43.200000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <text
+         id="text117"
+         y="399.800000"
+         x="412.921053"
+         style="font-size: 10.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;">8000</text>
+    </g>
+    <g
+       id="xtick9">
+      <path
+         id="path120"
+         d="M 471.410526,388.800000 L 471.410526,43.200000 "
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; fill: none; clip-path:url(#789695421804425603);" />
+      <path
+         id="path122"
+         d="M 471.410526,388.800000 L 471.410526,384.800000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path124"
+         d="M 471.410526,388.800000 L 471.410526,384.800000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path126"
+         d="M 471.410526,47.200000 L 471.410526,43.200000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path128"
+         d="M 471.410526,47.200000 L 471.410526,43.200000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <text
+         id="text130"
+         y="399.800000"
+         x="459.910526"
+         style="font-size: 10.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;">9000</text>
+    </g>
+    <g
+       id="xtick10">
+      <text
+         id="text133"
+         y="399.800000"
+         x="503.900000"
+         style="font-size: 10.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;">10000</text>
+    </g>
+    <text
+       id="text135"
+       y="417.800000"
+       x="249.700000"
+       style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;">Frequency (Hz)</text>
+  </g>
+  <g
+     id="matplotlib.axis2">
+    <g
+       id="ytick1">
+      <path
+         id="path139"
+         d="M 72.000000,365.760000 L 518.400000,365.760000 "
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; fill: none; clip-path:url(#789695421804425603);" />
+      <path
+         id="path141"
+         d="M 72.000000,365.760000 L 76.000000,365.760000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path143"
+         d="M 72.000000,365.760000 L 76.000000,365.760000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path145"
+         d="M 514.400000,365.760000 L 518.400000,365.760000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path147"
+         d="M 514.400000,365.760000 L 518.400000,365.760000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <text
+         id="text149"
+         y="369.260000"
+         x="53.000000"
+         style="font-size: 10.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;">-94</text>
+    </g>
+    <g
+       id="ytick2">
+      <path
+         id="path152"
+         d="M 72.000000,319.680000 L 518.400000,319.680000 "
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; fill: none; clip-path:url(#789695421804425603);" />
+      <path
+         id="path154"
+         d="M 72.000000,319.680000 L 76.000000,319.680000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path156"
+         d="M 72.000000,319.680000 L 76.000000,319.680000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path158"
+         d="M 514.400000,319.680000 L 518.400000,319.680000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path160"
+         d="M 514.400000,319.680000 L 518.400000,319.680000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <text
+         id="text162"
+         y="323.180000"
+         x="52.968750"
+         style="font-size: 10.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;">-92</text>
+    </g>
+    <g
+       id="ytick3">
+      <path
+         id="path165"
+         d="M 72.000000,273.600000 L 518.400000,273.600000 "
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; fill: none; clip-path:url(#789695421804425603);" />
+      <path
+         id="path167"
+         d="M 72.000000,273.600000 L 76.000000,273.600000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path169"
+         d="M 72.000000,273.600000 L 76.000000,273.600000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path171"
+         d="M 514.400000,273.600000 L 518.400000,273.600000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path173"
+         d="M 514.400000,273.600000 L 518.400000,273.600000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <text
+         id="text175"
+         y="277.100000"
+         x="53.000000"
+         style="font-size: 10.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;">-90</text>
+    </g>
+    <g
+       id="ytick4">
+      <path
+         id="path178"
+         d="M 72.000000,227.520000 L 518.400000,227.520000 "
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; fill: none; clip-path:url(#789695421804425603);" />
+      <path
+         id="path180"
+         d="M 72.000000,227.520000 L 76.000000,227.520000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path182"
+         d="M 72.000000,227.520000 L 76.000000,227.520000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path184"
+         d="M 514.400000,227.520000 L 518.400000,227.520000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path186"
+         d="M 514.400000,227.520000 L 518.400000,227.520000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <text
+         id="text188"
+         y="231.020000"
+         x="53.000000"
+         style="font-size: 10.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;">-88</text>
+    </g>
+    <g
+       id="ytick5">
+      <path
+         id="path191"
+         d="M 72.000000,181.440000 L 518.400000,181.440000 "
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; fill: none; clip-path:url(#789695421804425603);" />
+      <path
+         id="path193"
+         d="M 72.000000,181.440000 L 76.000000,181.440000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path195"
+         d="M 72.000000,181.440000 L 76.000000,181.440000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path197"
+         d="M 514.400000,181.440000 L 518.400000,181.440000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path199"
+         d="M 514.400000,181.440000 L 518.400000,181.440000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <text
+         id="text201"
+         y="184.940000"
+         x="53.000000"
+         style="font-size: 10.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;">-86</text>
+    </g>
+    <g
+       id="ytick6">
+      <path
+         id="path204"
+         d="M 72.000000,135.360000 L 518.400000,135.360000 "
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; fill: none; clip-path:url(#789695421804425603);" />
+      <path
+         id="path206"
+         d="M 72.000000,135.360000 L 76.000000,135.360000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path208"
+         d="M 72.000000,135.360000 L 76.000000,135.360000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path210"
+         d="M 514.400000,135.360000 L 518.400000,135.360000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path212"
+         d="M 514.400000,135.360000 L 518.400000,135.360000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <text
+         id="text214"
+         y="138.860000"
+         x="53.000000"
+         style="font-size: 10.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;">-84</text>
+    </g>
+    <g
+       id="ytick7">
+      <path
+         id="path217"
+         d="M 72.000000,89.280000 L 518.400000,89.280000 "
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; fill: none; clip-path:url(#789695421804425603);" />
+      <path
+         id="path219"
+         d="M 72.000000,89.280000 L 76.000000,89.280000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path221"
+         d="M 72.000000,89.280000 L 76.000000,89.280000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path223"
+         d="M 514.400000,89.280000 L 518.400000,89.280000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <path
+         id="path225"
+         d="M 514.400000,89.280000 L 518.400000,89.280000"
+         style="stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; fill: none; " />
+      <text
+         id="text227"
+         y="92.780000"
+         x="52.968750"
+         style="font-size: 10.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;">-82</text>
+    </g>
+    <g
+       id="ytick8">
+      <text
+         id="text230"
+         y="46.700000"
+         x="53.000000"
+         style="font-size: 10.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;">-80</text>
+    </g>
+    <text
+       id="text232"
+       transform="translate(47.968750,252.500000) rotate(-90.0) translate(-47.968750,-252.500000)"
+       y="252.500000"
+       x="47.968750"
+       style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;">THD+N (dB)</text>
+  </g>
+  <path
+     sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+     id="path234"
+     d="M 72.000000,195.26524 L 76.698947,196.75250 L 81.397895,195.09925 L 86.096842,196.82374 L 90.795789,193.80620 L 95.494737,199.15532 L 100.19368,197.52492 L 104.89263,196.73375 L 109.59158,195.56004 L 114.29053,197.18508 L 118.98947,196.14550 L 123.68842,196.16394 L 128.38737,196.11726 L 133.08632,197.19533 L 137.78526,195.31911 L 142.48421,194.52418 L 147.18316,194.17032 L 151.88211,194.55887 L 156.58105,194.81675 L 161.28000,194.37670 L 165.97895,194.73664 L 170.67789,194.63112 L 175.37684,195.97108 L 180.07579,194.73145 L 184.77474,192.39591 L 189.47368,195.17210 L 194.17263,194.54261 L 198.87158,191.17561 L 203.57053,194.51214 L 208.26947,195.59561 L 212.96842,192.41101 L 217.66737,191.14695 L 222.36632,194.03168 L 227.06526,189.87599 L 231.76421,194.30011 L 236.46316,191.40712 L 241.16210,191.95929 L 245.86105,190.89911 L 250.56000,190.02179 L 255.25895,189.78516 L 259.95790,190.68644 L 264.65684,189.71473 L 269.35579,188.54862 L 274.05474,192.04911 L 278.75368,190.25317 L 283.45263,186.95897 L 288.15158,189.29444 L 292.85053,192.26286 L 297.54947,187.96149 L 302.24842,187.15976 L 306.94737,186.37502 L 311.64632,189.32216 L 316.34526,184.33142 L 321.04421,185.25215 L 325.74316,186.45506 L 330.44210,184.47156 L 335.14105,186.68078 L 339.84000,181.52637 L 344.53895,182.68468 L 349.23789,182.84660 L 353.93684,182.33496 L 358.63579,184.98173 L 363.33474,183.56793 L 368.03368,181.91301 L 372.73263,182.88967 L 377.43158,181.14532 L 382.13053,181.67199 L 386.82947,178.69633 L 391.52842,177.64632 L 396.22737,179.14929 L 400.92632,178.54828 L 405.62526,178.75293 L 410.32421,175.30995 L 415.02316,176.85340 L 419.72210,174.98518 L 424.42105,176.17609 L 429.12000,175.93593 L 433.81895,173.66940 L 438.51790,174.11372 L 443.21684,174.34439 L 447.91579,171.76664 L 452.61474,172.67752 L 457.31368,172.75126 L 462.01263,170.74571 L 466.71158,169.11195 L 471.41053,173.71695 L 476.10947,170.67742 L 480.80842,167.93389 L 485.50737,167.70160 L 490.20632,165.12016 L 494.90526,166.96294 L 499.60421,166.14268 L 504.30316,166.20146 L 509.00210,164.02185 L 513.70105,163.55548 L 518.40000,164.83645"
+     style="stroke-opacity:1.0000000;stroke-linejoin:miter;stroke-linecap:square;stroke-width:0.50000000;stroke:#6a00d7;fill:none" />
+  <path
+     sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+     id="path236"
+     d="M 72.000000,187.11907 L 76.698947,189.52615 L 81.397895,187.29194 L 86.096842,187.03181 L 90.795789,185.95915 L 95.494737,196.54546 L 100.19368,195.88505 L 104.89263,190.89597 L 109.59158,189.78688 L 114.29053,187.61345 L 118.98947,191.11571 L 123.68842,188.37348 L 128.38737,189.54217 L 133.08632,189.34281 L 137.78526,192.10554 L 142.48421,182.39468 L 147.18316,190.96472 L 151.88211,184.00444 L 156.58105,186.91505 L 161.28000,187.99686 L 165.97895,191.85985 L 170.67789,190.73552 L 175.37684,185.98619 L 180.07579,189.73479 L 184.77474,187.57992 L 189.47368,191.19845 L 194.17263,186.81460 L 198.87158,177.59384 L 203.57053,179.30105 L 208.26947,187.93447 L 212.96842,187.71194 L 217.66737,182.39400 L 222.36632,190.39993 L 227.06526,185.51408 L 231.76421,187.59303 L 236.46316,189.21601 L 241.16210,185.96621 L 245.86105,185.59686 L 250.56000,183.18892 L 255.25895,183.28363 L 259.95790,185.49132 L 264.65684,184.84886 L 269.35579,180.13611 L 274.05474,178.89918 L 278.75368,185.66758 L 283.45263,182.82889 L 288.15158,185.62110 L 292.85053,187.87814 L 297.54947,181.99135 L 302.24842,182.57736 L 306.94737,176.78750 L 311.64632,182.49933 L 316.34526,173.18962 L 321.04421,182.00361 L 325.74316,180.01302 L 330.44210,173.91089 L 335.14105,182.53045 L 339.84000,171.97323 L 344.53895,180.44548 L 349.23789,177.54351 L 353.93684,175.64685 L 358.63579,180.84995 L 363.33474,176.53515 L 368.03368,179.00066 L 372.73263,178.38395 L 377.43158,175.58314 L 382.13053,174.50859 L 386.82947,173.50082 L 391.52842,173.40596 L 396.22737,174.84008 L 400.92632,172.97875 L 405.62526,175.34856 L 410.32421,167.28028 L 415.02316,165.69766 L 419.72210,167.24551 L 424.42105,171.29101 L 429.12000,171.57047 L 433.81895,161.67653 L 438.51790,169.13787 L 443.21684,170.64761 L 447.91579,167.97059 L 452.61474,169.05260 L 457.31368,169.13386 L 462.01263,166.43864 L 466.71158,163.91515 L 471.41053,166.61083 L 476.10947,166.48727 L 480.80842,163.81129 L 485.50737,162.63523 L 490.20632,156.49573 L 494.90526,164.23104 L 499.60421,161.38900 L 504.30316,159.04071 L 509.00210,159.49865 L 513.70105,157.91314 L 518.40000,161.27465"
+     style="fill:none;stroke:#ff0000;stroke-width:0.50000000;stroke-linecap:square;stroke-linejoin:miter" />
+  <path
+     sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+     id="path238"
+     d="M 72.000000,203.41141 L 76.698947,203.97884 L 81.397895,202.90655 L 86.096842,206.61567 L 90.795789,201.65324 L 95.494737,201.76517 L 100.19368,199.16479 L 104.89263,202.57152 L 109.59158,201.33321 L 114.29053,206.75671 L 118.98947,201.17528 L 123.68842,203.95439 L 128.38737,202.69235 L 133.08632,205.04786 L 137.78526,198.53267 L 142.48421,206.65367 L 147.18316,197.37593 L 151.88211,205.11330 L 156.58105,202.71846 L 161.28000,200.75653 L 165.97895,197.61343 L 170.67789,198.52672 L 175.37684,205.95598 L 180.07579,199.72810 L 184.77474,197.21189 L 189.47368,199.14575 L 194.17263,202.27062 L 198.87158,204.75738 L 203.57053,209.72324 L 208.26947,203.25674 L 212.96842,197.11008 L 217.66737,199.89990 L 222.36632,197.66343 L 227.06526,194.23791 L 231.76421,201.00718 L 236.46316,193.59824 L 241.16210,197.95237 L 245.86105,196.20137 L 250.56000,196.85466 L 255.25895,196.28669 L 259.95790,195.88157 L 264.65684,194.58061 L 269.35579,196.96112 L 274.05474,205.19903 L 278.75368,194.83877 L 283.45263,191.08905 L 288.15158,192.96778 L 292.85053,196.64757 L 297.54947,193.93164 L 302.24842,191.74216 L 306.94737,195.96255 L 311.64632,196.14499 L 316.34526,195.47322 L 321.04421,188.50069 L 325.74316,192.89711 L 330.44210,195.03223 L 335.14105,190.83111 L 339.84000,191.07951 L 344.53895,184.92388 L 349.23789,188.14969 L 353.93684,189.02306 L 358.63579,189.11351 L 363.33474,190.60069 L 368.03368,184.82537 L 372.73263,187.39539 L 377.43158,186.70750 L 382.13053,188.83539 L 386.82947,183.89183 L 391.52842,181.88667 L 396.22737,183.45850 L 400.92632,184.11782 L 405.62526,182.15730 L 410.32421,183.33962 L 415.02316,188.00914 L 419.72210,182.72484 L 424.42105,181.06117 L 429.12000,180.30139 L 433.81895,185.66226 L 438.51790,179.08956 L 443.21684,178.04116 L 447.91579,175.56268 L 452.61474,176.30245 L 457.31368,176.36866 L 462.01263,175.05279 L 466.71158,174.30874 L 471.41053,180.82306 L 476.10947,174.86757 L 480.80842,172.05650 L 485.50737,172.76796 L 490.20632,173.74459 L 494.90526,169.69484 L 499.60421,170.89637 L 504.30316,173.36220 L 509.00210,168.54505 L 513.70105,169.19781 L 518.40000,168.39824"
+     style="fill:none;stroke:#ff0000;stroke-width:0.50000000;stroke-linecap:square;stroke-linejoin:miter" />
+  <path
+     sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+     id="path240"
+     d="M 72.000000,276.49315 L 76.698947,276.54209 L 81.397895,278.65373 L 86.096842,273.19252 L 90.795789,274.76519 L 95.494737,274.12151 L 100.19368,271.94633 L 104.89263,277.74164 L 109.59158,275.77121 L 114.29053,273.05609 L 118.98947,277.23704 L 123.68842,276.19836 L 128.38737,275.54604 L 133.08632,275.73055 L 137.78526,276.95134 L 142.48421,273.75637 L 147.18316,277.82475 L 151.88211,275.55189 L 156.58105,273.14755 L 161.28000,273.91116 L 165.97895,275.62723 L 170.67789,276.77513 L 175.37684,275.32154 L 180.07579,272.90806 L 184.77474,273.12930 L 189.47368,273.63930 L 194.17263,271.89558 L 198.87158,274.92997 L 203.57053,274.03744 L 208.26947,273.86414 L 212.96842,271.32709 L 217.66737,272.07024 L 222.36632,274.38578 L 227.06526,269.22241 L 231.76421,272.11357 L 236.46316,270.57877 L 241.16210,274.00510 L 245.86105,270.54989 L 250.56000,273.55686 L 255.25895,271.73318 L 259.95790,266.97146 L 264.65684,267.66895 L 269.35579,269.69114 L 274.05474,269.54136 L 278.75368,269.85093 L 283.45263,268.08534 L 288.15158,269.44008 L 292.85053,267.42286 L 297.54947,270.14743 L 302.24842,267.35154 L 306.94737,267.95080 L 311.64632,267.34682 L 316.34526,264.25303 L 321.04421,266.58582 L 325.74316,267.80775 L 330.44210,265.75277 L 335.14105,263.70292 L 339.84000,265.08616 L 344.53895,265.94290 L 349.23789,263.10258 L 353.93684,261.72608 L 358.63579,263.71252 L 363.33474,262.03381 L 368.03368,263.36061 L 372.73263,259.73663 L 377.43158,262.01962 L 382.13053,261.15444 L 386.82947,261.39070 L 391.52842,261.10968 L 396.22737,260.94870 L 400.92632,257.10016 L 405.62526,258.80208 L 410.32421,259.71739 L 415.02316,258.40503 L 419.72210,258.99022 L 424.42105,257.70032 L 429.12000,256.71059 L 433.81895,256.71864 L 438.51790,255.39307 L 443.21684,252.35194 L 447.91579,254.34828 L 452.61474,253.02982 L 457.31368,251.65159 L 462.01263,251.96011 L 466.71158,250.67242 L 471.41053,251.29517 L 476.10947,249.07088 L 480.80842,249.28854 L 485.50737,248.95592 L 490.20632,248.86817 L 494.90526,249.13027 L 499.60421,247.43869 L 504.30316,250.25200 L 509.00210,242.29193 L 513.70105,243.91471 L 518.40000,244.49418"
+     style="fill:none;stroke:#008000;stroke-width:0.50000000;stroke-linecap:square;stroke-linejoin:miter" />
+  <path
+     sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+     id="path242"
+     d="M 72.000000,272.12879 L 76.698947,272.26124 L 81.397895,275.58370 L 86.096842,267.28485 L 90.795789,268.30621 L 95.494737,266.00389 L 100.19368,262.80312 L 104.89263,269.89295 L 109.59158,270.55461 L 114.29053,264.72467 L 118.98947,272.96741 L 123.68842,261.87363 L 128.38737,264.99044 L 133.08632,272.21824 L 137.78526,264.87156 L 142.48421,265.28271 L 147.18316,269.42388 L 151.88211,268.22944 L 156.58105,269.27409 L 161.28000,267.65941 L 165.97895,270.85671 L 170.67789,267.12692 L 175.37684,266.13703 L 180.07579,267.06611 L 184.77474,268.64750 L 189.47368,268.90073 L 194.17263,264.29030 L 198.87158,269.03193 L 203.57053,268.06021 L 208.26947,268.89101 L 212.96842,264.61315 L 217.66737,264.36609 L 222.36632,266.98509 L 227.06526,264.75457 L 231.76421,265.30823 L 236.46316,264.85676 L 241.16210,267.17861 L 245.86105,262.54301 L 250.56000,263.09313 L 255.25895,264.75256 L 259.95790,261.53265 L 264.65684,262.54717 L 269.35579,254.77955 L 274.05474,265.15815 L 278.75368,264.92017 L 283.45263,264.13202 L 288.15158,265.49461 L 292.85053,258.48750 L 297.54947,263.74047 L 302.24842,260.88721 L 306.94737,258.44547 L 311.64632,261.90750 L 316.34526,258.39572 L 321.04421,260.14224 L 325.74316,266.74671 L 330.44210,257.10040 L 335.14105,256.76976 L 339.84000,261.54545 L 344.53895,262.15033 L 349.23789,257.24231 L 353.93684,256.48541 L 358.63579,261.91481 L 363.33474,252.33066 L 368.03368,256.47682 L 372.73263,253.26775 L 377.43158,258.26226 L 382.13053,254.81234 L 386.82947,258.51686 L 391.52842,258.02221 L 396.22737,255.26464 L 400.92632,252.76595 L 405.62526,255.95917 L 410.32421,256.91524 L 415.02316,252.48923 L 419.72210,251.91137 L 424.42105,251.87567 L 429.12000,250.65122 L 433.81895,245.99748 L 438.51790,248.66215 L 443.21684,244.18665 L 447.91579,249.54072 L 452.61474,247.62633 L 457.31368,246.22856 L 462.01263,246.75618 L 466.71158,244.44744 L 471.41053,245.23042 L 476.10947,245.53907 L 480.80842,242.30337 L 485.50737,239.69333 L 490.20632,242.95604 L 494.90526,242.60079 L 499.60421,243.86379 L 504.30316,239.45883 L 509.00210,234.41967 L 513.70105,238.51322 L 518.40000,235.48324"
+     style="fill:none;stroke:#ff0000;stroke-width:0.50000000;stroke-linecap:square;stroke-linejoin:miter" />
+  <path
+     sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+     id="path244"
+     d="M 72.000000,280.85751 L 76.698947,280.82293 L 81.397895,281.72375 L 86.096842,279.10020 L 90.795789,281.22416 L 95.494737,282.23913 L 100.19368,281.08953 L 104.89263,285.59032 L 109.59158,280.98780 L 114.29053,281.38752 L 118.98947,281.50666 L 123.68842,290.52309 L 128.38737,286.10164 L 133.08632,279.24286 L 137.78526,289.03112 L 142.48421,282.23003 L 147.18316,286.22561 L 151.88211,282.87433 L 156.58105,277.02100 L 161.28000,280.16291 L 165.97895,280.39774 L 170.67789,286.42335 L 175.37684,284.50606 L 180.07579,278.75000 L 184.77474,277.61110 L 189.47368,278.37787 L 194.17263,279.50086 L 198.87158,280.82801 L 203.57053,280.01467 L 208.26947,278.83728 L 212.96842,278.04103 L 217.66737,279.77440 L 222.36632,281.78647 L 227.06526,273.69025 L 231.76421,278.91891 L 236.46316,276.30077 L 241.16210,280.83159 L 245.86105,278.55677 L 250.56000,284.02058 L 255.25895,278.71380 L 259.95790,272.41026 L 264.65684,272.79074 L 269.35579,284.60274 L 274.05474,273.92457 L 278.75368,274.78169 L 283.45263,272.03866 L 288.15158,273.38554 L 292.85053,276.35822 L 297.54947,276.55439 L 302.24842,273.81586 L 306.94737,277.45613 L 311.64632,272.78613 L 316.34526,270.11035 L 321.04421,273.02940 L 325.74316,268.86879 L 330.44210,274.40513 L 335.14105,270.63608 L 339.84000,268.62688 L 344.53895,269.73546 L 349.23789,268.96285 L 353.93684,266.96675 L 358.63579,265.51022 L 363.33474,271.73695 L 368.03368,270.24440 L 372.73263,266.20551 L 377.43158,265.77699 L 382.13053,267.49653 L 386.82947,264.26454 L 391.52842,264.19716 L 396.22737,266.63275 L 400.92632,261.43437 L 405.62526,261.64499 L 410.32421,262.51954 L 415.02316,264.32083 L 419.72210,266.06907 L 424.42105,263.52496 L 429.12000,262.76996 L 433.81895,267.43980 L 438.51790,262.12400 L 443.21684,260.51723 L 447.91579,259.15584 L 452.61474,258.43331 L 457.31368,257.07462 L 462.01263,257.16404 L 466.71158,256.89740 L 471.41053,257.35992 L 476.10947,252.60269 L 480.80842,256.27371 L 485.50737,258.21851 L 490.20632,254.78029 L 494.90526,255.65974 L 499.60421,251.01359 L 504.30316,261.04517 L 509.00210,250.16418 L 513.70105,249.31620 L 518.40000,253.50513"
+     style="fill:none;stroke:#ff0000;stroke-width:0.50000000;stroke-linecap:square;stroke-linejoin:miter" />
+  <path
+     sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+     id="path246"
+     d="M 72.000000,331.54078 L 76.698947,328.30952 L 81.397895,333.19068 L 86.096842,328.78958 L 90.795789,332.08722 L 95.494737,330.15066 L 100.19368,331.09317 L 104.89263,329.60338 L 109.59158,330.28201 L 114.29053,330.66339 L 118.98947,328.79014 L 123.68842,331.45757 L 128.38737,327.75464 L 133.08632,328.49038 L 137.78526,330.78767 L 142.48421,327.98597 L 147.18316,327.78138 L 151.88211,326.88431 L 156.58105,331.68254 L 161.28000,326.98684 L 165.97895,330.37167 L 170.67789,327.07484 L 175.37684,328.68151 L 180.07579,332.27315 L 184.77474,328.14501 L 189.47368,328.99021 L 194.17263,327.90693 L 198.87158,328.13457 L 203.57053,327.00116 L 208.26947,327.90395 L 212.96842,329.53075 L 217.66737,326.98025 L 222.36632,325.28832 L 227.06526,327.26866 L 231.76421,329.67723 L 236.46316,330.35907 L 241.16210,326.07288 L 245.86105,327.31811 L 250.56000,324.62681 L 255.25895,327.63553 L 259.95790,322.38445 L 264.65684,322.70907 L 269.35579,324.10988 L 274.05474,320.09683 L 278.75368,322.38726 L 283.45263,324.92370 L 288.15158,322.09554 L 292.85053,322.81955 L 297.54947,322.70362 L 302.24842,324.97970 L 306.94737,320.32602 L 311.64632,325.90830 L 316.34526,322.00418 L 321.04421,321.41426 L 325.74316,322.63340 L 330.44210,321.56398 L 335.14105,322.45758 L 339.84000,319.55343 L 344.53895,320.57821 L 349.23789,318.54715 L 353.93684,318.65966 L 358.63579,320.13505 L 363.33474,319.74207 L 368.03368,320.16676 L 372.73263,318.84130 L 377.43158,315.16996 L 382.13053,317.79421 L 386.82947,316.57813 L 391.52842,317.86001 L 396.22737,314.16876 L 400.92632,314.37370 L 405.62526,313.34873 L 410.32421,315.30023 L 415.02316,313.30597 L 419.72210,313.66092 L 424.42105,316.23825 L 429.12000,312.36871 L 433.81895,315.05749 L 438.51790,309.10976 L 443.21684,310.88988 L 447.91579,310.99146 L 452.61474,309.79099 L 457.31368,309.79380 L 462.01263,309.27632 L 466.71158,309.49129 L 471.41053,306.37973 L 476.10947,307.48095 L 480.80842,304.71357 L 485.50737,305.84227 L 490.20632,307.64160 L 494.90526,301.57670 L 499.60421,301.27714 L 504.30316,305.52663 L 509.00210,302.97739 L 513.70105,303.13319 L 518.40000,300.76535"
+     style="fill:none;stroke:#0000ff;stroke-width:0.50000000;stroke-linecap:square;stroke-linejoin:miter" />
+  <path
+     sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+     id="path248"
+     d="M 72.000000,328.81229 L 76.698947,318.72836 L 81.397895,325.60518 L 86.096842,319.25331 L 90.795789,323.99272 L 95.494737,320.20313 L 100.19368,319.09981 L 104.89263,323.20408 L 109.59158,322.99051 L 114.29053,327.16852 L 118.98947,323.70591 L 123.68842,328.65002 L 128.38737,323.77240 L 133.08632,324.10393 L 137.78526,324.22880 L 142.48421,315.24015 L 147.18316,319.78728 L 151.88211,323.96816 L 156.58105,327.70713 L 161.28000,323.26050 L 165.97895,327.90528 L 170.67789,322.80426 L 175.37684,320.98767 L 180.07579,325.09777 L 184.77474,322.79330 L 189.47368,321.41160 L 194.17263,325.00622 L 198.87158,322.00506 L 203.57053,323.43324 L 208.26947,320.99120 L 212.96842,321.13903 L 217.66737,320.68144 L 222.36632,321.24445 L 227.06526,322.33447 L 231.76421,321.24886 L 236.46316,323.23600 L 241.16210,321.71172 L 245.86105,323.00009 L 250.56000,318.22456 L 255.25895,322.44516 L 259.95790,312.33134 L 264.65684,316.81094 L 269.35579,318.37255 L 274.05474,314.29103 L 278.75368,316.07575 L 283.45263,316.79944 L 288.15158,314.58079 L 292.85053,312.75708 L 297.54947,316.16468 L 302.24842,318.97484 L 306.94737,315.30260 L 311.64632,317.95601 L 316.34526,314.24419 L 321.04421,317.27269 L 325.74316,317.72854 L 330.44210,317.08982 L 335.14105,320.31164 L 339.84000,312.99382 L 344.53895,309.19905 L 349.23789,311.98043 L 353.93684,311.78892 L 358.63579,313.03418 L 363.33474,313.60040 L 368.03368,313.85662 L 372.73263,313.88998 L 377.43158,307.37387 L 382.13053,314.73889 L 386.82947,312.81137 L 391.52842,308.03563 L 396.22737,307.32689 L 400.92632,308.33886 L 405.62526,308.68980 L 410.32421,308.60601 L 415.02316,309.20020 L 419.72210,305.63294 L 424.42105,311.26081 L 429.12000,306.48753 L 433.81895,308.61195 L 438.51790,303.26648 L 443.21684,304.92245 L 447.91579,303.98175 L 452.61474,301.57289 L 457.31368,299.71665 L 462.01263,301.95851 L 466.71158,306.11096 L 471.41053,299.51843 L 476.10947,305.83498 L 480.80842,296.50018 L 485.50737,299.61498 L 490.20632,302.16448 L 494.90526,293.43638 L 499.60421,296.27132 L 504.30316,298.52071 L 509.00210,295.92486 L 513.70105,297.19763 L 518.40000,294.64268"
+     style="fill:none;stroke:#ff0000;stroke-width:0.50000000;stroke-linecap:square;stroke-linejoin:miter" />
+  <path
+     sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+     id="path250"
+     d="M 72.000000,334.26927 L 76.698947,337.89067 L 81.397895,340.77619 L 86.096842,338.32585 L 90.795789,340.18171 L 95.494737,340.09819 L 100.19368,343.08653 L 104.89263,336.00267 L 109.59158,337.57352 L 114.29053,334.15827 L 118.98947,333.87436 L 123.68842,334.26512 L 128.38737,331.73689 L 133.08632,332.87683 L 137.78526,337.34654 L 142.48421,340.73180 L 147.18316,335.77548 L 151.88211,329.80046 L 156.58105,335.65795 L 161.28000,330.71318 L 165.97895,332.83806 L 170.67789,331.34542 L 175.37684,336.37535 L 180.07579,339.44854 L 184.77474,333.49672 L 189.47368,336.56881 L 194.17263,330.80764 L 198.87158,334.26408 L 203.57053,330.56908 L 208.26947,334.81669 L 212.96842,337.92246 L 217.66737,333.27907 L 222.36632,329.33219 L 227.06526,332.20286 L 231.76421,338.10560 L 236.46316,337.48213 L 241.16210,330.43404 L 245.86105,331.63613 L 250.56000,331.02905 L 255.25895,332.82589 L 259.95790,332.43755 L 264.65684,328.60720 L 269.35579,329.84722 L 274.05474,325.90262 L 278.75368,328.69876 L 283.45263,333.04796 L 288.15158,329.61029 L 292.85053,332.88203 L 297.54947,329.24256 L 302.24842,330.98456 L 306.94737,325.34945 L 311.64632,333.86059 L 316.34526,329.76416 L 321.04421,325.55584 L 325.74316,327.53826 L 330.44210,326.03814 L 335.14105,324.60352 L 339.84000,326.11305 L 344.53895,331.95736 L 349.23789,325.11386 L 353.93684,325.53040 L 358.63579,327.23591 L 363.33474,325.88374 L 368.03368,326.47690 L 372.73263,323.79262 L 377.43158,322.96606 L 382.13053,320.84953 L 386.82947,320.34489 L 391.52842,327.68438 L 396.22737,321.01063 L 400.92632,320.40853 L 405.62526,318.00767 L 410.32421,321.99446 L 415.02316,317.41175 L 419.72210,321.68890 L 424.42105,321.21569 L 429.12000,318.24989 L 433.81895,321.50303 L 438.51790,314.95304 L 443.21684,316.85731 L 447.91579,318.00116 L 452.61474,318.00908 L 457.31368,319.87095 L 462.01263,316.59413 L 466.71158,312.87162 L 471.41053,313.24103 L 476.10947,309.12692 L 480.80842,312.92696 L 485.50737,312.06955 L 490.20632,313.11873 L 494.90526,309.71702 L 499.60421,306.28295 L 504.30316,312.53254 L 509.00210,310.02992 L 513.70105,309.06876 L 518.40000,306.88803"
+     style="fill:none;stroke:#ff0000;stroke-width:0.50000000;stroke-linecap:square;stroke-linejoin:miter" />
+  <text
+     id="text252"
+     y="34.497944"
+     x="236.58397"
+     style="font-size:14.000000;fill:#000000;font-family:Bitstream Vera Sans">AA-only THD+N</text>
+  <polygon
+     id="polygon255"
+     points="389.414400,89.648640 389.414400,50.112000 509.472000,50.112000 509.472000,89.648640"
+     style="fill:#ffffff;opacity:1.0000000;stroke-linecap:square;stroke-linejoin:miter;stroke-width:1.0000000;stroke:#000000" />
+  <path
+     id="path257"
+     d="M 401.21920,57.906720 L 408.65920,57.906720 L 416.09920,57.906720 L 423.53920,57.906720"
+     style="stroke-opacity:1.0000000;stroke-linejoin:miter;stroke-linecap:square;stroke-width:0.50000000;stroke:#6a00d7;fill:#6a00d7;fill-opacity:1.0000000" />
+  <path
+     id="path259"
+     d="M 401.21920,69.880320 L 408.65920,69.880320 L 416.09920,69.880320 L 423.53920,69.880320"
+     style="fill:none;stroke:#008000;stroke-width:0.50000000;stroke-linecap:square;stroke-linejoin:miter" />
+  <path
+     id="path261"
+     d="M 401.21920,81.853920 L 408.65920,81.853920 L 416.09920,81.853920 L 423.53920,81.853920"
+     style="fill:none;stroke:#0000ff;stroke-width:0.50000000;stroke-linecap:square;stroke-linejoin:miter" />
+  <text
+     id="text263"
+     y="62.406719"
+     x="432.46719"
+     style="font-size:10.000000;fill:#000000;font-family:Bitstream Vera Sans">2.000000 Vpp</text>
+  <text
+     id="text265"
+     y="74.380318"
+     x="432.46719"
+     style="font-size:10.000000;fill:#000000;font-family:Bitstream Vera Sans">3.000000 Vpp</text>
+  <text
+     id="text267"
+     y="86.35392"
+     x="432.46719"
+     style="font-size:10.000000;fill:#000000;font-family:Bitstream Vera Sans">4.000000 Vpp</text>
+</svg>

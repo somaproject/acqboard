@@ -29,6 +29,7 @@ double compute10kHzBLTHDNpy(double* x, int N, int fs);
 
 double compute10kHzBandLimitedTHDN(boost::numeric::ublas::vector<double> & x, 
 				 double fs);
+
 sineParams threeParamFit(sineParams init, 
 			 boost::numeric::ublas::vector<double> &y, 
 			 double fs);
@@ -41,9 +42,11 @@ void normalize(boost::numeric::ublas::vector<double> x);
 double findPrimaryFrequency(boost::numeric::ublas::vector<double> & xin, double fs);
 double computeSqErr(boost::numeric::ublas::vector<double> & x, sineParams s, double fs); 
 double computeTHDN(boost::numeric::ublas::vector<double> &, double); 
+
 double computeBandLimitedTHDN(boost::numeric::ublas::vector<double> &, 
 			      const boost::numeric::ublas::vector<double> &,
 			      double); 
+
 void filter(boost::numeric::ublas::vector<double> & x,
 	    const boost::numeric::ublas::vector<double> & h, 
 	    boost::numeric::ublas::vector<double>* y); 

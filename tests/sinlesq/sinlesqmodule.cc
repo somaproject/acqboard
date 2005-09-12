@@ -68,7 +68,6 @@ sinlesq_compute10kHzBLTHDN(PyObject *self, PyObject *args)
 
 }
 
-
 static PyMethodDef SinlesqMethods[] = {
   {"test", sinlesq_test, METH_VARARGS, 
    "The test command"}, 

@@ -34,7 +34,7 @@ class AcqBoardCmd:
         else:
             self.cmdid += 1
             
-    def switchmode(self, mode, rawchan='AC' ):
+    def switchmode(self, mode, rawchan='A4' ):
         self.updatecmd()        
         str = ""
 
@@ -73,14 +73,20 @@ class AcqBoardCmd:
 
             return None 
 
+        return self.setgainnum(chan, gainset)
+    
+
+    def setgainnum(self, chan, gainnum):
+        """ Actually set the gain to gain setting number 'gainnum' """
+
         self.updatecmd()        
         str = ""
    
         cmdbyte = (self.cmdid << 4) | 0x1
         
-        str = pack("BBBBBB", cmdbyte, self.channames[chan], gainset, 0x0, 0x0, 0x0);
+        str = pack("BBBBBB", cmdbyte, self.channames[chan], gainnum, 0x0, 0x0, 0x0);
         return str;
-    
+
     def setinputch(self, chan, input):
         # chans:
         #   A : chan = 0

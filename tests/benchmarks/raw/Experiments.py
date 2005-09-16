@@ -64,6 +64,8 @@ class Experiment(object):
                     gaingroup = self.h5file.createGroup(chgroup,
                                                         "gain%d" % g,
                                                         "gain")
+                    gaingroup._v_attrs.gain = g
+                    
                 except tables.NodeError:
                     gaingroup = self.h5file.getNode(chgroup, "gain%d" % g,
                                                     classname="Group")
@@ -88,7 +90,7 @@ class Experiment(object):
                         ss.setup(False) # output is unbalanced
                         
                         for f in ss.freqIter():
-                            for v in ss.vppIter():
+                            for v in ss.vppIter(g):
 
 
                                 row = table.row
@@ -102,7 +104,7 @@ class Experiment(object):
                                 row.append()
 
                         table.flush()
-
+            bs.done()
 
 def simpleTest(filename):
 
@@ -110,21 +112,34 @@ def simpleTest(filename):
 
     b = boardstates.BoardStates()
     s = sourcestates.SineStates()
-    b.gains = [1]
-    s.freqs = r_[100:12100:100.0]
-    s.vpps = [2.0, 3.0, 4.0, 4.1]
+    gainSet = {0:0,
+               1:1,
+               2:2,
+               5:3,
+               10:4,
+               20:5,
+               50:6,
+               100:7}
+    b.gainSet = gainSet
     
-    e.AC.append((b, s))
+    b.gains = [1, 2, 5, 10, 20, 50, 100]
+    #s.freqs = r_[100:3100:100.0]
+    s.freqs = r_[100:10100:100.0]
+    
+    s.vpps = [4.0]
+    
+    e.A4.append((b, s))
+    #b2 = boardstates.BoardStates()
+    
+    #b2.gainSet = gainSet
+    #b2.gains = [50, 100]
+    #s2 = sourcestates.SineStates()
+    #s2.freqs = r_[1000:11000:1000.0]
+    #s2.vpps = [2.0]
+    #e.A4.append((b2, s2))
+
     print "ready to run" 
     e.run()
 
 if __name__ == "__main__":
     simpleTest(sys.argv[1])
-    
-
-    
-    
-
-                            
-                            
-            

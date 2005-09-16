@@ -60,14 +60,17 @@ class SineStates(object):
         for freq in self.__freqs:
             self.ats2.freq1 = freq
             readFreq = self.ats2.freq1
-        
 
-    def vppIter(self):
+    def close(self):
+        pass
+
+    def vppIter(self, gain = 1.0):
         for v in self.__vpps:
-            print "Source voltage set to ", v
-            self.ats2.ampVppA = v
+            newv = v/gain
+            print "Source voltage set to ", newv
+            self.ats2.ampVppA = newv
 
-            yield v
+            yield newv
 
     def freqIter(self):
         for f in self.__freqs:

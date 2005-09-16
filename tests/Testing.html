@@ -2500,7 +2500,75 @@ looking for. In particular, we take in the input vector, we LPF filter
 and perform the linear sine fitting. <br>
 <br>
 <img alt="" src="results/20050912/allvolts.singleadc.justAA.png"
- style="width: 595px; height: 446px;"><br>
+ style="width: 1338px; height: 1002px;"><br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">13
+September 2005</span><br
+ style="font-weight: bold; text-decoration: underline;">
+<br>
+Soldered on new ADC; original apparently unaffected. However, the new
+one's THD+N @ 10kHz ~ 89.5 dB. Added 1 uF ceramic to ref amp output; No
+effect. <br>
+<br>
+LPF filter debates:<br>
+<ul>
+  <li>Let's try with a 10 ohm/ 2200 pF LPF (I *sheepish* think we have
+480 pF on there now) -- That did it. <br>
+  </li>
+</ul>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">14
+September 2005</span><br
+ style="font-weight: bold; text-decoration: underline;">
+<br>
+Confirmed functioning of shift registers; when we get all of them here
+from AD we'll be able to have lots of fun. <br>
+<br>
+<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">15
+September 2005</span><br
+ style="font-weight: bold; text-decoration: underline;">
+<br>
+Well, holy crap, the THD+N doesn't suffer when we go with the PGA with
+gains of 1 or 2. Now I'm going to make the measurement for a whole
+range -- it looks like there are some DC offset issues for high gains. <br>
+<br>
+<br>
+<img alt="" src="results/20050915/allgains.withPGA.png"
+ style="width: 900px; height: 675px;"><br>
+WE will now try a HPF with a 0.82 uF ceramic cap and a 11.3k resistor:<br>
+<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20050915/THDN.withHPFA.png"
+ style="width: 600px; height: 450px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20050915/freqresp.withHPFA.png"
+ style="width: 600px; height: 450px;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+It might be a LPF artifact, but the frequency of the LPF droop in th
+efrequency response is at around 300 Hz, whereas the THD+N dropoff is
+at 1000 Hz. <br>
+<br>
+Now we'll try with double the cap and a 50 kOhm resistor -- the corner
+frequenc decreases as expected. <br>
+<br>
+<img alt="" src="results/20050915/allgain.withHPF.png"
+ style="width: 1200px; height: 900px;"><br>
+<br>
+We get pretty good THD+N across the board, although I'm still worried
+that the low-frequency terrible THD+N performance we're seeing is some
+sort of interaction between the HPF and the internal resistors in the
+PGA. <br>
 <br>
 <br>
 <br>

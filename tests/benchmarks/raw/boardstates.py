@@ -42,12 +42,27 @@ def sendCommandAndReTransmit(acqout, acqcmd, acqstat, commandstr):
 
     
 class BoardStates(object):
+    """
 
+    The gainSet is the set of gains that we will map to the
+    gain settings for the acqboard. For example, a [100] in gains is
+    turned into a request for the first gain setting in the acqboard. 
+
+    
+    """
     def __init__(self):
 
         self.__gains = [1]
         self.__hpfs = [False]
-
+        self.gainSet = {0: 0,
+                        100: 1,
+                        200: 2,
+                        500: 3,
+                        1000: 4,
+                        2000 : 5,
+                        5000 : 6,
+                        10000 : 7}
+        
         self.acqout = acqboard.AcqSocketOut()
         self.acqcmd = AcqBoardCmd()
         self.acqstat = acqboard.AcqSocketStatTimeout(1.0)
@@ -99,25 +114,39 @@ class BoardStates(object):
                                  self.acqcmd.switchmode(3,
                                                         rawchan=self.channel))
         print "board state setup"
+
+    def done(self):
+        self.acqout.close()
+        self.acqstat.close()
+        
         
     def gainIter(self):
 
         for g in self.__gains:
 
-            newgain = g
+            newgain = self.gainSet[g]
             
-            if g == 1:
-                newgain = 100
+            
 
+            # debugging for confused state of current board
+            channel = self.channel
+            if self.channel == "A4":
+                channel =  "A1"
+
+            
+            acqcmdstr =  self.acqcmd.setgainnum(channel,
+                                             newgain)
             sendCommandAndReTransmit(self.acqout,
                                      self.acqcmd,
                                      self.acqstat,
-                                     self.acqcmd.setgain(self.channel,
-                                                         newgain))
+                                     acqcmdstr)
 
+            print "acqcmd gain set str:",
+            for i in acqcmdstr:
+                print hex(ord(i)), 
 
-
-            print "board state gain set" 
+            print "\ngain set", channel, g
+            
             yield g
 
 

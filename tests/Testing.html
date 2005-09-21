@@ -2570,9 +2570,208 @@ that the low-frequency terrible THD+N performance we're seeing is some
 sort of interaction between the HPF and the internal resistors in the
 PGA. <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">16
+September 2005</span><br
+ style="font-weight: bold; text-decoration: underline;">
+<br>
+Now, we're going to try wiring up the OP1177 in front of the HPF and
+shorting its output to the PGA; if the buffer doesn't destroy our THD+N
+and helps with the HPF artifacts, it will suggest a need to redesign
+the input HPF. <br>
+<br>
+We have built the HPF using a 13k/2200pF set, and we get a frequency
+response that looks like:<br>
+<br>
+<img alt="" src="results/20050916/Dual%20frequency%20response.png"
+ style="width: 1200px; height: 900px;"><br>
+<br>
+<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20050916/noHPF.png" style="width: 600px; height: 450px;"><br>
+HPF disabled<br>
+      </td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20050916/HPF.png" style="width: 600px; height: 450px;"><br>
+HPF enabled<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <br>
 <br>
 <br>
+Now, I tried disabling the output and shorting pin 2 to pin 1. I get:<br>
+<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20050916/shourtoutput.noHPF.png"
+ style="width: 600px; height: 450px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20050916/shourtoutput.noHPF.png"
+ style="width: 600px; height: 450px;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+If this is true, I'm going to try totally removing the mux and just
+shorting the output. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">18
+September 2005<br>
+</span>Okay, we've removed everything but the HPF amp, to see the
+effect of passing through it. And look, it's kinda ass:<br>
+<br>
+&nbsp;<img alt="" src="results/20050918/withHPFamp.nomux.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+This is with just the HPF amp in the stage, but no mux or actual HPF
+caps (etc.). NOte that we're not using a FS input, so the g=1,2 values
+are worse than 90 db. <br>
+<br>
+<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20050918/nomux.HPFamp.allgains.png"
+ style="width: 600px; height: 450px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20050918/nomux.noHPFamp.allgains.png"
+ style="width: 600px; height: 450px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Just the HPF amplifier OP1177,
+no actual filter components, a zero-ohm resistor. So this is just the
+effect of the OP1177 amplifier. <br>
+      </td>
+      <td style="vertical-align: top;">When we leave the input of the
+amp connected, but directly connect the input of the LPF to here, this
+is what we get. <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;"><span
+ style="text-decoration: underline;"></span></span>I find it odd that
+just the 5 and 10 gain we get the loss of 6 dB.<br>
+<br>
+&nbsp;<img alt="" src="results/20050918/hpfampsoldered.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+The HPF amplifier with no actual filter components, and a zero-ohm
+resistor. <br>
+<br>
+we now try with the amp soldered on and 11.3k on the resistor R13, with
+no effect. <br>
+<br>
+<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">19
+September 2005</span><br
+ style="font-weight: bold; text-decoration: underline;">
+There's something really bad that the HPF amp is causing, all by
+itself. I am going to try this with the other channel, A2. <br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20050919/a2.fullscale.justHPFamp.png"
+ style="width: 918px; height: 693px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20050919/a2.attenuatedjustHPFamp.png"
+ style="width: 943px; height: 686px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Channel A2, just the HPF
+amplifier, full-scale signal<br>
+      </td>
+      <td style="vertical-align: top;">Channel 2, just the HPF, much
+smaller signal. <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">20
+September 2005</span><br
+ style="font-weight: bold; text-decoration: underline;">
+Time to try different amps...<br>
+<br>
+With the AD8510ARM we get:<br>
+AD8021<img alt="" src="results/20050920/ad8510.tog10.nohpfcaps.png"
+ style="width: 1000px; height: 648px;"><br>
+<br>
+Now, we'll try with the HPF network: 68nF X7R and&nbsp; 5.6kR:<br>
+<br>
+<img alt="" src="results/20050920/ad8510.tog10.hpf.png"
+ style="width: 1000px; height: 624px;"><br>
+<br>
+The AD8021 isn't pin-compat.&nbsp; So now we'll use AD8510ARM with the
+U9 mux:<br>
+<br>
+<br>
+<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20050920/ad8510.hpfnoten.png"
+ style="width: 600px; height: 443px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20050920/ad8510.hpfen.png"
+ style="width: 600px; height: 450px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">HPF off<br>
+      </td>
+      <td style="vertical-align: top;">HPF on<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">21
+September 2005</span><br
+ style="font-weight: bold; text-decoration: underline;">
+<br>
+With the AD8221 on there in a unity-gain configuration, we're getting
+great numbers -except- that we have a painful voltage offset that's
+really hurting our higher-gain numbers. <br>
+<br>
+With 2vPP input we get:<br>
+<br>
+<br>
+<br>
+<img alt="" src="results/20050921/hpfnoten.2vpp.png"
+ style="width: 1000px; height: 759px;"><br>
+<br>
+Which is expected, I guess -&nbsp; add 6dB on there to see what we'd
+get if we were FS. <br>
+<br>
+<br>
+When I short the inputs and set the gain on the PGA to 100, the output
+voltage offset is in the neighborhood of -600mV. This seems rather
+broken given previous data. <br>
 <br>
 <br>
 </body>

@@ -87,7 +87,7 @@ class Experiment(object):
                                                         SineRecord, "notes")
 
                         # create table inside of sine node
-                        ss.setup(False) # output is unbalanced
+                        ss.setup(True) # output is balanced
                         
                         for f in ss.freqIter():
                             for v in ss.vppIter(g):
@@ -121,10 +121,12 @@ def simpleTest(filename):
                50:6,
                100:7}
     b.gainSet = gainSet
-    
+    b.hpfs = [0, 1]
     b.gains = [1, 2, 5, 10, 20, 50, 100]
-    #s.freqs = r_[100:3100:100.0]
-    s.freqs = r_[100:10100:100.0]
+    f1 = 50
+    f2 = 10000
+    #s.freqs = logspace(log10(f1), log10(f2), 20.)
+    s.freqs = linspace(f1, f2, 20)
     
     s.vpps = [4.0]
     
@@ -134,7 +136,7 @@ def simpleTest(filename):
     #b2.gainSet = gainSet
     #b2.gains = [50, 100]
     #s2 = sourcestates.SineStates()
-    #s2.freqs = r_[1000:11000:1000.0]
+    #s2.freqs = linspace(f1, f2, 50)
     #s2.vpps = [2.0]
     #e.A4.append((b2, s2))
 

@@ -34,7 +34,7 @@ class AcqBoardCmd:
         else:
             self.cmdid += 1
             
-    def switchmode(self, mode, rawchan='A4' ):
+    def switchmode(self, mode, rawchan='AC' ):
         self.updatecmd()        
         str = ""
 
@@ -109,7 +109,7 @@ class AcqBoardCmd:
     def sethpfilter(self, chan, filter):
         self.updatecmd()        
         str = ""
-
+        
         cmdbyte = (self.cmdid << 4) | 0x3
         str = pack("BBBBBB", cmdbyte, self.channames[chan], \
                    filter, 0x0, 0x0, 0x0);

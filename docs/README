@@ -1,5 +1,5 @@
     * Overview
-    * Problem formulation
+    * Problem formulation (Design goals and overview)
           o What our real goal is
           o The importance of
                 + Linearity
@@ -15,26 +15,37 @@
           o Number of channels
       
           o Electrical Isolation -- the challenges of mixed-signal design
-    * Hardware Filter design:
-	  o We desire 16-bit resolution with an input bandwidth of 10 kHz. 
-	  o to achieve this, we oversample, downsample, and filter
-	  
+   
+
+    * signal chain and measured parameters: 
+      * schematic of signal channel 
+      * input: In-Amp -- component and performance
+      * Amplification : PGA, filter
+         * gain settings / voltage ranges
+      * Continuous channels: 
+         * THD+N, etc. 
+      * A->D:
+         * Hardware Filter design:
+	   o We desire 16-bit resolution with an input bandwidth of 10 kHz. 
+	   o to achieve this, we oversample, downsample, and filter
+
+         * digital filtering 
+	   * digital filtering simulation
+      * Power Requirements
+   	  
     * Analog Hardware Design
-          Hardware overview and filter theory	
           o Mixed signal design
                 + why not just use sigma-delta converters
                 + why not AC-couple inputs?      
           o Analog and Digital
                 + Oversampling and downsampling
           o Signal Chain
-                + Input
-                + Selectable high pass filters
-                + Programmable Gain Stage
-                + Anti-aliasing Filter Design
+ 	        + Anti-aliasing Filter Design
                       # Spice modles
                 + ADCs, voltage selection
+	          o Digital Simulations of filtering
 
-    * Fiber Interface:
+    * Fiber IO 
           o four modes
             1. describe modes
           o output interface
@@ -48,8 +59,9 @@
           o Optical Interface
           o Modes
           o EEPROM functionality
-    * Results
-          o Digital Simulations of filtering
+    * Circuit Design Commentary and Notes
+        
+    * Additional Results
           o [additional simulation notes]
           o Tests on:
                 + Analog performance, using Chris's hardware (?)
@@ -58,7 +70,9 @@
                 + Real Rat
           o
 
-    * Idea : theory section: downsampling
-    *
+
 
 Albert suggests appendix
+
+    * THD+N measurement
+    * Oversampling, downsampling, etc. 

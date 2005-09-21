@@ -1,0 +1,38 @@
+The soma acquisition board signal chain can be partitioned into an analog signal conditioning section and a digital signal processing section. Here, the stages will be discussed independently, except where they overlap and integrate to produce the final output.
+
+\section{Input Differential Amplification}
+
+The AD8221 In-amp is used to provide high common-mode rejection. See figer foo for a plot of the CMMR of the input stage. This stage has a constant gain of 100. 
+
+
+\section{Optional analog signal conditioning}
+Waveform data (EEG) is low-frequency data in the mV range; spike data is high-frequency data in the hundreds-of-uV range. When recording spikes the low-frequency EEG could potentially saturate our amplifier; thus we have an optional single-pole high-pass filter ($f_{-3dB}=300 Hz$) that can be enabled to maximize spike acqisition dynamic range. 
+
+FIGURE Frequency response of the board below 1 kHz with and without 
+
+\section{Programmable gain}
+The programmable gain amplifier can be off ($g=0$) or set to a range of gains from 1 to 100; the table below shows the PGA gain, total system gain, maximum input voltage, and LSB size for the possible settings. 
+
+\begin{table}
+\begin{centering}
+\begin{tabular}[h!]{|c|c|c|c|}
+\hline
+PGA gain & Total Gain & Input Voltage Range & LSB size \\
+\hline
+1 & 100 & $\pm20.480$ mV & $625$ nV \\
+2 & 200 & $\pm10.240$ mV & $312$ nV \\
+5 & 500 & $\pm4.096$ mV & $125$ nV \\
+10 & 1000 & $\pm2.048$ mV & $62.5$ nV \\
+20 & 2000 & $\pm1.024$ mV & $31.3$ nV \\
+50 & 5000 & $\pm0.410$ mV & $12.5$ nV \\
+100 & 10000 & $\pm0.205$ mV & $6.3$ nV \\
+\hline
+\end{tabular}
+\end{centering}
+\caption{Gain settings and voltage levels}
+\end{table}
+
+THD+N for the board without the op-amp or BGA
+THD+N for the board with HPF
+THD+N for the board with In-Amp, HPF en and not en
+

@@ -9,15 +9,20 @@ The acquisition board has four modes of operation, designed to set the internal 
 Mode 0 is the normal acquisition mode; in this mode all 10 channels are sampled at the full normal sampling rate and the data is transmitted over the 8b/10b bus using the standard Encoding Scheme. In this mode, gain and hardware filter settings can be changed, but nothing else. 
 
 \subsection{Offset disable mode}
-blah blah
+Offset disable mode disables the internal offset
+
+this is the only mode in which values can be written to the offset locations in the EEPROM
+
+
 
 \subsection{input disable mode}
 disables input
 gain etc have no effect
+let you run the samplebuffer
+
 
 \subsection{raw mode}
-just outputs daw data
-
+just outputs daw data, 192ksps.
 
 \section{Fiber IO}
 The Acqboard transmits an 8b/10b-encoded frame of 24 bytes, preceeded by the K28.5 comma character. The nominal frame transmission is as follows:

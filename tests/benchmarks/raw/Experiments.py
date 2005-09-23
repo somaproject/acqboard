@@ -125,10 +125,10 @@ def simpleTest(filename):
     b.gains = [1, 2, 5, 10, 20, 50, 100]
     f1 = 50
     f2 = 10000
-    #s.freqs = logspace(log10(f1), log10(f2), 20.)
-    s.freqs = linspace(f1, f2, 20)
+    s.freqs = logspace(log10(f1), log10(f2), 50.)
+    #s.freqs = linspace(f1, f2, 20)
     
-    s.vpps = [4.0]
+    s.vpps = [3.6]
     
     e.A4.append((b, s))
     #b2 = boardstates.BoardStates()

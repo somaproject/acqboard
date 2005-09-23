@@ -199,23 +199,23 @@
        xml:space="preserve"><tspan
          id="tspan10068">OSC[3:0]</tspan></text>
     <rect
-       style="opacity:1.0000000;fill:#ffffff;fill-opacity:1.0000000;stroke:#000000;stroke-width:1.2499999;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000"
+       style="opacity:1.0000000;fill:#ffffff;fill-opacity:1.0000000;stroke:#000000;stroke-width:1.2500000;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000"
        id="rect10070"
-       width="81.249985"
+       width="68.845467"
        height="81.250000"
-       x="40.625061"
+       x="53.125004"
        y="280.62500" />
     <text
        sodipodi:linespacing="100.00000%"
        id="text10072"
        y="277.5"
-       x="40.625053"
-       style="font-size:10.000000;line-height:100.00000%;stroke-width:1.0000000pt;font-family:Bitstream Vera Sans"
+       x="53.125"
+       style="font-size:10.000000px;line-height:100.00000%;stroke-width:1.0000000pt;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          id="tspan10074"
          sodipodi:role="line"
          y="277.50000"
-         x="40.625053">PGA Load</tspan></text>
+         x="53.125000">PGA Load</tspan></text>
     <text
        sodipodi:linespacing="100.00000%"
        id="text10076"
@@ -243,9 +243,9 @@
     <text
        sodipodi:linespacing="100.00000%"
        id="text10088"
-       y="290"
-       x="43.750053"
-       style="font-size:7.0000000;line-height:100.00000%;stroke-width:1.0000000pt;font-family:Bitstream Vera Sans"
+       y="311.875"
+       x="56.250053"
+       style="font-size:7.0000000px;line-height:100.00000%;stroke-width:1.0000000pt;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          id="tspan10090">SCLK</tspan></text>
     <text
@@ -275,17 +275,17 @@
     <text
        sodipodi:linespacing="100.00000%"
        id="text10104"
-       y="302.5"
-       x="43.75"
+       y="324.375"
+       x="56.25"
        style="font-size:7.0000000px;line-height:100.00000%;stroke-width:1.0000000pt;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          id="tspan10106">RCLK</tspan></text>
     <text
        sodipodi:linespacing="100.00000%"
        id="text10108"
-       y="315"
-       x="43.750053"
-       style="font-size:7.0000000;line-height:100.00000%;stroke-width:1.0000000pt;font-family:Bitstream Vera Sans"
+       y="336.875"
+       x="56.250053"
+       style="font-size:7.0000000px;line-height:100.00000%;stroke-width:1.0000000pt;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          id="tspan10110">SOUT</tspan></text>
     <text
@@ -927,23 +927,23 @@
        xml:space="preserve"><tspan
          id="tspan10536">MACDONE</tspan></text>
     <rect
-       style="opacity:1.0000000;fill:#ffffff;fill-opacity:1.0000000;stroke:#000000;stroke-width:1.2499998;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000"
+       style="opacity:1.0000000;fill:#ffffff;fill-opacity:1.0000000;stroke:#000000;stroke-width:1.2500001;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000"
        id="rect10538"
-       width="74.999908"
+       width="59.504101"
        height="106.25013"
-       x="43.750034"
+       x="59.375015"
        y="421.25006" />
     <text
        sodipodi:linespacing="100.00000%"
        id="text10540"
        y="418.125"
-       x="43.75"
-       style="font-size:10.000000;line-height:100.00000%;stroke-width:1.0000000pt;font-family:Bitstream Vera Sans"
+       x="59.375"
+       style="font-size:10.000000px;line-height:100.00000%;stroke-width:1.0000000pt;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          id="tspan10542"
          sodipodi:role="line"
          y="418.12500"
-         x="43.750000">Fiber RX</tspan></text>
+         x="59.375000">Fiber RX</tspan></text>
     <text
        sodipodi:linespacing="100.00000%"
        id="text10544"
@@ -971,9 +971,9 @@
     <text
        sodipodi:linespacing="100.00000%"
        id="text10556"
-       y="468.125"
-       x="46.875"
-       style="font-size:7.0000000;line-height:100.00000%;stroke-width:1.0000000pt;font-family:Bitstream Vera Sans"
+       y="477.5"
+       x="62.5"
+       style="font-size:7.0000000px;line-height:100.00000%;stroke-width:1.0000000pt;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          id="tspan10558">FIBERIN</tspan></text>
     <text
@@ -1041,11 +1041,11 @@
        xml:space="preserve"><tspan
          id="tspan10610">SI</tspan></text>
     <rect
-       style="opacity:1.0000000;fill:#ffffff;fill-opacity:1.0000000;stroke:#000000;stroke-width:1.2500004;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000"
+       style="opacity:1.0000000;fill:#ffffff;fill-opacity:1.0000000;stroke:#000000;stroke-width:1.2500005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000"
        id="rect10612"
-       width="78.124847"
+       width="65.724091"
        height="150.00015"
-       x="631.25012"
+       x="631.15100"
        y="371.25006" />
     <text
        sodipodi:linespacing="100.00000%"
@@ -1061,9 +1061,9 @@
     <text
        sodipodi:linespacing="100.00000%"
        id="text10618"
-       y="408.75015"
-       x="706.98438"
-       style="font-size:7.0000000;line-height:100.00000%;text-anchor:end;stroke-width:1.0000000pt;font-family:Bitstream Vera Sans"
+       y="421.25015"
+       x="694.48438"
+       style="font-size:7.0000000px;line-height:100.00000%;text-anchor:end;stroke-width:1.0000000pt;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          id="tspan10620">FIBEROUT</tspan></text>
     <text
@@ -2842,36 +2842,36 @@
     <text
        xml:space="preserve"
        style="font-size:10.000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125.00000%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
-       x="-28.125"
-       y="290"
+       x="-6.25"
+       y="311.875"
        id="text1992"
        sodipodi:linespacing="125.00000%"><tspan
          sodipodi:role="line"
          id="tspan1994"
-         x="-28.125000"
-         y="290.00000">PGASRCK</tspan></text>
+         x="-6.2500000"
+         y="311.87500">PGASRCK</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10.000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125.00000%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
-       x="-28.125"
-       y="302.5"
+       x="-6.25"
+       y="324.375"
        id="text1996"
        sodipodi:linespacing="125.00000%"><tspan
          sodipodi:role="line"
          id="tspan1998"
-         x="-28.125000"
-         y="302.50000">PGARCK</tspan></text>
+         x="-6.2500000"
+         y="324.37500">PGARCK</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10.000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125.00000%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
-       x="-28.125"
-       y="315"
+       x="-6.25"
+       y="336.875"
        id="text2000"
        sodipodi:linespacing="125.00000%"><tspan
          sodipodi:role="line"
          id="tspan2002"
-         x="-28.125000"
-         y="315.00000">PGASERA</tspan></text>
+         x="-6.2500000"
+         y="336.87500">PGASERA</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10.000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125.00000%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
@@ -2934,45 +2934,45 @@
        id="path2020" />
     <path
        style="opacity:1.0000000;color:#000000;fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.2500000;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000;visibility:visible;display:inline;overflow:visible"
-       d="M 21.875000,286.87500 L 37.500000,286.87500 L 40.625000,286.87500"
+       d="M 43.447584,308.75000 L 51.512100,308.75000 L 53.125003,308.75000"
        id="path2022" />
     <path
-       style="opacity:1.0000000;color:#000000;fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.2500000;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000;visibility:visible;display:inline;overflow:visible"
-       d="M 15.625000,299.37500 L 40.625000,299.37500"
+       style="opacity:1.0000000;color:#000000;fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.2499996;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000;visibility:visible;display:inline;overflow:visible"
+       d="M 37.271336,321.25000 L 53.124986,321.25000"
        id="path2024" />
     <path
        style="opacity:1.0000000;color:#000000;fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.2500000;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000;visibility:visible;display:inline;overflow:visible"
-       d="M 21.875000,311.87500 L 40.625000,311.87500"
+       d="M 43.447584,333.75000 L 53.125003,333.75000"
        id="path2026" />
     <text
        xml:space="preserve"
        style="font-size:10.000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125.00000%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
-       x="-12.5"
-       y="468.125"
+       x="3.125"
+       y="477.5"
        id="text2028"
        sodipodi:linespacing="125.00000%"><tspan
          sodipodi:role="line"
          id="tspan2030"
-         x="-12.500000"
-         y="468.12500">FIBERIN</tspan></text>
+         x="3.1250000"
+         y="477.50000">FIBERIN</tspan></text>
     <path
        style="opacity:1.0000000;color:#000000;fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.2500000;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000;visibility:visible;display:inline;overflow:visible"
-       d="M 28.125000,465.00000 L 43.750000,465.00000"
+       d="M 43.750000,474.37500 L 59.375000,474.37500"
        id="path2032" />
     <text
        xml:space="preserve"
        style="font-size:10.000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125.00000%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
-       x="728.125"
-       y="408.75"
+       x="712.5"
+       y="421.25"
        id="text2034"
        sodipodi:linespacing="125.00000%"><tspan
          sodipodi:role="line"
          id="tspan2036"
-         x="728.12500"
-         y="408.75000">FIBEROUT</tspan></text>
+         x="712.50000"
+         y="421.25000">FIBEROUT</tspan></text>
     <path
-       style="opacity:1.0000000;color:#000000;fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.2500000;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000;visibility:visible;display:inline;overflow:visible"
-       d="M 709.37500,405.62500 L 725.00000,405.62500"
+       style="opacity:1.0000000;color:#000000;fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.2499998;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000;visibility:visible;display:inline;overflow:visible"
+       d="M 696.75456,418.12500 L 709.37475,418.12500"
        id="path2038" />
     <text
        xml:space="preserve"

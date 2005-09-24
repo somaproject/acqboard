@@ -1,0 +1,35 @@
+\section{Repeated Multiply / Accumulate } 
+FIR filtering is performed by the repeated multiply-accumulate module; the filter used is that described earlier. 
+
+\subsection{RMAC}
+\begin{figure}
+\label{rmac}
+\includegraphics[width=6in]{RMAC.svg}
+\caption{Repeated Multiply-Accumulate (RMAC) module for fixed-point convolution.}
+\end{figure} 
+The repeated multiply-accumulate unit is composed (Figure \ref{rmac}) of the following subcomponents:
+
+\begin{enumerate}
+\item \textbf{Sample Counters}: under control of the RMAC FSM, the RMAC drives the sample buffer address pointer \signal{XA[7:0]} and the filter coefficient buffer address pointer \signal{HA[7:0]}. The sample buffer address pointer begins at location \signal{XBASE[7:0]} and counts backwards through the buffer. 
+\item \textbf{Multiplier}: The pipelined multipler performs fixed-point multiplication of the input, truncating the output at 1.23 bits of data. 
+\item \textbf{Extended-Resolution Accumulator} For each iteration through the sample buffer, the accumulator sums the resulting sample/coefficient products. The arithmetic is done with 7 extra bits of precision on the left side of the decimal, allowing for extended range and to prevent saturation mid-convolution. 
+\item \textbf{Convergent Rounding} Convergent rounding of the input is performed, resulting in the output being in ``8.15'' format. 
+\item \textbf{Overflow Detection} If the output is too large to be expressed in 1.15 format than the value saturates at either positve or negative extreme. 
+\end{enumerate}
+
+
+The RMAC is controlled by a FSM (Figure \ref{rmacfsm}) that is designed to convolve one channel's data per \signal{STARTMAC}. When \signal{STARTMAC} is asserted, the system convolves up to a maximum length $L$, and then asserts \signal{MACDONE}. 
+
+\begin{figure}
+\label{rmacfsm}
+\includegraphics[width=6in]{RMAC_fsm.svg}
+\caption{Controlling FSM for the RMAC.}
+\end{figure}
+
+
+\subsection{Fixed-point noise model} 
+Here we develop a model of the dynamic range. 
+
+\subsection{RMAC control}
+The RMAC control coordinates filtering across all 10 channels as well as incrementing the sample buffer. 
+

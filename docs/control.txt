@@ -1,0 +1,11 @@
+A more precise definition of the soma control interface. 
+
+The soma acquisition board has four modes:
+
+Mode 0 : Normal. Samples all channels, offsets enabled
+
+Mode 1 : Identical to mode 0 except offsets are disabled; in this mode you can write to the EEPROM's offset range
+
+Mode 2 : input disable; during this mode the eeprom's sample memory and filter memory can be written to. 
+
+Mode 3 : Raw data mode; transmits full data from a single channel, selected during run time. Offsets disabled. 

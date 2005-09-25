@@ -2807,6 +2807,106 @@ September 2005</span><br
 THD+N measurements above are rather depressing, but an artifact of the
 In-Amp<br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">23
+September 2005</span><br
+ style="font-weight: bold; text-decoration: underline;">
+<br>
+Where to go from here? We really should try and find some way to
+compensate for the voltage offset caused by the respective stages: <br>
+<br>
+<table style="width: 30%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">Part<br>
+      </td>
+      <td style="vertical-align: top;">Offset<br>
+      </td>
+      <td style="vertical-align: top;">Voltage effect @ g = 10k<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">AD8221<br>
+      </td>
+      <td style="vertical-align: top;">70uV<br>
+      </td>
+      <td style="vertical-align: top;">.7V<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">LT6910-1<br>
+      </td>
+      <td style="vertical-align: top;">10 mV<br>
+      </td>
+      <td style="vertical-align: top;">1V<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">AD8513ARU<br>
+      </td>
+      <td style="vertical-align: top;">400uV<br>
+      </td>
+      <td style="vertical-align: top;">400uV<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+I would really love to AC-couple very early on. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">25
+September 2005</span><br
+ style="font-weight: bold; text-decoration: underline;">
+Where should we try and do AC-coupling? After turning the AD8221's 70
+uV into 7 mV; we'll proceed to amplify it by a factor of 100 in the
+PGA. We --really-- would like to compensate for the PGA here as well,
+without a lot of extra effort. And we <span style="font-style: italic;">surely</span>
+want to do it before the LPF, no? <br>
+<br>
+We cut the trace between the PGA and the LPF and inserted a 1uF
+ceramic... and we get:<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20050925/hpfen.withcap.png"
+ style="width: 600px; height: 450px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20050925/hpfnoten.withcap.png"
+ style="width: 600px; height: 450px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">With our added 1uF ceramic, and
+HPF=en<br>
+      </td>
+      <td style="vertical-align: top;">With our added ceramic, and
+HFP=off<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Note: this is all -0.1dB FS!!! We've eliminated offset problems. <br>
+<br>
+The resulting lower portion of the frequency response is:<br>
+<img alt="" src="results/20050925/FreqRs1uF.cap.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+<br>
+Now we're going to redesign the board to use 3 SOIC 4.096 voltage
+references as well as optionally drive the voltage offset with them.<br>
+<br>
+<br>
+<br>
 <br>
 </body>
 </html>

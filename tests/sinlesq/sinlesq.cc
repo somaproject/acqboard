@@ -35,7 +35,8 @@ double computeTHDNpy(double* x, int N, int fs){
     xprime[i] = x[i]; 
     
   }
-  
+
+
   return computeTHDN(xprime, double(fs)); 
 
 }
@@ -73,14 +74,13 @@ sineParams threeParamFit(sineParams init,
 
   D0T = ublas::trans(D0); 
   D0Tprod = ublas::prod(D0T, D0); 
-      
 
   e2(0, 0) = 1.0; 
   e2(1, 1) = 1.0; 
   e2(2,2) = 1.0; 
 
   inverse(D0Tprod, e2); 
-
+  
   ublas::vector<double> v(3); 
   v = ublas::prod(D0T, y); 
   ublas::vector<double> x0prime = ublas::prod(e2, v); 
@@ -91,6 +91,7 @@ sineParams threeParamFit(sineParams init,
   s.B = x0prime(1); 
   s.C = x0prime(2); 
   s.w = init.w; 
+
 
   return s; 
   
@@ -132,16 +133,17 @@ sineParams fourParamFit(sineParams init,
   x(1) = init.B; 
   x(2) = init.C; 
   x(3) = 0.0; 
-
   ublas::matrix<double> DiT (N, 4), DiTprod(N, 4), e2(4, 4);
  
   while (i < 20) {
-    //cout << "Iteration " << i <<  " with " << x << endl;
+
     A = x(0); 
     B = x(1); 
     C = x(2); 
 
     w = x(3) + w; 
+
+    
     
     genMainMatrix(Di, N, A, B, C, w, fs); 
     
@@ -156,8 +158,9 @@ sineParams fourParamFit(sineParams init,
 	} else {
 	  e2(j, k) = 0.0;
 	}
-    inverse(DiTprod, e2); 
-
+    //inverse(DiTprod, e2); 
+    bool singular; 
+    e2 = gjinverse(DiTprod, singular); 
     
     
     ublas::vector<double> v(ublas::prod(DiT, y)); 
@@ -293,7 +296,6 @@ double computeTHDN(ublas::vector<double> & x,
   double detect = findPrimaryFrequency(x, fs);
   int N = 2<<14; 
 
-  
   if (x.size() < N)
     N = x.size();
     
@@ -362,7 +364,6 @@ int main(void){
  
   double thdn = computeTHDN(x,fs); 
 
-  cout << " The error is "  << thdn << " dB" << endl;; 
   
 }  
   

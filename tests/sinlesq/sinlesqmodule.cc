@@ -1,6 +1,7 @@
 #include <Python.h>
 #include <Numeric/arrayobject.h>
 #include "sinlesq.h"
+#include <iostream>
 
 
 static PyObject *
@@ -34,9 +35,10 @@ sinlesq_computeTHDN(PyObject *self, PyObject *args)
   if (array == NULL)
     return NULL; 
   n = array->dimensions[0]; 
-  
-  thdn = computeTHDNpy((double*)array->data, n, fs); 
 
+  thdn = computeTHDNpy((double*)array->data, n, fs); 
+  
+  
   Py_DECREF(array); 
   return PyFloat_FromDouble(thdn); 
 

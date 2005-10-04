@@ -2907,6 +2907,44 @@ references as well as optionally drive the voltage offset with them.<br>
 <br>
 <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">1 October
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+We're using the LT Voltage ref in this instance: <br>
+<ul>
+  <li>Initially the output was shit, I think because I had forgotten
+the bypass caps on the entire ADC subsection</li>
+  <li>Then we realized that the LT vref has strange stability
+requirements; so we put on a 2.2uF Tantalum with proper ESR. We got ~
+-84-85 dB THD+N or so.</li>
+  <li>Upping this to the 47 uF tantalums we just bought made things
+better... but we're going to try with 100uF tantalum now.&nbsp;</li>
+</ul>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">3 October
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+Well, continuing the suckitude, the maxim voltage ref needs a 8V input
+minimum, so we're again back down to the LTI one. Which got noticably
+better when we replaced its 0.1uF output cap with a 0.01 uF one, giving
+us ~90dB-89 thd+n <br>
+<br>
+Now we're going to try with a 10 uF output tantalum with a 3k res...
+brought us to a nice -84. Ugh. Same with 3k 100 uF. <br>
+<br>
+Depressingly, I don't do any better with the C version of the ADC and
+the 47 uF output cap<br>
+<br>
+Well, holy crap; using the National voltage ref but with a 10 uF
+stabilizing output cap, an 0.01uF ceramic cap, and THEN a 11k/47uF LPF
+gives us exactly what we want . <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 </body>
 </html>

@@ -86,8 +86,8 @@ class Experiment(object):
                         table = self.h5file.createTable(hpfgroup, "sine",
                                                         SineRecord, "notes")
 
-                        # create table inside of sine node
-                        ss.setup(True) # output is balanced
+                        # create table insde of sine node
+                        ss.setup(False) # output is unnbalanced
                         
                         for f in ss.freqIter():
                             for v in ss.vppIter(g):
@@ -99,10 +99,12 @@ class Experiment(object):
                                 
                                 
                                 # read the data
+                                time.sleep(0.1)
                                 x = read(2**17)
                                 row['data'] = x[2**16:]
                                 row.append()
-
+                                #pylab.plot(x)
+                                #pylab.show()
                         table.flush()
             bs.done()
 
@@ -121,17 +123,17 @@ def simpleTest(filename):
                50:6,
                100:7}
     b.gainSet = gainSet
-    b.hpfs = [0, 1]
+    b.hpfs = [1]
     #b.gains = [1, 2, 5, 10, 20, 50, 100]
     b.gains = [1]
-    f1 = 20
-    f2 = 1000
+    f1 = 200
+    f2 = 10000
     #s.freqs = logspace(log10(f1), log10(f2), 100.)
-    s.freqs = linspace(f1, f2, 100)
+    s.freqs = linspace(f1, f2, 200)
     
     s.vpps = [4.05]
     
-    e.A4.append((b, s))
+    e.AC.append((b, s))
     #b2 = boardstates.BoardStates()
     
     #b2.gainSet = gainSet

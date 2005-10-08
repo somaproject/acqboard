@@ -130,10 +130,10 @@ class BoardStates(object):
 
             # debugging for confused state of current board
             channel = self.channel
-            if self.channel == "A4":
-                channel =  "A1"
-            elif self.channel == "AC":
-                channel = "A2"
+            #if self.channel == "A4":
+            #    channel =  "A1"
+            #elif self.channel == "AC":
+            #    channel = "A1"
 
             
             acqcmdstr =  self.acqcmd.setgainnum(channel,
@@ -159,10 +159,10 @@ class BoardStates(object):
 
             # debugging for confused state of current board
             channel = self.channel
-            if self.channel == "A4":
-                channel =  "A1"
-            elif self.channel == "AC":
-                channel = "A2"
+            #if self.channel == "A4":
+            #    channel =  "A1"
+            #elif self.channel == "AC":
+            #    channel = "A1"
 
             sendCommandAndReTransmit(self.acqout,
                                      self.acqcmd,

@@ -123,17 +123,17 @@ def simpleTest(filename):
                50:6,
                100:7}
     b.gainSet = gainSet
-    b.hpfs = [1]
+    b.hpfs = [0, 1]
     #b.gains = [1, 2, 5, 10, 20, 50, 100]
     b.gains = [1]
     f1 = 200
     f2 = 10000
     #s.freqs = logspace(log10(f1), log10(f2), 100.)
-    s.freqs = linspace(f1, f2, 200)
+    s.freqs = linspace(f1, f2, 50)
     
     s.vpps = [4.05]
     
-    e.AC.append((b, s))
+    e.A1.append((b, s))
     #b2 = boardstates.BoardStates()
     
     #b2.gainSet = gainSet

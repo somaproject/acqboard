@@ -20,6 +20,10 @@ $(PROJECT).bit: build/$(PROJECT).bit
 	rm -rf $(PROJECT).bit
 	cp build/$(PROJECT).bit . 
 
+# coregen files:
+%.edn : %.xco
+	coregen -b $<
+
 # first stage : xst, produces ngc
 
 build/$(PROJECT).ngc: $(SOURCES) $(PROJECT).xst $(PROJECT).prj
@@ -32,7 +36,7 @@ build/$(PROJECT).ngc: $(SOURCES) $(PROJECT).xst $(PROJECT).prj
 
 #second stage : ngdbuild, produces .ngd
 build/$(PROJECT).ngd: build/$(PROJECT).ngc $(PROJECT).ucf 
-	ngdbuild -p $(PART) -uc $(PROJECT).ucf -dd build $(PROJECT).ngc build/$(PROJECT).ngd
+	ngdbuild -p $(PART) -uc $(PROJECT).ucf -dd build build/$(PROJECT).ngc build/$(PROJECT).ngd
 
 
 # third stage: map: produces pcf, map.ncd

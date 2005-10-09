@@ -23,13 +23,13 @@
 --     appliances, devices, or systems. Use in such applications are          --
 --     expressly prohibited.                                                  --
 --                                                                            --
---     (c) Copyright 1995-2003 Xilinx, Inc.                                   --
+--     (c) Copyright 1995-2004 Xilinx, Inc.                                   --
 --     All rights reserved.                                                   --
 --------------------------------------------------------------------------------
 -- You must compile the wrapper file decode8b10b.vhd when simulating
 -- the core, decode8b10b. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
--- instructions, please refer to the "CORE Generator Guide".
+-- instructions, please refer to the "CORE Generator Help".
 
 -- The synopsys directives "translate_off/translate_on" specified
 -- below are supported by XST, FPGA Compiler II, Mentor Graphics and Synplicity
@@ -68,8 +68,8 @@ end component;
 	for all : wrapped_decode8b10b use entity XilinxCoreLib.decode_8b10b_v5_0(behavioral)
 		generic map(
 			c_has_nd_b => 0,
-			c_has_run_disp => 0,
 			c_has_code_err => 1,
+			c_has_run_disp => 0,
 			c_sinit_dout => "00000000",
 			c_has_sym_disp_b => 0,
 			c_sinit_kout => 0,
@@ -81,8 +81,8 @@ end component;
 			c_enable_rlocs => 0,
 			c_has_disp_err_b => 0,
 			c_sinit_run_disp => 1,
-			c_has_bports => 0,
 			c_has_ce => 1,
+			c_has_bports => 0,
 			c_has_disp_err => 1,
 			c_sinit_kout_b => 0,
 			c_has_disp_in_b => 0,

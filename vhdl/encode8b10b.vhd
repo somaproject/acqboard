@@ -23,13 +23,13 @@
 --     appliances, devices, or systems. Use in such applications are          --
 --     expressly prohibited.                                                  --
 --                                                                            --
---     (c) Copyright 1995-2003 Xilinx, Inc.                                   --
+--     (c) Copyright 1995-2004 Xilinx, Inc.                                   --
 --     All rights reserved.                                                   --
 --------------------------------------------------------------------------------
 -- You must compile the wrapper file encode8b10b.vhd when simulating
 -- the core, encode8b10b. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
--- instructions, please refer to the "CORE Generator Guide".
+-- instructions, please refer to the "CORE Generator Help".
 
 -- The synopsys directives "translate_off/translate_on" specified
 -- below are supported by XST, FPGA Compiler II, Mentor Graphics and Synplicity
@@ -65,15 +65,15 @@ end component;
 		generic map(
 			c_has_nd_b => 0,
 			c_force_code_disp => 1,
-			c_force_code_disp_b => 1,
 			c_encode_type => 0,
+			c_force_code_disp_b => 1,
 			c_has_disp_out => 0,
 			c_has_kerr => 0,
 			c_has_disp_out_b => 0,
 			c_has_nd => 0,
 			c_enable_rlocs => 0,
-			c_has_bports => 0,
 			c_has_ce => 1,
+			c_has_bports => 0,
 			c_has_kerr_b => 0,
 			c_force_code_val_b => "1010101010",
 			c_has_disp_in_b => 0,

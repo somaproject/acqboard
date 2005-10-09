@@ -1,5 +1,4 @@
 set -tmpdir build
-set -dumpdir build
 set -xsthdpdir ./xst
 run
 -ifn acqboard.prj
@@ -11,7 +10,6 @@ run
 -opt_mode Area
 -opt_level 2
 -iuc NO
--lso acqboard.lso
 -keep_hierarchy NO
 -glob_opt AllClockNets
 -rtlview Yes

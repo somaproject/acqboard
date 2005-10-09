@@ -24,6 +24,7 @@ $(PROJECT).bit: build/$(PROJECT).bit
 
 build/$(PROJECT).ngc: $(SOURCES) $(PROJECT).xst $(PROJECT).prj
 	xst -ifn $(PROJECT).xst
+	mv $(PROJECT).ngc build/
 
 %.syn : %.vhd
 	sed "s/-top $(PROJECT)/-top $(subst .vhd,,$<)/" $(PROJECT).xst > .$<.xst

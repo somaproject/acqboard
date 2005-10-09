@@ -1,4 +1,5 @@
 set -tmpdir build
+set -dumpdir build
 set -xsthdpdir ./xst
 run
 -ifn acqboard.prj

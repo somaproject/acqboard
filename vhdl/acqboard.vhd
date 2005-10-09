@@ -26,8 +26,8 @@ entity acqboard is
          FIBERIN   : in  std_logic;
          FIBEROUT  : out std_logic;
          CLK8_OUT  : out std_logic;
-         LED0      : out std_logic;
-         LED1      : out std_logic);
+         LEDCMD      : out std_logic;
+         LEDLINK      : out std_logic);
 end acqboard;
 
 architecture Behavioral of acqboard is
@@ -516,34 +516,8 @@ begin
   ea          <= ('0' & laddr) when eesel = '1' else (ewaddr);
   een         <= len           when eesel = '1' else ceen;
 
-
-  LED0 <= not RESET;
-
-  commandblink : process(CLK)
-    variable cnt : std_logic_vector(20 downto 0) := (others => '0');
-    variable oldcmdid : std_logic_vector(3 downto 0) := (others => '0');
-    
-    begin
-      if rising_edge(CLK) then
-        if cmdid /= oldcmdid then
-          cnt := "000000000000000000000";
-        else
-          if cnt /= "111111111111111111111" then
-            cnt := cnt + 1; 
-          end if;
-        end if;
-        oldcmdid := cmdid;
-                    
-        if cnt /= "111111111111111111111" then
-          LED1 <= '1';
-        else
-          LED1 <= '0' ;
-        end if;
-        
-        
-      end if;
-    end process commandblink;
-    
+  LEDCMD <= pending;
+  LEDLINK <= not RESET; 
                               
   CLK8_OUT <= clk8; 
 

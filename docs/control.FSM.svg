@@ -12,7 +12,7 @@
    height="792.00000pt"
    id="svg1996"
    sodipodi:version="0.32"
-   inkscape:version="0.41+devel"
+   inkscape:version="0.42.2"
    sodipodi:docbase="/home/jonas/soma/developer/acqboard/docs"
    sodipodi:docname="control.FSM.svg">
   <defs
@@ -1518,5 +1518,16 @@
          y="230.00000"
          x="487.27734"
          sodipodi:role="line">and MODE=2</tspan></text>
+    <text
+       sodipodi:linespacing="125.00000%"
+       id="text1579"
+       y="265"
+       x="193.75"
+       style="font-size:8.0000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125.00000%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         id="tspan1589"
+         sodipodi:role="line"
+         x="193.75000"
+         y="265.00000">PENDING=0</tspan></text>
   </g>
 </svg>

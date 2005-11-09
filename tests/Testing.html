@@ -2970,5 +2970,35 @@ Attempted to solder up new board, but it has a short; now we're really
 out of parts. <br>
 <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">4 November
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+First new board; have programming working under linux, which is also
+awesome, thanks to some patches to XC3Sprog. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">7 November
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+Okay, linux sucks for losing all my notes about how I assembled the
+voltage refernece stage; what the fuck. <br>
+<br>
+I believe I literally placed every component on the schematic as it was
+supposed to be placed, using 0.1 uf caps on the backside, etc. , with
+the obvious caveat that we have the problems with deleting the wrong
+footprint/symbol combination on the acqboard, and our rather lame
+attempts to compensate. Thank god this is all low frequency stuff. <br>
+<br>
+Today we're going to actually solder up a channel. <br>
+<br>
+used a 12.1k resistor instead of 12.0 for r23. <br>
+<br>
+zero-ohms on R35, R39<br>
+Put a 0.1uF on C60; <br>
+a 10 uF ceramic on C54, which for some reason has the world's tiniest
+pad. <br>
+<br>
+We get ~ 90 dB THD+N on channel one with ADC+AA, driven from the ATS 2
+at 1kHz; at 10kHz, things aren't quite so pretty. <br>
+<br>
 </body>
 </html>

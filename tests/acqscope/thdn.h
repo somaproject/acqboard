@@ -25,7 +25,8 @@ class THDN
   int N_; 
   int pos_; 
   double recentTHDN_; 
-
+  double average_; 
+  double count_; 
   
 }; 
 

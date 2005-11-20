@@ -125,8 +125,8 @@ def simpleTest(filename):
     b.gainSet = gainSet
     b.hpfs = [0, 1]
     #b.gains = [1, 2, 5, 10, 20, 50, 100]
-    b.gains = [1]
-    f1 = 200
+    b.gains = [1, 2, 5, 10, 20, 50, 100]
+    f1 = 20
     f2 = 10000
     #s.freqs = logspace(log10(f1), log10(f2), 100.)
     s.freqs = linspace(f1, f2, 50)

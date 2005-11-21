@@ -26,18 +26,17 @@ class ADFilter:
         
         
 class filters:
-    def __init__(self, ad):
+    def __init__(self, ad, name):
        
         """
-        The anti-aliasing filter is an 8-pole bessel
+        A class that plots the interesting filters for a combined
+        analog-digital conversion system.
+        
         """
         cutoff3db = ad.cutoff3db 
         self.wc = cutoff3db
         self.poles = ad.poles
         self.f = ad.f
-        
-
-        
         
         self.Fs = ad.Fs
         self.dsN = ad.dsN
@@ -46,8 +45,9 @@ class filters:
         self.fxquant = fxquant.fxquant(self.fbits)
         
         self.h = array(self.fxquant.toInts(self.hfloat), Float)/(2**(self.fbits -1))
+        self.name = name
         
-    def plotanalog(self):
+    def plotanalog(self, save = False):
         
         fstart = 1000
         fstop = 250000
@@ -73,7 +73,10 @@ class filters:
         title('Frequency Response of analog filters')
         
         grid(1)
-
+        if save:
+            savefig(self.name + ".analog.freqres.svg")
+            
+        
         figure(2)
         semilogx(fr, log10(mag)*20, 'r')
         
@@ -84,12 +87,12 @@ class filters:
         ylabel('Magnitude (dB)')
         title('Passband Frequency Response of analog filters')
 
-
         grid(1)
+        if save:
+            savefig(self.name + ".analog.pass.svg")
 
         figure(3)
         semilogx(fr, log10(mag)*20, 'r')
-
 
         plot([self.Fs/2, self.Fs/2], [0, -110])
         axis([12000, fstop, -110, -70])
@@ -98,11 +101,11 @@ class filters:
         title('Stopband Frequency Response of analog filters')
        
         grid(1)
+        if save:
+            savefig(self.name + ".analog.stop.svg")
 
         # calculate group delay in us
         grd = -phase/fr/360*1e6
-        
-        
         
         figure(4)
         semilogx(fr, grd)
@@ -111,13 +114,30 @@ class filters:
         xlabel('Frequency (Hz)') 
         grid(1)
         title('Group delay of analog filters')
+        if save:
+            savefig(self.name + ".analog.grd.svg")
         
         show()
-    def plotdigital(self):
-        # uniting analog and digital
-        # first, we convert the analog response into the corresponding digital
-        # frequency response
 
+    def plotquant(self, save=False):
+        w = linspace(0, pi, 5000*self.dsN);
+        H = signal.freqz(self.hfloat, [1.0], w)
+        Hq = signal.freqz(self.h, [1.0], w)
+        flin = w/pi*self.Fs/2;
+        plot(flin/1000, 20*log10(abs(H[1])), 'b', label="Floating point")
+        plot(flin/1000, 20*log10(abs(Hq[1])), 'r', label="22 bit fixed-point")
+        xlabel('Frequency (kHz)')
+        ylabel('Magnitude (dB)')
+        title('Quantization effects on frequency response')
+        legend()
+        grid(1)
+        show()
+        
+    def plotdigital(self, save=False):
+        # uniting analog and digital
+        # first, we convert the analog response into the corresponding digital        # frequency response
+
+        
         w = linspace(0, pi, 5000*self.dsN);
         flin = w/pi*self.Fs/2;
         slin = flin*1j; 
@@ -140,7 +160,10 @@ class filters:
         xlabel('Frequency (kHz)'); 
         title(r'$\rm{Aggregate Spectra}Y(e^{j\omega})$')
         axis([0, 96, -180, 10])
-        show()
+        if save:
+            savefig(self.name + ".digital.aggregate.svg")
+        
+
 
         # now zoom in on the passband
         figure(6)
@@ -156,7 +179,9 @@ class filters:
         xlabel('Frequency (kHz)'); 
         title(r'$\rm{Aggregate Spectra}Y(e^{j\omega})$')
         axis([0, 10, -5, 5])
-        show()
+
+        if save:
+            savefig(self.name + ".digital.pass.svg")
 
         # now plot the downsampled total spectra
         figure(7)
@@ -170,6 +195,9 @@ class filters:
         xlabel('Freqency (kHz)')
         plot(flin[0, :]/1000, r_[[-96]*len(flin[0,:])], 'g')
         legend(('Signal', 'Aliases'))
+        if save:
+            savefig(self.name + ".digital.withaliases.svg")
+
         show()
 
 def find3db(co, poles):
@@ -218,10 +246,10 @@ def main():
                         Hz=ad.Fs,
                         maxiter=1000);
     
-    y = filters(ad)
-    y.plotanalog()
-    y.plotdigital()
-
+    y = filters(ad, name="test")
+    #y.plotanalog(save=True)
+    #y.plotdigital(save=True)
+    y.plotquant(save=True)
 
 
 

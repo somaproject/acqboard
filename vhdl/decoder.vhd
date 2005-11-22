@@ -28,7 +28,7 @@ architecture Behavioral of decoder is
   signal doutrdy, doutrdyl     : std_logic := '0';
   signal lldatalock, ldatalock : std_logic := '0';
 
-  signal ticcnt : std_logic_vector(2 downto 0) := (others => '0');
+  signal ticcnt : std_logic_vector(3 downto 0) := (others => '0');
 
   signal bitcnt : std_logic_vector(3 downto 0) := (others => '0');
 
@@ -59,9 +59,13 @@ begin
       lastbit <= curbit;
 
       if lastbit = not curbit then
-        ticcnt <= "000";
+        ticcnt <= "0000";
       else
+        if ticcnt = "1000" then
+          ticcnt <= "0000";
+        else
         ticcnt <= ticcnt + 1;
+        end if; 
       end if;
 
       -- shift register, et. al.
@@ -106,7 +110,7 @@ begin
   lldatalock <= '1' when doutrdyl = '0' and doutrdy = '1' else '0';
 
 
-  dout_en <= '1' when ticcnt = "101"  else '0';
+  dout_en <= '1' when ticcnt = "0110"  else '0';
   doutrdy <= '1' when bitcnt = "0011" else '0';
 
   -- instantiate decoder

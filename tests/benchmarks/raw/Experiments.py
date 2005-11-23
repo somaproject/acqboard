@@ -129,7 +129,7 @@ def simpleTest(filename):
     f1 = 20
     f2 = 10000
     #s.freqs = logspace(log10(f1), log10(f2), 100.)
-    s.freqs = linspace(f1, f2, 50)
+    s.freqs = linspace(f1, f2, 40)
     
     s.vpps = [4.05]
     

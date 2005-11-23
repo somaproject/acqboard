@@ -21,8 +21,9 @@ entity FiberRX is
 end FiberRX;
 
 architecture Behavioral of FiberRX is
--- FIBERRX.VHD                          -- system to deserialize 8B/10B bitstream and then 
--- parse command packets, eventually rendering a valid packet. 
+-- FIBERRX.VHD
+-- system to deserialize 8B/10B bitstream and then
+-- parse command packets, eventually rendering a valid packet.
   signal indata : std_logic_vector(7 downto 0) := (others => '0');
 
   signal code_err, disp_err, err : std_logic := '0';
@@ -37,15 +38,15 @@ architecture Behavioral of FiberRX is
   signal cs, ns : states := none;
 
 -- input decoder/deserializer
-  component decoder 
-                      port ( CLK      : in  std_logic;
-                             DIN      : in  std_logic;
-                             DATAOUT  : out std_logic_vector(7 downto 0);
-                             KOUT     : out std_logic;
-                             CODE_ERR : out std_logic;
-                             DISP_ERR : out std_logic;
-                             DATALOCK : out std_logic;
-                             RESET    : in  std_logic);
+  component decoder
+    port ( CLK      : in  std_logic;
+           DIN      : in  std_logic;
+           DATAOUT  : out std_logic_vector(7 downto 0);
+           KOUT     : out std_logic;
+           CODE_ERR : out std_logic;
+           DISP_ERR : out std_logic;
+           DATALOCK : out std_logic;
+           RESET    : in  std_logic);
   end component;
 
 begin
@@ -60,16 +61,16 @@ begin
     DATALOCK => newpkt,
     RESET    => RESET);
 
-  err <= code_err or disp_err;
+  err                    <= code_err or disp_err;
 
   clock : process(CLK, RESET, cs, newpkt)
   begin
     if RESET = '1' then
-      cs     <= none;
-      DATA   <= (others => '0');
-      CMDID  <= (others => '0');
-      CMD    <= (others => '0');
-      CHKSUM <= (others => '0');
+      cs                 <= none;
+      DATA               <= (others => '0');
+      CMDID              <= (others => '0');
+      CMD                <= (others => '0');
+      CHKSUM(7 downto 1) <= (others => '0');
 
     else
       if rising_edge(clk) then
@@ -90,11 +91,18 @@ begin
           when data4l  =>
             DATA(31 downto 24) <= indata;
           when chksumc =>
-            CHKSUM             <= indata;
-          when others  =>
+            CHKSUM(7 downto 1) <= indata(7 downto 1);  -- DEBUGGING!
+
+          when others =>
             null;
         end case;
-
+        if newpkt = '1' then
+          if err = '0' then
+            chksum(0)              <= kout;
+          end if;
+            
+        end if;
+        
       end if;
     end if;
 

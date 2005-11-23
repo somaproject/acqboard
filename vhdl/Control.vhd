@@ -38,7 +38,8 @@ entity Control is
          RAWCHAN    : out std_logic_vector(3 downto 0);
          LOAD       : out std_logic;
          PENDING    : out std_logic;
-         LDONE      : in  std_logic);
+         LDONE      : in  std_logic;
+         MODEOUT : out std_logic_vector(1 downto 0));
 end Control;
 
 architecture Behavioral of Control is
@@ -73,8 +74,8 @@ begin
            ("00" & DATA(7 downto 0) & '0')           when eaddrsel = 2 else
            ("00" & DATA(7 downto 0) & '1')           when eaddrsel = 3;
 
-  --OSEN   <= '0' when mode = "01"                   else '1';  
-  OSEN <= '0';                          -- DEBUGGING
+  OSEN   <= '0' when mode = "01"                   else '1';  
+
   BUFSEL <= '1' when loading = '1'                 else
             '1' when loading = '0' and mode = "10" else
             '0';
@@ -101,6 +102,7 @@ begin
           RAWCHAN <= DATA(11 downto 8);
         end if;
 
+        MODEOUT <= mode; 
       end if;
     end if;
   end process clock;
@@ -141,7 +143,7 @@ begin
                 ns <= badcmd;
               end if;
             when "0101" =>
-              if mode = "10" then
+              if mode = "10" then  
                 ns <= write_fl;
               else
                 ns <= badcmd;

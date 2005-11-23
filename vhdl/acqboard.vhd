@@ -10,7 +10,6 @@ use UNISIM.VComponents.all;
 
 entity acqboard is
   port ( CLKIN     : in  std_logic;
-         --RESET : in std_logic; 
          ADCSDIA   : in  std_logic;
          ADCSDIB : in std_logic;
          ADCSCK    : out std_logic;
@@ -100,7 +99,8 @@ architecture Behavioral of acqboard is
   signal cmdsuccess      : std_logic                     := '0';
   signal cmddone         : std_logic                     := '0';
   signal cmdsts          : std_logic_vector(3 downto 0)  := (others => '0');
-
+  signal mode : std_logic_vector(1 downto 0) := (others => '0');
+ 
 
 
 
@@ -303,7 +303,8 @@ architecture Behavioral of acqboard is
            OSWE       : out std_logic;
            LOAD       : out std_logic;
            PENDING    : out std_logic;
-           LDONE      : in  std_logic);
+           LDONE      : in  std_logic;
+           MODEOUT    : out std_logic_vector(1 downto 0));
   end component;
 
   component raw
@@ -493,7 +494,8 @@ begin
     OSWE       => oswe,
     LOAD       => load,
     PENDING    => pending,
-    LDONE      => ldone);
+    LDONE      => ldone,
+    MODEOUT    => mode);
 
   raw_inst : raw port map (
     CLK  => clk,
@@ -516,8 +518,8 @@ begin
   ea          <= ('0' & laddr) when eesel = '1' else (ewaddr);
   een         <= len           when eesel = '1' else ceen;
 
-  LEDCMD <= pending;
-  LEDLINK <= not RESET; 
+  LEDLINK <= '0';
+  LEDCMD <= PENDING;
                               
   CLK8_OUT <= clk8; 
 

@@ -96,18 +96,18 @@ class Experiment(object):
                                 row = table.row
                                 row['frequency'] = f
                                 row['sourcevpp'] = v
-                                
-                                
+
+                                # This is very fragile; I don't know why, but
+                                # it's all python's fault. 
+                                time.sleep(0.1)
                                 # read the data
-                                time.sleep(1.0)
-                                x = read(2**16)
-                                x = read(2**16)
-                                x = read(2**16)                                
-                                row['data'] = x
+                                x = read(2**18)
+                                y = read(2**16)
+                                z = read(2**18)                                
+                                row['data'] = y
                                 row.append()
                                 time.sleep(0.0)
-                                #pylab.plot(x)
-                                #pylab.show()
+
                         table.flush()
             bs.done()
 
@@ -130,9 +130,9 @@ def simpleTest(filename):
     #b.gains = [1, 2, 5, 10, 20, 50, 100]
     b.gains = [1]
     f1 = 20
-    f2 = 10000
+    f2 = 500
     #s.freqs = logspace(log10(f1), log10(f2), 100.)
-    s.freqs = linspace(f1, f2, 40)
+    s.freqs = linspace(f1, f2, 10)
     
     s.vpps = [4.05]
     

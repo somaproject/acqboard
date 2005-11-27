@@ -24,14 +24,18 @@ def read(nsamples):
     nsamp = 0; 
     
     resultstr = ""
+    fid = file("/tmp/readdata.tmp", 'w')
     sample = s.recv(512)
-    
     
     while (nsamp < (2*nsamples*24.0/12.0 + 200)):
         tmpstr =s.recv(1024)
         nsamp += len(tmpstr)
-        resultstr += tmpstr
-        
+        #resultstr += tmpstr
+        fid.write(tmpstr)
+
+    fid.close()
+    fid = file("/tmp/readdata.tmp")
+    resultstr = fid.read()
     offset = 18
     datastr = resultstr[offset:]
 

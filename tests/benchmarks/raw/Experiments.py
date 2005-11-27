@@ -99,10 +99,13 @@ class Experiment(object):
                                 
                                 
                                 # read the data
-                                time.sleep(0.1)
-                                x = read(2**17)
-                                row['data'] = x[2**16:]
+                                time.sleep(1.0)
+                                x = read(2**16)
+                                x = read(2**16)
+                                x = read(2**16)                                
+                                row['data'] = x
                                 row.append()
+                                time.sleep(0.0)
                                 #pylab.plot(x)
                                 #pylab.show()
                         table.flush()
@@ -123,9 +126,9 @@ def simpleTest(filename):
                50:6,
                100:7}
     b.gainSet = gainSet
-    b.hpfs = [0, 1]
+    b.hpfs = [1]
     #b.gains = [1, 2, 5, 10, 20, 50, 100]
-    b.gains = [1, 2, 5, 10, 20, 50, 100]
+    b.gains = [1]
     f1 = 20
     f2 = 10000
     #s.freqs = logspace(log10(f1), log10(f2), 100.)

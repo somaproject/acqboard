@@ -35,7 +35,7 @@
                 + Anti-aliasing Filter Design
                       # Spice modles
                 + ADCs, voltage selection
-          o
+          o 
 
     * Digital:
           o FPGA selection

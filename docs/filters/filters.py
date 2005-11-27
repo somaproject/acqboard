@@ -13,7 +13,10 @@ http://groups-beta.google.com/group/comp.soft-sys.matlab/msg/f96918240a97fbe6?dm
 """
 
 import fxquant
+from matplotlib.pylab import *
 
+
+kHzFormatter = FuncFormatter(lambda x, pos: "%d" % (x/1000))
 class ADFilter:
     def __init__(self):
         self.cutoff3db = None
@@ -23,9 +26,9 @@ class ADFilter:
         self.f = None
         self.h = None
         self.fbits = None
-        
-        
+
 class filters:
+    
     def __init__(self, ad, name):
        
         """
@@ -46,7 +49,17 @@ class filters:
         
         self.h = array(self.fxquant.toInts(self.hfloat), Float)/(2**(self.fbits -1))
         self.name = name
-        
+
+    def saveh(self):
+        """ Saves the quantized filter to name.firdat,
+        as a long list of integers"""
+
+        fid = file(self.name + ".firdat", 'w')
+        for x in self.h:
+            fid.write("%d\n" % int(round(x * 2**(self.fbits -1))))
+            
+        fid.close()
+
     def plotanalog(self, save = False):
         
         fstart = 1000
@@ -60,64 +73,90 @@ class filters:
 
         phase = unwrap(angle(hf))*180/pi;
 
+        # TOTAL FREQUENCY RESPONSE ##########################
         figure(1)
-        semilogx(fr, log10(mag)*20, 'r')
+        semilogx(fr, log10(mag)*20, 'b', linewidth=1.0)
 
-        
-
-        plot([self.Fs/2, self.Fs/2], [0, -110])
+        plot([self.Fs/2, self.Fs/2], [0, -110], 'r')
         plot([self.wc, self.wc], [0, -110], 'r')
         axis([fstart, fstop, -110, 0])
-        xlabel('Frequency (Hz)')
+        xlabel('Frequency (kHz)')
         ylabel('Magnitude (dB)')
         title('Frequency Response of analog filters')
+        ax=gca()
+        ax.xaxis.set_major_formatter(kHzFormatter)
+        ax.xaxis.grid(True, which="minor")
+        ax.xaxis.grid(True, which="major")
+        ax.yaxis.grid(True)
         
-        grid(1)
+     
         if save:
             savefig(self.name + ".analog.freqres.svg")
             
-        
+        # PASSBAND RESPONSE
         figure(2)
-        semilogx(fr, log10(mag)*20, 'r')
+        semilogx(fr, log10(mag)*20, 'b', linewidth=1.0)
         
-
         plot([self.Fs/2, self.Fs/2], [0, -110])
         axis([fstart, 10000, -6, 3])
         xlabel('Frequency (Hz)')
         ylabel('Magnitude (dB)')
         title('Passband Frequency Response of analog filters')
+        
+        ax=gca()
+        #ax.xaxis.set_minor_locator(MultipleLocator(5))
+        ax.xaxis.set_major_locator(MultipleLocator(1000))
+        ax.xaxis.set_major_formatter(kHzFormatter)
+        ax.xaxis.grid(True, which="major")
 
-        grid(1)
+        ax.yaxis.set_major_locator(MultipleLocator(1))
+        ax.yaxis.grid(True)
+        
         if save:
             savefig(self.name + ".analog.pass.svg")
 
+
+
         figure(3)
-        semilogx(fr, log10(mag)*20, 'r')
+        semilogx(fr, log10(mag)*20, 'b', linewidth=1.0)
 
         plot([self.Fs/2, self.Fs/2], [0, -110])
         axis([12000, fstop, -110, -70])
         xlabel('Frequency (Hz)')
         ylabel('Magnitude (dB)')
         title('Stopband Frequency Response of analog filters')
-       
-        grid(1)
+
+        ax = gca()
+        ax.xaxis.grid(True, which="major")
+        ax.xaxis.grid(True, which="minor")
+        ax.yaxis.grid(True, which="major")
+
+
         if save:
             savefig(self.name + ".analog.stop.svg")
 
-        # calculate group delay in us
+        # GROUP DELAY ##################################
         grd = -phase/fr/360*1e6
         
         figure(4)
-        semilogx(fr, grd)
+        semilogx(fr, grd, linewidth=1.0)
         
-        ylabel(r'Group Delay ($\mu s$)') 
-        xlabel('Frequency (Hz)') 
-        grid(1)
+        ylabel(r'Group Delay (us$)') 
+        xlabel('Frequency (kHz)') 
+        ax = gca()
+        ax.xaxis.set_major_formatter(kHzFormatter)
+        ax.xaxis.grid(True, which="major")
+        ax.xaxis.grid(True, which="minor")
+        ax.yaxis.grid(True, which="major")
+          
+        axis([1000, 100000, 5, 40])
+        
         title('Group delay of analog filters')
         if save:
             savefig(self.name + ".analog.grd.svg")
-        
-        show()
+
+        if not save:
+            show()
 
     def plotquant(self, save=False):
         w = linspace(0, pi, 5000*self.dsN);
@@ -128,10 +167,13 @@ class filters:
         plot(flin/1000, 20*log10(abs(Hq[1])), 'r', label="22 bit fixed-point")
         xlabel('Frequency (kHz)')
         ylabel('Magnitude (dB)')
-        title('Quantization effects on frequency response')
+        title('Quantization effects on FIR frequency response')
         legend()
         grid(1)
-        show()
+        if save:
+            savefig(self.name + ".digital.quant.svg")
+        else:
+            show()
         
     def plotdigital(self, save=False):
         # uniting analog and digital
@@ -148,40 +190,43 @@ class filters:
         H = signal.freqz(self.h, [1.0], w)
         
         figure(5)
-        plot(flin/1000, 20*log10(abs(H[1])), 'g')
-        plot(flin/1000, 20*log10(abs(hanalog)), 'r')
+        plot(flin/1000, 20*log10(abs(H[1])), 'g', label = "FIR response")
+        plot(flin/1000, 20*log10(abs(hanalog)), 'r', label = "Analog response")
         Y = abs(H[1])*abs(hanalog)
-        plot(flin/1000, 20*log10(Y), 'b')
+        plot(flin/1000, 20*log10(Y), 'b', label = "Total Frequency Response")
 
         grid(1)
-        plot([10, 10], [-200,10], 'k--');
-        plot([16, 16], [-200,10], 'k--');
+        plot([10, 10], [-200,10], 'k--', label = "_nolegend_");
+        plot([16, 16], [-200,10], 'k--', label = "_nolegend_");
         ylabel('Magnitude (dB)'); 
         xlabel('Frequency (kHz)'); 
-        title(r'$\rm{Aggregate Spectra}Y(e^{j\omega})$')
+        title(r'$\rm{Undecimated Aggregate Spectra}Y(e^{j\omega})$')
         axis([0, 96, -180, 10])
+        legend()
         if save:
             savefig(self.name + ".digital.aggregate.svg")
         
 
-
         # now zoom in on the passband
         figure(6)
-        plot(flin/1000, 20*log10(abs(H[1])), 'g')
-        plot(flin/1000, 20*log10(abs(hanalog)), 'r')
+        plot(flin/1000, 20*log10(abs(H[1])), 'g', label = "FIR response")
+        plot(flin/1000, 20*log10(abs(hanalog)), 'r', label = "Analog response")
         
-        plot(flin/1000, 20*log10(Y), 'b')
+        plot(flin/1000, 20*log10(Y), 'b', label = "Total Frequency Response")
 
         grid(1)
-        plot([10, 10], [-200,10], 'k--');
-        plot([16, 16], [-200,10], 'k--');
+
         ylabel('Magnitude (dB)'); 
         xlabel('Frequency (kHz)'); 
-        title(r'$\rm{Aggregate Spectra}Y(e^{j\omega})$')
-        axis([0, 10, -5, 5])
-
+        title(r'$\rm{Undecimated Aggregate Spectra}Y(e^{j\omega})$')
+        axis([0, 10, -3, 3])
+        legend()
+        
         if save:
             savefig(self.name + ".digital.pass.svg")
+
+
+
 
         # now plot the downsampled total spectra
         figure(7)
@@ -193,12 +238,16 @@ class filters:
         grid(1)
         plot(flin[0, :]/1000, 20*log10(sum(P[1:8, ::-1])), 'r')
         xlabel('Freqency (kHz)')
-        plot(flin[0, :]/1000, r_[[-96]*len(flin[0,:])], 'g')
+        ylabel('Magnitude (dB)')
+        plot(flin[0, :]/1000, r_[[-96]*len(flin[0,:])], 'g',
+             label = "_nolegend_")
+        title('Total decimated frequency response, with aliases')
         legend(('Signal', 'Aliases'))
         if save:
             savefig(self.name + ".digital.withaliases.svg")
 
-        show()
+        if not save:
+            show()
 
 def find3db(co, poles):
     cutoff3db = co
@@ -225,8 +274,6 @@ def find3db(co, poles):
 from scipy import *
 
 
-from matplotlib.pylab import *
-
 def main():
 
     ad = ADFilter
@@ -246,10 +293,12 @@ def main():
                         Hz=ad.Fs,
                         maxiter=1000);
     
-    y = filters(ad, name="test")
-    #y.plotanalog(save=True)
-    #y.plotdigital(save=True)
-    y.plotquant(save=True)
+    y = filters(ad, name="soma-1")
+    save = True
+    y.plotanalog(save=save)
+    y.plotdigital(save=save)
+    y.plotquant(save=save)
+    y.saveh()
 
 
 

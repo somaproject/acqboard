@@ -32,9 +32,9 @@
          * digital filtering 
 	   * digital filtering simulation
 	   * fixed-point math
-      * Power Requirements
-   	  
-    * Analog Hardware Design
+
+
+    * Analog Hardware Design -- a tour of the schematics
           o Mixed signal design
                 + why not just use sigma-delta converters
                 + why not AC-couple inputs?      
@@ -45,6 +45,13 @@
                       # Spice modles
                 + ADCs, voltage selection
 	          o Digital Simulations of filtering
+	 * Power Requirements
+    * Analog / Digital performance results
+        * Linearity
+        * THD+N
+        * Noise
+        * Common Mode rejection
+   	* animal results  
 
     * Fiber IO 
           o four modes
@@ -52,7 +59,7 @@
           o output interface
           o input interface and bus protocol
           o actual commands
-    * digital hardware implementation
+    * digital hardware implementation -- A tour of the FPGA
           o FPGA selection
           o Digital offsets
           o fixed-point math
@@ -70,11 +77,12 @@
                 + Single-channel
                 + multi channel
                 + Real Rat
-          o
 
 
 
 Albert suggests appendix
 
-    * THD+N measurement
+    * THD+N measurement mechanism
     * Oversampling, downsampling, etc. 
+    * Filter design code, analysis
+    * 

@@ -1,11 +1,17 @@
-The soma acquisition board signal chain can be partitioned into an analog signal conditioning section and a digital signal processing section. Here, the stages will be discussed independently, except where they overlap and integrate to produce the final output.
+
+The soma acquisition board signal chain (Figure \ref{signalchain}) can be partitioned into an analog signal conditioning section and a digital signal processing section. Here, the stages will be discussed independently, except where they overlap and integrate to produce the final output.
+\begin{figure}
+\includegraphics[scale=1.0]{signalchain.svg}
+\caption{The Soma 8+2 Acquiusition signal processing chain overview.}
+\label{signalchain}
+\end{figure}
 
 \section{Input Differential Amplification}
 
 The AD8221 In-amp is used to provide high common-mode rejection. See figer foo for a plot of the CMMR of the input stage. This stage has a constant gain of 100. 
 
 
-\section{Optional analog signal conditioning}
+\section{Optional analog high-pass filtering.}
 Waveform data (EEG) is low-frequency data in the mV range; spike data is high-frequency data in the hundreds-of-uV range. When recording spikes the low-frequency EEG could potentially saturate our amplifier; thus we have an optional single-pole high-pass filter ($f_{-3dB}=300 Hz$) that can be enabled to maximize spike acqisition dynamic range. 
 
 FIGURE Frequency response of the board below 1 kHz with and without 
@@ -32,7 +38,67 @@ PGA gain & Total Gain & Input Voltage Range & LSB size \\
 \caption{Gain settings and voltage levels}
 \end{table}
 
-THD+N for the board without the op-amp or BGA
-THD+N for the board with HPF
-THD+N for the board with In-Amp, HPF en and not en
+\section{Analog to Digital Conversion}
+Signal chain design: 
+to achieve 16-bits with an input bandwidth of 10 kHz we oversample, downsample, and digitally filter. The filtering process is the combination of the following factors:
 
+1. an initial antialiasing filter
+2. The analog-to-digital conversion step
+3. Fixed-point FIR filtering
+4. downsampling
+
+
+
+\subsection{Antialiasing Filter}
+The data is initially sampled at 192 kSPS; an 8-pole bessel filter achieves greater than 96 dB attenuation within the stop-band while maintaining linear phase (constant group delay) across the passband.
+
+\begin{figure}[h!]
+\includegraphics[scale=0.5]{soma-1.analog.freqres.svg}
+\label{analog.freqres}
+\caption{Anti-aliasing filter total frequency response.}
+\end{figure}
+
+\begin{figure}[h!]
+\includegraphics[scale=0.5]{soma-1.analog.pass.svg}
+\label{analog.pass}
+\caption{Antialiasing filter passband frequency response}
+\includegraphics[scale=0.5]{soma-1.analog.grd.svg}
+\label{analog.grd}
+\caption{Anti-aliasing filter group delay.}
+\end{figure}
+
+\subsection{ADC}
+A 16-bit ADC running at $f_s=192 \textrm{kHz}$ samples the incoming antialiased signal. 
+
+\subsection{Filtering}
+We filter the sampled data using an N-Tap FIR filter using fixed-point convolution. We use an extended-precision multiplier, 22-bit filter coefficients, and an extended-width accumulator to reduce the negative artifacts present in fixed-point aritmetic. 
+
+The Parks-McClellan optimum equiripple FIR filter is used for a cutoff at 10 kHz; the resulting frequency response (and coefficient-quantized frequency response) are seen in figure \ref{FIR}. A 143-tap filter gives the required stopband attenuation while keeping FIR-induced passband ripple to under $0.5 dB$, while fitting in our allocated FPGA resources. 
+
+\begin{figure}[h!]
+\includegraphics[scale=1.0]{soma-1.digital.quant.svg}
+\label{FIR}
+\caption{Frequency response of FIR filter.}
+\end{figure}  
+
+\subsection{Downsampling}
+We filter and then downsample; the filtering step is actually only performed once for every $M=6$ input samples, as the other $M-1$ samples would be removed in the decimation step and thus be wasted. 
+
+\subsection{Total response}
+The resulting frequency response of the combined analog and digital filters are shown in figures blah, including zoomed-in passband and stopband performace. The frequency response following decimation is also shown, with the sum of the (imperfectly filtered) antialiased components highlighted. 
+
+\begin{figure}[h!]
+\includegraphics[scale=1.0]{soma-1.digital.aggregate.svg}
+\label{digital.aggregate}
+\caption{Aggregate pre-decimation signal chain filtering.}
+\includegraphics[scale=1.0]{soma-1.digital.pass.svg}
+\label{digital.pass}
+\caption{Aggregate pre-decimation signal chain passband.}
+\end{figure}  
+
+
+\begin{figure}[h!]
+\includegraphics[scale=1.0]{soma-1.digital.withaliases.svg}
+\label{digital.withaliases}
+\caption{Aggregate post-decimation filtering.}
+\end{figure}  

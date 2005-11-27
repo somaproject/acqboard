@@ -37,7 +37,7 @@ Every command sent has a 4-bit command id (CMDID); when a command is \textit{don
 
 The data fields are 1.15-bit twos-complement fixed point samples from their corresponding ADCs; they are transmitted MSB first. 
 
-Normally, the acqboard receives a stream of valid 8b/10b encoded zeros; a new command is signalled by the presence of the comma character in the data stream followed by a packet which looks as follows:
+\emph{Normally, the acqboard receives a stream of valid 8b/10b encoded zeros; a new command is signalled by the presence of the comma character in the data stream followed by a packet. Actually, no, this won't work ebcause we need to periodically rentrain the decoder on a valid comma character. } which looks as follows:
 
 \begin{figure}[h!]
 \includegraphics[width=4in]{rxpacket.svg}

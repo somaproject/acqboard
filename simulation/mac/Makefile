@@ -1,6 +1,26 @@
+VHDLC=vhdlp
+WORKDIR=work.sym
+all: hw comp sim
 
-macgen: macgen.o
-	g++ -O2 macgen.o -o macgen -lgmpxx -lgmp
+$(WORKDIR)/multiplier/_behavioral.var: ../../vhdl/multiplier.vhd
+	$(VHDLC) ../../vhdl/multiplier.vhd
 
-macgen.o: ../../code/fixed.h macgen.cc
-	g++ -O2 -Wall -c macgen.cc
+$(WORKDIR)/accumulator/_behavioral.var: ../../vhdl/accumulator.vhd
+	$(VHDLC) ../../vhdl/accumulator.vhd
+
+$(WORKDIR)/rounding/_behavioral.var: ../../vhdl/rounding.vhd
+	$(VHDLC) ../../vhdl/rounding.vhd
+
+$(WORKDIR)/overflow/_behavioral.var: ../../vhdl/overflow.vhd
+	$(VHDLC) ../../vhdl/overflow.vhd
+
+hw: $(WORKDIR)/multiplier/_behavioral.var $(WORKDIR)/accumulator/_behavioral.var $(WORKDIR)/rounding/_behavioral.var $(WORKDIR)/overflow/_behavioral.var 
+
+comp: 
+
+$(WORKDIR)/mactest/_behavior.var: mactest.vhd
+	$(VHDLC) mactest.vhd
+
+sim: $(WORKDIR)/mactest/_behavior.var 
+clean:
+	rm -Rf $(WORKDIR)$

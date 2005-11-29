@@ -138,10 +138,10 @@ begin
 
   -- circuit board and isolator delays
 
-  SDIA <= SDIA_pre after 20 ns;
-  SDIB <= SDIB_pre after 20 ns;
+  SDIA <= SDIA_pre after 18 ns;
+  SDIB <= SDIB_pre after 18 ns;
 
-  SCK <= SCK_pre after 10 ns; 
+  SCK <= SCK_pre after 5 ns; 
   
   
   clock          : process(clk)

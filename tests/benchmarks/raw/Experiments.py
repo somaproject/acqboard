@@ -110,7 +110,8 @@ class Experiment(object):
                                     x = rawread(2**17)
                                 else:
                                     x = normread(2**17)
-                                x
+                                #pylab.plot(x[:2000])
+                                #pylab.show()
                                 y = diff(x)
                                 row['data'] = x[2**16:]
                                 row.append()
@@ -134,14 +135,15 @@ def simpleTest(filename):
                5000:6,
                10000:7}
     b.gainSet = gainSet
-    b.hpfs = [0]
-    #b.gains = [100, 200, 500, 1000, 2000, 5000, 10000]
-    b.gains = [100]
+    b.hpfs = [0, 1]
+    b.gains = [100, 200, 500, 1000, 2000, 5000, 10000]
+    #b.gains = [100, 200]
     f1 = 20
     f2 = 10000
     #s.freqs = logspace(log10(f1), log10(f2), 100.)
-    s.freqs = linspace(f1, f2, 10)
+    s.freqs = linspace(f1, f2, 30)
     
+    #s.vpps = [4.05]
     s.vpps = [4.05]
     
     e.A1.append((b, s))

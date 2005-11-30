@@ -75,7 +75,7 @@ def normread(nsamples, channum=0):
     fid = file("/tmp/readdata.tmp", 'w')
     sample = s.recv(512)
     
-    while (nsamp < (nsamples*24/2. + 200)):
+    while (nsamp < (nsamples*24 + 200)):
         tmpstr =s.recv(1024)
         nsamp += len(tmpstr)
         #resultstr += tmpstr
@@ -84,11 +84,9 @@ def normread(nsamples, channum=0):
     fid.close()
     fid = file("/tmp/readdata.tmp")
     resultstr = fid.read()
-    print "rsultstr = ", len(resultstr)
+
     offset = 18
     datastr = resultstr[offset:]
-
-        
 
     # now, we format
     data = zeros(nsamples, Int16)
@@ -97,10 +95,9 @@ def normread(nsamples, channum=0):
     for i in range(len(datastr)/2):
 
         #print i, len(datastr), len(datastr)/2, pos
-        if i % 12 == (channum + 1) :
+        if i % 12 == (channum ) :
             if pos < nsamples:
                 data[pos] = unpack(">h", datastr[(2*i):(2*(i+1))])[0]
-
                 pos += 1             
 
     s.close()

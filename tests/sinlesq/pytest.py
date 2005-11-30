@@ -2,10 +2,9 @@ import sinlesq
 from Numeric import *
 from scipy import *
 
-fs = 192000
-t = r_[0.0, 0.1, 0.2]
+fs = 31250
+x = io.read_array('/home/jonas/adtest.dat')
+y = array(x, Float64); 
 
-t = array(t, Float64)
-print type(t)
 
-sinlesq.computeTHDN(t, 192000)
+print sinlesq.computeTHDN(y[:2**14], fs)

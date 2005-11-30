@@ -3135,10 +3135,46 @@ and&nbsp; g=500 or g=2000 and g=5000 is larger than the others? <br>
 Keep in mind that this is also possible if the output of the in-amp has
 a constant noise too. <br>
 <br>
+<span style="font-weight: bold;">I can't tell if we're having trouble
+writing the eeprom or are having data format errors, and without a
+working HDL sim I won't ever know. <br>
+<span style="font-weight: bold;"><br>
 <br>
+<span style="font-weight: bold;"><span
+ style="text-decoration: underline;">30 November 2005<br>
+</span></span></span></span>I have to express a certain degree of shock
+and amazement that this all works: here are the THD+N numbers for a
+board with: <br>
+1. A1 totally soldered, including the in-amp<br>
+2. A2-AC totally soldered except for the in-amp<br>
+3. running in normal (non-raw, i.e. 32 ksps mode)<br>
+4. using the filter derived in docs/filters/soma-1.firdat, doing
+filtering <span style="font-style: italic;">on the acqboard</span>. <br>
 <br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20051130/A1.normal.hpf.with-INA.soma-1.png"
+ style="width: 600px; height: 450px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20051130/A1.normal.nohpf.with-INA.soma-1.png"
+ style="width: 600px; height: 450px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <br>
-<span style="font-weight: bold;"><span style="font-weight: bold;"></span><br>
-</span>
+When we perform analysis on the AD output of a full scale sine with
+g=400 we get... -46 dB. Rock on. <br>
+<br>
 </body>
 </html>

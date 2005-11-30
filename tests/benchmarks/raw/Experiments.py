@@ -16,7 +16,7 @@ class SineRecord(tables.IsDescription):
 
 class Experiment(object):
 
-    def __init__(self, filename, title):
+    def __init__(self, filename, title, raw):
 
         self.A1 = []
         self.A2 = []
@@ -30,6 +30,7 @@ class Experiment(object):
         self.BC = []
           
         self.h5file = tables.openFile(filename, mode = "w", title = title)
+        self.raw = raw
         
     def run(self):
 
@@ -55,7 +56,7 @@ class Experiment(object):
             (bs, ss) = set
 
             print "setting up board channel with ", chanName
-            bs.setup(chanName)
+            bs.setup(self.raw, chanName)
 
             
             for g in bs.gainIter():
@@ -87,7 +88,7 @@ class Experiment(object):
                                                         SineRecord, "notes")
 
                         # create table insde of sine node
-                        ss.setup(False) # output is unnbalanced
+                        ss.setup(balanced=True) # output is balanced
                         
                         for f in ss.freqIter():
                             for v in ss.vppIter(g):
@@ -101,10 +102,17 @@ class Experiment(object):
                                 # it's all python's fault. 
                                 time.sleep(0.1)
                                 # read the data
-                                x = read(2**18)
-                                y = read(2**16)
-                                z = read(2**18)                                
-                                row['data'] = y
+                                #x = read(2**18)
+                                #y = read(2**16)
+                                #z = read(2**18)
+                                #w = read(2**16)
+                                if self.raw:
+                                    x = rawread(2**17)
+                                else:
+                                    x = normread(2**17)
+                                x
+                                y = diff(x)
+                                row['data'] = x[2**16:]
                                 row.append()
                                 time.sleep(0.0)
 
@@ -113,24 +121,24 @@ class Experiment(object):
 
 def simpleTest(filename):
 
-    e = Experiment(filename, "A test experiment")
+    e = Experiment(filename, "A test experiment", raw=False)
 
     b = boardstates.BoardStates()
     s = sourcestates.SineStates()
     gainSet = {0:0,
-               1:1,
-               2:2,
-               5:3,
-               10:4,
-               20:5,
-               50:6,
-               100:7}
+               100:1,
+               200:2,
+               500:3,
+               1000:4,
+               2000:5,
+               5000:6,
+               10000:7}
     b.gainSet = gainSet
-    b.hpfs = [1]
-    #b.gains = [1, 2, 5, 10, 20, 50, 100]
-    b.gains = [1]
+    b.hpfs = [0]
+    #b.gains = [100, 200, 500, 1000, 2000, 5000, 10000]
+    b.gains = [100]
     f1 = 20
-    f2 = 500
+    f2 = 10000
     #s.freqs = logspace(log10(f1), log10(f2), 100.)
     s.freqs = linspace(f1, f2, 10)
     

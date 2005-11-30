@@ -66,7 +66,6 @@ class BoardStates(object):
         self.acqout = acqboard.AcqSocketOut()
         self.acqcmd = AcqBoardCmd()
         self.acqstat = acqboard.AcqSocketStatTimeout(1.0)
-
     
     def setGains(self, value):
         print "setgains"
@@ -101,18 +100,23 @@ class BoardStates(object):
     hpfs = property(getHpfs, setHpfs)
     
 
-    def setup(self, channel):
+    def setup(self, rawMode = False,  channel = 'A1'):
 
         self.acqout.open()
         self.acqstat.open()
 
         self.channel = channel
 
+        if rawMode:
+            acqcmdstr = self.acqcmd.switchmode(3, rawchan=self.channel)
+        else:
+            acqcmdstr = self.acqcmd.switchmode(0, rawchan=self.channel)
+
         sendCommandAndReTransmit(self.acqout,
                                  self.acqcmd,
                                  self.acqstat,
-                                 self.acqcmd.switchmode(3,
-                                                        rawchan=self.channel))
+                                 acqcmdstr);
+        
         print "board state setup"
 
     def done(self):

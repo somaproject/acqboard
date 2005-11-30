@@ -3072,5 +3072,73 @@ Now we're going to solder on the EEPROM and download a filter and try
 and get a response. <br>
 <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">28
+November 2005</span><br
+ style="font-weight: bold; text-decoration: underline;">
+<br>
+Partially aseembled results: <br>
+<br>
+<img alt="" src="results/20051128/a1.nohpf.partiallyassembled.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+Now we'll solder on the few remaining components; it is apparently
+obvious that <span style="font-weight: bold;">the addition of more
+channels subtlely degrades the THD+N. But not by much. <br>
+<br>
+<span style="font-weight: bold;">THD+N with the In-A is still quite
+good. <br>
+<br>
+<br>
+<span style="text-decoration: underline;">29 November 2005<br>
+<span style="text-decoration: underline;"><span
+ style="font-weight: bold;"><span style="text-decoration: underline;"><span
+ style="font-weight: bold;"><br>
+</span></span></span></span></span><span style="font-weight: bold;"><span
+ style="font-weight: bold;"></span></span></span></span>The issue of
+experiment design and benchmarking for this particular architecture is
+very complex; in particular we're not exactly sure how we should tread
+raw acquisition. We really will just be acquiring a single channel at a
+given time, because that'sthe only way (at the moment) that we can
+source a signal from the ATS-2. <br>
+<br>
+Performance measurement: <br>
+Our THD+N measurements with the In-A look assful, but that might be
+because what we're really seeing is a lot of source noise with a
+full-scale input voltage of +/- 200uV. <br>
+<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20051129/a1.nohpf.with-InA.png"
+ style="width: 600px; height: 450px;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">THD measurement. <br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+What if the input had a constant noise of, say, X p-p. Every time we
+reduce our input signal (to compensate for the gain change), the
+signal-to-noise ratio also falls by roughly our gain factor. That's
+what we've seen above -- note how the difference between g= 200
+and&nbsp; g=500 or g=2000 and g=5000 is larger than the others? <br>
+<br>
+Keep in mind that this is also possible if the output of the in-amp has
+a constant noise too. <br>
+<br>
+<br>
+<br>
+<br>
+<span style="font-weight: bold;"><span style="font-weight: bold;"></span><br>
+</span>
 </body>
 </html>

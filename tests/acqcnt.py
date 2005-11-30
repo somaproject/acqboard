@@ -242,7 +242,6 @@ class acqcnt:
         print "Channel ", chan, " hpf is ", state 
 
     def writeFilter(self, filename):
-        self.setMode(1, 'A1')
         fid = file(filename)
         pos = 0
         self.acqcmd.updatecmd()
@@ -250,8 +249,17 @@ class acqcnt:
             acqcmdstr = self.acqcmd.writefilter(pos, int(l))
             sendCommandAndReTransmit(self.acqout, self.acqcmd,
                                      self.acqstat, acqcmdstr)
+            pos += 1
             
-
+    def writeSamples(self, filename):
+        fid = file(filename)
+        pos = 0
+        self.acqcmd.updatecmd()
+        for l in fid.readlines():
+            acqcmdstr = self.acqcmd.writesamplebuffer(pos, int(l))
+            sendCommandAndReTransmit(self.acqout, self.acqcmd,
+                                     self.acqstat, acqcmdstr)
+            pos += 1
             
 def main():
     print sys.argv
@@ -282,6 +290,10 @@ def main():
     elif action == "filterload":
         filename = sys.argv[2]
         ac.writeFilter(filename)
+
+    elif action == "sampleload":
+        filename = sys.argv[2]
+        ac.writeSamples(filename)
 
     else:
         print "Proper usage:"

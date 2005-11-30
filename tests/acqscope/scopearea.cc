@@ -161,20 +161,33 @@ bool ScopeArea::on_expose_event(GdkEventExpose*)
   }
 
   // text to be rendered
-  
-  if (mode_ == 0){
-    Glib::RefPtr<Pango::Layout> pangolayout = create_pango_layout("Mode: RAW");
-    Pango::FontDescription foo; 
-    foo.set_size(10000); 
-    pangolayout->set_font_description(foo); 
-    window->draw_layout(gc_, 5, 220, pangolayout);
-  } else {
+  if (mode_ == 0) {
     Glib::RefPtr<Pango::Layout> pangolayout = create_pango_layout("Mode: Normal");
     Pango::FontDescription foo; 
     foo.set_size(10000); 
     pangolayout->set_font_description(foo); 
     window->draw_layout(gc_, 5, 220, pangolayout);
-  }    
+  } else if (mode_ == 1) {
+    Glib::RefPtr<Pango::Layout> pangolayout = create_pango_layout("Mode: OS Disable");
+    Pango::FontDescription foo; 
+    foo.set_size(10000); 
+    pangolayout->set_font_description(foo); 
+    window->draw_layout(gc_, 5, 220, pangolayout);
+  } else if (mode_ == 2) {
+
+    Glib::RefPtr<Pango::Layout> pangolayout = create_pango_layout("Mode: Input disable");
+    Pango::FontDescription foo; 
+    foo.set_size(10000); 
+    pangolayout->set_font_description(foo); 
+    window->draw_layout(gc_, 5, 220, pangolayout);
+  } else if (mode_ == 3) {
+
+    Glib::RefPtr<Pango::Layout> pangolayout = create_pango_layout("Mode: RAW");
+    Pango::FontDescription foo; 
+    foo.set_size(10000); 
+    pangolayout->set_font_description(foo); 
+    window->draw_layout(gc_, 5, 220, pangolayout);
+  }
 
   return true;
 }
@@ -188,10 +201,5 @@ void ScopeArea::redraw(void)
 
 void ScopeArea::change_mode(int newmode) 
 {
-  if (newmode == 3) {
-    mode_ = 0;
-  } else {
-    mode_ = 1;
-  }
-  
+  mode_ = newmode; 
 }

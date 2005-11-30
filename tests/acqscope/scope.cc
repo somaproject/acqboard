@@ -20,7 +20,9 @@ Scope::Scope()
     chanlbl_("Channel Selected:"),
     tholdadjust_(0.0, -32768.0, 32767, 1000.0, 5000.0),  
     tholdsel_(tholdadjust_),
-    thdn_()
+    thdn_(),
+    channel_(0),
+    mode_(-1)
 {
   set_title("SOMA Acquisition Board Scope"); 
   
@@ -91,7 +93,6 @@ Scope::Scope()
   
   resize(640, 240); 
   
-  mode_ = 1; 
   cout << "Connecting signal ..." ;
   Glib::signal_io().connect(sigc::mem_fun(this, &Scope::newdata),
                            datafd_, Glib::IO_IN);
@@ -104,12 +105,8 @@ Scope::Scope()
 
 void Scope::change_mode(int newmode) 
 {
-  if (newmode == 3) {
-    mode_ = 0;
-  } else {
-    mode_ = 1;
-  }
-  
+  mode_ = newmode; 
+  area_.change_mode(newmode); 
 }
 
 
@@ -136,7 +133,7 @@ bool Scope::newdata(Glib::IOCondition foo)
   
   //cout << endl;
   for (int i = 0; i < 10;  i++) { 
-    if ((mode_ == 0 and i < 6) or (mode_ == 1 and i == channel_)) { 
+    if ((mode_ == 3 and i < 6) or (mode_ != 3 and i == channel_)) { 
       unsigned char lowbyte = buffer[(i+1)*2 + 1];
       unsigned char highbyte = buffer[(i+1)*2];
       unsigned short usample = highbyte * 256 + lowbyte; 

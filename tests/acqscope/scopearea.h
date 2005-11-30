@@ -38,6 +38,8 @@ public:
   virtual ~ScopeArea();
   short thold_; 
   void add_data(short); 
+
+  void change_mode(int); 
   
 
 protected:
@@ -65,8 +67,6 @@ protected:
 
   int WINSIZE; 
   int BUFSIZE; 
-
-  void change_mode(int); 
 
 };
 

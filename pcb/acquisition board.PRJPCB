@@ -213,6 +213,45 @@ ClassGenCCAutoEnabled=1
 ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 
+[Document16]
+DocumentPath=C:\Program Files\Altium2004 SP2\Library\Pcb\Chip Capacitor - 2 Contacts.PcbLib
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+
+[Document17]
+DocumentPath=C:\Program Files\Altium2004 SP2\Library\Pcb\Chip Resistor - 2 Contacts.PcbLib
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+
+[Document18]
+DocumentPath=C:\Program Files\Altium2004 SP2\Library\Pcb\Capacitor Tantalum Leadless.PcbLib
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+
 [GeneratedDocument1]
 DocumentPath=outputs\acqboard.DRL
 

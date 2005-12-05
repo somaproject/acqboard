@@ -10,7 +10,7 @@ import time
 class AcqStatDissassemble(object):
 
     def __init__(self, string):
-
+        print "The length of the string is", len(string)
         r = unpack("bbbb", string) 
         self.cmdsts = r[0]
         self.cmdid = r[1]
@@ -19,7 +19,7 @@ class AcqStatDissassemble(object):
         if r[0] & 0x1:
             self.loading = True
 
-        print "Disassembled packet with cmdid=", self.cmdid
+
 
 
 def sendCommandAndReTransmit(acqout, acqcmd, acqstat, commandstr):
@@ -68,7 +68,6 @@ class BoardStates(object):
         self.acqstat = acqboard.AcqSocketStatTimeout(1.0)
     
     def setGains(self, value):
-        print "setgains"
         if not isinstance(value, list):
             raise "Gains is not a list"
         for g in value:
@@ -78,7 +77,6 @@ class BoardStates(object):
         self.__gains = value
                 
     def getGains(self):
-        print "getGains"
         return self.__gains
 
     gains = property(getGains, setGains, None)
@@ -117,12 +115,11 @@ class BoardStates(object):
                                  self.acqstat,
                                  acqcmdstr);
         
-        print "board state setup"
 
     def done(self):
+        print "board states closing"
         self.acqout.close()
         self.acqstat.close()
-        
         
     def gainIter(self):
 
@@ -147,12 +144,10 @@ class BoardStates(object):
                                      self.acqstat,
                                      acqcmdstr)
 
-            print "acqcmd gain set str:",
+
             for i in acqcmdstr:
                 print hex(ord(i)), 
 
-            print "\ngain set", channel, g
-            
             yield g
 
 
@@ -173,8 +168,6 @@ class BoardStates(object):
                                      self.acqstat,
                                      self.acqcmd.sethpfilter(channel, h))
 
-            print "board state hpf set"
-            
             yield h
 
     

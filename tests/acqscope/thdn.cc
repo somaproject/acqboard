@@ -243,8 +243,8 @@ void THDN::add_data(short x){
   pos_++; 
 
   if (pos_ == N_) {
-    recentTHDN_  = computeBandLimitedTHDN(data_, h_, 192000.0); 
-    //recentTHDN_  = computeTHDN(data_, 192000.0); 
+    //recentTHDN_  = computeBandLimitedTHDN(data_, h_, 192000.0); 
+    recentTHDN_  = computeTHDN(data_, 32000.0); 
     pos_ = -65536; 
     std::cout << "THe calculated thd+n is " << recentTHDN_ << "dB"
 	      << " and the average is " << average_ << " dB" 

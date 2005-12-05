@@ -3176,5 +3176,97 @@ filtering <span style="font-style: italic;">on the acqboard</span>. <br>
 When we perform analysis on the AD output of a full scale sine with
 g=400 we get... -46 dB. Rock on. <br>
 <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">1 December
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+Well, at this point I'm not sure where I want to go. <br>
+<br>
+<br>
+<span style="text-decoration: underline; font-weight: bold;">3 December
+2005</span><br style="text-decoration: underline; font-weight: bold;">
+Soldered on the input multiplexor (u11) and now we can see what kind of
+negative effect that has...<br>
+<br>
+it doesn't appear to have any negative impact for A1, but the 0-5 kHz
+response for AC looks like ass<br>
+<br>
+When we look at the plots with the poor THD+N at low frequencies for
+low gains (with the HPF enabled) I do not know what we are actualy
+seeing. We might try and explain the lower TH+N by arguing that since
+there is filtering involved, the actual amplitude and thus SNR goes
+down. I don't know why that would give us the curves we're seeing,
+though, given the filter cutoff should be WAY earlier.<br>
+<br>
+If we remove the HPF mux and just leave the HFP on all the time, we
+still get the same effect... Including strangely distorted
+low-frequency output. We evidently had this problem before we put in
+the 10 uF AC-coupling part and others. <br>
+<br>
+Confused, I'm just going to replace C30 with a 0-ohm and eliminate
+R13...<br>
+And the problem goes away. But for 20 Hz we're still only at 80 dB. <br>
+<br>
+I made a spice model to look at the effect of including the 20 Ohm
+input impedance, but the frequency response is as expected. <br>
+<br>
+Cutting the input voltage by half reduces the THD+N by 6 dB, as
+expected. <br>
+<br>
+We'll try using the SRS... better? inconclusive. <br>
+<br>
+I put the HPF back, but am using <span style="font-weight: bold;">a
+430 pf cap</span> because that's what was recommended. <br>
+<br>
+<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">5 December
+2005</span><br style="font-weight: bold; text-decoration: underline;">
+So here we are, about to test on the rat, and I still don't know wtf
+these measruements are.<br>
+<br>
+The act of putting a <span style="font-weight: bold;">430 pf</span>
+cap totally shot my THD+N when measuring with the LPF enabled.&nbsp; I
+have replaced it with the nominal <span style="font-weight: bold;">68000pf
+</span>cap. <br>
+<br>
+But it did give me the idea of plotting with frequency on a log scale,
+and seeing what I get. <br>
+<br>
+<img alt="" src="results/20051205/no-inA.A1.png"
+ style="width: 1200px; height: 900px;"><br>
+<br>
+What the hell is that? I wonder if I can make the upturn in the green
+(HPF disabled) go away if I remove the 10 uF cap...<br>
+<br>
+<br>
+<br>
+<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20051205/no-inA.A1.png"
+ style="width: 600px; height: 450px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20051205/no-inA.A1.no-10uF.png"
+ style="width: 600px; height: 450px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">With 10uF cap in place<br>
+      </td>
+      <td style="vertical-align: top;">With no 10Uf CAP (green is
+actualy hpf, ignore legend)<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+I'm convinced enough that it's an artifact that I'm going to say "go!"
+and let's go test this on one of tom's Rats. <br>
 </body>
 </html>

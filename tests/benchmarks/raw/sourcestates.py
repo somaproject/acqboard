@@ -5,6 +5,8 @@ import sys
 sys.path.append("../../")
 import ATSio
 
+class NoiseStates(object):
+    pass
 
 class SineStates(object):
 
@@ -67,14 +69,12 @@ class SineStates(object):
     def vppIter(self, gain = 1.0):
         for v in self.__vpps:
             newv = v/gain
-            print "Source voltage set to ", newv
             self.ats2.ampVppA = newv
 
             yield newv
 
     def freqIter(self):
         for f in self.__freqs:
-            print "source frequency set to ", f
             self.ats2.freq1 = f
             yield f
             

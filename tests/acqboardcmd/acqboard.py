@@ -16,10 +16,12 @@ class AcqSocketOut:
     # actually handles the socket communication
 
     def __init__(self):
-        self.s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-
+        pass
+    
     def open(self):
-       self.s.connect("/tmp/acqboard.in")
+        self.s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        
+        self.s.connect("/tmp/acqboard.in")
         
     def send(self, str):
 
@@ -34,21 +36,24 @@ class AcqSocketOut:
 
         
     def close(self):
+        print "closing acqsocketout"
         self.s.close()
 
 class AcqSocketStat:
     # actually handles the socket communication
 
     def __init__(self):
-        self.s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        pass
 
     def open(self):
+        self.s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
         self.s.connect("/tmp/acqboard.status")
 
     def read(self):
         return self.s.recv(4)
     
     def close(self):
+        print "closing acqsocketstat"
         self.s.close()
 
 class AcqSocketStatTimeout:
@@ -56,10 +61,12 @@ class AcqSocketStatTimeout:
     
 
     def __init__(self, timeout):
-        self.s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-        self.s.settimeout(timeout)
+        self.timeout = timeout
         
     def open(self):
+        self.s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        self.s.settimeout(self.timeout)
+
         self.s.connect("/tmp/acqboard.status")
 
     def read(self):
@@ -72,6 +79,7 @@ class AcqSocketStatTimeout:
         return resultstr
     
     def close(self):
+        print "closing acqsocketstattimeout"
         self.s.close()
 
 

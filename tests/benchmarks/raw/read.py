@@ -38,9 +38,7 @@ def rawread(nsamples):
     resultstr = fid.read()
     offset = 18
     datastr = resultstr[offset:]
-
-        
-
+    
     # now, we format
     data = zeros(nsamples, Int16)
     
@@ -49,6 +47,7 @@ def rawread(nsamples):
 
         #print i, len(datastr), len(datastr)/2, pos
         if i % 12 < 6 :
+
             if pos < nsamples:
                 data[pos] = unpack(">h", datastr[(2*i):(2*(i+1))])[0]
                 pos += 1             
@@ -86,8 +85,9 @@ def normread(nsamples, channum=0):
     resultstr = fid.read()
 
     offset = 18
-    datastr = resultstr[offset:]
 
+    datastr = resultstr[offset:]
+    
     # now, we format
     data = zeros(nsamples, Int16)
     

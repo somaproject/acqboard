@@ -230,10 +230,7 @@ class acqcnt:
         print "Channel ", chan, " gain set to " , gain
 
     def setHPF(self, chan, state):
-        if state:
-            acqcmdstr = self.acqcmd.sethpfilter(chan, 1)
-        else:
-            acqcmdstr = self.acqcmd.sethpfilter(chan, 0)
+        acqcmdstr = self.acqcmd.sethpfilter(chan, 1)
         sendCommandAndReTransmit(self.acqout,
                                  self.acqcmd,
                                  self.acqstat,

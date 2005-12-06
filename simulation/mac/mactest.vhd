@@ -1,15 +1,3 @@
-
--- VHDL Test Bench Created from source file accumulator.vhd  -- 19:58:19 12/03/2004
---
--- Notes: 
--- This testbench has been automatically generated using types std_logic and
--- std_logic_vector for the ports of the unit under test.  Xilinx recommends 
--- that these types always be used for the top-level I/O of a design in order 
--- to guarantee that the testbench will bind correctly to the post-implementation 
--- simulation model.
---
-
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use ieee.std_logic_textio.all;
@@ -159,7 +147,7 @@ begin
       clr <= '1';
       wait until rising_edge(accclk);
       clr <= '0';
-      while aline'length /= 0 loop
+      while aline'length > 0 loop
 
         hread(aline, vin);
 

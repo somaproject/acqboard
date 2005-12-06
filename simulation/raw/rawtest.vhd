@@ -130,7 +130,7 @@ architecture behavior of rawtest is
   signal WEOUT          : std_logic;
   signal OSC            : std_logic_vector(3 downto 0);
   signal OSRST          : std_logic;
-  signal OSEN           : std_logic;
+  signal OSEN           : std_logic := '0';
   signal OSWE           : std_logic;
   signal OSD            : std_logic_vector(15 downto 0);
 
@@ -304,7 +304,8 @@ begin
         end if;
 
         assert tmp = intout
-          report "error reading value"
+          report "error reading value: tmp=" & integer'image(tmp)
+          & " intout=" & integer'image(intout)
           severity error;
         outpos := (outpos + 1) mod 100;
 

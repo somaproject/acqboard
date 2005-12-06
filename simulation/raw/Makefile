@@ -1,9 +1,10 @@
 VHDLC=vhdlp
+VHDLS=vhdle
 WORKDIR=work.sym
 all: hw comp sim
 
-$(WORKDIR)/distram_dualport/_behavioral.var: ../../vhdl/distRAM_dualport.vhd
-	$(VHDLC) ../../vhdl/distRAM_dualport.vhd
+$(WORKDIR)/distram_dualport/_behavioral.var: ../../vhdl/distram_dualport.vhd
+	$(VHDLC) ../../vhdl/distram_dualport.vhd
 
 $(WORKDIR)/input/_behavioral.var: ../../vhdl/input.vhd
 	$(VHDLC) ../../vhdl/input.vhd
@@ -14,8 +15,8 @@ $(WORKDIR)/clocks/_behavioral.var: ../../vhdl/clocks.vhd
 $(WORKDIR)/encode8b10b/_encode8b10b_a.var: ../../vhdl/encode8b10b.vhd
 	$(VHDLC) ../../vhdl/encode8b10b.vhd
 
-$(WORKDIR)/fibertx/_behavioral.var: ../../vhdl/FiberTX.vhd
-	$(VHDLC) ../../vhdl/FiberTX.vhd
+$(WORKDIR)/fibertx/_behavioral.var: ../../vhdl/fibertx.vhd
+	$(VHDLC) ../../vhdl/fibertx.vhd
 
 $(WORKDIR)/raw/_behavioral.var: ../../vhdl/raw.vhd
 	$(VHDLC) ../../vhdl/raw.vhd
@@ -37,5 +38,10 @@ $(WORKDIR)/rawtest/_behavior.var: rawtest.vhd
 	$(VHDLC) rawtest.vhd
 
 sim: $(WORKDIR)/rawtest/_behavior.var 
+runsim: all
+	$(VHDLS) rawtest
+
+
 clean:
 	rm -Rf $(WORKDIR)$
+

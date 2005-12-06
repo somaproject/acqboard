@@ -1,4 +1,5 @@
 VHDLC=vhdlp
+VHDLS=vhdle
 WORKDIR=work.sym
 all: hw comp sim
 
@@ -22,5 +23,10 @@ $(WORKDIR)/mactest/_behavior.var: mactest.vhd
 	$(VHDLC) mactest.vhd
 
 sim: $(WORKDIR)/mactest/_behavior.var 
+runsim: all
+	$(VHDLS) mactest
+
+
 clean:
 	rm -Rf $(WORKDIR)$
+

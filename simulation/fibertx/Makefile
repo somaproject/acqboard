@@ -1,4 +1,5 @@
 VHDLC=vhdlp
+VHDLS=vhdle
 WORKDIR=work.sym
 all: hw comp sim
 
@@ -22,5 +23,10 @@ $(WORKDIR)/fibertxtest/_behavior.var: fibertxtest.vhd
 	$(VHDLC) fibertxtest.vhd
 
 sim: $(WORKDIR)/deserialize/_behavioral.var $(WORKDIR)/fibertxtest/_behavior.var 
+runsim: all
+	$(VHDLS) fibertxtest
+
+
 clean:
 	rm -Rf $(WORKDIR)$
+

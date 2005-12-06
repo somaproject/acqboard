@@ -1,4 +1,5 @@
 VHDLC=vhdlp
+VHDLS=vhdle
 WORKDIR=work.sym
 all: hw comp sim
 
@@ -43,5 +44,10 @@ $(WORKDIR)/filtertest/_behavior.var: filtertest.vhd
 	$(VHDLC) filtertest.vhd
 
 sim: $(WORKDIR)/filtertest/_behavior.var 
+runsim: all
+	$(VHDLS) filtertest
+
+
 clean:
 	rm -Rf $(WORKDIR)$
+

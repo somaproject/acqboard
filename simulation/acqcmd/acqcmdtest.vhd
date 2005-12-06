@@ -48,7 +48,7 @@ architecture behavior of acqcmdtest is
   signal ESCK       : std_logic;
   signal ECS        : std_logic;
   signal ESO        : std_logic;
-  signal EEPROMLEN  : std_logic := '1';
+  signal EEPROMLEN  : std_logic := '0';
   signal FIBERIN    : std_logic;
   signal FIBEROUT   : std_logic;
   signal RESET      : std_logic := '1';
@@ -112,7 +112,7 @@ architecture behavior of acqcmdtest is
   signal gains   : chanarray := (others => 0);
   signal filters : chanarray := (others => 0);
 
-  signal error : std_logic := '0';
+  signal errorsig : std_logic := '0';
 
   signal outvals : chanarray := (others => 0);
   signal ov : integer := 0;
@@ -247,10 +247,10 @@ begin
 
   -- circuit board and isolator delays
 
-  SDIA <= SDIA_pre after 20 ns;
-  SDIB <= SDIB_pre after 20 ns;
+  SDIA <= SDIA_pre after 6 ns;
+  SDIB <= SDIB_pre after 6 ns;
 
-  SCK <= SCK_pre after 10 ns;
+  SCK <= SCK_pre after 5 ns;
 
   adcs   : for i in 0 to 9 generate
     ADCi : AD7685 
@@ -358,11 +358,11 @@ begin
     wait until rising_edge(clkin)  and decmdid(4 downto 1) = "0011";
 
     if gains(0) = 7 then
-      error <= '0';
+      errorsig <= '0';
       report "Gain of channel 0 set to 0x7";
     else
-      error <= '1';
-      report "ERROR in setting gain of channel 0 to 0x7";
+      errorsig <= '1';
+      assert false report "Error in setting gain of channel 0 to 0x7" severity ERROR;
     end if;
 
 
@@ -379,8 +379,9 @@ begin
     wait until rising_edge(clkin)  and decmdid(4 downto 1) = "0100";
 
     if filters(6) /= 1 then
-      error <= '1';
-      report "Error in setting highpass filter for channel 7 to value 1";
+      errorsig <= '1';
+      report "Error in setting highpass filter for channel 7 to value 1"
+      severity error;
     else
       report "set highpass filter for channel 7 to value 1";
     end if;
@@ -404,7 +405,8 @@ begin
 
     report "Set mode to 1 (offset disable); mode now 1";
 
-
+    report "Attempting to write offset value...";
+    
     -- write offset value
     cmdid    <= "0110";
     cmd      <= "0100";
@@ -426,7 +428,7 @@ begin
     report "Wrote offset value of 0x1234 for chan 4, gain 3";
 
     
-    
+    report "Changing to mode 2";
     -- set mode = 2 (filter write)
     cmdid    <= "0111";
     cmd      <= "0111";
@@ -440,12 +442,13 @@ begin
     wait until rising_edge(clkin)  and  decmdid(4 downto 1) = "0111";
 
     if decmdst /= X"04" then
-      error <= '1';
-      report "error checking decmdst in mode 2";
+      errorsig <= '1';
+      report "error checking decmdst in mode 2" severity error;
     end if;
 
     report "moved to mode 2";
-
+    report "attempting to write filter coeff";
+    
     -- write filter value
     cmdid    <= "0000";
     cmd      <= "0101";
@@ -465,7 +468,8 @@ begin
 
     report "Wrote filter coefficient h[0]  to be 0x1FFFFF";
 
-
+    report "changing to mode 0";
+    
     -- set mode = 0 (normal)
     cmdid    <= "0001";
     cmd      <= "0111";
@@ -479,8 +483,8 @@ begin
     wait until rising_edge(clkin)  and  decmdid(4 downto 1) = "0001";
                                                          -- done with loading
     if decmdst /= X"00" then
-      error <= '1';
-      report "error checking decmdst in mode 0";
+      errorsig <= '1';
+      report "error checking decmdst in mode 0" severity error;
     end if;
 
     report "Returned to mode 0";
@@ -501,10 +505,10 @@ begin
     wait until rising_edge(clkin) and decmdid(4 downto 1) = "0011";
 
     if gains(4) = 3 then
-      error <= '0';
+      errorsig <= '0';
     else
-      error <= '1';
-      report "Error seytting channel 4 gain.";
+      errorsig <= '1';
+      report "Error seytting channel 4 gain." severity ERROR;
     end if;
 
     report "Channel 4 gain to 3; waiting to see offset effect";
@@ -530,7 +534,7 @@ begin
     wait until rising_edge(clkin) and decmdid(4 downto 1) = "0100";
     wait until rising_edge(clkin);
     if decmdst /= X"06" then
-      error <= '1';
+      errorsig <= '1';
     end if;
 
     report "Switched to mode 3, with chan 0x02 as raw input";
@@ -539,8 +543,12 @@ begin
     or outvals(2) = 800 or outvals(1) = 800 or outvals(0) = 800;
 
     ov <= outvals(0);
-    wait until outvals(5 downto 0) =
-      (ov+5, ov+4, ov+3, ov+2, ov+1, ov) and rising_edge(CLKIN);
+    wait until outvals(5) = (ov+5) and
+      outvals(4) = ov+4 and
+      outvals(3) = ov+3 and
+      outvals(2) = ov+2 and
+      outvals(1) = ov+1 and
+      outvals(0) = ov and rising_edge(CLKIN);
 
     report "Successfully read raw data";
 

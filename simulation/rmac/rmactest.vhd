@@ -90,7 +90,7 @@ begin
     variable xbuf, hbuf                     : bufarray;
     variable yref                           : integer;
     variable temp                           : integer;
-
+    variable lineread, posread : integer := 0;
 
   begin
 
@@ -101,7 +101,8 @@ begin
     file_open(hfile, "h.dat", read_mode);
     file_open(yfile, "y.dat", read_mode);
 
-    while not endfile(xfile) loop
+    while not endfile(xfile) or endfile(yfile) or endfile(hfile) loop
+      lineread := lineread + 1;
       readline(xfile, xline);
       readline(xbasefile, xbaseline);
       readline(hfile, hline);

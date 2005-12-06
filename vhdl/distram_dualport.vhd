@@ -5,7 +5,7 @@ use IEEE.std_logic_unsigned.all;
 -- Totally from the xilinx manual, this should infer dual-port
 -- dist-ram
 
-entity distRAM_dualport is
+entity distram_dualport is
   generic(
     d_width    :     integer := 16;
     addr_width :     integer := 3;
@@ -16,10 +16,10 @@ entity distRAM_dualport is
     we, clk    : in  std_logic;
     di         : in  std_logic_vector(d_width - 1 downto 0);
     ao, ai     : in  std_logic_vector(addr_width - 1 downto 0));
-end distRAM_dualport;
+end distram_dualport;
 
 
-architecture behavioral of distRAM_dualport is
+architecture behavioral of distram_dualport is
   type mem_type is array (
     mem_depth - 1 downto 0) of
     std_logic_vector (d_width - 1 downto 0);

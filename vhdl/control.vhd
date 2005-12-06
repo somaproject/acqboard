@@ -358,7 +358,7 @@ begin
         eaddrsel   <= 2;
         edatasel   <= '0';
         erw        <= '0';
-        een        <= '1';
+        een        <= '0';
         gset       <= '0';
         iset       <= '0';
         fset       <= '0';
@@ -394,7 +394,7 @@ begin
         eaddrsel   <= 3;
         edatasel   <= '1';
         erw        <= '0';
-        een        <= '1';
+        een        <= '0';
         gset       <= '0';
         iset       <= '0';
         fset       <= '0';

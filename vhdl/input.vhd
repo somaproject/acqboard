@@ -73,7 +73,7 @@ architecture Behavioral of input is
 
 
 
-  component distRAM_dualport
+  component distram_dualport
     generic(
       d_width    :     integer := 16;
       addr_width :     integer := 3;
@@ -90,7 +90,7 @@ architecture Behavioral of input is
 begin
 
 
-  OSram : distRAM_dualport generic map
+  OSram : distram_dualport generic map
     ( d_width    => 16,
       addr_width => 4,
       mem_depth  => 16)

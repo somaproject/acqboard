@@ -101,7 +101,7 @@ begin
     file_open(hfile, "h.dat", read_mode);
     file_open(yfile, "y.dat", read_mode);
 
-    while not endfile(xfile) or endfile(yfile) or endfile(hfile) loop
+    while not (endfile(xfile) or endfile(yfile) or endfile(hfile)) loop
       lineread := lineread + 1;
       readline(xfile, xline);
       readline(xbasefile, xbaseline);

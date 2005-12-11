@@ -298,6 +298,23 @@ DocumentPath=outputs\acqboard.TXT
 Path=..\..\..\Program Files\Altium\Library\Pcb\*.*
 IncludeSubFolders=1
 
+[Generic_SCH]
+Collation=True
+Copies=1
+DelegateCopies=False
+PrinterName=PDFCreator
+Duplex=0
+Orientation=1
+PaperName=A4
+BinName=Default
+Units=1
+PageDef.mmHeight=210079
+PageDef.mmWidth=297127
+PageDef.mmMarginLeft=6350
+PageDef.mmMarginRight=6350
+PageDef.mmMarginTop=6350
+PageDef.mmMarginBottom=6350
+
 [OutputGroup1]
 Name=Netlist Outputs
 Description=

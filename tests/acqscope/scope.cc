@@ -9,8 +9,9 @@
 #include <vector>
 #include <string>
 #include <sigc++/sigc++.h>
+#ifdef DTHDN
 #include "thdn.h"
-
+#endif // THDN 
 
 Scope::Scope()
   : area_(640, 240), 
@@ -20,7 +21,9 @@ Scope::Scope()
     chanlbl_("Channel Selected:"),
     tholdadjust_(0.0, -32768.0, 32767, 1000.0, 5000.0),  
     tholdsel_(tholdadjust_),
+#ifdef DTHDN
     thdn_(),
+#endif // THDN
     channel_(0),
     mode_(-1)
 {
@@ -114,7 +117,10 @@ void Scope::add_data(short x)
 {
 
   area_.add_data(x); 
+#ifdef DTHDN
   thdn_.add_data(x); 
+#endif //THDN 
+
 }
 
 bool Scope::newdata(Glib::IOCondition foo)

@@ -7,8 +7,9 @@
 #include "scopearea.h"
 #include <string>
 #include <vector>
-#include "thdn.h"
-
+#ifdef DTHDN
+  #include "thdn.h"
+#endif
 using namespace std;
 
 class Scope : public Gtk::Window
@@ -50,7 +51,9 @@ protected:
   int channel_; 
   int mode_; // 0 == RAW, 1 == normal
 
+#ifdef DTHDN
   THDN thdn_; 
+#endif //DTHDN
 
 };
 

@@ -17,25 +17,31 @@
           o Electrical Isolation -- the challenges of mixed-signal design
    
 
-    * signal chain and measured parameters: 
+    * signal chain design -- all design data 
+      -- these are all the design specs; there is no empirical data here at all
       * schematic of signal channel 
       * input: In-Amp -- component and performance
       * Amplification : PGA, filter
          * gain settings / voltage ranges
       * Continuous channels: 
-         * THD+N, etc. 
       * A->D:
          * Hardware Filter design:
 	   o We desire 16-bit resolution with an input bandwidth of 10 kHz. 
 	   o to achieve this, we oversample, downsample, and filter
-
+	
          * digital filtering 
 	   * digital filtering simulation
-	   * fixed-point math
+	   * fixed-point math 
 
+    * Measured performance:
+      1. CMRR 
+      2. Noise
+      3. THD+N 
+      4. linearity 
+      5. Rat Data
 
-    * Analog Hardware Design -- a tour of the schematics
-          o Mixed signal design
+    * SIGNAL chain Hardware Design -- a tour of the schematics
+          o Mixed signal design --
                 + why not just use sigma-delta converters
                 + why not AC-couple inputs?      
           o Analog and Digital
@@ -46,13 +52,7 @@
                 + ADCs, voltage selection
 	          o Digital Simulations of filtering
 	 * Power Requirements
-    * Analog / Digital performance results
-        * Linearity
-        * THD+N
-        * Noise
-        * Common Mode rejection
-   	* animal results  
-
+	
     * Fiber IO 
           o four modes
             1. describe modes
@@ -86,3 +86,9 @@ Albert suggests appendix
     * Oversampling, downsampling, etc. 
     * Filter design code, analysis
     * 
+
+
+Points we'll want to be sure to discuss someplace: 
+Component identification process
+Parameters measured
+VHDL organization

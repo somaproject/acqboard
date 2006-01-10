@@ -300,34 +300,57 @@ def measureNoise(filename):
     gains = []
     noisebitrange = []
     noiserangeuv = []
+    rmsnoisebits = []
     
     for r in table.iterrows():
+        x = array(r['data'], Float64)
+        xv = x * 4.096/2**16/r['gain']
+        rms = sqrt(mean(xv**2))
+        rmsnoisebits.append(rms)
         a = max(r['data'])
         b = min(r['data'])
         gains.append(r['gain'])
         noisebitrange.append(a-b)
         noiserangeuv.append((a-b)*(4.096e6/2**16)/r['gain'])
-    #pylab.plot(gains, noisebitrange)
-    ax1 = pylab.subplot(111)
-    pylab.plot(gains, noisebitrange)
-    pylab.scatter(gains, noisebitrange)
-    pylab.ylabel('bits')
-    ax2 = pylab.twinx()
-    
-    pylab.plot(gains, noiserangeuv, 'r')
-    pylab.scatter(gains, noiserangeuv, c='r')
-    pylab.ylabel('uV')
+        
+    pylab.scatter(gains, rmsnoisebits)
     pylab.xlabel('gain')
-    pylab.grid(1)
-
+    pylab.ylabel('uV RMS')
+    
+    
     
     pylab.show()
+
+def plotCMRR(filename):
+    f = tables.openFile(filename)
+
+
+    t= f.root.A1.gain10000.hpf1.sine
+
+    freqs = []
+    cmrrdB = []
+    for (freq, dat, v) in  [ (row['frequency'], row['data'], row['sourcevpp'])  for row in t] :
+        delta =  max(dat) - min(dat)
+        vpp = float(delta) / 2**16 * 4.096 / 10000
+        freqs.append(freq)
+        cmrrdB.append( 20*log10(v / vpp))
+        
+    pylab.semilogx(freqs, cmrrdB)
+
+    
+    pylab.xlabel('Frequency (Hz)')
+    pylab.ylabel('CMRR (dB)')
+ 
+    pylab.axis([10., 10000., 0., 120.])
+    pylab.grid(1)
+    pylab.show()
+    
 
 def plotFreqResponse(filename):
     f = tables.openFile(filename)
 
 
-    table = f.root.A4.gain10.hpf0.sine
+    table = f.root.A4.gain10.hpf1.sine
     ax = pylab.subplot(1,1,1)
     (freqs, amps) = freqResp(table, 0.37, 1)
 
@@ -347,7 +370,7 @@ def plotFreqResponse(filename):
     pylab.show()
     
 if __name__ == "__main__":
-    plotTHDnAllGains(sys.argv[1], 'A1', [False, True])
+    #plotTHDnAllGains(sys.argv[1], 'A1', [True])
 
     #plotTHDnAllGains(sys.argv[1], 'AC', False)
     #plotFreqResponse(sys.argv[1])
@@ -355,4 +378,5 @@ if __name__ == "__main__":
     
     #plotWave(sys.argv[1])
     #measureNoise(sys.argv[1])
+    plotCMRR(sys.argv[1])
     

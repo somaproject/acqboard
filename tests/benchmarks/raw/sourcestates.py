@@ -10,12 +10,12 @@ class NoiseStates(object):
 
 class SineStates(object):
 
-    def __init__(self):
+    def __init__(self, gainScale = True):
 
         self.__freqs = [1000.0]
         self.__vpps = [4.0]
         self.ats2 = None
-        
+        self.gainScale = gainScale
 
     def setFreqs(self, value):
 
@@ -68,7 +68,11 @@ class SineStates(object):
 
     def vppIter(self, gain = 1.0):
         for v in self.__vpps:
-            newv = v/gain
+            if self.gainScale:
+                newv = v/gain
+            else:
+                newv = v
+            print "setting voltage to ", newv
             self.ats2.ampVppA = newv
 
             yield newv

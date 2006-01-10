@@ -3288,6 +3288,99 @@ are our spikes!!!<br>
 </span></span></span><br>
 <br>
 Wow. Well, I added the optional HPFs in front of the in-amps. we'll see
-how badly that mucks things up. sending boards out tomorrow. <br>
+how badly that mucks things up. sending boards out tomorrow.<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">12
+DEcember 2005</span><br
+ style="font-weight: bold; text-decoration: underline;">
+<br>
+Well, here we are with the final version of the acqboard, although...
+I'm a bit worried about the voltage drop across R48, which appears to
+be 3 mV -- but this suggests the current flow is 0.27 uA, or 270
+nA.&nbsp; But that's hella-high for whatever is actually there. The
+amplifier itself is supposed to be 1 pA. <br>
+<br>
+Disabled the amp, still get the voltage drop. <br>
+<br>
+Trying with C7 = 22 uF, R48 = 5.6k. Still get the voltage drop. <br>
+<br style="font-weight: bold; text-decoration: underline;">
+<span style="font-weight: bold; text-decoration: underline;">13
+December 2005</span><br>
+What a lovely way to start off the morning, a THD+N at a shitty -87 dB.
+I think I will try and fix the AA filter and see if that helps. <br>
+<br>
+Of course, properly soldering up the LPF, etc. gives me -91.75 dB
+THD+N. <br>
+<br>
+I wonder if I can make this better. -- adding a 100uF cap in parallel
+boosts it to -91.97. Now we'll try the 1500uF cap -- -92.02! Wow! <br>
+<br>
+Now, in an attempt to smoke crack, I'm going to replace the 11k
+resistor with something huge.. 1 M. Didn't help. <br>
+<br>
+Removed 1000 uF cap, back down to 47 uF. REplaced resistor R48 with
+0-ohm : 88 dB. <br>
+<br>
+So it seems like 47uF/11k or so is roughly the filtering sweet-spot.<br>
+<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">14
+December 2005</span><br
+ style="font-weight: bold; text-decoration: underline;">
+<br>
+happy birthday courtney! <br>
+We seem to be getting good performance off of the current acqboard;
+time to test everything in a bit. <br>
+<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">15
+December 2005</span><br
+ style="font-weight: bold; text-decoration: underline;">
+<br>
+Our results are as expected: <br>
+<img alt="" src="results/20051215/A1.noInA.hpfon.png"
+ style="width: 1200px; height: 900px;"><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">9 January
+2006</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+AC coupling -- the hidden saga. <br>
+<br>
+Measured the neuralynx amps with 100 dB of CMR from 60 Hz to 5k. <br>
+<br>
+Now, the question is: what is the impact of Johnson noise from the
+AC-coupling filter on my Noise margins, and how does an impedance
+mismatch for the input filter impact my CMR. <br>
+<br>
+Back-of-the-envelope calculations suggest that for frequencies we care
+about, the impedance mismatch should have minimal effect.&nbsp; The
+neuralynx amps have 4 uV RMS noise <br>
+<br>
+<br>
+1. Noise measurements with no input HPF: short the inputs together. <br>
+<img alt="" src="results/20060109/noise.no-resistor.png"
+ style="width: 600px; height: 450px;"><br>
+2. using a 1 MOhm resistor<br>
+<br>
+<br>
+<br>
+<img alt="" src="results/20060109/noise.1mohm.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+With caps:<br>
+<img alt="" src="results/20060109/noise.1mohm-1uFcap.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+We end up with a CMMR looking like:<br>
+<br>
+<img alt="" src="results/20060109/cmrr.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+<br>
+<br>
 </body>
 </html>

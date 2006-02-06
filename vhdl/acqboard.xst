@@ -47,6 +47,5 @@ run
 -use_clock_enable Yes
 -use_sync_set Yes
 -use_sync_reset Yes
--enable_auto_floorplanning No
 -iob true
 -slice_utilization_ratio_maxmargin 5

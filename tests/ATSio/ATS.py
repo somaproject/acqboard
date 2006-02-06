@@ -171,7 +171,7 @@ def main() :
     a.gpib.write(":AGEN:DASINE:FRQ1 31000.4Hz")
     a.gpib.write(":AGEN:DASINE:FRQ2 31000.4Hz")
     a.gpib.write("ERRS?")
-    print a.gpib.read(2024) 
+    print a.gpib.read(2041) 
     a.gpib.write(":AGEN:SET?")
         
 if __name__ == "__main__":

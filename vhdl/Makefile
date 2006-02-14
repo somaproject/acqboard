@@ -33,6 +33,8 @@ $(PROJECT).rbt: build/$(PROJECT).rbt
 	cp build/$(PROJECT).rbt . 
 
 # coregen files:
+coregen: *.xco
+
 %.edn : %.xco
 	coregen -b $<
 

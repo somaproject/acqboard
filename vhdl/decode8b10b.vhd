@@ -23,7 +23,7 @@
 --     appliances, devices, or systems. Use in such applications are          --
 --     expressly prohibited.                                                  --
 --                                                                            --
---     (c) Copyright 1995-2004 Xilinx, Inc.                                   --
+--     (c) Copyright 1995-2005 Xilinx, Inc.                                   --
 --     All rights reserved.                                                   --
 --------------------------------------------------------------------------------
 -- You must compile the wrapper file decode8b10b.vhd when simulating
@@ -35,11 +35,11 @@
 -- below are supported by XST, FPGA Compiler II, Mentor Graphics and Synplicity
 -- synthesis tools. Ensure they are correct for your synthesis tool(s).
 
--- synopsys translate_off
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
-
+-- synopsys translate_off
 Library XilinxCoreLib;
+-- synopsys translate_on
 ENTITY decode8b10b IS
 	port (
 	clk: IN std_logic;
@@ -52,7 +52,7 @@ ENTITY decode8b10b IS
 END decode8b10b;
 
 ARCHITECTURE decode8b10b_a OF decode8b10b IS
-
+-- synopsys translate_off
 component wrapped_decode8b10b
 	port (
 	clk: IN std_logic;
@@ -92,8 +92,9 @@ end component;
 			c_has_run_disp_b => 0,
 			c_has_disp_in => 0,
 			c_has_ce_b => 0);
+-- synopsys translate_on
 BEGIN
-
+-- synopsys translate_off
 U0 : wrapped_decode8b10b
 		port map (
 			clk => clk,
@@ -103,7 +104,7 @@ U0 : wrapped_decode8b10b
 			ce => ce,
 			code_err => code_err,
 			disp_err => disp_err);
-END decode8b10b_a;
-
 -- synopsys translate_on
+
+END decode8b10b_a;
 

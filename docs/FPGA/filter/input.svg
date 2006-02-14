@@ -12,7 +12,7 @@
    sodipodi:docbase="/home/jonas/soma/acqboard/docs/FPGA/filter"
    height="552.00000pt"
    width="528.00000pt"
-   inkscape:version="0.42.2"
+   inkscape:version="0.43+devel"
    sodipodi:version="0.32"
    id="svg1">
   <defs
@@ -36,9 +36,9 @@
      showgrid="true"
      inkscape:window-height="977"
      inkscape:window-width="1277"
-     inkscape:cy="122.48832"
-     inkscape:cx="934.12473"
-     inkscape:zoom="0.62535463"
+     inkscape:cy="224.3889"
+     inkscape:cx="474.76169"
+     inkscape:zoom="1.2507093"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      borderopacity="1.0"
@@ -605,8 +605,8 @@
      x="502.5"
      style="font-size:8.0000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
      xml:space="preserve"><tspan
-       y="-243.75000"
-       x="502.50000"
+       y="-243.75"
+       x="502.5"
        id="tspan2054"
        sodipodi:role="line">CHANCNT[3:0]</tspan></text>
   <g
@@ -859,7 +859,7 @@
      x="604.47412"
      style="font-size:11.000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100.00000%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
      xml:space="preserve"><tspan
-       y="322.92480"
+       y="322.9248"
        x="604.47412"
        id="tspan2121"
        sodipodi:role="line">DOUT[15:0]</tspan></text>
@@ -893,8 +893,8 @@
      x="75"
      style="font-size:11.000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100.00000%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
      xml:space="preserve"><tspan
-       y="571.25000"
-       x="75.000000"
+       y="571.25"
+       x="75"
        id="tspan2130"
        sodipodi:role="line">INSAMPLE</tspan></text>
   <text
@@ -971,7 +971,7 @@
      x="327.92969"
      style="font-size:8.0000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
      xml:space="preserve"><tspan
-       y="564.68750"
+       y="564.6875"
        x="327.92969"
        id="tspan2157"
        sodipodi:role="line">CHANCNTL</tspan></text>
@@ -981,7 +981,7 @@
      x="477.67578"
      style="font-size:8.0000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
      xml:space="preserve"><tspan
-       y="564.68750"
+       y="564.6875"
        x="477.67578"
        id="tspan2160"
        sodipodi:role="line">CHANCNTLL</tspan></text>
@@ -1011,7 +1011,7 @@
      x="476.91406"
      style="font-size:8.0000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
      xml:space="preserve"><tspan
-       y="630.31250"
+       y="630.3125"
        x="476.91406"
        id="tspan2169"
        sodipodi:role="line">OENLL</tspan></text>
@@ -1126,7 +1126,7 @@
      x="305.80078"
      style="font-size:8.0000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
      xml:space="preserve"><tspan
-       y="205.31250"
+       y="205.3125"
        x="305.80078"
        id="tspan2201"
        sodipodi:role="line">CONCNTEN</tspan></text>
@@ -1223,8 +1223,8 @@
      x="28.125"
      style="font-size:11.000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100.00000%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
      xml:space="preserve"><tspan
-       y="190.00000"
-       x="28.125000"
+       y="190"
+       x="28.125"
        id="tspan2242"
        sodipodi:role="line">CNV</tspan></text>
   <g
@@ -1321,7 +1321,7 @@
      x="317.62891"
      style="font-size:8.0000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
      xml:space="preserve"><tspan
-       y="33.750000"
+       y="33.75"
        x="317.62891"
        id="tspan2286"
        sodipodi:role="line">BITEN</tspan></text>
@@ -1437,7 +1437,7 @@
      x="-280.73444"
      style="font-size:8.0000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
      xml:space="preserve"><tspan
-       y="127.81210"
+       y="127.8121"
        x="-280.73444"
        id="tspan1705"
        sodipodi:role="line">15</tspan></text>
@@ -1449,7 +1449,7 @@
      style="font-size:8.0000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
      xml:space="preserve"><tspan
        y="128.11682"
-       x="-315.52740"
+       x="-315.5274"
        id="tspan1709"
        sodipodi:role="line">0</tspan></text>
   <text
@@ -1459,7 +1459,7 @@
      x="-243.57816"
      style="font-size:8.0000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
      xml:space="preserve"><tspan
-       y="141.97610"
+       y="141.9761"
        x="-243.57816"
        id="tspan1713"
        sodipodi:role="line">Sample C</tspan></text>
@@ -1535,8 +1535,8 @@
      x="130.5699"
      style="font-size:8.0000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
      xml:space="preserve"><tspan
-       y="358.75000"
-       x="130.56990"
+       y="358.75"
+       x="130.5699"
        id="tspan1743"
        sodipodi:role="line">BITEN</tspan></text>
   <path
@@ -1570,7 +1570,7 @@
      x="184.78906"
      style="font-size:8.0000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
      xml:space="preserve"><tspan
-       y="290.00000"
+       y="290"
        x="184.78906"
        id="tspan2881"
        sodipodi:role="line">SAMPA1[15:0]</tspan></text>
@@ -1580,7 +1580,7 @@
      x="184.60938"
      style="font-size:8.0000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
      xml:space="preserve"><tspan
-       y="221.25000"
+       y="221.25"
        x="184.60938"
        id="tspan2885"
        sodipodi:role="line">SAMPAC[15:0]</tspan></text>
@@ -1598,14 +1598,14 @@
      x="126.55469"
      style="font-size:8.0000000px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:Bitstream Vera Sans"
      xml:space="preserve"><tspan
-       y="380.62500"
+       y="380.625"
        x="127.82812"
        id="tspan2896"
        sodipodi:role="line">There is a corresponding SINB, etc. </tspan><tspan
        id="tspan2898"
        sodipodi:role="line"
        x="126.55469"
-       y="390.62500">for the second set of channels</tspan></text>
+       y="390.625">for the second set of channels</tspan></text>
   <g
      transform="matrix(0.500000,0.000000,0.000000,0.500000,154.6875,70.00000)"
      id="g3743">
@@ -1690,4 +1690,30 @@
      style="opacity:1.0000000;color:#000000;fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.2500000;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000;visibility:visible;display:inline;overflow:visible"
      d="M 134.37500,568.12500 L 150.00000,568.12500"
      id="path1664" />
+  <text
+     xml:space="preserve"
+     style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+     x="467.73459"
+     y="446.93793"
+     id="text1639"><tspan
+       sodipodi:role="line"
+       id="tspan1641"
+       x="467.73459"
+       y="446.93793">Channel counts:</tspan><tspan
+       sodipodi:role="line"
+       x="467.73459"
+       y="461.93793"
+       id="tspan1650">0: A1</tspan><tspan
+       sodipodi:role="line"
+       x="467.73459"
+       y="476.93793"
+       id="tspan1652">4: AC</tspan><tspan
+       sodipodi:role="line"
+       x="467.73459"
+       y="491.93793"
+       id="tspan1654">5: B1</tspan><tspan
+       sodipodi:role="line"
+       x="467.73459"
+       y="506.93793"
+       id="tspan1656">9: BC</tspan></text>
 </svg>

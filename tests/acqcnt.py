@@ -238,6 +238,15 @@ class acqcnt:
         
         print "Channel ", chan, " hpf is ", state 
 
+    def setInputCh(self, tet, chan):
+        acqcmdstr = self.acqcmd.setinputch(int(tet), int(chan))
+        sendCommandAndReTransmit(self.acqout,
+                                 self.acqcmd,
+                                 self.acqstat,
+                                 acqcmdstr)
+        
+        print "Set tet ", tet, "to chan ", chan
+
     def writeFilter(self, filename):
         fid = file(filename)
         pos = 0
@@ -291,6 +300,11 @@ def main():
     elif action == "sampleload":
         filename = sys.argv[2]
         ac.writeSamples(filename)
+
+    elif action == "inputch":
+        tet = sys.argv[2]
+        chan = sys.argv[3]
+        ac.setInputCh(tet, chan)
 
     else:
         print "Proper usage:"

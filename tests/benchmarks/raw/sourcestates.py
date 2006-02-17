@@ -10,12 +10,15 @@ class NoiseStates(object):
 
 class SineStates(object):
 
-    def __init__(self, gainScale = True):
+    def __init__(self, gainScale = True, chanA = True, chanB = False):
 
         self.__freqs = [1000.0]
         self.__vpps = [4.0]
         self.ats2 = None
         self.gainScale = gainScale
+        self.chanA = chanA
+        self.chanB = chanB
+        
 
     def setFreqs(self, value):
 
@@ -56,7 +59,17 @@ class SineStates(object):
             self.ats2.output = 'unbal'
       
         self.ats2.mode = 0
-        self.ats2.onA = True
+        if self.chanA :
+            self.ats2.onA = True
+        else:
+            self.ats2.onA = False
+
+        if self.chanB :
+            self.ats2.onB = True
+        else:
+            self.ats2.onB = False
+
+            
 
 
         for freq in self.__freqs:
@@ -73,8 +86,11 @@ class SineStates(object):
             else:
                 newv = v
             print "setting voltage to ", newv
-            self.ats2.ampVppA = newv
-
+            if self.chanA:
+                self.ats2.ampVppA = newv
+            if self.chanB:
+                self.ats2.ampVppB = newv
+                
             yield newv
 
     def freqIter(self):

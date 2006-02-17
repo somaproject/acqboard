@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 from numarray import *
+from pylab import * 
 import struct
 
 
@@ -61,7 +62,7 @@ class RegFile(DataFile):
         self.fid = file(filename, 'rb')
 
         # correct for file offset... wtf? 
-        self.offset = 0
+        self.offset = 4
         self.fid.read(self.offset*2)
 
         self.pos = 0 
@@ -90,11 +91,10 @@ import sys
 
 
 def example():
-    f = RawFile(sys.argv[1])
-    
-    for i in range(2**8):
-        f.read(32768)
+    f = RegFile(sys.argv[1], 0)
 
+    plot(f.read(32768))
+    show()
 
 
 if __name__ == "__main__":

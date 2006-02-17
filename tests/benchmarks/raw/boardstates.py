@@ -62,10 +62,26 @@ class BoardStates(object):
                         2000 : 5,
                         5000 : 6,
                         10000 : 7}
+        self.__inChanA = 0
+        self.__inChanB = 0
         
         self.acqout = acqboard.AcqSocketOut()
         self.acqcmd = AcqBoardCmd()
         self.acqstat = acqboard.AcqSocketStatTimeout(1.0)
+
+    def setInChanA(self, value):
+        self.__inChanA = value
+    def getInChanA(self):
+        return self.__inChanA
+
+    inChanA = property(getInChanA, setInChanA, None)
+
+    def setInChanB(self, value):
+        self.__inChanB = value
+    def getInChanB(self):
+        return self.__inChanB
+
+    inChanB = property(getInChanB, setInChanB, None)
     
     def setGains(self, value):
         if not isinstance(value, list):
@@ -114,6 +130,24 @@ class BoardStates(object):
                                  self.acqcmd,
                                  self.acqstat,
                                  acqcmdstr);
+
+
+        # set continuous channel A
+        acqcmdstr = self.acqcmd.setinputch(0, self.__inChanA)
+        sendCommandAndReTransmit(self.acqout,
+                                 self.acqcmd,
+                                 self.acqstat,
+                                 acqcmdstr);
+        
+
+        # set continuous channel B
+        acqcmdstr = self.acqcmd.setinputch(1, self.__inChanB)
+        sendCommandAndReTransmit(self.acqout,
+                                 self.acqcmd,
+                                 self.acqstat,
+                                 acqcmdstr);
+        
+
         
 
     def done(self):

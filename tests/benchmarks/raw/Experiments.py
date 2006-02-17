@@ -180,33 +180,36 @@ class Experiment(object):
 
 def simpleTest(filename):
 
-    e = Experiment(filename, "A test experiment", raw=False, balanced=False)
+    e = Experiment(filename, "A test experiment", raw=False, balanced=True)
 
     b = boardstates.BoardStates()
-    s = sourcestates.SineStates()
+    s = sourcestates.SineStates(chanA=True, chanB=True)
     gainSet = {0:0,
-               1:1,
-               2:2,
-               5:3,
-               10:4,
-               20:5,
-               50:6,
-               100:7}
+               100:1,
+               200:2,
+               500:3,
+               1000:4,
+               2000:5,
+               5000:6,
+               10000:7}
     
     b.gainSet = gainSet
-    b.hpfs = [1, 0]
-    #b.gains = [100, 200, 500, 1000, 2000, 5000, 10000]
-    b.gains = [1, 2, 5, 10, 20, 50, 100]
+    b.hpfs = [0, 1]
+    b.gains = [100]
+    #b.gains = [100]
+    b.inChanB = 0
+    b.inChanA = 0    
     #b.gains = [1]
-    f1 = 20
+    f1 = 200
     f2 = 10000
-    s.freqs = logspace(log10(f1), log10(f2), 50.)
+    s.freqs = logspace(log10(f1), log10(f2), 10)
     #s.freqs = linspace(f1, f2, 20)
     
-    s.vpps = [4.05]
+    s.vpps = [3.9]
     
     #e.A1.append((b, s))
-    e.A1.append((b, s))
+    e.A2.append((b, s))
+    #e.B1.append((b, s))
     #e.AC.append((b, s))
     
 
@@ -266,7 +269,7 @@ def CMRRTest(filename):
     s.freqs = logspace(log10(f1), log10(f2), 10.)
     #s.freqs = linspace(f1, f2, 20)
     
-    s.vpps = [4.05]
+    s.vpps = [3.0]
     
     #e.A1.append((b, s))
     e.A1.append((b, s))

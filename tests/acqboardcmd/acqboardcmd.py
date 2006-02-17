@@ -87,7 +87,7 @@ class AcqBoardCmd:
         str = pack("BBBBBB", cmdbyte, self.channames[chan], gainnum, 0x0, 0x0, 0x0);
         return str;
 
-    def setinputch(self, chan, input):
+    def setinputch(self, tet, chan):
         # chans:
         #   A : chan = 0
         #   B : chan = 1
@@ -95,14 +95,8 @@ class AcqBoardCmd:
         self.updatecmd()        
         str = ""
 
-        if chan == 0 :
-            chanval = 4
-        elif chan == 1:
-            chanval = 5
-
-        
         cmdbyte = (self.cmdid << 4) | 0x2
-        str = pack("BBBBBB", cmdbyte, chanval, input, 0x0, 0x0, 0x0);
+        str = pack("BBBBBB", cmdbyte, tet, chan, 0x0, 0x0, 0x0);
 
         return str;
         

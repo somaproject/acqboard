@@ -35,7 +35,7 @@ class ATS2(object):
     ampVppA = property(getAmpVppA, setAmpVppA)
 
     def setAmpVppB(self, val):
-        self.gpib.write(":AGEN:AMPL A,%fVPP" % val)
+        self.gpib.write(":AGEN:AMPL B,%fVPP" % val)
 
 
     def getAmpVppB(self):

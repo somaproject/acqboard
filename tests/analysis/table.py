@@ -1,4 +1,4 @@
-#!/usr/bin/python
+
 from scipy import *
 import tables
 #import sinleqsq
@@ -32,12 +32,12 @@ def THDnFromSineRow(sinrow, fs):
     xo = xr
 
     thdlist = []
-    segnum = 8
+    segnum = 32
     xlen = len(xo)/segnum
-    #pylab.plot(xo)
+    #pylab.plot(xo[:200000])
     #pylab.show()
 
-    for j in range(0, segnum):
+    for j in range(0, 4):
         xrange = array(xo[xlen*j:xlen*(j+1)])
         thdn = 0.0
         enob = 0.0
@@ -84,9 +84,8 @@ def THDn(table, volt, filter=True):
 def freqResp(table, volt, gain):
     row = table
 
-    row = table
     result = [ (row['frequency'], row['data'])  for row in
-               table.where(table.cols.sourcevpp == volt)]
+               table.where(table.cols.sourcevpp == volt/gain)]
 
     freqs = zeros(len(result), Float64)
     logamps = zeros(len(result), Float64)
@@ -134,6 +133,13 @@ def plotTHDnAllGains(filename, chan, hpfs):
                  (0., 1., 1.),
                  (1., .5, .5),
                  (.5, .5, 1.),
+                 (1., 1., 0), (1.0, 0., 0.),
+                 (0., 1., 0.),
+                 (0., 0., 1.),
+                 (1., 0., 1.),
+                 (0., 1., 1.),
+                 (1., .5, .5),
+                 (.5, .5, 1.),
                  (1., 1., 0)]
     
                   
@@ -159,7 +165,7 @@ def plotTHDnAllGains(filename, chan, hpfs):
                 if v < r["sourcevpp"]:
                     v = r["sourcevpp"]
 
-
+            
             (freqs, thdns, thdnstd) = THDn(st, v, filter=True)
 
             c = colorlist.pop(0)
@@ -176,7 +182,7 @@ def plotTHDnAllGains(filename, chan, hpfs):
                 labelstr += " hpf off"
 
                 
-            pylab.semilogx(freqs, thdns,
+            pylab.plot(freqs, thdns,
                            color = c,
                            linewidth=1.5,
                            label = labelstr)
@@ -277,20 +283,23 @@ def plotFreqRespVsHPF(hpfenTable, hpfnotenTable, volt, gain):
 def plotBothFreqResp(filename):
     f = tables.openFile(filename)
 
-    t1 = f.root.A1.gain1.hpf0.sine
-    t2 = f.root.A1.gain1.hpf1.sine
+    t1 = f.root.AC.gain100.hpf0.sine
+    t2 = f.root.AC.gain100.hpf1.sine
 
-    plotFreqRespVsHPF(t1, t2, 4.05, 1.0)
+    print "both" 
+    plotFreqRespVsHPF(t1, t2, 3.9, 100.0)
 
 def plotWave(filename):
     f = tables.openFile(filename)
 
-
-    table = f.root.A1.gain1.hpf0.sine
+    num = 4
+    table = f.root.A1.gain100.hpf1.sine
     result = [ (row['frequency'], row['data'])  for row in
                table.where(table.cols.sourcevpp > 0 )]
-    pylab.plot(result[0][1][:10000])
-    
+
+    pylab.plot(result[num][1])
+    print THDnFromSineRow(table[num], 32000) 
+    print result[num][0]
     pylab.show()
 
 def measureNoise(filename):
@@ -350,9 +359,9 @@ def plotFreqResponse(filename):
     f = tables.openFile(filename)
 
 
-    table = f.root.A4.gain10.hpf1.sine
+    table = f.root.A2.gain10000.hpf1.sine
     ax = pylab.subplot(1,1,1)
-    (freqs, amps) = freqResp(table, 0.37, 1)
+    (freqs, amps) = freqResp(table, 4.05, 1)
 
     pylab.semilogx(freqs, amps)
     pylab.legend()
@@ -370,13 +379,12 @@ def plotFreqResponse(filename):
     pylab.show()
     
 if __name__ == "__main__":
-    #plotTHDnAllGains(sys.argv[1], 'A1', [True])
+    plotTHDnAllGains(sys.argv[1], 'A2', [True, False])
 
-    #plotTHDnAllGains(sys.argv[1], 'AC', False)
     #plotFreqResponse(sys.argv[1])
     #plotBothFreqResp(sys.argv[1])
     
     #plotWave(sys.argv[1])
     #measureNoise(sys.argv[1])
-    plotCMRR(sys.argv[1])
+    #plotCMRR(sys.argv[1])
     

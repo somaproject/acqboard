@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>Soma Acq Board Testingg</title>
+</head>
+<body>
+<span style="font-weight: bold; text-decoration: underline;">11 March
+2006</span>: Acqboard 01<br
+ style="font-weight: bold; text-decoration: underline;">
+<br>
+Detailed test and assembly log for Acqboard 01: Digital side<br>
+<span style="font-weight: bold;"><br>
+</span>
+<ol>
+  <li><span style="font-weight: bold;">First, we solder up the digital
+power</span></li>
+  <li><span style="font-weight: bold;">Solder QFp, etc</span></li>
+  <li><span style="font-weight: bold;">All back-of-board bypass caps
+are 0.1 uF Caps</span></li>
+</ol>
+Everyting soldered and documented; now try programming -- worked. <br>
+<br>
+<span style="font-weight: bold; font-style: italic;">Now the analog
+side -- first isolators, then the power supply <br>
+<br>
+Analog references appear to work properly. <br>
+<br>
+We had to use non-recently-purchased 150 uf Caps, 311-1071-1-ND,
+CC0603JRNP09BN151 from digikey. <br>
+<br>
+</span><span style="font-weight: bold;"><span
+ style="text-decoration: underline;">13 March 2006<br>
+<br>
+</span></span>Informal performance measurements of the ADC + AA look
+correct. Soldering on registers and the other hardware for further
+measurement.&nbsp; <br>
+<br>
+With the ADCs, AAs, and PGAs, but without any earlier-stage muxes, and
+with the inputs all ganged together, we get :<br>
+<br>
+<br>
+Now, we solder on : <br>
+1. the rest of the channel's bypass caps<br>
+2. The Mux and amp<br>
+3. the 5.6k Resistor<br>
+4. <span style="font-style: italic;"><span style="font-weight: bold;">We
+ordered the wrong 68nF caps, so we're jusing 490-3360-1-ND, a 1206 COG.
+<br>
+<br>
+<br>
+</span></span><span
+ style="text-decoration: underline; font-weight: bold;">14 March 2006<br>
+</span><span style="font-style: italic;"><span
+ style="font-weight: bold;"><span style="font-style: italic;"><br>
+</span></span></span><span style="font-weight: bold;"></span><span
+ style="font-style: italic;"><span style="font-weight: bold;">Our
+results are as follows for the boards which have everything but the IN-A<br>
+<br>
+<img alt=""
+ src="results/20060313/just_adc_aa_pga.A1.noshortedinputs.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+<br>
+<span style="font-weight: bold;"><span style="font-style: italic;">This
+is confusing and unfortunate. </span></span></span><span
+ style="font-style: italic;"><span style="text-decoration: underline;"><br>
+<br>
+<span style="text-decoration: underline;"></span></span></span></span>Further
+refinement along the analysis end has show that, for high gains using
+the LPF, we end up with awful nonlinearities. <br>
+<br>
+Below is the difference over serveral cycles between the recorded sine
+and the fit sine for a gain of 5 with the HPF enabled. <br>
+<br>
+<img alt="" src="results/20060314/hpf_minus_model.png"
+ style="width: 1200px; height: 900px;"><br>
+<span style="text-decoration: underline;"><span
+ style="font-style: italic;"></span></span><span
+ style="font-style: italic;"><span style="font-style: italic;"><span
+ style="text-decoration: underline;"></span></span><span
+ style="font-weight: bold;"><span style="font-weight: bold;"><span
+ style="font-style: italic;"></span></span>I don't know what this is. <br>
+<br>
+Resoldering the Mux appears to have fixed the problem: <br>
+<br>
+</span></span>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20060314/All.A1.png" style="width: 400px; height: 300px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20060314/All.B1.png" style="width: 400px; height: 300px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<span style="font-style: italic;"><span style="font-weight: bold;"><br>
+</span></span><span style="font-weight: bold; font-style: italic;"></span>
+</body>
+</html>

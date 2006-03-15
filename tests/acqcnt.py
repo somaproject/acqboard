@@ -4,7 +4,7 @@ Command-line interface to control the acqboard; should suck less than the GUI on
 
 examples:
 ./acqboard mode 0
-./acqboard loadfilter foo.firdat
+./acqboard filterload foo.firdat
 ./acqboard loadsamples foo.sampdat
 ./acqboard gain a1 100
 ./acqboard hpf a1 off

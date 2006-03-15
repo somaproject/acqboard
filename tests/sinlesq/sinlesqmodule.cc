@@ -36,11 +36,13 @@ sinlesq_computeTHDN(PyObject *self, PyObject *args)
     return NULL; 
   n = array->dimensions[0]; 
 
-  thdn = computeTHDNpy((double*)array->data, n, fs); 
+  sineParams s; 
+  thdn = computeTHDNpy((double*)array->data, n, fs, &s); 
   
   
   Py_DECREF(array); 
-  return PyFloat_FromDouble(thdn); 
+  return  Py_BuildValue("(ddddd)", thdn, s.A, s.B, s.C, s.w);  
+//#PyFloat_FromDouble(thdn); 
 
 }
 

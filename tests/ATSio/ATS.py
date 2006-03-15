@@ -168,11 +168,20 @@ class ATS2(object):
             
 def main() :
     a = ATS2()
-    a.gpib.write(":AGEN:DASINE:FRQ1 31000.4Hz")
-    a.gpib.write(":AGEN:DASINE:FRQ2 31000.4Hz")
-    a.gpib.write("ERRS?")
-    print a.gpib.read(2041) 
-    a.gpib.write(":AGEN:SET?")
-        
+    #a.gpib.write(":AGEN:DASINE:FRQ1 31000.4Hz")
+    #a.gpib.write(":AGEN:DASINE:FRQ2 31000.4Hz")
+    #a.gpib.write("ERRS?")
+    #print a.gpib.read(2041) 
+    #a.gpib.write(":AGEN:SET?")
+
+    a.freq1 = 1000.0
+    a.ampVppA = 4.0
+    a.onA = True
+    a.onB = True
+    a.output = 'unbal'
+
+    print a.onA
+    print a.freq1
+    print a.output
 if __name__ == "__main__":
     main()

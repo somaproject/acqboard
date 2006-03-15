@@ -1,4 +1,6 @@
 
+import sys
+import scipy
 from scipy import *
 import tables
 #import sinleqsq
@@ -32,17 +34,17 @@ def THDnFromSineRow(sinrow, fs):
     xo = xr
 
     thdlist = []
-    segnum = 32
+    segnum = 20
     xlen = len(xo)/segnum
     #pylab.plot(xo[:200000])
     #pylab.show()
 
-    for j in range(0, 4):
+    for j in range(4):
         xrange = array(xo[xlen*j:xlen*(j+1)])
         thdn = 0.0
         enob = 0.0
-
-        thdn = csinlesq.computeTHDN(round(32768*xrange)/32768.0, int(fs))
+        y = scipy.round_(32768*xrange)/32768.0
+        (thdn, A, B, C, w)  = csinlesq.computeTHDN(y, int(fs))
         m1 = max(xrange)
         m2 = min(xrange), 
         print thdn, fs, f, m1, m2 
@@ -125,7 +127,7 @@ def plotTHDnAllGains(filename, chan, hpfs):
 
     f = tables.openFile(filename)
     changroup = f.groups["/%s" % chan]
-    ax = pylab.subplot(1,1,1)
+
     colorlist = [(1.0, 0., 0.),
                  (0., 1., 0.),
                  (0., 0., 1.),
@@ -202,6 +204,12 @@ def plotTHDnAllGains(filename, chan, hpfs):
 
 
     pylab.legend()
+    leg = pylab.gca().get_legend()
+    ltext  = leg.get_texts()  # all the text.Text instance in the legend
+
+    pylab.setp(ltext, fontsize='xx-small')    # the legend text fontsize
+
+
     pylab.xlabel('Frequency (Hz)')
     pylab.ylabel('THD+N (dB)')
 
@@ -212,9 +220,9 @@ def plotTHDnAllGains(filename, chan, hpfs):
 
     #ax.xaxis.set_major_locator(majorLocator)
     majorFormatter = FormatStrFormatter('%d')
-    ax.xaxis.set_major_formatter(majorFormatter)
+    #ax.xaxis.set_major_formatter(majorFormatter)
 
-    pylab.show()
+    pylab.title("%s : %s" % (filename, chan))
 
 
 def test(filename):
@@ -254,7 +262,7 @@ def test(filename):
     
     print "DONE"
     
-    #pylab.show()
+    #
 
 def plotFreqRespVsHPF(hpfenTable, hpfnotenTable, volt, gain):
     """
@@ -277,7 +285,7 @@ def plotFreqRespVsHPF(hpfenTable, hpfnotenTable, volt, gain):
     pylab.ylabel('Magnitude (dB)')
     
     pylab.grid(1)
-    pylab.show()
+    
     
 
 def plotBothFreqResp(filename):
@@ -292,15 +300,59 @@ def plotBothFreqResp(filename):
 def plotWave(filename):
     f = tables.openFile(filename)
 
-    num = 4
-    table = f.root.A1.gain100.hpf1.sine
+    num = 10
+    table = f.root.A1.gain1.hpf0.sine
     result = [ (row['frequency'], row['data'])  for row in
                table.where(table.cols.sourcevpp > 0 )]
 
     pylab.plot(result[num][1])
     print THDnFromSineRow(table[num], 32000) 
     print result[num][0]
-    pylab.show()
+
+def compWave(filename):
+    f = tables.openFile(filename)
+
+    num = 5
+    t1 = f.root.A1.gain1.hpf0.sine
+    r1 = [ (row['frequency'], row['data'])  for row in
+               t1.where(t1.cols.sourcevpp > 0 )]
+
+    t2 = f.root.A1.gain5.hpf0.sine
+    r2 = [ (row['frequency'], row['data'])  for row in
+               t2.where(t2.cols.sourcevpp > 0 )]
+
+    x1= r1[num][1][:8000]
+    x2 = r2[num][1][:8000]
+
+
+    fs = 32000
+    N = len(x2)
+    t =  r_[0.0:N]/ fs;
+
+    (thdn, A1, B1, C1, w1) =  csinlesq.computeTHDN(x1, fs)
+    x1m = (A1*cos(t*w1) + B1 * sin(t*w1) + C1)
+    print "x1 thdn = ", thdn
+
+    (thdn, A2, B2, C2, w2) =  csinlesq.computeTHDN(x2, fs)
+    x2m = (A2*cos(t*w2) + B2 * sin(t*w2) + C2)
+    print "x2 thdn = ", thdn
+    
+    pylab.figure(1)
+    pylab.plot(x1-x1m, label = "g=1")
+    
+    pylab.legend()
+    pylab.grid()
+
+    pylab.figure(2)
+    pylab.plot(x2-x2m, label = "g=5")
+    #pylab.plot(x2m, label = "g=5, model")
+    pylab.legend()
+    pylab.grid()
+
+    
+
+    #print result[num][0]
+    
 
 def measureNoise(filename):
     f = tables.openFile(filename)
@@ -328,7 +380,7 @@ def measureNoise(filename):
     
     
     
-    pylab.show()
+    
 
 def plotCMRR(filename):
     f = tables.openFile(filename)
@@ -352,7 +404,7 @@ def plotCMRR(filename):
  
     pylab.axis([10., 10000., 0., 120.])
     pylab.grid(1)
-    pylab.show()
+    
     
 
 def plotFreqResponse(filename):
@@ -376,15 +428,31 @@ def plotFreqResponse(filename):
     
     print "DONE"
     
-    pylab.show()
+def thdnloop():
+
+    trodes = ['A', 'B']
+    chans = [1, 2, 3, 4]
+    fname =  sys.argv[1]
+
+    pylab.figure(1)
+    for i, t in enumerate(trodes) :
+        for j, cn in enumerate(chans):
+            pylab.subplot(len(trodes), len(chans), i*len(chans)+j + 1)
+
+            c = t + str(cn)
+            
+            plotTHDnAllGains(fname, c, [True, False])
+
+
     
 if __name__ == "__main__":
-    plotTHDnAllGains(sys.argv[1], 'A2', [True, False])
-
+    plotTHDnAllGains(sys.argv[1], 'A1', [False, True])
+    #thdnloop()
     #plotFreqResponse(sys.argv[1])
     #plotBothFreqResp(sys.argv[1])
     
-    #plotWave(sys.argv[1])
+    #compWave(sys.argv[1] )
     #measureNoise(sys.argv[1])
     #plotCMRR(sys.argv[1])
     
+    pylab.show()

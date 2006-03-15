@@ -138,11 +138,11 @@ begin
           sampA2 <= sampA2(14 downto 0) & sampA1(15);
           sampA1 <= sampA1(14 downto 0) & sdial;
 
-          sampBC <= sampB4(14 downto 0) & sampB4(15);
-          sampB4 <= sampB3(14 downto 0) & sampB3(15);
-          sampB3 <= sampB2(14 downto 0) & sampB2(15);
-          sampB2 <= sampB1(14 downto 0) & sampB1(15);
-          sampB1 <= sampBC(14 downto 0) & sdibl;
+          sampB4 <= sampB4(14 downto 0) & sampB3(15);
+          sampB3 <= sampB3(14 downto 0) & sampB2(15);
+          sampB2 <= sampB2(14 downto 0) & sampB1(15);
+          sampB1 <= sampB1(14 downto 0) & sampBC(15);
+          sampBC <= sampBC(14 downto 0) & sdibl;
 
         end if;
 

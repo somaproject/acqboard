@@ -24,7 +24,7 @@ struct sineParams {
 
 char const * greet();
 
-double computeTHDNpy(double* x, int N, int fs); 
+double computeTHDNpy(double* x, int N, int fs, sineParams *); 
 double compute10kHzBLTHDNpy(double* x, int N, int fs); 
 
 double compute10kHzBandLimitedTHDN(boost::numeric::ublas::vector<double> & x, 
@@ -41,7 +41,7 @@ sineParams fourParamFit(sineParams init,
 void normalize(boost::numeric::ublas::vector<double> x);
 double findPrimaryFrequency(boost::numeric::ublas::vector<double> & xin, double fs);
 double computeSqErr(boost::numeric::ublas::vector<double> & x, sineParams s, double fs); 
-double computeTHDN(boost::numeric::ublas::vector<double> &, double); 
+double computeTHDN(boost::numeric::ublas::vector<double> &, double, sineParams * = 0); 
 
 double computeBandLimitedTHDN(boost::numeric::ublas::vector<double> &, 
 			      const boost::numeric::ublas::vector<double> &,

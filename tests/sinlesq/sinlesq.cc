@@ -27,7 +27,7 @@ char const * greet()
   return "HELLO WORLD";
 }
 
-double computeTHDNpy(double* x, int N, int fs){
+double computeTHDNpy(double* x, int N, int fs, sineParams * s){
 
   ublas::vector<double> xprime(N); 
   
@@ -37,7 +37,7 @@ double computeTHDNpy(double* x, int N, int fs){
   }
 
 
-  return computeTHDN(xprime, double(fs)); 
+  return computeTHDN(xprime, double(fs), s); 
 
 }
 
@@ -291,7 +291,7 @@ double computeBandLimitedTHDN(ublas::vector<double> & x,
 }
 
 double computeTHDN(ublas::vector<double> & x, 
-		   double fs) {
+		   double fs, sineParams * sOut) {
  
   double detect = findPrimaryFrequency(x, fs);
   int N = 2<<14; 
@@ -322,6 +322,13 @@ double computeTHDN(ublas::vector<double> & x,
 
   double rmssignal = sqrt(s2.A*s2.A + s2.B*s2.B);
   double thdn = 20*log(rmsnoise/rmssignal)/log(10.0); 
+
+  if (sOut > 0){
+    sOut->A = s2.A; 
+    sOut->B = s2.B; 
+    sOut->C = s2.C; 
+    sOut->w = s2.w; 
+  }
   return thdn ; 
 }
 

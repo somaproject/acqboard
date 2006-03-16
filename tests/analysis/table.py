@@ -19,7 +19,7 @@ def FreqRes(table, volts):
     pass
 
 
-def THDnFromSineRow(sinrow, fs):
+def THDnFromSineRow(sinrow, fs, segnum = 32):
 
     f = sinrow['frequency']
     x = sinrow['data']
@@ -34,12 +34,11 @@ def THDnFromSineRow(sinrow, fs):
     xo = xr
 
     thdlist = []
-    segnum = 20
     xlen = len(xo)/segnum
     #pylab.plot(xo[:200000])
     #pylab.show()
 
-    for j in range(4):
+    for j in range(segnum):
         xrange = array(xo[xlen*j:xlen*(j+1)])
         thdn = 0.0
         enob = 0.0
@@ -59,11 +58,13 @@ def THDnFromSineRow(sinrow, fs):
         thdnstd = 0.
     else:
         thdns = mean(thdlist)
+        thdlist.sort()
         thdnstd = abs(max(thdlist) - min(thdlist))
+
 
     return (thdns, thdnstd)
     
-def THDn(table, volt, filter=True):
+def THDn(table, volt, filter=True, segnum = 100):
 
 
     freqs = []
@@ -77,7 +78,7 @@ def THDn(table, volt, filter=True):
     for row in table.where(table.cols.sourcevpp == volt):
         print row
         freqs.append(row['frequency'])
-        (th, ts) = THDnFromSineRow(row, fs)
+        (th, ts) = THDnFromSineRow(row, fs, segnum)
         thdns.append( th)
         thdnstd.append( ts)
 
@@ -118,7 +119,7 @@ def freqResp(table, volt, gain):
         
 
 
-def plotTHDnAllGains(filename, chan, hpfs):
+def plotTHDnAllGains(filename, chan, hpfs, segnum = 32):
     """
     Create a plot of all gains in this particular
     point in the filespace.
@@ -168,7 +169,7 @@ def plotTHDnAllGains(filename, chan, hpfs):
                     v = r["sourcevpp"]
 
             
-            (freqs, thdns, thdnstd) = THDn(st, v, filter=True)
+            (freqs, thdns, thdnstd) = THDn(st, v, filter=True, segnum=segnum)
 
             c = colorlist.pop(0)
             for i in freqs:
@@ -312,71 +313,118 @@ def plotWave(filename):
 def compWave(filename):
     f = tables.openFile(filename)
 
-    num = 5
-    t1 = f.root.A1.gain1.hpf0.sine
+    num = 2
+    t1 = f.root.A1.gain100.hpf1.sine
     r1 = [ (row['frequency'], row['data'])  for row in
                t1.where(t1.cols.sourcevpp > 0 )]
 
-    t2 = f.root.A1.gain5.hpf0.sine
-    r2 = [ (row['frequency'], row['data'])  for row in
-               t2.where(t2.cols.sourcevpp > 0 )]
-
-    x1= r1[num][1][:8000]
-    x2 = r2[num][1][:8000]
+    x1= r1[num][1][:]
 
 
     fs = 32000
-    N = len(x2)
+    N = len(x1)
     t =  r_[0.0:N]/ fs;
 
     (thdn, A1, B1, C1, w1) =  csinlesq.computeTHDN(x1, fs)
     x1m = (A1*cos(t*w1) + B1 * sin(t*w1) + C1)
     print "x1 thdn = ", thdn
 
-    (thdn, A2, B2, C2, w2) =  csinlesq.computeTHDN(x2, fs)
-    x2m = (A2*cos(t*w2) + B2 * sin(t*w2) + C2)
-    print "x2 thdn = ", thdn
     
     pylab.figure(1)
     pylab.plot(x1-x1m, label = "g=1")
-    
     pylab.legend()
     pylab.grid()
 
     pylab.figure(2)
-    pylab.plot(x2-x2m, label = "g=5")
-    #pylab.plot(x2m, label = "g=5, model")
+    pylab.plot(x1, 'r')
+    pylab.plot(x1m, 'g')
     pylab.legend()
     pylab.grid()
 
-    
+
+    pylab.grid()
+
+    test = []
+    for i in range(100):
+        test.append(mean(x1[(i*1000):((i+1)*1000)]))
+    #pylab.plot(r_[0:100]*1000, test, 'r')
+        
 
     #print result[num][0]
     
 
-def measureNoise(filename):
+def noiseHist(filename):
     f = tables.openFile(filename)
 
-    table = f.root.A1.noise.hpf1
+    t1 = f.root.A1.noise.hpf0
+    t2 = f.root.A1.noise.hpf1
+    print "la = ", len(t1), len(t2)
+
+    pos = 1
+    bins = r_[-300:300]
+    for r in t1.iterrows():
+        pylab.figure(pos)
+        x = r['data'].astype(Float64)
+        #pylab.hist(x-mean(x), bins=bins)
+        pylab.plot(x*4.096/2**16/r['gain']*1e6)
+        pos += 1
+        
+        
+def getNoise(table):
+    # takes in a table of noise data and returns a tuple of
+    # (gains, noisebits, noiserangeuv) 
+
     gains = []
     noisebitrange = []
     noiserangeuv = []
-    rmsnoisebits = []
-    
+    bitvar = []
+    rmsnoise = []
+
     for r in table.iterrows():
         x = array(r['data'], Float64)
         xv = x * 4.096/2**16/r['gain']
         rms = sqrt(mean(xv**2))
-        rmsnoisebits.append(rms)
+        rmsnoise.append(rms)
         a = max(r['data'])
         b = min(r['data'])
         gains.append(r['gain'])
         noisebitrange.append(a-b)
-        noiserangeuv.append((a-b)*(4.096e6/2**16)/r['gain'])
-        
-    pylab.scatter(gains, rmsnoisebits)
+        bitvar.append(std(x))
+        noiserangeuv.append(max(xv) - min(xv))
+
+    return (gains, array(noisebitrange),
+            array(noiserangeuv), array(rmsnoise), array(bitvar))
+            
+
+def measureNoise(filename):
+    f = tables.openFile(filename)
+
+    (g1, nb1, nv1, rv1, bstd1) = getNoise(f.root.A1.noise.hpf0)
+    (g2, nb2, nv2, rv2, bstd2) = getNoise(f.root.A1.noise.hpf1)
+    
+    print g1, nv1
+    
+    pylab.scatter(g1, rv1*1e6, c='r')
+    pylab.plot(g1, rv1*1e6, c='r')
+    
+    pylab.scatter(g2, rv2*1e6, c='b')
+    pylab.plot(g2, rv2*1e6, c='b')
+
+    
     pylab.xlabel('gain')
     pylab.ylabel('uV RMS')
+
+    pylab.figure(2)
+    pylab.scatter(g1, bstd1, c='r')
+    pylab.plot(g1, bstd1, c='r')
+
+
+    pylab.scatter(g2, bstd2, c='b')
+    pylab.plot(g2, bstd2, c='b')
+
+    
+    pylab.xlabel('gain')
+    pylab.ylabel('bit std dev')
     
     
     
@@ -446,13 +494,14 @@ def thdnloop():
 
     
 if __name__ == "__main__":
-    plotTHDnAllGains(sys.argv[1], 'A1', [False, True])
+    plotTHDnAllGains(sys.argv[1], 'B1', [False, True], 32)
     #thdnloop()
     #plotFreqResponse(sys.argv[1])
     #plotBothFreqResp(sys.argv[1])
     
     #compWave(sys.argv[1] )
     #measureNoise(sys.argv[1])
+    #noiseHist(sys.argv[1])
     #plotCMRR(sys.argv[1])
     
     pylab.show()

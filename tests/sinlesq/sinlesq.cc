@@ -35,9 +35,16 @@ double computeTHDNpy(double* x, int N, int fs, sineParams * s){
     xprime[i] = x[i]; 
     
   }
+  
+  double d = 0.0; 
+  d = computeTHDN(xprime, double(fs), s); 
+  while ( isnan(d) ) {
+    cout << "C++ NAN!" << endl; 
+    xprime[0] += 0.0000000001; 
+    d = computeTHDN(xprime, double(fs), s); 
 
-
-  return computeTHDN(xprime, double(fs), s); 
+  } 
+  return d; 
 
 }
 
@@ -54,13 +61,17 @@ double compute10kHzBLTHDNpy(double* x, int N, int fs){
 }
 
 sineParams threeParamFit(sineParams init, 
-			 ublas::vector<double> &y, 
+			 const ublas::vector<double> &y, 
 			 double fs)
 {
   
+
   int N = y.size(); 
   ublas::matrix<double> D0 (N, 3);
 
+
+  
+  
   for (int i = 0; i < N; i++){
     double t = i/fs; 
     D0(i, 0) = cos(init.w * t);
@@ -91,9 +102,24 @@ sineParams threeParamFit(sineParams init,
   s.B = x0prime(1); 
   s.C = x0prime(2); 
   s.w = init.w; 
+  
+  if (s.A > 10.0 or s.A < -10.0) {
+//     cout << "WE ARE WRITING" << endl; 
+//     ofstream ffs("/tmp/test.2.dat"); 
+//     for (int i =0; i < N; i++) {
+//       ffs << (double) y[i] << endl; 
+//     }
+//     ffs.close();
+    
+    init.A = 0.1; 
+    s = threeParamFit(init, y, fs); 
+    
+    cout << "c++ three param fit " << s.A << " " << s.B << " " << s.C 
+	 << "  " << s.w << endl; 
+  }
+  
 
-
-  return s; 
+  return sineParams(s); 
   
 }  
 
@@ -315,6 +341,12 @@ double computeTHDN(ublas::vector<double> & x,
   s.w = detect; 
 
   s1 = threeParamFit(s, xnorm, fs); 
+//   cout << "The three param fit was " 
+//        << " A = " << s1.A 
+//        << " B = " << s1.B 
+//        << " C = " << s1.C
+//        << " w = " << s1.w << endl; 
+
   s2 = fourParamFit(s1, xnorm, fs); 
 
   double sqerr = computeSqErr(xnorm, s2, fs); 

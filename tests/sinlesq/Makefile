@@ -1,6 +1,6 @@
 
 CXX=g++-3.4
-CFLAGS=  -O2  -fpic -DNDEBUG
+CFLAGS=  -O2 -g  -fpic -DNDEBUG
 
 all: sinlesq python
 

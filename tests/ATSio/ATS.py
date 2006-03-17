@@ -175,10 +175,10 @@ def main() :
     #a.gpib.write(":AGEN:SET?")
 
     a.freq1 = 1000.0
-    a.ampVppA = 4.0
+    a.ampVppA = 0.039
     a.onA = True
     a.onB = True
-    a.output = 'unbal'
+    a.output = 'bal'
 
     print a.onA
     print a.freq1

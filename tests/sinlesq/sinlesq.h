@@ -31,7 +31,7 @@ double compute10kHzBandLimitedTHDN(boost::numeric::ublas::vector<double> & x,
 				 double fs);
 
 sineParams threeParamFit(sineParams init, 
-			 boost::numeric::ublas::vector<double> &y, 
+			 const boost::numeric::ublas::vector<double> &y, 
 			 double fs);
 
 sineParams fourParamFit(sineParams init, 

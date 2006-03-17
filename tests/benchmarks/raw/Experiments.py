@@ -180,34 +180,34 @@ class Experiment(object):
 
 def simpleTest(filename):
 
-    e = Experiment(filename, "A test experiment", raw=False, balanced=False)
+    e = Experiment(filename, "A test experiment", raw=False, balanced=True)
 
     b = boardstates.BoardStates()
     s = sourcestates.SineStates(chanA=True, chanB=True)
     gainSet = {0:0,
-               1:1,
-               2:2,
-               5:3,
-               10:4,
-               20:5,
-               50:6,
-               100:7}
+               100:1,
+               200:2,
+               500:3,
+               1000:4,
+               2000:5,
+               5000:6,
+               10000:7}
     
     b.gainSet = gainSet
     b.hpfs = [0, 1]
-    b.gains = [1, 10, 100]
+    b.gains = [100, 1000, 10000]
     #b.gains = [100]
     b.inChanB = 0
     b.inChanA = 0    
     #b.gains = [1]
     f1 = 200
     f2 = 10000
-    s.freqs = logspace(log10(f1), log10(f2), 20)
-    #s.freqs = linspace(f1, f2, 20)
+    #s.freqs = logspace(log10(f1), log10(f2), 20)
+    s.freqs = linspace(f1, f2, 20)
     
     s.vpps = [3.9]
     
-    e.A1.append((b, s))
+    #e.A1.append((b, s))
     #e.A2.append((b, s))
     #e.A3.append((b, s))
     #e.A4.append((b, s))

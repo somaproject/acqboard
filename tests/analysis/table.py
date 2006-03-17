@@ -42,8 +42,8 @@ def THDnFromSineRow(sinrow, fs, segnum = 32):
         xrange = array(xo[xlen*j:xlen*(j+1)])
         thdn = 0.0
         enob = 0.0
-        y = scipy.round_(32768*xrange)/32768.0
-        (thdn, A, B, C, w)  = csinlesq.computeTHDN(y, int(fs))
+        #y = scipy.round_(32768*xrange)/32768.0
+        (thdn, A, B, C, w)  = csinlesq.computeTHDN(xrange, int(fs))
         m1 = max(xrange)
         m2 = min(xrange), 
         print thdn, fs, f, m1, m2 

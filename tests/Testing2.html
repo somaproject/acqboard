@@ -106,6 +106,67 @@ Resoldering the Mux appears to have fixed the problem: <br>
   </tbody>
 </table>
 <span style="font-style: italic;"><span style="font-weight: bold;"><br>
-</span></span><span style="font-weight: bold; font-style: italic;"></span>
+</span></span><span
+ style="text-decoration: underline; font-weight: bold;">15 March 2006</span><br
+ style="text-decoration: underline; font-weight: bold;">
+Now we try with the in-amps, AD8221AR. We use ERJ-3EKF1004V
+(P1.00MHCT-ND) resistors, 1 MOhm, and 1 uf Caps. <br>
+<br>
+Things looked great, but now we're seeing a ton of non-HPF THD+N
+variance. To measure this, I've removed the mux and am just directly
+measuring the HPF-less signal chain. <br>
+<br>
+Here is B1 initially, with an entire signal chain: <br>
+<img alt="" src="results/20060315/B1.g100.pre-test.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+It looks great. The associated data is at B1.good.h5.&nbsp; (note this
+is with segnum = 100) <br>
+<br>
+If we want we can seriously overdrive the ADC -- -1.8V to 4.2V! <br>
+<br>
+This doesn't appear to cause any noticable difference, however, in the
+measured response. <br>
+<br>
+Cleaned off the flux, now let's look... no real difference. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">16 March
+2006</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+Trying hard to be more rigorous here. It's not even obvious what we're
+measuring or how/why we should care. To that effect, I think that the
+current plots are not very useful/effective. <br>
+<br>
+<span style="font-weight: bold;">test.70.h5</span>: Both channels A1
+and B1 soldered; A1 Ac-coupling caps removed; using All-Chan connector.
+<br>
+<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">17 March
+2006</span><br style="font-weight: bold; text-decoration: underline;">
+We continue, even after substantial refactoring of sine-fitting code,
+to get unfortunate-looking results. <br>
+<br>
+As a test, first thing in the morning, we will record: Both channels A1
+and B1 soldered; A1 Ac-coupling caps removed; using All-Chan connector.
+<br>
+<br>
+<br>
+<img alt="" src="results/20060317/early.B1.png"
+ style="width: 600px; height: 450px;"><br>
+Note that, contrary to what the graph says, the signals with high
+variance actually have the HPF -off-. I don't think what results is a
+problem with sine convergence, because we clearly have results
+-converging-, and there is a very clear difference between the HPF
+off-and-on states. This data is in early.B1.h5. <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<span style="font-style: italic;"><span style="font-weight: bold;"></span></span><span
+ style="font-weight: bold; font-style: italic;"></span>
 </body>
 </html>

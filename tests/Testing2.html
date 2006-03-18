@@ -161,9 +161,69 @@ problem with sine convergence, because we clearly have results
 off-and-on states. This data is in early.B1.h5. <br>
 <br>
 <br>
+Test Plans -- to develop comprehensive testing, we're going to record
+noise data and sine data across HPF and LPF. <br>
 <br>
 <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">18 March
+2006</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+I think it's more important to try and characterize the nature of our
+observed problem: <br>
+1. Is it real ? <br>
+2. why does it vary with segment size? <br>
+3. What is the spectral relation? <br>
+<br>
+Here, we have the results of B1, gain = 100, hpf = 0, sine, a few
+sines. <br>
+<br>
+<img alt="" src="results/20060318/B1.original.gain100.hpf0.THDn.png"
+ style="width: 600px; height: 716px;"><br>
+<br>
+<br>
+THD+N for various frequencies across a series of frequencies. <br>
+<br>
+There is more low-frequency noise in the hpf=off, so it makes sense
+that fitting over smaller windows would be tighter. <br>
+<br>
+I'm going to try filtering the data and then seeing what we get. <br>
+<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20060318/B1.original.gain100-hpf1.thdns.png"
+ style="width: 400px; height: 300px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20060318/B1.original.gain100-hpf0.thdns.png"
+ style="width: 400px; height: 300px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20060318/B1.original.gain100-hpf0-filtered.thdns.png"
+ style="width: 400px; height: 300px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">THD+N across multiple segment
+sizes for 2.6k, gain = 100, with HPF on <br>
+      </td>
+      <td style="vertical-align: top;">THD+N across multiple segment
+sizes for 2.6k, gain = 100, with HPF on </td>
+      <td style="vertical-align: top;">THD+N across multiple segment
+sizes for 2.6k, gain = 100, with HPF on, filtered with <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Note that when we (digitally) filter, we get a much flatter response
+(minus the edges, an artifact of filtering). And notice that the same
+thing happens when we reduce the segment size. My best conclusion is
+that we have some low-freqency noise (surprise!) that gets filtered out
+by the HPF, and that causes the problems we see in the LPF. <br>
 <br>
 <br>
 <span style="font-style: italic;"><span style="font-weight: bold;"></span></span><span

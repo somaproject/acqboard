@@ -15,9 +15,9 @@ from scipy import *
 import tables
 
 import pylab
-import sinleqsq as pysinlesq
 sys.path.append("../sinlesq/")
 import sinlesq as csinlesq
+import pysinlesq
 from matplotlib.ticker import FormatStrFormatter
 import sets
 
@@ -28,7 +28,7 @@ def THDns(x, fs):
     """
 
     # first, zero-mean
-    
+    print "thdns shape =", x.shape
     rowcnt = len(x)
     meanxr = x.mean(1)
     meanxr.shape = (rowcnt, 1)
@@ -87,7 +87,7 @@ def THDnsFromTable(table, volt, segnum = 100):
 
     return outrec
 
-def fileTHDN(filename, chan, segnum = 64):
+def fileTHDN(filename, chan, segnum = 4):
 
     """
 
@@ -164,7 +164,7 @@ def plotTHDNs(ms):
         labelstr = "gain = %d, %3.2f dBFS " % (gain,
                                                20*log10(v*gain/4.096))
         
-        if hpf:
+        if hpf == "hpf1" :
             labelstr += " hpf on"
         else:
             labelstr += " hpf off"
@@ -173,7 +173,7 @@ def plotTHDNs(ms):
         thdnmeds = thdns[:, 3]
         thdnq1 = thdns[:, 1]
         thdnq3 = thdns[:, 5]
-                
+        print thdnmeds
         pylab.plot(freqs, thdnmeds, 
                    color = c,
                    linewidth=1.5,
@@ -206,8 +206,23 @@ def plotTHDNs(ms):
     #ax.xaxis.set_major_formatter(majorFormatter)
 
 
+def getSineError(x, A, B, C, w, fs):
+    """
+    
+
+
+    """
+    t = arange(len(x), dtype=Float64)/fs
+
+    y = A * sin(w*t) + B * cos(w*t) + C 
+
+    err = y - x
+
+    return err
+    
 if __name__ == "__main__":
-    x = fileTHDN('/tmp/test.100.h5', 'B1')
+    x = fileTHDN('/tmp/test.02.h5', 'B1')
+
     plotTHDNs(x)
     pylab.show()
 

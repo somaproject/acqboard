@@ -370,65 +370,7 @@ def noiseHist(filename):
         pos += 1
         
         
-def getNoise(table):
-    # takes in a table of noise data and returns a tuple of
-    # (gains, noisebits, noiserangeuv) 
 
-    gains = []
-    noisebitrange = []
-    noiserangeuv = []
-    bitvar = []
-    rmsnoise = []
-
-    for r in table.iterrows():
-        x = array(r['data'], Float64)
-        xv = x * 4.096/2**16/r['gain']
-        rms = sqrt(mean(xv**2))
-        rmsnoise.append(rms)
-        a = max(r['data'])
-        b = min(r['data'])
-        gains.append(r['gain'])
-        noisebitrange.append(a-b)
-        bitvar.append(std(x))
-        noiserangeuv.append(max(xv) - min(xv))
-
-    return (gains, array(noisebitrange),
-            array(noiserangeuv), array(rmsnoise), array(bitvar))
-            
-
-def measureNoise(filename):
-    f = tables.openFile(filename)
-
-    (g1, nb1, nv1, rv1, bstd1) = getNoise(f.root.A1.noise.hpf0)
-    (g2, nb2, nv2, rv2, bstd2) = getNoise(f.root.A1.noise.hpf1)
-    
-    print g1, nv1
-    
-    pylab.scatter(g1, rv1*1e6, c='r')
-    pylab.plot(g1, rv1*1e6, c='r')
-    
-    pylab.scatter(g2, rv2*1e6, c='b')
-    pylab.plot(g2, rv2*1e6, c='b')
-
-    
-    pylab.xlabel('gain')
-    pylab.ylabel('uV RMS')
-
-    pylab.figure(2)
-    pylab.scatter(g1, bstd1, c='r')
-    pylab.plot(g1, bstd1, c='r')
-
-
-    pylab.scatter(g2, bstd2, c='b')
-    pylab.plot(g2, bstd2, c='b')
-
-    
-    pylab.xlabel('gain')
-    pylab.ylabel('bit std dev')
-    
-    
-    
-    
 
 def plotCMRR(filename):
     f = tables.openFile(filename)
@@ -494,7 +436,7 @@ def thdnloop():
 
     
 if __name__ == "__main__":
-    plotTHDnAllGains(sys.argv[1], 'B1', [False, True], 32)
+    plotTHDnAllGains(sys.argv[1], 'A1', [False, True], 128)
     #thdnloop()
     #plotFreqResponse(sys.argv[1])
     #plotBothFreqResp(sys.argv[1])

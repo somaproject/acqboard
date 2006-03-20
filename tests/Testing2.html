@@ -225,7 +225,49 @@ thing happens when we reduce the segment size. My best conclusion is
 that we have some low-freqency noise (surprise!) that gets filtered out
 by the HPF, and that causes the problems we see in the LPF. <br>
 <br>
+Given this, I think that the best future option will be fitting to
+short records. In addition, we will now specify our ns in terms of
+segment lengths. <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">19 March
+2006</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+We need to robustly measure noise, and come up with a way of saving
+that data to the files that also have sine data. <br>
+<br>
+Ultimately, we're interested in absolute noise at various gains. <br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20060319/A1.noise.png"
+ style="width: 600px; height: 450px;"></td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20060319/B1.noise.png"
+ style="width: 600px; height: 450px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Noise for A1<br>
+      </td>
+      <td style="vertical-align: top;">Noise for B1<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+The channels start off with roughly the same amount of noise at G=100,
+but the noise stays flat across gains whereas B1 decreases. <br>
+<br>
+This would seem to suggest ... A1 has some intrinsic noise, whereas
+with B1 the noise is ADC-dominated? <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">20 March
+2006</span><br style="font-weight: bold; text-decoration: underline;">
+Using the shorter THD+N windows, we get:<br>
+<img alt="" src="results/20060320/A1.allthdn.png"
+ style="width: 1024px; height: 972px;"><br>
 <span style="font-style: italic;"><span style="font-weight: bold;"></span></span><span
  style="font-weight: bold; font-style: italic;"></span>
 </body>

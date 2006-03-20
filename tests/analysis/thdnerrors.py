@@ -30,7 +30,7 @@ colorlist = [(1.0, 0., 0.),
              (1., 1., 0)]
     
 
-def manysegTHDNs(x, ns, fs):
+def manysegTHDNs(xorig, ns, fs):
     """
     Given a vector x and a list of segement lengths, where
     len(x) is an integer multiple of each n in ns, returns
@@ -39,10 +39,13 @@ def manysegTHDNs(x, ns, fs):
     """
 
     outputs = []
+    N = len(xorig)
+    x = array(xorig)
     for n in ns:
-            x.shape = (n, -1)
-            print x.shape
-            outputs.append(thdnMeasure.THDns(x, fs))
+        print N, n,  N/n, 
+        x.shape = (N/n, -1)
+        print x.shape
+        outputs.append(thdnMeasure.THDns(x, fs))
 
     return outputs
 
@@ -53,8 +56,9 @@ def plotmanysegns(ns, thdns):
         
     for pnum, thdn in enumerate(thdns):
         n = ns[pnum]
-        pylab.plot(arange(n, dtype=float)/(n-1), thdn,
-                   color = cl[0], label = "%d segments " % n)
+        q = len(thdn)
+        pylab.plot(arange(q, dtype=float)/(q-1), thdn,
+                   color = cl[0], label = "segment length = %d  " % n)
         
         pylab.axhline(mean(thdn), color = cl[0], linestyle = '--', 
                       label = "_nolegend_")
@@ -70,9 +74,10 @@ def plotmanysegns(ns, thdns):
 def plotmanyTHDns():
     f = tables.openFile(sys.argv[1])
 
-    h = io.read_array(file('testhpf.fcf'))
+    #h = io.read_array(file('testhpf.fcf'))
 
-    ns = [8, 32, 64, 128]
+
+    ns = [2**16, 2**14, 2**10]
     plots = [ 5, 6,  12]
 
     for pnum, i in enumerate(plots):
@@ -80,7 +85,7 @@ def plotmanyTHDns():
         cl = list(colorlist)
 
         for n in ns:
-            t = f.root.B1.gain100.hpf1.sine
+            t = f.root.A1.gain100.hpf1.sine
             x = array(t[i][0], dtype=Float64)
 
             y = (x - mean(x)) /2**15
@@ -91,8 +96,7 @@ def plotmanyTHDns():
             #y = signal.convolve(h, y, mode='same')
             #print  "after", max(y), min(y)
 
-            N = n
-            y.shape = (N, -1)
+            y.shape = (len(y)/n, -1)
 
             
             errs = empty_like(y)
@@ -134,3 +138,4 @@ def plotmanyTHDns():
     pylab.show()
 
 
+plotmanyTHDns()

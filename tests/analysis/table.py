@@ -9,7 +9,7 @@ import sinleqsq as pysinlesq
 sys.path.append("../sinlesq/")
 import sinlesq as csinlesq
 from matplotlib.ticker import FormatStrFormatter
-
+import thdnMeasure
 
 def FreqRes(table, volts):
     """
@@ -22,47 +22,19 @@ def FreqRes(table, volts):
 def THDnFromSineRow(sinrow, fs, segnum = 32):
 
     f = sinrow['frequency']
-    x = sinrow['data']
+    x = array(sinrow['data'], dtype=Float)
 
 
     xr = x/2.0**15
 
-    meanxr = mean(xr)
-    xr = xr - meanxr
+    xr.shape = (segnum, -1)
 
-    #xo = pysinlesq.lpf(xr, 201, 13000., fs)
-    xo = xr
+    
+    thdnlist = thdnMeasure.THDns(xr, fs)
 
-    thdlist = []
-    xlen = len(xo)/segnum
-    #pylab.plot(xo[:200000])
-    #pylab.show()
-
-    for j in range(segnum):
-        xrange = array(xo[xlen*j:xlen*(j+1)])
-        thdn = 0.0
-        enob = 0.0
-        #y = scipy.round_(32768*xrange)/32768.0
-        (thdn, A, B, C, w)  = csinlesq.computeTHDN(xrange, int(fs))
-        m1 = max(xrange)
-        m2 = min(xrange), 
-        print thdn, fs, f, m1, m2 
-        if thdn > -20:
-            print "POOR THDN", thdn, fs, f, m1, m2, j
-        else:
-            thdlist.append(thdn)
-
-
-    if len(thdlist) == 0:
-        thdns = 0.
-        thdnstd = 0.
-    else:
-        thdns = mean(thdlist)
-        thdlist.sort()
-        thdnstd = abs(max(thdlist) - min(thdlist))
-
-
-    return (thdns, thdnstd)
+    thdnmean = mean(thdnlist) 
+    thdnrange = std(thdnlist)
+    return (thdnmean, thdnrange)
     
 def THDn(table, volt, filter=True, segnum = 100):
 
@@ -76,7 +48,7 @@ def THDn(table, volt, filter=True, segnum = 100):
     except:
         fs = 192000
     for row in table.where(table.cols.sourcevpp == volt):
-        print row
+
         freqs.append(row['frequency'])
         (th, ts) = THDnFromSineRow(row, fs, segnum)
         thdns.append( th)
@@ -325,7 +297,7 @@ def compWave(filename):
     N = len(x1)
     t =  r_[0.0:N]/ fs;
 
-    (thdn, A1, B1, C1, w1) =  csinlesq.computeTHDN(x1, fs)
+    (thdn, A1, B1, C1, w1) =  pysinlesq.computeTHDN(x1, fs)
     x1m = (A1*cos(t*w1) + B1 * sin(t*w1) + C1)
     print "x1 thdn = ", thdn
 
@@ -436,7 +408,7 @@ def thdnloop():
 
     
 if __name__ == "__main__":
-    plotTHDnAllGains(sys.argv[1], 'A1', [False, True], 128)
+    plotTHDnAllGains(sys.argv[1], 'A3', [False], 32)
     #thdnloop()
     #plotFreqResponse(sys.argv[1])
     #plotBothFreqResp(sys.argv[1])

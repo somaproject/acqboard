@@ -129,12 +129,12 @@ def tableRMSNoise(table):
 
     
     
-def plotTableNoise(tables):
+def plotTableNoise(tables, prefix = "" ):
 
     for t in tables:
         (g, noise) = tableRMSNoise(t)
 
-        pylab.semilogy(g, noise * 1e6, label = t.name)
+        pylab.semilogy(g, noise * 1e6, label = name)
 
     pylab.xlabel("gain")
     pylab.ylabel("Noise RMS (uV)")
@@ -142,3 +142,24 @@ def plotTableNoise(tables):
     pylab.grid()
 
     
+
+def plotAllNoise(filename):
+    f = tables.openFile(filename)
+
+    for t in f.walkNodes('/', 'Table'):
+
+        (g, noise) = tableRMSNoise(t)
+
+        pylab.semilogy(g, noise * 1e6, label = t._v_pathname)
+        
+
+
+    pylab.xlabel("gain")
+    pylab.ylabel("Noise RMS (uV)")
+    pylab.legend()
+    pylab.grid()
+    pylab.show()
+    
+
+if __name__ == "__main__":
+    plotAllNoise(sys.argv[1])

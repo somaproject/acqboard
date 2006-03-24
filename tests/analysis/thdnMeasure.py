@@ -28,7 +28,7 @@ def THDns(x, fs):
     """
 
     # first, zero-mean
-    print "thdns shape =", x.shape
+
     rowcnt = len(x)
     meanxr = x.mean(1)
     meanxr.shape = (rowcnt, 1)
@@ -41,7 +41,7 @@ def THDns(x, fs):
         thdn = 0.0
         enob = 0.0
 
-        (thdn, A, B, C, w)  = csinlesq.computeTHDN(xrow, int(fs))
+        (thdn, A, B, C, w)  = pysinlesq.computeTHDN(xrow, int(fs))
 
         out[i] = thdn
 
@@ -173,7 +173,7 @@ def plotTHDNs(ms):
         thdnmeds = thdns[:, 3]
         thdnq1 = thdns[:, 1]
         thdnq3 = thdns[:, 5]
-        print thdnmeds
+
         pylab.plot(freqs, thdnmeds, 
                    color = c,
                    linewidth=1.5,

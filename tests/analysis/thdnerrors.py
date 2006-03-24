@@ -74,18 +74,18 @@ def plotmanysegns(ns, thdns):
 def plotmanyTHDns():
     f = tables.openFile(sys.argv[1])
 
-    #h = io.read_array(file('testhpf.fcf'))
+    h = io.read_array(file('HPF-as-fir.dat'))
 
 
-    ns = [2**16, 2**14, 2**10]
-    plots = [ 5, 6,  12]
+    ns = [2**13, 2**11,  2**9]
+    plots = [2, 10, 19]
 
     for pnum, i in enumerate(plots):
         pylab.subplot( len(plots), 1, pnum+1)
         cl = list(colorlist)
 
         for n in ns:
-            t = f.root.A1.gain100.hpf1.sine
+            t = f.root.A3.gain100.hpf0.sine
             x = array(t[i][0], dtype=Float64)
 
             y = (x - mean(x)) /2**15
@@ -96,7 +96,8 @@ def plotmanyTHDns():
             #y = signal.convolve(h, y, mode='same')
             #print  "after", max(y), min(y)
 
-            y.shape = (len(y)/n, -1)
+            N = len(y)  / n
+            y.shape = (N, -1)
 
             
             errs = empty_like(y)
@@ -120,8 +121,9 @@ def plotmanyTHDns():
 
             b = errs[best]
             w = errs[worst]
-
-            pylab.plot(arange(n, dtype=float)/(n-1), thdns,
+            print n, len(thdns)
+            
+            pylab.plot(arange(N, dtype=float)/(N-1), thdns,
                        color = cl[0], label = "%d segments " % n)
             pylab.axhline(mean(thdns), color = cl[0], linestyle = '--', 
                        label = "_nolegend_")

@@ -268,7 +268,117 @@ with B1 the noise is ADC-dominated? <br>
 Using the shorter THD+N windows, we get:<br>
 <img alt="" src="results/20060320/A1.allthdn.png"
  style="width: 1024px; height: 972px;"><br>
-<span style="font-style: italic;"><span style="font-weight: bold;"></span></span><span
+This would be fine except that we have really bad performance now on
+B1. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">21 March
+2006</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+At this point, A1 is the normal looking channel and B1, g=10k, hpf=off
+looks horrible. <br>
+<br>
+We'll try power-cycling... no effect; now we'll try input B. No effect.
+What the hell happened? <br>
+<br>
+So, to diagnose this we have removed the input AC-coupling network, and
+the 10 uF Coupling capacitor: <br>
+<br>
+<img alt="" src="results/20060321/A1-B1.noise.justAA+ADC.png"
+ style="width: 1200px; height: 900px;"><br>
+<br>
+<br>
+&nbsp;<br>
+<span style="font-style: italic;"><br>
+We get a graph that looks almost exactly like this when we remove the
+In-Amp and ground the input to the PGA/HPF subcircuit. <br>
+<br>
+</span><span style="font-weight: bold; text-decoration: underline;">22
+March 2006</span><br
+ style="font-weight: bold; text-decoration: underline;">
+<span style="font-style: italic;"><span style="font-style: italic;"></span></span>TWe
+soldered on A3 and B3, without any part of the spike filter (HPF
+network -- no mux, no filter, no cap, etc.) and we get the following:<br>
+<br>
+<img alt="" src="results/20060322/A1-B1-A3-B3-noise.png"
+ style="width: 600px; height: 490px;"><br>
+That is, A1 still has the bad performance, but all other channels
+appear to have ADC-dominated noise . <br>
+<br>
+Accidentally ran against the noise tests, so we no doubt had some
+sustained periods of overvoltage. Let's see if that actually kills our
+THD+N. <br>
+<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">23 March
+2006</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+The THD+N we measure for these channels <span
+ style="font-weight: bold;">which lack the HPF circuitry or AC-coupling
+is:</span><br>
+<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20060323/A3.withoutHPF.THD+N.png"
+ style="width: 500px; height: 375px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20060323/B3.withoutHPF.THD+N.png"
+ style="width: 500px; height: 375px;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+111, 112 are new with AC-coupling:<br>
+<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20060323/A3.with-AC-coupling.THD+N.png"
+ style="width: 600px; height: 450px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20060323/B3.with-AC-coupling.THD+N.png"
+ style="width: 600px; height: 450px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Wow, A3 looks like total shit. But noise measurements show that A3 and
+B3 still have good noise performance. <br>
+<br>
+Now, to check, we'll replace the AC-coupling components on A3 with just
+the zero-ohm resistor -- we clearly get the same A3 as above. <br>
+<br>
+What is up with the upper side of the board? We've removed mux and HPF
+amp from A1, and resoldered AC-coupling r/c on A3, and will test again
+-- we still get the same poor non-flat response for A3:<br>
+<img alt="" src="results/20060323/A3.with-AC-coupling.THD+N.2.png"
+ style="width: 400px; height: 300px;"><br>
+<br>
+<br>
+<br>
+<br>
+Now, with a different XLR-connector board (one which also provides
+input to A1's current no-AC-coupling In-amp) we get something that
+looks virtually identical. <br>
+<br>
+<br>
+<span style="font-style: italic;"><span style="font-style: italic;"></span><span
+ style="font-weight: bold;"></span></span><span
  style="font-weight: bold; font-style: italic;"></span>
 </body>
 </html>

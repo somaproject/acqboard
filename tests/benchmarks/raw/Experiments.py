@@ -194,8 +194,8 @@ def simpleTest(filename):
                10000:7}
     
     b.gainSet = gainSet
-    b.hpfs = [0, 1]
-    b.gains = [100, 200, 500, 1000, 2000, 5000, 10000]
+    b.hpfs = [0]
+    b.gains = [100, 1000, 10000]
     #b.gains = [100]
     b.inChanB = 0
     b.inChanA = 0    
@@ -203,15 +203,15 @@ def simpleTest(filename):
     f1 = 200
     f2 = 10000
     #s.freqs = logspace(log10(f1), log10(f2), 20)
-    s.freqs = linspace(f1, f2, 50)
+    s.freqs = linspace(f1, f2, 30)
     
     s.vpps = [3.9]
     
-    e.A1.append((b, s))
+    #e.A1.append((b, s))
     #e.A2.append((b, s))
-    #e.A3.append((b, s))
+    e.A3.append((b, s))
     #e.A4.append((b, s))
-    #e.B1.append((b, s))
+    #e.A3.append((b, s))
     #e.B2.append((b, s))
     #e.B3.append((b, s))
     #e.B4.append((b, s))
@@ -244,7 +244,9 @@ def noiseTest(filename):
     #b.gains = [1, 2, 5, 10, 20, 50, 100]
     #b.gains = [1]
     e.A1.append((b, s))
+    e.A3.append((b, s))
     e.B1.append((b, s))
+    e.B3.append((b, s))
 
 
     print "ready to run" 
@@ -268,7 +270,7 @@ def CMRRTest(filename):
     b.gainSet = gainSet
     b.hpfs = [1, 0]
     #b.gains = [100, 200, 500, 1000, 2000, 5000, 10000]
-    b.gains = [10000]
+    b.gains = [1000, 10000]
     #b.gains = [1]
     f1 = 20
     f2 = 10000

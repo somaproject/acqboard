@@ -85,7 +85,7 @@ def plotmanyTHDns():
         cl = list(colorlist)
 
         for n in ns:
-            t = f.root.A3.gain100.hpf0.sine
+            t = f.root.A3.gain10000.hpf0.sine
             x = array(t[i][0], dtype=Float64)
 
             y = (x - mean(x)) /2**15
@@ -124,7 +124,7 @@ def plotmanyTHDns():
             print n, len(thdns)
             
             pylab.plot(arange(N, dtype=float)/(N-1), thdns,
-                       color = cl[0], label = "%d segments " % n)
+                       color = cl[0], label = "length %d segments " % n)
             pylab.axhline(mean(thdns), color = cl[0], linestyle = '--', 
                        label = "_nolegend_")
             cl.pop(0)

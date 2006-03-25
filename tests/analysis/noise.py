@@ -120,7 +120,7 @@ def tableRMSNoise(table):
         xv = x * 4.096/2**16/r['gain']
         xvnormed = xv - mean(xv) 
         
-        rms = sqrt(mean(xv**2))
+        rms = sqrt(mean(xvnormed**2))
 
 
         gains[i] = r['gain']
@@ -150,7 +150,7 @@ def plotAllNoise(filename):
 
         (g, noise) = tableRMSNoise(t)
 
-        pylab.semilogy(g, noise * 1e6, label = t._v_pathname)
+        pylab.plot(g, noise * 1e6, label = t._v_pathname)
         
 
 

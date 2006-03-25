@@ -28,7 +28,7 @@ def THDnFromSineRow(sinrow, fs, segnum = 32):
     xr = x/2.0**15
 
     xr.shape = (segnum, -1)
-
+    print "The length of the segment is", xr.shape
     
     thdnlist = thdnMeasure.THDns(xr, fs)
 
@@ -373,9 +373,9 @@ def plotFreqResponse(filename):
     f = tables.openFile(filename)
 
 
-    table = f.root.A2.gain10000.hpf1.sine
+    table = f.root.A3.gain100.hpf0.sine
     ax = pylab.subplot(1,1,1)
-    (freqs, amps) = freqResp(table, 4.05, 1)
+    (freqs, amps) = freqResp(table, 3.9, 1)
 
     pylab.semilogx(freqs, amps)
     pylab.legend()
@@ -408,7 +408,7 @@ def thdnloop():
 
     
 if __name__ == "__main__":
-    plotTHDnAllGains(sys.argv[1], 'A3', [False], 32)
+    plotTHDnAllGains(sys.argv[1], 'B3', [False, True], 32)
     #thdnloop()
     #plotFreqResponse(sys.argv[1])
     #plotBothFreqResp(sys.argv[1])

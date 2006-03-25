@@ -376,6 +376,92 @@ Now, with a different XLR-connector board (one which also provides
 input to A1's current no-AC-coupling In-amp) we get something that
 looks virtually identical. <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">24 March
+2006</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+As best I can tell, an artifact of adding the AC-coupling components is
+to generate very-low-frequency artifacts which impact THD+N. <br>
+<br>
+Let's try with 1M/1uf vs 100k/10uF:<br>
+<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20060324/A3.1M1uF.png"
+ style="width: 600px; height: 450px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20060324/A3.100k10uF.png"
+ style="width: 600px; height: 450px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">1 MOhm, 1 uF<br>
+      </td>
+      <td style="vertical-align: top;">100k, 10 uF<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Now, let's measure our noise perf: <br>
+<br>
+<img alt="" src="results/20060324/A3.noise.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+<br>
+The B3 channel shows exactly the same performance when we substitute
+resistors like this. <br>
+<br>
+Now, we add on other resistors and use the multiple-input selection;
+what happens when the input is loaded down by multiple resistors? We
+don't really care, but...<br>
+<br>
+Now, we've soldered onto A3 and B3 the HPF-amp and the mux, but not the
+R/C; now let's measure: <br>
+<br>
+<br>
+&nbsp;<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20060324/A3.all.png" style="width: 500px; height: 381px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20060324/B3.all.png" style="width: 500px; height: 403px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+As near as we can tell, the above are complete channels. <br>
+<br>
+<big><big><span style="font-weight: bold; text-decoration: underline;">Oh
+my, there are horrible systemic errors in all of the previous NOISE
+MEASUREMENTS. </span><br
+ style="font-weight: bold; text-decoration: underline;">
+<br>
+</big></big><span style="font-weight: bold; text-decoration: underline;">25
+March 2006</span><br
+ style="font-weight: bold; text-decoration: underline;">
+Let's try and measure noise properly now...<br>
+<img alt="" src="results/20060325/A3B3.noise.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+<br>
+<br>
+Okay, that looks pretty awesome. <br>
 <br>
 <span style="font-style: italic;"><span style="font-style: italic;"></span><span
  style="font-weight: bold;"></span></span><span

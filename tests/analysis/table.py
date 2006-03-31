@@ -297,7 +297,7 @@ def compWave(filename):
     N = len(x1)
     t =  r_[0.0:N]/ fs;
 
-    (thdn, A1, B1, C1, w1) =  pysinlesq.computeTHDN(x1, fs)
+    (thdn, A1, B1, C1, w1) =  csinlesq.computeTHDN(x1, fs)
     x1m = (A1*cos(t*w1) + B1 * sin(t*w1) + C1)
     print "x1 thdn = ", thdn
 
@@ -408,7 +408,7 @@ def thdnloop():
 
     
 if __name__ == "__main__":
-    plotTHDnAllGains(sys.argv[1], 'B3', [False, True], 32)
+    plotTHDnAllGains(sys.argv[1], 'A1', [False, True], 32)
     #thdnloop()
     #plotFreqResponse(sys.argv[1])
     #plotBothFreqResp(sys.argv[1])

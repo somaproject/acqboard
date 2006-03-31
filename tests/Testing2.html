@@ -463,8 +463,79 @@ Let's try and measure noise properly now...<br>
 <br>
 Okay, that looks pretty awesome. <br>
 <br>
-<span style="font-style: italic;"><span style="font-style: italic;"></span><span
- style="font-weight: bold;"></span></span><span
+<br>
+<span style="font-weight: bold; text-decoration: underline;">27 March
+2006</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+Looking at the results after a few days, and a board cleaning:&nbsp;
+Looks fine. A3 and B3 have good THD+N. <br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">29 March
+2006</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+All of the channels that use the old HPF caps have the strange THD+N
+curves; the current ones don't. It is very possible that <code>490-3360-1-ND
+is the solution to our problems on that front. <br>
+<br>
+Noise performance looks great across all channels -except- for A1,
+which has its long-standing problems. <br>
+<br>
+</code><br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">31 March
+2006</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+So here we are: <br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20060331/B1.thdn.png" style="width: 300px; height: 225px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20060331/B2.thdn.png" style="width: 300px; height: 225px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20060331/B3.thdn.png" style="width: 300px; height: 225px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20060331/B4.thdn.png" style="width: 300px; height: 225px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Apparently a large part of the crappy results arose from our choice of
+the HPF cap -- the answer appears to be GRM31C5C1H683JA01L, or Digikey
+490-3360-1-ND. <br>
+<br>
+<span style="font-weight: bold;">WE've confirmed that the noise in a
+neuralynx amp at g=400 = 5.7 uV RMS, and g=40000 are 3.9 uV RMS. <br>
+<br>
+SOldering up A1, we note that the AD8510ARMs in the box are marked
+differently from the ones in our package. We are using the box one for
+A1. <br>
+<br>
+Still, performance on A 1 looks great. <br>
+<br>
+<br>
+<img alt="" src="results/20060331/noise.png"
+ style="width: 1000px; height: 700px;"><br>
+</span><span style="font-style: italic;"><br>
+<br>
+Noise performance. Woohoo, spring break! <span
+ style="font-style: italic;"></span><span style="font-weight: bold;"></span></span><span
  style="font-weight: bold; font-style: italic;"></span>
 </body>
 </html>

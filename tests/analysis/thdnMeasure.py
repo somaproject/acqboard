@@ -41,9 +41,13 @@ def THDns(x, fs):
         thdn = 0.0
         enob = 0.0
 
-        (thdn, A, B, C, w)  = pysinlesq.computeTHDN(xrow, int(fs))
+        (thdnpy, A, B, C, w)  = pysinlesq.computeTHDN(xrow, int(fs))
+        (thdnc, A, B, C, w)  = csinlesq.computeTHDN(xrow, int(fs))
 
-        out[i] = thdn
+        if thdnc < thdnpy:
+            out[i] = thdnc
+        else:
+            out[i] = thdnpy
 
     return out
 

@@ -57,7 +57,7 @@ def rawread(nsamples):
     
     return data
 
-def normread(nsamples, channum=0):
+def normread(nsamples, chans):
 
     print "executing normal read"
 
@@ -66,8 +66,7 @@ def normread(nsamples, channum=0):
     
     s.connect("/tmp/acqboard.out")
     
-    
-    
+        
     nsamp = 0; 
     
     resultstr = ""
@@ -89,18 +88,22 @@ def normread(nsamples, channum=0):
     datastr = resultstr[offset:]
     
     # now, we format
-    data = zeros(nsamples, Int16)
+
+    datas = []
+    for channum in chans:
+        data = zeros(nsamples, Int16)
     
-    pos = 0
-    for i in range(len(datastr)/2):
+        pos = 0
+        for i in range(len(datastr)/2):
 
-        #print i, len(datastr), len(datastr)/2, pos
-        if i % 12 == (channum ) :
-            if pos < nsamples:
-                data[pos] = unpack(">h", datastr[(2*i):(2*(i+1))])[0]
-                pos += 1             
+            #print i, len(datastr), len(datastr)/2, pos
+            if i % 12 == (channum ) :
+                if pos < nsamples:
+                    data[pos] = unpack(">h", datastr[(2*i):(2*(i+1))])[0]
+                    pos += 1             
 
+        datas.append(data)
     s.close()
 
     
-    return data
+    return datas

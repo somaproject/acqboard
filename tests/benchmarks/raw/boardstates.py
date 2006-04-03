@@ -114,17 +114,25 @@ class BoardStates(object):
     hpfs = property(getHpfs, setHpfs)
     
 
-    def setup(self, rawMode = False,  channel = 'A1'):
+    def setup(self, rawMode = False,  channels = 'A1'):
+        """
 
+        Channel can be a list too
+        
+        """
+        
         self.acqout.open()
         self.acqstat.open()
 
-        self.channel = channel
+        if isinstance(channels, list):
+            self.channels = channels
+        else:
+            self.channels = [channels]
 
         if rawMode:
-            acqcmdstr = self.acqcmd.switchmode(3, rawchan=self.channel)
+            acqcmdstr = self.acqcmd.switchmode(3, rawchan=self.channels[0])
         else:
-            acqcmdstr = self.acqcmd.switchmode(0, rawchan=self.channel)
+            acqcmdstr = self.acqcmd.switchmode(0, rawchan=self.channels[0])
 
         sendCommandAndReTransmit(self.acqout,
                                  self.acqcmd,
@@ -161,22 +169,17 @@ class BoardStates(object):
 
             newgain = self.gainSet[g]
             
-            
 
-            # debugging for confused state of current board
-            channel = self.channel
-            #if self.channel == "A4":
-            #    channel =  "A1"
-            #elif self.channel == "AC":
-            #    channel = "A1"
+            for channel in self.channels:
+
 
             
-            acqcmdstr =  self.acqcmd.setgainnum(channel,
-                                             newgain)
-            sendCommandAndReTransmit(self.acqout,
-                                     self.acqcmd,
-                                     self.acqstat,
-                                     acqcmdstr)
+                acqcmdstr =  self.acqcmd.setgainnum(channel,
+                                                    newgain)
+                sendCommandAndReTransmit(self.acqout,
+                                         self.acqcmd,
+                                         self.acqstat,
+                                         acqcmdstr)
 
 
             for i in acqcmdstr:
@@ -191,18 +194,16 @@ class BoardStates(object):
         for h in self.__hpfs:
 
             # debugging for confused state of current board
-            channel = self.channel
+
             #if self.channel == "A4":
             #    channel =  "A1"
             #elif self.channel == "AC":
             #    channel = "A1"
 
-            sendCommandAndReTransmit(self.acqout,
-                                     self.acqcmd,
-                                     self.acqstat,
-                                     self.acqcmd.sethpfilter(channel, h))
+            for channel in self.channels:
+                sendCommandAndReTransmit(self.acqout,
+                                         self.acqcmd,
+                                         self.acqstat,
+                                         self.acqcmd.sethpfilter(channel, h))
 
             yield h
-
-    
-            

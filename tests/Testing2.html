@@ -534,8 +534,48 @@ Still, performance on A 1 looks great. <br>
  style="width: 1000px; height: 700px;"><br>
 </span><span style="font-style: italic;"><br>
 <br>
-Noise performance. Woohoo, spring break! <span
- style="font-style: italic;"></span><span style="font-weight: bold;"></span></span><span
- style="font-weight: bold; font-style: italic;"></span>
+Noise performance. Woohoo, spring break! <br>
+<br style="font-weight: bold;">
+</span><br style="font-weight: bold; text-decoration: underline;">
+<span style="font-weight: bold; text-decoration: underline;"></span><span
+ style="font-weight: bold; text-decoration: underline;">1 April 2006</span><span
+ style="font-weight: bold;"><br>
+<br>
+<span style="font-weight: bold;"></span></span>There exist many
+situations where csinlesq will return one result and pysinlesq will
+return another, and this is very frustrating; sometimes these differ by
+as much as 90 dB! It seems that all the poor-THD+N results were
+essentially artifacts. <br>
+<br>
+<span style="font-weight: bold;"><span style="font-weight: bold;"></span>Also,
+simply shorting A1 and AC doesn't appear to negatively impact either;
+now we'll try with in-muxes<br>
+<br>
+</span><span style="text-decoration: underline; font-weight: bold;">2
+April 2006</span><br
+ style="text-decoration: underline; font-weight: bold;">
+<span style="font-weight: bold;"><span style="font-weight: bold;">Un</span></span>fortunately,
+the performance on the inmux channels looks awful.<br>
+<img alt="" src="results/20060402/AC.bad.thdn.png"
+ style="width: 600px; height: 450px;">&nbsp;<br>
+<br>
+I think this is a direct result of the large voltage swing encountering
+the non-flat RON; to test this, I'm going to replace the AC HPF with a
+zero-ohm resistor and then remove the PGAIN pin. Thus the input to the
+mux (U9) will be through a AD8510 ARM buffer. <br>
+<br>
+<span style="text-decoration: underline; font-weight: bold;">3 April
+2006</span><br style="text-decoration: underline; font-weight: bold;">
+<span style="font-weight: bold;"><br>
+I think we're ready to go. </span>Although oh my, I may have been
+calculating noise wrong this entire time!<br>
+<br>
+<img alt="" src="results/20060403/noise.correct.png"
+ style="width: 1000px; height: 736px;"><br>
+<br>
+<br>
+<br>
+<span style="font-weight: bold;"><br>
+</span><span style="font-weight: bold; font-style: italic;"></span>
 </body>
 </html>

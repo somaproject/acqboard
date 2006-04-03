@@ -112,7 +112,7 @@ begin
 
   gwe <= zero or GSET;
 
-  f   <= FILTER and not zero;
+  f   <= not (FILTER and not zero);
   fwe <= FSET or zero;
 
   i(0) <= ISEL(0) and not zero;

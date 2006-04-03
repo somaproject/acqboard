@@ -118,10 +118,9 @@ def tableRMSNoise(table):
         r = table[i] 
         x = array(r['data'], Float64)
         xv = x * 4.096/2**16/r['gain']
-        xvnormed = xv - mean(xv) 
         
-        rms = sqrt(mean(xvnormed**2))
-
+        #rms = sqrt(mean(xvnormed**2))
+        rms = std(xv)
 
         gains[i] = r['gain']
         rmsnoise[i] = rms

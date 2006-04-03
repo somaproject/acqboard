@@ -33,7 +33,7 @@ def computeTHDN(x, fs):
     rmssignal = sqrt(A**2 + B**2)
     rmsnoise = sqrt(sum(diff**2)/len(diff))
     snrdb =  20*log10(rmssignal/rmsnoise)
-
+        
     return (-snrdb, A, B, C, w)
 
 def test():

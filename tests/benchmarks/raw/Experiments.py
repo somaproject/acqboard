@@ -16,7 +16,8 @@ class SineRecord(tables.IsDescription):
 class NoiseRecord(tables.IsDescription):
     gain = tables.Int16Col()
     data          = tables.Int16Col(shape=(2**16,))
-    
+
+
 class Experiment(object):
 
     def __init__(self, filename, title, raw, balanced=False):
@@ -169,9 +170,9 @@ class Experiment(object):
                             if self.raw:
                                 x = rawread(2**17)
                             else:
-                                x = normread(2**17, chanNum)
+                                x = normread(2**17, [chanNum])
 
-                            row['data'] = x[2**16:]
+                            row['data'] = x[0][2**16:]
                             row.append()
                             time.sleep(0.0)
                                 
@@ -195,27 +196,29 @@ def simpleTest(filename):
     
     b.gainSet = gainSet
     b.hpfs = [0, 1]
-    b.gains = [100, 10000]
+    b.gains = [100,  10000]
     #b.gains = [100]
     b.inChanB = 0
     b.inChanA = 0    
     #b.gains = [1]
-    f1 = 200
+    f1 = 100
     f2 = 10000
     #s.freqs = logspace(log10(f1), log10(f2), 20)
     s.freqs = linspace(f1, f2, 10)
-    
+    #s.freqs = array([100.0, 500.0, 1000.0, 10000.0])
     s.vpps = [3.9]
     
     e.A1.append((b, s))
-    #e.A2.append((b, s))
-    #e.A3.append((b, s))
-    #e.A4.append((b, s))
-    #e.A3.append((b, s))
-    #e.B1.append((b, s))
-    #e.B2.append((b, s))
-    #e.B3.append((b, s))
-    #e.B4.append((b, s))
+    e.A2.append((b, s))
+    e.A3.append((b, s))
+    e.A4.append((b, s))
+    e.AC.append((b, s))
+    
+    e.B1.append((b, s))
+    e.B2.append((b, s))
+    e.B3.append((b, s))
+    e.B4.append((b, s))
+    e.BC.append((b, s))
 
     #e.AC.append((b, s))
     

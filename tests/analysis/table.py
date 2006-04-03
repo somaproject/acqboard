@@ -408,7 +408,7 @@ def thdnloop():
 
     
 if __name__ == "__main__":
-    plotTHDnAllGains(sys.argv[1], 'A1', [False, True], 32)
+    plotTHDnAllGains(sys.argv[1], 'A1', [True, False], 32)
     #thdnloop()
     #plotFreqResponse(sys.argv[1])
     #plotBothFreqResp(sys.argv[1])

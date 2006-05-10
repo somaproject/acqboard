@@ -210,13 +210,13 @@ OutputVariantName25=
 OutputEnabled25=0
 OutputDefault25=0
 Configuration25_Name1=General
-Configuration25_Item1=OpenExported=False|ForceFit=False|TemplateFilename=|BatchMode=2|FormWidth=875|FormHeight=665
+Configuration25_Item1=OpenExported=False|ForceFit=False|Preview=False|TemplateFilename=|BatchMode=0|FormWidth=875|FormHeight=663
 Configuration25_Name2=GroupOrder
-Configuration25_Item2=LibRef=True|Value=True
+Configuration25_Item2=
 Configuration25_Name3=SortOrder
 Configuration25_Item3=Description=Down
 Configuration25_Name4=VisibleOrder
-Configuration25_Item4=Description=100|Footprint=100|LibRef=100|Quantity=100|Value=100
+Configuration25_Item4=Designator=114|Description=181|Footprint=100|LibRef=100|Quantity=100|Value=100|Comment=114|Tolerance=114|Type=100
 
 [CAMtasticOutputs]
 OpenODBOutput=False

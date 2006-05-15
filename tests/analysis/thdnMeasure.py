@@ -162,7 +162,6 @@ def plotTHDNs(ms):
 
 
     for (gain, hpf, v, thdns)  in ms: 
-
         c = colorlist.pop(0)
 
         labelstr = "gain = %d, %3.2f dBFS " % (gain,
@@ -225,7 +224,9 @@ def getSineError(x, A, B, C, w, fs):
     return err
     
 if __name__ == "__main__":
-    x = fileTHDN('/tmp/test.02.h5', 'B1')
+    file = sys.argv[1]
+    chan = sys.argv[2]
+    x = fileTHDN(file, chan)
 
     plotTHDNs(x)
     pylab.show()

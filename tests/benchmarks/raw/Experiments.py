@@ -209,16 +209,16 @@ def simpleTest(filename):
     s.vpps = [3.9]
     
     e.A1.append((b, s))
-    e.A2.append((b, s))
-    e.A3.append((b, s))
-    e.A4.append((b, s))
-    e.AC.append((b, s))
+##     e.A2.append((b, s))
+##     e.A3.append((b, s))
+##     e.A4.append((b, s))
+##     e.AC.append((b, s))
     
-    e.B1.append((b, s))
-    e.B2.append((b, s))
-    e.B3.append((b, s))
-    e.B4.append((b, s))
-    e.BC.append((b, s))
+##     e.B1.append((b, s))
+##     e.B2.append((b, s))
+##     e.B3.append((b, s))
+##     e.B4.append((b, s))
+##     e.BC.append((b, s))
 
     #e.AC.append((b, s))
     

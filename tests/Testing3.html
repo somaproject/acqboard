@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>Acqboard Testing 3</title>
+</head>
+<body>
+<span style="font-weight: bold; text-decoration: underline;">14 May 2006</span><br
+ style="font-weight: bold; text-decoration: underline;">
+<br>
+Another day, another series of tests. Unfortunately, the acqboard
+prototype we received from eTech-WEB had numerous shorts in it,
+including an impossible-to-fix one that appeared to be under the PGA
+between channel B2 and B1. I have removed those channels for the time
+being. <br>
+<br>
+<br>
+<img alt="" src="results/20060514/img_3858.jpg"
+ style="width: 800px; height: 600px;"><br>
+<br>
+The visible shorts on the ADC are above. <br>
+<br>
+<br>
+The current state of our benchmarking code really leaves something to
+be desired, and should undergo a comprehensive clean-up at some point
+in the near future. In particular, I'm unclear on how exactly I run
+THD+N tests, noise tests, linearity tests, etc. and produce my expected
+plots. <br>
+<br>
+Ultimately, the problem is that the code that you want to run when
+debugging is different from the code that you want to run when running
+large-scale performance tests. The situation is similar with the
+graphical output. <br>
+<br>
+We generate the following data with Experiments2.py, and then use
+thdnMeasure.py to plot: <br>
+<br>
+<img alt="" src="results/20060514/A1.THD+N.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+Which is associated with the non-svn'd file 20060514.all.h5. <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>

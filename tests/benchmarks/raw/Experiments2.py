@@ -3,7 +3,7 @@ import sys
 import time
 import sourcestates
 import boardstates
-from read import * 
+import read
 import tables
 from scipy import * 
 from matplotlib import pylab
@@ -100,7 +100,7 @@ class AllTHDNExperiment(object):
             for pos, c in enumerate(self.chanlist):
                 if i == c:
                     channums.append(pos)
-        
+        print "self.chans = ", self.chans
 
         for g in self.bs.gainIter():
             # create table insde of sine node
@@ -116,8 +116,9 @@ class AllTHDNExperiment(object):
                         # it's all python's fault. 
                         time.sleep(0.1)
 
-
-                        x = normread(2**18, channums)
+                        print channums
+                        
+                        x = read.normread(2**18, channums)
 
                         y = diff(x)
 
@@ -172,14 +173,9 @@ def test():
 
     e.bs = b
     e.ss = s
-    e.chans = ['A1', 'A2', 'A3', 'A4', 'AC', 'B1', 'B2', 'B3', 'B4', 'BC']
-
+    e.chans = ['A1', 'A2', 'A3', 'A4', 'AC', 'B3', 'B4', 'BC']
+    #e.chans = ['A1', 'A2']
     e.run()
-
-
-
-
-
 
 
 if __name__ == "__main__":

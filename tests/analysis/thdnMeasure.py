@@ -21,6 +21,7 @@ import pysinlesq
 from matplotlib.ticker import FormatStrFormatter
 import sets
 
+import numpy as n
 
 def THDns(x, fs):
     """
@@ -51,7 +52,7 @@ def THDns(x, fs):
 
     return out
 
-def THDnsFromTable(table, volt, segnum = 100):
+def THDnsFromTable(table, volt, segnum = 100, frequency= None):
     """
     Takes in a table of sine samples and returns a five-number summary
 
@@ -66,9 +67,15 @@ def THDnsFromTable(table, volt, segnum = 100):
         fs = 192000
 
     pos = 0
-    for row in table.where(table.cols.sourcevpp == volt):
 
-
+    if frequency == None:
+        titerator = table.where(table.cols.sourcevpp == volt)
+    else:
+        titerator = [row for row in table.iterrows() if row['sourcevpp'] == volt  and row['frequency'] == frequency]
+        
+        
+    for row in titerator:
+        
         x = array(row['data'], Float)
         xn = x / 2.0**15
 
@@ -85,7 +92,6 @@ def THDnsFromTable(table, volt, segnum = 100):
         qu = ts[len(ts)*3/4]
         
         outrec[pos] = (row['frequency'], minval, ql, med, qu, maxval)
-
         pos += 1 
         
 
@@ -222,14 +228,85 @@ def getSineError(x, A, B, C, w, fs):
     err = y - x
 
     return err
+
+def thdnSummary(filename, freq, gains, hpfs):
+    """
+    Takes in a filename and for that HDF5 file, generates
+    a table of THD+N values across all channels, gains, for that frequency
+
+
+    """
+
+    volt = 3.9
+    
+    h5file = tables.openFile(filename)
+    chanresults = []
+
+    for name, chan in h5file.root._v_children.iteritems():
+        results = []
+        for g in gains:
+            gaingroup = chan._v_children['gain%d' % g]
+
+            for h in hpfs: 
+                if h:
+                    hpfgroup = gaingroup.hpf0
+                else:
+                    hpfgroup = gaingroup.hpf1
+
+                table = hpfgroup.sine
+                
+                thdns = THDnsFromTable(table, volt/g, segnum = 64,
+                                       frequency = freq)
+
+
+                thdn = thdns[0][1]
+                results.append(thdn)
+        chanresults.append((name, results))
+    return chanresults
+
+def formatResults(filename, chanresults, gains, hpfs):
+
+    fid = file(filename, 'w')
+
+    fid.write("<html><body>\n")
+    fid.write("<table>\n")
+
+    # headers
+    fid.write("<tr>\n")
+    fid.write("<td>Channel </td>")
+    for g in gains:
+        for h in hpfs:
+            fid.write("<TD><b> g=%d, hpf=%d</b> </TD>" % (g, h))
+    fid.write("</tr>\n")
+
+    for c in chanresults:
+        fid.write("<tr>\n")
+        fid.write("<td> %s </td>"  % c[0])
+        for cr in c[1]:
+            fid.write("<td> %3.1f </td>" % cr)
+        fid.write('</tr>\n')
+    
+    fid.write("</table>")
+
+    fid.write("</body><html>\n")
+
+    fid.close()
+
+def doSummary():
+    gains = n.array([100, 200, 500, 1000, 2000, 5000, 10000])
+    hpfs = [True, False]
+
+    file = sys.argv[1]
+    chanresults = thdnSummary(file, 1000.0, gains, hpfs)
+    formatResults('/tmp/dummy.html', chanresults, gains, hpfs)
     
 if __name__ == "__main__":
-    file = sys.argv[1]
-    chan = sys.argv[2]
-    x = fileTHDN(file, chan)
 
-    plotTHDNs(x)
-    pylab.show()
-
-
+    doSummary()
     
+#    chan = sys.argv[2]
+#    x = fileTHDN(file, chan)
+
+#    plotTHDNs(x)
+#    pylab.show()
+  

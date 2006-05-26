@@ -177,6 +177,42 @@ def test():
     #e.chans = ['A1', 'A2']
     e.run()
 
+def QuickAllChannelTest(filename):
+
+    """ Across all channels, we try and measure
+    the THD+N at a single frequency / voltage just to make sure
+    everything is working.
+
+    """
+    e = AllTHDNExperiment(filename, "A quick test of all chans",
+                          raw=False, balanced=True)
+
+    b = boardstates.BoardStates()
+    s = sourcestates.SineStates(chanA=True, chanB=True)
+    gainSet = {0:0,
+               100:1,
+               200:2,
+               500:3,
+               1000:4,
+               2000:5,
+               5000:6,
+               10000:7}
+    
+    b.gainSet = gainSet
+    b.hpfs = [0, 1]
+    b.gains = [100, 200, 500, 1000, 2000, 5000, 10000]
+    b.inChanB = 0
+    b.inChanA = 0    
+    s.freqs = array([1000.0])
+    s.vpps = [3.9]
+
+    e.bs = b
+    e.ss = s
+    e.chans = ['A1', 'A2', 'A3', 'A4', 'AC', 'B1', 'B2', 'B3', 'B4', 'BC']
+    e.run()
+
 
 if __name__ == "__main__":
-    test()
+    filename = sys.argv[1]
+
+    QuickAllChannelTest(filename)

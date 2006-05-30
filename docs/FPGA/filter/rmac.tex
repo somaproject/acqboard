@@ -28,8 +28,24 @@ The RMAC is controlled by a FSM (Figure \ref{rmacfsm}) that is designed to convo
 
 
 \subsection{Fixed-point noise model} 
-Here we develop a model of the dynamic range. 
+Here we develop a model of the dynamic range. \textbf{TO DO } 
 
 \subsection{RMAC control}
-The RMAC control coordinates filtering across all 10 channels as well as incrementing the sample buffer. 
+The RMAC control (Figure \ref{rmaccontroller}) coordinates filtering
+across all 10 channels as well as incrementing the base address of the
+sample buffer, thus controlling the output interface of the sample
+ring buffer. The associated FSM (figure \ref{rmaccontrollerfsm}) is
+equally simple, asserting \signal{STARTMAC} to the RMAC engine and
+waiting for completion.
 
+\begin{figure}
+\label{rmaccontroller}
+\includegraphics[scale=1.0]{RMACcontrol.svg}
+\caption{The RMAC controller}
+\end{figure}
+
+\begin{figure}
+\label{rmaccontrollerfsm}
+\includegraphics[scale=1.0]{RMACcontrol.fsm.svg}
+\caption{The RMAC controller FSM}
+\end{figure}

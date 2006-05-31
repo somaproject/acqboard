@@ -4,38 +4,24 @@ The xilinx spartan-3 is used for acquisition control, digital filtering, and dat
 \includegraphics[scale=0.7]{FPGA.svg}
 \end{figure}
 
+\section{Clocks}
 \import{.}{clocks.tex}
 
+\section{The Filter Chain}
 \import{filter}{input.tex}
 \import{filter}{samplebuffer.tex}
 \import{filter}{filterarray.tex}
 \import{filter}{rmac.tex}
 
-Functions can be separated into
+\section{Input / output}
 
-1. THe filtering pathway
-  * input
-  * offset compensation
-  * sample buffer
-  * Filter samples
-  * RMAC
-     * fixed point mat
-     * Multiply
-     * accumulate
-     * round 
-     * overflow
-2. digital I/O -- fiber transmission
-   -- decoder
-   -- 8b/10b decoding
-   -- word parsing -- importance of FSM, error signal. 
-   outputs 
-     mode vs cmd
+\import{io}{io.tex}
+
+\section{Control}
 
 3. command/control
    The complex command FSM. 
 
-4. EEPROM IO
-   Loader
-   EEPROM module
+\section{Storage}
+\import{.}{eepromio.tex}
 
-5. 

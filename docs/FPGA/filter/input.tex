@@ -1,27 +1,29 @@
-\section{Input}
+\subsection{Input}
 
 The FPGA input module (figure \ref{input}) controls ADC sampling, bit acquisition, offset compensation, and the eventual write-out of the sample bits. 
 
 \begin{figure}[h!]
 \begin{centering}
 \label{input}
-\includegraphics[scale=1.0]{input.svg}
+\includegraphics[scale=0.7]{input.svg}
 \end{centering}
 \end{figure}
 
 
-\subsection{ADC interface}
+\subsubsection{ADC interface}
 The two sets of ADCs are serially chained, providing \signal{SDIA} and \signal{SDIB}. The ADC FSM (figure \ref{adcfsm}) controls the sampling sequence; CONCNT the delay between the assertion of \signal{CNV} and the bit read-out; \signal{BITCNT} sends the sample clock. To compesate for the ADC readout delay and the propagation delay across the galvanic isolators, we delay the \signal{LSCK} via a shift-register into \signal{BITEN}. 
 
 \begin{figure}
 \label{adcfsm}
-\includegraphics[scale=1.0]{adc.inputFSM.svg}
+\begin{centering}
+\includegraphics[scale=0.7]{adc.inputFSM.svg}
+\end{centering}
 \end{figure}
 
 We go out of our way to make sure we keep the digital signals are quite during the ADC's conversion period. 
 
-\subsection{Offset arithmatic}
+\subsubsection{Offset arithmatic}
 The 16-bit unipolar ACD samples are converted to bipolar samples and then added to the per-channel offset values. The resulting \signal{SUM} is checked for overflow and then written to. 
 
-\subsection{Output writing}
+\subsubsection{Output writing}
 For each \signal{INSAMPLE} assertion we cycle through all channels and then write the resulting offset-adjusted values to the downstream modules. 

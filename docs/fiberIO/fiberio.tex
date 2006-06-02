@@ -1,46 +1,85 @@
+\section{Operation and interfacing}
 
+The acquisition board has four modes of operation, one normal
+multichannel mode, one mode for offset compensation, one mode for link
+testing with simulated output, and one mode for single-channel test.
 
-The Acquisition Board's external interface is a bidirectional 8 MHz fiber-optic link over Agilent's 1mm plastic optical fiber. Both the TX and RX streams are encoded using 8b/10b encoding. 
+Interfacing with the Acquisition board is accomplished via a plastic
+optical fiber interface for enhanced electrical isolation even over
+long data transmission distances.
 
 \section{Modes}
-The acquisition board has four modes of operation, designed to set the internal state and prevent accidental configuration modification during operation. 
+The acquisition board has four modes of operation, designed to set the
+internal state and prevent accidental configuration modification
+during operation.
 
 \subsection{Normal acquisition mode}
-Mode 0 is the normal acquisition mode; in this mode all 10 channels are sampled at the full normal sampling rate and the data is transmitted over the 8b/10b bus using the standard Encoding Scheme. In this mode, gain and hardware filter settings can be changed, but nothing else. 
+Mode 0 is the normal acquisition mode; in this mode all 10 channels
+are sampled at the full normal sampling rate and the data is
+transmitted over the 8b/10b bus using the standard Encoding Scheme. In
+this mode, gain and hardware filter settings can be changed, but
+nothing else.
 
 \subsection{Offset disable mode}
-Offset disable mode disables the internal offset
+Offset disable mode (mode 1)  disables the internal offset compensation. The
+values transmitted are thus the actual measured ADC values. This is
+the only mode in which new offset values can be saved to the board's
+internal non-volatile memory (EEPROM).
 
-this is the only mode in which values can be written to the offset locations in the EEPROM
+\subsection{Input disable mode}
+Input disable mode (mode 2) disables all reading from the ADCs; in
+this mode no change of input or analog settings has any effect on the
+board. While in this mode, the board will continuously transmit a test
+pattern stored in the on-board EEPROM.
 
+In this mode, both the test pattern and the digital low-pass filter
+can be modified and written to. The sample pattern \textit{is} filtered by
+the digital filter, and can be used as a mechanism to verify that the
+filter coefficients were properly written.
 
+\subsection{Raw mode}
+Raw mode (mode 3) simply outputs the raw, unfiltered, non-decimated
+data from a single selected channel. The 192 ksps data stream occupies
+multiple words in the transmitted data stream. This can be useful to
+characterize the analog properties of a given channel, and to debug
+signal integrity problems.
 
-\subsection{input disable mode}
-disables input
-gain etc have no effect
-let you run the samplebuffer
-
-
-\subsection{raw mode}
-just outputs daw data, 192ksps.
 
 \section{Fiber IO}
-The Acqboard transmits an 8b/10b-encoded frame of 24 bytes, preceeded by the K28.5 comma character. The nominal frame transmission is as follows:
+The Acquisition Board's external interface is a bidirectional 8 MHz
+fiber-optic link over  1mm plastic optical fiber. Both the TX
+and RX streams are encoded using 8b/10b encoding.
+
+The Acqboard transmits an 8b/10b-encoded frame of 24 bytes, preceded
+by the K28.5 comma character. The nominal frame transmission is as
+follows:
 
 \begin{figure}[h!]
-\includegraphics[width=6in]{txpacket.svg}
+\includegraphics[scale=1.0]{txpacket.svg}
 \end{figure}
 
-CMDST is a 3-bit field; CMDST[1:0] are the mode numbers; CMDST[0] is high \textit{after we have just switched into this mode, while this mode is loading.} Modes load because they need to read data from the EEPROM, etc. 
+CMDST is a 3-bit field; CMDST[1:0] are the mode numbers; CMDST[0] is
+high \textit{after we have just switched into this mode, while this
+  mode is loading.} Modes load because they need to read data from the
+EEPROM, etc.
 
-Every command sent has a 4-bit command id (CMDID); when a command is \textit{done executing} the output command id is changed to reflect this. CMDRP is the command response field; CMDRP[4:1] are the bits of the most-recently executed CMDID; CMDRP[0] tells whether or not this command was successful. 
+Every command sent has a 4-bit command id (CMDID); when a command is
+\textit{done executing} the output command id is changed to reflect
+this. CMDRP is the command response field; CMDRP[4:1] are the bits of
+the most-recently executed CMDID; CMDRP[0] tells whether or not this
+command was successful.
 
-The data fields are 1.15-bit twos-complement fixed point samples from their corresponding ADCs; they are transmitted MSB first. 
+The data fields are 1.15-bit twos-complement fixed point samples from
+their corresponding ADCs; they are transmitted MSB first.
 
-\emph{Normally, the acqboard receives a stream of valid 8b/10b encoded zeros; a new command is signalled by the presence of the comma character in the data stream followed by a packet. Actually, no, this won't work ebcause we need to periodically rentrain the decoder on a valid comma character. } which looks as follows:
+\emph{Normally, the acqboard receives a stream of valid 8b/10b encoded
+  zeros; a new command is signalled by the presence of the comma
+  character in the data stream followed by a packet. Actually, no,
+  this won't work because we need to periodically re-entrain the decoder
+  on a valid comma character. } which looks as follows:
 
 \begin{figure}[h!]
-\includegraphics[width=4in]{rxpacket.svg}
+\includegraphics[scale=1.0]{rxpacket.svg}
 \end{figure}
 
 \section{Commands}
@@ -51,7 +90,7 @@ The following commands are valid in any mode
 
 \subsubsection{Switch Mode}
 \begin{figure}[h!]
-\includegraphics[width=4in]{switchmode.cmd.svg}
+\includegraphics[scale=1.0]{switchmode.cmd.svg}
 \end{figure}
 
 Switch the current acqboard mode to \textsc{mode}. If changing to the RAW mode, the \textsc{chan} field is the 4-bit number of the raw channel you are reading from -- otherwise the field is ignored. 
@@ -60,21 +99,21 @@ Note that some mode transitions can take up to 300 ms; during this time the tran
 
 \subsubsection{Set Gain}
 \begin{figure}[h!]
-\includegraphics[width=4in]{setgain.cmd.svg}
+\includegraphics[scale=1.0]{setgain.cmd.svg}
 \end{figure}
 
 Sets the gain of channel \textsc{Chan} to one of the preset gain values \textsc{Gain}. Valid in all modes. 
 
 \subsubsection{Set Input}
 \begin{figure}[h!]
-\includegraphics[width=4in]{setinput.cmd.svg}
+\includegraphics[scale=1.0]{setinput.cmd.svg}
 \end{figure}
 
 Select which of the four channels will be used for tetrode a and B's continuous channel. 
 
 \subsubsection{High Pass Filter Enable}
 \begin{figure}[h!]
-\includegraphics[width=4in]{setfilter.cmd.svg}
+\includegraphics[scale=1.0]{setfilter.cmd.svg}
 \end{figure}
 
 Enable (\textsc{filter}= 1) or disable (\textsc{filter}=0) the high pass filter on channel \textsc{chan}. 
@@ -83,26 +122,29 @@ Enable (\textsc{filter}= 1) or disable (\textsc{filter}=0) the high pass filter 
 \subsection{Mode 1 Commands}
 \subsubsection{Write offset}
 \begin{figure}[h!]
-\includegraphics[width=4in]{writeos.cmd.svg}
+\includegraphics[scale=1.0]{writeos.cmd.svg}
 \end{figure}
 
-This command writes the 16-bit twos-complement value in V as the digital offset for channel \textsc{chan} when the gain on that channel is set to \textsc{gain}. This is only valid in offset-disable mode as to properly measure the zero offsets you'd need to have offsets disabled. 
+This command writes the 16-bit twos-complement value in V as the
+digital offset for channel \textsc{chan} when the gain on that channel
+is set to \textsc{gain}. This is only valid in offset-disable mode as
+to properly measure the zero offsets you'd need to have offsets
+disabled.
 
 \subsection{Mode 2 Commands}
 \subsubsection{Write filter}
 \begin{figure}[h!]
-\includegraphics[width=4in]{writefil.cmd.svg}
+\includegraphics[scale=1.0]{writefil.cmd.svg}
 \end{figure}
 
-This command writes the 22-bit twos-complement value in V as the \textsc{addr}th coeffiient for the low-pass filter. 
+This command writes the 22-bit twos-complement value in V as the
+\textsc{addr}th coefficient for the low-pass filter.
 
 \subsubsection{Write Sample Buffer}
 \begin{figure}[h!]
-\includegraphics[width=4in]{writesamp.cmd.svg}
+\includegraphics[scale=1.0]{writesamp.cmd.svg}
 \end{figure}
 
-This command writes the 16-bit twos-complement value in V as the \textsc{addr}th sample in the no-input sample buffer. 
-
-
-
+This command writes the 16-bit twos-complement value in V as the
+\textsc{addr}th sample in the no-input sample buffer.
 

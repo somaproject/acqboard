@@ -10,6 +10,7 @@ be partitioned into an analog signal conditioning section and a
 digital signal processing section. Here, the stages will be discussed
 independently, except where they overlap and integrate to produce the
 final output.
+
 \begin{figure}
   \begin{center}
     \includegraphics[scale=1.0]{signalchain.svg}
@@ -69,12 +70,12 @@ Signal chain design: to achieve 16-bits with an input bandwidth of 10
 kHz we oversample, downsample, and digitally filter. The filtering
 process is the combination of the following factors:
 
-1. an initial antialiasing filter
-2. The analog-to-digital conversion step
-3. Fixed-point FIR filtering
-4. downsampling
-
-
+\begin{enumerate}
+\item an initial antialiasing filter
+\item The analog-to-digital conversion step
+\item fixed-point FIR filtering
+\item downsampling
+\end{enumerate}
 
 \subsection{Antialiasing Filter}
 The data is initially sampled at 192 kSPS; an 8-pole bessel filter
@@ -113,7 +114,7 @@ passband ripple to under $0.5 dB$, while fitting in our allocated FPGA
 resources.
 
 \begin{figure}[h!]
-  \includegraphics[scale=1.0]{soma-1.digital.quant.svg}
+  \includegraphics[scale=0.7]{soma-1.digital.quant.svg}
   \label{FIR}
   \caption{Frequency response of FIR filter.}
 \end{figure}
@@ -131,21 +132,27 @@ also shown, with the sum of the (imperfectly filtered) antialiased
 components highlighted.
 
 \begin{figure}[h!]
-  \includegraphics[scale=1.0]{soma-1.digital.aggregate.svg}
+  \includegraphics[scale=0.7]{soma-1.digital.aggregate.svg}
   \label{digital.aggregate}
   \caption{Aggregate pre-decimation signal chain filtering.}
-  \includegraphics[scale=1.0]{soma-1.digital.pass.svg}
+  \includegraphics[scale=0.7]{soma-1.digital.pass.svg}
   \label{digital.pass}
   \caption{Aggregate pre-decimation signal chain passband.}
 \end{figure}
 
 
 \begin{figure}[h!]
-  \includegraphics[scale=1.0]{soma-1.digital.withaliases.svg}
+  \includegraphics[scale=0.7]{soma-1.digital.withaliases.svg}
   \label{digital.withaliases}
   \caption{Aggregate post-decimation filtering.}
 \end{figure}
 
 
-Frequency Response measurements THD+N Measurements
+This concludes the tour of the Soma 8+2 Acquisition board signal
+processing chain. The next chapter deals with the resulting empirical
+measures from the board, including frequency response, harmonic
+distortion, and noise measurements.
+
+
+
 

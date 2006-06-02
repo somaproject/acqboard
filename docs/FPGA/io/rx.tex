@@ -1,4 +1,4 @@
-\section{Fiber RX}
+\subsection{Fiber RX}
 
 The fiber receive interface (figure \ref{fiberrx} ) is in some ways
 simpler than the transmit interface. The interface's state machine
@@ -18,13 +18,11 @@ the relevant input words.
 \caption{The Fiber Reception finite state machine.}
 \end{figure}
 
-
 Any error in 8b/10b decoding or spurious (out-of-sequence) comma
 character causes a transition back to \state{NONE}, preventing the
 reception of an invalid data frame.
 
-
-\subsection{Decoder}
+\subsubsection{Decoder}
 
 The deserialization step is somewhat more difficult; as the core is
 running at 72 MHz, we can oversample the input bitstream by a factor

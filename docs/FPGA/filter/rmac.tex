@@ -1,10 +1,10 @@
-\section{Repeated Multiply / Accumulate } 
+\subsection{Repeated Multiply / Accumulate } 
 FIR filtering is performed by the repeated multiply-accumulate module; the filter used is that described earlier. 
 
-\subsection{RMAC}
+\subsubsection{RMAC}
 \begin{figure}
 \label{rmac}
-\includegraphics[scale=1.0]{RMAC.svg}
+\includegraphics[scale=0.7]{RMAC.svg}
 \caption{Repeated Multiply-Accumulate (RMAC) module for fixed-point convolution.}
 \end{figure} 
 The repeated multiply-accumulate unit is composed (Figure \ref{rmac}) of the following subcomponents:
@@ -22,15 +22,15 @@ The RMAC is controlled by a FSM (Figure \ref{rmacfsm}) that is designed to convo
 
 \begin{figure}
 \label{rmacfsm}
-\includegraphics[scale=1.0]{RMAC_fsm.svg}
+\includegraphics[scale=0.7]{RMAC_fsm.svg}
 \caption{Controlling FSM for the RMAC.}
 \end{figure}
 
 
-\subsection{Fixed-point noise model} 
+\subsubsection{Fixed-point noise model} 
 Here we develop a model of the dynamic range. \textbf{TO DO } 
 
-\subsection{RMAC control}
+\subsubsection{RMAC control}
 The RMAC control (Figure \ref{rmaccontroller}) coordinates filtering
 across all 10 channels as well as incrementing the base address of the
 sample buffer, thus controlling the output interface of the sample
@@ -40,12 +40,12 @@ waiting for completion.
 
 \begin{figure}
 \label{rmaccontroller}
-\includegraphics[scale=1.0]{RMACcontrol.svg}
+\includegraphics[scale=0.7]{RMACcontrol.svg}
 \caption{The RMAC controller}
 \end{figure}
 
 \begin{figure}
 \label{rmaccontrollerfsm}
-\includegraphics[scale=1.0]{RMACcontrol.fsm.svg}
+\includegraphics[scale=0.7]{RMACcontrol.fsm.svg}
 \caption{The RMAC controller FSM}
 \end{figure}

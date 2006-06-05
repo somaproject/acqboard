@@ -122,11 +122,11 @@ class Experiment(object):
                                     if self.raw:
                                         x = rawread(2**17)
                                     else:
-                                        x = normread(2**18, chanNum)
+                                        x = normread(2**18, [chanNum])
                                     #pylab.plot(x[:1000])
                                     #pylab.show()
                                     y = diff(x)
-                                    row['data'] = x[2**17:]
+                                    row['data'] = x[0][2**17:]
                                     row.append()
                                     time.sleep(0.0)
 
@@ -196,28 +196,26 @@ def simpleTest(filename):
     
     b.gainSet = gainSet
     b.hpfs = [0, 1]
-    b.gains = [100,  10000]
+    b.gains = [10000]
     #b.gains = [100]
     b.inChanB = 0
     b.inChanA = 0    
     #b.gains = [1]
-    f1 = 100
+    f1 = 50
     f2 = 10000
     #s.freqs = logspace(log10(f1), log10(f2), 20)
-    s.freqs = linspace(f1, f2, 10)
+    s.freqs = linspace(f1, f2, 20)
     #s.freqs = array([100.0, 500.0, 1000.0, 10000.0])
     s.vpps = [3.9]
     
     e.A1.append((b, s))
-##     e.A2.append((b, s))
-##     e.A3.append((b, s))
-##     e.A4.append((b, s))
-##     e.AC.append((b, s))
-    
-##     e.B1.append((b, s))
-##     e.B2.append((b, s))
-##     e.B3.append((b, s))
-##     e.B4.append((b, s))
+    e.A2.append((b, s))
+    e.A3.append((b, s))
+    e.A4.append((b, s))
+    e.B1.append((b, s))
+    e.B2.append((b, s))
+    e.B3.append((b, s))
+    e.B4.append((b, s))
 ##     e.BC.append((b, s))
 
     #e.AC.append((b, s))
@@ -243,18 +241,18 @@ def noiseTest(filename):
                10000:7}
     b.gainSet = gainSet
     b.hpfs = [0, 1]
-    #b.hpfs = [0]
     b.gains = [100, 200, 500, 1000, 2000, 5000, 10000]
-    #b.gains = [1, 2, 5, 10, 20, 50, 100]
-    #b.gains = [1]
     e.A1.append((b, s))
     e.A2.append((b, s))
     e.A3.append((b, s))
     e.A4.append((b, s))
+    e.AC.append((b, s))
+    
     e.B1.append((b, s))
     e.B2.append((b, s))
     e.B3.append((b, s))
     e.B4.append((b, s))
+    e.BC.append((b, s))
 
 
     print "ready to run" 
@@ -288,7 +286,10 @@ def CMRRTest(filename):
     s.vpps = [3.0]
     
     #e.A1.append((b, s))
-    e.A1.append((b, s))
+    #e.A1.append((b, s))
+    e.A2.append((b, s))
+    #e.A3.append((b, s))
+    #e.A4.append((b, s))
     #e.AC.append((b, s))
     e.run()
     

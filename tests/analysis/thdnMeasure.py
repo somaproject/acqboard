@@ -11,7 +11,7 @@ How do we plot and measure our THD+N?
 import sys
 import scipy
 from numpy import * 
-from scipy import *
+#from scipy import *
 import tables
 
 import pylab
@@ -114,7 +114,7 @@ def fileTHDN(filename, chan, segnum = 4):
 
     # sort by gain:
     allgains.sort(lambda x, y : x._v_attrs.gain- y._v_attrs.gain)
-
+    print "ready"
     maxfreq = 0
     res = []
     for hpf in ['hpf0', 'hpf1']:
@@ -125,14 +125,12 @@ def fileTHDN(filename, chan, segnum = 4):
             except:
                 print "HPF ", hpf, " not implemented"
                 
-                
             # find the maximum voltage
             v = 0.0
             for r in st.iterrows():
                 if v < r["sourcevpp"]:
                     v = r["sourcevpp"]
-
-            
+            print "Computing THDNs for table ", str(hpf), gain
             thdntablenums = THDnsFromTable(st, v, segnum=segnum)
 
             res.append((gain, hpf, v, thdntablenums))
@@ -302,11 +300,11 @@ def doSummary():
     
 if __name__ == "__main__":
 
-    doSummary()
-    
-#    chan = sys.argv[2]
-#    x = fileTHDN(file, chan)
+    #doSummary()
+    file = sys.argv[1]
+    chan = sys.argv[2]
+    x = fileTHDN(file, chan)
 
-#    plotTHDNs(x)
-#    pylab.show()
+    plotTHDNs(x)
+    pylab.show()
   

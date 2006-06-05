@@ -348,7 +348,7 @@ def plotCMRR(filename):
     f = tables.openFile(filename)
 
 
-    t= f.root.A1.gain10000.hpf1.sine
+    t= f.root.A2.gain10000.hpf0.sine
 
     freqs = []
     cmrrdB = []
@@ -356,6 +356,7 @@ def plotCMRR(filename):
         delta =  max(dat) - min(dat)
         vpp = float(delta) / 2**16 * 4.096 / 10000
         freqs.append(freq)
+        print "voltage = " , v, freq
         cmrrdB.append( 20*log10(v / vpp))
         
     pylab.semilogx(freqs, cmrrdB)
@@ -408,7 +409,7 @@ def thdnloop():
 
     
 if __name__ == "__main__":
-    plotTHDnAllGains(sys.argv[1], 'A1', [True, False], 32)
+    #plotTHDnAllGains(sys.argv[1], 'A1', [True, False], 32)
     #thdnloop()
     #plotFreqResponse(sys.argv[1])
     #plotBothFreqResp(sys.argv[1])
@@ -416,6 +417,6 @@ if __name__ == "__main__":
     #compWave(sys.argv[1] )
     #measureNoise(sys.argv[1])
     #noiseHist(sys.argv[1])
-    #plotCMRR(sys.argv[1])
+    plotCMRR(sys.argv[1])
     
     pylab.show()

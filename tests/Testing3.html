@@ -34,9 +34,7 @@ large-scale performance tests. The situation is similar with the
 graphical output. <br>
 <br>
 We generate the following data with Experiments2.py, and then use
-thdnMeasure.py to plot: <br>
-<br>
-<img alt="" src="results/20060514/A1.THD+N.png"
+thdnMeasure.py to plot: <img alt="" src="results/20060514/A1.THD+N.png"
  style="width: 600px; height: 450px;"><br>
 <br>
 Which is associated with the non-svn'd file 20060514.all.h5. <br>
@@ -66,5 +64,78 @@ some sort of ADC-related problem that has proven difficult to diagnose.
 <br>
 We have 13 working acquisition boards assembled by eTech-WEB, and
 another 3 that need some sort of love. <br>
+<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">1 June 2006</span><br
+ style="font-weight: bold; text-decoration: underline;">
+<br>
+Board performance measurement for docs...<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">3 June 2006</span><br
+ style="font-weight: bold; text-decoration: underline;">
+<br>
+Print-able noise benchmarks: <br>
+<br>
+<img alt="" src="results/20060603/noise.rms.per-gain.board-05.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+Noise plot generated from no-svn/200606030-board.05.noise.h5 by
+averaging the RMS noise across all channels, per gain. <br>
+<br>
+<img alt=""
+ src="file:///home/jonas/soma/acqboard/tests/results/20060603/noise.spect.board-05.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+<br>
+Of course, now I'm worrying our CMR might be total crap...<br>
+<br>
+<br>
+CMR Measurements: <br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20060603/CMR.no-AC-couple.png"
+ style="width: 600px; height: 450px;"></td>
+      <td style="vertical-align: top;"><img alt=""
+ src="results/20060603/CMR.AC-couple.png"
+ style="width: 600px; height: 450px;"></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">CMRR of board with AC-coupling
+hardware removed<br>
+      </td>
+      <td style="vertical-align: top;">CMRR of board as-shipping, with
+input AC-coupling HPF<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+As you can see from above, the addition of the 10uf/100k AC-coupling
+stage in front of the in-amps has significantly degraded our
+common-mode rejection, due to impedance mismatch between the filter
+elements. At high frequencies, this is less of a problem, and it still
+looks like we get ~90 dB CMR at 60 Hz, but it would be nice if we
+didn't have to take this hit. <br>
+<br>
+Ultimately, the ramifications will depend on the measured CMR of the
+neuralynx amps, as a guide to how much CMR we "really need". Potential
+solutions would be: <br>
+<ul>
+  <li>remove input AC-coupling, and perform the same thing at the preamp</li>
+  <li>remove input AC-coupling, change in-amp gain to 10x, and reduce
+the ADC range by a factor of 10</li>
+</ul>
+Both of these can be done with our current hardware configuration. <br>
+<br>
+Again, the above graphs can be found under
+no-svn/20060603-board.05.cmmr.h5<br>
+<br>
+<br>
+<br>
+<br>
 </body>
 </html>

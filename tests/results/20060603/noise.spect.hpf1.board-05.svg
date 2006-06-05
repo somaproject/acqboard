@@ -1,0 +1,133 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with matplotlib (http://matplotlib.sourceforge.net/) -->
+<svg width="576" height="432" viewBox="0 0 576 432"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.1"
+   id="svg1">
+<g id="figure1">
+<polygon style="fill: #ffffff; stroke: #ffffff; stroke-width: 1.000000; stroke-linejoin: miter; stroke-linecap: square;  opacity: 1.000000; " points = "0.000000,432.000000 0.000000,0.000000 576.000000,0.000000 576.000000,432.000000"/>
+<g id="axes1">
+<polygon style="fill: #ffffff; stroke: #000000; stroke-width: 1.000000; stroke-linejoin: miter; stroke-linecap: square;  opacity: 1.000000; " points = "72.000000,388.800000 72.000000,43.200000 518.400000,43.200000 518.400000,388.800000"/>
+<defs>
+    <clipPath id="789695421804425603">
+    <rect x="72.000000" y="43.200000" width="446.400000" height="345.600000"
+    style="stroke: gray; fill: none;"/>
+    </clipPath>
+</defs>
+<path style="fill: none; stroke: #ff0000; stroke-width: 1.000000; stroke-linejoin: miter; stroke-linecap: square;  opacity: 1.000000; clip-path:url(#789695421804425603);" d="M 75.487500,282.968656 L 78.975000,244.560699 L 82.462500,199.671395 L 85.950000,169.541509 L 89.437500,143.507881 L 92.925000,139.308796 L 96.412500,122.619475 L 99.900000,114.107815 L 103.387500,115.162554 L 106.875000,102.974707 L 110.362500,94.658099 L 113.850000,99.092925 L 117.337500,94.114323 L 120.825000,95.306519 L 124.312500,93.317734 L 127.800000,91.054424 L 131.287500,102.316394 L 134.775000,103.865575 L 138.262500,95.831125 L 141.750000,88.916125 L 145.237500,81.548633 L 148.725000,83.530913 L 152.212500,108.551095 L 155.700000,110.533945 L 159.187500,94.296743 L 162.675000,77.490928 L 166.162500,90.496299 L 169.650000,98.228346 L 173.137500,90.922184 L 176.625000,102.824464 L 180.112500,73.476240 L 183.600000,83.963316 L 187.087500,74.813558 L 190.575000,92.505460 L 194.062500,106.497880 L 197.550000,110.724161 L 201.037500,98.122815 L 204.525000,100.249673 L 208.012500,109.579046 L 211.500000,109.907056 L 214.987500,105.561652 L 218.475000,94.791970 L 221.962500,93.718685 L 225.450000,110.832558 L 228.937500,115.906463 L 232.425000,107.943757 L 235.912500,106.472898 L 239.400000,115.852637 L 242.887500,110.387502 L 246.375000,108.552550 L 249.862500,105.184946 L 253.350000,111.667591 L 256.837500,121.135396 L 260.325000,120.022717 L 263.812500,120.260069 L 267.300000,112.113009 L 270.787500,109.273960 L 274.275000,118.840349 L 277.762500,112.313010 L 281.250000,135.297588 L 284.737500,129.417632 L 288.225000,131.084661 L 291.712500,114.801041 L 295.200000,142.398560 L 298.687500,135.828509 L 302.175000,126.486736 L 305.662500,123.411581 L 309.150000,131.911677 L 312.637500,134.815620 L 316.125000,135.773938 L 319.612500,132.826513 L 323.100000,149.904991 L 326.587500,142.751998 L 330.075000,145.980614 L 333.562500,142.596169 L 337.050000,134.947157 L 340.537500,146.002556 L 344.025000,135.781228 L 347.512500,144.704717 L 351.000000,142.985871 L 354.487500,155.801711 L 357.975000,159.807821 L 361.462500,172.098920 L 364.950000,178.910261 L 368.437500,194.487246 L 371.925000,195.409028 L 375.412500,204.170122 L 378.900000,217.662123 L 382.387500,233.883935 L 385.875000,241.090881 L 389.362500,259.459240 L 392.850000,271.405535 L 396.337500,288.285691 L 399.825000,299.915938 L 403.312500,306.923107 L 406.800000,317.526562 L 410.287500,329.971084 L 413.775000,339.045308 L 417.262500,345.600496 L 420.750000,352.822933 L 424.237500,358.301363 L 427.725000,364.900263 L 431.212500,368.454360 L 434.700000,371.199749 L 438.187500,374.392511 L 441.675000,376.546158 L 445.162500,377.545519 L 448.650000,379.156653 L 452.137500,379.883230 L 455.625000,380.331462 L 459.112500,380.942928 L 462.600000,381.416147 L 466.087500,381.222649 L 469.575000,381.502554 L 473.062500,381.401034 L 476.550000,381.187401 L 480.037500,381.439326 L 483.525000,381.744388 L 487.012500,381.728586 L 490.500000,381.605294 L 493.987500,381.632548 L 497.475000,381.689421 L 500.962500,381.770243 L 504.450000,381.700244 L 507.937500,381.777196 L 511.425000,381.476489 L 514.912500,381.674599 "/>
+<path style="fill: none; stroke: #008000; stroke-width: 1.000000; stroke-linejoin: miter; stroke-linecap: square;  opacity: 1.000000; clip-path:url(#789695421804425603);" d="M 75.487500,361.289965 L 78.975000,322.235531 L 82.462500,288.864964 L 85.950000,260.965061 L 89.437500,231.369217 L 92.925000,219.853097 L 96.412500,202.592163 L 99.900000,200.505336 L 103.387500,184.331658 L 106.875000,187.475503 L 110.362500,182.646141 L 113.850000,184.395085 L 117.337500,177.021622 L 120.825000,182.411202 L 124.312500,183.228952 L 127.800000,169.764914 L 131.287500,173.795066 L 134.775000,175.062576 L 138.262500,177.912303 L 141.750000,175.059367 L 145.237500,162.898353 L 148.725000,175.014526 L 152.212500,182.133835 L 155.700000,176.383541 L 159.187500,175.825349 L 162.675000,175.124346 L 166.162500,179.547436 L 169.650000,191.378934 L 173.137500,178.138717 L 176.625000,173.058481 L 180.112500,175.840284 L 183.600000,176.285423 L 187.087500,173.173503 L 190.575000,168.659363 L 194.062500,173.359241 L 197.550000,185.205667 L 201.037500,170.007070 L 204.525000,178.514155 L 208.012500,177.512921 L 211.500000,186.930954 L 214.987500,185.699542 L 218.475000,189.590291 L 221.962500,183.695587 L 225.450000,186.883067 L 228.937500,196.160968 L 232.425000,197.187510 L 235.912500,193.154645 L 239.400000,191.284561 L 242.887500,195.250988 L 246.375000,197.678328 L 249.862500,193.417542 L 253.350000,189.154973 L 256.837500,193.641336 L 260.325000,190.930227 L 263.812500,200.764533 L 267.300000,192.980423 L 270.787500,199.566879 L 274.275000,197.242442 L 277.762500,201.834369 L 281.250000,203.579075 L 284.737500,201.103080 L 288.225000,199.619779 L 291.712500,212.383292 L 295.200000,213.645673 L 298.687500,206.491959 L 302.175000,215.153977 L 305.662500,214.879420 L 309.150000,216.150372 L 312.637500,212.621098 L 316.125000,219.066632 L 319.612500,215.257739 L 323.100000,212.051798 L 326.587500,215.252669 L 330.075000,216.077621 L 333.562500,223.913678 L 337.050000,223.114489 L 340.537500,227.772906 L 344.025000,220.331018 L 347.512500,223.557475 L 351.000000,224.511177 L 354.487500,236.162560 L 357.975000,238.718862 L 361.462500,246.307102 L 364.950000,248.056752 L 368.437500,248.950460 L 371.925000,266.083561 L 375.412500,270.063365 L 378.900000,281.221500 L 382.387500,286.992249 L 385.875000,291.277694 L 389.362500,303.803686 L 392.850000,314.119785 L 396.337500,321.214889 L 399.825000,332.221445 L 403.312500,339.430864 L 406.800000,347.259213 L 410.287500,354.034184 L 413.775000,360.862724 L 417.262500,366.241320 L 420.750000,370.484632 L 424.237500,374.253202 L 427.725000,377.328908 L 431.212500,379.881996 L 434.700000,382.116731 L 438.187500,383.654835 L 441.675000,384.868387 L 445.162500,386.013163 L 448.650000,386.531315 L 452.137500,387.076801 L 455.625000,387.391131 L 459.112500,387.637538 L 462.600000,387.839261 L 466.087500,387.957813 L 469.575000,388.054511 L 473.062500,388.111981 L 476.550000,388.138004 L 480.037500,388.185561 L 483.525000,388.199201 L 487.012500,388.212640 L 490.500000,388.219229 L 493.987500,388.234222 L 497.475000,388.235901 L 500.962500,388.247561 L 504.450000,388.259591 L 507.937500,388.249601 L 511.425000,388.253529 L 514.912500,388.265586 "/>
+<path style="fill: none; stroke: #0000ff; stroke-width: 1.000000; stroke-linejoin: miter; stroke-linecap: square;  opacity: 1.000000; clip-path:url(#789695421804425603);" d="M 75.487500,363.107633 L 78.975000,325.197050 L 82.462500,288.437464 L 85.950000,263.590787 L 89.437500,231.060625 L 92.925000,219.503867 L 96.412500,210.630133 L 99.900000,207.444904 L 103.387500,205.707712 L 106.875000,194.861454 L 110.362500,200.087855 L 113.850000,184.764239 L 117.337500,186.886540 L 120.825000,198.604070 L 124.312500,180.630887 L 127.800000,183.078290 L 131.287500,189.202760 L 134.775000,181.072489 L 138.262500,186.584561 L 141.750000,177.366373 L 145.237500,184.755937 L 148.725000,184.773972 L 152.212500,178.407798 L 155.700000,184.017590 L 159.187500,178.225988 L 162.675000,175.218258 L 166.162500,186.534466 L 169.650000,185.505255 L 173.137500,186.121449 L 176.625000,192.403859 L 180.112500,176.801589 L 183.600000,192.714558 L 187.087500,191.280169 L 190.575000,186.193016 L 194.062500,185.907985 L 197.550000,183.901559 L 201.037500,194.649360 L 204.525000,188.364782 L 208.012500,184.086567 L 211.500000,187.817824 L 214.987500,198.957669 L 218.475000,190.829736 L 221.962500,194.969949 L 225.450000,196.495835 L 228.937500,199.627254 L 232.425000,192.315459 L 235.912500,196.328238 L 239.400000,201.742205 L 242.887500,202.942169 L 246.375000,214.134677 L 249.862500,204.854011 L 253.350000,203.323497 L 256.837500,212.733067 L 260.325000,201.822932 L 263.812500,205.809442 L 267.300000,208.475810 L 270.787500,205.543454 L 274.275000,206.726706 L 277.762500,214.623359 L 281.250000,208.922022 L 284.737500,212.900225 L 288.225000,216.688621 L 291.712500,212.837731 L 295.200000,216.465655 L 298.687500,217.436925 L 302.175000,209.571731 L 305.662500,216.865404 L 309.150000,233.077955 L 312.637500,220.103307 L 316.125000,222.343676 L 319.612500,230.236571 L 323.100000,233.516700 L 326.587500,223.283608 L 330.075000,224.257263 L 333.562500,230.781970 L 337.050000,230.085602 L 340.537500,224.864529 L 344.025000,228.720604 L 347.512500,229.451102 L 351.000000,231.969979 L 354.487500,240.401431 L 357.975000,251.267185 L 361.462500,250.100954 L 364.950000,257.634289 L 368.437500,261.786414 L 371.925000,265.670760 L 375.412500,271.765365 L 378.900000,285.769603 L 382.387500,291.657042 L 385.875000,297.544171 L 389.362500,307.560869 L 392.850000,319.643116 L 396.337500,323.836306 L 399.825000,332.088365 L 403.312500,342.521818 L 406.800000,350.458681 L 410.287500,356.417159 L 413.775000,361.199348 L 417.262500,365.506763 L 420.750000,371.447770 L 424.237500,374.652856 L 427.725000,377.494466 L 431.212500,380.449039 L 434.700000,382.030373 L 438.187500,383.838680 L 441.675000,385.128621 L 445.162500,385.897650 L 448.650000,386.559516 L 452.137500,387.169729 L 455.625000,387.456121 L 459.112500,387.664099 L 462.600000,387.893461 L 466.087500,387.973266 L 469.575000,388.092581 L 473.062500,388.147404 L 476.550000,388.181569 L 480.037500,388.205263 L 483.525000,388.231964 L 487.012500,388.245996 L 490.500000,388.253637 L 493.987500,388.263294 L 497.475000,388.271272 L 500.962500,388.276576 L 504.450000,388.281209 L 507.937500,388.284824 L 511.425000,388.287215 L 514.912500,388.289611 "/>
+<text style="font-size: 14.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="147.200000" y="36.288000" >Noise Power Spectral Density, HPF enabled</text>
+<g id="matplotlib.axis1">
+<g id="xtick1">
+<text style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="63.000000" y="401.800000" >0.0</text>
+</g>
+<g id="xtick2">
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; clip-path:url(#789695421804425603);" d="M 127.800000,388.800000 L 127.800000,43.200000 "/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 127.800000,388.800000 L 127.800000,384.800000"/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 127.800000,47.200000 L 127.800000,43.200000"/>
+<text style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="118.776562" y="401.800000" >0.2</text>
+</g>
+<g id="xtick3">
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; clip-path:url(#789695421804425603);" d="M 183.600000,388.800000 L 183.600000,43.200000 "/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 183.600000,388.800000 L 183.600000,384.800000"/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 183.600000,47.200000 L 183.600000,43.200000"/>
+<text style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="174.600000" y="401.800000" >0.4</text>
+</g>
+<g id="xtick4">
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; clip-path:url(#789695421804425603);" d="M 239.400000,388.800000 L 239.400000,43.200000 "/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 239.400000,388.800000 L 239.400000,384.800000"/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 239.400000,47.200000 L 239.400000,43.200000"/>
+<text style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="230.400000" y="401.800000" >0.6</text>
+</g>
+<g id="xtick5">
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; clip-path:url(#789695421804425603);" d="M 295.200000,388.800000 L 295.200000,43.200000 "/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 295.200000,388.800000 L 295.200000,384.800000"/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 295.200000,47.200000 L 295.200000,43.200000"/>
+<text style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="286.200000" y="401.800000" >0.8</text>
+</g>
+<g id="xtick6">
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; clip-path:url(#789695421804425603);" d="M 351.000000,388.800000 L 351.000000,43.200000 "/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 351.000000,388.800000 L 351.000000,384.800000"/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 351.000000,47.200000 L 351.000000,43.200000"/>
+<text style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="342.000000" y="401.800000" >1.0</text>
+</g>
+<g id="xtick7">
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; clip-path:url(#789695421804425603);" d="M 406.800000,388.800000 L 406.800000,43.200000 "/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 406.800000,388.800000 L 406.800000,384.800000"/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 406.800000,47.200000 L 406.800000,43.200000"/>
+<text style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="397.776562" y="401.800000" >1.2</text>
+</g>
+<g id="xtick8">
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; clip-path:url(#789695421804425603);" d="M 462.600000,388.800000 L 462.600000,43.200000 "/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 462.600000,388.800000 L 462.600000,384.800000"/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 462.600000,47.200000 L 462.600000,43.200000"/>
+<text style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="453.600000" y="401.800000" >1.4</text>
+</g>
+<g id="xtick9">
+<text style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="509.400000" y="401.800000" >1.6</text>
+</g>
+<text style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="249.200000" y="419.800000" >Frequency (Hz)</text>
+<text style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="489.400000" y="413.800000" >x1e4</text>
+</g>
+<g id="matplotlib.axis2">
+<g id="ytick1">
+<text style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="50.000000" y="393.300000" >0.0</text>
+</g>
+<g id="ytick2">
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; clip-path:url(#789695421804425603);" d="M 72.000000,339.428571 L 518.400000,339.428571 "/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 72.000000,339.428571 L 76.000000,339.428571"/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 514.400000,339.428571 L 518.400000,339.428571"/>
+<text style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="50.000000" y="343.928571" >0.5</text>
+</g>
+<g id="ytick3">
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; clip-path:url(#789695421804425603);" d="M 72.000000,290.057143 L 518.400000,290.057143 "/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 72.000000,290.057143 L 76.000000,290.057143"/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 514.400000,290.057143 L 518.400000,290.057143"/>
+<text style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="50.000000" y="294.557143" >1.0</text>
+</g>
+<g id="ytick4">
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; clip-path:url(#789695421804425603);" d="M 72.000000,240.685714 L 518.400000,240.685714 "/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 72.000000,240.685714 L 76.000000,240.685714"/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 514.400000,240.685714 L 518.400000,240.685714"/>
+<text style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="50.000000" y="245.185714" >1.5</text>
+</g>
+<g id="ytick5">
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; clip-path:url(#789695421804425603);" d="M 72.000000,191.314286 L 518.400000,191.314286 "/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 72.000000,191.314286 L 76.000000,191.314286"/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 514.400000,191.314286 L 518.400000,191.314286"/>
+<text style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="50.000000" y="195.814286" >2.0</text>
+</g>
+<g id="ytick6">
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; clip-path:url(#789695421804425603);" d="M 72.000000,141.942857 L 518.400000,141.942857 "/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 72.000000,141.942857 L 76.000000,141.942857"/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 514.400000,141.942857 L 518.400000,141.942857"/>
+<text style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="50.000000" y="146.442857" >2.5</text>
+</g>
+<g id="ytick7">
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt; stroke-dasharray: 1.000000 3.000000; stroke-dashoffset: 0.000000; opacity: 1.000000; clip-path:url(#789695421804425603);" d="M 72.000000,92.571429 L 518.400000,92.571429 "/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 72.000000,92.571429 L 76.000000,92.571429"/>
+<path style="fill: none; stroke: #000000; stroke-width: 0.500000; stroke-linejoin: miter; stroke-linecap: butt;  opacity: 1.000000; " d="M 514.400000,92.571429 L 518.400000,92.571429"/>
+<text style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="50.000000" y="97.071429" >3.0</text>
+</g>
+<g id="ytick8">
+<text style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="50.000000" y="47.700000" >3.5</text>
+</g>
+<text style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="45.000000" y="254.500000" transform="translate(45.000000,254.500000) rotate(-90.0) translate(-45.000000,-254.500000)">Noise power</text>
+<text style="font-size: 12.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="72.000000" y="40.200000" >x1e-6</text>
+</g>
+<g id="legend1">
+<polygon style="fill: #ffffff; stroke: #000000; stroke-width: 1.000000; stroke-linejoin: miter; stroke-linecap: square;  opacity: 1.000000; " points = "380.774400,109.985280 380.774400,50.112000 509.472000,50.112000 509.472000,109.985280"/>
+<path style="fill: none; stroke: #ff0000; stroke-width: 1.000000; stroke-linejoin: miter; stroke-linecap: square;  opacity: 1.000000; " d="M 394.499200,61.601440 L 401.939200,61.601440 L 409.379200,61.601440 L 416.819200,61.601440 "/>
+<path style="fill: none; stroke: #008000; stroke-width: 1.000000; stroke-linejoin: miter; stroke-linecap: square;  opacity: 1.000000; " d="M 394.499200,80.048640 L 401.939200,80.048640 L 409.379200,80.048640 L 416.819200,80.048640 "/>
+<path style="fill: none; stroke: #0000ff; stroke-width: 1.000000; stroke-linejoin: miter; stroke-linecap: square;  opacity: 1.000000; " d="M 394.499200,98.495840 L 401.939200,98.495840 L 409.379200,98.495840 L 416.819200,98.495840 "/>
+<text style="font-size: 14.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="425.747200" y="68.101440" >g = 100</text>
+<text style="font-size: 14.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="425.747200" y="86.548640" >g = 1000</text>
+<text style="font-size: 14.000000; font-family: Bitstream Vera Sans; font-style: Roman; fill: #000000;" x="425.747200" y="104.995840" >g = 10000</text>
+</g>
+</g>
+</g>
+</svg>

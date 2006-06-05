@@ -9,7 +9,7 @@ import sinleqsq as pysinlesq
 sys.path.append("../sinlesq/")
 import sinlesq as csinlesq
 from matplotlib.ticker import FormatStrFormatter
-
+import numpy as n
 
 def nvNoisePgram(x, fs, wlen, N = 2**12):
     """
@@ -140,6 +140,53 @@ def plotTableNoise(tables, prefix = "" ):
     pylab.legend()
     pylab.grid()
 
+def generateNoiseTable(h5file):
+    """ tenerates a table of noises at each gain across
+    channels, one for hpf=1 and one for hpf=0
+    """
+
+    chans = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4']
+    gains = {100:0, 200:1,
+             500:2, 1000:3,  2000:4, 5000:5, 10000:6}
+
+    hpf0noises = n.empty((len(chans), len(gains)), Float)
+    hpf1noises = n.empty((len(chans), len(gains)), Float)
+    
+    for i, c in enumerate(chans):
+        changroup = t.root._v_children[c].noise
+        
+
+        (g, noise) = tableRMSNoise(changroup.hpf0)
+
+        # insert into array
+        for j, ga in enumerate(g):
+            hpf0noises[i][gains[ga]] =  noise[j]
+
+        (g, noise) = tableRMSNoise(changroup.hpf1)
+        for j, ga in enumerate(g):
+            hpf1noises[i][gains[ga]] =  noise[j]
+        
+
+    glist = []
+    for i in range(7):
+        for k, v in gains.iteritems():
+            if v == i:
+                glist.append(str(k))
+    
+    p0 = pylab.bar(n.arange(0, 7), hpf0noises.mean(0) * 1e6,
+              yerr = hpf0noises.std(0) * 1e6,
+              width = 0.35, color = 'g')
+    p1 = pylab.bar(n.arange(0, 7) + 0.4, hpf1noises.mean(0) * 1e6,
+              yerr = hpf0noises.std(0) * 1e6,
+              width = 0.35, color='b')
+    pylab.xticks(n.arange(0, 7) + 0.30, glist)
+
+    pylab.legend((p0[0], p1[0]), ('HPF disabled', 'HPF enabled'))
+
+    pylab.xlabel('gain')
+    pylab.ylabel('RMS Noise (uV)')
+    pylab.title('Voltage noise RMS RTI averaged across channels')
+    pylab.show()
     
 
 def plotAllNoise(filename):
@@ -161,4 +208,7 @@ def plotAllNoise(filename):
     
 
 if __name__ == "__main__":
-    plotAllNoise(sys.argv[1])
+    #plotAllNoise(sys.argv[1])
+    t = tables.openFile(sys.argv[1])
+    generateNoiseTable(t)
+    

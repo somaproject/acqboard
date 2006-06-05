@@ -143,7 +143,7 @@ class AllTHDNExperiment(object):
 def test():
 
     filename = sys.argv[1]
-    e = AllTHDNExperiment(filename, "A test experiment",
+    e = AllTHDNExperiment(filename, "Comprehensive Test for Board 05",
                           raw=False, balanced=True)
 
     b = boardstates.BoardStates()
@@ -167,14 +167,13 @@ def test():
     f1 = 100
     f2 = 10000
     #s.freqs = logspace(log10(f1), log10(f2), 20)
-    s.freqs = linspace(f1, f2, 30)
+    s.freqs = linspace(f1, f2, 40)
     #s.freqs = array([100.0, 500.0, 1000.0, 10000.0])
     s.vpps = [3.9]
 
     e.bs = b
     e.ss = s
-    e.chans = ['A1', 'A2', 'A3', 'A4', 'AC', 'B3', 'B4', 'BC']
-    #e.chans = ['A1', 'A2']
+    e.chans = ['A1', 'A2', 'A3', 'A4', 'AC', 'B1', 'B2', 'B3', 'B4', 'BC']
     e.run()
 
 def QuickAllChannelTest(filename):
@@ -215,4 +214,5 @@ def QuickAllChannelTest(filename):
 if __name__ == "__main__":
     filename = sys.argv[1]
 
-    QuickAllChannelTest(filename)
+    #QuickAllChannelTest(filename)
+    test()

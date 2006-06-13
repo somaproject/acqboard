@@ -355,6 +355,7 @@ def plotCMRR(filename):
     for (freq, dat, v) in  [ (row['frequency'], row['data'], row['sourcevpp'])  for row in t] :
         delta =  max(dat) - min(dat)
         vpp = float(delta) / 2**16 * 4.096 / 10000
+        
         freqs.append(freq)
         print "voltage = " , v, freq
         cmrrdB.append( 20*log10(v / vpp))

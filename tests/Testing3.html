@@ -135,6 +135,102 @@ Again, the above graphs can be found under
 no-svn/20060603-board.05.cmmr.h5<br>
 <br>
 <br>
+<span style="font-weight: bold; text-decoration: underline;">08 June
+2006</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+Performance measurement, part two: <br>
+<br>
+I want to measure the CMR for the neuralynx amp, and explain how part
+of what we're seeing is an artifact of the input AC-coupling filter. <br>
+<br>
+As measured by the lynx-8 amp, we get: <br>
+<br>
+with 5 vpp in and a gain of 10k: <br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">freq<br>
+      </td>
+      <td style="vertical-align: top;">output Vpp<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">50<br>
+      </td>
+      <td style="vertical-align: top;">980 mV<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">100<br>
+      </td>
+      <td style="vertical-align: top;">980 mV<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">500<br>
+      </td>
+      <td style="vertical-align: top;">880 mV<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">1k<br>
+      </td>
+      <td style="vertical-align: top;">1V<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">5k<br>
+      </td>
+      <td style="vertical-align: top;">1v<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">10k<br>
+      </td>
+      <td style="vertical-align: top;">960 mV<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">12 June
+2006</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+Analog performance measure of the non-AC-coupled case: <br>
+1. noise<br>
+2. THD+N<br>
+3. CMR<br>
+<br>
+<br>
+Fabian suggested that I present it as "look, the THD+N curves are flat,
+i.e. there are no frequency-dependent distortion components, and the
+spacing shows that the primary contributor is the input noise." <br>
+<br>
+Wow, so it turns out that part of our CMR problems were due to
+measuring the inputs shorted together. There's a lesson there,
+someplace. <br>
+<br>
+<img alt="" src="results/20060612/CMRR.A2.board05.png"
+ style="width: 600px; height: 450px;"><br>
+<br>
+<br>
+<br>
+<br>
+Hmm, but if we measure the other channel, we get the original bad
+result. Ass. <br>
+<br>
+We should check the precision of the resistors and caps we're using...<br>
+<br>
+<span style="font-weight: bold; text-decoration: underline;">13 June
+2006</span><br style="font-weight: bold; text-decoration: underline;">
+<br>
+It seems like the CMR consistently sucks. I'm going to build a new set
+of connectors, and buy some higher-end resistors and capacitors, in an
+attempt to track this down...<br>
+<br>
+<br>
 <br>
 <br>
 </body>

@@ -118,7 +118,6 @@ def tableRMSNoise(table):
         r = table[i] 
         x = array(r['data'], Float64)
         xv = x * 4.096/2**16/r['gain']
-        
         #rms = sqrt(mean(xvnormed**2))
         rms = std(xv)
 
@@ -145,7 +144,7 @@ def generateNoiseTable(h5file):
     channels, one for hpf=1 and one for hpf=0
     """
 
-    chans = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4']
+    chans = ['A2']
     gains = {100:0, 200:1,
              500:2, 1000:3,  2000:4, 5000:5, 10000:6}
 

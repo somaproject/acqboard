@@ -173,7 +173,7 @@ def test():
 
     e.bs = b
     e.ss = s
-    e.chans = ['A1', 'A2', 'A3', 'A4', 'AC', 'B1', 'B2', 'B3', 'B4', 'BC']
+    e.chans = ['A2']
     e.run()
 
 def QuickAllChannelTest(filename):

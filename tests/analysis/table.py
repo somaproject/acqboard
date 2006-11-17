@@ -348,7 +348,7 @@ def plotCMRR(filename):
     f = tables.openFile(filename)
 
 
-    t= f.root.A2.gain10000.hpf0.sine
+    t= f.root.B3.gain10000.hpf0.sine
 
     freqs = []
     cmrrdB = []

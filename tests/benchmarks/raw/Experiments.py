@@ -288,7 +288,7 @@ def CMRRTest(filename):
     #e.A1.append((b, s))
     #e.A1.append((b, s))
     #e.A2.append((b, s))
-    e.A2.append((b, s))
+    e.B3.append((b, s))
     #e.A4.append((b, s))
     #e.AC.append((b, s))
     e.run()

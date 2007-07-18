@@ -1,0 +1,11 @@
+the files are
+
+acqboard.GTO : top silkscreen
+acqboard.GTS : top soldermask
+acqboard.GTL : top solder layer
+acqboard.GP1 : internal plane 1
+acqboard.GP2 : internal plane 2
+acqboard.GBL : bottom solder layer
+acqboard.GBS : bottom soldermaskk
+acqboard.GBO : bottom silkscreen
+acqboard.TXT : drill file

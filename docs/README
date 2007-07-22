@@ -1,6 +1,5 @@
     * Overview
 
-    
     *CHAPTER 1 Problem formulation (Design goals and overview)
           o What our real goal is
           o The importance of
@@ -64,7 +63,6 @@
  	  * composit diagram -- tour, showing modules, layers
    	  * ref appendex in the back 
         * BOM
-	 * cost as a function of quantity
         * Component identification
 	* enclosure
   	

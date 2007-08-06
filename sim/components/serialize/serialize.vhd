@@ -14,7 +14,7 @@ entity serialize is
     Generic (filename : string := "input.dat"); 
     Port ( START : in std_logic;
            DOUT : out std_logic;
-		 DONE : out std_logic);
+           DONE : out std_logic);
 end serialize;
 
 architecture Behavioral of serialize is

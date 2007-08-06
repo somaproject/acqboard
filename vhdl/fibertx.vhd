@@ -25,7 +25,7 @@ entity FiberTX is
 end FiberTX;
 
 architecture Behavioral of FiberTX is
--- FIBERTX.VHD                          -- System which forms packets and serializes the 8b/10b
+-- FIBERTX.VHD : System which forms packets and serializes the 8b/10b
 -- encoded result. 
 
   -- input latches

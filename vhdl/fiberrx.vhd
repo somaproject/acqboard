@@ -3,8 +3,6 @@ use IEEE.STD_LOGIC_1164.all;
 use IEEE.STD_LOGIC_ARITH.all;
 use IEEE.STD_LOGIC_UNSIGNED.all;
 
--- Uncomment the following lines to use the declarations that are
--- provided for instantiating Xilinx primitive components.
 library UNISIM;
 use UNISIM.VComponents.all;
 
@@ -17,7 +15,8 @@ entity FiberRX is
          NEWCMD  : out std_logic;
          PENDING : in  std_logic;
          CMDID   : out std_logic_vector(3 downto 0);
-         CHKSUM  : out std_logic_vector(7 downto 0));
+         CHKSUM  : out std_logic_vector(7 downto 0);
+         LINKUP  : out std_logic);
 end FiberRX;
 
 architecture Behavioral of FiberRX is
@@ -51,17 +50,18 @@ architecture Behavioral of FiberRX is
 
 begin
 
-  decoder_inst : decoder port map (
-    CLK      => CLK,
-    DIN      => FIBERIN,
-    DATAOUT  => indata,
-    KOUT     => kout,
-    CODE_ERR => code_err,
-    DISP_ERR => disp_err,
-    DATALOCK => newpkt,
-    RESET    => RESET);
+  decoder_inst : decoder
+    port map (
+      CLK      => CLK,
+      DIN      => FIBERIN,
+      DATAOUT  => indata,
+      KOUT     => kout,
+      CODE_ERR => code_err,
+      DISP_ERR => disp_err,
+      DATALOCK => newpkt,
+      RESET    => RESET);
 
-  err                    <= code_err or disp_err;
+  err <= code_err or disp_err;
 
   clock : process(CLK, RESET, cs, newpkt)
   begin
@@ -96,13 +96,15 @@ begin
           when others =>
             null;
         end case;
+
         if newpkt = '1' then
           if err = '0' then
-            chksum(0)              <= kout;
+            chksum(0) <= kout;
+            LINKUP    <= '1';
+          else
+            LINKUP    <= '0';
           end if;
-            
         end if;
-        
       end if;
     end if;
 
@@ -113,7 +115,7 @@ begin
   fsm : process(cs, ns, newpkt, err, kout, indata, chksumvalid, PENDING)
   begin
     case cs is
-      when none     =>
+      when none =>
         NEWCMD <= '0';
         if newpkt = '1' and kout = '1'
           and err = '0' and indata = "10111100" then
@@ -121,6 +123,7 @@ begin
         else
           ns   <= none;
         end if;
+
       when startpkt =>
         NEWCMD <= '0';
         if newpkt = '1' then
@@ -132,14 +135,16 @@ begin
         else
           ns   <= startpkt;
         end if;
-      when cmdl     =>
+
+      when cmdl =>
         NEWCMD <= '0';
         if indata(3 downto 0) = "0000" then
           ns   <= none;
         else
           ns   <= data1w;
         end if;
-      when data1w   =>
+
+      when data1w =>
         NEWCMD <= '0';
         if newpkt = '1' then
           if kout = '0' and err = '0' then
@@ -150,10 +155,12 @@ begin
         else
           ns   <= data1w;
         end if;
-      when data1l   =>
+
+      when data1l =>
         NEWCMD <= '0';
         ns     <= data2w;
-      when data2w   =>
+
+      when data2w =>
         NEWCMD <= '0';
         if newpkt = '1' then
           if kout = '0' and err = '0' then
@@ -164,10 +171,12 @@ begin
         else
           ns   <= data2w;
         end if;
-      when data2l   =>
+
+      when data2l =>
         NEWCMD <= '0';
         ns     <= data3w;
-      when data3w   =>
+
+      when data3w =>
         NEWCMD <= '0';
         if newpkt = '1' then
           if kout = '0' and err = '0' then
@@ -178,10 +187,12 @@ begin
         else
           ns   <= data3w;
         end if;
-      when data3l   =>
+
+      when data3l =>
         NEWCMD <= '0';
         ns     <= data4w;
-      when data4w   =>
+
+      when data4w =>
         NEWCMD <= '0';
         if newpkt = '1' then
           if kout = '0' and err = '0' then
@@ -192,10 +203,12 @@ begin
         else
           ns   <= data4w;
         end if;
-      when data4l   =>
+
+      when data4l =>
         NEWCMD <= '0';
         ns     <= chksumw;
-      when chksumw  =>
+
+      when chksumw =>
         NEWCMD <= '0';
         if newpkt = '1' then
           if kout = '0' and err = '0' then
@@ -206,13 +219,15 @@ begin
         else
           ns   <= chksumw;
         end if;
-      when chksumc  =>
+
+      when chksumc =>
         NEWCMD <= '0';
         if chksumvalid = '1' then
           ns   <= validpkt;
         else
           ns   <= none;
         end if;
+
       when validpkt =>
         NEWCMD <= '1';
         if PENDING = '0' then
@@ -221,13 +236,15 @@ begin
           ns   <= pendw;
 
         end if;
-      when pendw  =>
+
+      when pendw =>
         NEWCMD <= '0';
         if PENDING = '1' then
           ns   <= pendw;
         else
           ns   <= none;
         end if;
+
       when others =>
         NEWCMD <= '0';
         ns     <= none;

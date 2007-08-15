@@ -99,7 +99,8 @@ architecture Behavioral of acqboard is
   signal cmdsts          : std_logic_vector(3 downto 0)  := (others => '0');
   signal mode            : std_logic_vector(1 downto 0)  := (others => '0');
 
-
+  signal jtag1, jtag2 : std_logic_vector(63 downto 0) := (others => '0');
+  
 
 
 -- component definitions
@@ -239,7 +240,8 @@ architecture Behavioral of acqboard is
            NEWCMD  : out std_logic;
            PENDING : in  std_logic;
            CMDID   : out std_logic_vector(3 downto 0);
-           CHKSUM  : out std_logic_vector(7 downto 0));
+           CHKSUM  : out std_logic_vector(7 downto 0);
+           LINKUP : out std_logic);
   end component;
 
   component Loader
@@ -445,7 +447,8 @@ begin
     NEWCMD  => newcmd,
     PENDING => pending,
     CMDID   => cmdid,
-    CHKSUM  => chksum);
+    CHKSUM  => chksum,
+    LINKUP => LEDLINK);
 
   loader_inst : Loader port map (
     CLK      => clk,
@@ -528,19 +531,25 @@ begin
   ea  <= ('0' & laddr) when eesel = '1' else (ewaddr);
   een <= len           when eesel = '1' else ceen;
 
-  LEDLINK <= '0';
+
   LEDCMD  <= PENDING;
 
   CLK8_OUT <= clk8;
 
   jtaginterface_inst : jtaginterface
     generic map (
-      JTAG1N => 32,
-      JTAG2N => 32)
+      JTAG1N => 64,
+      JTAG2N => 64)
     port map (
       CLK    => clk,
-      DIN1   => X"01234567",
-      DIN2   => X"89ABCDEF");
+      DIN1   => jtag1,
+      DIN2   => jtag2);
 
+  jtag1(63 downto 48) <= X"0123";
+  jtag1(31 downto 0) <= cmd & X"0" & cmdid & X"000" & chksum;
+  
+  
+  jtag2(63 downto 48) <= X"ABCD"; 
+  jtag2(31 downto 0) <= cmddata; 
 
 end Behavioral;

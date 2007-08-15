@@ -3,17 +3,15 @@ use IEEE.STD_LOGIC_1164.all;
 use IEEE.STD_LOGIC_ARITH.all;
 use IEEE.STD_LOGIC_UNSIGNED.all;
 
--- Uncomment the following lines to use the declarations that are
--- provided for instantiating Xilinx primitive components.
 library UNISIM;
 use UNISIM.VComponents.all;
 
 entity acqboard is
   port ( CLKIN     : in  std_logic;
          ADCSDIA   : in  std_logic;
-         ADCSDIB : in std_logic;
+         ADCSDIB   : in  std_logic;
          ADCSCK    : out std_logic;
-         ADCCNV : out std_logic;
+         ADCCNV    : out std_logic;
          PGARCK    : out std_logic;
          PGASRCK   : out std_logic;
          PGASERA   : out std_logic;
@@ -25,13 +23,13 @@ entity acqboard is
          FIBERIN   : in  std_logic;
          FIBEROUT  : out std_logic;
          CLK8_OUT  : out std_logic;
-         LEDCMD      : out std_logic;
-         LEDLINK      : out std_logic);
+         LEDCMD    : out std_logic;
+         LEDLINK   : out std_logic);
 end acqboard;
 
 architecture Behavioral of acqboard is
--- ACQBOARD.VHD : master file for entire Acquisition Board FPGA. 
--- See FPGA.svg for details. 
+-- ACQBOARD.VHD : master file for entire Acquisition Board FPGA.
+-- See FPGA.svg for details.
 
 -- signals
   signal reset     : std_logic := '1';
@@ -99,8 +97,8 @@ architecture Behavioral of acqboard is
   signal cmdsuccess      : std_logic                     := '0';
   signal cmddone         : std_logic                     := '0';
   signal cmdsts          : std_logic_vector(3 downto 0)  := (others => '0');
-  signal mode : std_logic_vector(1 downto 0) := (others => '0');
- 
+  signal mode            : std_logic_vector(1 downto 0)  := (others => '0');
+
 
 
 
@@ -131,10 +129,10 @@ architecture Behavioral of acqboard is
     port ( CLK      : in  std_logic;
            INSAMPLE : in  std_logic;
            RESET    : in  std_logic;
-           CNV   : out std_logic;
-           SCK     : out std_logic;
+           CNV      : out std_logic;
+           SCK      : out std_logic;
            SDIA     : in  std_logic;
-           SDIB         : in std_logic; 
+           SDIB     : in  std_logic;
            DOUT     : out std_logic_vector(15 downto 0);
            COUT     : out std_logic_vector(3 downto 0);
            WEOUT    : out std_logic;
@@ -316,8 +314,20 @@ architecture Behavioral of acqboard is
            Y    : out std_logic_vector(15 downto 0);
            YEN  : out std_logic);
   end component;
+
+  component jtaginterface
+    generic (
+      JTAG1N :    integer := 32;
+      JTAG2N :    integer := 32);
+    port (
+      CLK    : in std_logic;
+      DIN1   : in std_logic_vector(JTAG1N-1 downto 0);
+      DIN2   : in std_logic_vector(JTAG2N-1 downto 0)
+      );
+  end component;
+
 begin
-  U1            :     TOC port map (O => reset);
+  U1 : TOC port map (O => reset);
 
   clocks_inst : clocks port map (
     CLKIN     => CLKIN,
@@ -333,8 +343,8 @@ begin
     CLK      => clk,
     INSAMPLE => insample,
     RESET    => reset,
-    CNV   => ADCCNV,
-    SCK     => ADCSCK,
+    CNV      => ADCCNV,
+    SCK      => ADCSCK,
     SDIA     => ADCSDIA,
     SDIB     => ADCSDIB,
     DOUT     => dout,
@@ -399,7 +409,7 @@ begin
     CLK      => clk,
     RESET    => reset,
     SCLK     => PGASRCK,
-    RCLK     => PGARCK, 
+    RCLK     => PGARCK,
     SOUT     => PGASERA,
     CHAN     => pgachan,
     GAIN     => gain,
@@ -515,12 +525,22 @@ begin
 
   ain <= laddr(7 downto 0) when bufsel = '1' else sample;
 
-  ea          <= ('0' & laddr) when eesel = '1' else (ewaddr);
-  een         <= len           when eesel = '1' else ceen;
+  ea  <= ('0' & laddr) when eesel = '1' else (ewaddr);
+  een <= len           when eesel = '1' else ceen;
 
   LEDLINK <= '0';
-  LEDCMD <= PENDING;
-                              
-  CLK8_OUT <= clk8; 
+  LEDCMD  <= PENDING;
+
+  CLK8_OUT <= clk8;
+
+  jtaginterface_inst : jtaginterface
+    generic map (
+      JTAG1N => 32,
+      JTAG2N => 32)
+    port map (
+      CLK    => clk,
+      DIN1   => X"01234567",
+      DIN2   => X"89ABCDEF");
+
 
 end Behavioral;

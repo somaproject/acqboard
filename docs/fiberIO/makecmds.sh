@@ -1,6 +1,5 @@
 #!/usr/bin/bash
 
-
 cat cmd.svg | sed  "s/CMD/0x7/;s/DATA0/Mode/;s/DATA1/Chan/;s/DATA2/0x00/;s/DATA3/0x00/" > switchmode.cmd.svg
 
 cat cmd.svg | sed  "s/CMD/0x1/;s/DATA0/Chan/;s/DATA1/Gain/;s/DATA2/0x00/;s/DATA3/0x00/" > setgain.cmd.svg

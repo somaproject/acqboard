@@ -532,7 +532,7 @@ begin
   een <= len           when eesel = '1' else ceen;
 
 
-  LEDCMD  <= PENDING;
+  LEDCMD  <= cmdsuccess;
 
   CLK8_OUT <= clk8;
 

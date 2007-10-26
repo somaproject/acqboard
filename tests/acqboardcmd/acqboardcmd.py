@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 This is the reference implementation for the acqboard command interface.
-This file, and the commands.ai doc should always be in sync.
+This file, and the commands doc should always be in sync.
 
 
 create a new acqboardcmd object:
@@ -14,26 +14,66 @@ Status is 6 3 255
    will return a six-char packed string of the command packet
    to set the gain of chan to value
 
-   cmdid = current (most-recently-written) command ID
+   cmd.cmdid is the  current (most-recently-written) command ID
+   
    
 """
 
 from struct import *
-
+    
 class AcqBoardCmd:
 
     channames = { 'A1' : 0, 'A2' : 1, 'A3' : 2, 'A4' : 3, 'AC' : 4,
                  'B1' : 6, 'B2' : 7, 'B3' : 8, 'B4' : 9, 'BC' : 5}
-
+    
+    cmdfilename = "/tmp/cmdid"
+    
     def __init__(self):
-        self.cmdid = 0
+
+        try:
+            self.fid = open(self.cmdfilename, 'ra+b')
+            self.fid.seek(0)
+            b = self.fid.read(1)
+            assert len(b) == 1
+            self.cmdid = unpack("B", b)[0]
+            print("acqboardcmd: recovered %d from %s." % (self.cmdid,
+                                                          self.cmdfilename))
+            
+        except IOError:
+            self.fid = open(self.cmdfilename, 'w+b')
+            self.cmdid = 2
+            print("acqboardcmd interface: created file %s" % self.cmdfilename)
+            
+
+        self.fid.seek(0)
+        self.fid.write(pack("B", self.cmdid))
+        self.fid.flush()
+
+    def cacheString(self, str):
+        self.latestString = str
+        return str
+
         
     def updatecmd(self):
         if self.cmdid == 15 :
             self.cmdid = 0
         else:
             self.cmdid += 1
-            
+        self.fid.seek(0)
+        self.fid.write(pack("B", self.cmdid))
+        self.fid.flush()
+        
+    def noop(self):
+        self.updatecmd()        
+
+        cmdbyte = (self.cmdid << 4) | 0x0
+        str = pack("BBBBBB", cmdbyte, 0x00, 0x00, \
+                   0x0, 0x0, 0x0);
+
+
+        return self.cacheString(str)
+    
+        
     def switchmode(self, mode, rawchan='AC' ):
         self.updatecmd()        
         str = ""
@@ -44,8 +84,8 @@ class AcqBoardCmd:
         str = pack("BBBBBB", cmdbyte, mode, self.channames[rawchan], \
                    0x0, 0x0, 0x0);
 
-        print rawchan
-        return str;
+
+        return self.cacheString(str)
     
     def setgain(self, chan, gain):
         """ Gains are 'actual' gains, i.e. 0, 100, 200, 500,
@@ -85,7 +125,8 @@ class AcqBoardCmd:
         cmdbyte = (self.cmdid << 4) | 0x1
         
         str = pack("BBBBBB", cmdbyte, self.channames[chan], gainnum, 0x0, 0x0, 0x0);
-        return str;
+        
+        return self.cacheString(str)
 
     def setinputch(self, tet, chan):
         # chans:
@@ -98,7 +139,7 @@ class AcqBoardCmd:
         cmdbyte = (self.cmdid << 4) | 0x2
         str = pack("BBBBBB", cmdbyte, tet, chan, 0x0, 0x0, 0x0);
 
-        return str;
+        return self.cacheString(str)
         
     def sethpfilter(self, chan, filter):
         self.updatecmd()        
@@ -108,7 +149,8 @@ class AcqBoardCmd:
         str = pack("BBBBBB", cmdbyte, self.channames[chan], \
                    filter, 0x0, 0x0, 0x0);
 
-        return str;
+        return self.cacheString(str)
+    
         
         
     def writeoffset(self, chan, gain, value):
@@ -124,8 +166,9 @@ class AcqBoardCmd:
         highbyte = (value >> 8 ) & 0xFF
         print "Lowbyte", lowbyte, " higbyte", highbyte
         str = pack("BBBBBB", cmdbyte, addr, 0x00, highbyte,lowbyte, 0x0);
+
         
-        return str
+        return self.cacheString(str)
 
     def writefilter(self, addr, value):
         print "writefilter address ", addr, " with value ", value 
@@ -140,13 +183,15 @@ class AcqBoardCmd:
         str = pack("BBBBBB", cmdbyte, addr, y[2] ,y[1] , y[0], 0x0 );
         fid.write("value: %d, bytes : %d %d %d\n" % (value, y[2], y[1], y[0]))
         fid.close()
-        return str;
+
+        
+        return self.cacheString(str)
         
 
 if __name__ == "__main__":
     cmd = AcqBoardCmd()
 
     print unpack("BBBBBB", cmd.switchmode(4))
-    print unpack("BBBBBB", cmd.setgain('A3', 4))
+    print unpack("BBBBBB", cmd.setgain('A3', 100))
     print unpack("BBBBBB", cmd.setinputch(0, 3))
     

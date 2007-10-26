@@ -19,7 +19,9 @@ import sys
 sys.path.append("../../")
 from acqboardcmd.acqboardcmd import AcqBoardCmd
 from acqboardcmd import acqboard
+import fiberdebug
 import time
+
 import random
 
 class AcqStatDissassemble(object):
@@ -79,10 +81,6 @@ class BoardStates(object):
                         5000 : 6,
                         10000 : 7}
         
-        self.acqout = acqboard.AcqSocketOut()
-        self.acqcmd = AcqBoardCmd()
-        self.acqstat = acqboard.AcqSocketStatTimeout(1.0)
-
     
     def setGains(self, value):
         print "setgains"
@@ -124,10 +122,7 @@ class BoardStates(object):
 
         self.channel = channel
 
-        sendCommandAndReTransmit(self.acqout,
-                                 self.acqcmd,
-                                 self.acqstat,
-                                 self.acqcmd.switchmode(3,
+        sendCommandAndReTransmit(self.acqcmd.switchmode(3,
                                                         rawchan=self.channel))
         print "board state setup"
 
@@ -193,9 +188,9 @@ class BoardStates(object):
             
 class acqcnt:
     def __init__(self):
-        self.acqout = acqboard.AcqSocketOut()
         self.acqcmd = AcqBoardCmd()
-        self.acqstat = acqboard.AcqSocketStatTimeout(1.0)
+
+        self.abi = fiberdebug.AcqBoardInterface("10.0.0.2")
 
         self.gainSet = {0: 0,
                         1: 1,
@@ -206,15 +201,9 @@ class acqcnt:
                         50 : 6,
                         100 : 7}
         
-        self.acqout.open()
-        self.acqstat.open()
-
     def setMode(self,  mode, channel):
         acqcmdstr = self.acqcmd.switchmode(mode, rawchan=channel)
-        sendCommandAndReTransmit(self.acqout,
-                                 self.acqcmd,
-                                 self.acqstat, acqcmdstr)
-        
+        self.abi.sendCommandAndBlock(self.acqcmd)        
                                  
         print "Board switched to mode", mode, " with channel", channel
 
@@ -223,27 +212,19 @@ class acqcnt:
         newgain = self.gainSet[gain]
         acqcmdstr =  self.acqcmd.setgainnum(chan,
                                             newgain)
-        sendCommandAndReTransmit(self.acqout,
-                                 self.acqcmd,
-                                 self.acqstat,
-                                 acqcmdstr)
+        self.abi.sendCommandAndBlock(self.acqcmd)        
+
         print "Channel ", chan, " gain set to " , gain
 
     def setHPF(self, chan, state):
         acqcmdstr = self.acqcmd.sethpfilter(chan, int(state))
-        sendCommandAndReTransmit(self.acqout,
-                                 self.acqcmd,
-                                 self.acqstat,
-                                 acqcmdstr)
+        self.abi.sendCommandAndBlock(self.acqcmd)        
         
         print "Channel ", chan, " hpf is ", state 
 
     def setInputCh(self, tet, chan):
         acqcmdstr = self.acqcmd.setinputch(int(tet), int(chan))
-        sendCommandAndReTransmit(self.acqout,
-                                 self.acqcmd,
-                                 self.acqstat,
-                                 acqcmdstr)
+        self.abi.sendCommandAndBlock(self.acqcmd)        
         
         print "Set tet ", tet, "to chan ", chan
 
@@ -253,8 +234,8 @@ class acqcnt:
         self.acqcmd.updatecmd()
         for l in fid.readlines():
             acqcmdstr = self.acqcmd.writefilter(pos, int(l))
-            sendCommandAndReTransmit(self.acqout, self.acqcmd,
-                                     self.acqstat, acqcmdstr)
+            self.abi.sendCommandAndBlock(self.acqcmd)        
+
             pos += 1
             
     def writeSamples(self, filename):
@@ -263,8 +244,9 @@ class acqcnt:
         self.acqcmd.updatecmd()
         for l in fid.readlines():
             acqcmdstr = self.acqcmd.writesamplebuffer(pos, int(l))
-            sendCommandAndReTransmit(self.acqout, self.acqcmd,
-                                     self.acqstat, acqcmdstr)
+
+            self.abi.sendCommandAndBlock(self.acqcmd)        
+
             pos += 1
             
 def main():
@@ -274,8 +256,7 @@ def main():
     action = sys.argv[1]
     
     ac = acqcnt()
-    for i in range(1, random.randint(1, 14)):
-        ac.acqcmd.updatecmd()
+
     if action == "mode":
         mode = int(sys.argv[2])
         chan = 'A1'

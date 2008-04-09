@@ -60,8 +60,10 @@ follows:
 
 CMDST is a 3-bit field; CMDST[1:0] are the mode numbers; CMDST[0] is
 high \textit{after we have just switched into this mode, while this
-  mode is loading.} Modes load because they need to read data from the
-EEPROM, etc.
+  mode is loading.} Mode switching is not instantaneous because the
+board needs to read values from EEPROM, a (comparatively) slow
+process.
+
 
 Every command sent has a 4-bit command id (CMDID); when a command is
 \textit{done executing} the output command id is changed to reflect

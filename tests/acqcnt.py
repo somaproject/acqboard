@@ -239,6 +239,10 @@ class acqcnt:
             pos += 1
             
     def writeSamples(self, filename):
+        """ filename is a file consisting of a list
+        of samples, that's it.
+
+        """
         fid = file(filename)
         pos = 0
         self.acqcmd.updatecmd()

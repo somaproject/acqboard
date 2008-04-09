@@ -1,6 +1,6 @@
 
 
-acquisition board/
+pcb/
     All Protel-related files for schematic capture and board design
 
 docs/
@@ -12,17 +12,17 @@ docs/filters
 vhdl/
     main system vhdl
 
-simulation/
+sim/
     code to simulate the vhdl, and for spice sims
     .do files
     simulated parts (acqboard, etc)
     analysis of the output
-simulation/vectors
-    test input and output data from the system
-    code to generate the fake data
 
-tests
-   code to test various parts of the system in the real world
+tgt/ 
+    Final aggregate project, compiled outputs, filters, bitstreams, etc. 
+
+tests/ 
+   code to test various parts of the system in the real world -- i.e. hardware tests, etc. 
 
 tests/vhdl : 
    bits of vhdl for testing

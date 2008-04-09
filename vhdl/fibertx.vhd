@@ -98,7 +98,7 @@ begin
           "0000" & CSLL        when bcnt = 1  else
           yout(0)(15 downto 8) when bcnt = 2  else
           yout(0)(7 downto 0)  when bcnt = 3  else
-          yout(1)(15 downto 8) when bcnt = 4  else
+          yout(1)(15 downto 8) when bcnt = 4  else 
           yout(1)(7 downto 0)  when bcnt = 5  else
           yout(2)(15 downto 8) when bcnt = 6  else
           yout(2)(7 downto 0)  when bcnt = 7  else

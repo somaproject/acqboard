@@ -100,7 +100,7 @@ architecture Behavioral of acqboard is
   signal mode            : std_logic_vector(1 downto 0)  := (others => '0');
 
   signal jtag1, jtag2 : std_logic_vector(63 downto 0) := (others => '0');
-
+  
 
 
 -- component definitions
@@ -241,7 +241,7 @@ architecture Behavioral of acqboard is
            PENDING : in  std_logic;
            CMDID   : out std_logic_vector(3 downto 0);
            CHKSUM  : out std_logic_vector(7 downto 0);
-           LINKUP  : out std_logic);
+           LINKUP : out std_logic);
   end component;
 
   component Loader
@@ -448,7 +448,7 @@ begin
     PENDING => pending,
     CMDID   => cmdid,
     CHKSUM  => chksum,
-    LINKUP  => LEDLINK);
+    LINKUP => LEDLINK);
 
   loader_inst : Loader port map (
     CLK      => clk,
@@ -531,25 +531,8 @@ begin
   ea  <= ('0' & laddr) when eesel = '1' else (ewaddr);
   een <= len           when eesel = '1' else ceen;
 
-  blink             : process(CLK)
-    variable cmdcnt : integer range 0 to 1023 := 1023;
-  begin
-    if rising_edge(CLK) then
-      if cmdsuccess = '1' then
-        cmdcnt   := 0;
-      else
-        if cmdcnt /= 1023 and outbyte = '1' then
-          cmdcnt := cmdcnt + 1;
-        end if;
-      end if;
 
-      if cmdcnt = 1023 then
-        LEDCMD <= '0';
-      else
-        LEDCMD <= '1';
-      end if;
-    end if;
-  end process;
+  LEDCMD  <= cmdsuccess;
 
   CLK8_OUT <= clk8;
 
@@ -563,10 +546,11 @@ begin
       DIN2   => jtag2);
 
   jtag1(63 downto 48) <= X"0123";
-  jtag1(31 downto 0)  <= cmd & X"0" & cmdid & X"000" & chksum;
-
-
-  jtag2(63 downto 48) <= X"ABC" & cmdsts;
-  jtag2(31 downto 0)  <= cmddata;
+  jtag1(35 downto 32) <= cmdsts; 
+  jtag1(31 downto 0) <= cmd & X"0" & cmdid & X"000" & chksum;
+  
+  
+  jtag2(63 downto 48) <= X"ABCD"; 
+  jtag2(31 downto 0) <= cmddata; 
 
 end Behavioral;

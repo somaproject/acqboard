@@ -29,8 +29,9 @@ class AcqBoardCmd:
     cmdfilename = "/tmp/cmdid"
     
     def __init__(self):
+        self.cmdid = 2
 
-        try:
+        try:  # this is so that we have persistent cmdid across invocations
             self.fid = open(self.cmdfilename, 'ra+b')
             self.fid.seek(0)
             b = self.fid.read(1)
@@ -48,7 +49,7 @@ class AcqBoardCmd:
         self.fid.seek(0)
         self.fid.write(pack("B", self.cmdid))
         self.fid.flush()
-
+    
     def cacheString(self, str):
         self.latestString = str
         return str

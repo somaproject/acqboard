@@ -101,7 +101,8 @@ architecture Behavioral of acqboard is
 
   signal jtag1, jtag2 : std_logic_vector(63 downto 0) := (others => '0');
   
-
+  signal cmdsuccesscnt : std_logic_vector(23 downto 0) := (others => '0');
+  
 
 -- component definitions
 
@@ -534,7 +535,24 @@ begin
   een <= len           when eesel = '1' else ceen;
 
 
-  LEDCMD  <= cmdsuccess;
+  process(CLK)
+  begin
+    if rising_edge(CLK) then
+      if cmdsuccess  = '1' then
+        cmdsuccesscnt <= (others => '0');
+      else
+        if cmdsuccesscnt /= X"FFFFFF" then
+          cmdsuccesscnt <= cmdsuccesscnt + 1;
+        end if;
+      end if;
+
+      if cmdsuccesscnt /= X"FFFFFF" then
+        LEDCMD <= '1';
+      else
+        LEDCMD <= '0'; 
+      end if;
+    end if;
+  end process; 
 
   CLK8_OUT <= clk8;
 

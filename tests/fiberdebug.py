@@ -20,8 +20,8 @@ from somapynet.neteventio import NetEventIO
 import sys
 import acqboardcmd.acqboardcmd
 import struct
-
-
+import numpy as n
+import pylab
 
 class AcqBoardInterface(object):
 
@@ -93,7 +93,30 @@ class AcqBoardInterface(object):
                         success = True
 
         self.eio.stop()
-# test
+    def getSamples(self, N):
+        """ Very simple interface to getting
+        samples -- at the moment we just return N samples
+        from either the A channels or the B channels"""
+
+        data = n.zeros((5, N), dtype=n.int16)
+        
+        self.eio.addRXMask(self.CMDFIBERDATAA, xrange(256) )
+
+
+        self.eio.start()
+        receivedN = 0
+        while (receivedN < N):
+            erx = self.eio.getEvents()
+            for e in erx:
+                if receivedN < N:
+                    for i in xrange(5):
+                        print e
+                        data[i][receivedN]  = e.data[i]
+                receivedN += 1
+        self.eio.stop()
+
+        return data
+
 def test():
     #startcmdid = int(sys.argv[1])
     print("Running primary AcqBoard Interface Test")
@@ -104,8 +127,15 @@ def test():
     #acmd.setgain('A1', 0)
     acmd.switchmode(3)
     abi.sendCommandAndBlock(acmd)
-    
+
+def test2():
+    abi = AcqBoardInterface("10.0.0.2")
+    x = abi.getSamples(1000)
+    pylab.plot(x[1])
+    pylab.show()
+                 
+                 
     
 
 if __name__ == "__main__":
-    test()
+    test2()

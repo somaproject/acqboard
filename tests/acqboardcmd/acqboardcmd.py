@@ -20,7 +20,9 @@ Status is 6 3 255
 """
 
 from struct import *
-    
+import os
+import stat
+
 class AcqBoardCmd:
 
     channames = { 'A1' : 0, 'A2' : 1, 'A3' : 2, 'A4' : 3, 'AC' : 4,
@@ -42,6 +44,8 @@ class AcqBoardCmd:
             
         except IOError:
             self.fid = open(self.cmdfilename, 'w+b')
+            os.chmod(self.cmdfilename, stat.S_IRUSR | stat.S_IWUSR)
+            
             self.cmdid = 2
             print("acqboardcmd interface: created file %s" % self.cmdfilename)
             

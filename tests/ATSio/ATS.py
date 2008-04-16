@@ -177,6 +177,8 @@ def main() :
 
     a.freq1 = 1000.0
     a.ampVppA = 0.04
+    a.ampVppB = 0.04
+    #a.ampVppA = 4
     a.onA = True
     a.onB = True
     a.output = 'bal'

@@ -33,8 +33,9 @@ class AcqBoardInterface(object):
     DESTSRCID = 76
     
     
-    def __init__(self, IP):
+    def __init__(self, IP, set = 'A'):
         self.eio = NetEventIO(IP)
+        self.set = set
         
 
     def sendCommandAndBlock(self, acqboardcmd):
@@ -99,8 +100,10 @@ class AcqBoardInterface(object):
         from either the A channels or the B channels"""
 
         data = n.zeros((5, N), dtype=n.int16)
-        
-        self.eio.addRXMask(self.CMDFIBERDATAA, xrange(256) )
+        if self.set == "A":
+            self.eio.addRXMask(self.CMDFIBERDATAA, xrange(256) )
+        else:
+            self.eio.addRXMask(self.CMDFIBERDATAB, xrange(256) )
 
 
         self.eio.start()
@@ -129,9 +132,17 @@ def test():
     abi.sendCommandAndBlock(acmd)
 
 def test2():
-    abi = AcqBoardInterface("10.0.0.2")
+    set = sys.argv[1]
+    chan = [int(x) -1 for x in sys.argv[2:]]
+        
+    abi = AcqBoardInterface("10.0.0.2", set=set)
     x = abi.getSamples(1000)
-    pylab.plot(x[1])
+    pylab.subplot(len(chan), 1, 1)
+    for i, v in enumerate(chan):
+        pylab.subplot(len(chan), 1, i+1)
+        pylab.plot(x[v][:100])
+    
+               
     pylab.show()
                  
                  

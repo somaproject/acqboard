@@ -243,7 +243,8 @@ begin
         concnten <= '1';
         bitcnten <= '0';
         oen      <= '0';
-        if concnt = 118 then
+        --if concnt = 118 then
+        if concnt = 120 then
           ns     <= startrd;
         else
           ns     <= waitconv;

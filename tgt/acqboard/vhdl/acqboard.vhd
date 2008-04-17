@@ -103,6 +103,8 @@ architecture Behavioral of acqboard is
   
   signal cmdsuccesscnt : std_logic_vector(23 downto 0) := (others => '0');
   signal ladcsck : std_logic := '0';
+  signal adcsckreg : std_logic_vector(7 downto 0) := (others => '0');
+  
   
 
 -- component definitions
@@ -552,10 +554,12 @@ begin
       else
         LEDCMD <= '0'; 
       end if;
-      ADCSCK <= ladcsck;
-      
+      --ADCSCK <= adcsckreg(4);
+      adcsckreg <= adcsckreg(6 downto 0) & ladcsck; 
+      ADCSCK <= ladcsck; 
     end if;
-  end process; 
+  end process;
+
 
   CLK8_OUT <= clk8;
 

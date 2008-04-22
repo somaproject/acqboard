@@ -3,10 +3,12 @@ import sys
 import time
 import sourcestates
 import boardstates
-from read import * 
 import tables
+sys.path.append("../../")
+import fiberdebug
 from scipy import * 
 from matplotlib import pylab
+
 
 class SineRecord(tables.IsDescription):
     frequency     = tables.FloatCol()
@@ -21,7 +23,6 @@ class NoiseRecord(tables.IsDescription):
 class Experiment(object):
 
     def __init__(self, filename, title, raw, balanced=False):
-
         self.A1 = []
         self.A2 = []
         self.A3 = []
@@ -39,14 +40,17 @@ class Experiment(object):
         self.balanced = balanced
         self.chanlist = ['A1', 'A2', 'A3', 'A4', 'AC',
                          'B1', 'B2', 'B3', 'B4', 'BC']
+        self.abi = fiberdebug.AcqBoardInterface()
+        
     def run(self):
-
+        
         for chan in self.chanlist:
             print "Running for channel ", chan
             self.runChan(chan)
 
     def runChan(self, chanName):
-
+        import gc
+        
         chan = eval("self.%s" % chanName)
         for i, v in enumerate(self.chanlist):
             if chanName == v:
@@ -61,7 +65,7 @@ class Experiment(object):
                 chgroup = self.h5file.createGroup("/", chanName,
                                                   "Channel %s " %chanName)
 
-            
+
         for set in chan:
             (bs, ss) = set
 
@@ -109,7 +113,8 @@ class Experiment(object):
 
                             for f in ss.freqIter():
                                 for v in ss.vppIter(g):
-
+                                    print "measurement : chan = %s, gain = %d, voltage  = %f, freq = %f" % (self.chanlist[chanNum],
+                                                                                                 g, v, f)
 
                                     row = table.row
                                     row['frequency'] = f
@@ -120,13 +125,15 @@ class Experiment(object):
                                     time.sleep(0.1)
 
                                     if self.raw:
-                                        x = rawread(2**17)
+                                        x = self.rawread(2**17)
                                     else:
-                                        x = normread(2**18, [chanNum])
-                                    #pylab.plot(x[:1000])
-                                    #pylab.show()
-                                    y = diff(x)
-                                    row['data'] = x[0][2**17:]
+                                        if chanNum < 5:
+                                            x = self.abi.getNormSamplesA(2**18)
+                                            row['data'] = x[chanNum][2**17:]
+                                        else:
+                                            x = self.abi.getNormSamplesB(2**18)
+                                            row['data'] = x[chanNum-5][2**17:]
+
                                     row.append()
                                     time.sleep(0.0)
 
@@ -195,35 +202,27 @@ def simpleTest(filename):
                10000:7}
     
     b.gainSet = gainSet
-    b.hpfs = [0, 1]
-    b.gains = [10000]
-    #b.gains = [100]
+    b.hpfs = [0]
+    b.gains = [100]
     b.inChanB = 0
     b.inChanA = 0    
-    #b.gains = [1]
     f1 = 60
     f2 = 10000
-    #s.freqs = logspace(log10(f1), log10(f2), 20)
-    s.freqs = linspace(f1, f2, 20)
-    #s.freqs = array([100.0, 500.0, 1000.0, 10000.0])
+    s.freqs = logspace(log10(f1), log10(f2), 3)
     s.vpps = [3.9]
     
     e.A1.append((b, s))
     e.A2.append((b, s))
     e.A3.append((b, s))
     e.A4.append((b, s))
+    e.AC.append((b, s))
     e.B1.append((b, s))
     e.B2.append((b, s))
     e.B3.append((b, s))
     e.B4.append((b, s))
-##     e.BC.append((b, s))
-
-    #e.AC.append((b, s))
-    
-
-
-    print "ready to run" 
+    e.BC.append((b, s))
     e.run()
+    
 
 def noiseTest(filename):
 

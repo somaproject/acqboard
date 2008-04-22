@@ -8,6 +8,12 @@ def increasing(offset):
 
     return x + offset
 
+def const(offset):
+    N = 256
+    x = n.arange(0, N-1, dtype=n.int16)
+    x[:] = offset
+    return x
+
 def impulse():
     N = 256
     x = n.zeros(N, dtype=n.int16)
@@ -23,8 +29,14 @@ def sine(freq):
     x = n.sin( t * fs * freq * 2 * 3.1415)
     # conversion
     y=  (x * 32767).astype(n.int16)
-         
-    
+    z = n.zeros(200)
+    dsx = x[::6]
+        
+    z[0:(len(dsx))] = dsx
+    z[len(dsx):2*(len(dsx))] = dsx
+    pylab.plot(z)
+    pylab.grid(1)
+    pylab.show()
     return y
     
 def impulsefilter():
@@ -56,7 +68,8 @@ def writesamp(filename, data):
 
 writesamp("sequential.samp", increasing(0))
 writesamp("impulse.samp", impulse())
-writesamp("sine.samp", sine(100))
+writesamp("sine.samp", sine(132))
+writesamp("const.samp", const(1))
 
 writesamp("impulse.firdat", impulsefilter())
 writesamp("ramp.firdat", rampfilter())

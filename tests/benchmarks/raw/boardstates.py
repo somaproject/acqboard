@@ -5,42 +5,10 @@ import sys
 sys.path.append("../../")
 from acqboardcmd.acqboardcmd import AcqBoardCmd
 from acqboardcmd import acqboard
+import fiberdebug
+
 import time
 
-class AcqStatDissassemble(object):
-
-    def __init__(self, string):
-        print "The length of the string is", len(string)
-        r = unpack("bbbb", string) 
-        self.cmdsts = r[0]
-        self.cmdid = r[1]
-        self.success = r[2]
-        self.loading = False
-        if r[0] & 0x1:
-            self.loading = True
-
-
-
-
-def sendCommandAndReTransmit(acqout, acqcmd, acqstat, commandstr):
-
-
-    acqout.send(commandstr)
-
-    success = False
-    while not success: 
-        resultstr = acqstat.read()
-        if resultstr:
-            as = AcqStatDissassemble(resultstr)
-            if as.cmdid == acqcmd.cmdid and not as.loading:
-                success = True
-        else:
-            # if indeed we did time out we resend the original command
-            print "Acqboard command time-out error; resending command" 
-            acqout.send(commandstr)
-        
-
-    
 class BoardStates(object):
     """
 
@@ -65,12 +33,13 @@ class BoardStates(object):
         self.__inChanA = 0
         self.__inChanB = 0
         
-        self.acqout = acqboard.AcqSocketOut()
         self.acqcmd = AcqBoardCmd()
-        self.acqstat = acqboard.AcqSocketStatTimeout(1.0)
+        self.abi = fiberdebug.AcqBoardInterface("10.0.0.2")
+
 
     def setInChanA(self, value):
         self.__inChanA = value
+        
     def getInChanA(self):
         return self.__inChanA
 
@@ -116,14 +85,9 @@ class BoardStates(object):
 
     def setup(self, rawMode = False,  channels = 'A1'):
         """
-
         Channel can be a list too
-        
         """
         
-        self.acqout.open()
-        self.acqstat.open()
-
         if isinstance(channels, list):
             self.channels = channels
         else:
@@ -133,35 +97,22 @@ class BoardStates(object):
             acqcmdstr = self.acqcmd.switchmode(3, rawchan=self.channels[0])
         else:
             acqcmdstr = self.acqcmd.switchmode(0, rawchan=self.channels[0])
-
-        sendCommandAndReTransmit(self.acqout,
-                                 self.acqcmd,
-                                 self.acqstat,
-                                 acqcmdstr);
-
+        print "sending mode switch"
+        self.abi.sendCommandAndBlock(self.acqcmd);
 
         # set continuous channel A
         acqcmdstr = self.acqcmd.setinputch(0, self.__inChanA)
-        sendCommandAndReTransmit(self.acqout,
-                                 self.acqcmd,
-                                 self.acqstat,
-                                 acqcmdstr);
-        
+        self.abi.sendCommandAndBlock(self.acqcmd);
 
         # set continuous channel B
         acqcmdstr = self.acqcmd.setinputch(1, self.__inChanB)
-        sendCommandAndReTransmit(self.acqout,
-                                 self.acqcmd,
-                                 self.acqstat,
-                                 acqcmdstr);
+        self.abi.sendCommandAndBlock(self.acqcmd);
         
 
         
 
     def done(self):
         print "board states closing"
-        self.acqout.close()
-        self.acqstat.close()
         
     def gainIter(self):
 
@@ -176,10 +127,7 @@ class BoardStates(object):
             
                 acqcmdstr =  self.acqcmd.setgainnum(channel,
                                                     newgain)
-                sendCommandAndReTransmit(self.acqout,
-                                         self.acqcmd,
-                                         self.acqstat,
-                                         acqcmdstr)
+                self.abi.sendCommandAndBlock(self.acqcmd)
 
 
             for i in acqcmdstr:
@@ -201,9 +149,7 @@ class BoardStates(object):
             #    channel = "A1"
 
             for channel in self.channels:
-                sendCommandAndReTransmit(self.acqout,
-                                         self.acqcmd,
-                                         self.acqstat,
-                                         self.acqcmd.sethpfilter(channel, h))
+                self.acqcmd.sethpfilter(channel, h)
+                self.abi.sendCommandAndBlock(self.acqcmd)
 
             yield h

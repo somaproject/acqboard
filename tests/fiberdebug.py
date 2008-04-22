@@ -33,7 +33,7 @@ class AcqBoardInterface(object):
     DESTSRCID = 76
     
     
-    def __init__(self, IP, set = 'A'):
+    def __init__(self, IP="10.0.0.2", set = 'A'):
         self.eio = NetEventIO(IP)
         self.set = set
         
@@ -102,9 +102,12 @@ class AcqBoardInterface(object):
         data = n.zeros((5, N), dtype=n.int16)
         if self.set == "A":
             self.eio.addRXMask(self.CMDFIBERDATAA, xrange(256) )
-        else:
+        elif self.set == "B" :
             self.eio.addRXMask(self.CMDFIBERDATAB, xrange(256) )
-
+        else:
+            # both 
+            self.eio.addRXMask(self.CMDFIBERDATAA, xrange(256) )
+            self.eio.addRXMask(self.CMDFIBERDATAB, xrange(256) )
 
         self.eio.start()
         receivedN = 0
@@ -113,12 +116,35 @@ class AcqBoardInterface(object):
             for e in erx:
                 if receivedN < N:
                     for i in xrange(5):
-                        print e
                         data[i][receivedN]  = e.data[i]
                 receivedN += 1
         self.eio.stop()
 
         return data
+    def getNormSamplesA(self, N):
+        """
+        Return 5xN "normal", that is not-raw-mode, samples, from
+        the A tetrode set of channels
+        """
+        self.set = "A"
+        return self.getSamples(N)
+
+    def getNormSamplesB(self, N):
+        """
+        Return 5xN "normal", that is not-raw-mode, samples, from
+        the B tetrode set of channels
+        """
+
+        self.set = "B"
+        return self.getSamples(N)
+        
+    def getRawSamples(self, N):
+        """
+        return N sampes as if from "Raw"
+
+        """
+        raise "Not implemented" 
+        # not really implemented yet
 
 def test():
     #startcmdid = int(sys.argv[1])

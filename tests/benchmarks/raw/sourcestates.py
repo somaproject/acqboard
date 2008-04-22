@@ -85,7 +85,7 @@ class SineStates(object):
                 newv = v/gain
             else:
                 newv = v
-            print "setting voltage to ", newv
+            #print "setting voltage to ", newv
             if self.chanA:
                 self.ats2.ampVppA = newv
             if self.chanB:

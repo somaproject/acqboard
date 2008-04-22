@@ -24,10 +24,12 @@ def impulse():
 def sine(freq):
 
     fs = 32000.
-    N = 256
-    t = n.arange(0, N-1, dtype=n.float)/ fs
-    x = n.sin( t * fs * freq * 2 * 3.1415)
-    # conversion
+    N = 256.0
+    t = n.arange(0, fs, dtype=n.double) / fs
+    t = t[:N]
+    rt = t * freq * 2.0 * 3.141592
+    x = n.sin( rt)
+
     y=  (x * 32767).astype(n.int16)
     z = n.zeros(200)
     dsx = x[::6]
@@ -37,11 +39,16 @@ def sine(freq):
     pylab.plot(z)
     pylab.grid(1)
     pylab.show()
+    q = n.zeros(200)
+    q[0:56] = y[200:]
+    q[56:106] = y[:50]
+    pylab.plot(q)
+    pylab.show()
     return y
     
-def impulsefilter():
+def impulsefilter(offset = 0):
     x = n.zeros(256, dtype=n.int32)
-    x[0] = 2**21-1
+    x[offset] = 2**21-1
     return x
 
 def patternfilter():
@@ -68,9 +75,16 @@ def writesamp(filename, data):
 
 writesamp("sequential.samp", increasing(0))
 writesamp("impulse.samp", impulse())
-writesamp("sine.samp", sine(132))
+#writesamp("sine.samp", sine(132))
+writesamp("sine.samp", sine(125))
 writesamp("const.samp", const(1))
 
 writesamp("impulse.firdat", impulsefilter())
+writesamp("impulse.0.firdat", impulsefilter(0))
+writesamp("impulse.1.firdat", impulsefilter(1))
+writesamp("impulse.2.firdat", impulsefilter(2))
+writesamp("impulse.3.firdat", impulsefilter(3))
+writesamp("impulse.4.firdat", impulsefilter(4))
+writesamp("impulse.5.firdat", impulsefilter(5))
 writesamp("ramp.firdat", rampfilter())
 writesamp("pattern.firdat", patternfilter())

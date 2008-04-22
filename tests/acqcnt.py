@@ -75,6 +75,10 @@ class acqcnt:
             self.abi.sendCommandAndBlock(self.acqcmd)        
 
             pos += 1
+        while  pos < 256:
+            acqcmdstr = self.acqcmd.writefilter(pos, 0)
+            self.abi.sendCommandAndBlock(self.acqcmd)        
+            pos += 1
             
     def writeSamples(self, filename):
         """ filename is a file consisting of a list

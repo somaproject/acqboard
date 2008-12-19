@@ -8,13 +8,14 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="744.09448819"
-   height="1052.3622047"
+   width="248.92139"
+   height="141.34013"
    id="svg4682"
    sodipodi:version="0.32"
-   inkscape:version="0.43+devel"
-   sodipodi:docbase="/home/jonas/soma/acqboard.docs/hw"
-   sodipodi:docname="enclosure.back.power.svg">
+   inkscape:version="0.44.1"
+   sodipodi:docbase="/home/jonas/soma/acqboard/docs/hw"
+   sodipodi:docname="enclosure.back.power.svg"
+   version="1.0">
   <defs
      id="defs4684" />
   <sodipodi:namedview
@@ -24,15 +25,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="538.75164"
-     inkscape:cy="830.70286"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="-108.08755"
+     inkscape:cy="240.89034"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
-     inkscape:window-width="808"
-     inkscape:window-height="572"
+     inkscape:window-width="872"
+     inkscape:window-height="617"
      inkscape:window-x="112"
-     inkscape:window-y="37" />
+     inkscape:window-y="37"
+     height="1052.36px"
+     width="744.09448px" />
   <metadata
      id="metadata4687">
     <rdf:RDF>
@@ -47,7 +50,8 @@
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(-383.8986,-147.8112)">
     <text
        xml:space="preserve"
        style="font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:black;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:Bitstream Vera Sans"

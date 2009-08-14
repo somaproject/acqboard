@@ -22,3 +22,4 @@ BUILD/
 coregen.log
 xilinx_device_details.xml
 *.twx
+docs/tools/

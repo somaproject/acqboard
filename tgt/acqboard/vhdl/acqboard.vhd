@@ -7,7 +7,7 @@ library UNISIM;
 use UNISIM.VComponents.all;
 
 entity acqboard is
-  port ( CLKIN     : in  std_logic;
+  port (CLKIN      : in  std_logic;
          ADCSDIA   : in  std_logic;
          ADCSDIB   : in  std_logic;
          ADCSCK    : out std_logic;
@@ -31,13 +31,20 @@ architecture Behavioral of acqboard is
 -- ACQBOARD.VHD : master file for entire Acquisition Board FPGA.
 -- See FPGA.svg for details.
 
+  -- The semantic information associated with protocol versions is
+  -- like that of the linux kernel: odd numbered versions are debug,
+  -- even are release. see docs/fiberio/versions.rst
+
+  
+  constant VERSION : std_logic_vector(7 downto 0) := X"01";
+
 -- signals
   signal reset     : std_logic := '1';
   signal debugdata : std_logic_vector(15 downto 0);
   signal debugen   : std_logic := '0';
 -- clock-related signals
   signal clk, clk8, insample, outsample, outbyte, spiclk :
-    std_logic                  := '0';
+    std_logic := '0';
 
 -- pga and input select signals
   signal gain         : std_logic_vector(2 downto 0) := (others => '0');
@@ -73,9 +80,9 @@ architecture Behavioral of acqboard is
   signal ain : std_logic_vector(7 downto 0)   := (others => '0');
 
 -- MAC & MAC control signals
-  signal x, ymac, y        : std_logic_vector(15 downto 0) := (others => '0');
+  signal x, ymac, y : std_logic_vector(15 downto 0) := (others => '0');
   signal xa, xabase, ha, sample :
-    std_logic_vector(7 downto 0)                           := (others => '0');
+    std_logic_vector(7 downto 0) := (others => '0');
   signal yenmac, yen       : std_logic                     := '0';
   signal h                 : std_logic_vector(21 downto 0) := (others => '0');
   signal startmac, macdone : std_logic                     := '0';
@@ -100,12 +107,12 @@ architecture Behavioral of acqboard is
   signal mode            : std_logic_vector(1 downto 0)  := (others => '0');
 
   signal jtag1, jtag2 : std_logic_vector(63 downto 0) := (others => '0');
-  
+
   signal cmdsuccesscnt : std_logic_vector(23 downto 0) := (others => '0');
-  signal ladcsck : std_logic := '0';
-  signal adcsckreg : std_logic_vector(7 downto 0) := (others => '0');
-  
-  
+  signal ladcsck       : std_logic                     := '0';
+  signal adcsckreg     : std_logic_vector(7 downto 0)  := (others => '0');
+
+
 
 -- component definitions
 
@@ -120,7 +127,7 @@ architecture Behavioral of acqboard is
 
 
   component clocks
-    port ( CLKIN     : in  std_logic;
+    port (CLKIN      : in  std_logic;
            CLK       : out std_logic;
            CLK8      : out std_logic;
            RESET     : in  std_logic;
@@ -131,7 +138,7 @@ architecture Behavioral of acqboard is
   end component;
 
   component input
-    port ( CLK      : in  std_logic;
+    port (CLK       : in  std_logic;
            INSAMPLE : in  std_logic;
            RESET    : in  std_logic;
            CNV      : out std_logic;
@@ -151,7 +158,7 @@ architecture Behavioral of acqboard is
   end component;
 
   component samplebuffer
-    port ( CLK       : in  std_logic;
+    port (CLK        : in  std_logic;
            RESET     : in  std_logic;
            DIN       : in  std_logic_vector(15 downto 0);
            CHANIN    : in  std_logic_vector(3 downto 0);
@@ -161,12 +168,12 @@ architecture Behavioral of acqboard is
            AOUT      : in  std_logic_vector(7 downto 0);
            SAMPOUTEN : in  std_logic;
            ALLCHAN   : in  std_logic;
-           ONLYONE : in std_logic; 
+           ONLYONE   : in  std_logic;
            CHANOUT   : in  std_logic_vector(3 downto 0));
   end component;
 
   component RMACcontrol
-    port ( CLK       : in  std_logic;
+    port (CLK        : in  std_logic;
            INSAMPLE  : in  std_logic;
            OUTSAMPLE : in  std_logic;
            OUTBYTE   : in  std_logic;
@@ -180,7 +187,7 @@ architecture Behavioral of acqboard is
   end component;
 
   component FilterArray
-    port ( CLK   : in  std_logic;
+    port (CLK    : in  std_logic;
            RESET : in  std_logic;
            WE    : in  std_logic;
            H     : out std_logic_vector(21 downto 0);
@@ -190,7 +197,7 @@ architecture Behavioral of acqboard is
   end component;
 
   component RMAC
-    port ( CLK      : in  std_logic;
+    port (CLK       : in  std_logic;
            X        : in  std_logic_vector(15 downto 0);
            XA       : out std_logic_vector(7 downto 0);
            H        : in  std_logic_vector(21 downto 0);
@@ -203,7 +210,7 @@ architecture Behavioral of acqboard is
   end component;
 
   component PGAload
-    port ( CLK      : in  std_logic;
+    port (CLK       : in  std_logic;
            RESET    : in  std_logic;
            SCLK     : out std_logic;
            RCLK     : out std_logic;
@@ -220,7 +227,9 @@ architecture Behavioral of acqboard is
 
 
   component FiberTX
-    port ( CLK        : in  std_logic;
+    generic (
+      VERSION : std_logic_vector(7 downto 0));
+    port (CLK         : in  std_logic;
            CLK8       : in  std_logic;
            RESET      : in  std_logic;
            OUTSAMPLE  : in  std_logic;
@@ -237,7 +246,7 @@ architecture Behavioral of acqboard is
   end component;
 
   component FiberRX
-    port ( CLK     : in  std_logic;
+    port (CLK      : in  std_logic;
            FIBERIN : in  std_logic;
            RESET   : in  std_logic;
            DATA    : out std_logic_vector(31 downto 0);
@@ -246,11 +255,11 @@ architecture Behavioral of acqboard is
            PENDING : in  std_logic;
            CMDID   : out std_logic_vector(3 downto 0);
            CHKSUM  : out std_logic_vector(7 downto 0);
-           LINKUP : out std_logic);
+           LINKUP  : out std_logic);
   end component;
 
   component Loader
-    port ( CLK      : in  std_logic;
+    port (CLK       : in  std_logic;
            LOAD     : in  std_logic;
            DONE     : out std_logic;
            RESET    : in  std_logic;
@@ -263,7 +272,7 @@ architecture Behavioral of acqboard is
   end component;
 
   component EEPROMio
-    port ( CLK    : in  std_logic;
+    port (CLK     : in  std_logic;
            RESET  : in  std_logic;
            SPICLK : in  std_logic;
            DOUT   : out std_logic_vector(15 downto 0);
@@ -279,7 +288,7 @@ architecture Behavioral of acqboard is
   end component;
 
   component Control
-    port ( CLK        : in  std_logic;
+    port (CLK         : in  std_logic;
            RESET      : in  std_logic;
            DATA       : in  std_logic_vector(31 downto 0);
            CMD        : in  std_logic_vector(3 downto 0);
@@ -313,7 +322,7 @@ architecture Behavioral of acqboard is
   end component;
 
   component raw
-    port ( CLK  : in  std_logic;
+    port (CLK   : in  std_logic;
            WEIN : in  std_logic;
            CIN  : in  std_logic_vector(3 downto 0);
            DIN  : in  std_logic_vector(15 downto 0);
@@ -324,12 +333,12 @@ architecture Behavioral of acqboard is
 
   component jtaginterface
     generic (
-      JTAG1N :    integer := 32;
-      JTAG2N :    integer := 32);
+      JTAG1N : integer := 32;
+      JTAG2N : integer := 32);
     port (
-      CLK    : in std_logic;
-      DIN1   : in std_logic_vector(JTAG1N-1 downto 0);
-      DIN2   : in std_logic_vector(JTAG2N-1 downto 0)
+      CLK  : in std_logic;
+      DIN1 : in std_logic_vector(JTAG1N-1 downto 0);
+      DIN2 : in std_logic_vector(JTAG2N-1 downto 0)
       );
   end component;
 
@@ -375,7 +384,7 @@ begin
     AOUT      => xa,
     SAMPOUTEN => sampouten,
     ALLCHAN   => lswe,
-    ONLYONE => bufsel, 
+    ONLYONE   => bufsel,
     CHANOUT   => macchan);
 
 
@@ -428,20 +437,23 @@ begin
     PGARESET => pgarst,
     ISEL     => isel);
 
-  fibertx_inst : FiberTX port map (
-    CLK        => clk,
-    CLK8       => clk8,
-    RESET      => RESET,
-    OUTSAMPLE  => outsample,
-    FIBEROUT   => FIBEROUT,
-    CMDDONE    => cmddone,
-    Y          => y,
-    YEN        => yen,
-    CMDSTS     => cmdsts,
-    CMDID      => cmdid,
-    CMDSUCCESS => cmdsuccess,
-    OUTBYTE    => outbyte,
-    CHKSUM     => chksum);
+  fibertx_inst : FiberTX
+    generic map (
+      VERSION => VERSION)
+    port map (
+      CLK        => clk,
+      CLK8       => clk8,
+      RESET      => RESET,
+      OUTSAMPLE  => outsample,
+      FIBEROUT   => FIBEROUT,
+      CMDDONE    => cmddone,
+      Y          => y,
+      YEN        => yen,
+      CMDSTS     => cmdsts,
+      CMDID      => cmdid,
+      CMDSUCCESS => cmdsuccess,
+      OUTBYTE    => outbyte,
+      CHKSUM     => chksum);
 
 
   fiberrx_inst : FiberRX port map (
@@ -454,7 +466,7 @@ begin
     PENDING => pending,
     CMDID   => cmdid,
     CHKSUM  => chksum,
-    LINKUP => LEDLINK);
+    LINKUP  => LEDLINK);
 
   loader_inst : Loader port map (
     CLK      => clk,
@@ -541,7 +553,7 @@ begin
   process(CLK)
   begin
     if rising_edge(CLK) then
-      if cmdsuccess  = '1' then
+      if cmdsuccess = '1' then
         cmdsuccesscnt <= (others => '0');
       else
         if cmdsuccesscnt /= X"FFFFFF" then
@@ -552,11 +564,11 @@ begin
       if cmdsuccesscnt /= X"FFFFFF" then
         LEDCMD <= '1';
       else
-        LEDCMD <= '0'; 
+        LEDCMD <= '0';
       end if;
       --ADCSCK <= adcsckreg(4);
-      adcsckreg <= adcsckreg(6 downto 0) & ladcsck; 
-      ADCSCK <= ladcsck; 
+      adcsckreg <= adcsckreg(6 downto 0) & ladcsck;
+      ADCSCK    <= ladcsck;
     end if;
   end process;
 
@@ -568,16 +580,16 @@ begin
       JTAG1N => 64,
       JTAG2N => 64)
     port map (
-      CLK    => clk,
-      DIN1   => jtag1,
-      DIN2   => jtag2);
+      CLK  => clk,
+      DIN1 => jtag1,
+      DIN2 => jtag2);
 
   jtag1(63 downto 48) <= X"0123";
-  jtag1(35 downto 32) <= cmdsts; 
-  jtag1(31 downto 0) <= cmd & X"0" & cmdid & X"000" & chksum;
-  
-  
-  jtag2(63 downto 48) <= X"ABCD"; 
-  jtag2(31 downto 0) <= cmddata; 
+  jtag1(35 downto 32) <= cmdsts;
+  jtag1(31 downto 0)  <= cmd & X"0" & cmdid & X"000" & chksum;
+
+
+  jtag2(63 downto 48) <= X"ABCD";
+  jtag2(31 downto 0)  <= cmddata;
 
 end Behavioral;

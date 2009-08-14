@@ -2,7 +2,7 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
@@ -10,14 +10,23 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="svg1"
    sodipodi:version="0.32"
-   inkscape:version="0.43+devel"
+   inkscape:version="0.46"
    width="890.625"
    height="484.375"
    sodipodi:docbase="/home/jonas/soma/acqboard.docs/FPGA/io"
    sodipodi:docname="fiberTX.svg"
-   version="1.0">
+   version="1.0"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
-     id="defs3" />
+     id="defs3">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 242.1875 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="890.625 : 242.1875 : 1"
+       inkscape:persp3d-origin="445.3125 : 161.45833 : 1"
+       id="perspective330" />
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -25,27 +34,36 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.1371088"
-     inkscape:cx="320.47974"
-     inkscape:cy="711.97058"
-     inkscape:window-width="1596"
-     inkscape:window-height="1159"
+     inkscape:zoom="3.0223282"
+     inkscape:cx="468.16925"
+     inkscape:cy="223.0304"
+     inkscape:window-width="1592"
+     inkscape:window-height="1126"
      showgrid="true"
      snaptogrid="true"
      inkscape:grid-points="true"
-     gridspacingy="2.5000000pt"
-     gridspacingx="2.5000000pt"
-     gridoriginy="0.0000000pt"
-     gridoriginx="0.0000000pt"
      gridtolerance="10000"
      showguides="true"
      snaptoguides="true"
-     inkscape:window-x="0"
+     inkscape:window-x="1600"
      inkscape:window-y="0"
      inkscape:grid-bbox="false"
      guidetolerance="5.0000000pt"
      inkscape:current-layer="svg1"
-     inkscape:object-paths="false" />
+     inkscape:object-paths="false">
+    <inkscape:grid
+       id="GridFromPre046Settings"
+       type="xygrid"
+       originx="0px"
+       originy="0.0000000pt"
+       spacingx="2.5000000pt"
+       spacingy="2.5000000pt"
+       color="#0000ff"
+       empcolor="#0000ff"
+       opacity="0.2"
+       empopacity="0.4"
+       empspacing="5" />
+  </sodipodi:namedview>
   <g
      id="g1365"
      transform="translate(181.25,-36.87491)">
@@ -832,14 +850,14 @@
      id="path2590" />
   <text
      xml:space="preserve"
-     style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;text-anchor:start;fill:black;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
-     x="343.22266"
-     y="268.63672"
+     style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+     x="328.125"
+     y="268.75"
      id="text2591"><tspan
        sodipodi:role="line"
        id="tspan2592"
-       x="343.22266"
-       y="268.63672">0x00</tspan></text>
+       x="328.125"
+       y="268.75">VERSION</tspan></text>
   <path
      style="color:black;fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:black;stroke-width:1.25;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1"
      d="M 365.625,265.625 L 375,265.625"

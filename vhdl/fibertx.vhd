@@ -9,6 +9,8 @@ library UNISIM;
 use UNISIM.VComponents.all;
 
 entity FiberTX is
+  generic (
+    VERSION : std_logic_vector(7 downto 0) := X"00");
   port ( CLK        : in  std_logic;
          CLK8       : in  std_logic;
          RESET      : in  std_logic;
@@ -118,7 +120,7 @@ begin
           yout(9)(7 downto 0)  when bcnt = 21 else
           cll                  when bcnt = 22 else
           ckll                 when bcnt = 23 else
-          X"00";
+          VERSION;
 
 
   main : process(clk, reset)

@@ -30,6 +30,14 @@ def inkscapeconv_pdf(srcfilename, destfilename):
     p = Popen(inkscapestr, shell=True)
     sts = os.waitpid(p.pid, 0)
 
+def inkscapeconv_png(srcfilename, destfilename):
+    inkscapecmd = "inkscape %(filename)s --export-png=%(exportname)s "
+    inkscapestr = inkscapecmd % {'filename' : srcfilename,
+                                 'exportname' : destfilename}
+    print "calling inkscape with cmd", inkscapestr
+    p = Popen(inkscapestr, shell=True)
+    sts = os.waitpid(p.pid, 0)
+
 def sanitize_pdf_name(fname):
     head, tail = os.path.split(fname)
     newf = tail.replace(".", "_")
@@ -46,8 +54,17 @@ def process_nodes(app, doctree, fromdocname):
             fname = node.attributes['uri']
             if hasattr(app.builder, 'imgpath'):
                 # HTML
+
                 relfn = os.path.join(app.builder.imgpath, fname)
-                outfn = os.path.join(app.builder.outdir, '_images', fname)
+                fn, ext = os.path.splitext(relfn)
+                outfn =  os.path.join(app.builder.outdir, "_images", fn + ".png")
+                print "The filename is", outfn
+                ensuredir(os.path.dirname(outfn))
+
+                inkscapeconv_png(fname, outfn)
+                #node.attributes['candidates']['application/pdf'] = outfn
+                node.attributes['uri'] = outfn
+
             else:
                 # LaTeX
                 relfn = fname
@@ -63,6 +80,5 @@ def process_nodes(app, doctree, fromdocname):
                 inkscapeconv_pdf(fname, outfn)
 
             
-            node.attributes['candidates']['application/pdf'] = outfn
-            node.attributes['uri'] = outfn
-            print node.attributes['candidates']
+                node.attributes['candidates']['application/pdf'] = outfn
+                node.attributes['uri'] = outfn

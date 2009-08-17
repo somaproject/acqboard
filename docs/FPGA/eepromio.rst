@@ -6,13 +6,13 @@ EEPROM I/O
 The EEPROM is a SPI-serial component which can store up to 32 kB of
 ram. We store 16-bit big-endian words as in table \ref{eepromaddr}.
 
--------------   -----------------------------------------
+=============   =========================================
 Word Address	Data 
 -------------	-----------------------------------------
 0-511 		Filter (256 2-word samples) 
 512 - 757 	sample buffer initial values (256 words) 
 1024 - 1535	offset values for each gain (512 words) 
--------------	-----------------------------------------
+=============	=========================================
 
 
 On each operation we execute the EEPROM's write-enable (WREN)

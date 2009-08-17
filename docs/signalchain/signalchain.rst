@@ -8,7 +8,7 @@
 **************
 
 This chapter outlines the design and implementation of the primary
-soma signal processing chain, from low-level differential input to
+Soma signal processing chain, from low-level differential input to
 encoded binary data at the output of the fiber interface. This is a
 design chapter only; all figures are from simulation and design
 specifications. 
@@ -27,7 +27,7 @@ final output.
 
 The AD8221 In-amp is used to provide high common-mode rejection. See
 figer foo for a plot of the CMMR of the input stage. This stage has a
-constant gain of 100.  To accomodate the large DC offsets inherent in
+constant gain of 100.  To accommodate the large DC offsets inherent in
 most electrophysiology recording environments, the inputs are
 AC-coupled.
 
@@ -39,7 +39,7 @@ Waveform data (EEG) is low-frequency data in the mV range; spike data
 is high-frequency data in the hundreds-of-uV range. When recording
 spikes the low-frequency EEG could potentially saturate our amplifier;
 thus we have an optional single-pole high-pass filter ($f_{-3dB}=300
-Hz$) that can be enabled to maximize spike acqisition dynamic range.
+Hz$) that can be enabled to maximize spike acquisition dynamic range.
 
 .. todo:: FIGURE Frequency response of the board below 1 kHz with and without theoretical
 
@@ -111,7 +111,7 @@ Filtering
 We filter the sampled data using an N-Tap FIR filter using fixed-point
 convolution. We use an extended-precision multiplier, 22-bit filter
 coefficients, and an extended-width accumulator to reduce the negative
-artifacts present in fixed-point aritmetic.
+artifacts present in fixed-point arithmetic.
 
 The Parks-McClellan optimum equiripple FIR filter is used for a cutoff
 at 10 kHz; the resulting frequency response (and coefficient-quantized
@@ -138,7 +138,7 @@ Total response, designed and measured
 
 The resulting frequency response of the combined analog and digital
 filters are shown in figures blah, including zoomed-in passband and
-stopband performace. The frequency response following decimation is
+stopband performance. The frequency response following decimation is
 also shown, with the sum of the (imperfectly filtered) antialiased
 components highlighted.
 

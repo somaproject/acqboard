@@ -1,12 +1,22 @@
-\section{Performance}
 
-\subsection{THD + N}
+***********
+Performance
+***********
+
+==================
+THD + N
+==================
 THD+N with and without input HPF filters, across gains
+[IEEESTDWaveformRecorder]_
 
-\subsection{RMS Voltage Noise }
+===================
+RMS Voltage Noise
+===================
 
-\subsection{Noise Spectra} 
+==============
+Noise Spectra
+==============
 
-\subsection{CMRR}
-
-CMR with and without input HPF. 
+==============
+CMRR
+==============

@@ -16,8 +16,13 @@ Contents:
    FPGA/fpga.rst
    operation/fiberio.rst
    hw/hwio.rst
-..     #performance/performance.rst
-	         #circuitdesign/circuitdesign.rst
+   performance/performance.rst
+..	         #circuitdesign/circuitdesign.rst
+
+.. todo:: Add schematics
+.. todo:: Add BOM
+
+.. todolist::
 
 
 Indices and tables

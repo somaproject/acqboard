@@ -1,1 +1,0 @@
-Loader always loads 384 words, some into the sample buffer and some into the filter array. 

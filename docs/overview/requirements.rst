@@ -46,7 +46,7 @@ number unattainable.
 Bandwidth
 =========
 
-Electrophysiological phenomina in the brain can be losely divided into
+Electrophysiological phenomena in the brain can be loosely divided into
 high-frequency, discrete events and low-frequency, continuous signals.
 Neural action potentials ("spikes") comprise the first category, with
 frequencies of interest between 1 kHz and 8 kHz. Electroencephalogram
@@ -66,11 +66,10 @@ bandwidth of 10 kHz is thus necessary.
 Noise
 =====
 
-
 Even in the absence of any common or differential input, all
 amplifiers still generate internal electrical noise, which is measured
 relative to the input. This noise corrupts input signals and is
-generally broadband, thwarting computaitonal attempts at removing it.
+generally broadband, thwarting computational attempts at removing it.
 Input noise can directly contribute to cluster size for multiunit
 recordings, making unit isolation more difficult.
 
@@ -82,11 +81,28 @@ amplitude down by a factor of 10.
 =================================
 Phase
 =================================
- The importance of linear phase
+
+Electrophysiological signals, in particular the local-field potential,
+vary in frequency over three orders of magnitude. Frequently we are
+interested in the precise phase relationship between different
+frequency signals, which necessitates a filtering scheme that exhibits
+a "linear phase" offset with frequency (i.e. constant group delay). 
 
 =================================
 Electrical isolation
 ================================= 
+
+We are looking for fantastically small electrical signals in
+electrically hostile environments. While we can attempt to control the
+intra-Soma electrical environment, the presence of high-speed digital
+signals nearby makes this a challenge. We can not control the external
+environment, which is plagued by everything from noisy desktop PCs
+(ground noise, radiative noise) to nearby industrial centrifuges
+(ground noise) and 802.11 Wi-Fi access points (radiative
+interference). Thus we need our electrical environment to be as
+controlled as possible, and ideally we should isolate our analog
+front-end from all possible digital contamination.
+
 
 =================================
 Cost, size, number of channels

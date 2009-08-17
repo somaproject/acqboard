@@ -7,10 +7,12 @@ packet with no errors and the appropriate K-character, and then sets
 about latching the relevant input words.
 
 .. figure:: fiberRX.svg
-   
+   :autoconvert:
+
    The Fiber Reception interface.
 
 .. figure:: fiberRX.fsm.svg
+   :autoconvert:
    
    The Fiber Reception finite state machine.
 
@@ -27,6 +29,7 @@ of 9. The 8b/10b encoding guarantees a maximum run of five, so we
 simply need to maintain a lock for at most five input-bit-cycles.
 
 .. figure:: decoder.svg
+   :autoconvert:
 
    The oversampling fiber decoder
 

@@ -19,7 +19,8 @@ digital signal processing section. Here, the stages will be discussed
 independently, except where they overlap and integrate to produce the
 final output.
 
-.. image:: signalchain.svg
+.. figure:: signalchain.svg
+   :autoconvert:
 
 ==================================
  Input Differential Amplification
@@ -87,14 +88,18 @@ achieves greater than 96 dB attenuation within the stop-band while
 maintaining linear phase (constant group delay) across the passband.
 
 .. figure:: soma-1.analog.freqres.svg
+   :autoconvert:
 
    Anti-aliasing filter total frequency response.
 
 .. figure:: soma-1.analog.pass.svg
+   :autoconvert:
+
 
    Antialiasing filter passband frequency response
 
 .. figure:: soma-1.analog.grd.svg
+   :autoconvert:
 
    Anti-aliasing filter group delay.
 
@@ -121,6 +126,7 @@ passband ripple to under $0.5 dB$, while fitting in our allocated FPGA
 resources.
 
 .. figure:: soma-1.digital.quant.svg
+   :autoconvert:
    
    Frequency response of FIR filter.
 
@@ -143,15 +149,18 @@ also shown, with the sum of the (imperfectly filtered) antialiased
 components highlighted.
 
 .. figure:: soma-1.digital.aggregate.svg
+   :autoconvert:
 
    Aggregate pre-decimation signal chain filtering.
 
 
 .. figure:: soma-1.digital.pass.svg
+   :autoconvert:
 
    Aggregate pre-decimation signal chain passband.
 
 .. figure:: soma-1.digital.withaliases.svg
+   :autoconvert:
 
    Aggregate post-decimation filtering.
 

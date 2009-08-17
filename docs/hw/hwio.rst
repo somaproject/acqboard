@@ -14,6 +14,7 @@ The pinout can be seen in figure \ref{inputconn}.
 
 
 .. figure:: enclosure.front.inputconn.svg
+   :autoconvert:
 
    The front panel connector for the Soma Acquisition Module.
    AGND is connected to the amplifier analog ground.   
@@ -29,6 +30,7 @@ The back panel (Figure \ref{backpanel}) contains power, IO, and
 debugging information. There are four sections of interest.
 
 .. figure:: enclosure.back.svg
+   :autoconvert:
 
    The back of the Soma Acquisition Module.
 
@@ -51,8 +53,9 @@ Xilinx FPGAs, allowing both programming of the on-board flash and
 debugging.
 
 .. figure:: enclosure.back.jtag.svg
+   :autoconvert:
    	    
-	    The JTAG port.
+    The JTAG port.
 
 Optical Fiber IO
 --------------------
@@ -61,8 +64,9 @@ visible-light wavelength plastic optical fibers. These are color-coded
 by TX and RX ends to avoid polarity mistakes.
 
 .. figure:: enclosure.back.fiber.svg
-
- The optical fiber interface.
+   :autoconvert:	
+   
+   The optical fiber interface.
 
 
 Analog and Digital Power
@@ -79,6 +83,7 @@ supply requires 5 Volts DC. Analog requires a very clean bipolar +/-5V
 DC. See figure \ref{power} for details. 
 
 .. figure:: enclosure.back.power.svg
+   :autoconvert:
 
    The analog and digital power ports. DVDD=+5V, AVDD=+5V, AVSS=-5V. 
 

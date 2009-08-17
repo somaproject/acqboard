@@ -6,6 +6,7 @@ FIR filtering is performed by the repeated multiply-accumulate module; the filte
 RMAC
 ~~~~
 .. figure:: RMAC.svg
+   :autoconvert:
 
    Repeated Multiply-Accumulate (RMAC) module for fixed-point convolution.
 
@@ -48,7 +49,8 @@ designed to convolve one channel's data per :signal:`STARTMAC`. When
 length $L$, and then asserts :signal:`MACDONE`.
 
 .. figure:: RMAC_fsm.svg
-
+   :autoconvert:
+   
    Controlling FSM for the RMAC.
 
 Fixed-point noise model
@@ -67,10 +69,12 @@ equally simple, asserting :signal:`STARTMAC` to the RMAC engine and
 waiting for completion.
 
 .. figure:: RMACcontrol.svg
+   :autoconvert:
    
    The RMAC controller
 
 
 .. figure:: RMACcontrol.fsm.svg
+   :autoconvert:
    
    The RMAC controller FSM

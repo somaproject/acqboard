@@ -67,8 +67,8 @@ The Acqboard transmits an 8b/10b-encoded frame of 24 bytes, preceded
 by the K28.5 comma character. The nominal frame transmission is as
 follows:
 
-.. image:: txpacket.svg
-
+.. figure:: txpacket.svg
+   :autoconvert:
 
 CMDST is a 3-bit field; CMDST[1:0] are the mode numbers; CMDST[0] is
 high **after we have just switched into this mode, while this
@@ -90,7 +90,8 @@ their corresponding ADCs; they are transmitted MSB first.
   zeros; a new command is signalled by the presence of the comma
   character in the data stream followed by a packet. } which looks as follows:
 
-.. image:: rxpacket.svg
+.. figure:: rxpacket.svg
+   :autoconvert:
 
 Commands
 ============
@@ -103,7 +104,8 @@ Universal Commands
 Switch Mode
 ^^^^^^^^^^^^
 
-.. image:: switchmode.cmd.svg
+.. figure:: switchmode.cmd.svg
+   :autoconvert:
 
 Switch the current acqboard mode to \textsc{mode}. If changing to the
 RAW mode, the \textsc{chan} field is the 4-bit number of the raw
@@ -117,7 +119,8 @@ loading is completed will the CMDID be updated.
 Set Gain
 ^^^^^^^^
 
-.. image:: setgain.cmd.svg
+.. figure:: setgain.cmd.svg
+   :autoconvert:
 
 
 Sets the gain of channel \textsc{Chan} to one of the preset gain
@@ -125,7 +128,8 @@ values \textsc{Gain}. Valid in all modes.
 
 Set Input
 ^^^^^^^^^
-.. image:: setinput.cmd.svg
+.. figure:: setinput.cmd.svg
+   :autoconvert:
 
 Select which of the four channels will be used for tetrode a and B's
 continuous channel.
@@ -133,7 +137,8 @@ continuous channel.
 High Pass Filter Enable
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: setfilter.cmd.svg
+.. figure:: setfilter.cmd.svg
+   :autoconvert:
 
 Enable (\textsc{filter}= 1) or disable (\textsc{filter}=0) the high
 pass filter on channel \textsc{chan}.
@@ -144,7 +149,8 @@ Mode 1 Commands
 
 Write offset
 ^^^^^^^^^^^^^
-.. image:: writeos.cmd.svg
+.. figure:: writeos.cmd.svg
+   :autoconvert:
 
 This command writes the 16-bit twos-complement value in V as the
 digital offset for channel \textsc{chan} when the gain on that channel
@@ -157,14 +163,16 @@ Mode 2 Commands
 
 Write filter
 ^^^^^^^^^^^^^
-.. image:: writefil.cmd.svg
+.. figure:: writefil.cmd.svg
+   :autoconvert:
 
 This command writes the 22-bit twos-complement value in V as the
 \textsc{addr}th coefficient for the low-pass filter.
 
 Write Sample Buffer
 ^^^^^^^^^^^^^^^^^^^
-.. image:: writesamp.cmd.svg
+.. figure:: writesamp.cmd.svg
+   :autoconvert:
 
 This command writes the 16-bit twos-complement value in V as the
 \textsc{addr}th sample in the no-input sample buffer.

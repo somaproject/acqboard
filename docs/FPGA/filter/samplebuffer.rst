@@ -11,3 +11,4 @@ block is written to.
 
 
 .. figure:: samplebuffer.svg
+   :autoconvert:

@@ -9,6 +9,7 @@ addresses of the EEPROM are decoded into the filter write-enable
 
 
 .. figure:: loader.svg
+   :autoconvert:
 
 .. figure:: loader.fsm.svg
-
+   :autoconvert:

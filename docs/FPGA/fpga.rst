@@ -5,7 +5,8 @@ Digital Design of FPGA
 The Xilinx Spartan-3 is used for acquisition control, digital
 filtering, and data encoding and transmission.
 
-.. image:: FPGA.svg
+.. figure:: FPGA.svg
+   :autoconvert:
 
 .. toctree:: 
 
@@ -19,6 +20,7 @@ filtering, and data encoding and transmission.
      loader.rst
 
 .. Control}
+
 
 
 .. \section{Storage}

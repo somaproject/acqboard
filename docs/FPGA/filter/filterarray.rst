@@ -2,6 +2,8 @@ Filter Array
 --------------
 
 .. figure:: filterarray.svg
+   :autoconvert:
+
 
 The filter array uses a block of BlockRAM to store the 22-bit
 fixed-point filter coefficients. The double-buffering allows for

@@ -6,7 +6,7 @@ acquisition, offset compensation, and the eventual write-out of the
 sample bits.
 
 .. figure:: input.svg
-
+   :autoconvert:
 
 ADC interface
 
@@ -19,7 +19,7 @@ delay across the galvanic isolators, we delay the :signal:`LSCK` via a
 shift-register into :signal:`BITEN`.
 
 .. figure:: adc.inputFSM.svg
-
+   :autoconvert:
 
 We go out of our way to make sure we keep the digital signals are
 quite during the ADC's conversion period.

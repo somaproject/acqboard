@@ -28,6 +28,7 @@ To interface to the SPI EEPROM we use a single output mux driven by
 :signal:`CNT`.
 
 .. figure:: EEPROMIO.svg
+   :autoconvert:
 
 .. figure:: EEPROMIO.fsm.svg
-
+   :autoconvert:

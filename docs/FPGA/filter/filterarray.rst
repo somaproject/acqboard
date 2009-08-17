@@ -1,13 +1,12 @@
-\section{Filter Array}
+Filter Array
+--------------
 
-\begin{figure}
-\label{filterarray}
-\includegraphics[scale=1.0]{filterarray.svg}
-\end{figure}
+.. figure:: filterarray.svg
 
 The filter array uses a block of BlockRAM to store the 22-bit
 fixed-point filter coefficients. The double-buffering allows for
 independent read-write points to let the Control and EEPROM write the
 coefficents on mode-switch.
 
-Coefficients are written 16-bits at a time as indicated in Figure \ref{filterarray}. 
+Coefficients are written 16-bits at a time as indicated in Figure
+\ref{filterarray}.

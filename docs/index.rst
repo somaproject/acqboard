@@ -9,13 +9,15 @@ Welcome to Soma Acquisition's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 2	
+
    overview/requirements.rst
    signalchain/signalchain.rst
-   performance/performance.rst
+   FPGA/fpga.rst
    operation/fiberio.rst
-   firmware/fpga.rst
-   circuitdesign/circuitdesign.rst
+   hw/hwio.rst
+..     #performance/performance.rst
+	         #circuitdesign/circuitdesign.rst
 
 
 Indices and tables

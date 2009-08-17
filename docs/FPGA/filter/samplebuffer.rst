@@ -1,0 +1,13 @@
+
+Sample Buffer
+---------------------------
+
+The sample buffer stores 256 16-bit samples for each of the 10
+channels. The dual-port Spartan-3 BlockRam allows for an independent
+interface to simultaneously read out the samples. The assertion of
+:signal:`ALLCHAN` writes all channels. :signal:`CHAN[3:2]` selects which
+internal block is used; :signal:`CHAN[1:0]` selects whcih range in the
+block is written to.
+
+
+.. figure:: samplebuffer.svg

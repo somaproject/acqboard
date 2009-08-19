@@ -3,7 +3,7 @@
 Hardware IO
 ***********************************
 
-============
+
 Front Panel
 ============
 
@@ -22,7 +22,7 @@ The pinout can be seen in figure \ref{inputconn}.
 The connector is a dual-row, twenty-pin 0.100-inch pitch IDC
 connector.
 
-================
+
 Back Panel
 ================
 
@@ -40,9 +40,9 @@ Status LEDs
 There are two status LEDs on the back of the module:
 
    - **Link** : indicates the link with the Soma backplane (over the
-optical fiber) is functioning properly.
+     optical fiber) is functioning properly.
    - **Command**: Flashes briefly every time the Soma Backplane sends
-a command to the acqboard.
+     a command to the acqboard.
 
 
 JTAG port
@@ -55,13 +55,14 @@ debugging.
 .. figure:: enclosure.back.jtag.svg
    :autoconvert:
    	    
-    The JTAG port.
+   The JTAG port.
 
 Optical Fiber IO
 --------------------
-The optical fiber interface (figure \ref{fiber}) takes two 1-mm
-visible-light wavelength plastic optical fibers. These are color-coded
-by TX and RX ends to avoid polarity mistakes.
+
+The optical fiber interface takes two 1-mm visible-light wavelength
+plastic optical fibers. These are color-coded by TX and RX ends to
+avoid polarity mistakes.
 
 .. figure:: enclosure.back.fiber.svg
    :autoconvert:	
@@ -79,8 +80,8 @@ with a Molex 39-01-4041 four-pin connector (and associated female pins
 
 The Acquisition module completely isolates its internal analog and
 digital power supplies for maximum signal integrity. The digital power
-supply requires 5 Volts DC. Analog requires a very clean bipolar +/-5V
-DC. See figure \ref{power} for details. 
+supply requires 5 volts DC. Analog requires a very clean bipolar |pm| 5V
+DC. 
 
 .. figure:: enclosure.back.power.svg
    :autoconvert:

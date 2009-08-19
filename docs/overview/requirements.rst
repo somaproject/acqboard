@@ -55,7 +55,6 @@ synchronous activity of large brain regions, and make up the bulk of
 the latter group. These slower-wave signals extend from 200 Hz down to
 near-DC levels.
 
-
 Thus any electrophysiological system will need to be able to isolate
 the higher-amplitude, low-frequency EEG from the low-amplitude,
 high-frequency spikes, and do so using controlled filtering that

@@ -10,13 +10,16 @@ Contents:
 
 .. toctree::
    :maxdepth: 2	
-
+   
    overview/requirements.rst
    signalchain/signalchain.rst
    FPGA/fpga.rst
    operation/fiberio.rst
    hw/hwio.rst
    performance/performance.rst
+   hardware/hardware.rst
+   hardware/schematics.rst
+   hardware/gerbers.rst
 ..	         #circuitdesign/circuitdesign.rst
 
 .. todo:: Add schematics

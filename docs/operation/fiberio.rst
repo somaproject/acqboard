@@ -10,50 +10,42 @@ Interfacing with the Acquisition board is accomplished via a plastic
 optical fiber interface for enhanced electrical isolation even over
 long data transmission distances.
 
-
 Modes
 =================
 The acquisition board has four modes of operation, designed to set the
 internal state and prevent accidental configuration modification
 during operation.
 
-Normal acquisition mode
-------------------------------------
-Mode 0 is the normal acquisition mode; in this mode all 10 channels
-are sampled at the full normal sampling rate and the data is
-transmitted over the 8b/10b bus using the standard Encoding Scheme. In
-this mode, gain and hardware filter settings can be changed, but
-nothing else.
+**Normal acquisition mode (Mode 0)**
+       Mode 0 is the normal acquisition mode; in this mode all 10 channels
+       are sampled at the full normal sampling rate and the data is
+       transmitted over the 8b/10b bus using the standard Encoding Scheme. In
+       this mode, gain and hardware filter settings can be changed, but
+       nothing else.
 
-Offset disable mode
--------------------
+**Offset disable mode (Mode 1)**
+       Offset disable mode disables the internal offset compensation. The
+       values transmitted are thus the actual measured ADC values. This is
+       the only mode in which new offset values can be saved to the board's
+       internal non-volatile memory (EEPROM).
 
-Offset disable mode (mode 1)  disables the internal offset compensation. The
-values transmitted are thus the actual measured ADC values. This is
-the only mode in which new offset values can be saved to the board's
-internal non-volatile memory (EEPROM).
+**Input disable mode (Mode 2)**
+      Input disable mode disables all reading from the ADCs; in
+      this mode no change of input or analog settings has any effect on the
+      board. While in this mode, the board will continuously transmit a test
+      pattern stored in the on-board EEPROM.
 
-Input disable mode
-------------------
+      In this mode, both the test pattern and the digital low-pass filter
+      can be modified and written to. The sample pattern **is** filtered by
+      the digital filter, and can be used as a mechanism to verify that the
+      filter coefficients were properly written.
 
-Input disable mode (mode 2) disables all reading from the ADCs; in
-this mode no change of input or analog settings has any effect on the
-board. While in this mode, the board will continuously transmit a test
-pattern stored in the on-board EEPROM.
-
-In this mode, both the test pattern and the digital low-pass filter
-can be modified and written to. The sample pattern \textit{is} filtered by
-the digital filter, and can be used as a mechanism to verify that the
-filter coefficients were properly written.
-
-Raw mode
---------------------
-
-Raw mode (mode 3) simply outputs the raw, unfiltered, non-decimated
-data from a single selected channel. The 192 ksps data stream occupies
-multiple words in the transmitted data stream. This can be useful to
-characterize the analog properties of a given channel, and to debug
-signal integrity problems.
+**Raw mode (Mode 3)**
+    Raw mode simply outputs the raw, unfiltered, non-decimated
+    data from a single selected channel. The 192 ksps data stream occupies
+    multiple words in the transmitted data stream. This can be useful to
+    characterize the analog properties of a given channel, and to debug
+    signal integrity problems.
 
 
 Fiber IO
@@ -69,6 +61,7 @@ follows:
 
 .. figure:: txpacket.svg
    :autoconvert:
+   :pngdpi: 150
 
 CMDST is a 3-bit field; CMDST[1:0] are the mode numbers; CMDST[0] is
 high **after we have just switched into this mode, while this
@@ -92,6 +85,7 @@ their corresponding ADCs; they are transmitted MSB first.
 
 .. figure:: rxpacket.svg
    :autoconvert:
+   :pngdpi: 150
 
 Commands
 ============
@@ -106,6 +100,7 @@ Switch Mode
 
 .. figure:: switchmode.cmd.svg
    :autoconvert:
+   :pngdpi: 150
 
 Switch the current acqboard mode to \textsc{mode}. If changing to the
 RAW mode, the \textsc{chan} field is the 4-bit number of the raw
@@ -121,6 +116,7 @@ Set Gain
 
 .. figure:: setgain.cmd.svg
    :autoconvert:
+   :pngdpi: 150
 
 
 Sets the gain of channel \textsc{Chan} to one of the preset gain
@@ -130,6 +126,7 @@ Set Input
 ^^^^^^^^^
 .. figure:: setinput.cmd.svg
    :autoconvert:
+   :pngdpi: 150
 
 Select which of the four channels will be used for tetrode a and B's
 continuous channel.
@@ -139,6 +136,7 @@ High Pass Filter Enable
 
 .. figure:: setfilter.cmd.svg
    :autoconvert:
+   :pngdpi: 150
 
 Enable (\textsc{filter}= 1) or disable (\textsc{filter}=0) the high
 pass filter on channel \textsc{chan}.
@@ -151,6 +149,7 @@ Write offset
 ^^^^^^^^^^^^^
 .. figure:: writeos.cmd.svg
    :autoconvert:
+   :pngdpi: 150
 
 This command writes the 16-bit twos-complement value in V as the
 digital offset for channel \textsc{chan} when the gain on that channel
@@ -165,6 +164,7 @@ Write filter
 ^^^^^^^^^^^^^
 .. figure:: writefil.cmd.svg
    :autoconvert:
+   :pngdpi: 150
 
 This command writes the 22-bit twos-complement value in V as the
 \textsc{addr}th coefficient for the low-pass filter.
@@ -173,6 +173,7 @@ Write Sample Buffer
 ^^^^^^^^^^^^^^^^^^^
 .. figure:: writesamp.cmd.svg
    :autoconvert:
+   :pngdpi: 150
 
 This command writes the 16-bit twos-complement value in V as the
 \textsc{addr}th sample in the no-input sample buffer.

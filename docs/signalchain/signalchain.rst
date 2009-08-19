@@ -8,10 +8,10 @@
 **************
 
 This chapter outlines the design and implementation of the primary
-Soma signal processing chain, from low-level differential input to
-encoded binary data at the output of the fiber interface. This is a
-design chapter only; all figures are from simulation and design
-specifications. 
+Soma Acquisition signal processing chain, from low-level differential
+input to encoded binary data at the output of the fiber
+interface. This is a design chapter only; all figures are from
+simulation and design specifications.
 
 The Soma acquisition board signal chain (Figure \ref{signalchain}) can
 be partitioned into an analog signal conditioning section and a
@@ -21,6 +21,9 @@ final output.
 
 .. figure:: signalchain.svg
    :autoconvert:
+   :pngdpi: 150
+
+   The Soma Acquisition Signal Processing Chain
 
 ==================================
  Input Differential Amplification
@@ -108,7 +111,8 @@ maintaining linear phase (constant group delay) across the passband.
 ADC
 ------
 
-A 16-bit ADC running at $f_s=192 \textrm{kHz}$ samples the incoming antialiased signal. 
+A 16-bit ADC running at $f_s=192 \textrm{kHz}$ samples the incoming
+antialiased signal.
 
 ----------
 Filtering

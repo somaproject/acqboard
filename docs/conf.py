@@ -23,7 +23,7 @@ sys.path.append(os.path.abspath('.'))
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinx.ext.todo', 'sphinx.ext.pngmath', 'sphinx.ext.ifconfig',
-              'svgrenderer']
+              'svgrenderer', 'reftex']
 
 todo_include_todos=True
 
@@ -176,7 +176,7 @@ htmlhelp_basename = 'SomaAcquisitiondoc'
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
   ('index', 'SomaAcquisition.tex', u'Soma Acquisition Documentation',
-   u'Eric Jonas', 'report'),
+   u'Eric Jonas', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -188,7 +188,7 @@ latex_documents = [
 #latex_use_parts = False
 
 # Additional stuff for the LaTeX preamble.
-latex_preamble = ''
+#latex_preamble = ''
 
 # Documents to append as an appendix to all manuals.
 #latex_appendices = []

@@ -438,8 +438,6 @@ by\par
 \@prevdegrees
 \par
 \vspace{0.2in}
-\Logo
-\vspace{0.2in}
 \par
 \choosecase{Submitted to the}\\
 \choosecase{\@department} \\
@@ -474,8 +472,6 @@ at the
 by \\
 \@author \\[\baselineskip]}
 \vspace{-0.2in}
-\Logo
-\vspace{0.2in}
 \par
 \def\baselinestretch{1}\@normalsize
 Submitted to the \@department \\
@@ -511,10 +507,10 @@ requirements for the \@degreeword\ of \\
 \def\MIT{MASSACHUSETTS INSTITUTE OF TECHNOLOGY}
 \def\Mit{Massachusetts Institute of Technology}
 
-\def\permission{\par\noindent{\centering
-   The author hereby grants to MIT permission to reproduce and
-   distribute publicly paper and electronic copies of this thesis
-   document in whole or in part.}\par}
+\def\permission{\par\noindent{\centering The author hereby grants to
+    M.I.T. permission to reproduce and to distribute publicly paper
+    and electronic copies of this thesis document in whole and in part
+    in any medium now known or hereafter created.  }\par}
 
 \def\signature#1#2{\par\noindent#1\dotfill\null\\*
   {\raggedleft #2\par}}

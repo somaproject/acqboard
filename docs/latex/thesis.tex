@@ -1,0 +1,31 @@
+\documentclass[10pt,twoside]{mitthesis}
+
+\usepackage{amsfonts,amsmath,amssymb,amsthm,caption,
+  clrscode,graphicx,subfig,bold-extra, hyperref, tabulary, color}
+
+\graphicspath{{./}{latex/}}
+
+\author{Eric M Jonas}
+
+\begin{document}
+
+\include{cover}
+\pagestyle{plain}
+
+\newcommand{\ThesisText}{
+ My thesis is that a framework for probabilistic inference can be designed
+ that enables efficient composition of both models and inference procedures,
+ that is suited to the representational needs of emerging classes of
+ probabilistic models, and that supports recent advances in inference.
+}
+
+\newcommand{\ThesisStatement}{
+ \begin{hypo}
+ \ThesisText
+ \end{hypo}
+}
+
+
+\include{latex/SomaAcquisition}
+
+\end{document}

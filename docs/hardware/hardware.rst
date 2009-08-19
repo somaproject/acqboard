@@ -19,10 +19,10 @@ Input front-end
 
 (see :ref:`input_schematic`)
 
-The AD8221AR (:part:`U12`) is used as an input instrumentation
+The AD8221AR (:desig:`U12`) is used as an input instrumentation
 amplifier due to it's excellent linearity and high common-mode
-rejection [AD8221_DataSheet]_. We use a fixed gain of 100 set by
-:part:`R26` -- programmable gain at this stage would necessitate the
+rejection :bibcite:`analog_devices_ad8221_2007`. We use a fixed gain of 100 set by
+:desig:`R26` -- programmable gain at this stage would necessitate the
 introduction of an analog mux, which would unacceptably degrade
 performance.
 
@@ -35,21 +35,19 @@ gone through at least one stage of internal amplification. The very
 high DC component in our common mode voltages would overwhelm this
 stage.
 
-
-
 Input high-pass filter and Programmable gain
 ---------------------------------------------
 (see :ref:`pga_schematic`)
 
 To optionally high-pass filter the input, a single-pole RC filter is
-combined with the JFET-input AD8510 ([AD8510_DataSheet]_, :part:`U7`)
-and an ADG619 SPDT analog mux ([ADG619_DataSheet]_). The high input
+combined with the JFET-input :part:`AD8510` ([AD8510_DataSheet]_, :desig:`U7`)
+and an :part:`ADG619` SPDT analog mux ([ADG619_DataSheet]_). The high input
 impedance of the AD8510 results in minimum impact to the overall
 signal chain.
 
-The bipolar programmable-gain LTC6910-1 :part:`U8` provides gains of
-0, 1, 2, 5, 10, 20, 50, and 100, allowing us to maximize the input
-dynamic range of the ADC.
+The bipolar programmable-gain :part:`LTC6910-1` :desig:`U8`
+provides gains of 0, 1, 2, 5, 10, 20, 50, and 100, allowing us to
+maximize the input dynamic range of the ADC.
 
 
 Programmable Gain Shift Register Network
@@ -76,7 +74,7 @@ ADC
 ---
 (see :ref:`adc_schematic`)
 
-:part:`AD7685` :designator:`U2`
+:part:`AD7685` :desig:`U2`
 
 Differential input, single-supply
 
@@ -85,7 +83,7 @@ Individually buffer voltage reference
 
 Voltage Refernece
 --------------------------------
-Use :part:`LM4140CCM-4.1` :designator:`U28`. 
+Use :part:`LM4140CCM-4.1` :desig:`U28`. 
 
 Low-pass filter, use it for VRef. 
 
@@ -104,14 +102,14 @@ Galvanic Isolation
 (see :ref:`isolation_schematic`)
 
 To isolate ground current flow, we use the :part:`IL715-3`
-(:designator:`U14`) and :part:`IL716-3` galvanic isolation ICs to
+(:desig:`U14`) and :part:`IL716-3` galvanic isolation ICs to
 bridge the analog-digital domain. 
 
 FPGA
 ----
 (see :ref:`fpga_scheamtic`)
 
-The Xilinx Spartan-3 VQ100 :part:`XC3s200-4Q100: :designator:`U4` 
+The Xilinx Spartan-3 VQ100 :part:`XC3s200-4Q100: :desig:`U4` 
 performs all the control, signal processing, and communication tasks on
 the Acquisition Board. Driven by a single 36 MHz digital oscillator. 
 

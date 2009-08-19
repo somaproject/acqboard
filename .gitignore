@@ -23,3 +23,7 @@ coregen.log
 xilinx_device_details.xml
 *.twx
 docs/tools/
+/pcb/acqboard.PRJPCBStructure
+/pcb/outputs/Status Report.Txt
+/pcb/template.schdotPreview
+/pcb/acqboard.Dat

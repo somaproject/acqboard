@@ -8,11 +8,13 @@ about latching the relevant input words.
 
 .. figure:: fiberRX.svg
    :autoconvert:
+   :latexwidth: 6in
 
    The Fiber Reception interface.
 
 .. figure:: fiberRX.fsm.svg
    :autoconvert:
+   :latexwidth: 6in
    
    The Fiber Reception finite state machine.
 
@@ -30,6 +32,7 @@ simply need to maintain a lock for at most five input-bit-cycles.
 
 .. figure:: decoder.svg
    :autoconvert:
+   :latexwidth: 6in
 
    The oversampling fiber decoder
 

@@ -10,9 +10,6 @@ Front Panel
 The front panel of the acquisiton module has the 20-pin input for all
 8 differential channel pairs of amplifier input.
 
-The pinout can be seen in figure \ref{inputconn}. 
-
-
 .. figure:: enclosure.front.inputconn.svg
    :autoconvert:
 
@@ -48,21 +45,24 @@ There are two status LEDs on the back of the module:
 JTAG port
 ----------
 
-The JTAG port (figure \ref{jtag}) is the standard 14-pin 2mm-pitch JTAG connector for
+The JTAG port is the standard 14-pin 2mm-pitch JTAG connector for
 Xilinx FPGAs, allowing both programming of the on-board flash and
-debugging.
+debugging. This mates with any of the Xilinx programming cables, such
+as the Xilinx Parallel Cable IV :bibcite:`Xilinx_Parallel_2004`. 
 
 .. figure:: enclosure.back.jtag.svg
    :autoconvert:
    	    
-   The JTAG port.
+   The JTAG port, which conforms to the standard Xilinx pinout. 
+
 
 Optical Fiber IO
 --------------------
 
-The optical fiber interface takes two 1-mm visible-light wavelength
-plastic optical fibers. These are color-coded by TX and RX ends to
-avoid polarity mistakes.
+The optical fiber interface takes two 1-mm 650nm wavelength
+plastic optical fibers. The receiver and transmitter colorings
+match up with the associated ends of the plastic optical fiber, 
+eliminating polarity mistakes. 
 
 .. figure:: enclosure.back.fiber.svg
    :autoconvert:	
@@ -72,16 +72,17 @@ avoid polarity mistakes.
 
 Analog and Digital Power
 -------------------------
+
 Powering analog and mixed signal data acquisition devices is always a
 challenge, as the exact nature of the power distribution scheme can
 substantially impact analog performance. The power connectors mate
 with a Molex 39-01-4041 four-pin connector (and associated female pins
-44476-3112).  
+44476-3112).
 
 The Acquisition module completely isolates its internal analog and
 digital power supplies for maximum signal integrity. The digital power
-supply requires 5 volts DC. Analog requires a very clean bipolar |pm| 5V
-DC. 
+supply requires 5 volts DC. Analog requires a very clean bipolar |pm|
+5V DC.
 
 .. figure:: enclosure.back.power.svg
    :autoconvert:

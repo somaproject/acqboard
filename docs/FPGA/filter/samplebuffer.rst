@@ -12,3 +12,4 @@ block is written to.
 
 .. figure:: samplebuffer.svg
    :autoconvert:
+   :latexwidth: 6in

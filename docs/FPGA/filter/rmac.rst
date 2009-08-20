@@ -7,6 +7,7 @@ RMAC
 ~~~~
 .. figure:: RMAC.svg
    :autoconvert:
+   :latexwidth: 6in
 
    Repeated Multiply-Accumulate (RMAC) module for fixed-point convolution.
 

@@ -7,6 +7,7 @@ filtering, and data encoding and transmission.
 
 .. figure:: FPGA.svg
    :autoconvert:
+   :latexwidth: 6in
 
 .. toctree:: 
 

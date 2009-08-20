@@ -8,12 +8,11 @@
 **************
 
 This chapter outlines the design and implementation of the primary
-Soma Acquisition signal processing chain, from low-level differential
-input to encoded binary data at the output of the fiber
-interface. This is a design chapter only; all figures are from
-simulation and design specifications.
+Soma Acquisition Board signal processing chain, from low-level
+differential input to encoded binary data. This is a design chapter
+only; all figures are from simulation and design specifications.
 
-The Soma acquisition board signal chain (Figure \ref{signalchain}) can
+The Soma AcquisitionBboard signal chain (Figure \ref{signalchain}) can
 be partitioned into an analog signal conditioning section and a
 digital signal processing section. Here, the stages will be discussed
 independently, except where they overlap and integrate to produce the
@@ -23,9 +22,11 @@ final output.
    :autoconvert:
    :pngdpi: 150
 
-   The Soma Acquisition Signal Processing Chain
+   The Soma Acquisition Signal Processing Chain. Signals are divided
+into two sets of four (A1-A4, B1-B4) with each set having an optional 
+fifth channel (AC and BC, respectively).
 
-==================================
+
  Input Differential Amplification
 ==================================
 
@@ -34,21 +35,27 @@ rejection.  A constant gain of 100 results in a low-level bipolar
 signal.  To accommodate the large DC offsets inherent in most
 electrophysiology recording environments, the inputs are AC-coupled.
 
-=============================================
+
 Optional analog high-pass filtering
 =============================================
 
-Local field potential (LFP) waveform data is low-frequency in the mV
- range; spike data is high-frequency data in the hundreds-of-uV
- range. When recording spikes the low-frequency LFP could potentially
- saturate our amplifier; thus we have an optional single-pole
- high-pass filter ($f_{-3dB}=300 Hz$) that can be enabled to maximize
- spike acquisition dynamic range.
+Low-frequency (1-200 Hz) local field potential (LFP) oscillations can
+range to several millivolts. The higher-frequency extracellular action
+potentials (spikes) are normally sub-millivolt. When recording spikes
+the larger-amplitude LFP could potentially saturate our amplifier;
+thus we have an optional single-pole high-pass filter ($f_{-3dB}=300
+Hz$) that can be enabled to maximize spike acquisition dynamic range.
 
-.. todo:: FIGURE Frequency response of the board below 1 kHz with and without theoretical
+Each group of four input channels feeds into an optional fifth channel
+(A.C and B.C) which can independently filter the
+differentially-amplified input. This allows for each bundle of four
+channels to record high-frequency, low-amplitude spike signals and to
+simultaneously record the low-frequency, higher-voltage LFP.
+
+.. todo:: FIGURE Frequency response of the board below 1 kHz with and
+.. without theoretical
 
 
-===================
  Programmable gain
 ===================
 
@@ -57,12 +64,11 @@ of gains from 1 to 100; the table below shows the PGA gain, total
 system gain, maximum input voltage, and LSB size for the possible
 settings.
 
-.. figure::
    ========   ===========  ===================  =========
    PGA gain   Total Gain   Input Voltage Range  LSB size 
    --------   -----------  -------------------  ---------
-   1           100            |pm| 20.480 mV     625 nV
-   2           200            |pm| 10.240 mV     312 nV
+   1           100         |pm| 20.480 mV        625 nV
+   2           200         |pm| 10.240 mV        312 nV
    5           500  	   |pm| 4.096 mV      	 125 nV
    10          1000 	   |pm| 2.048 mV       	 62.5 nV
    20          2000 	   |pm| 1.024 mV       	 31.3 nV
@@ -71,7 +77,6 @@ settings.
    ========   ===========  ===================  =========
 
 
-============================
 Analog to Digital Conversion
 ============================
 
@@ -84,9 +89,9 @@ process is the combination of the following factors:
   - fixed-point FIR filtering
   - downsampling
 
----------------------
-Antialiasing Filter
----------------------
+
+Antialiasing Filter & ADC
+-------------------------
 To achieve our desired sampling rate, an 8-pole Bessel filter
 achieves greater than 96 dB attenuation within the stop-band while
 maintaining linear phase (constant group delay) across the passband.
@@ -111,14 +116,9 @@ maintaining linear phase (constant group delay) across the passband.
    Anti-aliasing filter group delay.
 
 
-------
-ADC
-------
-
-A 16-bit ADC running at $f_s=192 \textrm{kHz}$ samples the incoming
+A 16-bit ADC running at 192 kSPS samples the resulting 
 antialiased signal.
 
-----------
 Filtering
 ----------
 
@@ -140,7 +140,7 @@ resources.
 
    Frequency response of FIR filter.
 
--------------
+
 Downsampling
 -------------
 
@@ -183,19 +183,20 @@ components highlighted.
 Digital Output
 =======================
 
-The resulting sampled bytes are transmitted at 32 ksps over
-an 8MHz 8b/10b-encoded link. A separate input 8b/10b link
-sends commands to control gain, filter settings, and the like. 
-
-TODO: cite mode. 
+The resulting sampled bytes are transmitted at 32 ksps over an 8MHz
+650nm 8b/10b-encoded link. A separate input 8b/10b link sends commands
+to control gain, filter settings, and the like. This allows complete
+long-haul electrical isolation between the acquisition system
+and the downstream noisy digital analysis. 
 
 Transmission of the a serial bitstream requires the receiver to
-synchrnize to the bitstream so as to determine bit boundaries. Transitions
-between one and zero bits can be used to infer the clocking parameters, 
-but long strings of ones or zeros may result in a gradual precssion and,
-eventually, a bit error. To prevent this, we use the 8b/10b encoding scheme. 
+synchronize to the bitstream so as to determine bit
+boundaries. Transitions between one and zero bits can be used to infer
+the clocking parameters, but long strings of ones or zeros may result
+in a gradual precession and, eventually, a bit error. To prevent this,
+we use the 8b/10b encoding scheme.
 
 8b/10b encodes 8-bit symbols in 10 bits of data
 :bibcite:`Widmer_DC-Balanced_1983` selecting code words to guarantee a
-bit transition at least every six bits. 8b/10b also includes some
+bit transition at least every six bits. 8b/10b also includes defines
 framing ("comma") characters which simplify packet identification.

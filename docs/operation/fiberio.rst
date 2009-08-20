@@ -6,9 +6,11 @@ The acquisition board has four modes of operation, one normal
 multichannel mode, one mode for offset compensation, one mode for link
 testing with simulated output, and one mode for single-channel test.
 
-Interfacing with the Acquisition board is accomplished via a plastic
+Interfacing with the acquisition board is accomplished via a plastic
 optical fiber interface for enhanced electrical isolation even over
 long data transmission distances.
+
+.. todo:: cite the analog device 
 
 Modes
 =================
@@ -16,12 +18,12 @@ The acquisition board has four modes of operation, designed to set the
 internal state and prevent accidental configuration modification
 during operation.
 
-**Normal acquisition mode (Mode 0)**
-       Mode 0 is the normal acquisition mode; in this mode all 10 channels
-       are sampled at the full normal sampling rate and the data is
-       transmitted over the 8b/10b bus using the standard Encoding Scheme. In
-       this mode, gain and hardware filter settings can be changed, but
-       nothing else.
+**Normal acquisition mode (Mode 0)** 
+    Mode 0 is the normal acquisition
+    mode; in this mode all 10 channels are sampled at the full normal
+    sampling rate and the data is transmitted over the 8b/10b bus
+    using the standard encoding scheme. In this mode, gain and
+    hardware filter settings can be changed, but nothing else.
 
 **Offset disable mode (Mode 1)**
        Offset disable mode disables the internal offset compensation. The
@@ -63,25 +65,31 @@ follows:
    :autoconvert:
    :pngdpi: 150
 
-CMDST is a 3-bit field; CMDST[1:0] are the mode numbers; CMDST[0] is
-high **after we have just switched into this mode, while this
-  mode is loading.** Mode switching is not instantaneous because the
-board needs to read values from EEPROM, a (comparatively) slow
-process.
 
+The Command Status byte consists of three active bits. CMDST[1:0] are
+the mode numbers, indicating the current active mode.  CMDST[0] is a
+"loading" bit, and is high **during transition into a new mode.** Mode
+switching is not instantaneous because the board needs to read values
+from EEPROM, a (comparatively) slow process.
 
-Every command sent has a 4-bit command id (CMDID); when a command is
-\textit{done executing} the output command id is changed to reflect
-this. CMDRP is the command response field; CMDRP[4:1] are the bits of
+Every command sent to the board contains  a 4-bit Command ID (CMDID);
+this is a nonce which indicates command completion. The most
+recently-completed Command ID is transmitted with each full
+frame. When a command is **done executing** the output Command ID is
+changed to reflect this.
+
+CMDRP is the command response field; CMDRP[4:1] are the bits of
 the most-recently executed CMDID; CMDRP[0] tells whether or not this
 command was successful.
 
 The data fields are 1.15-bit twos-complement fixed point samples from
 their corresponding ADCs; they are transmitted MSB first.
 
-\emph{Normally, the acqboard receives a stream of valid 8b/10b encoded
-  zeros; a new command is signalled by the presence of the comma
-  character in the data stream followed by a packet. } which looks as follows:
+Normally, the Acqboard receives a stream of valid 8b/10b encoded
+zeros; a new command is indicated by the presence of the comma
+character in the data stream followed by a packet. A typical 
+command packet is below, and consists of six bytes. The specific internals
+of the commands are explained in the following section. g
 
 .. figure:: rxpacket.svg
    :autoconvert:
@@ -102,14 +110,14 @@ Switch Mode
    :autoconvert:
    :pngdpi: 150
 
-Switch the current acqboard mode to \textsc{mode}. If changing to the
-RAW mode, the \textsc{chan} field is the 4-bit number of the raw
-channel you are reading from -- otherwise the field is ignored.
+Switch the current acqboard mode to **mode**. If changing to the
+RAW mode, the **chan** field is the 4-bit number of the raw
+channel to be transmitted. In all other modes, this field is ignored. 
 
 Note that some mode transitions can take up to 300 ms; during this
 time the transmitted packet's CMDST will reflect the new mode, but the
-``loading'' bit will be set until the mode has been entered. Only once
-loading is completed will the CMDID be updated.
+**loading** bit will be high until the mode has been entered. Only
+once loading is completed will the CMDID be updated.
 
 Set Gain
 ^^^^^^^^
@@ -119,8 +127,8 @@ Set Gain
    :pngdpi: 150
 
 
-Sets the gain of channel \textsc{Chan} to one of the preset gain
-values \textsc{Gain}. Valid in all modes.
+Sets the gain of channel **chan** to one of the preset gain
+values **gain**. Valid in all modes.
 
 Set Input
 ^^^^^^^^^
@@ -128,8 +136,8 @@ Set Input
    :autoconvert:
    :pngdpi: 150
 
-Select which of the four channels will be used for tetrode a and B's
-continuous channel.
+Select which of the four primary input channels will be used
+as input to the secondary input channel. 
 
 High Pass Filter Enable
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -138,8 +146,7 @@ High Pass Filter Enable
    :autoconvert:
    :pngdpi: 150
 
-Enable (\textsc{filter}= 1) or disable (\textsc{filter}=0) the high
-pass filter on channel \textsc{chan}.
+Enable or disable the high pass filter on channel the indicated channel.
 
 
 Mode 1 Commands
@@ -152,10 +159,9 @@ Write offset
    :pngdpi: 150
 
 This command writes the 16-bit twos-complement value in V as the
-digital offset for channel \textsc{chan} when the gain on that channel
-is set to \textsc{gain}. This is only valid in offset-disable mode as
-to properly measure the zero offsets you'd need to have offsets
-disabled.
+digital offset for channel **chan** when the gain on that channel is
+set to **gain**. To measure the inherit DC offset (and thus compute
+the compensation value) you must be in offset-disable mode.
 
 Mode 2 Commands
 ----------------
@@ -167,7 +173,7 @@ Write filter
    :pngdpi: 150
 
 This command writes the 22-bit twos-complement value in V as the
-\textsc{addr}th coefficient for the low-pass filter.
+**addr**th coefficient for the low-pass filter.
 
 Write Sample Buffer
 ^^^^^^^^^^^^^^^^^^^
@@ -176,5 +182,5 @@ Write Sample Buffer
    :pngdpi: 150
 
 This command writes the 16-bit twos-complement value in V as the
-\textsc{addr}th sample in the no-input sample buffer.
+**addr**th sample in the no-input sample buffer.
 

@@ -7,7 +7,8 @@ sample bits.
 
 .. figure:: input.svg
    :autoconvert:
-
+   :latexwidth: 6in
+   
 ADC interface
 
  The two sets of ADCs are serially chained, providing :signal:`SDIA`

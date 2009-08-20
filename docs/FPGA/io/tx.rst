@@ -21,5 +21,6 @@ data :signal:`DOUT` and serializes it to the eventual output
 
 .. figure:: fiberTX.svg
    :autoconvert:
+   :latexwidth: 6in
 
    The Fiber Transmission interface

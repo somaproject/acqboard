@@ -23,7 +23,7 @@ sys.path.append(os.path.abspath('.'))
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinx.ext.todo', 'sphinx.ext.pngmath', 'sphinx.ext.ifconfig',
-              'svgrenderer', 'reftex']
+              'svgrenderer', 'reftex', 'hardware']
 
 todo_include_todos=True
 

@@ -10,6 +10,8 @@ The FPGA is clocked at 72 MHz via a DCM-doubled 36-MHz input clock signal.
 A series of centralized synchronized clock-enables coordinates events
 across the entire FPGA.
 
+.. tabularcolumns:: |l|c|c|p{7cm}|
+
 ===================  ========  ===========  ============================================
 Clock name 	     Ticks     Frequency    Use
 -------------------  --------  -----------  --------------------------------------------

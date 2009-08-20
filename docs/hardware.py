@@ -36,8 +36,6 @@ def latex_visit_signal(self, node):
     raise nodes.SkipNode    
 
 def setup(app):
-    app.connect('doctree-resolved', process_nodes)
-
     app.add_node(signal,
                  latex=(latex_visit_signal, None), 
                  latexnaked=(latex_visit_signal, None), 
@@ -46,5 +44,3 @@ def setup(app):
     app.add_role('signal', signal_role)
     
 
-def process_nodes(app, doctree, fromdocname):
-    pass

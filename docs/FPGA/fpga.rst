@@ -9,6 +9,9 @@ filtering, and data encoding and transmission.
    :autoconvert:
    :latexwidth: 6in
 
+   Overall architecture of the FPGA firmware for signal processing and amplifier control. 
+
+
 .. toctree:: 
 
      clocks.rst
@@ -17,8 +20,10 @@ filtering, and data encoding and transmission.
      filter/filterarray.rst
      filter/rmac.rst
      io/io.rst
+     pga.rst
      eepromio.rst
      loader.rst
+     control.rst
 
 .. Control}
 

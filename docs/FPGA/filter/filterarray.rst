@@ -5,10 +5,10 @@ Filter Array
    :autoconvert:
    :latexwidth: 6in
 
-The filter array uses a block of BlockRAM to store the 22-bit
-fixed-point filter coefficients. The double-buffering allows for
-independent read-write points to let the Control and EEPROM write the
-coefficents on mode-switch.
+   Filter coefficient buffer and write pattern. 
 
-Coefficients are written 16-bits at a time as indicated in Figure
-\ref{filterarray}.
+The filter array uses BlockRAM to store the 22-bit fixed-point filter
+coefficients. The double-buffering allows for independent read-write
+ports to let the Control and EEPROM write the coefficients on
+mode-switch. Coefficients are written 16-bits at a time via
+:signal:`DIN[15:0]` and read out via :signal:`H[21:0]`.

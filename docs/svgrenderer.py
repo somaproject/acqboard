@@ -25,11 +25,14 @@ def setup(app):
         images.Figure.option_spec['pngdpi'] = set_ping_val
         images.Figure.option_spec['latexwidth'] = str
         images.Figure.option_spec['latexangle'] = str
+        images.Figure.option_spec['label'] = str
+        
     except AttributeError:
         images.figure.options['autoconvert'] = testfoo
         images.figure.options['pngdpi'] = set_ping_val
         images.figure.options['latexwidth'] = str
         images.figure.options['latexangle'] = str
+        images.figure.options['label'] = str
 
 
 def inkscapeconv_pdf(srcfilename, destfilename):

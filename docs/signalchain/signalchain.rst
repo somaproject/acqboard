@@ -2,7 +2,6 @@
 
 .. &plusmn;
 
-
 **************
  Signal Chain
 **************
@@ -12,23 +11,25 @@ Soma Acquisition Board signal processing chain, from low-level
 differential input to encoded binary data. This is a design chapter
 only; all figures are from simulation and design specifications.
 
-The Soma AcquisitionBboard signal chain (Figure \ref{signalchain}) can
-be partitioned into an analog signal conditioning section and a
-digital signal processing section. Here, the stages will be discussed
-independently, except where they overlap and integrate to produce the
-final output.
+The Soma AcquisitionBboard signal chain can be partitioned into an
+analog signal conditioning section and a digital signal processing
+section. Here, the stages will be discussed independently, except
+where they overlap and integrate to produce the final output.
 
 .. figure:: signalchain.svg
    :autoconvert:
-   :pngdpi: 150
+   :latexwidth: 5in
+   :label: signal-chain
 
-   The Soma Acquisition Signal Processing Chain. Signals are divided
-into two sets of four (A1-A4, B1-B4) with each set having an optional 
-fifth channel (AC and BC, respectively).
+   The signal processing chain.
 
+Signals are divided into two sets of four (A1-A4, B1-B4) with each set
+having an optional fifth channel (AC and BC, respectively) (Figure
+:ref:`signal-chain`).
 
+=================================
  Input Differential Amplification
-==================================
+=================================
 
 There are an initial eight channels of input with high common-mode
 rejection.  A constant gain of 100 results in a low-level bipolar
@@ -43,8 +44,9 @@ Low-frequency (1-200 Hz) local field potential (LFP) oscillations can
 range to several millivolts. The higher-frequency extracellular action
 potentials (spikes) are normally sub-millivolt. When recording spikes
 the larger-amplitude LFP could potentially saturate our amplifier;
-thus we have an optional single-pole high-pass filter ($f_{-3dB}=300
-Hz$) that can be enabled to maximize spike acquisition dynamic range.
+thus we have an optional single-pole high-pass filter (f\ :sub:`-3dB`\
+=300
+Hz ) that can be enabled to maximize spike acquisition dynamic range.
 
 Each group of four input channels feeds into an optional fifth channel
 (A.C and B.C) which can independently filter the
@@ -64,6 +66,8 @@ of gains from 1 to 100; the table below shows the PGA gain, total
 system gain, maximum input voltage, and LSB size for the possible
 settings.
 
+:latex:`begin{singlespace}`
+
    ========   ===========  ===================  =========
    PGA gain   Total Gain   Input Voltage Range  LSB size 
    --------   -----------  -------------------  ---------
@@ -76,6 +80,7 @@ settings.
    100         10000 	   |pm| 0.205 mV       	 6.3 nV
    ========   ===========  ===================  =========
 
+:latex:`end{singlespace}`
 
 Analog to Digital Conversion
 ============================
@@ -131,7 +136,7 @@ The Parks-McClellan optimum equiripple FIR filter is used for a cutoff
 at 10 kHz; the resulting frequency response (and coefficient-quantized
 frequency response) are seen in figure \ref{FIR}. The 143-tap filter
 gives the required stopband attenuation while keeping FIR-induced
-passband ripple to under $0.5 dB$, while fitting in our allocated FPGA
+passband ripple to under 0.5 dB, while fitting in our allocated FPGA
 resources.
 
 .. figure:: soma-1.digital.quant.svg

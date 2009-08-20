@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -8,14 +9,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="1024"
-   height="768"
+   width="704.05872"
+   height="528.29401"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.46"
+   inkscape:version="0.46+devel r21521"
    version="1.0"
-   sodipodi:docbase="/home/jonas/soma/presentations/acquisition"
-   sodipodi:docname="performance.noise.1.svg"
+   sodipodi:docname="noise1.svg"
    inkscape:export-filename="/tmp/test.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
@@ -38,8 +38,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.35355339"
-     inkscape:cx="449.49261"
-     inkscape:cy="36.136585"
+     inkscape:cx="400.42652"
+     inkscape:cy="-54.728653"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      width="1024px"
@@ -54,10 +54,11 @@
      inkscape:window-width="1083"
      inkscape:window-height="858"
      inkscape:window-x="344"
-     inkscape:window-y="191">
+     inkscape:window-y="191"
+     inkscape:window-maximized="0">
     <sodipodi:guide
        orientation="horizontal"
-       position="28.284271"
+       position="-49.06609,-56.924113"
        id="guide1890" />
     <inkscape:grid
        id="GridFromPre046Settings"
@@ -70,7 +71,10 @@
        empcolor="#0000ff"
        opacity="0.2"
        empopacity="0.4"
-       empspacing="5" />
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -87,16 +91,18 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="background"
-     style="display:inline" />
+     style="display:inline"
+     transform="translate(-49.06609,-154.4976)" />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     style="display:inline">
+     style="display:inline"
+     transform="translate(-49.06609,-154.4976)">
     <g
        id="g2892">
       <path
-         style="font-size:200px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;opacity:0.09090899;fill:white;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+         style="font-size:200px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;opacity:0.09090899;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
          d=""
          id="text2944" />
     </g>
@@ -105,21 +111,21 @@
        transform="matrix(1.220588,0,0,1.220588,49.56609,154.9976)">
       <polygon
          id="polygon1888"
-         points="0,432 0,0 576,0 576,432 0,432 "
-         style="opacity:1;fill:white;stroke:white;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+         points="576,432 0,432 0,432 0,0 576,0 "
+         style="fill:#ffffff;stroke:#ffffff;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
       <g
          id="axes1">
         <polygon
            id="polygon1891"
-           points="72,388.8 72,43.2 518.4,43.2 518.4,388.8 72,388.8 "
-           style="opacity:1;fill:white;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           points="518.4,388.8 72,388.8 72,388.8 72,43.2 518.4,43.2 "
+           style="fill:#ffffff;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <defs
            id="defs1893">
           <clipPath
              id="789695421804425603">
             <rect
                id="rect1896"
-               style="fill:none;stroke:gray"
+               style="fill:none;stroke:#808080"
                height="345.60001"
                width="446.39999"
                y="43.200001"
@@ -128,408 +134,408 @@
         </defs>
         <polygon
            id="polygon1898"
-           points="72,388.8 72,97.995224 94.32,97.995224 94.32,388.8 72,388.8 "
-           style="opacity:1;fill:green;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           points="94.32,388.8 72,388.8 72,388.8 72,97.995224 94.32,97.995224 "
+           style="fill:#008000;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <polygon
            id="polygon1900"
-           points="135.77143,388.8 135.77143,131.31624 158.09143,131.31624 158.09143,388.8 135.77143,388.8 "
-           style="opacity:1;fill:green;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           points="158.09143,388.8 135.77143,388.8 135.77143,388.8 135.77143,131.31624 158.09143,131.31624 "
+           style="fill:#008000;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <polygon
            id="polygon1902"
-           points="199.54286,388.8 199.54286,141.02402 221.86286,141.02402 221.86286,388.8 199.54286,388.8 "
-           style="opacity:1;fill:green;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           points="221.86286,388.8 199.54286,388.8 199.54286,388.8 199.54286,141.02402 221.86286,141.02402 "
+           style="fill:#008000;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <polygon
            id="polygon1904"
-           points="263.31429,388.8 263.31429,144.82233 285.63429,144.82233 285.63429,388.8 263.31429,388.8 "
-           style="opacity:1;fill:green;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           points="285.63429,388.8 263.31429,388.8 263.31429,388.8 263.31429,144.82233 285.63429,144.82233 "
+           style="fill:#008000;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <polygon
            id="polygon1906"
-           points="327.08571,388.8 327.08571,145.68913 349.40571,145.68913 349.40571,388.8 327.08571,388.8 "
-           style="opacity:1;fill:green;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           points="349.40571,388.8 327.08571,388.8 327.08571,388.8 327.08571,145.68913 349.40571,145.68913 "
+           style="fill:#008000;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <polygon
            id="polygon1908"
-           points="390.85714,388.8 390.85714,147.40131 413.17714,147.40131 413.17714,388.8 390.85714,388.8 "
-           style="opacity:1;fill:green;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           points="413.17714,388.8 390.85714,388.8 390.85714,388.8 390.85714,147.40131 413.17714,147.40131 "
+           style="fill:#008000;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <polygon
            id="polygon1910"
-           points="454.62857,388.8 454.62857,150.15551 476.94857,150.15551 476.94857,388.8 454.62857,388.8 "
-           style="opacity:1;fill:green;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           points="476.94857,388.8 454.62857,388.8 454.62857,388.8 454.62857,150.15551 476.94857,150.15551 "
+           style="fill:#008000;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <polygon
            id="polygon1912"
-           points="97.508571,388.8 97.508571,103.53199 119.82857,103.53199 119.82857,388.8 97.508571,388.8 "
-           style="opacity:1;fill:blue;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           points="119.82857,388.8 97.508571,388.8 97.508571,388.8 97.508571,103.53199 119.82857,103.53199 "
+           style="fill:#0000ff;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <polygon
            id="polygon1914"
-           points="161.28,388.8 161.28,138.93258 183.6,138.93258 183.6,388.8 161.28,388.8 "
-           style="opacity:1;fill:blue;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           points="183.6,388.8 161.28,388.8 161.28,388.8 161.28,138.93258 183.6,138.93258 "
+           style="fill:#0000ff;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <polygon
            id="polygon1916"
-           points="225.05143,388.8 225.05143,149.49325 247.37143,149.49325 247.37143,388.8 225.05143,388.8 "
-           style="opacity:1;fill:blue;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           points="247.37143,388.8 225.05143,388.8 225.05143,388.8 225.05143,149.49325 247.37143,149.49325 "
+           style="fill:#0000ff;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <polygon
            id="polygon1918"
-           points="288.82286,388.8 288.82286,153.06446 311.14286,153.06446 311.14286,388.8 288.82286,388.8 "
-           style="opacity:1;fill:blue;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           points="311.14286,388.8 288.82286,388.8 288.82286,388.8 288.82286,153.06446 311.14286,153.06446 "
+           style="fill:#0000ff;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <polygon
            id="polygon1920"
-           points="352.59429,388.8 352.59429,153.65062 374.91429,153.65062 374.91429,388.8 352.59429,388.8 "
-           style="opacity:1;fill:blue;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           points="374.91429,388.8 352.59429,388.8 352.59429,388.8 352.59429,153.65062 374.91429,153.65062 "
+           style="fill:#0000ff;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <polygon
            id="polygon1922"
-           points="416.36571,388.8 416.36571,155.32083 438.68571,155.32083 438.68571,388.8 416.36571,388.8 "
-           style="opacity:1;fill:blue;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           points="438.68571,388.8 416.36571,388.8 416.36571,388.8 416.36571,155.32083 438.68571,155.32083 "
+           style="fill:#0000ff;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <polygon
            id="polygon1924"
-           points="480.13714,388.8 480.13714,157.80614 502.45714,157.80614 502.45714,388.8 480.13714,388.8 "
-           style="opacity:1;fill:blue;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           points="502.45714,388.8 480.13714,388.8 480.13714,388.8 480.13714,157.80614 502.45714,157.80614 "
+           style="fill:#0000ff;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1926"
-           d="M 83.16,97.995224 L 83.16,87.243863"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 83.16,97.995224 0,-10.751361"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1928"
-           d="M 146.93143,131.31624 L 146.93143,126.91629"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 146.93143,131.31624 0,-4.39995"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1930"
-           d="M 210.70286,141.02402 L 210.70286,138.74863"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 210.70286,141.02402 0,-2.27539"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1932"
-           d="M 274.47429,144.82233 L 274.47429,142.64374"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 274.47429,144.82233 0,-2.17859"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1934"
-           d="M 338.24571,145.68913 L 338.24571,143.85962"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 338.24571,145.68913 0,-1.82951"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1936"
-           d="M 402.01714,147.40131 L 402.01714,145.60489"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 402.01714,147.40131 0,-1.79642"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1938"
-           d="M 465.78857,150.15551 L 465.78857,147.98069"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 465.78857,150.15551 0,-2.17482"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1940"
-           d="M 83.16,97.995224 L 83.16,108.74658"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 83.16,97.995224 0,10.751356"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1942"
-           d="M 146.93143,131.31624 L 146.93143,135.71619"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 146.93143,131.31624 0,4.39995"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1944"
-           d="M 210.70286,141.02402 L 210.70286,143.29941"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 210.70286,141.02402 0,2.27539"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1946"
-           d="M 274.47429,144.82233 L 274.47429,147.00091"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 274.47429,144.82233 0,2.17858"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1948"
-           d="M 338.24571,145.68913 L 338.24571,147.51865"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 338.24571,145.68913 0,1.82952"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1950"
-           d="M 402.01714,147.40131 L 402.01714,149.19772"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 402.01714,147.40131 0,1.79641"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1952"
-           d="M 465.78857,150.15551 L 465.78857,152.33033"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 465.78857,150.15551 0,2.17482"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1954"
-           d="M 80.16,108.74658 L 86.16,108.74658"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 80.16,108.74658 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path1956"
-           d="M 143.93143,135.71619 L 149.93143,135.71619"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 143.93143,135.71619 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path1958"
-           d="M 207.70286,143.29941 L 213.70286,143.29941"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 207.70286,143.29941 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path1960"
-           d="M 271.47429,147.00091 L 277.47429,147.00091"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 271.47429,147.00091 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path1962"
-           d="M 335.24571,147.51865 L 341.24571,147.51865"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 335.24571,147.51865 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path1964"
-           d="M 399.01714,149.19772 L 405.01714,149.19772"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 399.01714,149.19772 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path1966"
-           d="M 462.78857,152.33033 L 468.78857,152.33033"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 462.78857,152.33033 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path1968"
-           d="M 80.16,87.243863 L 86.16,87.243863"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 80.16,87.243863 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path1970"
-           d="M 143.93143,126.91629 L 149.93143,126.91629"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 143.93143,126.91629 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path1972"
-           d="M 207.70286,138.74863 L 213.70286,138.74863"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 207.70286,138.74863 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path1974"
-           d="M 271.47429,142.64374 L 277.47429,142.64374"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 271.47429,142.64374 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path1976"
-           d="M 335.24571,143.85962 L 341.24571,143.85962"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 335.24571,143.85962 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path1978"
-           d="M 399.01714,145.60489 L 405.01714,145.60489"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 399.01714,145.60489 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path1980"
-           d="M 462.78857,147.98069 L 468.78857,147.98069"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 462.78857,147.98069 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path1982"
-           d="M 108.66857,103.53199 L 108.66857,92.780628"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 108.66857,103.53199 0,-10.751362"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1984"
-           d="M 172.44,138.93258 L 172.44,134.53263"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 172.44,138.93258 0,-4.39995"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1986"
-           d="M 236.21143,149.49325 L 236.21143,147.21786"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 236.21143,149.49325 0,-2.27539"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1988"
-           d="M 299.98286,153.06446 L 299.98286,150.88588"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 299.98286,153.06446 0,-2.17858"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1990"
-           d="M 363.75429,153.65062 L 363.75429,151.8211"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 363.75429,153.65062 0,-1.82952"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1992"
-           d="M 427.52571,155.32083 L 427.52571,153.52442"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 427.52571,155.32083 0,-1.79641"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1994"
-           d="M 491.29714,157.80614 L 491.29714,155.63132"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 491.29714,157.80614 0,-2.17482"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1996"
-           d="M 108.66857,103.53199 L 108.66857,114.28335"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 108.66857,103.53199 0,10.75136"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path1998"
-           d="M 172.44,138.93258 L 172.44,143.33254"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 172.44,138.93258 0,4.39996"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path2000"
-           d="M 236.21143,149.49325 L 236.21143,151.76864"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 236.21143,149.49325 0,2.27539"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path2002"
-           d="M 299.98286,153.06446 L 299.98286,155.24304"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 299.98286,153.06446 0,2.17858"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path2004"
-           d="M 363.75429,153.65062 L 363.75429,155.48013"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 363.75429,153.65062 0,1.82951"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path2006"
-           d="M 427.52571,155.32083 L 427.52571,157.11725"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 427.52571,155.32083 0,1.79642"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path2008"
-           d="M 491.29714,157.80614 L 491.29714,159.98095"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 491.29714,157.80614 0,2.17481"
+           style="fill:none;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
         <path
            id="path2010"
-           d="M 105.66857,114.28335 L 111.66857,114.28335"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 105.66857,114.28335 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path2012"
-           d="M 169.44,143.33254 L 175.44,143.33254"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 169.44,143.33254 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path2014"
-           d="M 233.21143,151.76864 L 239.21143,151.76864"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 233.21143,151.76864 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path2016"
-           d="M 296.98286,155.24304 L 302.98286,155.24304"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 296.98286,155.24304 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path2018"
-           d="M 360.75429,155.48013 L 366.75429,155.48013"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 360.75429,155.48013 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path2020"
-           d="M 424.52571,157.11725 L 430.52571,157.11725"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 424.52571,157.11725 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path2022"
-           d="M 488.29714,159.98095 L 494.29714,159.98095"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 488.29714,159.98095 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path2024"
-           d="M 105.66857,92.780628 L 111.66857,92.780628"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 105.66857,92.780628 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path2026"
-           d="M 169.44,134.53263 L 175.44,134.53263"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 169.44,134.53263 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path2028"
-           d="M 233.21143,147.21786 L 239.21143,147.21786"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 233.21143,147.21786 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path2030"
-           d="M 296.98286,150.88588 L 302.98286,150.88588"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 296.98286,150.88588 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path2032"
-           d="M 360.75429,151.8211 L 366.75429,151.8211"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 360.75429,151.8211 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path2034"
-           d="M 424.52571,153.52442 L 430.52571,153.52442"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 424.52571,153.52442 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <path
            id="path2036"
-           d="M 488.29714,155.63132 L 494.29714,155.63132"
-           style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+           d="m 488.29714,155.63132 6,0"
+           style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
         <text
            id="text2038"
            y="36.287998"
            x="126.7"
-           style="font-size:14px;fill:black;font-family:Bitstream Vera Sans">Voltage noise RMS RTI averaged across channels</text>
+           style="font-size:14px;fill:#000000;font-family:Bitstream Vera Sans">Voltage noise RMS RTI averaged across channels</text>
         <g
            id="matplotlib.axis1">
           <g
              id="xtick1">
             <path
                id="path2042"
-               d="M 91.131429,388.8 L 91.131429,384.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 91.131429,388.8 0,-4"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2044"
-               d="M 91.131429,47.2 L 91.131429,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 91.131429,47.2 0,-4"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <text
                id="text2046"
                y="401.79999"
                x="80.131432"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">100</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">100</text>
           </g>
           <g
              id="xtick2">
             <path
                id="path2049"
-               d="M 154.90286,388.8 L 154.90286,384.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 154.90286,388.8 0,-4"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2051"
-               d="M 154.90286,47.2 L 154.90286,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 154.90286,47.2 0,-4"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <text
                id="text2053"
                y="401.79999"
                x="143.90286"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">200</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">200</text>
           </g>
           <g
              id="xtick3">
             <path
                id="path2056"
-               d="M 218.67429,388.8 L 218.67429,384.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 218.67429,388.8 0,-4"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2058"
-               d="M 218.67429,47.2 L 218.67429,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 218.67429,47.2 0,-4"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <text
                id="text2060"
                y="401.79999"
                x="207.67429"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">500</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">500</text>
           </g>
           <g
              id="xtick4">
             <path
                id="path2063"
-               d="M 282.44571,388.8 L 282.44571,384.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 282.44571,388.8 0,-4"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2065"
-               d="M 282.44571,47.2 L 282.44571,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 282.44571,47.2 0,-4"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <text
                id="text2067"
                y="401.79999"
                x="267.44571"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">1000</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">1000</text>
           </g>
           <g
              id="xtick5">
             <path
                id="path2070"
-               d="M 346.21714,388.8 L 346.21714,384.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 346.21714,388.8 0,-4"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2072"
-               d="M 346.21714,47.2 L 346.21714,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 346.21714,47.2 0,-4"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <text
                id="text2074"
                y="401.79999"
                x="331.21713"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">2000</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">2000</text>
           </g>
           <g
              id="xtick6">
             <path
                id="path2077"
-               d="M 409.98857,388.8 L 409.98857,384.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 409.98857,388.8 0,-4"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2079"
-               d="M 409.98857,47.2 L 409.98857,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 409.98857,47.2 0,-4"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <text
                id="text2081"
                y="401.79999"
                x="394.98856"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">5000</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">5000</text>
           </g>
           <g
              id="xtick7">
             <path
                id="path2084"
-               d="M 473.76,388.8 L 473.76,384.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 473.76,388.8 0,-4"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2086"
-               d="M 473.76,47.2 L 473.76,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 473.76,47.2 0,-4"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <text
                id="text2088"
                y="401.79999"
                x="454.76001"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">10000</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">10000</text>
           </g>
           <text
              id="text2090"
              y="418.79999"
              x="282.70001"
-             style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">gain</text>
+             style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">gain</text>
         </g>
         <g
            id="matplotlib.axis2">
@@ -539,87 +545,87 @@
                id="text2094"
                y="393.29999"
                x="50"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">0.0</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">0.0</text>
           </g>
           <g
              id="ytick2">
             <path
                id="path2097"
-               d="M 72,331.2 L 76,331.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 72,331.2 4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2099"
-               d="M 514.4,331.2 L 518.4,331.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 514.4,331.2 4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <text
                id="text2101"
                y="335.70001"
                x="49.953125"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">0.2</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">0.2</text>
           </g>
           <g
              id="ytick3">
             <path
                id="path2104"
-               d="M 72,273.6 L 76,273.6"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 72,273.6 4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2106"
-               d="M 514.4,273.6 L 518.4,273.6"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 514.4,273.6 4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <text
                id="text2108"
                y="278.10001"
                x="50"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">0.4</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">0.4</text>
           </g>
           <g
              id="ytick4">
             <path
                id="path2111"
-               d="M 72,216 L 76,216"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 72,216 4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2113"
-               d="M 514.4,216 L 518.4,216"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 514.4,216 4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <text
                id="text2115"
                y="220.5"
                x="50"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">0.6</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">0.6</text>
           </g>
           <g
              id="ytick5">
             <path
                id="path2118"
-               d="M 72,158.4 L 76,158.4"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 72,158.4 4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2120"
-               d="M 514.4,158.4 L 518.4,158.4"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 514.4,158.4 4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <text
                id="text2122"
                y="162.89999"
                x="50"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">0.8</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">0.8</text>
           </g>
           <g
              id="ytick6">
             <path
                id="path2125"
-               d="M 72,100.8 L 76,100.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 72,100.8 4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2127"
-               d="M 514.4,100.8 L 518.4,100.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 514.4,100.8 4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.40963867;stroke-linecap:butt;stroke-linejoin:miter" />
             <text
                id="text2129"
                y="105.3"
                x="50"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">1.0</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">1.0</text>
           </g>
           <g
              id="ytick7">
@@ -627,39 +633,39 @@
                id="text2132"
                y="47.700001"
                x="49.953125"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">1.2</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">1.2</text>
           </g>
           <text
              id="text2134"
              transform="matrix(0,-1,1,0,-218.0469,307.9531)"
              y="263"
              x="44.953125"
-             style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">RMS Noise (uV)</text>
+             style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">RMS Noise (uV)</text>
         </g>
         <g
            id="legend1">
           <polygon
              id="polygon2137"
-             points="366.3744,82.80864 366.3744,50.112 509.472,50.112 509.472,82.80864 366.3744,82.80864 "
-             style="opacity:1;fill:white;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+             points="509.472,82.80864 366.3744,82.80864 366.3744,82.80864 366.3744,50.112 509.472,50.112 "
+             style="fill:#ffffff;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
           <polygon
              id="polygon2139"
-             points="378.2992,62.81472 378.2992,53.85872 400.6192,53.85872 400.6192,62.81472 378.2992,62.81472 "
-             style="opacity:1;fill:green;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+             points="400.6192,62.81472 378.2992,62.81472 378.2992,62.81472 378.2992,53.85872 400.6192,53.85872 "
+             style="fill:#008000;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
           <polygon
              id="polygon2141"
-             points="378.2992,79.06192 378.2992,70.10592 400.6192,70.10592 400.6192,79.06192 378.2992,79.06192 "
-             style="opacity:1;fill:blue;stroke:black;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
+             points="400.6192,79.06192 378.2992,79.06192 378.2992,79.06192 378.2992,70.10592 400.6192,70.10592 "
+             style="fill:#0000ff;stroke:#000000;stroke-width:0.81927735;stroke-linecap:square;stroke-linejoin:miter" />
           <text
              id="text2143"
              y="63.83672"
              x="409.54721"
-             style="font-size:14px;fill:black;font-family:Bitstream Vera Sans">HPF disabled</text>
+             style="font-size:14px;fill:#000000;font-family:Bitstream Vera Sans">HPF disabled</text>
           <text
              id="text2145"
              y="80.083923"
              x="409.54721"
-             style="font-size:14px;fill:black;font-family:Bitstream Vera Sans">HPF enabled</text>
+             style="font-size:14px;fill:#000000;font-family:Bitstream Vera Sans">HPF enabled</text>
         </g>
       </g>
     </g>

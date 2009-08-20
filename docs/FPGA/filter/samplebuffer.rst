@@ -13,3 +13,5 @@ block is written to.
 .. figure:: samplebuffer.svg
    :autoconvert:
    :latexwidth: 6in
+   
+   Sample buffers for 10 channels of input data. 

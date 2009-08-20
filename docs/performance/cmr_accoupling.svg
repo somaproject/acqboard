@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -8,14 +9,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="1024"
-   height="768"
+   width="400.1611"
+   height="300.37082"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.46"
+   inkscape:version="0.46+devel r21521"
    version="1.0"
-   sodipodi:docbase="/home/jonas/soma/presentations/acquisition"
-   sodipodi:docname="performance.cmr.svg"
+   sodipodi:docname="cmr_accoupling.svg"
    inkscape:export-filename="/tmp/test.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
@@ -38,8 +38,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.70710678"
-     inkscape:cx="434.89101"
-     inkscape:cy="315.18917"
+     inkscape:cx="47.004548"
+     inkscape:cy="105.91867"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      width="1024px"
@@ -54,10 +54,11 @@
      inkscape:window-width="1083"
      inkscape:window-height="858"
      inkscape:window-x="344"
-     inkscape:window-y="191">
+     inkscape:window-y="191"
+     inkscape:window-maximized="0">
     <sodipodi:guide
        orientation="horizontal"
-       position="28.284271"
+       position="-537.7931,-220.58421"
        id="guide1890" />
     <inkscape:grid
        id="GridFromPre046Settings"
@@ -70,7 +71,10 @@
        empcolor="#0000ff"
        opacity="0.2"
        empopacity="0.4"
-       empspacing="5" />
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -87,16 +91,18 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="background"
-     style="display:inline" />
+     style="display:inline"
+     transform="translate(-537.7931,-218.7607)" />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     style="display:inline">
+     style="display:inline"
+     transform="translate(-537.7931,-218.7607)">
     <g
        id="g2892">
       <path
-         style="font-size:200px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;opacity:0.09090899;fill:white;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+         style="font-size:200px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;opacity:0.09090899;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
          d=""
          id="text2944" />
     </g>
@@ -105,21 +111,21 @@
        transform="matrix(0.692988,0,0,0.692988,538.2931,219.2607)">
       <polygon
          id="polygon2229"
-         points="0,432 0,0 576,0 576,432 0,432 "
-         style="opacity:1;fill:white;stroke:white;stroke-width:1.44302583;stroke-linecap:square;stroke-linejoin:miter" />
+         points="576,432 0,432 0,432 0,0 576,0 "
+         style="fill:#ffffff;stroke:#ffffff;stroke-width:1.44302583;stroke-linecap:square;stroke-linejoin:miter" />
       <g
          id="axes1">
         <polygon
            id="polygon2232"
-           points="72,388.8 72,43.2 518.4,43.2 518.4,388.8 72,388.8 "
-           style="opacity:1;fill:white;stroke:black;stroke-width:1.44302583;stroke-linecap:square;stroke-linejoin:miter" />
+           points="518.4,388.8 72,388.8 72,388.8 72,43.2 518.4,43.2 "
+           style="fill:#ffffff;stroke:#000000;stroke-width:1.44302583;stroke-linecap:square;stroke-linejoin:miter" />
         <defs
            id="defs2234">
           <clipPath
              id="789695421804425603">
             <rect
                id="rect2237"
-               style="fill:none;stroke:gray"
+               style="fill:none;stroke:#808080"
                height="345.60001"
                width="446.39999"
                y="43.200001"
@@ -128,8 +134,8 @@
         </defs>
         <path
            id="path2239"
-           d="M 116.79326,113.9971 L 161.41623,114.38764 L 206.03921,116.56931 L 250.66218,116.19473 L 295.28515,119.17551 L 339.90812,124.22489 L 384.53109,133.11801 L 429.15406,145.9048 L 473.77703,159.75366 L 518.4,166.18937"
-           style="opacity:1;fill:none;stroke:blue;stroke-width:1.44302583;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 116.79326,113.9971 44.62297,0.39054 44.62298,2.18167 44.62297,-0.37458 44.62297,2.98078 44.62297,5.04938 44.62297,8.89312 44.62297,12.78679 44.62297,13.84886 44.62297,6.43571"
+           style="fill:none;stroke:#0000ff;stroke-width:1.44302583;stroke-linecap:square;stroke-linejoin:miter" />
         <g
            id="matplotlib.axis1">
           <g
@@ -138,62 +144,62 @@
                id="text2243"
                y="401.79999"
                x="63.5"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">10</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">10</text>
             <text
                id="text2245"
                y="397.29999"
                x="78.900002"
-               style="font-size:8.39999962px;fill:black;font-family:Bitstream Vera Sans">1</text>
+               style="font-size:8.39999962px;fill:#000000;font-family:Bitstream Vera Sans">1</text>
           </g>
           <g
              id="xtick2">
             <path
                id="path2248"
-               d="M 220.8,388.8 L 220.8,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:1.44302585, 4.32907755;stroke-dashoffset:0" />
+               d="m 220.8,388.8 0,-345.6"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:1.44302585, 4.32907755;stroke-dashoffset:0" />
             <path
                id="path2250"
-               d="M 220.8,388.8 L 220.8,384.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 220.8,388.8 0,-4"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2252"
-               d="M 220.8,47.2 L 220.8,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 220.8,47.2 0,-4"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <text
                id="text2254"
                y="401.79999"
                x="211.78438"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">10</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">10</text>
             <text
                id="text2256"
                y="397.29999"
                x="227.18437"
-               style="font-size:8.39999962px;fill:black;font-family:Bitstream Vera Sans">2</text>
+               style="font-size:8.39999962px;fill:#000000;font-family:Bitstream Vera Sans">2</text>
           </g>
           <g
              id="xtick3">
             <path
                id="path2259"
-               d="M 369.6,388.8 L 369.6,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:1.44302585, 4.32907755;stroke-dashoffset:0" />
+               d="m 369.6,388.8 0,-345.6"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:1.44302585, 4.32907755;stroke-dashoffset:0" />
             <path
                id="path2261"
-               d="M 369.6,388.8 L 369.6,384.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 369.6,388.8 0,-4"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2263"
-               d="M 369.6,47.2 L 369.6,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 369.6,47.2 0,-4"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <text
                id="text2265"
                y="401.79999"
                x="360.60001"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">10</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">10</text>
             <text
                id="text2267"
                y="397.29999"
                x="376"
-               style="font-size:8.39999962px;fill:black;font-family:Bitstream Vera Sans">3</text>
+               style="font-size:8.39999962px;fill:#000000;font-family:Bitstream Vera Sans">3</text>
           </g>
           <g
              id="xtick4">
@@ -201,282 +207,282 @@
                id="text2270"
                y="401.79999"
                x="509.39999"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">10</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">10</text>
             <text
                id="text2272"
                y="397.29999"
                x="524.79999"
-               style="font-size:8.39999962px;fill:black;font-family:Bitstream Vera Sans">4</text>
+               style="font-size:8.39999962px;fill:#000000;font-family:Bitstream Vera Sans">4</text>
           </g>
           <g
              id="xtick5">
             <path
                id="path2275"
-               d="M 116.79326,388.8 L 116.79326,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 116.79326,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2277"
-               d="M 116.79326,45.2 L 116.79326,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 116.79326,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick6">
             <path
                id="path2280"
-               d="M 142.99564,388.8 L 142.99564,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 142.99564,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2282"
-               d="M 142.99564,45.2 L 142.99564,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 142.99564,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick7">
             <path
                id="path2285"
-               d="M 161.58653,388.8 L 161.58653,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 161.58653,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2287"
-               d="M 161.58653,45.2 L 161.58653,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 161.58653,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick8">
             <path
                id="path2290"
-               d="M 176.00674,388.8 L 176.00674,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 176.00674,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2292"
-               d="M 176.00674,45.2 L 176.00674,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 176.00674,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick9">
             <path
                id="path2295"
-               d="M 187.78891,388.8 L 187.78891,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 187.78891,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2297"
-               d="M 187.78891,45.2 L 187.78891,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 187.78891,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick10">
             <path
                id="path2300"
-               d="M 197.75059,388.8 L 197.75059,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 197.75059,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2302"
-               d="M 197.75059,45.2 L 197.75059,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 197.75059,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick11">
             <path
                id="path2305"
-               d="M 206.37979,388.8 L 206.37979,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 206.37979,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2307"
-               d="M 206.37979,45.2 L 206.37979,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 206.37979,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick12">
             <path
                id="path2310"
-               d="M 213.99129,388.8 L 213.99129,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 213.99129,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2312"
-               d="M 213.99129,45.2 L 213.99129,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 213.99129,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick13">
             <path
                id="path2315"
-               d="M 265.59326,388.8 L 265.59326,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 265.59326,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2317"
-               d="M 265.59326,45.2 L 265.59326,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 265.59326,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick14">
             <path
                id="path2320"
-               d="M 291.79564,388.8 L 291.79564,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 291.79564,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2322"
-               d="M 291.79564,45.2 L 291.79564,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 291.79564,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick15">
             <path
                id="path2325"
-               d="M 310.38653,388.8 L 310.38653,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 310.38653,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2327"
-               d="M 310.38653,45.2 L 310.38653,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 310.38653,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick16">
             <path
                id="path2330"
-               d="M 324.80674,388.8 L 324.80674,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 324.80674,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2332"
-               d="M 324.80674,45.2 L 324.80674,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 324.80674,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick17">
             <path
                id="path2335"
-               d="M 336.58891,388.8 L 336.58891,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 336.58891,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2337"
-               d="M 336.58891,45.2 L 336.58891,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 336.58891,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick18">
             <path
                id="path2340"
-               d="M 346.55059,388.8 L 346.55059,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 346.55059,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2342"
-               d="M 346.55059,45.2 L 346.55059,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 346.55059,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick19">
             <path
                id="path2345"
-               d="M 355.17979,388.8 L 355.17979,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 355.17979,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2347"
-               d="M 355.17979,45.2 L 355.17979,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 355.17979,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick20">
             <path
                id="path2350"
-               d="M 362.79129,388.8 L 362.79129,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 362.79129,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2352"
-               d="M 362.79129,45.2 L 362.79129,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 362.79129,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick21">
             <path
                id="path2355"
-               d="M 414.39326,388.8 L 414.39326,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 414.39326,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2357"
-               d="M 414.39326,45.2 L 414.39326,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 414.39326,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick22">
             <path
                id="path2360"
-               d="M 440.59564,388.8 L 440.59564,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 440.59564,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2362"
-               d="M 440.59564,45.2 L 440.59564,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 440.59564,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick23">
             <path
                id="path2365"
-               d="M 459.18653,388.8 L 459.18653,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 459.18653,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2367"
-               d="M 459.18653,45.2 L 459.18653,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 459.18653,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick24">
             <path
                id="path2370"
-               d="M 473.60674,388.8 L 473.60674,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 473.60674,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2372"
-               d="M 473.60674,45.2 L 473.60674,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 473.60674,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick25">
             <path
                id="path2375"
-               d="M 485.38891,388.8 L 485.38891,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 485.38891,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2377"
-               d="M 485.38891,45.2 L 485.38891,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 485.38891,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick26">
             <path
                id="path2380"
-               d="M 495.35059,388.8 L 495.35059,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 495.35059,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2382"
-               d="M 495.35059,45.2 L 495.35059,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 495.35059,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick27">
             <path
                id="path2385"
-               d="M 503.97979,388.8 L 503.97979,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 503.97979,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2387"
-               d="M 503.97979,45.2 L 503.97979,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 503.97979,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <g
              id="xtick28">
             <path
                id="path2390"
-               d="M 511.59129,388.8 L 511.59129,386.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 511.59129,388.8 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2392"
-               d="M 511.59129,45.2 L 511.59129,43.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 511.59129,45.2 0,-2"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
           </g>
           <text
              id="text2394"
              y="419.79999"
              x="249.2"
-             style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">Frequency (Hz)</text>
+             style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">Frequency (Hz)</text>
         </g>
         <g
            id="matplotlib.axis2">
@@ -486,107 +492,107 @@
                id="text2398"
                y="393.29999"
                x="62"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">0</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">0</text>
           </g>
           <g
              id="ytick2">
             <path
                id="path2401"
-               d="M 72,331.2 L 518.4,331.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:1.44302585, 4.32907755;stroke-dashoffset:0" />
+               d="m 72,331.2 446.4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:1.44302585, 4.32907755;stroke-dashoffset:0" />
             <path
                id="path2403"
-               d="M 72,331.2 L 76,331.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 72,331.2 4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2405"
-               d="M 514.4,331.2 L 518.4,331.2"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 514.4,331.2 4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <text
                id="text2407"
                y="335.70001"
                x="54"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">20</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">20</text>
           </g>
           <g
              id="ytick3">
             <path
                id="path2410"
-               d="M 72,273.6 L 518.4,273.6"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:1.44302585, 4.32907755;stroke-dashoffset:0" />
+               d="m 72,273.6 446.4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:1.44302585, 4.32907755;stroke-dashoffset:0" />
             <path
                id="path2412"
-               d="M 72,273.6 L 76,273.6"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 72,273.6 4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2414"
-               d="M 514.4,273.6 L 518.4,273.6"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 514.4,273.6 4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <text
                id="text2416"
                y="278.10001"
                x="54"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">40</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">40</text>
           </g>
           <g
              id="ytick4">
             <path
                id="path2419"
-               d="M 72,216 L 518.4,216"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:1.44302585, 4.32907755;stroke-dashoffset:0" />
+               d="m 72,216 446.4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:1.44302585, 4.32907755;stroke-dashoffset:0" />
             <path
                id="path2421"
-               d="M 72,216 L 76,216"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 72,216 4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2423"
-               d="M 514.4,216 L 518.4,216"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 514.4,216 4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <text
                id="text2425"
                y="220.5"
                x="54"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">60</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">60</text>
           </g>
           <g
              id="ytick5">
             <path
                id="path2428"
-               d="M 72,158.4 L 518.4,158.4"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:1.44302585, 4.32907755;stroke-dashoffset:0" />
+               d="m 72,158.4 446.4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:1.44302585, 4.32907755;stroke-dashoffset:0" />
             <path
                id="path2430"
-               d="M 72,158.4 L 76,158.4"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 72,158.4 4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2432"
-               d="M 514.4,158.4 L 518.4,158.4"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 514.4,158.4 4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <text
                id="text2434"
                y="162.89999"
                x="54"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">80</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">80</text>
           </g>
           <g
              id="ytick6">
             <path
                id="path2437"
-               d="M 72,100.8 L 518.4,100.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:1.44302585, 4.32907755;stroke-dashoffset:0" />
+               d="m 72,100.8 446.4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:1.44302585, 4.32907755;stroke-dashoffset:0" />
             <path
                id="path2439"
-               d="M 72,100.8 L 76,100.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 72,100.8 4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <path
                id="path2441"
-               d="M 514.4,100.8 L 518.4,100.8"
-               style="opacity:1;fill:none;stroke:black;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
+               d="m 514.4,100.8 4,0"
+               style="fill:none;stroke:#000000;stroke-width:0.72151291;stroke-linecap:butt;stroke-linejoin:miter" />
             <text
                id="text2443"
                y="105.3"
                x="46"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">100</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">100</text>
           </g>
           <g
              id="ytick7">
@@ -594,19 +600,19 @@
                id="text2446"
                y="47.700001"
                x="46"
-               style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">120</text>
+               style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">120</text>
           </g>
           <text
              id="text2448"
              transform="matrix(0,-1,1,0,-206.5,288.5)"
              y="247.5"
              x="41"
-             style="font-size:12px;fill:black;font-family:Bitstream Vera Sans">CMRR (dB)</text>
+             style="font-size:12px;fill:#000000;font-family:Bitstream Vera Sans">CMRR (dB)</text>
         </g>
         <path
            id="path2450"
-           d="M 72,388.8 L 518.4,388.8 L 518.4,43.2 L 72,43.2 L 72,388.8"
-           style="opacity:1;fill:none;stroke:black;stroke-width:1.44302583;stroke-linecap:square;stroke-linejoin:miter" />
+           d="m 72,388.8 446.4,0 0,-345.6 -446.4,0 0,345.6"
+           style="fill:none;stroke:#000000;stroke-width:1.44302583;stroke-linecap:square;stroke-linejoin:miter" />
       </g>
     </g>
   </g>

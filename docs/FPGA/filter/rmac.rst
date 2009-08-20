@@ -36,7 +36,7 @@ The repeated multiply-accumulate unit is composed (Figure \ref{rmac}) of the fol
 
 **Convergent Rounding**
     Convergent rounding of the input is
-    performed, resulting in the output being in ``8.15'' format.
+    performed, resulting in the output being in **8.15** format.
 
 **Overflow Detection**
    If the output is too large to be
@@ -47,7 +47,7 @@ The repeated multiply-accumulate unit is composed (Figure \ref{rmac}) of the fol
 The RMAC is controlled by a FSM (Figure \ref{rmacfsm}) that is
 designed to convolve one channel's data per :signal:`STARTMAC`. When
 :signal:`STARTMAC` is asserted, the system convolves up to a maximum
-length $L$, and then asserts :signal:`MACDONE`.
+length L=143, and then asserts :signal:`MACDONE`.
 
 .. figure:: RMAC_fsm.svg
    :autoconvert:
@@ -72,10 +72,10 @@ waiting for completion.
 .. figure:: RMACcontrol.svg
    :autoconvert:
    
-   The RMAC controller
+   The RMAC pointer controller. 
 
 
 .. figure:: RMACcontrol.fsm.svg
    :autoconvert:
    
-   The RMAC controller FSM
+   The RMAC controller FSM. 

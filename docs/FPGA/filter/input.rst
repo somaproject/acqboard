@@ -1,9 +1,8 @@
 Input
 ~~~~~~~~~~~~~
 
-The FPGA input module (figure \ref{input}) controls ADC sampling, bit
-acquisition, offset compensation, and the eventual write-out of the
-sample bits.
+The FPGA input module controls ADC sampling, bit acquisition, offset
+compensation, and the eventual write-out of the sample bits.
 
 .. figure:: input.svg
    :autoconvert:
@@ -13,9 +12,10 @@ sample bits.
 
    
 ADC interface 
-    The two sets of ADCs are serially chained, providing
-    :signal:`SDIA` and :signal:`SDIB`. The ADC FSM (figure
-    \ref{adcfsm}) controls the sampling sequence; CONCNT the delay
+    The ten ACDs are configured in two serial chains of five
+    ADCs each, corresponding to input channel sets A and B, and giving
+    rise to :signal:`SDIA` and :signal:`SDIB`. The ADC FSM
+    controls the sampling sequence; CONCNT the delay
     between the assertion of :signal:`CNV` and the bit read-out;
     :signal:`BITCNT` sends the sample clock. To compesate for the ADC
     readout delay and the propagation delay across the galvanic
@@ -24,6 +24,9 @@ ADC interface
 
 .. figure:: adc.inputFSM.svg
    :autoconvert:
+
+   ADC input FSM,  which reads all ADC serial bitstreams upon the 
+   assertion of input clock signal :signal:`INSAMPLE`. 
 
 We go out of our way to make sure we keep the digital signals are
 quite during the ADC's conversion period.

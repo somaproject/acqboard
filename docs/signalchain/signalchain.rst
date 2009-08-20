@@ -11,7 +11,7 @@ Soma Acquisition Board signal processing chain, from low-level
 differential input to encoded binary data. This is a design chapter
 only; all figures are from simulation and design specifications.
 
-The Soma AcquisitionBboard signal chain can be partitioned into an
+The Soma Acquisition Board signal chain can be partitioned into an
 analog signal conditioning section and a digital signal processing
 section. Here, the stages will be discussed independently, except
 where they overlap and integrate to produce the final output.
@@ -21,7 +21,7 @@ where they overlap and integrate to produce the final output.
    :latexwidth: 5in
    :label: signal-chain
 
-   The signal processing chain.
+   The Soma Acquisition Board signal processing chain.
 
 Signals are divided into two sets of four (A1-A4, B1-B4) with each set
 having an optional fifth channel (AC and BC, respectively) (Figure
@@ -31,10 +31,11 @@ having an optional fifth channel (AC and BC, respectively) (Figure
  Input Differential Amplification
 =================================
 
-There are an initial eight channels of input with high common-mode
-rejection.  A constant gain of 100 results in a low-level bipolar
-signal.  To accommodate the large DC offsets inherent in most
-electrophysiology recording environments, the inputs are AC-coupled.
+Eight channels of input with high common-mode rejection accept
+voltages ranging with an AC range of |pm| 20 mV.  A constant gain of
+100 results in a low-level bipolar signal.  To accommodate the large
+DC offsets inherent in most electrophysiology recording environments,
+the inputs are AC-coupled.
 
 
 Optional analog high-pass filtering
@@ -45,8 +46,8 @@ range to several millivolts. The higher-frequency extracellular action
 potentials (spikes) are normally sub-millivolt. When recording spikes
 the larger-amplitude LFP could potentially saturate our amplifier;
 thus we have an optional single-pole high-pass filter (f\ :sub:`-3dB`\
-=300
-Hz ) that can be enabled to maximize spike acquisition dynamic range.
+=300 Hz ) that can be enabled to maximize spike acquisition dynamic
+range.
 
 Each group of four input channels feeds into an optional fifth channel
 (A.C and B.C) which can independently filter the
@@ -58,7 +59,7 @@ simultaneously record the low-frequency, higher-voltage LFP.
 .. without theoretical
 
 
- Programmable gain
+Programmable gain
 ===================
 
 The programmable gain amplifier can be off or set to a range
@@ -85,9 +86,9 @@ settings.
 Analog to Digital Conversion
 ============================
 
-Signal chain design: to achieve 16-bits with an input bandwidth of 10
-kHz we oversample, downsample, and digitally filter. The filtering
-process is the combination of the following factors:
+To achieve 16-bit resolution with an input bandwidht of 10kHz, we
+oversample the input signal, downsample, and digitally filter. The
+filtering process is the combination of the following factors:
 
   - an initial antialiasing filter
   - The analog-to-digital conversion step
@@ -100,6 +101,7 @@ Antialiasing Filter & ADC
 To achieve our desired sampling rate, an 8-pole Bessel filter
 achieves greater than 96 dB attenuation within the stop-band while
 maintaining linear phase (constant group delay) across the passband.
+Over the desired 10 kHz bandwidth the filter droops 1.5 dB. 
 
 .. figure:: soma-1.analog.freqres.svg
    :autoconvert:
@@ -110,7 +112,6 @@ maintaining linear phase (constant group delay) across the passband.
 .. figure:: soma-1.analog.pass.svg
    :autoconvert:
    :latexwidth: 5in
-
 
    Antialiasing filter passband frequency response
 
@@ -129,7 +130,7 @@ Filtering
 
 We filter the sampled data using an 143-Tap FIR filter using fixed-point
 convolution. We use an extended-precision multiplier, 22-bit filter
-coefficients, and an extended-width accumulator to reduce the negative
+coefficients, and an extended-width accumulator to reduce the quantization
 artifacts present in fixed-point arithmetic.
 
 The Parks-McClellan optimum equiripple FIR filter is used for a cutoff
@@ -143,7 +144,7 @@ resources.
    :autoconvert:
    :latexwidth: 5in
 
-   Frequency response of FIR filter.
+   Frequency response of FIR filter, both ideal (float-point) response and the filtering performance when coefficients are quantized to 22 bits. 
 
 
 Downsampling

@@ -12,14 +12,14 @@ THD + N
 
 Total harmonic distortion plus noise (THD+N) measures the ratio of a
 fundamental signal to the power in all other harmonics and noise over
-a targeted bandwidth :bibcite:`kester_understanding_2008` . We measure
+a targeted bandwidth :bibcite:`kester_understand_2008` . We measure
 THD+N by using test signals at multiple frequencies. We follow the
-IEEE standard for digitizing waveform recorder :bibcite:`IEEEstd` to
+IEEE standard for digitizing waveform recorder :bibcite:`_ieee_2008-1` to
 fit the sine wave.
 
 
 .. figure:: thdn.png
-   :latexwidth: 6in
+   :latexwidth: 5in
    
    Total Harmonic distortion + noise measured across frequencies, gains,
    and high-pass filter settings at -0.43 dBFS. 
@@ -38,7 +38,7 @@ full-scale. With consistent input noise (see next section), the effective
 THD+N decreases. 
 
 
-===================
+
 RMS Voltage Noise
 ===================
 
@@ -50,7 +50,7 @@ input stage of the amplifier.
 
 .. figure:: noise1.svg
    :autoconvert:
-   :latexwidth: 6in
+   :latexwidth: 5in
 
    Voltage noise RMS, averaged across channels, for each gain
    and high-pass filter setting. 
@@ -65,11 +65,11 @@ filter is enabled.
 
 .. figure:: noise2.svg
    :autoconvert:
-   :latexwidth: 6in
+   :latexwidth: 5in
 
    Power spectral density of noise measurements. 
 
-==============
+
 CMRR
 ==============
 
@@ -78,6 +78,6 @@ interest, and 95 dB at 60 Hz.
 
 .. figure:: cmr_accoupling.svg
    :autoconvert:
-   :latexwidth: 6in
+   :latexwidth: 5in
 
-   
+   Common-mode rejection across frequency. 

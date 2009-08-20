@@ -28,6 +28,7 @@ debugging information. There are four sections of interest.
 
 .. figure:: enclosure.back.svg
    :autoconvert:
+   :latexwidth: 6in
 
    The back of the Soma Acquisition Module.
 

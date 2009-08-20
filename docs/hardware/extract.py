@@ -18,7 +18,14 @@ pagedict = { 1 : "aafilter.pdf",
              8 : "overview.pdf",
              9 : "shiftreg.pdf",
              10 : "pga.pdf",
-             11 : "power.pdf"}
+             11 : "power.pdf",
+             12 : "gerber_layer1.pdf",
+             13 : "gerber_layer2.pdf",
+             14 : "gerber_layer3.pdf",
+             15 : "gerber_layer4.pdf",
+             16 : "gerber_topsilk.pdf",
+             17 : "gerber_bottomsilk.pdf"
+             }
 
 outdir = "schematicdir"
 try:
@@ -34,8 +41,13 @@ for pgnum, filename in pagedict.iteritems():
     sts = os.waitpid(p.pid, 0)
 
     filebase, pdfext = os.path.splitext(filename)
-    # now convert to png
+
+    # now crop
+    cmd = "pdfcrop %s %s" % (outpdf, outpdf)
+    p = Popen(cmd, shell=True)
+    sts = os.waitpid(p.pid, 0)
     
+    # now convert to png
     outpng = os.path.join(outdir, filebase + ".png")
     cmd = "convert %s %s" % (outpdf, outpng)
     p = Popen(cmd, shell=True)

@@ -1,6 +1,8 @@
 
 Control
----------
+--------
+The control module handles mode changes, gain and filter setting changes, and 
+the storage and retrieval of settings and filter coefficients from the EEPROM. 
 
 .. figure:: control.svg
    :autoconvert:

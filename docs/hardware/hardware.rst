@@ -45,7 +45,7 @@ impedance of the AD8510 results in minimum impact to the overall
 signal chain.
 
 The bipolar programmable-gain :part:`LTC6910-1`
-(:bibcite:`linear_technology_LTC6910-1`) :desig:`U8` provides gains of 0, 1, 2,
+(:bibcite:`linear_technology_LTC6910-1_2009`) :desig:`U8` provides gains of 0, 1, 2,
 5, 10, 20, 50, and 100, allowing us to maximize the input dynamic
 range of the ADC.
 

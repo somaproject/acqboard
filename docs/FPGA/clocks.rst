@@ -5,12 +5,15 @@ Clocks
 
 .. Status: verified timings are correct in the code. 
 
-The FPGA is clocked at 72 MHz via a DCM-doubled 36-MHz input clock signal. 
+The FPGA is clocked at 72 MHz via a DCM-doubled 36-MHz input clock
+signal. A series of centralized synchronized clock-enables coordinates
+events across the entire FPGA.
 
-A series of centralized synchronized clock-enables coordinates events
-across the entire FPGA.
 
 .. tabularcolumns:: |l|c|c|p{7cm}|
+
+
+:latex:`begin{singlespace}`
 
 ===================  ========  ===========  ============================================
 Clock name 	     Ticks     Frequency    Use
@@ -21,3 +24,5 @@ Clock name 	     Ticks     Frequency    Use
 :signal:`CLK8` 	     9	       8.0 MHz 	    Fiber output bit clock.
 :signal:`SPICLK`     180       400.0 kHz    SPI clock for interfacing with EEPROM. 
 ===================  ========  ===========  ============================================
+
+:latex:`end{singlespace}`

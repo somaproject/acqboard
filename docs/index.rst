@@ -13,10 +13,10 @@ Contents:
    
    overview/requirements.rst
    signalchain/signalchain.rst
-   FPGA/fpga.rst
    operation/fiberio.rst
    hw/hwio.rst
    performance/performance.rst
+   FPGA/fpga.rst
    hardware/hardware.rst
    hardware/schematics.rst
    hardware/gerbers.rst

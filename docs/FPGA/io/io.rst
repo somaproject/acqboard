@@ -3,7 +3,7 @@
 Fiber IO
 ======================
 
-The fiber IO ... [cite relevant chapter]
+The fiber IO controls the optical transmitter and receiver. 
 
 
 .. include:: tx.rst

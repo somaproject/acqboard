@@ -15,7 +15,7 @@ Word Address	Data
 =============	=========================================
 
 
-On each operation we execute the EEPROM's write-enable (WREN)
+On each operation we execute the EEPROM's write-enable (:signal:`WREN`)
 instruction, and then a full two bytes.  Since we have 12 bits of
 address, we place the 11 input bits on the line and always have the
 LSB be zero.
@@ -29,6 +29,9 @@ To interface to the SPI EEPROM we use a single output mux driven by
 
 .. figure:: EEPROMIO.svg
    :autoconvert:
+   :latexwidth: 6in
+
 
 .. figure:: EEPROMIO.fsm.svg
    :autoconvert:
+   :latexwidth: 6in

@@ -83,8 +83,10 @@ CMDRP is the command response field; CMDRP[4:1] are the bits of
 the most-recently executed CMDID; CMDRP[0] tells whether or not this
 command was successful.
 
-The data fields are 1.15-bit twos-complement fixed point samples from
-their corresponding ADCs; they are transmitted MSB first.
+The data fields are 1.15-bit twos-complement fixed point samples, that
+is they should be interpreted has having the decimal point after the
+first bit, with fifteen bits to the right of the point. They are
+transmitted MSB first.
 
 Normally, the Acqboard receives a stream of valid 8b/10b encoded
 zeros; a new command is indicated by the presence of the comma
@@ -160,7 +162,7 @@ High Pass Filter Enable
 
    Enable HPF command. 
 
-Enable or disable the high pass filter on channel the indicated channel.
+Enable or disable the high pass filter on the indicated channel.
 
 
 Mode 1 Commands

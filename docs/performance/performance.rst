@@ -23,7 +23,9 @@ fit the sine wave.
    :label: thdn
    
    Total Harmonic distortion + noise measured across frequencies, gains,
-   and high-pass filter settings at -0.43 dBFS. 
+   and high-pass filter settings at -0.43 dBFS. Blue shaded regions 
+   exist where the sine-fitting algorithm failed to converge on a datapoint
+   due to numerical stability problems. 
 
 Figure :latex:`ref{thdn}` shows THD+N across frequencies, with more
 negative values reflecting a lower (better) THD+N. Each measurement
@@ -62,7 +64,7 @@ Noise Spectra
 ==============
 
 The noise spectra are relatively flat across our 10kHz bandwidth
-(figure :latex:`ref{noise2}`), and is unsurprisingly attenuated at low
+(figure :latex:`ref{noise2}`), and are unsurprisingly attenuated at low
 frequencies when the high-pass filter is enabled.
 
 .. figure:: noise2.svg

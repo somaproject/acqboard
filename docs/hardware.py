@@ -95,7 +95,32 @@ def latex_visit_part(self, node):
     raise nodes.SkipNode    
 
 
+class pm(nodes.Inline, nodes.TextElement):
+    pass
 
+def visit_pm_node(self, node):
+    pass
+
+
+class PmDirective(Directive):
+    has_content = True
+
+    def run(self):
+        b = pm('')
+        return [b]
+    
+
+def pm_role(role, rawtext, text, lineno, inliner, options={}, content=[]):
+    return [pm(pm=text)], []
+
+def html_visit_pm(self, node):
+
+    self.body.append('<b>%s</b>' % node['pm'])
+    raise nodes.SkipNode    
+
+def latex_visit_pm(self, node):
+    self.body.append("TEST")
+    raise nodes.SkipNode    
 
 
 def setup(app):

@@ -1,8 +1,8 @@
+.. |pm| replace:: +/-
 
 ***********************************
 Hardware IO
 ***********************************
-
 
 Front Panel
 ============
@@ -83,7 +83,7 @@ with a Molex 39-01-4041 four-pin connector (and associated female pins
 
 The Acquisition module completely isolates its internal analog and
 digital power supplies for maximum signal integrity. The digital power
-supply requires 5 volts DC. Analog requires a very clean bipolar :pm:
+supply requires 5 volts DC. Analog requires a very clean bipolar |pm|
 5V DC.
 
 .. figure:: enclosure.back.power.svg

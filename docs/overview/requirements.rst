@@ -87,8 +87,7 @@ Electrophysiological signals, in particular the local-field potential,
 vary in frequency over three orders of magnitude. Frequently we are
 interested in the precise phase relationship between different
 frequency signals, which necessitates a filtering scheme that exhibits
-a "linear phase" offset with frequency (i.e. constant group delay). Non-constant
-group delay 
+a "linear phase" offset with frequency (i.e. constant group delay).
 
 =================================
 Electrical isolation

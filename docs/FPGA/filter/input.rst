@@ -22,7 +22,9 @@ ADC interface
     :signal:`BITCNT` sends the sample clock. To compesate for the ADC
     readout delay and the propagation delay across the galvanic
     isolators, we delay the :signal:`LSCK` via a shift-register into
-    :signal:`BITEN`.
+    :signal:`BITEN`.We go out of our way to make sure we keep the digital signals
+    quiet during the ADC's conversion period.
+
 
 .. figure:: adc.inputFSM.svg
    :autoconvert:
@@ -31,8 +33,6 @@ ADC interface
    ADC input FSM,  which reads all ADC serial bitstreams upon the 
    assertion of input clock signal :signal:`INSAMPLE`. 
 
-We go out of our way to make sure we keep the digital signals are
-quite during the ADC's conversion period.
 
 Offset arithmatic
        The 16-bit unipolar ACD samples are converted to bipolar samples and

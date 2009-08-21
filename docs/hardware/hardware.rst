@@ -2,8 +2,7 @@
 Components and Circuit Design 
 ******************************
 
-The design of the Soma Acquisition hardware matches the [Signal
-Chain]_ closely, but for the purpose of this discussion we will divide
+The design of the Soma Acquisition hardware matches the signal chain closely, but for the purpose of this discussion we will divide
 it into the analog and digital subsections (figure
 :latex:`ref{overview_schematic}`) .  The analog subsection runs off
 bipolar 5V rails, and the digital side is powered by an independent 5V
@@ -17,7 +16,7 @@ Input front-end
 ------------------------------
 
 The AD8221AR (:desig:`U12`) (figure :latex:`ref{input_schematic}`) was
-chosen as the input instrumentation amplifier due to it's excellent
+chosen as the input instrumentation amplifier due to its excellent
 linearity and high common-mode rejection
 :bibcite:`analog_devices_ad8221_2007`. We use a fixed gain of 100 set
 by :desig:`R26` -- programmable gain at this stage would necessitate
@@ -54,14 +53,14 @@ Programmable Gain Shift Register Network
 
 For each channel we have four bits of state: the three for PGA state
 and one for HPF state. We use a cascaded array of shift registers
-(figure :latex:`ref{shiftreg_schematic}`) to propagate these settins
+(figure :latex:`ref{shiftreg_schematic}`) to propagate these settings
 from the FPGA to the actual analog components.
 
 
 Input Anti-Aliasing Filter
 ----------------------------------------
 
-To achieve filtering we use an eight-pole bessel filter in a multiple
+To achieve filtering we use an eight-pole Bessel filter in a multiple
 feedback configuration (figure :latex:`ref{aafilter_schematic}`) ,
 implemented via low-noise JFET quad op-amp AD8513AR
 :bibcite:`analog_devices_AD8513_2009`.
@@ -73,7 +72,7 @@ ADC
 ---
 
 The differential input, single-supply ADCs :part:`AD7685` :desig:`U2`
-(:bibcite:`analog_devices_ad7685_2007`) are driven at 192 ksps at from
+(:bibcite:`analog_devices_ad7685_2007`) are driven at 192 ksps from
 a common conversion signal (figure :latex:`ref{adc_schematic}`) . Each
 ADC's voltage reference input ( V\ :subscript:`REF`) is individually
 buffered to limit the voltage drop on the reference with each ADC
@@ -111,15 +110,15 @@ FPGA
 The Xilinx Spartan-3 VQ100 :part:`XC3s200-4Q100` :desig:`U4`
 (:bibcite:`xilinx_spartan-3_2009`) performs all the control, signal
 processing, and communication tasks on the Acquisition Board (figure
-:latex:`ref{fpga_scheamtic}`) . The FPGA is driven by a single 36 MHz
+:latex:`ref{fpga_schematic}`) . The FPGA is driven by a single 36 MHz
 digital oscillator.
 
 The primary bitstream is contained within a :part:`XCFS01` Platform
 Flash EEPROM. Both the Spartan-3 and the Platform Flash EEPROM are
 connected to the primary JTAG chain (figure
-:latex:`ref{fpgapower_scheamtic}`). To power the FPGA we take the input
+:latex:`ref{fpgapower_schematic}`). To power the FPGA we take the input
 5V and convert it to the 3.3 V for IO, the 2.5V aux level, and the 1.2
-V core
+V core. 
 
 Optical Interface
 ------------------
@@ -135,6 +134,6 @@ Mechanics, PCB, Enclosure
 
 The resulting Acquisition Board is a four-layer FR-4 PCB measuring 7
 inches by 5.5 inches. The majority of signal routing takes place 
-on the top layer (figure :latex:`ref{gerber_layer1}`}) with
+on the top layer (figure :latex:`ref{gerber_layer1}`) with
 dedicated split power and ground planes (figures :latex:`ref{gerber_layer2}`
 and :latex:`ref{gerber_layer3}`). 

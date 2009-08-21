@@ -5,7 +5,7 @@ EEPROM I/O
 
 The EEPROM is a SPI-serial component which can store up to 32 kB of
 ram (figure :latex:`ref{fpga_eepromio}`). We store 16-bit big-endian
-words as in table \ref{eepromaddr}.
+words as in the table below.
 
 
 :latex:`begin{singlespace}`
@@ -25,7 +25,7 @@ instruction, and then a full two bytes.  Since we have 12 bits of
 address, we place the 11 input bits on the line and always have the
 LSB be zero.
 
-We use the two-byte read and two-byte write seqence capability of the
+We use the two-byte read and two-byte write sequence capability of the
 eeprom for both reads and writes. We never cross page boundary since
 we always start with LSB = 0.
 

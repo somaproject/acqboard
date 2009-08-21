@@ -4,7 +4,7 @@ Control
 
 The control module (figures :latex:`ref{fpga_control}` and
 :latex:`ref{fpga_control_fsm}`) handles mode changes, gain and
-filter setting changes, and the storage andretrieval of settings and
+filter setting changes, and the storage and retrieval of settings and
 filter coefficients from the EEPROM.
 
 .. figure:: control.svg

@@ -1,4 +1,4 @@
-.. |pm| replace:: :pm:
+.. |pm| replace:: +/-
 
 .. &plusmn;
 
@@ -53,7 +53,7 @@ thus we have an optional single-pole high-pass filter (f\ :sub:`-3dB`\
 and maximize spike acquisition dynamic range.
 
 Each group of four input channels feeds into an optional fifth channel
-(A.C and B.C) which can independently filter the
+(AC and BC) which can independently filter the
 differentially-amplified input. This allows for each bundle of four
 channels to record high-frequency, low-amplitude spike signals and to
 simultaneously record the low-frequency, higher-voltage LFP.
@@ -142,7 +142,7 @@ fixed-point convolution. We use an extended-precision multiplier,
 reduce the quantization artifacts. 
 
 The Parks-McClellan optimum equiripple FIR filter design algorithm 
- is used to compute the coefficients for the 143-tap filter with passband
+is used to compute the coefficients for the 143-tap filter with passband
 cutoff at 10 kHz. The resulting frequency response (and coefficient-quantized
 frequency response) are seen in the figure below (figure :latex:`ref{fir_resp}`). The 143-tap filter
 gives the required stopband attenuation while keeping FIR-induced
@@ -211,7 +211,7 @@ to control gain, filter settings, and the like. This allows complete
 long-haul electrical isolation between the acquisition system
 and the downstream noisy digital analysis. 
 
-Transmission of the a serial bitstream requires the receiver to
+Transmission of a serial bitstream requires the receiver to
 synchronize to the transmitting clock so as to determine bit
 boundaries. Transitions between one and zero bits can be used to infer
 the clocking parameters, but long strings of ones or zeros may result
@@ -220,5 +220,5 @@ we use the 8b/10b encoding scheme.
 
 8b/10b encodes 8-bit symbols in 10 bits of data
 :bibcite:`Widmer_DC-Balanced_1983` selecting code words to guarantee a
-bit transition at least every six bits. 8b/10b also includes defines
+bit transition at least every six bits. 8b/10b also defines
 framing ("comma") characters which simplify packet identification.

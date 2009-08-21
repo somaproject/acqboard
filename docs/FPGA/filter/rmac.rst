@@ -38,7 +38,7 @@ The repeated multiply-accumulate unit is composed (figure
 
 **Convergent Rounding**
     Convergent rounding of the input is
-    performed, resulting in the output being in **8.15** format.
+    performed, resulting in the output being in 8.15 format.
 
 **Overflow Detection**
    If the output is too large to be

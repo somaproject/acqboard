@@ -21,9 +21,6 @@ Welcome to Soma Acquisition's documentation!
    hardware/gerbers.rst
 ..	         #circuitdesign/circuitdesign.rst
 
-.. todo:: Add schematics
-.. todo:: Add BOM
-
 .. todolist::
 
 

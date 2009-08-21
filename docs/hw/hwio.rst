@@ -23,12 +23,13 @@ connector.
 Back Panel
 ================
 
-The back panel (Figure \ref{backpanel}) contains power, IO, and
+The back panel (figure :latex:`ref{hwio_back}`) contains power, IO, and
 debugging information. There are four sections of interest.
 
 .. figure:: enclosure.back.svg
    :autoconvert:
    :latexwidth: 6in
+   :label: hwio_back
 
    The back of the Soma Acquisition Module.
 
@@ -49,7 +50,7 @@ JTAG port
 The JTAG port is the standard 14-pin 2mm-pitch JTAG connector for
 Xilinx FPGAs, allowing both programming of the on-board flash and
 debugging. This mates with any of the Xilinx programming cables, such
-as the Xilinx Parallel Cable IV :bibcite:`Xilinx_Parallel_2004`. 
+as the Xilinx Parallel Cable IV :bibcite:`Xilinx_Xilinx_2008`. 
 
 .. figure:: enclosure.back.jtag.svg
    :autoconvert:
@@ -82,7 +83,7 @@ with a Molex 39-01-4041 four-pin connector (and associated female pins
 
 The Acquisition module completely isolates its internal analog and
 digital power supplies for maximum signal integrity. The digital power
-supply requires 5 volts DC. Analog requires a very clean bipolar |pm|
+supply requires 5 volts DC. Analog requires a very clean bipolar :pm:
 5V DC.
 
 .. figure:: enclosure.back.power.svg

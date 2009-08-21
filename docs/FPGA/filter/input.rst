@@ -17,7 +17,7 @@ ADC interface
     ADCs each, corresponding to input channel sets A and B, and giving
     rise to :signal:`SDIA` and :signal:`SDIB` (figure
     :latex:`ref{fpga_input}`). The ADC FSM controls the sampling
-    sequence (figure :latexl:`ref{fpga_adc_inputfsm}`); CONCNT the
+    sequence (figure :latex:`ref{fpga_adc_inputfsm}`); CONCNT the
     delay between the assertion of :signal:`CNV` and the bit read-out;
     :signal:`BITCNT` sends the sample clock. To compesate for the ADC
     readout delay and the propagation delay across the galvanic

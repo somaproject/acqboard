@@ -40,6 +40,7 @@ def setup(app):
     
     try:
         images.Figure.option_spec['autoconvert'] = testfoo
+        #images.Image.option_spec['autoconvert'] = testfoo
         images.Figure.option_spec['pngdpi'] = set_ping_val
         images.Figure.option_spec['latexwidth'] = str
         images.Figure.option_spec['latexangle'] = str
@@ -47,6 +48,7 @@ def setup(app):
         
     except AttributeError:
         images.figure.options['autoconvert'] = testfoo
+        #images.image.options['autoconvert'] = testfoo
         images.figure.options['pngdpi'] = set_ping_val
         images.figure.options['latexwidth'] = str
         images.figure.options['latexangle'] = str

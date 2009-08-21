@@ -22,7 +22,7 @@ input words.
    The Fiber Reception finite state machine.
 
 Any error in 8b/10b decoding or spurious (out-of-sequence) comma
-character causes a transition back to :state:`NONE`, preventing the
+character causes a transition back to state NONE, preventing the
 reception of an invalid data frame.
 
 Decoder

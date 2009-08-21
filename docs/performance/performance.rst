@@ -20,11 +20,12 @@ fit the sine wave.
 
 .. figure:: thdn.png
    :latexwidth: 5in
+   :label: thdn
    
    Total Harmonic distortion + noise measured across frequencies, gains,
    and high-pass filter settings at -0.43 dBFS. 
 
-Figure FIXME:ref fig shows THD+N across frequencies, with more
+Figure :latex:`ref{thdn}` shows THD+N across frequencies, with more
 negative values reflecting a lower (better) THD+N. Each measurement
 was run ten times, with the range indicated by a partially-transparent
 envelope. In general, this range is very small, except at two points
@@ -43,14 +44,15 @@ RMS Voltage Noise
 ===================
 
 By shorting the inputs to ground we measure the RMS noise
-referred-to-input (RTI). In all cases the RMS noise is less
-than one microvolt, and varies only slightly as a function of gain,
-indicating that the bulk of noise contribution is from the
-input stage of the amplifier. 
+referred-to-input (RTI). In all cases the RMS noise is less than one
+microvolt (figure :latex:`ref{noise1}`), and varies only slightly as a
+function of gain, indicating that the bulk of noise contribution is
+from the input stage of the amplifier.
 
 .. figure:: noise1.svg
    :autoconvert:
    :latexwidth: 5in
+   :label: noise1
 
    Voltage noise RMS, averaged across channels, for each gain
    and high-pass filter setting. 
@@ -59,13 +61,14 @@ input stage of the amplifier.
 Noise Spectra
 ==============
 
-The noise spectra are relatively flat across our 10kHz bandwidth, and
-is unsurprisingly attenuated at low frequencies when the high-pass
-filter is enabled.
+The noise spectra are relatively flat across our 10kHz bandwidth
+(figure :latex:`ref{noise2}`), and is unsurprisingly attenuated at low
+frequencies when the high-pass filter is enabled.
 
 .. figure:: noise2.svg
    :autoconvert:
    :latexwidth: 5in
+   :label: noise2   
 
    Power spectral density of noise measurements. 
 

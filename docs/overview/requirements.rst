@@ -43,7 +43,7 @@ For example, existing equipment in the Wilson lab allows for 12-bit
 sampling of input voltages with full-scale 20 mV (gain = 1,000) to 500
 uV (gain = 40,000). This allows for LSB sizes between 4.8 mV and 122
 nV, although system noise performance makes the latter number
-unattainable :bibcite:`neuralynx_2008`.
+unattainable :bibcite:`neuralynx_lynx_2008`.
 
 =========
 Bandwidth
@@ -76,7 +76,7 @@ Input noise can directly contribute to cluster size for multiunit
 recordings, making unit isolation more difficult.
 
 Current amplifiers in use have a manufacturer-measured input noise of
-20 uV peak-to-peak :bibcite:`neuralynx`. This can have a substantial
+20 uV peak-to-peak :bibcite:`neuralynx_lynx_2008`. This can have a substantial
 impact on recorded peak amplitude of a common 200 uV spike. 
 
 ========

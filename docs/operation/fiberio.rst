@@ -10,7 +10,6 @@ Interfacing with the acquisition board is accomplished via a plastic
 optical fiber interface for enhanced electrical isolation even over
 long data transmission distances.
 
-.. todo:: cite the analog device 
 
 Modes
 =================
@@ -21,7 +20,7 @@ during operation.
 **Normal acquisition mode (Mode 0)** 
     Mode 0 is the normal acquisition
     mode; in this mode all 10 channels are sampled at the full normal
-    sampling rate and the data is transmitted over the 8b/10b bus
+    sampling rate and the data is transmitted over the optical link
     using the standard encoding scheme. In this mode, gain and
     hardware filter settings can be changed, but nothing else.
 
@@ -59,7 +58,7 @@ and RX streams are encoded using 8b/10b encoding.
 
 The Acqboard transmits an 8b/10b-encoded frame of 24 bytes, preceded
 by the K28.5 comma character (figure
-:latex:`ref{fiber_txpacket)`). 
+:latex:`ref{fiber_txpacket}`). 
 
 .. figure:: txpacket.svg
    :autoconvert:
@@ -192,7 +191,7 @@ Write filter
    Write filter command. 
 
 This command writes the 22-bit twos-complement value in V as the
-**addr**th coefficient for the low-pass filter.
+addr-th coefficient for the low-pass filter.
 
 Write Sample Buffer
 ^^^^^^^^^^^^^^^^^^^
@@ -203,5 +202,5 @@ Write Sample Buffer
    Write sample buffer command. 
 
 This command writes the 16-bit twos-complement value in V as the
-**addr**th sample in the no-input sample buffer.
+addr-th sample in the no-input sample buffer.
 

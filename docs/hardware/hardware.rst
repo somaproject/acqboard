@@ -84,11 +84,12 @@ Voltage Refernece
 
 :part:`LM4140CCM-4.1` :desig:`U28` is used as the voltage reference,
 providing V\ :subscript:`REF` at 4.096V with a 0.1% initial accuracy
-and excellent 3 ppm / C stability. The output of the reference
-is low-pass filtered before being distributed to the ADCs, which
-are individually-buffered. The voltage reference
-is voltage-divided via precision resistors to provide 
-the V\ :subscript:`OS` offset. 
+and excellent 3 ppm / C stability
+:bibcite:`National_Semiconductor_LM4140_2005`. The output of the
+reference is low-pass filtered before being distributed to the ADCs,
+which are individually-buffered. The voltage reference is
+voltage-divided via precision resistors to provide the V\
+:subscript:`OS` offset.
 
 
 ==============================
@@ -107,7 +108,7 @@ To isolate ground current flow, we use the :part:`IL715-3`
 FPGA
 ----
 
-The Xilinx Spartan-3 VQ100 :part:`XC3s200-4Q100: :desig:`U4`
+The Xilinx Spartan-3 VQ100 :part:`XC3s200-4Q100` :desig:`U4`
 (:bibcite:`xilinx_spartan-3_2009`) performs all the control, signal
 processing, and communication tasks on the Acquisition Board (figure
 :latex:`ref{fpga_scheamtic}`) . The FPGA is driven by a single 36 MHz
@@ -124,9 +125,9 @@ Optical Interface
 ------------------
 
 The 8MHz serial link is carried at 650 nm via 1 mm plastic optical
-fiber. We use the Avago :part:`HFBR-1528` transmitter and
-:part:`HFBR-2528` receiver, which can transmit up to 10 MBd over
-50 m of the inexpensive plastic fiber. 
+fiber. We use the Avago :part:`HFBR-1528` transmitter
+:bibcite:`avago_hfbr-1528_2009` and :part:`HFBR-2528` receiver :bibcite:`avago_hfbr-2528_2009`, which
+can transmit up to 10 MBd over 50 m of the inexpensive plastic fiber.
 
 ==============================
 Mechanics, PCB, Enclosure

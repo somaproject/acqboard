@@ -1,4 +1,4 @@
-.. |pm| replace:: +- 
+.. |pm| replace:: :pm:
 
 .. &plusmn;
 
@@ -8,7 +8,7 @@
 
 This chapter outlines the design and implementation of the primary
 Soma Acquisition Board signal processing chain, from low-level
-differential input to encoded binary data. Here we present the
+differential input to encoded binary data. This reflects 
 high-level design only, with all figures reflecting simulation and
 design specification.
 
@@ -102,7 +102,7 @@ Antialiasing Filter & ADC
 -------------------------
 
 To achieve our desired sampling rate, an 8-pole Bessel filter achieves
-greater than 96 dB attenuation within the stop-band (figure
+greater than 90 dB attenuation within the stop-band (figure
 :latex:`ref{analog_freqres}`) while maintaining linear phase (constant
 group delay) across the passband (figure :latex:`ref{analog_grd}`).
 Over the desired 10 kHz bandwidth the filter droops 1.5 dB (figure
@@ -141,8 +141,9 @@ fixed-point convolution. We use an extended-precision multiplier,
 22-bit filter coefficients, and an extended-width accumulator to
 reduce the quantization artifacts. 
 
-The Parks-McClellan optimum equiripple FIR filter is used for a cutoff
-at 10 kHz; the resulting frequency response (and coefficient-quantized
+The Parks-McClellan optimum equiripple FIR filter design algorithm 
+ is used to compute the coefficients for the 143-tap filter with passband
+cutoff at 10 kHz. The resulting frequency response (and coefficient-quantized
 frequency response) are seen in the figure below (figure :latex:`ref{fir_resp}`). The 143-tap filter
 gives the required stopband attenuation while keeping FIR-induced
 passband ripple to under 0.5 dB, while fitting in our allocated FPGA

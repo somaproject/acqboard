@@ -68,31 +68,30 @@ To achieve filtering we use an eight-pole bessel filter in a multiple
 feedback configuration, implemented via low-noise JFET quad op-amp
 AD8513AR :bibcite:`analog_devices_AD8513_2009`. 
 
-The last stage we bias with $V_os$ to create a single-sided signal for
+The last stage is biased with V\ :subscript:`OS` to create a single-sided signal for
 the unipolar ADC.
 
 ADC
 ---
 (see :ref:`adc_schematic`)
 
-The differential input, single-supply ADC :part:`AD7685` :desig:`U2`
-(:bibcite:`analog_devices_AD7685_2007`) is run at 192 ksps at from a common
-conversion signal. Each ADC's voltage reference input is run at 4.096
-V and individually buffered to limit the voltage drop on the reference
-with each ADC cycle.
-
+The differential input, single-supply ADCs :part:`AD7685` :desig:`U2`
+(:bibcite:`analog_devices_AD7685_2007`) are driven at 192 ksps at from
+a common conversion signal. Each ADC's voltage reference input ( V\
+:subscript:`REF`) is individually buffered to limit the voltage drop
+on the reference with each ADC cycle.
 
 Voltage Refernece
 --------------------------------
-Use :part:`LM4140CCM-4.1` :desig:`U28`. 
 
-Low-pass filter, use it for VRef. 
+:part:`LM4140CCM-4.1` :desig:`U28` is used as the voltage reference,
+providing V\ :subscript:`REF` at 4.096V with a 0.1% initial accuracy
+and excellent 3 ppm / C stability. The output of the reference
+is low-pass filtered before being distributed to the ADCs, which
+are individually-buffered. The voltage reference
+is voltage-divided via precision resistors to provide 
+the V\ :subscript:`OS` offset. 
 
-Then voltage-divide it, amplify the output, use that for VOs. 
-Use super-accurage resistors to prevent thermal drift. 
-
-Power
------
 
 ==============================
 Digital
@@ -103,8 +102,8 @@ Galvanic Isolation
 (see :ref:`isolation_schematic`)
 
 To isolate ground current flow, we use the :part:`IL715-3`
-(:desig:`U14`) and :part:`IL716-3` galvanic isolation ICs to
-bridge the analog-digital domain. 
+(:desig:`U14`) and :part:`IL716-3` high-speed galvanic isolation ICs
+:bibcite:`NVE_High-Speed_2009` to bridge the analog-digital domain.
 
 FPGA
 ----

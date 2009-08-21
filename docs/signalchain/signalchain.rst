@@ -8,13 +8,18 @@
 
 This chapter outlines the design and implementation of the primary
 Soma Acquisition Board signal processing chain, from low-level
-differential input to encoded binary data. This is a design chapter
-only; all figures are from simulation and design specifications.
+differential input to encoded binary data. Here we present the
+high-level design only, with all figures reflecting simulation and
+design specification.
 
 The Soma Acquisition Board signal chain can be partitioned into an
-analog signal conditioning section and a digital signal processing
-section. Here, the stages will be discussed independently, except
-where they overlap and integrate to produce the final output.
+analog signal acquisition section and a digital signal processing
+section. The signal acquisition section amplifies the differential
+input and scales the signal to make maximal use of the
+analog-to-digital converter. Digital signal processing removes aliased
+components, frames the data, and encodes the resulting optical output
+signal.
+
 
 .. figure:: signalchain.svg
    :autoconvert:
@@ -31,12 +36,11 @@ having an optional fifth channel (AC and BC, respectively) (Figure
  Input Differential Amplification
 =================================
 
-Eight channels of input with high common-mode rejection accept
-voltages ranging with an AC range of |pm| 20 mV.  A constant gain of
-100 results in a low-level bipolar signal.  To accommodate the large
+Eight input channels with high common-mode rejection accept |pm| 20
+mV.  A constant differential input gain of 100 preamplifies weak input
+signals, removing common-mode contamination.  To accommodate the large
 DC offsets inherent in most electrophysiology recording environments,
 the inputs are AC-coupled.
-
 
 Optional analog high-pass filtering
 =============================================
@@ -46,8 +50,8 @@ range to several millivolts. The higher-frequency extracellular action
 potentials (spikes) are normally sub-millivolt. When recording spikes
 the larger-amplitude LFP could potentially saturate our amplifier;
 thus we have an optional single-pole high-pass filter (f\ :sub:`-3dB`\
-=300 Hz ) that can be enabled to maximize spike acquisition dynamic
-range.
+=300 Hz ) that can optionally remove these low-frequency oscillations
+and maximize spike acquisition dynamic range.
 
 Each group of four input channels feeds into an optional fifth channel
 (A.C and B.C) which can independently filter the
@@ -55,15 +59,12 @@ differentially-amplified input. This allows for each bundle of four
 channels to record high-frequency, low-amplitude spike signals and to
 simultaneously record the low-frequency, higher-voltage LFP.
 
-.. todo:: FIGURE Frequency response of the board below 1 kHz with and
-.. without theoretical
-
 
 Programmable gain
 ===================
 
-The programmable gain amplifier can be off or set to a range
-of gains from 1 to 100; the table below shows the PGA gain, total
+The programmable gain amplification stage ranges over two orders
+of magnitude. The table below shows the PGA gain, total
 system gain, maximum input voltage, and LSB size for the possible
 settings.
 
@@ -86,9 +87,11 @@ settings.
 Analog to Digital Conversion
 ============================
 
-To achieve 16-bit resolution with an input bandwidht of 10kHz, we
-oversample the input signal, downsample, and digitally filter. The
-filtering process is the combination of the following factors:
+To achieve 16-bit resolution with an input bandwidth of 10kHz, we
+oversample the input signal, downsample, and digitally filter. This
+allows us to use a more lenient analog antialiasing filter at the cost
+of sampling at a faster rate. The filtering process is the combination
+of the following factors:
 
   - an initial antialiasing filter
   - The analog-to-digital conversion step
@@ -98,6 +101,7 @@ filtering process is the combination of the following factors:
 
 Antialiasing Filter & ADC
 -------------------------
+
 To achieve our desired sampling rate, an 8-pole Bessel filter
 achieves greater than 96 dB attenuation within the stop-band while
 maintaining linear phase (constant group delay) across the passband.
@@ -128,14 +132,14 @@ antialiased signal.
 Filtering
 ----------
 
-We filter the sampled data using an 143-Tap FIR filter using fixed-point
-convolution. We use an extended-precision multiplier, 22-bit filter
-coefficients, and an extended-width accumulator to reduce the quantization
-artifacts present in fixed-point arithmetic.
+We filter the sampled data using an 143-Tap FIR filter using
+fixed-point convolution. We use an extended-precision multiplier,
+22-bit filter coefficients, and an extended-width accumulator to
+reduce the quantization artifacts. 
 
 The Parks-McClellan optimum equiripple FIR filter is used for a cutoff
 at 10 kHz; the resulting frequency response (and coefficient-quantized
-frequency response) are seen in figure \ref{FIR}. The 143-tap filter
+frequency response) are seen in the figure below. The 143-tap filter
 gives the required stopband attenuation while keeping FIR-induced
 passband ripple to under 0.5 dB, while fitting in our allocated FPGA
 resources.
@@ -162,7 +166,9 @@ The resulting frequency response of the combined analog and digital
 filters are shown in figures blah, including zoomed-in passband and
 stopband performance. The frequency response following decimation is
 also shown, with the sum of the (imperfectly filtered) antialiased
-components highlighted.
+components highlighted. Note that this gives us a theoretical
+signal-to-alias ratio in excess of 100 dB, below that of our 
+ADC quantization noise floor. 
 
 .. figure:: soma-1.digital.aggregate.svg
    :autoconvert:

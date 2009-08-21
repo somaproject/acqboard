@@ -4,7 +4,11 @@ EEPROM I/O
 
 
 The EEPROM is a SPI-serial component which can store up to 32 kB of
-ram. We store 16-bit big-endian words as in table \ref{eepromaddr}.
+ram (figure :latex:`ref{fpga_eepromio}`). We store 16-bit big-endian
+words as in table \ref{eepromaddr}.
+
+
+:latex:`begin{singlespace}`
 
 =============   =========================================
 Word Address	Data 
@@ -14,6 +18,7 @@ Word Address	Data
 1024 - 1535	offset values for each gain (512 words) 
 =============	=========================================
 
+:latex:`end{singlespace}`
 
 On each operation we execute the EEPROM's write-enable (:signal:`WREN`)
 instruction, and then a full two bytes.  Since we have 12 bits of
@@ -30,8 +35,13 @@ To interface to the SPI EEPROM we use a single output mux driven by
 .. figure:: EEPROMIO.svg
    :autoconvert:
    :latexwidth: 6in
+   :label: fpga_eepromio
+
+   SPI interface control to the EEPROM. 
 
 
 .. figure:: EEPROMIO.fsm.svg
    :autoconvert:
    :latexwidth: 6in
+
+   FSM for controlling the EEPROM SPI interface. 

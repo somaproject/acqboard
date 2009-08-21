@@ -58,13 +58,15 @@ fiber-optic link over  1mm plastic optical fiber. Both the TX
 and RX streams are encoded using 8b/10b encoding.
 
 The Acqboard transmits an 8b/10b-encoded frame of 24 bytes, preceded
-by the K28.5 comma character. The nominal frame transmission is as
-follows:
+by the K28.5 comma character (figure
+:latex:`ref{fiber_txpacket)`). 
 
 .. figure:: txpacket.svg
    :autoconvert:
    :pngdpi: 150
-
+   :label: fiber_txpacket
+   
+   Format of 24-byte frame transmitted by the Acquisition Board. 
 
 The Command Status byte consists of three active bits. CMDST[1:0] are
 the mode numbers, indicating the current active mode.  CMDST[0] is a
@@ -87,13 +89,17 @@ their corresponding ADCs; they are transmitted MSB first.
 
 Normally, the Acqboard receives a stream of valid 8b/10b encoded
 zeros; a new command is indicated by the presence of the comma
-character in the data stream followed by a packet. A typical 
-command packet is below, and consists of six bytes. The specific internals
-of the commands are explained in the following section. g
+character in the data stream followed by a packet (figure
+:latex:`ref{fiber_rxpacket}`). A typical command packet is below, and
+consists of six bytes. The specific internals of the commands are
+explained in the following section.
 
 .. figure:: rxpacket.svg
    :autoconvert:
    :pngdpi: 150
+   :label: fiber_rxpacket
+
+   Format of six-byte command sent to the acquisition board. 
 
 Commands
 ============
@@ -109,6 +115,10 @@ Switch Mode
 .. figure:: switchmode.cmd.svg
    :autoconvert:
    :pngdpi: 150
+   :label: fiber_switchmode
+
+   Switch mode command. 
+
 
 Switch the current acqboard mode to **mode**. If changing to the
 RAW mode, the **chan** field is the 4-bit number of the raw
@@ -126,6 +136,7 @@ Set Gain
    :autoconvert:
    :pngdpi: 150
 
+   Set gain command. 
 
 Sets the gain of channel **chan** to one of the preset gain
 values **gain**. Valid in all modes.
@@ -136,6 +147,8 @@ Set Input
    :autoconvert:
    :pngdpi: 150
 
+   Set input command. 
+
 Select which of the four primary input channels will be used
 as input to the secondary input channel. 
 
@@ -145,6 +158,8 @@ High Pass Filter Enable
 .. figure:: setfilter.cmd.svg
    :autoconvert:
    :pngdpi: 150
+
+   Enable HPF command. 
 
 Enable or disable the high pass filter on channel the indicated channel.
 
@@ -157,6 +172,8 @@ Write offset
 .. figure:: writeos.cmd.svg
    :autoconvert:
    :pngdpi: 150
+
+   Write offset command. 
 
 This command writes the 16-bit twos-complement value in V as the
 digital offset for channel **chan** when the gain on that channel is
@@ -172,6 +189,8 @@ Write filter
    :autoconvert:
    :pngdpi: 150
 
+   Write filter command. 
+
 This command writes the 22-bit twos-complement value in V as the
 **addr**th coefficient for the low-pass filter.
 
@@ -180,6 +199,8 @@ Write Sample Buffer
 .. figure:: writesamp.cmd.svg
    :autoconvert:
    :pngdpi: 150
+
+   Write sample buffer command. 
 
 This command writes the 16-bit twos-complement value in V as the
 **addr**th sample in the no-input sample buffer.

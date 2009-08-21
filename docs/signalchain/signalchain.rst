@@ -20,7 +20,6 @@ analog-to-digital converter. Digital signal processing removes aliased
 components, frames the data, and encodes the resulting optical output
 signal.
 
-
 .. figure:: signalchain.svg
    :autoconvert:
    :latexwidth: 5in
@@ -30,7 +29,7 @@ signal.
 
 Signals are divided into two sets of four (A1-A4, B1-B4) with each set
 having an optional fifth channel (AC and BC, respectively) (Figure
-:ref:`signal-chain`).
+:latex:`ref{signal-chain}`).
 
 =================================
  Input Differential Amplification
@@ -102,26 +101,31 @@ of the following factors:
 Antialiasing Filter & ADC
 -------------------------
 
-To achieve our desired sampling rate, an 8-pole Bessel filter
-achieves greater than 96 dB attenuation within the stop-band while
-maintaining linear phase (constant group delay) across the passband.
-Over the desired 10 kHz bandwidth the filter droops 1.5 dB. 
+To achieve our desired sampling rate, an 8-pole Bessel filter achieves
+greater than 96 dB attenuation within the stop-band (figure
+:latex:`ref{analog_freqres}`) while maintaining linear phase (constant
+group delay) across the passband (figure :latex:`ref{analog_grd}`).
+Over the desired 10 kHz bandwidth the filter droops 1.5 dB (figure
+:latex:`ref{analog_pass}`)
 
 .. figure:: soma-1.analog.freqres.svg
    :autoconvert:
    :latexwidth: 5in
+   :label: analog_freqres
 
    Anti-aliasing filter total frequency response.
 
 .. figure:: soma-1.analog.pass.svg
    :autoconvert:
    :latexwidth: 5in
+   :label: analog_pass
 
    Antialiasing filter passband frequency response
 
 .. figure:: soma-1.analog.grd.svg
    :autoconvert:
    :latexwidth: 5in
+   :label: analog_grd
 
    Anti-aliasing filter group delay.
 
@@ -139,7 +143,7 @@ reduce the quantization artifacts.
 
 The Parks-McClellan optimum equiripple FIR filter is used for a cutoff
 at 10 kHz; the resulting frequency response (and coefficient-quantized
-frequency response) are seen in the figure below. The 143-tap filter
+frequency response) are seen in the figure below (figure :latex:`ref{fir_resp}`). The 143-tap filter
 gives the required stopband attenuation while keeping FIR-induced
 passband ripple to under 0.5 dB, while fitting in our allocated FPGA
 resources.
@@ -147,6 +151,7 @@ resources.
 .. figure:: soma-1.digital.quant.svg
    :autoconvert:
    :latexwidth: 5in
+   :label: fir_resp
 
    Frequency response of FIR filter, both ideal (float-point) response and the filtering performance when coefficients are quantized to 22 bits. 
 
@@ -163,16 +168,18 @@ Total response, designed and measured
 ======================================
 
 The resulting frequency response of the combined analog and digital
-filters are shown in figures blah, including zoomed-in passband and
-stopband performance. The frequency response following decimation is
-also shown, with the sum of the (imperfectly filtered) antialiased
-components highlighted. Note that this gives us a theoretical
-signal-to-alias ratio in excess of 100 dB, below that of our 
-ADC quantization noise floor. 
+filters are shown in figures :latex:`ref{total_resp}`, including
+zoomed-in passband (figure :latex:`ref{total_resp_pass}`) and stopband
+performance (figure :latex:`ref{total_resp_aliases}`). The frequency
+response following decimation is also shown, with the sum of the
+(imperfectly filtered) antialiased components highlighted. Note that
+this gives us a theoretical signal-to-alias ratio in excess of 100 dB,
+below that of our ADC quantization noise floor.
 
 .. figure:: soma-1.digital.aggregate.svg
    :autoconvert:
    :latexwidth: 5in
+   :label: total_resp
 
    Aggregate pre-decimation signal chain filtering.
 
@@ -180,15 +187,17 @@ ADC quantization noise floor.
 .. figure:: soma-1.digital.pass.svg
    :autoconvert:
    :latexwidth: 5in
+   :label: total_resp_pass
 
    Aggregate pre-decimation signal chain passband.
 
 .. figure:: soma-1.digital.withaliases.svg
    :autoconvert:
    :latexwidth: 5in
+   :label: total_resp_aliases
+   
 
    Aggregate post-decimation filtering.
-
 
 
 =======================
@@ -202,7 +211,7 @@ long-haul electrical isolation between the acquisition system
 and the downstream noisy digital analysis. 
 
 Transmission of the a serial bitstream requires the receiver to
-synchronize to the bitstream so as to determine bit
+synchronize to the transmitting clock so as to determine bit
 boundaries. Transitions between one and zero bits can be used to infer
 the clocking parameters, but long strings of ones or zeros may result
 in a gradual precession and, eventually, a bit error. To prevent this,

@@ -3,9 +3,9 @@
 The Fiber TX module
 --------------------
 
-The Fiber TX module formats data for transmission according to the
-Soma FiberIO Protocol. All inputs are latched on the
-:signal:`OUTSAMPLE` signal to prevent word-skew.
+The Fiber TX module (figure :latex:`ref{fpga_fibertx}`) formats data
+for transmission according to the Soma FiberIO Protocol. All inputs
+are latched on the :signal:`OUTSAMPLE` signal to prevent word-skew.
 
 The counter :signal:`INCNT` counts the assertion of the input
 :signal:`YEN` to write samples from the output of the RMAC. These are
@@ -22,5 +22,6 @@ data :signal:`DOUT` and serializes it to the eventual output
 .. figure:: fiberTX.svg
    :autoconvert:
    :latexwidth: 6in
+   :label: fpga_fibertx
 
    The Fiber Transmission interface

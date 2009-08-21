@@ -7,6 +7,7 @@ compensation, and the eventual write-out of the sample bits.
 .. figure:: input.svg
    :autoconvert:
    :latexwidth: 6in
+   :label: fpga_input
 
    Input control which deserializes ADC samples and performs offset compensation. 
 
@@ -14,9 +15,10 @@ compensation, and the eventual write-out of the sample bits.
 ADC interface 
     The ten ACDs are configured in two serial chains of five
     ADCs each, corresponding to input channel sets A and B, and giving
-    rise to :signal:`SDIA` and :signal:`SDIB`. The ADC FSM
-    controls the sampling sequence; CONCNT the delay
-    between the assertion of :signal:`CNV` and the bit read-out;
+    rise to :signal:`SDIA` and :signal:`SDIB` (figure
+    :latex:`ref{fpga_input}`). The ADC FSM controls the sampling
+    sequence (figure :latexl:`ref{fpga_adc_inputfsm}`); CONCNT the
+    delay between the assertion of :signal:`CNV` and the bit read-out;
     :signal:`BITCNT` sends the sample clock. To compesate for the ADC
     readout delay and the propagation delay across the galvanic
     isolators, we delay the :signal:`LSCK` via a shift-register into
@@ -24,6 +26,7 @@ ADC interface
 
 .. figure:: adc.inputFSM.svg
    :autoconvert:
+   :label: fpga_adc_inputfsm
 
    ADC input FSM,  which reads all ADC serial bitstreams upon the 
    assertion of input clock signal :signal:`INSAMPLE`. 

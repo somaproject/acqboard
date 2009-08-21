@@ -3,11 +3,14 @@ Digital Design of FPGA
 *******************************
 
 The Xilinx Spartan-3 is used for acquisition control, digital
-filtering, and data encoding and transmission.
+filtering, and data encoding and transmission. The modular firmware
+architecture (figure :latex:`ref{fgpa}` ) implements this
+functionality in VHDL.
 
 .. figure:: FPGA.svg
    :autoconvert:
    :latexwidth: 6in
+   :label: fpga
 
    Overall architecture of the FPGA firmware for signal processing and amplifier control. 
 

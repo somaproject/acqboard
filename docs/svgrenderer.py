@@ -20,6 +20,24 @@ def set_ping_val(foo):
 def setup(app):
     app.connect('doctree-resolved', process_nodes)
 
+
+    # monkey-patch figure
+
+    frun = images.Figure.run
+
+    def new_frun(self):
+        print "Running monkey"
+        label = self.options.get('label')
+        if label:
+            del self.options['label']
+
+        res = frun(self)
+        if label:
+            res[0]['label'] = label
+        return res
+    
+    images.Figure.run = new_frun
+    
     try:
         images.Figure.option_spec['autoconvert'] = testfoo
         images.Figure.option_spec['pngdpi'] = set_ping_val

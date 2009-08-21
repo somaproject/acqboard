@@ -8,11 +8,13 @@ RMAC
 .. figure:: RMAC.svg
    :autoconvert:
    :latexwidth: 6in
+   :label: fpga_rmac
 
    Repeated Multiply-Accumulate (RMAC) module for fixed-point convolution.
 
 
-The repeated multiply-accumulate unit is composed (Figure \ref{rmac}) of the following subcomponents:
+The repeated multiply-accumulate unit is composed (figure
+:latex:`ref{fpga_rmac}`) of the following subcomponents:
 
 
 **Sample Counters** 
@@ -24,7 +26,7 @@ The repeated multiply-accumulate unit is composed (Figure \ref{rmac}) of the fol
 	 the buffer.
 
 **Multiplier** 
-   The pipelined multipler performs fixed-point
+   The pipelined multiplier performs fixed-point
    multiplication of the input, truncating the output at 1.23 bits of
    data.
 
@@ -44,38 +46,38 @@ The repeated multiply-accumulate unit is composed (Figure \ref{rmac}) of the fol
    negative extreme.
 
 
-The RMAC is controlled by a FSM (Figure \ref{rmacfsm}) that is
-designed to convolve one channel's data per :signal:`STARTMAC`. When
-:signal:`STARTMAC` is asserted, the system convolves up to a maximum
-length L=143, and then asserts :signal:`MACDONE`.
+The RMAC is controlled by a FSM (figure :latex:`ref{fpga_rmac_fsm}`)
+that is designed to convolve one channel's data per
+:signal:`STARTMAC`. When :signal:`STARTMAC` is asserted, the system
+convolves up to a maximum length L=143, and then asserts
+:signal:`MACDONE`.
 
 .. figure:: RMAC_fsm.svg
    :autoconvert:
+   :label: fpga_rmac_fsm
    
    Controlling FSM for the RMAC.
 
-Fixed-point noise model
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Here we develop a model of the dynamic range. :todo:`Noise model`
 
 RMAC control
 ~~~~~~~~~~~~~
 
-The RMAC control (Figure \ref{rmaccontroller}) coordinates filtering
+The RMAC control (figure :latex:`ref{fpga_rmac_control}`) coordinates filtering
 across all 10 channels as well as incrementing the base address of the
 sample buffer, thus controlling the output interface of the sample
-ring buffer. The associated FSM (figure \ref{rmaccontrollerfsm}) is
+ring buffer. The associated FSM (figure :latex:`ref{fpga_rmac_control_fsm}`) is
 equally simple, asserting :signal:`STARTMAC` to the RMAC engine and
 waiting for completion.
 
 .. figure:: RMACcontrol.svg
    :autoconvert:
+   :label: fpga_rmac_control
    
    The RMAC pointer controller. 
 
 
 .. figure:: RMACcontrol.fsm.svg
    :autoconvert:
+   :label: fpga_rmac_control_fsm
    
    The RMAC controller FSM. 

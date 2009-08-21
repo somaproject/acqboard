@@ -1,25 +1,28 @@
 Fiber RX
 ---------
 
-The fiber receive interface is in some ways simpler than the transmit
-interface. The interface's state machine waits until we receive a new
-packet with no errors and the appropriate K-character, and then sets
-about latching the relevant input words.
+The fiber receive interface (figure :latex:`ref{fpga_fiberrx}`) is in
+some ways simpler than the transmit interface. The interface's state
+machine waits until we receive a new packet with no errors and the
+appropriate K-character, and then sets about latching the relevant
+input words.
 
 .. figure:: fiberRX.svg
    :autoconvert:
    :latexwidth: 6in
+   :label: fpga_fiberrx
 
    The Fiber Reception interface.
 
 .. figure:: fiberRX.fsm.svg
    :autoconvert:
    :latexwidth: 6in
+   :label: fpga_fiberrx_fsm
    
    The Fiber Reception finite state machine.
 
 Any error in 8b/10b decoding or spurious (out-of-sequence) comma
-character causes a transition back to \state{NONE}, preventing the
+character causes a transition back to :state:`NONE`, preventing the
 reception of an invalid data frame.
 
 Decoder
@@ -33,11 +36,12 @@ simply need to maintain a lock for at most five input-bit-cycles.
 .. figure:: decoder.svg
    :autoconvert:
    :latexwidth: 6in
+   :label: fpga_decoder
 
    The oversampling fiber decoder
 
 
-The decoder used here (figure \ref{decoder}) is generalized to work
+The decoder used here (figure :latex:`ref{fpga_decoder}`) is generalized to work
 for different oversampling rates, as it was not known in the early
 stage of development what the final oversampling rate would be. We use
 a counter which is reset on each bit transition, and shift in the

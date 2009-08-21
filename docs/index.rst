@@ -6,8 +6,6 @@
 Welcome to Soma Acquisition's documentation!
 ============================================
 
-Contents:
-
 .. toctree::
    :maxdepth: 2	
    
@@ -18,6 +16,7 @@ Contents:
    performance/performance.rst
    FPGA/fpga.rst
    hardware/hardware.rst
+   startappendix.rst
    hardware/schematics.rst
    hardware/gerbers.rst
 ..	         #circuitdesign/circuitdesign.rst
@@ -28,10 +27,10 @@ Contents:
 .. todolist::
 
 
-Indices and tables
-==================
+.. Indices and tables
+.. ==================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`
 

@@ -4,9 +4,10 @@ Components and Circuit Design
 
 The design of the Soma Acquisition hardware matches the [Signal
 Chain]_ closely, but for the purpose of this discussion we will divide
-it into the analog and digital subsections.  The analog subsection
-runs off bipolar 5V rails, and the digital side is powered by an
-independent 5V digital supply.
+it into the analog and digital subsections (figure
+:latex:`ref{overview_schematic}`) .  The analog subsection runs off
+bipolar 5V rails, and the digital side is powered by an independent 5V
+digital supply.
 
 ==============================
 Analog 
@@ -15,14 +16,13 @@ Analog
 Input front-end
 ------------------------------
 
-(see :ref:`input_schematic`)
-
-The AD8221AR (:desig:`U12`) was chosen as the input instrumentation
-amplifier due to it's excellent linearity and high common-mode
-rejection :bibcite:`analog_devices_ad8221_2007`. We use a fixed gain
-of 100 set by :desig:`R26` -- programmable gain at this stage would
-necessitate the introduction of an analog mux, which would
-unacceptably degrade performance.
+The AD8221AR (:desig:`U12`) (figure :latex:`ref{input_schematic}`) was
+chosen as the input instrumentation amplifier due to it's excellent
+linearity and high common-mode rejection
+:bibcite:`analog_devices_ad8221_2007`. We use a fixed gain of 100 set
+by :desig:`R26` -- programmable gain at this stage would necessitate
+the introduction of an analog mux, which would unacceptably degrade
+performance.
 
 The input stage is AC-coupled to deal with the issues mentioned in
 :doc:`signalchain/signalchain`. We use a simple single pole RC filter
@@ -35,51 +35,49 @@ would overwhelm this stage.
 
 Input high-pass filter and Programmable gain
 ---------------------------------------------
-(see :ref:`pga_schematic`)
 
-To optionally high-pass filter the input, a single-pole RC filter is
-combined with the JFET-input :part:`AD8510`
-(:bibcite:`analog_devices_AD8510_2009`, :desig:`U7`) and an :part:`ADG619`
-SPDT analog mux (:bibcite:`analog_devices_ADG619_2007`). The high input
-impedance of the AD8510 results in minimum impact to the overall
-signal chain.
+To optionally high-pass filter the input, a single-pole RC filter
+(figure :latex:`ref{pga_schematic}`) is combined with the JFET-input
+:part:`AD8510` (:bibcite:`analog_devices_AD8510_2009`, :desig:`U7`)
+and an :part:`ADG619` SPDT analog mux
+(:bibcite:`analog_devices_ADG619_2007`). The high input impedance of
+the AD8510 results in minimum impact to the overall signal chain.
 
 The bipolar programmable-gain :part:`LTC6910-1`
-(:bibcite:`linear_technology_LTC6910-1_2009`) :desig:`U8` provides gains of 0, 1, 2,
-5, 10, 20, 50, and 100, allowing us to maximize the input dynamic
-range of the ADC.
+(:bibcite:`linear_technology_LTC6910-1_2009`) :desig:`U8` provides
+gains of 0, 1, 2, 5, 10, 20, 50, and 100, allowing us to maximize the
+input dynamic range of the ADC.
 
 
 Programmable Gain Shift Register Network
 ----------------------------------------
 
-(see :ref:`shiftreg_schematic`)
-
 For each channel we have four bits of state: the three for PGA state
-and one for HPF state. We use a cascaded array of shift registers to
-propagate these settins from the FPGA to the actual analog components.
+and one for HPF state. We use a cascaded array of shift registers
+(figure :latex:`ref{shiftreg_schematic}`) to propagate these settins
+from the FPGA to the actual analog components.
 
 
 Input Anti-Aliasing Filter
 ----------------------------------------
-(see :ref:`aafilter_schematic`)
 
 To achieve filtering we use an eight-pole bessel filter in a multiple
-feedback configuration, implemented via low-noise JFET quad op-amp
-AD8513AR :bibcite:`analog_devices_AD8513_2009`. 
+feedback configuration (figure :latex:`ref{aafilter_schematic}`) ,
+implemented via low-noise JFET quad op-amp AD8513AR
+:bibcite:`analog_devices_AD8513_2009`.
 
 The last stage is biased with V\ :subscript:`OS` to create a single-sided signal for
 the unipolar ADC.
 
 ADC
 ---
-(see :ref:`adc_schematic`)
 
 The differential input, single-supply ADCs :part:`AD7685` :desig:`U2`
-(:bibcite:`analog_devices_AD7685_2007`) are driven at 192 ksps at from
-a common conversion signal. Each ADC's voltage reference input ( V\
-:subscript:`REF`) is individually buffered to limit the voltage drop
-on the reference with each ADC cycle.
+(:bibcite:`analog_devices_ad7685_2007`) are driven at 192 ksps at from
+a common conversion signal (figure :latex:`ref{adc_schematic}`) . Each
+ADC's voltage reference input ( V\ :subscript:`REF`) is individually
+buffered to limit the voltage drop on the reference with each ADC
+cycle.
 
 Voltage Refernece
 --------------------------------
@@ -99,29 +97,28 @@ Digital
 
 Galvanic Isolation
 --------------------
-(see :ref:`isolation_schematic`)
 
 To isolate ground current flow, we use the :part:`IL715-3`
 (:desig:`U14`) and :part:`IL716-3` high-speed galvanic isolation ICs
-:bibcite:`NVE_High-Speed_2009` to bridge the analog-digital domain.
+:bibcite:`nve_il715_2009` to bridge the analog-digital domain (figure
+:latex:`ref{isolation_schematic}`). 
+
 
 FPGA
 ----
-(see :ref:`fpga_scheamtic`)
 
 The Xilinx Spartan-3 VQ100 :part:`XC3s200-4Q100: :desig:`U4`
 (:bibcite:`xilinx_spartan-3_2009`) performs all the control, signal
-processing, and communication tasks on the Acquisition Board. The FPGA
-is driven by a single 36 MHz digital oscillator.
+processing, and communication tasks on the Acquisition Board (figure
+:latex:`ref{fpga_scheamtic}`) . The FPGA is driven by a single 36 MHz
+digital oscillator.
 
 The primary bitstream is contained within a :part:`XCFS01` Platform
 Flash EEPROM. Both the Spartan-3 and the Platform Flash EEPROM are
-connected to the primary JTAG chain.
-
-To power the FPGA we take the input 5V and convert it to the
-3.3 V for IO, the 2.5V aux level, and the 1.2 V core. 
-
-(see :ref:`fpgapower_scheamtic`)
+connected to the primary JTAG chain (figure
+:latex:`ref{fpgapower_scheamtic}`). To power the FPGA we take the input
+5V and convert it to the 3.3 V for IO, the 2.5V aux level, and the 1.2
+V core
 
 Optical Interface
 ------------------
@@ -135,7 +132,8 @@ fiber. We use the Avago :part:`HFBR-1528` transmitter and
 Mechanics, PCB, Enclosure
 ==============================
 
-Protocase, enclosure schematics, etc. 
-Gerbers
-
-
+The resulting Acquisition Board is a four-layer FR-4 PCB measuring 7
+inches by 5.5 inches. The majority of signal routing takes place 
+on the top layer (figure :latex:`ref{gerber_layer1}`}) with
+dedicated split power and ground planes (figures :latex:`ref{gerber_layer2}`
+and :latex:`ref{gerber_layer3}`). 

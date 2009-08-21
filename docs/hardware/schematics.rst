@@ -1,96 +1,89 @@
 
 ******************************
-Appendix A : Schematics
+Schematics
 ******************************
 
 The following are the schematic used in the design 
 of the Acquisition Board, generated via Altium Designer. 
 
-.. _overview_schematic:
 .. figure:: schematicdir/overview.*
    :latexangle: 90
    :latexwidth: 8.5in
+   :label: overview_schematic
       
    Integrated master schematic of all subsheets.    
-
-.. _input_schematic:
 
 .. figure:: schematicdir/input.*
    :latexangle: 90
    :latexwidth: 8.5in
+   :label: input_schematic
       
    Input stage schematic. 
 
-.. _pga_schematic:
 
 .. figure:: schematicdir/pga.*
    :latexangle: 90
    :latexwidth: 8.5in
+   :label: pga_schematic
 
    High-pass filter and programmable gain amplifier.   
 
-.. _aafilter_schematic:
 
 .. figure:: schematicdir/aafilter.*
    :latexangle: 90
    :latexwidth: 8.5in
+   :label: aafilter_schematic
 
    Anti-aliasing filter. 
       
-
-.. _inmux_schematic:
-
 .. figure:: schematicdir/inmux.*
    :latexangle: 90
    :latexwidth: 8.5in
+   :label: inmux_schematic
       		
    Input channel selection multiplexer. 
 
-.. _shiftreg_schematic:
 
 .. figure:: schematicdir/shiftreg.*
    :latexangle: 90
    :latexwidth: 8.5in
+   :label: shiftreg_schematic
       
    Shift register for amplifier state control. 
-
-.. _adc_schematic:
 
 .. figure:: schematicdir/adc.*
    :latexangle: 90
    :latexwidth: 8.5in
+   :label: adc_schematic
       
    Analog-to-Digital Converter. 
-
-.. _isolation_schematic:
 
 .. figure:: schematicdir/isolation.*
    :latexangle: 90
    :latexwidth: 8.5in
-      
+   :label: isolation_schematic
+  
    Galvanic isolation separating analog and digital subsystems. 
 
-
-.. _power_schematic:
 
 .. figure:: schematicdir/power.*
    :latexangle: 90
    :latexwidth: 8.5in
+   :label: power_schematic
       
    Analog power, digital power, and reference voltage generation. 
-
-.. _fpga_schematic:
 
 .. figure:: schematicdir/fpga.*
    :latexangle: 90
    :latexwidth: 8.5in
+   :label: fpga_schematic
       
    FPGA IO. 
 
-.. _fpgapower_schematic:
 
 .. figure:: schematicdir/fpgapower.*
    :latexangle: 90
    :latexwidth: 8.5in
+   :label: fpgapower_schematic
       
    FPGA booting, JTAG. 

@@ -151,7 +151,10 @@ Set Input
    Set input command. 
 
 Select which of the four primary input channels will be used
-as input to the secondary input channel. 
+as input to the secondary input (continuous) channel. **chan** is which
+channel set you are setting the continuous input for (0 == A, 1 == B), 
+and input is which channel number (0 through 3). 
+
 
 High Pass Filter Enable
 ^^^^^^^^^^^^^^^^^^^^^^^
